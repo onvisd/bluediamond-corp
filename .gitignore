@@ -1,0 +1,18 @@
+# maybe some logs
+/log
+
+# webpack build target folder
+/client/build
+
+# npm modules
+# https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
+/node_modules
+
+# npm errors
+npm-debug.log
+
+# for OS X users
+.DS_Store
+
+# test coverage folder
+coverage
