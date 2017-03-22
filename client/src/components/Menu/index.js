@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 import {Link, IndexLink} from 'react-isomorphic-render';
-import {flat as style} from 'react-styling';
+
+import styles from './styles.module.css';
 
 export default class Menu extends Component {
     render() {
         const {items} = this.props;
 
         return (
-            <ul style={styles.menu} className="menu">
+            <ul className={styles.menu}>
                 {items.map((item, i) => (
-                    <li key={i} style={styles.menu_item}>
+                    <li key={i} className={styles.menuItem}>
                         {this.renderLink(item)}
                     </li>
                 ))}
@@ -23,29 +24,11 @@ export default class Menu extends Component {
         return (
             <LinkComponent
                 to={item.link}
-                style={styles.menu_item_link}
-                activeClassName="menu-item-selected"
-                className="menu-item"
+                activeClassName={styles.selected}
+                className={styles.menuItemLink}
             >
                 { item.name }
             </LinkComponent>
         );
     }
 }
-
-const styles = style
-`
-    menu
-        margin-top    : 0
-        margin-bottom : 0
-
-        list-style-type : none
-        padding         : 0
-
-        item
-            display: inline-block
-
-        link
-            display         : inline-block
-            text-decoration : none
-`;

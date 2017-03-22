@@ -1,12 +1,4 @@
-@import "constants.scss";
-
-@import "../../src/components/Menu.scss";
-@import "../../src/components/Preloading.scss";
-
-@import "../../src/pages/Error.scss";
-@import "../../src/pages/Home.scss";
-@import "../../src/pages/Layout.scss";
-@import "../../src/pages/NotFound.scss";
+@import "constants.css";
 
 body
 {
@@ -113,7 +105,7 @@ section
 		background-color : var(--base-color);
 	}
 
-	.rrui__button__button
+	& .rrui__button__button
 	{
 		padding-left  : calc(var(--unit) * 4);
 		padding-right : calc(var(--unit) * 4);

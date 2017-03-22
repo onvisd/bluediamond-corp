@@ -44,4 +44,4 @@ if(module.hot) {
     };
 }
 
-require('./application');
+require('./app');

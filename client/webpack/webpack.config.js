@@ -1,150 +1,140 @@
 // This is the base Webpack configuration file
 
-var path = require('path')
-var webpack = require('webpack')
-var autoprefixer = require('autoprefixer')
-var cssCustomProperties = require('postcss-custom-properties')
-var postcssCalc = require('postcss-calc')
+const path = require('path');
+const webpack = require('webpack');
 
 // project folder
-var root_folder = path.resolve(__dirname, '..')
+const rootFolder = path.resolve(__dirname, '..');
 
-var configuration =
-{
-  // Resolve all relative paths from the project root folder
-  context: root_folder,
+const config = {
+    // Resolve all relative paths from the project root folder
+    context: rootFolder,
 
-  // Each "entry" can be divided into multiple chunks.
-  // Why multiple "entries" might be used?
-  // For example, for completely different website parts,
-  // like the public user-facing part and the private "admin" part.
-  entry:
-  {
-    // The "main" entry
-    main: './src/application.entry.js'
-  },
-
-  output:
-  {
-    // Filesystem path for static files
-    path: path.resolve(root_folder, 'build/assets'),
-
-    // Network path for static files
-    publicPath: '/assets/',
-
-    // Specifies the name of each output entry file
-    filename: '[name].[hash].js',
-
-    // Specifies the name of each (non-entry) chunk file
-    chunkFilename: '[name].[hash].js'
-  },
-
-  module:
-  {
-    rules:
-    [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use:
-      [{
-        loader: 'babel-loader'
-      }]
+    // Each "entry" can be divided into multiple chunks.
+    // Why multiple "entries" might be used?
+    // For example, for completely different website parts,
+    // like the public user-facing part and the private "admin" part.
+    entry: {
+        // The "main" entry
+        main: './src/app.entry.js'
     },
-    {
-      test: /\.(scss)$/,
-      use:
-      [{
-        loader: 'style-loader'
-      },
-      {
-        loader : 'css-loader',
-        options:
-        {
-          importLoaders : 2,
-          sourceMap     : true
-        }
-      },
-      {
-        loader : 'postcss-loader'
-      },
-      {
-        loader : 'sass-loader',
-        options:
-        {
-          outputStyle       : 'expanded',
-          sourceMap         : true,
-          sourceMapContents : true
-        }
-      }]
+
+    output: {
+        // Filesystem path for static files
+        path: path.resolve(rootFolder, 'build/assets'),
+
+        // Network path for static files
+        publicPath: '/assets/',
+
+        // Specifies the name of each output entry file
+        filename: '[name].[hash].js',
+
+        // Specifies the name of each (non-entry) chunk file
+        chunkFilename: '[name].[hash].js'
     },
-    {
-      test: /\.(css)$/,
-      use:
-      [{
-        loader: 'style-loader'
-      },
-      {
-        loader : 'css-loader',
-        options:
-        {
-          importLoaders : 2,
-          sourceMap     : true
-        }
-      },
-      {
-        loader : 'postcss-loader'
-      }]
+
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'babel-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.(css)$/,
+                exclude: /\.module\.css$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2,
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.module\.css$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            importLoaders: 1,
+                            localIdentName: '[folder]__[local]__[hash:base64:5]'
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.(jpg|png)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            // Any png-image or woff-font below or equal to
+                            // 10K will be converted to inline base64 instead
+                            limit: 10240
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(svg)$/,
+                use: [
+                    {
+                        loader: 'svg-react-loader'
+                    }
+                ]
+            }
+        ]
     },
-    {
-      test: /\.(jpg|png)$/,
-      use:
-      [{
-        loader : 'url-loader',
-        options:
-        {
-          limit: 10240 // Any png-image or woff-font below or equal to 10K will be converted to inline base64 instead
+
+    plugins: []
+};
+
+config.plugins.push(
+    new webpack.LoaderOptionsPlugin({
+        test: /\.(css)$/,
+        debug: true,
+        options: {
+            // A temporary workaround for `scss`
+            // https://github.com/jtangelder/sass/issues/298
+            // output: {
+            //     path: configuration.output.path
+            // },
+
+            postcss: [
+                require('postcss-import')({
+                    path: [
+                        path.resolve(rootFolder, 'assets', 'styles')
+                    ]
+                }),
+                require('postcss-mixins'),
+                require('postcss-cssnext')
+            ],
+
+            // A temporary workaround for `css`.
+            // Can also supply `query.context` parameter.
+            context: config.context
         }
-      }]
-    },
-    {
-      test: /\.(svg)$/,
-      use:
-      [{
-        loader: 'svg-react-loader'
-      }]
-    }]
-  },
+    })
+);
 
-  plugins: []
-}
-
-configuration.plugins.push
-(
-  new webpack.LoaderOptionsPlugin
-  ({
-    test: /\.(scss|css)$/,
-    debug: true,
-    options:
-    {
-      // A temporary workaround for `scss-loader`
-      // https://github.com/jtangelder/sass-loader/issues/298
-      output:
-      {
-        path: configuration.output.path
-      },
-
-      postcss:
-      [
-        autoprefixer({ browsers: 'last 2 version' }),
-        cssCustomProperties(),
-        postcssCalc()
-      ],
-
-      // A temporary workaround for `css-loader`.
-      // Can also supply `query.context` parameter.
-      context: configuration.context
-    }
-  })
-)
-
-module.exports = configuration
+module.exports = config;

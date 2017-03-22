@@ -10,12 +10,12 @@
 	display: none;
 }
 
-.preloading--shown
+.shown
 {
 	display: block;
 	cursor: wait;
 
-	.rrui__activity-indicator
+	& .rrui__activity-indicator
 	{
 		position: absolute;
 		left: calc(50% - 2rem);
@@ -23,7 +23,7 @@
 		width: 4rem;
 		height: 4rem;
 
-		circle
+		& circle
 		{
 			stroke: #ffffff;
 		}

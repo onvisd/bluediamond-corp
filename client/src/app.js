@@ -6,15 +6,14 @@ import {render} from 'react-isomorphic-render';
 import settings from './react-isomorphic-render';
 
 require('react-responsive-ui/styles/react-responsive-ui.css');
-require('../assets/styles/style.scss');
+require('../assets/styles/style.css');
 
 // renders the webpage on the client side
-render(settings,
-    {
-        // enable/disable Redux dev-tools
-        // eslint-disable-next-line no-undefined
-        devtools: global.REDUX_DEVTOOLS ? require('./devtools').default : undefined
-    })
+render(settings, {
+    // enable/disable Redux dev-tools
+    // eslint-disable-next-line no-undefined
+    devtools: global.REDUX_DEVTOOLS ? require('./devtools').default : undefined
+})
 .then(({store, rerender}) => {
     if(module.hot) {
         module.hot.accept('./react-isomorphic-render', () => {
