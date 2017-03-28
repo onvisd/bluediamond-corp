@@ -1,8 +1,8 @@
 import merge from 'lodash/merge';
 
-import defaultConfig from './config.defaults';
-import developmentConfig from './config.development';
-import productionConfig from './config.production';
+import defaultConfig from './defaults';
+import developmentConfig from './development';
+import productionConfig from './production';
 
 const config = merge({}, defaultConfig);
 
@@ -10,11 +10,6 @@ if(process.env.NODE_ENV === 'production')
     merge(config, productionConfig);
 else
     merge(config, developmentConfig);
-
-
-// For services like Amazon Elastic Compute Cloud and Heroku
-if(process.env.PORT)
-    config.web.port = process.env.PORT;
 
 // For passing custom config via an environment variable.
 // For frameworks like Docker.

@@ -50,6 +50,7 @@
   "license": "Proprietary",
   "dependencies": {
     "autoprefixer": "^6.6.1",
+    "axios": "^0.15.3",
     "babel-eslint": "^7.2.0",
     "babel-loader": "^6.2.10",
     "babel-plugin-react-transform": "^2.0.2",
@@ -68,6 +69,7 @@
     "classnames": "^2.2.5",
     "clean-webpack-plugin": "^0.1.14",
     "css-loader": "^0.26.1",
+    "dotenv": "^4.0.0",
     "eslint": "^3.18.0",
     "eslint-config-planetary": "^0.1.1",
     "eslint-plugin-react": "^6.10.3",
