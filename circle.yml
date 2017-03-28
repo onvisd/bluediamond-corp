@@ -1,0 +1,9 @@
+machine:
+    node:
+        version: 6.9.2
+    environment:
+        NODE_ENV: testing
+test:
+    override:
+        - node_modules/.bin/eslint .
+        - node_modules/.bin/stylelint ./**/*.css
