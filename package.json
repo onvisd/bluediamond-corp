@@ -94,6 +94,7 @@
     "sass-loader": "^6.0.0",
     "simpler-redux-form": "^0.3.9",
     "style-loader": "^0.13.1",
+    "stylelint": "^7.9.0",
     "stylelint-config-planetary": "^1.0.1",
     "universal-webpack": "^0.3.3",
     "url-loader": "^0.5.7",
