@@ -1,12 +1,12 @@
 {
-  "name": "webpack-react-redux-isomorphic-render-example",
-  "version": "1.0.0",
-  "description": "an alternative to using webpack-isomorphic-tools",
+  "name": "bluediamond-corp",
+  "version": "0.1.0",
+  "description": "Blue Diamond Corporate Website",
   "repository": {
     "type": "git",
-    "url": "https://github.com/halt-hammerzeit/webpack-react-redux-isomorphic-render-example.git"
+    "url": "https://github.com/planetary/bluediamond-corp.git"
   },
-  "homepage": "https://github.com/halt-hammerzeit/webpack-react-redux-isomorphic-render-example",
+  "homepage": "https://github.com/planetary/bluediamond-corp",
   "scripts": {
     "start": "npm run dev",
     "dev": "npm-run-all development:client:render-service:build:prepare development",
@@ -46,8 +46,8 @@
       }
     }
   },
-  "author": "Halt Hammerzeit",
-  "license": "MIT",
+  "author": "Planetary Corporation",
+  "license": "Proprietary",
   "dependencies": {
     "autoprefixer": "^6.6.1",
     "babel-eslint": "^7.2.0",
