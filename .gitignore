@@ -1,5 +1,5 @@
-# maybe some logs
-/log
+# environment-specific file
+.env
 
 # webpack build target folder
 /client/build
