@@ -4,18 +4,6 @@ import {Title} from 'react-isomorphic-render';
 
 import husky from '../../assets/images/husky.jpg';
 
-export default () => (
-    <section className="content">
-        <Title>Home</Title>
-
-        <h1 style={styles.header}>
-            Husky
-        </h1>
-
-        <img src={husky} style={styles.image}/>
-    </section>
-);
-
 const styles = style`
     header
     text-align: center
@@ -32,3 +20,15 @@ const styles = style`
 
     border-radius : 0.5em
 `;
+
+export default () => (
+    <section className="content">
+        <Title>Home</Title>
+
+        <h1 style={styles.header}>
+            Husky
+        </h1>
+
+        <img src={husky} style={styles.image}/>
+    </section>
+);

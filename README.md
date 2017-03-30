@@ -13,7 +13,7 @@
 ## Quick Start
 
 * `npm install`
-* `npm run dev`
+* `npm start`
 * wait for startup to complete
 * go to `http://localhost:3000`
 * interact with the development version of the web application

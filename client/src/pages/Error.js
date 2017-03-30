@@ -2,6 +2,11 @@ import React from 'react';
 import {flat as style} from 'react-styling';
 import {Title} from 'react-isomorphic-render';
 
+const styles = style`
+    header
+    text-align: center
+`;
+
 export default () => (
     <section className="content">
         <Title>Error</Title>
@@ -11,8 +16,3 @@ export default () => (
         </h1>
     </section>
 );
-
-const styles = style`
-    header
-    text-align: center
-`;
