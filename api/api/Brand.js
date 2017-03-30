@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import {setCached} from '../services/cache';
 import config from '../../config';
 
 const apiBase = 'https://cdn.contentful.com';
@@ -12,7 +13,10 @@ export default (api) => {
             'select=sys.id,fields.slug,fields.name&' +
             `access_token=${accessToken}&content_type=brand`
         )
-        .then((response) => res.send(response.data))
+        .then((response) => {
+            setCached('brand', response.data);
+            res.send(response.data);
+        })
         .catch((err) => {
             console.trace(err);
             res.status(500).send(err.message);
@@ -25,7 +29,10 @@ export default (api) => {
             `fields.slug=${req.params.slug}&` +
             `access_token=${accessToken}&content_type=brand`
         )
-        .then((response) => res.send(response.data))
+        .then((response) => {
+            setCached(`brand_${req.params.slug}`, response.data);
+            res.send(response.data);
+        })
         .catch((err) => {
             console.trace(err);
             res.status(500).send(err.message);

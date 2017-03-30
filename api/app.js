@@ -2,12 +2,15 @@ import http from 'http';
 import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
+import redis from 'redis';
 import api from './api';
 
 import config from '../config';
 
 const app = express();
 app.server = http.createServer(app);
+
+export const redisClient = redis.createClient(config.redis.port);
 
 // logger
 app.use(morgan('dev'));
