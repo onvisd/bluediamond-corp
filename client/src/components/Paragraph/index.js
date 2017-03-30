@@ -11,22 +11,21 @@ export default class Paragraph extends Component {
         const {header, content} = this.props;
 
         return (
-            <div className={styles.paragraphComponent}>
-                {header && this.renderHeader(header)}
-                {this.renderContent(content)}
+            <div className={styles.container}>
+                {header &&
+                    <div className={styles.heading}>
+                        <h2>{header}</h2>
+                    </div>
+                }
+                <div
+                    className={styles.content}
+                    dangerouslySetInnerHTML={this.renderMarkup(content)}
+                />
             </div>
         );
     }
 
-    renderHeader(data)	{
-        return (
-            <h2>{data}</h2>
-        );
-    }
-
-    renderContent(data)	{
-        return (
-            <p>{data}</p>
-        );
+    renderMarkup(data) {
+        return {__html: data};
     }
 }
