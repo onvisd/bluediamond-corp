@@ -18,7 +18,7 @@ export default class Menu extends Component {
         );
     }
 
-    renderLink(item)	{
+    renderLink(item) {
         const LinkComponent = item.link === '/' ? IndexLink : Link;
 
         return (
