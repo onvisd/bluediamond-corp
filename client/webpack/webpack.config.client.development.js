@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import StylelintPlugin from 'stylelint-webpack-plugin';
 import webpackBaseConfig from './webpack.config.client';
 import appConfig from '../../config';
 
@@ -8,6 +9,10 @@ const config = webpackBaseConfig({development: true, css_bundle: true});
 // config.devtool = 'inline-eval-cheap-source-map'
 
 config.plugins.push(
+
+    new StylelintPlugin({
+        files: '**/*.css'
+    }),
 
     // environment variables
     new webpack.DefinePlugin({
