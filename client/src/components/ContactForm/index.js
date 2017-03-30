@@ -12,17 +12,9 @@ export default class ContactForm extends Component {
     };
 
     static propTypes = {
-        data: PropTypes.shape({
-            sys: PropTypes.shape({
-                id: PropTypes.string.isRequired
-            }),
-            fields: PropTypes.shape({
-                header: PropTypes.string.isRequired,
-                emailTo: PropTypes.string.isRequired,
-                allowSubject: PropTypes.bool.isRequired,
-                allowMessage: PropTypes.bool.isRequired
-            })
-        })
+        header: PropTypes.string.isRequired,
+        allowSubject: PropTypes.bool.isRequired,
+        allowMessage: PropTypes.bool.isRequired
     }
 
     constructor() {
@@ -48,7 +40,7 @@ export default class ContactForm extends Component {
     }
 
     render() {
-        const {fields} = this.props.data;
+        const {header, allowSubject, allowMessage} = this.props;
 
         return (
             <Formsy.Form
@@ -56,7 +48,7 @@ export default class ContactForm extends Component {
                 onValid={this.enableSubmit}
                 onInvalid={this.disableSubmit}
             >
-                <h3>{fields.header}</h3>
+                <h3>{header}</h3>
                 <ContactFormInput
                     name="name"
                     label="Name"
@@ -69,14 +61,14 @@ export default class ContactForm extends Component {
                     validationError="This is not a valid email"
                     required
                 />
-                {fields.allowSubject && (
+                {allowSubject && (
                     <ContactFormInput
                         name="subject"
                         label="Subject"
                         required
                     />
                 )}
-                {fields.allowMessage && (
+                {allowMessage && (
                     <ContactFormTextarea
                         name="message"
                         label="Message"
