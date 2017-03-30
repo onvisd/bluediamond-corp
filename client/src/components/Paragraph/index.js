@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 
 export default class Paragraph extends Component {
     static propTypes: {
-        header: PropTypes.string.isRequired,
+        header: PropTypes.string,
         content: PropTypes.string.isRequired
     }
 
