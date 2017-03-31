@@ -5,10 +5,7 @@ import ProductImageCmpnt from '../ParagraphWithImage';
 export default class ParagraphWithImage extends Component {
     static propTypes = {
         data: PropTypes.shape({
-            sys: PropTypes.shape({
-                id: PropTypes.string.isRequired
-            }),
-            items: PropTypes.shape({
+            items: PropTypes.arrayOf(PropTypes.shape({
                 fields: PropTypes.shape({
                     header: PropTypes.string.isRequired,
                     paragraph: PropTypes.string.isRequired,
@@ -20,7 +17,7 @@ export default class ParagraphWithImage extends Component {
                     imagePosition: PropTypes.string,
                     description: PropTypes.string
                 })
-            }),
+            })),
             includes: PropTypes.shape({
                 Asset: PropTypes.arrayOf(PropTypes.shape({
                     sys: PropTypes.shape({
@@ -41,12 +38,17 @@ export default class ParagraphWithImage extends Component {
         const {items, includes} = this.props.data;
         const {fields} = items[0];
 
+        const assetsById = {};
+        includes.Asset.forEach((asset) => {
+            assetsById[asset.sys.id] = asset.fields;
+        });
+
         return (
             <ProductImageCmpnt
                 header={fields.header}
                 paragraph={fields.paragraph}
-                imageFile={includes.fields.file.url}
-                imageName={includes.fields.file.title}
+                imageFile={assetsById[fields.image.sys.id].file.url}
+                imageName={assetsById[fields.image.sys.id].file.title}
                 imageDescription={fields.description || null}
                 imageAlign={fields.imagePosition || null}
             />
