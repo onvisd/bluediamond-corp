@@ -1,4 +1,6 @@
 import React, {Component, PropTypes} from 'react';
+import marked from 'marked';
+
 import styles from './styles.module.css';
 
 export default class ParagraphComponent extends Component {
@@ -8,7 +10,7 @@ export default class ParagraphComponent extends Component {
     }
 
     renderMarkup(field) {
-        return {__html: field};
+        return {__html: marked(field)};
     }
 
     render() {
