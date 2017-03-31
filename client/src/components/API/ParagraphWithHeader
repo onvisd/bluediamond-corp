@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 
-import ParagraphComponent from '../Paragraph';
+import ParagraphComponent from '../ParagraphWithHeader';
 
 export default class ParagraphWithHeader extends Component {
     static propTypes = {
