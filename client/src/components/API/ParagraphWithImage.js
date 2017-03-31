@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 
-import ProductImageCmpnt from '../ParagraphWithImage';
+import ParagraphImageCmpnt from '../ParagraphWithImage';
 
 export default class ParagraphWithImage extends Component {
     static propTypes = {
@@ -44,7 +44,7 @@ export default class ParagraphWithImage extends Component {
         });
 
         return (
-            <ProductImageCmpnt
+            <ParagraphImageCmpnt
                 header={fields.header}
                 paragraph={fields.paragraph}
                 imageFile={assetsById[fields.image.sys.id].file.url}
