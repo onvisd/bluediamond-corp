@@ -22,15 +22,17 @@ export default class ParagraphWithImage extends Component {
                 })
             }),
             includes: PropTypes.shape({
-                sys: PropTypes.shape({
-                    id: PropTypes.string.isRequired
-                }),
-                fields: PropTypes.shape({
-                    title: PropTypes.string.isRequired,
-                    file: PropTypes.shape({
-                        url: PropTypes.string
-                    }).isRequired
-                })
+                Asset: PropTypes.arrayOf(PropTypes.shape({
+                    sys: PropTypes.shape({
+                        id: PropTypes.string.isRequired
+                    }),
+                    fields: PropTypes.shape({
+                        title: PropTypes.string.isRequired,
+                        file: PropTypes.shape({
+                            url: PropTypes.string
+                        }).isRequired
+                    })
+                }))
             })
         })
     }
