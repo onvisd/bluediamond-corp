@@ -5,10 +5,7 @@ import RecipeCardComponent from '../RecipeCard';
 export default class RecipeCard extends Component {
     static propTypes = {
         data: PropTypes.shape({
-            sys: PropTypes.shape({
-                id: PropTypes.string.isRequired
-            }),
-            items: PropTypes.shape({
+            items: PropTypes.arrayOf(PropTypes.shape({
                 fields: PropTypes.shape({
                     name: PropTypes.string.isRequired,
                     backgroundImage: PropTypes.shape({
@@ -18,7 +15,7 @@ export default class RecipeCard extends Component {
                     }).isRequired,
                     description: PropTypes.string.isRequired
                 })
-            }),
+            })),
             includes: PropTypes.shape({
                 Asset: PropTypes.arrayOf(PropTypes.shape({
                     sys: PropTypes.shape({
@@ -39,11 +36,16 @@ export default class RecipeCard extends Component {
         const {items, includes} = this.props.data;
         const {fields} = items[0];
 
+        const assetsById = {};
+        includes.Asset.forEach((asset) => {
+            assetsById[asset.sys.id] = asset.fields;
+        });
+
         return (
             <RecipeCardComponent
                 title={fields.name}
-                imageFile={includes.fields.file.url}
-                imageAlt={includes.fields.file.name}
+                imageFile={assetsById[fields.backgroundImage.sys.id].file.url}
+                imageAlt={assetsById[fields.backgroundImage.sys.id].file.name}
                 description={fields.description}
             />
         );
