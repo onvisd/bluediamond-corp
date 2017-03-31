@@ -29,7 +29,9 @@ export default class Recipe extends Component {
             <section className="content">
                 <Title>{`Recipe: ${item.fields.name}`}</Title>
                 <RecipeHead data={recipe} />
-                {steps.map((step) => <RecipeStep data={step} />)}
+                <ol>
+                    {steps.map((step) => <RecipeStep data={step} />)}
+                </ol>
             </section>
         );
     }
