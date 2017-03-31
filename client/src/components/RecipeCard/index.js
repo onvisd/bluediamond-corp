@@ -6,7 +6,7 @@ export default class RecipeCard extends Component {
     static PropTypes = {
         title: PropTypes.string.isRequired,
         imageFile: PropTypes.string.isRequired,
-        imageName: PropTypes.string.isRequired,
+        imageAlt: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired
     }
 
