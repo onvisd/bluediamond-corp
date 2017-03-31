@@ -11,13 +11,13 @@ export default class RecipeCard extends Component {
     }
 
     render() {
-        const {title, imageFile, imageName, description} = this.props;
+        const {title, imageFile, imageAlt, description} = this.props;
 
         return (
             <div className={styles.container}>
                 <h4>{title}</h4>
                 <p>{description}</p>
-                <img src={imageFile} alt={imageName} />
+                <img src={imageFile} alt={imageAlt} />
             </div>
         );
     }
