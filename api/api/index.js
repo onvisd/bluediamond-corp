@@ -17,7 +17,8 @@ export default () => {
     });
 
     // check the cache before hitting the endpoints
-    api.use(getCached);
+    if(process.env.NODE_ENV === 'production')
+        api.use(getCached);
 
     setupBrand(api);
     setupHome(api);
