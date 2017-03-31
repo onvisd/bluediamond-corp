@@ -1,25 +1,8 @@
 import React, {Component, PropTypes} from 'react';
-import {Title} from 'react-isomorphic-render';
-import axios from 'axios';
 
 class Page extends Component {
     static propTypes = {
-        slug: PropTypes.string.isRequired,
         children: PropTypes.node
-    }
-
-    state = {
-        data: null
-    }
-
-    componentDidMount() {
-        axios.get(`/api/${this.props.slug}`)
-            .then((response) => {
-                this.setState({data: response.data});
-            })
-            .catch((err) => {
-                console.log('oops!', err);
-            });
     }
 
     parseEntries = (data) => {
@@ -58,11 +41,10 @@ class Page extends Component {
     }
 
     render() {
-        const {data} = this.state;
+        const {data} = this.props;
 
         return (
             <div>
-                {data && <Title>{data.items[0].fields.title}</Title>}
                 {data && this.parseEntries(data)}
             </div>
         );
