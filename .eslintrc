@@ -16,6 +16,10 @@
         "max-len": [1, 99, 4, {
             ignoreUrls: true,
             ignorePattern: "\\s*<"
+        }],
+        "no-shadow": [1, {
+            "builtinGlobals": true,
+            "allow": ["event", "name", "callback", "resolve", "reject", "done", "cb"]
         }]
     },
     "plugins": [
