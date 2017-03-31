@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import Formsy from 'formsy-react';
 
-import ContactFormInput from '../ContactFormInput';
-import ContactFormTextarea from '../ContactFormTextarea';
+import Input from '../ContactFormInput';
+import Textarea from '../ContactFormTextarea';
 
 // import styles from './styles.module.css';
 
@@ -17,19 +17,13 @@ export default class ContactForm extends Component {
         allowMessage: PropTypes.bool.isRequired
     }
 
-    constructor() {
-        super();
-        this.enableSubmit = this.enableSubmit.bind(this);
-        this.disableSubmit = this.disableSubmit.bind(this);
-    }
-
-    enableSubmit() {
+    enableSubmit = () => {
         this.setState({
             canSubmit: true
         });
     }
 
-    disableSubmit() {
+    disableSubmit = () => {
         this.setState({
             canSubmit: false
         });
@@ -49,12 +43,12 @@ export default class ContactForm extends Component {
                 onInvalid={this.disableSubmit}
             >
                 <h3>{header}</h3>
-                <ContactFormInput
+                <Input
                     name="name"
                     label="Name"
                     required
                 />
-                <ContactFormInput
+                <Input
                     name="email"
                     label="Email"
                     validations="isEmail"
@@ -62,14 +56,14 @@ export default class ContactForm extends Component {
                     required
                 />
                 {allowSubject && (
-                    <ContactFormInput
+                    <Input
                         name="subject"
                         label="Subject"
                         required
                     />
                 )}
                 {allowMessage && (
-                    <ContactFormTextarea
+                    <Textarea
                         name="message"
                         label="Message"
                         required
