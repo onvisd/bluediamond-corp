@@ -5,41 +5,40 @@ import ParagraphImageCmpnt from '../ParagraphWithImage';
 export default class ParagraphWithImage extends Component {
     static propTypes = {
         data: PropTypes.shape({
-            items: PropTypes.arrayOf(PropTypes.shape({
-                fields: PropTypes.shape({
-                    header: PropTypes.string.isRequired,
-                    paragraph: PropTypes.string.isRequired,
-                    image: PropTypes.shape({
-                        sys: PropTypes.shape({
-                            id: PropTypes.string
-                        })
-                    }).isRequired,
-                    imagePosition: PropTypes.string,
-                    description: PropTypes.string
-                })
-            })),
-            includes: PropTypes.shape({
-                Asset: PropTypes.arrayOf(PropTypes.shape({
+            sys: PropTypes.shape({
+                id: PropTypes.string.isRequired
+            }),
+            fields: PropTypes.shape({
+                header: PropTypes.string.isRequired,
+                paragraph: PropTypes.string.isRequired,
+                image: PropTypes.shape({
                     sys: PropTypes.shape({
                         id: PropTypes.string.isRequired
-                    }),
-                    fields: PropTypes.shape({
-                        title: PropTypes.string.isRequired,
-                        file: PropTypes.shape({
-                            url: PropTypes.string
-                        }).isRequired
                     })
-                }))
+                }),
+                imagePosition: PropTypes.string.isRequired,
+                description: PropTypes.string.isRequired
             })
-        })
+        }),
+        assets: PropTypes.arrayOf(PropTypes.shape({
+            sys: PropTypes.shape({
+                id: PropTypes.string.isRequired
+            }),
+            fields: PropTypes.shape({
+                title: PropTypes.string.isRequired,
+                file: PropTypes.shape({
+                    url: PropTypes.string
+                }).isRequired
+            })
+        }))
     }
 
     render() {
-        const {items, includes} = this.props.data;
-        const {fields} = items[0];
+        const {assets} = this.props;
+        const {fields} = this.props.data;
 
         const assetsById = {};
-        includes.Asset.forEach((asset) => {
+        assets.forEach((asset) => {
             assetsById[asset.sys.id] = asset.fields;
         });
 
@@ -48,7 +47,7 @@ export default class ParagraphWithImage extends Component {
                 header={fields.header}
                 paragraph={fields.paragraph}
                 imageFile={assetsById[fields.image.sys.id].file.url}
-                imageName={assetsById[fields.image.sys.id].file.title}
+                imageName={assetsById[fields.image.sys.id].title}
                 imageDescription={fields.description || null}
                 imageAlign={fields.imagePosition || null}
             />

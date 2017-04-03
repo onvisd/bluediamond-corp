@@ -6,8 +6,11 @@ import {connector, getPageData} from '../redux/pageData';
 import NotFound from './NotFound';
 
 // require pageModules ahead of time here using the format
-// PageModuleName: require('../components/PageModuleName').default
-const pageModules = {};
+// PageModuleName: require('../components/API/PageModuleName').default
+const pageModules = {
+    ParagraphWithHeader: require('../components/API/ParagraphWithHeader').default,
+    ParagraphWithImage: require('../components/API/ParagraphWithImage').default
+};
 
 @preload(({dispatch, location}) => dispatch(getPageData(location.pathname)))
 @connect(
@@ -19,35 +22,24 @@ export default class Page extends Component {
         const modules = data.items[0].fields.modules;
         const includes = data.includes;
         const entries = includes.Entry;
-        const assets = includes.Asset;
 
         const parsedEntries = [];
         if(modules && modules.length) {
             entries.forEach((entry) => {
                 const entryId = entry.sys.contentType.sys.id;
-                const entryData = {
-                    id: entryId,
-                    component: entryId.replace('pageModule', '')
-                };
-                Object.keys(entry.fields).forEach((key) => {
-                    let assetURL = false;
-
-                    if(entry.fields[key].sys && entry.fields[key].sys.linkType === 'Asset') {
-                        assetURL = assets
-                            .filter((asset) => asset.sys.id === entry.fields[key].sys.id)
-                            .map((asset) => asset.fields.file.url)[0];
-                    }
-
-                    if(assetURL) entryData[key] = assetURL;
-                    else entryData[key] = entry.fields[key];
+                const entryComponent = entryId.replace('pageModule', '');
+                parsedEntries.push({
+                    component: entryComponent,
+                    data: entry,
+                    assets: includes.Asset
                 });
-
-                parsedEntries.push(entryData);
             });
         }
-
         return parsedEntries.filter((entry) => pageModules[entry.component])
-            .map((entry) => React.createElement(pageModules[entry.component], entry));
+            .map((entry) => React.createElement(pageModules[entry.component], {
+                data: entry.data,
+                assets: entry.assets
+            }));
     }
 
     render() {
