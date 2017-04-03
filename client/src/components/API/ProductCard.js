@@ -1,21 +1,19 @@
 import React, {Component, PropTypes} from 'react';
 
-import RecipeHeadComponent from '../RecipeHead';
+import ProductCardComponent from '../ProductCard';
 
-export default class RecipeHead extends Component {
+export default class ProductCard extends Component {
     static propTypes = {
         data: PropTypes.shape({
             items: PropTypes.arrayOf(PropTypes.shape({
                 fields: PropTypes.shape({
                     name: PropTypes.string.isRequired,
-                    heroImage: PropTypes.shape({
+                    productPhotos: PropTypes.arrayOf(PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string
                         })
-                    }).isRequired,
-                    ingredients: PropTypes.array.isRequired,
-                    nutrition: PropTypes.string.isRequired,
-                    steps: PropTypes.array.isRequired
+                    })).isRequired,
+                    description: PropTypes.string.isRequired
                 })
             })),
             includes: PropTypes.shape({
@@ -44,14 +42,10 @@ export default class RecipeHead extends Component {
         });
 
         return (
-            <RecipeHeadComponent
+            <ProductCardComponent
                 title={fields.name}
-                heroImage={assetsById[fields.heroImage.sys.id].file.url}
-                ingredients={fields.ingredients}
-                nutrition={fields.nutrition}
-                steps={fields.steps}
-                cookTime={fields.cookTime}
-                servingSize={fields.servingSize}
+                imageFile={assetsById[fields.productPhotos[0].sys.id].file.url}
+                imageAlt={assetsById[fields.productPhotos[0].sys.id].file.name}
             />
         );
     }
