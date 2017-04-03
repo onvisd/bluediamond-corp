@@ -7,17 +7,13 @@ import husky from '../../assets/images/husky.jpg';
 const styles = style`
     header
     text-align: center
-
     image
     display: block
-
     margin-left  : auto
     margin-right : auto
-
     border-width : 1px
     border-style : solid
     border-color : #7f7f7f
-
     border-radius : 0.5em
 `;
 

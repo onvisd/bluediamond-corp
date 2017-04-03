@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import marked from 'marked';
 
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 
 export default class RecipeStep extends Component {
     static PropTypes = {

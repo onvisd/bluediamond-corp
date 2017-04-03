@@ -11,7 +11,13 @@
 
 
 ## Quick Start
+Make sure you have Redis installed and running on your system.
 
+* `brew install redis`
+* `brew services start redis`
+* make sure Redis is running by entering `redis-cli ping` in your terminal, you should see `PONG` in response
+
+Then: 
 * `npm install`
 * `npm start`
 * wait for startup to complete

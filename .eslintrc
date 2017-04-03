@@ -19,7 +19,7 @@
         }],
         "no-shadow": [1, {
             "builtinGlobals": true,
-            "allow": ["event", "name", "callback", "resolve", "reject", "done", "cb"]
+            "allow": ["event", "name", "callback", "resolve", "reject", "done", "cb", "location"]
         }]
     },
     "plugins": [

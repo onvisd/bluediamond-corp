@@ -14,6 +14,9 @@ export default {
             accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
         }
     },
+    redis: {
+        port: process.env.REDIS_PORT || 6379
+    },
     webpack: {
         devserver: {
             port: 3001
