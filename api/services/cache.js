@@ -20,7 +20,7 @@ export const getCached = (req, res, next) => {
 };
 
 export const setCached = (key, data, exp) => {
-    if(process.env.NODE_ENV !== 'production') {
+    if(process.env.NODE_ENV === 'production') {
         const expiresIn = exp || 3600; // default cache length of 1 hour
         return redisClient.setex(key, expiresIn, JSON.stringify(data));
     }
