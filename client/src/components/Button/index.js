@@ -20,7 +20,7 @@ export default class Menu extends Component {
         } = this.props;
 
         return (
-            <div className="buttonWrap">
+            <div className={styles.container}>
                 {buttonLink &&
                     <Link
                         to={buttonLink}
