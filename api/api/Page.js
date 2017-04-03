@@ -14,8 +14,12 @@ export default (api) => {
             `access_token=${accessToken}&content_type=page`
         )
         .then((response) => {
-            setCached(`page_${req.params.slug}`, response.data);
-            res.send(response.data);
+            if(response.data.items.length) {
+                setCached(`page_${req.params.slug}`, response.data);
+                res.send(response.data);
+            } else {
+                res.status(404).send({ok: false, error: 'not found'});
+            }
         })
         .catch((err) => {
             console.trace(err);

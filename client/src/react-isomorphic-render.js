@@ -14,8 +14,19 @@ export default {
 
     preload: {
         catch(error, {url, redirect}) {
-            console.error(`Error while preloading "${url}"`);
-            console.error(error);
+            switch (error.status) {
+                case 404:
+                    return redirect('/404');
+
+                default:
+                    console.error(`Error while preloading "${url}"`);
+                    console.error(error);
+
+                    if(process.env.NODE_ENV === 'production')
+                        redirect('/error');
+                    else
+                        throw error;
+            }
 
             // // Not authenticated
             // if (error.status === 401)
@@ -28,13 +39,6 @@ export default {
             // {
             // 	return redirect('/unauthorized')
             // }
-
-            // Redirect to a generic error page
-            if(process.env.NODE_ENV === 'production')
-                redirect('/error');
-
-
-            throw error;
         }
     },
 

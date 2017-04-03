@@ -12,8 +12,8 @@ export default (
     <Route path="/" component={Layout}>
         <IndexRoute component={Home} />
         <Route path="recipe/:slug" component={Recipe} />
-        <Route path="*" component={Page} />
         <Route path="404" component={NotFound} status={404} />
         <Route path="error" component={GenericError} />
+        <Route path="*" component={Page} />
     </Route>
 );
