@@ -8,7 +8,9 @@ export default class RecipeHead extends Component {
         title: PropTypes.string.isRequired,
         heroImage: PropTypes.string.isRequired,
         ingredients: PropTypes.array.isRequired,
-        nutrition: PropTypes.string.isRequired
+        nutrition: PropTypes.string.isRequired,
+        servingSize: PropTypes.number.isRequired,
+        cookTime: PropTypes.number.isRequired
     }
 
     renderMarkup(field) {
@@ -19,12 +21,10 @@ export default class RecipeHead extends Component {
         const {
             title,
             heroImage,
-
-            // meta, // not yet implemented
-            // stats, // not yet implemented
-
             ingredients,
-            nutrition
+            nutrition,
+            servingSize,
+            cookTime
         } = this.props;
 
         return (
@@ -34,19 +34,15 @@ export default class RecipeHead extends Component {
                 </div>
                 <div className={styles.content}>
                     <h2>{title}</h2>
-                    {/*
-                    // not yet implemented
-                    <ul>
-                        {meta.map((item) => (
-                            <li>{item}</li>
-                        ))}
-                    </ul>
-                    */}
+                    <div className={styles.meta}>
+                        <div className={styles.servingSize}>Serves {servingSize} people</div>
+                        <div className={styles.cookTime}>Takes {cookTime} minutes</div>
+                    </div>
                     <div className={styles.ingredients}>
                         <h3>Ingredients</h3>
                         <ul>
-                            {ingredients.map((item) => (
-                                <li>{item}</li>
+                            {ingredients.map((item, idx) => (
+                                <li key={`ingredient${idx}`}>{item}</li>
                             ))}
                         </ul>
                     </div>
