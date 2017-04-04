@@ -3,41 +3,27 @@ import {Link} from 'react-isomorphic-render';
 
 import styles from './styles.module.css';
 
-export default class Menu extends Component {
+export default class Button extends Component {
     static PropTypes = {
-        buttonLink: PropTypes.string,
-        buttonFunc: PropTypes.func,
-        buttonName: PropTypes.string.isRequired,
-        buttonClass: PropTypes.string.isRequired
+        link: PropTypes.string,
+        func: PropTypes.func,
+        name: PropTypes.string,
+        style: PropTypes.string
     }
 
     render() {
-        const {
-            buttonLink,
-            buttonFunc,
-            buttonName,
-            buttonClass
-        } = this.props;
+        const {link, func, name, style} = this.props;
 
         return (
             <div className={styles.container}>
-                {buttonLink &&
-                    <Link
-                        to={buttonLink}
-                        className={`${styles.button} ${buttonClass}`}
-                    >
-                        {buttonName}
-                    </Link>
-                }
-
-                {buttonFunc &&
-                    <Link
-                        onClick={buttonFunc}
-                        className={`${styles.button} ${buttonClass}`}
-                    >
-                        {buttonName}
-                    </Link>
-                }
+                <Link
+                    to={link}
+                    onClick={func}
+                    name={name}
+                    className={`${styles.button} ${style}`}
+                >
+                    {this.props.children}
+                </Link>
             </div>
         );
     }
