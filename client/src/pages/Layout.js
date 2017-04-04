@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Title, Meta} from 'react-isomorphic-render';
 
-import Menu from '../components/Menu';
 import Preloading from '../components/Preloading';
 
 export default class Layout extends Component {
@@ -31,27 +30,12 @@ export default class Layout extends Component {
                 {property: 'og:locale', content: 'ru-RU'}
             ];
 
-        const menuItems = [
-            {
-                name: 'Home',
-                link: '/'
-            },
-            {
-                name: 'Users',
-                link: '/users'
-            }
-        ];
-
         return (
             <div className="content">
                 <Title>{title}</Title>
                 <Meta>{meta}</Meta>
 
                 <Preloading />
-
-                <nav className="main-header">
-                    <Menu items={menuItems} />
-                </nav>
 
                 {children}
 

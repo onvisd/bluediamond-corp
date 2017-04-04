@@ -1,0 +1,65 @@
+:root {
+    /* Grid configuration */
+    --l--grid-width: 70rem;
+    --l--gutter: 2%;
+
+    /* Border radius */
+    --l--border-radius: 4px;
+
+    /* Z indexes */
+    --l--z-lowest: -9999;
+    --l--z-lower: -100;
+    --l--z-low: -10;
+    --l--z-base: 0;
+    --l--z-high: 10;
+    --l--z-higher: 100;
+    --l--z-highest: 9999;
+
+    /* Spacing definitions */
+    --l--space-l: 4rem;
+    --l--space-m: 2rem;
+    --l--space-s: 1rem;
+
+    /* Media queries */
+    @custom-media --mq-l (width > 1024px);
+    @custom-media --mq-m (width <= 1024px);
+    @custom-media --mq-s (width <= 768px);
+
+    @define-mixin visually-hidden {
+        position: absolute;
+        top: auto;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+
+    @define-mixin container {
+        width: 100%;
+        margin: 0 auto;
+        max-width: var(--l--grid-width);
+    }
+
+    @define-mixin row {
+        display: flex;
+        padding: 0 calc(var(--l--gutter) / 2);
+        flex-flow: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    @define-mixin column-fixed $span {
+        margin: 0 calc(var(--l--gutter) / 2);
+        flex: 0 0 calc(($(span) * 100%) - var(--l--gutter));
+    }
+
+    @define-mixin column-flex {
+        margin: 0 calc(var(--l--gutter) / 2);
+        flex: 1;
+    }
+
+    @define-mixin visible-grid {
+        background: color(var(--c--blue) a(90%));
+    }
+}

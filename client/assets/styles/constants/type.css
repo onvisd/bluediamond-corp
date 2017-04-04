@@ -1,0 +1,45 @@
+:root {
+    /* base configuration */
+    --t--base-size: 16px;
+    --t--base-leading: 1.6;
+
+    /* modular scale configuration */
+    --ms-base: 1rem;
+    --ms-ratio: 1.5;
+
+    /* font families */
+    /* stylelint-disable value-keyword-case */
+    --t--family-sans:
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        'Roboto',
+        'Oxygen',
+        'Ubuntu',
+        'Cantarell',
+        'Fira Sans',
+        'Droid Sans',
+        'Helvetica Neue',
+        arial,
+        sans-serif;
+    /* stylelint-enable */
+    --t--family-serif: georgia, serif;
+    --t--family-mono:
+        menlo,
+        monaco,
+        consolas,
+        'Liberation Mono',
+        'Courier New',
+        monospace;
+
+    /* font weights */
+    --t--weight-bold: 700;
+    --t--weight-normal: 400;
+    --t--weight-light: 300;
+
+    /* font sizes - normal scale */
+    --t--size-xl: 3rem;
+    --t--size-l: 2rem;
+    --t--size-m: 1rem;
+    --t--size-s: 0.75rem;
+}
