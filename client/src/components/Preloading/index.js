@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ActivityIndicator} from 'react-responsive-ui';
 
 import styles from './styles.module.css';
 
@@ -10,7 +9,7 @@ export default class Preloading extends Component {
         const {pending} = this.props;
         return (
             <div className={`${styles.preloading} ${pending ? styles.shown : ''}`}>
-                <ActivityIndicator />
+                {/* Insert spinner */}
             </div>
         );
     }

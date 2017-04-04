@@ -1,0 +1,58 @@
+:root {
+    /* black and white */
+    --c--black: hsl(0, 0%, 20%);
+    --c--white: hsl(0, 0%, 100%);
+
+    /* gray */
+    --c--gray: hsl(210, 7%, 50%);
+
+    /* colors */
+    --c--blue: hsl(208, 80%, 50%);
+    --c--green: hsl(131, 50%, 50%);
+    --c--yellow: hsl(52, 100%, 50%);
+    --c--orange: hsl(28, 100%, 50%);
+    --c--red: hsl(0, 100%, 50%);
+    --c--purple: hsl(276, 75%, 50%);
+
+    /* variants: gray */
+    --c--gray-lighter: color(var(--c--gray) l(90%));
+    --c--gray-light: color(var(--c--gray) l(70%));
+    --c--gray-dark: color(var(--c--gray) l(35%));
+    --c--gray-darker: color(var(--c--gray) l(20%));
+
+    /* variants: blue */
+    --c--blue-lighter: color(var(--c--blue) l(80%));
+    --c--blue-light: color(var(--c--blue) l(65%));
+    --c--blue-dark: color(var(--c--blue) l(35%));
+    --c--blue-darker: color(var(--c--blue) l(20%));
+
+    /* variants: green */
+    --c--green-lighter: color(var(--c--green) l(80%));
+    --c--green-light: color(var(--c--green) l(65%));
+    --c--green-dark: color(var(--c--green) l(35%));
+    --c--green-darker: color(var(--c--green) l(20%));
+
+    /* variants: yellow */
+    --c--yellow-lighter: color(var(--c--yellow) l(80%));
+    --c--yellow-light: color(var(--c--yellow) l(65%));
+    --c--yellow-dark: color(var(--c--yellow) l(35%));
+    --c--yellow-darker: color(var(--c--yellow) l(20%));
+
+    /* variants: orange */
+    --c--orange-lighter: color(var(--c--orange) l(80%));
+    --c--orange-light: color(var(--c--orange) l(65%));
+    --c--orange-dark: color(var(--c--orange) l(35%));
+    --c--orange-darker: color(var(--c--orange) l(20%));
+
+    /* variants: red */
+    --c--red-lighter: color(var(--c--red) l(80%));
+    --c--red-light: color(var(--c--red) l(65%));
+    --c--red-dark: color(var(--c--red) l(35%));
+    --c--red-darker: color(var(--c--red) l(20%));
+
+    /* variants: purple */
+    --c--purple-lighter: color(var(--c--purple) l(80%));
+    --c--purple-light: color(var(--c--purple) l(65%));
+    --c--purple-dark: color(var(--c--purple) l(35%));
+    --c--purple-darker: color(var(--c--purple) l(20%));
+}
