@@ -6,7 +6,6 @@ import husky from '../../assets/images/husky.jpg';
 export default () => (
     <section className="content">
         <Title>Home</Title>
-
         <img src={husky} />
     </section>
 );

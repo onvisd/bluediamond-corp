@@ -1,44 +1,59 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
 
 import styles from './styles.module.css';
 
-export default class Menu extends Component {
-    static PropTypes = {
-        buttonLink: PropTypes.string,
-        buttonFunc: PropTypes.func,
-        buttonName: PropTypes.string.isRequired,
-        buttonClass: PropTypes.string.isRequired
-    }
+const Button = (props) => {
+    const {appearance, href, onClick, children, ...rest} = props;
+    const className = `${
+        appearance.className ||
+        styles[appearance.theme] ||
+        styles.default
+    } ${styles[appearance.layout] || ''}`;
 
-    render() {
-        const {
-            buttonLink,
-            buttonFunc,
-            buttonName,
-            buttonClass
-        } = this.props;
+    // Render a button element
+    let button = (
+        <button
+            className={className}
+            onClick={onClick}
+            {...rest}
+        >
+            {children}
+        </button>
+    );
 
-        return (
-            <div className={styles.container}>
-                {buttonLink &&
-                    <Link
-                        to={buttonLink}
-                        className={`${styles.button} ${buttonClass}`}
-                    >
-                        {buttonName}
-                    </Link>
-                }
-
-                {buttonFunc &&
-                    <Link
-                        onClick={buttonFunc}
-                        className={`${styles.button} ${buttonClass}`}
-                    >
-                        {buttonName}
-                    </Link>
-                }
-            </div>
+    // If Button has an href prop, render an anchor element
+    if(href) {
+        button = (
+            <Link
+                className={className}
+                to={href}
+                {...rest}
+            >
+                {children}
+            </Link>
         );
     }
-}
+
+    return button;
+};
+
+Button.propTypes = {
+    appearance: PropTypes.shape({
+        className: PropTypes.string,
+        theme: PropTypes.string,
+        layout: PropTypes.string
+    }),
+    href: PropTypes.string,
+    onClick: PropTypes.func,
+    children: PropTypes.string.isRequired
+};
+
+Button.defaultProps = {
+    appearance: {
+        theme: 'primary',
+        layout: 'medium'
+    }
+};
+
+export default Button;
