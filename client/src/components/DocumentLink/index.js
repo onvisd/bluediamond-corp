@@ -7,8 +7,8 @@ export default class DocumentLink extends Component {
         date: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
-        textUrl: PropTypes.string.isRequired,
-        mediaUrl: PropTypes.string.isRequired
+        textUrl: PropTypes.string,
+        mediaUrl: PropTypes.string
     }
 
     render() {
