@@ -1,30 +1,41 @@
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
 import {Link} from 'react-isomorphic-render';
 
 import styles from './styles.module.css';
 
-export default class Button extends Component {
-    static PropTypes = {
-        link: PropTypes.string,
-        func: PropTypes.func,
-        name: PropTypes.string,
-        style: PropTypes.string
-    }
+const Button = (props) => {
+    const {appearance, href, onClick, children, ...rest} = props;
+    const className = `${
+        appearance.className ||
+        styles[appearance.theme] ||
+        styles.default
+    } ${styles[appearance.layout] || ''}`;
 
-    render() {
-        const {link, func, name, style} = this.props;
+    // Render a button element
+    let button = (
+        <button
+            className={className}
+            onClick={onClick}
+            {...rest}
+        >
+            {children}
+        </button>
+    );
 
-        return (
-            <div className={styles.container}>
-                <Link
-                    to={link}
-                    onClick={func}
-                    name={name}
-                    className={`${styles.button} ${style}`}
-                >
-                    {this.props.children}
-                </Link>
-            </div>
+    // If Button has an href prop, render an anchor element
+    if(href) {
+        button = (
+            <Link
+                className={className}
+                to={href}
+                {...rest}
+            >
+                {children}
+            </Link>
         );
     }
-}
+
+    return button;
+};
+
+export default Button;
