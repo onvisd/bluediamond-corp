@@ -9,7 +9,8 @@ import NotFound from './NotFound';
 // PageModuleName: require('../components/API/PageModuleName').default
 const pageModules = {
     ParagraphWithHeader: require('../components/API/ParagraphWithHeader').default,
-    ParagraphWithImage: require('../components/API/ParagraphWithImage').default
+    ParagraphWithImage: require('../components/API/ParagraphWithImage').default,
+    DocumentLink: require('../components/API/DocumentLink').default
 };
 
 @preload(({dispatch, location}) => dispatch(getPageData(location.pathname)))
@@ -36,9 +37,10 @@ export default class Page extends Component {
             });
         }
         return parsedEntries.filter((entry) => pageModules[entry.component])
-            .map((entry) => React.createElement(pageModules[entry.component], {
+            .map((entry, idx) => React.createElement(pageModules[entry.component], {
                 data: entry.data,
-                assets: entry.assets
+                assets: entry.assets,
+                key: `pageEntry${idx}`
             }));
     }
 
