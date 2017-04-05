@@ -7,17 +7,21 @@ export default class DocumentLink extends Component {
         date: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
-        url: PropTypes.string
+        textUrl: PropTypes.string.isRequired,
+        mediaUrl: PropTypes.string.isRequired
     }
 
     render() {
-        const {date, title, description, url} = this.props;
+        const {date, title, description, textUrl, mediaUrl} = this.props;
 
         return (
             <div className={styles.container}>
                 <p>{date}</p>
-                <p><a href={url} target="_blank">{title}</a></p>
-                <p>{description}</p>
+                {textUrl || mediaUrl
+                    ? <p><a href={textUrl || mediaUrl} target="_blank">{title}</a></p>
+                    : <p>{title}</p>
+                }
+                {description && <p>{description}</p>}
             </div>
         );
     }

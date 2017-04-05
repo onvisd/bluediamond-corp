@@ -47,7 +47,8 @@ export default class DocumentLink extends Component {
                 date={fields.date}
                 title={fields.linkTitle}
                 description={fields.description}
-                url={fields.linkUrl || assetsById[fields.image.sys.id].file.url || null}
+                textUrl={fields.linkUrl || null}
+                mediaUrl={assetsById[fields.linkMedia.sys.id].file.url || null}
             />
         );
     }
