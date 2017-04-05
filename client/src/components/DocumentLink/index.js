@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 export default class DocumentLink extends Component {
     static propTypes = {
-        date: PropTypes.string.isRequired,
+        date: PropTypes.string,
         title: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
         textUrl: PropTypes.string,
@@ -16,12 +16,12 @@ export default class DocumentLink extends Component {
 
         return (
             <div className={styles.container}>
-                <p>{date}</p>
+                {date && <p>{date}</p>}
                 {textUrl || mediaUrl
                     ? <p><a href={textUrl || mediaUrl} target="_blank">{title}</a></p>
                     : <p>{title}</p>
                 }
-                {description && <p>{description}</p>}
+                <p>{description}</p>
             </div>
         );
     }
