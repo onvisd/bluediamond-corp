@@ -39,11 +39,11 @@ const Button = (props) => {
 };
 
 Button.propTypes = {
-    appearance: PropTypes.arrayOf(PropTypes.shape({
+    appearance: PropTypes.shape({
         className: PropTypes.string,
         theme: PropTypes.string,
         layout: PropTypes.string
-    })),
+    }),
     href: PropTypes.string,
     onClick: PropTypes.func,
     children: PropTypes.string.isRequired
