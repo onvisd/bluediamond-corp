@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
 
 import styles from './styles.module.css';
@@ -36,6 +36,24 @@ const Button = (props) => {
     }
 
     return button;
+};
+
+Button.propTypes = {
+    appearance: PropTypes.arrayOf(PropTypes.shape({
+        className: PropTypes.string,
+        theme: PropTypes.string,
+        layout: PropTypes.string
+    })),
+    href: PropTypes.string,
+    onClick: PropTypes.func,
+    children: PropTypes.string.isRequired
+};
+
+Button.defaultProps = {
+    appearance: {
+        theme: 'primary',
+        layout: 'medium'
+    }
 };
 
 export default Button;
