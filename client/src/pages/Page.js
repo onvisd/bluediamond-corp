@@ -25,23 +25,19 @@ export default class Page extends Component {
         const includes = data.includes;
         const entries = includes.Entry;
 
-        const parsedEntries = [];
-        if(modules && modules.length) {
-            entries.forEach((entry) => {
-                const entryId = entry.sys.contentType.sys.id;
-                const entryComponent = entryId.replace('pageModule', '');
-                parsedEntries.push({
-                    component: entryComponent,
-                    data: entry,
-                    assets: includes.Asset
-                });
-            });
-        }
-        return parsedEntries.filter((entry) => pageModules[entry.component])
-            .map((entry, idx) => React.createElement(pageModules[entry.component], {
-                data: entry.data,
-                assets: entry.assets,
-                key: `pageEntry${idx}`
+        const parsedModules = modules.map((mdle) =>
+            entries.filter((entry) =>
+                entry.sys.id === mdle.sys.id
+            ).map((entry) => ({
+                component: entry.sys.contentType.sys.id.replace('pageModule', ''),
+                data: entry
+            }))[0]);
+
+        return parsedModules.filter((mdle) => pageModules[mdle.component])
+            .map((mdle, idx) => React.createElement(pageModules[mdle.component], {
+                data: mdle.data,
+                assets: includes.Asset,
+                key: `pageModule${idx}`
             }));
     }
 
