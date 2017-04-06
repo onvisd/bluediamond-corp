@@ -12,8 +12,8 @@ export default class ImageGallery extends Component {
         const alt = image.file.title;
 
         return (
-            <div key={id}>
-                <img src={url} alt={alt} />
+            <div key={id} className="l--col-12-at-s l--col-6-at-m l--col-4-at-l">
+                <img src={`${url}?fit=fill&f=face&w=800&h=800`} alt={alt} />
             </div>
         );
     }
@@ -23,7 +23,7 @@ export default class ImageGallery extends Component {
         const {images} = this.props;
 
         return (
-            <div className={styles.container}>
+            <div className={`${styles.container} l--row l--align-left`}>
                 {images.map((image, idx) => this.renderGalleryItem(image, idx))}
             </div>
         );

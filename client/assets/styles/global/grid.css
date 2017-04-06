@@ -73,6 +73,9 @@
     .l--hidden-at-s { display: none; }
 }
 
+.l--align-left { justify-content: flex-start; }
+.l--align-right { justify-content: flex-end; }
+
 .l--pad-l { padding: var(--l--space-l); }
 .l--pad-m { padding: var(--l--space-m); }
 .l--pad-s { padding: var(--l--space-s); }
