@@ -10,7 +10,8 @@ import NotFound from './NotFound';
 const pageModules = {
     ParagraphWithHeader: require('../components/API/ParagraphWithHeader').default,
     ParagraphWithImage: require('../components/API/ParagraphWithImage').default,
-    DocumentLink: require('../components/API/DocumentLink').default
+    DocumentLink: require('../components/API/DocumentLink').default,
+    Gallery: require('../components/API/ImageGallery').default
 };
 
 @preload(({dispatch, location}) => dispatch(getPageData(location.pathname)))

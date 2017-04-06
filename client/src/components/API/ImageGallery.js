@@ -1,23 +1,20 @@
 import React, {Component, PropTypes} from 'react';
 
-import DocumentLinkCmpnt from '../DocumentLink';
+import ImageGalleryCmpnt from '../ImageGallery';
 
-export default class DocumentLink extends Component {
+export default class Gallery extends Component {
     static propTypes = {
         data: PropTypes.shape({
             sys: PropTypes.shape({
                 id: PropTypes.string.isRequired
             }),
             fields: PropTypes.shape({
-                date: PropTypes.string.isRequired,
-                linkTitle: PropTypes.string.isRequired,
-                description: PropTypes.string.isRequired,
-                linkUrl: PropTypes.string.isRequired,
-                linkMedia: PropTypes.shape({
+                name: PropTypes.string.isRequired,
+                images: PropTypes.arrayOf(PropTypes.shape({
                     sys: PropTypes.shape({
                         id: PropTypes.string.isRequired
                     })
-                })
+                }))
             })
         }),
         assets: PropTypes.arrayOf(PropTypes.shape({
@@ -42,13 +39,11 @@ export default class DocumentLink extends Component {
             assetsById[asset.sys.id] = asset.fields;
         });
 
+        const images = fields.images.map((image) => assetsById[image.sys.id]);
+
         return (
-            <DocumentLinkCmpnt
-                date={fields.date}
-                title={fields.linkTitle}
-                description={fields.description}
-                textUrl={fields.linkUrl || null}
-                mediaUrl={assetsById[fields.linkMedia.sys.id].file.url || null}
+            <ImageGalleryCmpnt
+                images={images}
             />
         );
     }
