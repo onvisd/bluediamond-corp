@@ -7,6 +7,7 @@ import setupHome from './Home';
 import setupPage from './Page';
 import setupProduct from './Product';
 import setupRecipe from './Recipe';
+import setupRecipeCard from './RecipeCard';
 
 export default () => {
     const api = Router();
@@ -25,6 +26,7 @@ export default () => {
     setupPage(api);
     setupProduct(api);
     setupRecipe(api);
+    setupRecipeCard(api);
 
     return api;
 };
