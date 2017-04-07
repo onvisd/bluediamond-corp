@@ -1,0 +1,67 @@
+@import 'constants/color';
+
+.container {
+    width: 100%;
+}
+
+.tabs {
+    display: flex;
+    background: var(--c--gray-lighter);
+}
+
+.tabs,
+.subTab,
+.drawer {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.tab,
+.subTabs,
+.subTab {
+    display: inline-block;
+}
+
+.tab {
+    cursor: pointer;
+
+    &.brand {
+        font-weight: 700;
+    }
+
+    &.category {
+        padding: 0 0.5rem;
+        font-weight: 400;
+
+        &.active {
+            font-weight: 700;
+        }
+    }
+
+    &.active {
+        flex: auto;
+    }
+
+    &:not(.active) {
+        & .subTabs {
+            display: none;
+        }
+    }
+}
+
+.drawer {
+    display: flex;
+    padding: 1rem 0;
+    background: var(--c--gray-light);
+
+    & li {
+        display: inline-block;
+        margin: 0 1rem;
+        flex: 0 0 12.5%;
+    }
+
+    & .cta {
+        flex: 0 0 25%;
+    }
+}

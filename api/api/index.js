@@ -8,6 +8,7 @@ import setupPage from './Page';
 import setupProduct from './Product';
 import setupRecipe from './Recipe';
 import setupRecipeCard from './RecipeCard';
+import setupNavigation from './Navigation';
 
 export default () => {
     const api = Router();
@@ -27,6 +28,7 @@ export default () => {
     setupProduct(api);
     setupRecipe(api);
     setupRecipeCard(api);
+    setupNavigation(api);
 
     return api;
 };

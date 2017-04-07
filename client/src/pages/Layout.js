@@ -1,15 +1,25 @@
 import React, {Component, PropTypes} from 'react';
-import {Title, Meta} from 'react-isomorphic-render';
+import {connect} from 'react-redux';
+import {Title, Meta, preload} from 'react-isomorphic-render';
+
+import {connector, getNavigation} from '../redux/navigation';
 
 import Preloading from '../components/Preloading';
+import Navigation from '../components/API/Navigation';
 
+@preload(({dispatch}) => dispatch(getNavigation()))
+@connect(
+    (state) => ({...connector(state.navigation)}),
+    {getNavigation}
+)
 export default class Layout extends Component {
     static propTypes = {
-        children: PropTypes.node.isRequired
+        children: PropTypes.node.isRequired,
+        navigation: PropTypes.object.isRequired
     }
 
     render() {
-        const {children} = this.props;
+        const {children, navigation} = this.props;
 
         const title = 'WebApp';
 
@@ -34,6 +44,8 @@ export default class Layout extends Component {
             <div className="content">
                 <Title>{title}</Title>
                 <Meta>{meta}</Meta>
+
+                <Navigation data={navigation} />
 
                 <Preloading />
 

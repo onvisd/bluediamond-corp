@@ -1,0 +1,55 @@
+@import 'constants/grid';
+
+.container {
+    @mixin container;
+
+    position: relative;
+}
+
+.external {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    overflow: hidden;
+
+    & li {
+        display: inline-block;
+        margin-left: var(--l--space-s);
+        float: right;
+    }
+}
+
+.primary {
+    display: flex;
+    width: 100%;
+}
+
+.primaryItem {
+    padding: 0 var(--l--space-s);
+    flex: auto;
+
+    &:first-child {
+        padding-left: 0;
+    }
+
+    &:last-child {
+        padding-right: 0;
+    }
+}
+
+.logo {
+    flex: 0 0 50%;
+    text-align: center;
+}
+
+.navDrawer {
+    display: none;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+
+    &.visible {
+        display: block;
+    }
+}
