@@ -97,11 +97,7 @@ const config = {
             },
             {
                 test: /\.(svg)$/,
-                use: [
-                    {
-                        loader: 'svg-react-loader'
-                    }
-                ]
+                loaders: ['react-svgdom-loader', 'svgo-loader']
             }
         ]
     },

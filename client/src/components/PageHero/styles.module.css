@@ -1,0 +1,94 @@
+@import 'constants/grid';
+@import 'constants/color';
+
+/* Hero Styles */
+
+.container {
+    display: flex;
+    position: relative;
+    height: 40vw;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--c--gray-darker);
+    overflow: hidden;
+
+    @media (--mq-s) {
+        height: 20rem;
+    }
+
+    &.videoOpen {
+        & .innerContainer {
+            z-index: -1;
+            opacity: 0;
+        }
+
+        & .videoPlayer {
+            z-index: 20;
+            opacity: 1;
+        }
+    }
+}
+
+.innerContainer {
+    @mixin container;
+
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 200ms ease;
+
+    & h1,
+    & p {
+        color: var(--c--white);
+    }
+}
+
+.background {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+
+    & video {
+        width: 100%;
+
+        @media (--mq-s) {
+            width: 200%;
+        }
+    }
+}
+
+.playIcon {
+    text-align: center;
+
+    & svg {
+        display: inline-block;
+        width: 70px;
+        height: 70px;
+    }
+}
+
+.videoPlayer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 200ms ease;
+    background-color: #000;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

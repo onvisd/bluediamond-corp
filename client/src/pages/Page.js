@@ -11,7 +11,8 @@ const pageModules = {
     ParagraphWithHeader: require('../components/API/ParagraphWithHeader').default,
     ParagraphWithImage: require('../components/API/ParagraphWithImage').default,
     DocumentLink: require('../components/API/DocumentLink').default,
-    Gallery: require('../components/API/ImageGallery').default
+    Gallery: require('../components/API/ImageGallery').default,
+    Hero: require('../components/API/PageHero').default
 };
 
 @preload(({dispatch, location}) => dispatch(getPageData(location.pathname)))
