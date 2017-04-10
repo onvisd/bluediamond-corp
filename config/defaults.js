@@ -21,5 +21,11 @@ export default {
         devserver: {
             port: 3001
         }
+    },
+    aws: {
+        key: process.env.AWS_ACCESS_KEY_ID,
+        secret: process.env.AWS_SECRET_ACCESS_KEY,
+        sesSource: process.env.SES_SOURCE_ADDRESS,
+        approvedEmails: process.env.APPROVED_DESTINATION_EMAILS
     }
 };
