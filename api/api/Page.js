@@ -1,17 +1,13 @@
 import axios from 'axios';
 
 import {setCached} from '../services/cache';
-import config from '../../config';
 
-const apiBase = 'https://cdn.contentful.com';
-const {spaceId, accessToken} = config.services.api;
-
-export default (api) => {
+export default (api, spaceId) => {
     api.get('/page/:slug', (req, res) =>
         axios.get(
-            `${apiBase}/spaces/${spaceId}/entries?` +
+            `${req.apiParams.base}/spaces/${spaceId}/entries?` +
             `include=2&fields.slug=${req.params.slug}&` +
-            `access_token=${accessToken}&content_type=page`
+            `access_token=${req.apiParams.token}&content_type=page`
         )
         .then((response) => {
             if(response.data.items.length) {

@@ -1,16 +1,12 @@
 import axios from 'axios';
 
 import {setCached} from '../services/cache';
-import config from '../../config';
 
-const apiBase = 'https://cdn.contentful.com';
-const {spaceId, accessToken} = config.services.api;
-
-export default (api) => {
+export default (api, spaceId) => {
     api.get('/home', (req, res) =>
         axios.get(
-            `${apiBase}/spaces/${spaceId}/entries?` +
-            `access_token=${accessToken}&content_type=homepageModule`
+            `${req.apiParams.base}/spaces/${spaceId}/entries?` +
+            `access_token=${req.apiParams.token}&content_type=homepageModule`
         )
         .then((response) => {
             setCached('home', response.data);

@@ -1,18 +1,16 @@
 import {Router} from 'express';
+import requireAll from 'require-all';
 
+import config from '../../config';
 import {getCached} from '../services/cache';
-
-import setupBrand from './Brand';
-import setupHome from './Home';
-import setupPage from './Page';
-import setupProduct from './Product';
-import setupRecipe from './Recipe';
-import setupRecipeCard from './RecipeCard';
-import setupNavigation from './Navigation';
-import setupEmail from './Email';
 
 export default () => {
     const api = Router();
+    const apiBase = {
+        prod: 'https://cdn.contentful.com',
+        prev: 'https://preview.contentful.com'
+    };
+    const {spaceId, accessToken, previewToken} = config.services.api;
 
 	// perhaps expose some API metadata at the root
     api.get('/', (req, res) => {
@@ -23,14 +21,22 @@ export default () => {
     if(process.env.NODE_ENV === 'production')
         api.use(getCached);
 
-    setupBrand(api);
-    setupHome(api);
-    setupPage(api);
-    setupProduct(api);
-    setupRecipe(api);
-    setupRecipeCard(api);
-    setupNavigation(api);
-    setupEmail(api);
+    // setup the route params
+    api.use((req, res, next) => {
+        req.apiParams = {
+            base: req.query.preview ? apiBase.prev : apiBase.prod,
+            token: req.query.preview ? previewToken : accessToken
+        };
+
+        next();
+    });
+
+    requireAll({
+        dirname: __dirname,
+        filter: /^(?!index)(.+)\.js$/,
+        recursive: false,
+        resolve: (endpoint) => endpoint.default(api, spaceId)
+    });
 
     return api;
 };

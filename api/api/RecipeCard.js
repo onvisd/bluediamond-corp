@@ -1,17 +1,17 @@
 import axios from 'axios';
 
-import config from '../../config';
+import {setCached} from '../services/cache';
 
-const apiBase = 'https://cdn.contentful.com';
-const {spaceId, accessToken} = config.services.api;
-
-export default (api) => {
+export default (api, spaceId) => {
     api.get('/recipeCard', (req, res) =>
         axios.get(
-            `${apiBase}/spaces/${spaceId}/entries?` +
-            `access_token=${accessToken}&content_type=recipeCard`
+            `${req.apiParams.base}/spaces/${spaceId}/entries?` +
+            `access_token=${req.apiParams.token}&content_type=recipeCard`
         )
-        .then((response) => res.send(response.data))
+        .then((response) => {
+            setCached('recipeCard', response.data);
+            res.send(response.data);
+        })
         .catch((err) => {
             console.trace(err);
             res.status(500).send(err.message);

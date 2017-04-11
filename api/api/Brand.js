@@ -1,17 +1,13 @@
 import axios from 'axios';
 
 import {setCached} from '../services/cache';
-import config from '../../config';
 
-const apiBase = 'https://cdn.contentful.com';
-const {spaceId, accessToken} = config.services.api;
-
-export default (api) => {
+export default (api, spaceId) => {
     api.get('/brand', (req, res) =>
         axios.get(
-            `${apiBase}/spaces/${spaceId}/entries?` +
+            `${req.apiParams.base}/spaces/${spaceId}/entries?` +
             'select=sys.id,fields.slug,fields.name&' +
-            `access_token=${accessToken}&content_type=brand`
+            `access_token=${req.apiParams.token}&content_type=brand`
         )
         .then((response) => {
             setCached('brand', response.data);
@@ -25,9 +21,9 @@ export default (api) => {
 
     api.get('/brand/:slug', (req, res) =>
         axios.get(
-            `${apiBase}/spaces/${spaceId}/entries?` +
+            `${req.apiParams.base}/spaces/${spaceId}/entries?` +
             `fields.slug=${req.params.slug}&` +
-            `access_token=${accessToken}&content_type=brand`
+            `access_token=${req.apiParams.token}&content_type=brand`
         )
         .then((response) => {
             setCached(`brand_${req.params.slug}`, response.data);

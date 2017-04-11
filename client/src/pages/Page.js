@@ -16,7 +16,7 @@ const pageModules = {
     ButtonBar: require('../components/API/ButtonBar').default
 };
 
-@preload(({dispatch, location}) => dispatch(getPageData(location.pathname)))
+@preload(({dispatch, location}) => dispatch(getPageData(location.pathname, location.search)))
 @connect(
     (state) => ({...connector(state.pageData)}),
     {getPageData}

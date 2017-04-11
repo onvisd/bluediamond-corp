@@ -6,7 +6,7 @@ const handler = createHandler(settings);
 export const getPageData = action({
     namespace: 'PAGE_DATA',
     event: 'GET_PAGE_DATA',
-    action: (slug, http) => http.get(`/api/page${slug}`),
+    action: (slug, search, http) => http.get(`/api/page${slug}${search}`),
     result: (state, result) => ({
         ...state,
         pageData: result

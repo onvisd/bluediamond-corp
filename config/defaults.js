@@ -11,7 +11,8 @@ export default {
         api: {
             port: 3003,
             spaceId: process.env.CONTENTFUL_SPACE_ID,
-            accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+            accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+            previewToken: process.env.CONTENTFUL_PREVIEW_TOKEN
         }
     },
     redis: {
