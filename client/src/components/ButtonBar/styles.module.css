@@ -1,0 +1,6 @@
+/* Button Bar styles */
+
+.container {
+    display: flex;
+    justify-content: center;
+}

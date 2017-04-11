@@ -9,7 +9,7 @@
     height: 40vw;
     justify-content: center;
     align-items: center;
-    background-color: var(--c--gray-darker);
+    background-color: var(--c--gray-dark);
     overflow: hidden;
 
     @media (--mq-s) {
