@@ -2,6 +2,7 @@
 // (including generators, which means async/await)
 import 'babel-polyfill';
 import {render} from 'react-isomorphic-render';
+import {mediaQueryTracker} from 'redux-mediaquery';
 
 import settings from './react-isomorphic-render';
 
@@ -14,6 +15,14 @@ render(settings, {
     devtools: global.REDUX_DEVTOOLS ? require('./devtools').default : undefined
 })
 .then(({store, rerender}) => {
+    mediaQueryTracker({
+        large: '(min-width: 1025px)',
+        medium: '(max-width: 1024px)',
+        small: '(max-width: 768px)',
+        innerWidth: true,
+        innerHeight: true
+    })(store.dispatch);
+
     if(module.hot) {
         module.hot.accept('./react-isomorphic-render', () => {
             store.hotReload(settings.reducer);

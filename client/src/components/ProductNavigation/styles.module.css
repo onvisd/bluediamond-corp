@@ -1,4 +1,5 @@
 @import 'constants/color';
+@import 'constants/grid';
 
 .container {
     width: 100%;
@@ -7,6 +8,11 @@
 .tabs {
     display: flex;
     background: var(--c--gray-lighter);
+
+    @media (--mq-s) {
+        display: block;
+        background: none;
+    }
 }
 
 .tabs,
@@ -21,6 +27,10 @@
 .subTabs,
 .subTab {
     display: inline-block;
+
+    @media (--mq-s) {
+        display: block;
+    }
 }
 
 .tab {

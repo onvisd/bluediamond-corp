@@ -1,9 +1,13 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
 
+@connect((state) => ({
+    responsive: state.responsive
+}))
 export default class ProductNavigation extends Component {
     static propTypes = {
         items: PropTypes.array.isRequired
@@ -23,19 +27,27 @@ export default class ProductNavigation extends Component {
     }
 
     renderBrand = (tab, index) => (
-        <li key={`tab${index}`} className={classnames(styles.tab, styles.brand, {
-            [styles.active]: this.state.brand === index
-        })}>
-            <span
-                className={styles.label}
-                onClick={() => this.selectBrand(index)}
-            >
-                {tab.name}
-            </span>
-            <ol className={styles.subTabs}>
-                {tab.children.map(this.renderCategory)}
-            </ol>
-        </li>
+        this.props.responsive.small ? (
+            <li key={`tab${index}`}>
+                <Link to={`/brand/${tab.slug}`}>
+                    {tab.name}
+                </Link>
+            </li>
+        ) : (
+            <li key={`tab${index}`} className={classnames(styles.tab, styles.brand, {
+                [styles.active]: this.state.brand === index
+            })}>
+                <span
+                    className={styles.label}
+                    onClick={() => this.selectBrand(index)}
+                >
+                    {tab.name}
+                </span>
+                <ol className={styles.subTabs}>
+                    {tab.children.map(this.renderCategory)}
+                </ol>
+            </li>
+        )
     );
 
     selectCategory = (index) => {
@@ -84,14 +96,14 @@ export default class ProductNavigation extends Component {
     }
 
     render() {
-        const {items} = this.props;
+        const {items, responsive} = this.props;
 
         return (
             <div className={styles.container}>
                 <ol className={styles.tabs}>
                     {items.map(this.renderBrand)}
                 </ol>
-                {this.renderDrawer()}
+                {!responsive.small && this.renderDrawer()}
             </div>
         );
     }

@@ -1,9 +1,39 @@
 @import 'constants/grid';
+@import 'constants/color';
 
 .container {
     @mixin container;
 
     position: relative;
+
+    @media (--mq-s) {
+        display: none;
+    }
+}
+
+.mobileContainer {
+    @media (--mq-gt-s) {
+        display: none;
+    }
+
+    & .drawer {
+        position: fixed;
+        top: 0;
+        right: -100vw;
+        width: 100%;
+        height: 100%;
+        background: var(--c--white);
+
+        &.visible {
+            right: 0;
+        }
+
+        & ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+    }
 }
 
 .external {
@@ -35,6 +65,21 @@
 
     &:last-child {
         padding-right: 0;
+    }
+
+    @media (--mq-s) {
+        padding: 0;
+    }
+}
+
+.secondaryItem {
+    @media (--mq-s) {
+        display: none;
+        margin-left: 1rem;
+
+        &.visible {
+            display: block;
+        }
     }
 }
 

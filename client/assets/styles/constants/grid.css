@@ -21,8 +21,9 @@
     --l--space-s: 1rem;
 
     /* Media queries */
-    @custom-media --mq-l (width > 1024px);
+    @custom-media --mq-gt-m (width > 1024px);
     @custom-media --mq-m (width <= 1024px);
+    @custom-media --mq-gt-s (width > 768px);
     @custom-media --mq-s (width <= 768px);
 
     @define-mixin visually-hidden {

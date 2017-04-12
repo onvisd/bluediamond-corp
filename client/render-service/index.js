@@ -8,8 +8,8 @@ require('babel-polyfill');
 // resulting in faster server-side hot-reload (startup) times.
 require('babel-register')(
     require('universal-webpack').babel_register_options(
-    require('../webpack/universal-webpack-settings'),
-    require('../webpack/webpack.config')
+        require('../webpack/universal-webpack-settings'),
+        require('../webpack/webpack.config')
     )
 );
 

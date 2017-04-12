@@ -21,7 +21,7 @@
 .l--col-11 { @mixin column-fixed (11/12); }
 .l--col-12 { @mixin column-fixed (12/12); }
 
-@media (--mq-l) {
+@media (--mq-gt-m) {
     .l--col-auto-at-l { @mixin column-flex; }
     .l--col-1-at-l { @mixin column-fixed (1/12); }
     .l--col-2-at-l { @mixin column-fixed (2/12); }
