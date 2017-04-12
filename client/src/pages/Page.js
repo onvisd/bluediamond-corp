@@ -19,7 +19,7 @@ const pageModules = {
 const pageLayouts = {
     page: require('../components/Page').default,
     pageWithSidebar: require('../components/PageWithSidebar').default,
-    fullScreenPage: require('../components/Page').default
+    fullScreenPage: require('../components/FullScreenPage').default
 };
 
 @preload(({dispatch, location}) => dispatch(getPageData(location.pathname, location.search)))
