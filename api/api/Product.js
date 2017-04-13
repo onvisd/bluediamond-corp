@@ -3,19 +3,43 @@ import axios from 'axios';
 import {setCached} from '../services/cache';
 
 export default (api, spaceId) => {
-    api.get('/product/:slug', (req, res) =>
+    const getProduct = (apiParams, slug) =>
         axios.get(
-            `${req.apiParams.base}/spaces/${spaceId}/entries?` +
-            `fields.slug=${req.params.slug}&` +
-            `access_token=${req.apiParams.token}&content_type=product`
+            `${apiParams.base}/spaces/${spaceId}/entries?` +
+            `fields.slug=${slug}&` +
+            `access_token=${apiParams.token}&content_type=product`
         )
-        .then((response) => {
-            setCached(`product_${req.params.slug}`, response.data);
-            res.send(response.data);
-        })
+        .then((response) => response.data);
+
+    const getSmartLabel = (smartLabelId) =>
+        axios.get(`https://smartlabel-api.labelinsight.com/api/v2/${smartLabelId}`)
+        .then((response) => response.data)
         .catch((err) => {
             console.trace(err);
+            return 'No Smart Label data found';
+        });
+
+    api.get('/product/:slug', async (req, res) => {
+        try {
+            const product = await getProduct(req.apiParams, req.params.slug);
+
+            if(product.items.length) {
+                const smartLabelId = product.items[0].fields.smartLabel;
+                const smartLabel = await getSmartLabel(smartLabelId);
+                const amend = typeof smartLabel === 'string'
+                    ? {error: smartLabel}
+                    : smartLabel;
+
+                product.items[0].fields.smartLabel = {id: smartLabelId, ...amend};
+
+                setCached(`product_${req.params.slug}`, product);
+                res.send(product);
+            } else {
+                res.status(404).send({ok: false, error: 'not found'});
+            }
+        } catch (err) {
+            console.trace(err);
             res.status(500).send(err.message);
-        })
-    );
+        }
+    });
 };
