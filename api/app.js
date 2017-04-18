@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 // api router
 app.use(api());
 
-app.server.listen(process.env.PORT || config.services.api.port);
+app.server.listen(config.services.api.port);
 
 console.log(`Started on port ${app.server.address().port}`);
 

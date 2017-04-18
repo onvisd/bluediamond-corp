@@ -1,15 +1,17 @@
-require('dotenv').config();
-
 export default {
     web: {
-        port: process.env.PORT || 3000
+        port: process.env.WEB_PORT || 3000
     },
     services: {
         rendering: {
-            port: 3002
+            port: process.env.RENDERING_PORT || 3002,
+            ajax: {
+                host: process.env.AJAX_HOST || 'localhost',
+                port: process.env.AJAX_PORT || process.env.WEB_PORT || 3000
+            }
         },
         api: {
-            port: 3003,
+            port: process.env.API_PORT || 3003,
             spaceId: process.env.CONTENTFUL_SPACE_ID,
             accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
             previewToken: process.env.CONTENTFUL_PREVIEW_TOKEN
@@ -20,7 +22,7 @@ export default {
     },
     webpack: {
         devserver: {
-            port: 3001
+            port: process.env.DEVSERVER_PORT || 3001
         }
     },
     aws: {

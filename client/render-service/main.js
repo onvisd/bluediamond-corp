@@ -12,10 +12,7 @@ export default function(parameters) {
         // E.g. an AJAX request to `/items/5` will be transformed to
         // `http://${host}:${port}/items/5` during server-side rendering.
         // Specify `secure: true` flag to use `https` protocol instead of `http`.
-        application: {
-            host: 'localhost',
-            port: config.web.port
-        },
+        application: config.services.rendering.ajax,
 
         // Http Urls to javascripts and (optionally) CSS styles
         // which will be insterted into the <head/> element of the resulting Html webpage
