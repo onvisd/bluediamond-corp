@@ -6,7 +6,7 @@ import appConfig from '../../config';
 // eslint-disable-next-line camelcase
 const config = webpackBaseConfig({development: true, css_bundle: true});
 
-// config.devtool = 'inline-eval-cheap-source-map'
+config.devtool = 'inline-eval-cheap-source-map';
 
 config.plugins.push(
 
@@ -20,7 +20,7 @@ config.plugins.push(
             NODE_ENV: JSON.stringify('development'),
             BABEL_ENV: JSON.stringify('development/client')
         },
-        REDUX_DEVTOOLS: false  // enable/disable redux-devtools
+        REDUX_DEVTOOLS: true  // enable/disable redux-devtools
     }),
 
     // faster code reload on changes

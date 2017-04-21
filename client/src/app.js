@@ -1,3 +1,5 @@
+/* global REDUX_DEVTOOLS */
+
 // The polyfill will emulate a full ES6 environment (for old browsers)
 // (including generators, which means async/await)
 import 'babel-polyfill';
@@ -12,7 +14,7 @@ require('../assets/styles/style.css');
 render(settings, {
     // enable/disable Redux dev-tools
     // eslint-disable-next-line no-undefined
-    devtools: global.REDUX_DEVTOOLS ? require('./devtools').default : undefined
+    devtools: REDUX_DEVTOOLS ? require('./devtools').default : undefined
 })
 .then(({store, rerender}) => {
     mediaQueryTracker({
