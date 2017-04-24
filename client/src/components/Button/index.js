@@ -1,23 +1,18 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
-
+import classNames from 'classnames';
 import styles from './styles.module.css';
 
 const Button = (props) => {
-    const {appearance, href, onClick, children, ...rest} = props;
+    const {theme, layout, href, onClick, children, ...rest} = props;
     const className = `${
-        appearance.className ||
-        styles[appearance.theme] ||
-        styles.default
-    } ${styles[appearance.layout] || ''}`;
+        styles[theme] ||
+        styles.primary
+    } ${classNames({[styles[layout]]: layout})}`;
 
     // Render a button element
     let button = (
-        <button
-            className={className}
-            onClick={onClick}
-            {...rest}
-        >
+        <button className={className} onClick={onClick} {...rest}>
             {children}
         </button>
     );
@@ -25,11 +20,7 @@ const Button = (props) => {
     // If Button has an href prop, render an anchor element
     if(href) {
         button = (
-            <Link
-                className={className}
-                to={href}
-                {...rest}
-            >
+            <Link className={className} to={href} {...rest}>
                 {children}
             </Link>
         );
@@ -39,21 +30,15 @@ const Button = (props) => {
 };
 
 Button.propTypes = {
-    appearance: PropTypes.shape({
-        className: PropTypes.string,
-        theme: PropTypes.string,
-        layout: PropTypes.string
-    }),
+    theme: PropTypes.string,
+    layout: PropTypes.string,
     href: PropTypes.string,
     onClick: PropTypes.func,
     children: PropTypes.string.isRequired
 };
 
 Button.defaultProps = {
-    appearance: {
-        theme: 'primary',
-        layout: 'medium'
-    }
+    theme: 'blue'
 };
 
 export default Button;

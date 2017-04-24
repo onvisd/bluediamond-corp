@@ -9,6 +9,7 @@
 .c--gray-lighter { color: var(--c--gray-lighter); }
 .c--gray-light { color: var(--c--gray-light); }
 .c--gray-dark { color: var(--c--gray-dark); }
+.c--gray-darker { color: var(--c--gray-darker); }
 
 /* color variant utilities: blue */
 .c--blue { color: var(--c--blue); }
@@ -37,6 +38,7 @@
 .c--bg-gray-lighter { background: var(--c--gray-lighter); }
 .c--bg-gray-light { background: var(--c--gray-light); }
 .c--bg-gray-dark { background: var(--c--gray-dark); }
+.c--bg-gray-darker { background: var(--c--gray-darker); }
 
 /* background color utilities: blue */
 .c--bg-blue { background: var(--c--blue); }

@@ -1,4 +1,5 @@
 @import '../constants/type';
+@import '../constants/color';
 
 /* global type baselines */
 body,
@@ -24,8 +25,7 @@ h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
+h5 {
     margin-bottom: 1rem;
     line-height: 1;
     font-family: var(--t--family-sans);
@@ -40,8 +40,13 @@ h2 {
     font-size: var(--t--size-l);
 }
 
-h4 {
-    color: var(--c--gray);
+h3 {
+    font-size: var(--t--size-m);
+}
+
+h5 {
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 p {
@@ -85,7 +90,7 @@ a {
 
     &:focus,
     &:hover {
-        text-decoration: underline;
+        color: var(--c--blue-light);
     }
 }
 
@@ -93,10 +98,22 @@ a {
 .t--family-serif { font-family: var(--t--family-serif); }
 .t--family-mono { font-family: var(--t--family-mono); }
 
+.t--size-xxl { font-size: var(--t--size-xxl); }
 .t--size-xl { font-size: var(--t--size-xl); }
 .t--size-l { font-size: var(--t--size-l); }
 .t--size-m { font-size: var(--t--size-m); }
 .t--size-s { font-size: var(--t--size-s); }
+
+.t--type-display-one {
+    font-size: var(--t--size-xxl);
+    text-transform: uppercase;
+}
+.t--type-display-two {
+    font-size: var(--t--size-l);
+    text-transform: uppercase;
+}
+.t--type-prose { font-size: var(--t--size-m); }
+.t--type-incidental { color: var(--c--gray); }
 
 .t--size-ms-xl { font-size: var(--ms2); }
 .t--size-ms-l { font-size: var(--ms1); }
