@@ -76,14 +76,6 @@ ol {
     }
 }
 
-/* code */
-pre,
-code {
-    font-family: var(--t--family-mono);
-    font-size: 90%;
-    white-space: pre-wrap;
-}
-
 /* links */
 a {
     color: var(--c--blue);
@@ -95,8 +87,6 @@ a {
 }
 
 .t--family-sans { font-family: var(--t--family-sans); }
-.t--family-serif { font-family: var(--t--family-serif); }
-.t--family-mono { font-family: var(--t--family-mono); }
 
 .t--size-xxl { font-size: var(--t--size-xxl); }
 .t--size-xl { font-size: var(--t--size-xl); }

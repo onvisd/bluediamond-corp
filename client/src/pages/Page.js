@@ -8,12 +8,13 @@ import NotFound from './NotFound';
 // require pageModules ahead of time here using the format
 // PageModuleName: require('../components/API/PageModuleName').default
 const pageModules = {
-    ParagraphWithHeader: require('../components/API/ParagraphWithHeader').default,
-    ParagraphWithImage: require('../components/API/ParagraphWithImage').default,
+    ButtonBar: require('../components/API/ButtonBar').default,
     DocumentLink: require('../components/API/DocumentLink').default,
-    Gallery: require('../components/API/ImageGallery').default,
     Hero: require('../components/API/PageHero').default,
-    ButtonBar: require('../components/API/ButtonBar').default
+    Gallery: require('../components/API/ImageGallery').default,
+    GenericHero: require('../components/API/GenericHero').default,
+    ParagraphWithHeader: require('../components/API/ParagraphWithHeader').default,
+    ParagraphWithImage: require('../components/API/ParagraphWithImage').default
 };
 
 const pageLayouts = {
