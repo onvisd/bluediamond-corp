@@ -17,7 +17,7 @@ export default class ParagraphWithImage extends Component {
                     })
                 }),
                 imagePosition: PropTypes.string.isRequired,
-                description: PropTypes.string.isRequired
+                description: PropTypes.string
             })
         }),
         assets: PropTypes.arrayOf(PropTypes.shape({

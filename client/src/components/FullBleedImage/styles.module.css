@@ -1,0 +1,36 @@
+@import 'constants/grid';
+@import 'constants/color';
+
+.container {
+    display: flex;
+    position: relative;
+    height: 24vh;
+    padding: 18vh 0;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+
+    @media (--mq-s) {
+        height: 20rem;
+    }
+}
+
+.innerContainer {
+    @mixin container;
+
+    text-align: center;
+
+    & h1,
+    & p {
+        margin-right: auto;
+        margin-left: auto;
+        color: var(--c--white);
+    }
+
+    & p {
+        margin-bottom: 0;
+        max-width: 30vw;
+    }
+}

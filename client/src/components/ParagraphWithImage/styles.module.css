@@ -1,1 +1,61 @@
-/* Page Paragraph with Image Component */
+@import 'constants/grid';
+@import 'constants/type';
+
+.container {
+    @mixin container;
+
+    display: flex;
+    position: relative;
+    height: 480px;
+    align-items: center;
+}
+
+.imageWrap {
+    display: flex;
+    position: absolute;
+    width: 60%;
+    height: 100%;
+    z-index: 11;
+    align-items: center;
+
+    &.left {
+        left: 0;
+        justify-content: flex-start;
+
+        & img {
+            margin-left: -10vw;
+        }
+    }
+
+    &.right {
+        right: 0;
+        justify-content: flex-end;
+
+        & img {
+            margin-right: -10vw;
+        }
+    }
+
+    & img {
+        max-width: 115%;
+    }
+}
+
+.content {
+    position: absolute;
+    width: 40%;
+
+    &.left {
+        right: 0;
+    }
+
+    &.right {
+        left: 0;
+    }
+}
+
+.description {
+    & p {
+        margin-bottom: 0;
+    }
+}

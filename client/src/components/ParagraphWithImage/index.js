@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import marked from 'marked';
+import classNames from 'classnames';
 
 import styles from './styles.module.css';
 
@@ -9,7 +10,7 @@ export default class ParagraphWithImage extends Component {
         paragraph: PropTypes.string.isRequired,
         imageFile: PropTypes.string.isRequired,
         imageName: PropTypes.string.isRequired,
-        imageDescription: PropTypes.string.isRequired,
+        imageDescription: PropTypes.string,
         imageAlign: PropTypes.string.isRequired
     }
 
@@ -27,28 +28,28 @@ export default class ParagraphWithImage extends Component {
             imageAlign
         } = this.props;
 
-        const alignClass = `styles.${imageAlign}`;
-        const alignCheck = imageAlign ? alignClass : '';
-
         return (
             <div className={styles.container}>
-                <h3>{header}</h3>
+                <div className={classNames(styles.content, {[styles[imageAlign]]: imageAlign})}>
+                    <h2 className="t--type-display-two">{header}</h2>
+                    <div
+                        className={`${styles.description} t--type-prose`}
+                        dangerouslySetInnerHTML={this.renderMarkup(paragraph)}
+                    />
+                </div>
 
-                {imageDescription &&
-                    <figure className={alignCheck}>
+                <div className={classNames(styles.imageWrap, {[styles[imageAlign]]: imageAlign})}>
+                    {imageDescription &&
+                        <figure>
+                            <img src={imageFile} alt={imageName} />
+                            <figcaption>{imageDescription}</figcaption>
+                        </figure>
+                    }
+
+                    {!imageDescription &&
                         <img src={imageFile} alt={imageName} />
-                        <figcaption>{imageDescription}</figcaption>
-                    </figure>
-                }
-
-                {!imageDescription &&
-                    <img src={imageFile} alt={imageName} className={alignCheck} />
-                }
-
-                <div
-                    className={styles.content}
-                    dangerouslySetInnerHTML={this.renderMarkup(paragraph)}
-                />
+                    }
+                </div>
             </div>
         );
     }

@@ -25,6 +25,7 @@ export default class Page extends Component {
             .map((mdle, idx) => React.createElement(pageModules[mdle.component], {
                 data: mdle.data,
                 assets: includes.Asset,
+                entries,
                 key: `pageModule${idx}`
             }));
     }

@@ -10,11 +10,13 @@ import NotFound from './NotFound';
 const pageModules = {
     ButtonBar: require('../components/API/ButtonBar').default,
     DocumentLink: require('../components/API/DocumentLink').default,
-    Hero: require('../components/API/PageHero').default,
+    FullBleedImage: require('../components/API/FullBleedImage').default,
     Gallery: require('../components/API/ImageGallery').default,
     GenericHero: require('../components/API/GenericHero').default,
+    Hero: require('../components/API/PageHero').default,
     ParagraphWithHeader: require('../components/API/ParagraphWithHeader').default,
-    ParagraphWithImage: require('../components/API/ParagraphWithImage').default
+    ParagraphWithImage: require('../components/API/ParagraphWithImage').default,
+    RelatedPages: require('../components/API/RelatedPages').default
 };
 
 const pageLayouts = {
