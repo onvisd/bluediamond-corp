@@ -8,3 +8,7 @@
 @import 'global/grid';
 
 /* component styles - styles groups of elements */
+@import 'components/related';
+
+/* layout styles - styles pages of elements */
+@import 'layouts/history';

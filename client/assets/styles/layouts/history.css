@@ -1,0 +1,165 @@
+/* Static History page styles */
+
+.history--timeline {
+    overflow: hidden;
+
+    & .l--container {
+        max-width: 100%;
+
+        @media (--mq-s) {
+            max-width: inherit;
+        }
+    }
+
+    & img {
+        max-width: 105%;
+
+        &:first-of-type {
+            margin-top: 2rem;
+        }
+
+        &:last-of-type {
+            margin-bottom: 2rem;
+        }
+
+        &.is-left {
+            margin-left: -5%;
+        }
+
+        &.is-right {
+            margin-right: -5%;
+        }
+    }
+
+    @media (--mq-s) {
+        & img.is-left,
+        & img.is-right {
+            margin: 2% 0;
+            max-width: 100%;
+        }
+    }
+}
+
+.history--timeline-row {
+    & .l--col-auto {
+        display: flex;
+        align-items: center;
+
+        &.is-left {
+            justify-content: flex-end;
+        }
+
+        &.is-right {
+            justify-content: flex-start;
+        }
+    }
+
+    @media (--mq-s) {
+        & .l--col-auto.is-left {
+            justify-content: flex-start;
+        }
+    }
+}
+
+.history--timebar-wrap {
+    display: flex;
+    position: relative;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.history--timebar {
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: calc(50% - 2px);
+        width: 4px;
+        z-index: 10;
+        background-color: var(--c--blue);
+    }
+
+    &.is-start {
+        &::after {
+            top: 50%;
+        }
+    }
+
+    &.is-end {
+        &::after {
+            top: 0;
+            bottom: 50%;
+        }
+    }
+
+    & svg {
+        width: 40px;
+        height: 40px;
+        fill: var(--c--blue);
+    }
+}
+
+.history--today {
+    position: relative;
+    height: 80vh;
+    background-color: var(--c--gray-dark);
+    background-image: url(http://images.contentful.com/v50q1scweni9/2w6sjY5K36ym6O4ySWQ8cm/6a0596a785a10432ff3cab40cd52ca18/Space.jpg);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+
+    @media (--mq-s) {
+        height: 20rem;
+        justify-content: center;
+
+        & .history--timebar-wrap {
+            display: none;
+        }
+
+        & .l--container {
+            height: 100%;
+        }
+    }
+
+    & h2,
+    & p {
+        text-align: center;
+        color: var(--c--white);
+    }
+
+    & .history--timeline-row {
+        max-height: 100px;
+        min-height: auto;
+
+        @media (--mq-s) {
+            height: 100%;
+            align-items: center;
+            max-height: 100%;
+        }
+    }
+}
+
+.timeline--content {
+    width: 85%;
+    max-width: 500px;
+
+    @media (--mq-s) {
+        width: 100%;
+        margin: 2%;
+        max-width: inherit;
+    }
+
+    & h2 {
+        margin-top: 1rem;
+    }
+
+    & p {
+        margin-bottom: 0;
+        font-size: 1.3rem;
+        line-height: 1.7rem;
+        max-width: 85%;
+    }
+}

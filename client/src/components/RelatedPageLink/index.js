@@ -26,8 +26,12 @@ export default class RelatedPageLink extends Component {
             backgroundImage
         } = this.props;
 
+        const style = {
+            backgroundImage: `url(${!backgroundImage && backgroundImage})`
+        };
+
         return (
-            <div className={styles.container} style={backgroundImage && {backgroundImage: `url(${backgroundImage})`}}>
+            <div className={styles.container} style={style}>
                 <div style={{width: '100%'}}>
                     {headline && <h4>{headline}</h4>}
                     <h1 className="t--type-display-two">{title}</h1>
