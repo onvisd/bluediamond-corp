@@ -1,0 +1,29 @@
+@import 'constants/color';
+@import 'constants/grid';
+
+.container {
+    display: flex;
+    height: 54px;
+    align-items: center;
+    background-color: var(--c--yellow);
+}
+
+.innerContainer {
+    @mixin container;
+
+    padding: 0;
+}
+
+.crumb {
+    &:not(:last-child)::after {
+        content: '\25b6'; /* right-carret */
+        margin: 0 0.9rem 0 1.1rem; /* visually centered */
+        opacity: 0.4;
+        vertical-align: middle;
+    }
+}
+
+.crumbLink {
+    composes: crumb;
+    color: var(--c--black);
+}

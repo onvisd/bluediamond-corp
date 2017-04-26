@@ -22,7 +22,7 @@ export default (api, spaceId) => {
     api.get('/brand/:slug', (req, res) =>
         axios.get(
             `${req.apiParams.base}/spaces/${spaceId}/entries?` +
-            `fields.slug=${req.params.slug}&` +
+            `include=2&fields.slug=${req.params.slug}&` +
             `access_token=${req.apiParams.token}&content_type=brand`
         )
         .then((response) => {

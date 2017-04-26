@@ -1,0 +1,26 @@
+.container {
+    position: relative;
+}
+
+.arrow {
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 68px;
+    height: 68px;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.prev {
+    left: 40px;
+    composes: arrow;
+}
+
+.next {
+    right: 40px;
+    composes: arrow;
+}

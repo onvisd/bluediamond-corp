@@ -1,0 +1,31 @@
+@import 'constants/grid';
+@import 'constants/color';
+
+.container {
+    display: flex;
+    position: relative;
+    height: 30vh;
+    padding: 12vh 0;
+    align-items: center;
+    background-color: var(--c--gray-dark);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+
+    & p,
+    & h2 {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 50vw;
+        color: var(--c--white);
+        text-align: center;
+    }
+
+    & p {
+        margin-bottom: 0;
+    }
+}
+
+.innerContainer {
+    @mixin container;
+}

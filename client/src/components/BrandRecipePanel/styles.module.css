@@ -1,0 +1,18 @@
+@import 'constants/color';
+@import 'constants/grid';
+
+.container {
+    padding: 3rem 0;
+    background-color: var(--c--white);
+}
+
+.innerContainer {
+    @mixin container;
+
+    text-align: center;
+}
+
+.recipeCards {
+    display: flex;
+    margin-bottom: 3rem;
+}

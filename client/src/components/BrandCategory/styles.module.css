@@ -1,0 +1,44 @@
+@import 'constants/color';
+@import 'constants/grid';
+
+.container {
+    display: flex;
+    padding: 3rem 0;
+    align-items: center;
+    background-color: var(--c--blue);
+    background-image:
+        radial-gradient(
+            ellipse farthest-corner at center bottom,
+            var(--c--gray-lighter) 0%,
+            var(--c--white) 100%
+        );
+    border-bottom: 2px solid var(--c--gray-lighter);
+}
+
+.innerContainer {
+    @mixin container;
+
+    text-align: center;
+
+    & p {
+        margin-bottom: 2rem;
+    }
+}
+
+.productList {
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    list-style: none;
+    text-align: center;
+}
+
+.product a {
+    color: var(--c--black);
+    text-align: center;
+
+    & img {
+        display: block;
+        max-width: 150px;
+    }
+}
