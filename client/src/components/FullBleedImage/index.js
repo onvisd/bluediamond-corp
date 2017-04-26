@@ -4,8 +4,8 @@ import styles from './styles.module.css';
 
 export default class FullBleedImage extends Component {
     static propTypes = {
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
+        title: PropTypes.string,
+        description: PropTypes.string,
         image: PropTypes.string.isRequired
     }
 
@@ -19,11 +19,11 @@ export default class FullBleedImage extends Component {
         return (
             <div className={styles.container} style={{backgroundImage: `url(${image})`}}>
                 <div className={styles.innerContainer}>
-                    <h1 className="t--type-display-one">{title}</h1>
-                    <div
+                    {title && <h1 className="t--type-display-one">{title}</h1>}
+                    {description && <div
                         className="t--type-prose"
                         dangerouslySetInnerHTML={this.renderMarkup(description)}
-                    />
+                    />}
                 </div>
             </div>
         );

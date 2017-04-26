@@ -1,0 +1,49 @@
+/* Image Cluster styles */
+
+.cluster {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+}
+
+.clusterImage {
+    z-index: 5;
+    flex: 1;
+
+    & img {
+        position: relative;
+        margin: 3rem 0;
+    }
+
+    &:nth-child(even) {
+        padding-top: 4%;
+    }
+}
+
+.twoUp {
+    & .clusterImage {
+        &:nth-child(1) {
+            z-index: 10;
+        }
+
+        &:nth-child(2) {
+            margin-left: -25%;
+        }
+    }
+}
+
+.threeUp {
+    & .clusterImage {
+        &:nth-child(n+2) {
+            margin-left: -15%;
+        }
+    }
+}
+
+.fourPlus {
+    & .clusterImage {
+        &:nth-child(n+2) {
+            margin-left: -10%;
+        }
+    }
+}

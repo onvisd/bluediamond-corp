@@ -9,11 +9,13 @@ import Home from './pages/Home';
 import Recipe from './pages/Recipe';
 import RecipeIndex from './pages/RecipeIndex';
 import HistoryIndex from './pages/History';
+import Manifesto from './pages/Manifesto';
 import Brand from './pages/Brand';
 
 export default (
     <Route path="/" component={Layout}>
         <IndexRoute component={Home} />
+        <Route path="manifesto" component={Manifesto} />
         <Route path="history" component={HistoryIndex} />
         <Route path="recipes" component={RecipeIndex} />
         <Route path="recipe/:slug" component={Recipe} />
