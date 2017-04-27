@@ -1,0 +1,6 @@
+@import 'constants/color';
+
+.secondary {
+    border-top: 3px solid var(--c--gray-lighter);
+    border-bottom: 3px solid var(--c--gray-lighter);
+}

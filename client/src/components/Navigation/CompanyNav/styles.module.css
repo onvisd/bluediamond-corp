@@ -1,0 +1,39 @@
+@import 'constants/grid';
+@import 'constants/color';
+
+.container {
+    @mixin container;
+
+    max-width: 74rem;
+    background-color: var(--c--white);
+    border: 2px solid var(--c--gray-lighter);
+    border-top: none;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.tiles {
+    display: flex;
+}
+
+.companyLinks {
+    display: flex;
+    height: 50px;
+    margin: 0;
+    padding: 0 0 0 24px;
+    align-items: center;
+    list-style-type: none;
+    background-color: var(--c--gray-lighter);
+}
+
+.companyLink {
+    display: inline-block;
+
+    &:not(:last-of-type) {
+        margin-right: 32px;
+    }
+
+    & a {
+        color: var(--c--black);
+    }
+}

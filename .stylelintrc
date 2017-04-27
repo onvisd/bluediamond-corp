@@ -1,8 +1,9 @@
 {
-    "extends": "stylelint-config-planetary",
+    "extends": [
+        "stylelint-config-planetary",
+        "stylelint-config-css-modules"
+    ],
     "rules": {
-        "property-no-unknown": [true, {
-            "ignoreProperties": ["composes"]
-        }]
+        "at-rule-no-unknown": null
     }
 }

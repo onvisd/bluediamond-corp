@@ -1,0 +1,34 @@
+@import 'constants/color';
+@import 'constants/grid';
+
+.default {
+    position: relative;
+    height: 100%;
+    background-color: var(--c--white);
+
+    & ul {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    @media (--mq-gt-s) {
+        width: calc(0.25 * 74rem);
+        height: 280px;
+        background-color: var(--c--gray-light);
+    }
+}
+
+.brand {
+    composes: default;
+    background-color: var(--c--yellow-dark);
+}
+
+.two_wide {
+    composes: default;
+
+    @media (--mq-gt-s) {
+        width: calc(0.5 * 74rem);
+        height: 280px;
+        background-color: var(--c--white);
+    }
+}

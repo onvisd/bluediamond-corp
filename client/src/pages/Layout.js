@@ -45,7 +45,7 @@ export default class Layout extends Component {
                 <Title>{title}</Title>
                 <Meta>{meta}</Meta>
 
-                <Navigation data={navigation} />
+                <Navigation {...navigation} />
 
                 <Preloading />
 

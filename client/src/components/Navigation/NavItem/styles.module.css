@@ -1,0 +1,69 @@
+@import 'constants/color';
+
+.primary {
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    background-color: var(--c--white);
+
+    &:not(:last-of-type) {
+        border-bottom: 1px solid var(--c--gray-lighter);
+    }
+
+    & a,
+    & button {
+        display: flex;
+        height: 100%;
+        align-items: center;
+    }
+
+    & a {
+        padding: 0 24px;
+        color: var(--c--black);
+    }
+
+    & button {
+        width: 100%;
+        padding: 0 24px;
+        justify-content: space-between;
+
+        &::after {
+            content: '\25b6'; /* right-carret */
+            opacity: 0.4;
+            vertical-align: middle;
+        }
+
+        &.active {
+            background-color: var(--c--gray-lighter);
+        }
+
+        &.active::after {
+            opacity: 0.8;
+        }
+    }
+}
+
+.secondary {
+    composes: primary;
+
+    & a {
+        color: var(--c--gray-dark);
+    }
+}
+
+.brand {
+    composes: primary;
+    background-color: var(--c--yellow);
+
+    &:not(:last-of-type) {
+        border-bottom: 1px solid var(--c--yellow-dark);
+    }
+
+    & button.active {
+        background-color: var(--c--yellow-light);
+    }
+
+    & button.active::after {
+        opacity: 0.8;
+    }
+}

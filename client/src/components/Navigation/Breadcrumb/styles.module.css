@@ -1,0 +1,36 @@
+@import 'constants/color';
+@import 'constants/type';
+
+.default {
+    height: 50px;
+    background-color: var(--c--gray-lighter);
+
+    & button {
+        display: flex;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        font-weight: var(--t--weight-bold);
+
+        &::before {
+            content: '\25c0'; /* left-carret */
+            position: absolute;
+            left: 24px;
+            opacity: 0.4;
+            vertical-align: middle;
+        }
+    }
+}
+
+.yellow {
+    composes: default;
+    background-color: var(--c--yellow);
+}
+
+.yellow_light {
+    composes: default;
+    background-color: var(--c--yellow-light);
+}

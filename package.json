@@ -109,6 +109,7 @@
     "sass-loader": "^6.0.0",
     "style-loader": "^0.13.1",
     "stylelint": "^7.10.1",
+    "stylelint-config-css-modules": "^1.0.0",
     "stylelint-config-planetary": "^1.0.1",
     "stylelint-webpack-plugin": "^0.7.0",
     "svgo-loader": "^1.2.1",

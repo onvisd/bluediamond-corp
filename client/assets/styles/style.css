@@ -2,6 +2,7 @@
 @import 'vendor/modularscale';
 
 /* project-wide styles - styles single elements */
+@import 'global/layout';
 @import 'global/reset';
 @import 'global/color';
 @import 'global/type';

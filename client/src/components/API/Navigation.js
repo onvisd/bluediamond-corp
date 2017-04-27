@@ -4,7 +4,7 @@ import NavigationComponent from '../Navigation';
 
 export default class Navigation extends Component {
     static propTypes = {
-        data: PropTypes.shape({
+        brands: PropTypes.shape({
             items: PropTypes.arrayOf(PropTypes.shape({
                 fields: PropTypes.shape({
                     name: PropTypes.string.isRequired,
@@ -46,11 +46,31 @@ export default class Navigation extends Component {
                     })
                 }))
             })
+        }),
+        companyNavTiles: PropTypes.shape({
+            items: PropTypes.arrayOf(PropTypes.shape({
+                fields: PropTypes.shape({
+                    headline: PropTypes.string.isRequired,
+                    title: PropTypes.string.isRequired,
+                    linkUrl: PropTypes.string.isRequired
+                })
+            })),
+            Asset: PropTypes.arrayOf(PropTypes.shape({
+                sys: PropTypes.shape({
+                    id: PropTypes.string.isRequired
+                }),
+                fields: PropTypes.shape({
+                    file: PropTypes.shape({
+                        url: PropTypes.string
+                    }).isRequired
+                })
+            }))
         })
     }
 
     render() {
-        const {items, includes} = this.props.data;
+        const {brands, companyNavTiles} = this.props;
+        const {items, includes} = brands;
 
         const assetsById = {};
         includes.Asset.forEach((asset) => {
@@ -91,9 +111,16 @@ export default class Navigation extends Component {
             });
         });
 
+        const companyNav = companyNavTiles.items.map((navTile) => ({
+            headline: navTile.fields.headline,
+            title: navTile.fields.title,
+            slug: navTile.fields.linkUrl
+        }));
+
         return (
             <NavigationComponent
-                products={productNavigation}
+                brands={productNavigation}
+                companyNavTiles={companyNav}
             />
         );
     }

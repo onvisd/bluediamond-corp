@@ -1,0 +1,30 @@
+@import 'constants/grid';
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (--mq-gt-s) {
+        flex-wrap: nowrap;
+    }
+}
+
+.product {
+    width: 100%;
+    padding: 2rem 0;
+    text-align: center;
+
+    & img {
+        display: block;
+        margin: 0 auto;
+        max-width: 150px;
+    }
+
+    @media (--mq-gt-s) {
+        padding: 2rem;
+
+        & img {
+            max-width: 124px;
+        }
+    }
+}

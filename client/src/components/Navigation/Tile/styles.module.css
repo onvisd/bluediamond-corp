@@ -1,0 +1,36 @@
+@import 'constants/color';
+@import 'constants/type';
+@import 'constants/grid';
+
+.tile {
+    display: flex;
+    padding: 0 24px;
+    align-items: center;
+    flex-grow: 1;
+
+    & a {
+        color: var(--c--black);
+    }
+
+    & h2 {
+        margin-bottom: 0;
+        font-size: var(--t--size-m);
+    }
+
+    @media (--mq-gt-s) {
+        width: 33.3%;
+        padding: 24px;
+
+        & h2 {
+            max-width: 80%;
+        }
+
+        & div {
+            margin-bottom: 3rem;
+        }
+
+        &:not(:last-of-type) div {
+            border-right: 2px solid var(--c--gray-lighter);
+        }
+    }
+}
