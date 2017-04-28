@@ -1,42 +1,36 @@
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import Button from '../Button';
 import styles from './styles.module.css';
 
 import RecipeCard from '../API/RecipeCard';
 
-const BrandRecipePanel = ({title, description, linkText, linkUrl, recipes}) => (
-    <div className={styles.container}>
-        <div className={styles.innerContainer}>
-            <h2>{title}</h2>
-            <p>{description}</p>
-            <div className={styles.recipeCards}>
-                {recipes.map((recipe, idx) => (
-                    <RecipeCard {...recipe} key={`recipe${idx}`} />
-                ))}
+export default class BrandRecipePanel extends Component {
+    static PropTypes = {
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        linkText: PropTypes.string.isRequired,
+        linkUrl: PropTypes.string.isRequired,
+        recipes: PropTypes.array.isRequired
+    }
+
+    render() {
+        const {title, description, linkText, linkUrl, recipes} = this.props;
+
+        return (
+            <div className={styles.container}>
+                <div className={styles.innerContainer}>
+                    <h2>{title}</h2>
+                    <p>{description}</p>
+                    <div className={`${styles.recipeCards} l--row`}>
+                        {recipes.map((recipe, idx) => (
+                            <RecipeCard {...recipe} key={`recipe${idx}`} />
+                        ))}
+                    </div>
+                    <Button theme="yellow" href={linkUrl}>
+                        {linkText}
+                    </Button>
+                </div>
             </div>
-            <Button theme="yellow" href={linkUrl}>
-                {linkText}
-            </Button>
-        </div>
-    </div>
-);
-
-BrandRecipePanel.propTypes = {
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    recipes: PropTypes.arrayOf(PropTypes.shape({
-        sys: PropTypes.shape({
-            id: PropTypes.string.isRequired
-        }),
-        fields: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            backgroundImage: PropTypes.shape({
-                sys: PropTypes.shape({
-                    id: PropTypes.string.isRequired
-                })
-            })
-        })
-    }))
-};
-
-export default BrandRecipePanel;
+        );
+    }
+}

@@ -1,1 +1,63 @@
+@import 'constants/color';
+@import 'constants/type';
+
 /* Recipe Card Component */
+
+.container {
+    display: flex;
+    position: relative;
+    height: 45vh;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    background-size: cover;
+    background-position: center;
+
+    & a {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 20;
+    }
+
+    & h3,
+    & p {
+        position: relative;
+        z-index: 15;
+        color: var(--c--white);
+    }
+
+    & h3 {
+        margin-bottom: 0.5rem;
+        max-width: 75%;
+        text-align: left;
+    }
+
+    & p {
+        font-size: var(--t--size-xs);
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        background-color: var(--c--black);
+        opacity: 0.5;
+        transition: opacity 200ms ease;
+    }
+
+    &:hover {
+        &::after {
+            opacity: 0;
+        }
+    }
+}

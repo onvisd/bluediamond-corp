@@ -102,7 +102,7 @@ export default class Brand extends Component {
         }));
     };
 
-    getRecipeCards = (ids) => {
+    getRecipe = (ids) => {
         const entries = this.props.brand.includes.Entry;
         const assets = this.props.brand.includes.Asset;
 
@@ -112,7 +112,7 @@ export default class Brand extends Component {
             data: {
                 entry,
                 assets: assets.filter(
-                    (asset) => asset.sys.id === entry.fields.backgroundImage.sys.id)
+                    (asset) => asset.sys.id === entry.fields.cardBackgroundImage.sys.id)
             }
         }));
     };
@@ -124,7 +124,7 @@ export default class Brand extends Component {
             entry.sys.id === id
         ).map((entry) => ({
             ...entry.fields,
-            recipes: this.getRecipeCards(
+            recipes: this.getRecipe(
                 entry.fields.recipes.map((recipe) => recipe.sys.id))
         }))[0];
     };

@@ -3,13 +3,13 @@ import axios from 'axios';
 import {setCached} from '../services/cache';
 
 export default (api, spaceId) => {
-    api.get('/recipeCard', (req, res) =>
+    api.get('/recipes', (req, res) =>
         axios.get(
             `${req.apiParams.base}/spaces/${spaceId}/entries?` +
-            `access_token=${req.apiParams.token}&content_type=recipeCard`
+            `access_token=${req.apiParams.token}&content_type=recipe`
         )
         .then((response) => {
-            setCached('recipeCard', response.data);
+            setCached(`recipe_${req.params.slug}`, response.data);
             res.send(response.data);
         })
         .catch((err) => {

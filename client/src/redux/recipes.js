@@ -3,18 +3,18 @@ import settings from '../react-isomorphic-render-async';
 
 const handler = createHandler(settings);
 
-export const getRecipeCards = action({
-    namespace: 'RECIPE_CARDS',
-    event: 'GET_RECIPE_CARDS',
-    action: (http) => http.get('/api/recipeCard'),
+export const getRecipes = action({
+    namespace: 'RECIPES',
+    event: 'GET_RECIPES',
+    action: (slug, http) => http.get('/api/recipes'),
     result: (state, result) => ({
         ...state,
-        recipeCards: result
+        recipes: result
     })
 }, handler);
 
-handler.addStateProperties('recipeCards');
+handler.addStateProperties('recipes');
 
 export const connector = stateConnector(handler);
 
-export default handler.reducer({recipeCards: {}});
+export default handler.reducer({recipes: {}});

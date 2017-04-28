@@ -8,12 +8,14 @@ export default class RecipeCard extends Component {
             entry: PropTypes.shape({
                 fields: PropTypes.shape({
                     name: PropTypes.string.isRequired,
-                    backgroundImage: PropTypes.shape({
+                    cookTime: PropTypes.number.isRequired,
+                    slug: PropTypes.string.isRequired,
+                    difficulty: PropTypes.string.isRequired,
+                    cardBackgroundImage: PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string.isRequired
                         })
-                    }),
-                    description: PropTypes.string.isRequired
+                    })
                 })
             }),
             assets: PropTypes.arrayOf(PropTypes.shape({
@@ -21,7 +23,6 @@ export default class RecipeCard extends Component {
                     id: PropTypes.string.isRequired
                 }),
                 fields: PropTypes.shape({
-                    title: PropTypes.string.isRequired,
                     file: PropTypes.shape({
                         url: PropTypes.string.isRequired
                     })
@@ -34,15 +35,18 @@ export default class RecipeCard extends Component {
         const {entry, assets} = this.props.data;
         const {fields} = entry;
 
-        const image = assets.filter((asset) =>
-            asset.sys.id === entry.fields.backgroundImage.sys.id)[0];
+        const assetsById = {};
+        assets.forEach((asset) => {
+            assetsById[asset.sys.id] = asset.fields;
+        });
 
         return (
             <RecipeCardComponent
                 title={fields.name}
-                imageFile={image.fields.file.url}
-                imageAlt={image.fields.title}
-                description={fields.description}
+                cookTime={fields.cookTime}
+                recipe={fields.slug}
+                difficulty={fields.difficulty}
+                imageFile={assetsById[fields.cardBackgroundImage.sys.id].file.url}
             />
         );
     }
