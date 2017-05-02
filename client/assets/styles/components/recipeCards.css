@@ -1,0 +1,13 @@
+/* Global Recipe Card container - not used for BrandRecipePanel */
+.recipeCards--container {
+    padding: 0;
+    justify-content: flex-start;
+
+    & div:first-child {
+        margin-left: 0;
+    }
+
+    & div:last-child {
+        margin-right: 0;
+    }
+}

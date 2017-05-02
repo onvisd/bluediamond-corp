@@ -8,6 +8,7 @@ export default class ProductCard extends Component {
             items: PropTypes.arrayOf(PropTypes.shape({
                 fields: PropTypes.shape({
                     name: PropTypes.string.isRequired,
+                    slug: PropTypes.string.isRequired,
                     productPhotos: PropTypes.arrayOf(PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string
@@ -44,6 +45,7 @@ export default class ProductCard extends Component {
         return (
             <ProductCardComponent
                 title={fields.name}
+                slug={fields.slug}
                 imageFile={assetsById[fields.productPhotos[0].sys.id].file.url}
                 imageAlt={assetsById[fields.productPhotos[0].sys.id].file.name}
             />

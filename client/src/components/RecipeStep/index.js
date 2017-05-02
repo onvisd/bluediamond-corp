@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import marked from 'marked';
 
-// import styles from './styles.module.css';
+import styles from './styles.module.css';
 
 export default class RecipeStep extends Component {
     static PropTypes = {
@@ -14,12 +14,11 @@ export default class RecipeStep extends Component {
     }
 
     render() {
-        const {title, directions} = this.props;
+        const {directions} = this.props;
 
         return (
-            <li>
-                <h4>{title}</h4>
-                <p dangerouslySetInnerHTML={this.renderMarkup(directions)}></p>
+            <li className={styles.container}>
+                <div dangerouslySetInnerHTML={this.renderMarkup(directions)} />
             </li>
         );
     }

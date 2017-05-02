@@ -1,1 +1,72 @@
-/* Recipe Step Component */
+@import 'constants/color';
+
+.container {
+    margin: 2rem auto;
+}
+
+.meta {
+    display: flex;
+
+    & div:first-of-type {
+        margin-right: 10%;
+    }
+
+    & p {
+        margin: 0;
+        color: var(--c--gray);
+    }
+}
+
+.accordionItem {
+    border-top: 1px solid var(--c--gray-light);
+
+    &:last-of-type {
+        border-bottom: 1px solid var(--c--gray-light);
+    }
+}
+
+.isOpen {
+    & .accordionContent {
+        max-height: 100rem;
+    }
+
+    & svg {
+        transform: rotate(180deg);
+    }
+}
+
+.accordionTitle {
+    display: flex;
+    position: relative;
+    height: 3rem;
+    align-items: center;
+
+    &:hover,
+    &:focus {
+        cursor: pointer;
+    }
+
+    & h4 {
+        margin: 0;
+        flex: 1;
+        line-height: 3rem;
+    }
+
+    & svg {
+        width: 25px;
+        height: 25px;
+        fill: var(--c--gray-light);
+        transition: transform 100ms ease;
+    }
+}
+
+.accordionContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 400ms ease;
+
+    & ul {
+        padding: 0;
+        list-style-type: none;
+    }
+}

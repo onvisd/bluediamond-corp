@@ -1,1 +1,20 @@
-/* Product Card component */
+@import 'constants/color';
+@import 'constants/type';
+
+.container {
+    width: 125px;
+
+    & a {
+        font-size: var(--t--size-xs);
+        color: var(--c--black);
+    }
+}
+
+.image {
+    display: flex;
+    height: 150px;
+    margin-bottom: 0.5rem;
+    padding: 10%;
+    align-items: center;
+    background-color: var(--c--gray-lighter);
+}
