@@ -3,6 +3,10 @@ import {connect} from 'react-redux';
 
 import RootNav from './RootNav';
 import RootNavMobile from './RootNavMobile';
+import ProductNav from './ProductNav';
+import ProductNavMobile from './ProductNavMobile';
+import CompanyNav from './CompanyNav';
+import CompanyNavMobile from './CompanyNavMobile';
 
 const navData = {
     primary: {
@@ -52,42 +56,121 @@ export default class Navigation extends Component {
         this.setState(() => ({navStack}));
     }
 
-    renderNav = () => (
-        <header>
-            <RootNav
-                navData={navData}
-                onUpdateView={this.updateNavStack}
-                onToggleNav={this.toggleNavigation}
-                navStack={this.state.navStack}
-                brands={this.props.brands}
-                companyNavTiles={this.props.companyNavTiles}
-            />
-        </header>
-    );
+    renderProducts = () => {
+        const {responsive} = this.props;
 
-    renderNavMobile = () => (
-        <header>
-            <RootNavMobile
-                navData={navData}
-                onUpdateView={this.updateNavStack}
-                onToggleNav={this.toggleNavigation}
-                navStack={this.state.navStack}
-                visible={this.state.visible}
-                brands={this.props.brands}
-                companyNavTiles={this.props.companyNavTiles}
-            />
-        </header>
-    );
+        if(responsive.small !== undefined && responsive.small) { // eslint-disable-line
+            return (
+                <ProductNavMobile
+                    onUpdateView={this.updateNavStack}
+                    navStack={this.state.navStack}
+                    brands={this.props.brands}
+                />
+            );
+        } else if(responsive.small !== undefined && !responsive.small) { // eslint-disable-line
+            return (
+                <ProductNav
+                    onUpdateView={this.updateNavStack}
+                    onToggleNav={this.toggleNavigation}
+                    navStack={this.state.navStack}
+                    brands={this.props.brands}
+                />
+            );
+        }
+    };
+
+    renderCompany = () => {
+        const {responsive} = this.props;
+
+        if(responsive.small !== undefined && responsive.small) { // eslint-disable-line
+            return (
+                <CompanyNavMobile
+                    navTiles={this.props.companyNavTiles}
+                    onUpdateView={this.updateNavStack}
+                />
+            );
+        } else if(responsive.small !== undefined && !responsive.small) { // eslint-disable-line
+            return (
+                <CompanyNav
+                    onToggleNav={this.toggleNavigation}
+                    navTiles={this.props.companyNavTiles}
+                    navData={navData}
+                />
+            );
+        }
+    };
+
+    renderView = () => {
+        const {navStack} = this.state;
+
+        if(navStack.length && navStack.indexOf('products') === (navStack.length - 1))
+            return this.renderProducts();
+        if(navStack.indexOf('company') === 0)
+            return this.renderCompany();
+    };
 
     render() {
         const {responsive} = this.props;
 
-        if(responsive.small !== undefined && responsive.small) // eslint-disable-line
-            return this.renderNavMobile();
+        let rootNav = (
+            <header>
+                <RootNav
+                    navData={navData}
+                    navStack={this.state.navStack}
+                    onUpdateView={this.updateNavStack}
+                    onToggleNav={this.toggleNavigation}
+                    brands={this.props.brands}
+                    companyNavTiles={this.props.companyNavTiles}
+                >
+                    {this.renderView()}
+                </RootNav>
+                <RootNavMobile
+                    navData={navData}
+                    navStack={this.state.navStack}
+                    onUpdateView={this.updateNavStack}
+                    onToggleNav={this.toggleNavigation}
+                    visible={this.state.visible}
+                    brands={this.props.brands}
+                    companyNavTiles={this.props.companyNavTiles}
+                >
+                    {this.renderView()}
+                </RootNavMobile>
+            </header>
+        );
 
-        if(responsive.small !== undefined) // eslint-disable-line
-            return this.renderNav();
+        if(responsive.small !== undefined && responsive.small) { // eslint-disable-line
+            rootNav = (
+                <header>
+                    <RootNavMobile
+                        navData={navData}
+                        navStack={this.state.navStack}
+                        onUpdateView={this.updateNavStack}
+                        onToggleNav={this.toggleNavigation}
+                        visible={this.state.visible}
+                        brands={this.props.brands}
+                        companyNavTiles={this.props.companyNavTiles}
+                    >
+                        {this.renderView()}
+                    </RootNavMobile>
+                </header>
+            );
+        } else if(responsive.small !== undefined && !responsive.small) { // eslint-disable-line
+            rootNav = (
+                <header>
+                    <RootNav
+                        navData={navData}
+                        navStack={this.state.navStack}
+                        onUpdateView={this.updateNavStack}
+                        onToggleNav={this.toggleNavigation}
+                        brands={this.props.brands}
+                        companyNavTiles={this.props.companyNavTiles}
+                    >
+                        {this.renderView()}
+                    </RootNav>
+                </header>
+            );
+        }
 
-        return null;
+        return rootNav;
     }
 }

@@ -4,47 +4,18 @@ import classnames from 'classnames';
 import styles from './styles.module.css';
 
 import BDLogo from '../../../../assets/images/BDLogo.png';
-import ProductNav from '../ProductNav';
-import CompanyNav from '../CompanyNav';
 
 export default class RootNav extends Component {
     static propTypes = {
         onUpdateView: PropTypes.func.isRequired,
         onToggleNav: PropTypes.func.isRequired,
-        brands: PropTypes.array.isRequired,
         navStack: PropTypes.array.isRequired,
         navData: PropTypes.object.isRequired,
-        companyNavTiles: PropTypes.array.isRequired
+        children: PropTypes.node
     }
 
-    renderProducts = () => (
-        <ProductNav
-            onUpdateView={this.props.onUpdateView}
-            onToggleNav={this.props.onToggleNav}
-            navStack={this.props.navStack}
-            brands={this.props.brands}
-        />
-    );
-
-    renderCompany = () => (
-        <CompanyNav
-            onToggleNav={this.props.onToggleNav}
-            navTiles={this.props.companyNavTiles}
-            navData={this.props.navData}
-        />
-    );
-
-    renderView = () => {
-        const {navStack} = this.props;
-
-        if(navStack.length && navStack.indexOf('products') === (navStack.length - 1))
-            return this.renderProducts();
-        if(navStack.indexOf('company') === 0)
-            return this.renderCompany();
-    };
-
     render() {
-        const {onUpdateView, onToggleNav, navStack, navData} = this.props;
+        const {children, onUpdateView, onToggleNav, navStack, navData} = this.props;
 
         return (
             <nav className={styles.container}>
@@ -94,7 +65,7 @@ export default class RootNav extends Component {
                         <img src={BDLogo} className={styles.logo} />
                     </div>
                 </div>
-                {this.renderView()}
+                {children}
             </nav>
         );
     }

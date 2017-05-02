@@ -6,34 +6,16 @@ import View from '../View';
 import NavItem from '../NavItem';
 import NavList from '../NavList';
 import BDLogo from '../../../../assets/images/BDLogo.png';
-import ProductNavMobile from '../ProductNavMobile';
-import CompanyNavMobile from '../CompanyNavMobile';
 
 export default class RootNavMobile extends Component {
     static propTypes = {
         visible: PropTypes.bool.isRequired,
         onUpdateView: PropTypes.func.isRequired,
         onToggleNav: PropTypes.func.isRequired,
-        brands: PropTypes.array.isRequired,
         navStack: PropTypes.array.isRequired,
         navData: PropTypes.object.isRequired,
-        companyNavTiles: PropTypes.array.isRequired
+        children: PropTypes.node
     }
-
-    renderProducts = () => (
-        <ProductNavMobile
-            onUpdateView={this.props.onUpdateView}
-            navStack={this.props.navStack}
-            brands={this.props.brands}
-        />
-    );
-
-    renderCompany = () => (
-        <CompanyNavMobile
-            navTiles={this.props.companyNavTiles}
-            onUpdateView={this.props.onUpdateView}
-        />
-    );
 
     renderBase = () => (
         <View>
@@ -76,19 +58,8 @@ export default class RootNavMobile extends Component {
         </View>
     );
 
-    renderView = () => {
-        const {navStack} = this.props;
-
-        if(navStack.length && navStack.indexOf('products') === (navStack.length - 1))
-            return this.renderProducts();
-        if(navStack.indexOf('company') === 0)
-            return this.renderCompany();
-
-        return this.renderBase();
-    };
-
     render() {
-        const {visible, onToggleNav} = this.props;
+        const {children, visible, onToggleNav} = this.props;
 
         return (
             <nav className={styles.container}>
@@ -110,7 +81,7 @@ export default class RootNavMobile extends Component {
                         [styles.visible]: visible
                     })}
                 >
-                    {this.renderView()}
+                    {children || this.renderBase()}
                 </div>
             </nav>
         );

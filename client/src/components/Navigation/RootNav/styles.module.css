@@ -5,8 +5,13 @@
 .container {
     position: relative;
     height: 96px;
+    z-index: 9999;
     background-color: var(--c--white);
     border-top: 4px solid var(--c--blue);
+
+    @media (--mq-s) {
+        display: none;
+    }
 }
 
 .wrap {
