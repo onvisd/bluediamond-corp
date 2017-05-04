@@ -11,6 +11,7 @@ export default class RecipeCard extends Component {
                     cookTime: PropTypes.number.isRequired,
                     slug: PropTypes.string.isRequired,
                     difficulty: PropTypes.string.isRequired,
+                    dietaryRestrictions: PropTypes.array,
                     cardBackgroundImage: PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string.isRequired

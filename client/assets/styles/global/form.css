@@ -1,0 +1,80 @@
+.form--group {
+    display: flex;
+    justify-content: flex-start;
+
+    @media (--mq-s) {
+        display: block;
+    }
+}
+
+.form--select {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin: 0 1%;
+    flex: 1;
+
+    &:first-of-type {
+        margin-left: 0;
+    }
+
+    &:last-of-type {
+        margin-right: 0;
+    }
+
+    @media (--mq-s) {
+        margin: 2% 0;
+    }
+
+    & select {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        background: none;
+        font-size: var(--t--size-s);
+        border: 1px solid var(--c--gray-light);
+        border-radius: var(--l--border-radius);
+        color: var(--c--gray);
+        outline: none;
+        appearance: none;
+
+        &:disabled {
+            background: var(--c--gray-lighter);
+            color: var(--c--gray);
+            border: var(--c--gray);
+        }
+
+        &:disabled:hover {
+            cursor: not-allowed;
+        }
+
+        &:hover {
+            border-color: var(--c--gray);
+            cursor: pointer;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: var(--c--blue);
+        }
+    }
+
+    & option {
+        font-weight: var(--t--weight-normal);
+        color: var(--c--black);
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 1em;
+        width: 0;
+        height: 0;
+        margin-top: -0.25em;
+        z-index: var(--l--z-high);
+        border-width: 0.5em 0.33em 0;
+        border-color: var(--c--gray-light) transparent transparent;
+        border-style: solid;
+        pointer-events: none;
+    }
+}

@@ -1,5 +1,6 @@
 /* import any vendor files */
 @import 'vendor/modularscale';
+@import 'vendor/selectcss';
 
 /* project-wide styles - styles single elements */
 @import 'global/layout';
@@ -7,6 +8,7 @@
 @import 'global/color';
 @import 'global/type';
 @import 'global/grid';
+@import 'global/form';
 
 /* component styles - styles groups of elements */
 @import 'components/related';
@@ -15,3 +17,4 @@
 /* layout styles - styles pages of elements */
 @import 'layouts/history';
 @import 'layouts/manifesto';
+@import 'layouts/recipes';

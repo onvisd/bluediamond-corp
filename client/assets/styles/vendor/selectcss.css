@@ -1,0 +1,32 @@
+/* OPERA - Pre-Blink nix the custom arrow, go with a native select button to keep it simple.
+Targeted via this hack http://browserhacks.com/#hack-a3f166304aafed524566bc6814e1d5c7 */
+
+/* stylelint-disable */
+x:-o-prefocus,
+.form--select::after {
+    display: none;
+}
+/* stylelint-enable */
+
+/* IE 10/11+ - This hides native dropdown button arrow so it will have the custom appearance,
+IE 9 and earlier get a native select - targeting media query hack via
+http://browserhacks.com/#hack-28f493d247a12ab654f6c3637f6978d5 - looking for better ways to
+achieve this targeting */
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .form--select select::-ms-expand {
+        display: none;
+    }
+    .form--select select:focus::-ms-value {
+        background: transparent;
+        color: #222;
+    }
+}
+
+/* Firefox focus has odd artifacts around the text, this kills that. See
+https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-focusring */
+
+.form--select select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}

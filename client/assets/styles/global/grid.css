@@ -116,6 +116,8 @@
 .l--mar-left-m { margin-left: var(--l--space-m); }
 .l--mar-left-s { margin-left: var(--l--space-s); }
 
+.l--align-center { align-items: center; }
+
 /* Accessibility Classes */
 .l--acc-hidden {
     @mixin visually-hidden;

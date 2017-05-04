@@ -1,0 +1,23 @@
+/* Recipe Index Styles */
+
+.recipes--index {
+    margin: 3rem auto;
+}
+
+.recipes--title {
+    margin: 2rem 0;
+
+    @media (--mq-s) {
+        margin: 0.5rem 0;
+    }
+
+    & small {
+        font-weight: var(--t--weight-normal);
+        font-size: var(--t--size-m);
+        color: var(--c--gray);
+    }
+}
+
+.recipes--list {
+    justify-content: flex-start;
+}

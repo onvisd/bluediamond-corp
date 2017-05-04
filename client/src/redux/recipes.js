@@ -6,7 +6,7 @@ const handler = createHandler(settings);
 export const getRecipes = action({
     namespace: 'RECIPES',
     event: 'GET_RECIPES',
-    action: (slug, http) => http.get('/api/recipes'),
+    action: (http) => http.get('/api/recipes'),
     result: (state, result) => ({
         ...state,
         recipes: result
