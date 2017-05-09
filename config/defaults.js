@@ -31,5 +31,9 @@ export default {
         secret: process.env.AWS_SECRET_ACCESS_KEY,
         sesSource: process.env.SES_SOURCE_ADDRESS,
         approvedEmails: process.env.APPROVED_DESTINATION_EMAILS
+    },
+    shopify: {
+        key: process.env.SHOPIFY_API_KEY,
+        pass: process.env.SHOPIFY_API_PASS
     }
 };
