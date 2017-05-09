@@ -20,7 +20,7 @@ const Button = (props) => {
     // If Button has an href prop, render an anchor element
     if(href) {
         button = (
-            <Link className={className} to={href} {...rest}>
+            <Link className={className} to={href} onClick={onClick} {...rest}>
                 {children}
             </Link>
         );

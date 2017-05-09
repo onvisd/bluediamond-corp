@@ -17,7 +17,7 @@ const NavItem = ({active, type, href, extHref, onClick, children}) => {
 
     if(href) {
         button = (
-            <Link to={href}>
+            <Link to={href} onClick={onClick}>
                 {children}
             </Link>
         );

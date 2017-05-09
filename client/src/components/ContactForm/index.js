@@ -1,10 +1,12 @@
 import React, {Component, PropTypes} from 'react';
-import Formsy from 'formsy-react';
+import axios from 'axios';
+import {Form} from 'formsy-react';
 
-import Input from '../ContactFormInput';
-import Textarea from '../ContactFormTextarea';
-
-// import styles from './styles.module.css';
+import Button from '../Button';
+import Input from './Input';
+import Select from './Select';
+import Textarea from './Textarea';
+import Checkbox from './Checkbox';
 
 export default class ContactForm extends Component {
     state = {
@@ -13,8 +15,10 @@ export default class ContactForm extends Component {
 
     static propTypes = {
         header: PropTypes.string.isRequired,
+        emailTo: PropTypes.string.isRequired,
         allowSubject: PropTypes.bool.isRequired,
-        allowMessage: PropTypes.bool.isRequired
+        allowMessage: PropTypes.bool.isRequired,
+        predefinedSubjects: PropTypes.arrayOf(PropTypes.string)
     }
 
     enableSubmit = () => {
@@ -30,47 +34,71 @@ export default class ContactForm extends Component {
     }
 
     submit(model) {
-        console.log(model);
+        axios.post('/api/email', {
+            toEmail: this.props.emailTo,
+            fromEmail: model.email,
+            name: model.name,
+            subject: model.subject,
+            message: model.message,
+            subscribe: model.subscribe
+        })
+        .then(() => {
+            console.log('Message sent successfully!');
+        })
+        .catch((err) => {
+            console.log('Something went wrong, please try again!', err);
+        });
     }
 
     render() {
-        const {header, allowSubject, allowMessage} = this.props;
+        const {allowSubject, allowMessage, predefinedSubjects} = this.props;
 
         return (
-            <Formsy.Form
+            <Form
                 onValidSubmit={this.submit}
                 onValid={this.enableSubmit}
                 onInvalid={this.disableSubmit}
             >
-                <h3>{header}</h3>
                 <Input
                     name="name"
-                    label="Name"
+                    label="Your name*"
+                    validations="minLength:1"
                     required
                 />
                 <Input
                     name="email"
-                    label="Email"
+                    label="Email address*"
                     validations="isEmail"
                     validationError="This is not a valid email"
                     required
                 />
                 {allowSubject && (
-                    <Input
+                    <Select
                         name="subject"
-                        label="Subject"
-                        required
+                        label="My inquiry is regarding"
+                        options={predefinedSubjects}
                     />
                 )}
                 {allowMessage && (
                     <Textarea
                         name="message"
-                        label="Message"
+                        label="Your message*"
+                        validations="minLength:1"
                         required
                     />
                 )}
-                <button type="submit" disabled={!this.state.canSubmit}>Submit</button>
-            </Formsy.Form>
+                <p className="t--type-incidental">
+                    In order for us to better serve you (or address your concerns),
+                    please include the product's Lot Code,
+                    Best Before Date, Time Stamp, and UPC code.
+                </p>
+                <Checkbox
+                    name="subscribe"
+                    defaultChecked
+                    label="Sign me up to receive emails from Blue Diamond Growers about the latest products, special offers, and more." // eslint-disable-line
+                />
+                <Button type="submit" disabled={!this.state.canSubmit}>Send message</Button>
+            </Form>
         );
     }
 }

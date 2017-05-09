@@ -18,10 +18,10 @@ export default class BrandCategory extends Component {
                     <h2>{name}</h2>
                     <p>{description}</p>
                     <ul className={styles.productList}>
-                        {products.map((product, idx) => (
-                            <li className={styles.product} key={`product${idx}`}>
+                        {products.map((product) => (
+                            <li className={styles.product} key={product._id}>
                                 <Link to={`/${product.slug}`}>
-                                    <img src={product.image} />
+                                    <img src={product.productPhotos[0].file.url} />
                                     {product.name}
                                 </Link>
                             </li>

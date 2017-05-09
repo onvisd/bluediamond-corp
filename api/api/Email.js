@@ -4,7 +4,7 @@ import aws from 'aws-sdk';
 import config from '../../config';
 
 aws.config.update({
-    region: 'us-east-1',
+    region: config.aws.region,
     accessKeyId: config.aws.key,
     secretAccessKey: config.aws.secret
 });

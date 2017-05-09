@@ -11,7 +11,11 @@ export default class BrandStories extends Component {
         stories: PropTypes.arrayOf(PropTypes.shape({
             tagline: PropTypes.string.isRequired,
             content: PropTypes.string.isRequired,
-            backgroundImage: PropTypes.string.isRequired,
+            backgroundImage: PropTypes.shape({
+                file: PropTypes.shape({
+                    url: PropTypes.string.isRequired
+                })
+            }),
             textAlignment: PropTypes.string.isRequired
         })).isRequired
     }
@@ -35,7 +39,7 @@ export default class BrandStories extends Component {
                                 <BrandStory
                                     tagline={story.tagline}
                                     content={story.content}
-                                    image={story.backgroundImage}
+                                    image={story.backgroundImage.file.url}
                                     align={story.textAlignment}
                                 />
                             </View>

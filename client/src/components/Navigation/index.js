@@ -45,9 +45,9 @@ export default class Navigation extends Component {
         brands: PropTypes.array.isRequired
     };
 
-    toggleNavigation = () => {
+    toggleNavigation = (hide) => {
         this.setState((state) => ({
-            visible: !state.visible,
+            visible: hide === true ? false : !state.visible,
             navStack: []
         }));
     }
@@ -63,6 +63,7 @@ export default class Navigation extends Component {
             return (
                 <ProductNavMobile
                     onUpdateView={this.updateNavStack}
+                    onToggleNav={this.toggleNavigation}
                     navStack={this.state.navStack}
                     brands={this.props.brands}
                 />
@@ -86,6 +87,7 @@ export default class Navigation extends Component {
             return (
                 <CompanyNavMobile
                     navTiles={this.props.companyNavTiles}
+                    onToggleNav={this.toggleNavigation}
                     onUpdateView={this.updateNavStack}
                 />
             );
@@ -119,7 +121,6 @@ export default class Navigation extends Component {
                     navStack={this.state.navStack}
                     onUpdateView={this.updateNavStack}
                     onToggleNav={this.toggleNavigation}
-                    brands={this.props.brands}
                     companyNavTiles={this.props.companyNavTiles}
                 >
                     {this.renderView()}
@@ -162,7 +163,6 @@ export default class Navigation extends Component {
                         navStack={this.state.navStack}
                         onUpdateView={this.updateNavStack}
                         onToggleNav={this.toggleNavigation}
-                        brands={this.props.brands}
                         companyNavTiles={this.props.companyNavTiles}
                     >
                         {this.renderView()}

@@ -11,6 +11,7 @@ import RecipeIndex from './pages/RecipeIndex';
 import HistoryIndex from './pages/History';
 import Manifesto from './pages/Manifesto';
 import Brand from './pages/Brand';
+import Contact from './pages/Contact';
 
 export default (
     <Route path="/" component={Layout}>
@@ -20,6 +21,7 @@ export default (
         <Route path="recipes" component={RecipeIndex} />
         <Route path="recipe/:slug" component={Recipe} />
         <Route path="brand/:slug" component={Brand} />
+        <Route path="contact" component={Contact} />
         <Route path="404" component={NotFound} status={404} />
         <Route path="error" component={GenericError} />
         <Route path="*" component={Page} />

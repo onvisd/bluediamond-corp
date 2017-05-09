@@ -26,9 +26,9 @@ export default class ProductNavMobile extends Component {
                     {brand.name}
                 </Breadcrumb>
                 <NavList>
-                    {brand.children.map((child) => (
+                    {brand.categories.map((child) => (
                         <NavItem
-                            key={child.name}
+                            key={child._id}
                             type="brand"
                             onClick={() => onUpdateView([child.name, brand.slug, 'products'])}
                         >
@@ -41,7 +41,7 @@ export default class ProductNavMobile extends Component {
     };
 
     renderCategory = (brand, category) => {
-        const {onUpdateView} = this.props;
+        const {onUpdateView, onToggleNav} = this.props;
 
         return (
             <View>
@@ -51,10 +51,12 @@ export default class ProductNavMobile extends Component {
                 >
                     {category.name}
                 </Breadcrumb>
-                <ProductList products={category.products} />
+                {category.products &&
+                    <ProductList products={category.products} />}
                 <Button
                     theme="yellow"
-                    href={`/${brand.slug}`}
+                    href={`/brand/${brand.slug}`}
+                    onClick={onToggleNav}
                     style={{
                         position: 'absolute',
                         left: '50%',
@@ -92,7 +94,7 @@ export default class ProductNavMobile extends Component {
 
         if(navStack.length === 3) {
             const brand = brands.filter((b) => b.slug === navStack[1])[0];
-            const category = brand.children.filter((c) => c.name === navStack[0])[0];
+            const category = brand.categories.filter((c) => c.name === navStack[0])[0];
 
             return this.renderCategory(brand, category);
         }

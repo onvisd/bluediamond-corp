@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import {Title, Meta, preload} from 'react-isomorphic-render';
 
 import {connector, getNavigation} from '../redux/navigation';
+import {parseModel} from '../tools/parseApi';
 
 import Preloading from '../components/Preloading';
-import Navigation from '../components/API/Navigation';
+import Navigation from '../components/Navigation';
 
 @preload(({dispatch}) => dispatch(getNavigation()))
 @connect(
@@ -20,6 +21,8 @@ export default class Layout extends Component {
 
     render() {
         const {children, navigation} = this.props;
+        const brands = parseModel(navigation.brands).map((b) => b.fields);
+        const companyNavTiles = parseModel(navigation.companyNavTiles).map((c) => c.fields);
 
         const title = 'WebApp';
 
@@ -45,7 +48,7 @@ export default class Layout extends Component {
                 <Title>{title}</Title>
                 <Meta>{meta}</Meta>
 
-                <Navigation {...navigation} />
+                <Navigation brands={brands} companyNavTiles={companyNavTiles} />
 
                 <Preloading />
 

@@ -1,23 +1,28 @@
 @import 'constants/color.css';
+@import 'constants/type.css';
 
 .base {
     display: inline-block;
     position: relative;
-    height: 40px;
-    padding: 0 24px;
-    font-size: 16px;
+    height: 2.5rem;
+    padding: 0 3rem;
+    font-size: var(--t--size-s);
     font-weight: 400;
-    line-height: 40px;
+    line-height: 2.5rem;
     text-align: center;
     white-space: nowrap;
     background: none;
     border: none;
-    border-radius: 4px;
+    border-radius: 80px;
     outline: 0;
     user-select: none;
-}
 
-/* Layouts */
+    &:disabled {
+        color: var(--c--gray-lighter);
+        background-color: var(--c--gray-light);
+        pointer-events: none;
+    }
+}
 
 /* Themes */
 .blue {
@@ -26,6 +31,7 @@
     background-color: var(--c--blue);
 
     &:hover {
+        color: var(--c--white);
         background-color: var(--c--blue-light);
     }
 }

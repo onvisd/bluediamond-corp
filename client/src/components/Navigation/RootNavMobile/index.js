@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 import styles from './styles.module.css';
 
@@ -49,7 +50,11 @@ export default class RootNavMobile extends Component {
                         rest = {extHref: link.slug};
 
                     return (
-                        <NavItem key={link.slug} {...rest}>
+                        <NavItem
+                            key={link.slug}
+                            onClick={this.props.onToggleNav}
+                            {...rest}
+                        >
                             {link.name}
                         </NavItem>
                     );
@@ -65,7 +70,9 @@ export default class RootNavMobile extends Component {
             <nav className={styles.container}>
                 <div className={styles.head}>
                     <div className={styles.logo}>
-                        <img src={BDLogo} />
+                        <Link to="/" onClick={() => onToggleNav(true)}>
+                            <img src={BDLogo} />
+                        </Link>
                     </div>
                     <div onClick={onToggleNav} className={styles.toggleWrap}>
                         <div

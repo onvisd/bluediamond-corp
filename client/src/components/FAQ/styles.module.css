@@ -1,0 +1,61 @@
+@import 'constants/color';
+
+.container {
+    display: flex;
+}
+
+.nav,
+.content {
+    list-style: none;
+}
+
+.nav {
+    width: 30%;
+    padding-left: 0;
+    border-top: 1px solid var(--c--gray-lighter);
+}
+
+.navItem {
+    display: flex;
+    height: 3.2rem;
+    padding: 0 1rem;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--c--gray);
+    background-color: var(--c--gray-lighter);
+    cursor: pointer;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid var(--c--white);
+    }
+
+    & svg {
+        fill: var(--c--gray);
+    }
+
+    &.active {
+        color: var(--c--blue);
+        background-color: var(--c--white);
+
+        & svg {
+            fill: var(--c--blue);
+        }
+    }
+}
+
+.content {
+    width: 70%;
+
+    & li {
+        margin-bottom: 2rem;
+
+        & h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        & p:first-child,
+        & p:last-child {
+            margin: 0;
+        }
+    }
+}

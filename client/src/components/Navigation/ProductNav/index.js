@@ -21,9 +21,9 @@ export default class ProductNav extends Component {
         return (
             <View theme="brand">
                 <NavList>
-                    {brand.children.map((child) => (
+                    {brand.categories.map((child) => (
                         <NavItem
-                            key={child.name}
+                            key={child._id}
                             type="brand"
                             active={navStack.indexOf(child.name) !== -1}
                             onClick={() => onUpdateView([child.name, brand.slug, 'products'])}
@@ -38,10 +38,12 @@ export default class ProductNav extends Component {
 
     renderCategory = (brand, category) => (
         <View theme="two_wide">
-            <ProductList products={category.products.slice(0, 3)} />
+            {category.products &&
+                <ProductList products={category.products.slice(0, 3)} />}
             <Button
                 theme="yellow"
-                href={`/${brand.slug}`}
+                href={`/brand/${brand.slug}`}
+                onClick={this.props.onToggleNav}
                 style={{
                     position: 'absolute',
                     left: '50%',
@@ -62,7 +64,7 @@ export default class ProductNav extends Component {
                 <NavList>
                     {brands.map((brand) => (
                         <NavItem
-                            key={brand.slug}
+                            key={brand._id}
                             active={navStack.indexOf(brand.slug) !== -1}
                             onClick={() => onUpdateView([brand.slug, 'products'])}
                         >
@@ -79,7 +81,7 @@ export default class ProductNav extends Component {
 
         if(navStack.length === 3) {
             const brand = brands.filter((b) => b.slug === navStack[1])[0];
-            const category = brand.children.filter((c) => c.name === navStack[0])[0];
+            const category = brand.categories.filter((c) => c.name === navStack[0])[0];
 
             return (
                 <div className={styles.wrapper}>

@@ -5,7 +5,7 @@ const ProductList = ({products}) => (
     <ul className={styles.products}>
         {products.map((product) => (
             <li className={styles.product} key={product.name}>
-                <img src={product.photo.file.url} />
+                <img src={product.productPhotos[0].file.url} />
                 {product.name}
             </li>
         ))}

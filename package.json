@@ -88,6 +88,7 @@
     "morgan": "^1.8.1",
     "node-sass": "^4.1.1",
     "nodemailer": "^4.0.0",
+    "normalizr": "^3.2.2",
     "npm-run-all": "^4.0.0",
     "postcss-cssnext": "^2.10.0",
     "postcss-import": "^9.1.0",

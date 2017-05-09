@@ -62,7 +62,9 @@ export default class RootNav extends Component {
                                 ))}
                             </ul>
                         </div>
-                        <img src={BDLogo} className={styles.logo} />
+                        <Link to="/">
+                            <img src={BDLogo} className={styles.logo} />
+                        </Link>
                     </div>
                 </div>
                 {children}

@@ -1,0 +1,32 @@
+@import 'constants/grid';
+@import 'constants/color';
+
+.container {
+    @mixin container;
+
+    padding: 2rem 0 4rem;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.colLeft {
+    width: 68%;
+}
+
+.colRight {
+    width: 28%;
+    margin-left: 4%;
+}
+
+.intro {
+    margin-bottom: 2rem;
+    text-align: center;
+
+    & h1,
+    & p {
+        text-align: left;
+    }
+}

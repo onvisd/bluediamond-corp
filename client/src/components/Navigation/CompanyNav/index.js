@@ -10,14 +10,14 @@ export default class CompanyNav extends Component {
     }
 
     render() {
-        const {navTiles, navData} = this.props;
+        const {navTiles, navData, onToggleNav} = this.props;
 
         return (
-            <div className={styles.container} onMouseLeave={this.props.onToggleNav}>
+            <div className={styles.container} onMouseLeave={onToggleNav}>
                 <div className={styles.tiles}>
                     {navTiles.map((navTile) => (
-                        <Tile key={navTile.slug}>
-                            <Link to={navTile.slug}>
+                        <Tile key={navTile._id}>
+                            <Link to={navTile.linkUrl} onClick={onToggleNav}>
                                 <div>
                                     {navTile.headline}
                                     <h2 className="t--type-display-two">
@@ -30,7 +30,7 @@ export default class CompanyNav extends Component {
                 </div>
                 <ul className={styles.companyLinks}>
                     {navData.primary.companyLinks.map((link) => {
-                        let child = <Link to={link.slug}>{link.name}</Link>;
+                        let child = <Link to={link.slug} onClick={onToggleNav}>{link.name}</Link>;
 
                         if(link.external)
                             child = <a href={link.slug} target="_blank">{link.name}</a>;

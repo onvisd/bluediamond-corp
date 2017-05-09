@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import Button from '../Button';
 import styles from './styles.module.css';
 
-import RecipeCard from '../API/RecipeCard';
+import RecipeCard from '../RecipeCard';
 
 export default class BrandRecipePanel extends Component {
     static PropTypes = {
@@ -22,8 +22,15 @@ export default class BrandRecipePanel extends Component {
                     <h2>{title}</h2>
                     <p>{description}</p>
                     <div className={`${styles.recipeCards} l--row`}>
-                        {recipes.map((recipe, idx) => (
-                            <RecipeCard {...recipe} key={`recipe${idx}`} />
+                        {recipes.map((recipe) => (
+                            <RecipeCard
+                                key={recipe._id}
+                                title={recipe.name}
+                                cookTime={recipe.cookTime}
+                                difficulty={recipe.difficulty}
+                                recipe={recipe.slug}
+                                imageFile={recipe.cardBackgroundImage.file.url}
+                            />
                         ))}
                     </div>
                     <Button theme="yellow" href={linkUrl}>
