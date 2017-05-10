@@ -16,14 +16,14 @@ import Contact from './pages/Contact';
 export default (
     <Route path="/" component={Layout}>
         <IndexRoute component={Home} />
-        <Route path="manifesto" component={Manifesto} />
-        <Route path="history" component={HistoryIndex} />
-        <Route path="recipes" component={RecipeIndex} />
-        <Route path="recipe/:slug" component={Recipe} />
-        <Route path="brand/:slug" component={Brand} />
-        <Route path="contact" component={Contact} />
-        <Route path="404" component={NotFound} status={404} />
-        <Route path="error" component={GenericError} />
+        <Route path="/manifesto" component={Manifesto} />
+        <Route path="/history" component={HistoryIndex} />
+        <Route path="/recipes" component={RecipeIndex} />
+        <Route path="/recipes/:slug" component={Recipe} />
+        <Route path="/brand/:slug" component={Brand} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/404" component={NotFound} status={404} />
+        <Route path="/error" component={GenericError} />
         <Route path="*" component={Page} />
     </Route>
 );

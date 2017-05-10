@@ -45,17 +45,21 @@
 
 .content {
     width: 70%;
+}
 
-    & li {
-        margin-bottom: 2rem;
+.item {
+    margin-bottom: 1.5rem;
 
-        & h4 {
-            margin-bottom: 0.5rem;
-        }
+    & h4 {
+        margin-bottom: 0.25rem;
+    }
 
-        & p:first-child,
-        & p:last-child {
-            margin: 0;
-        }
+    & p:first-child,
+    & p:last-child {
+        margin: 0;
+    }
+
+    & > li {
+        margin-bottom: 0;
     }
 }

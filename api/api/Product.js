@@ -19,7 +19,7 @@ export default (api, spaceId) => {
             return 'No Smart Label data found';
         });
 
-    api.get('/product/:slug', async (req, res) => {
+    api.get('/products/:slug', async (req, res) => {
         try {
             const product = await getProduct(req.apiParams, req.params.slug);
 
@@ -32,7 +32,7 @@ export default (api, spaceId) => {
 
                 product.items[0].fields.smartLabel = {id: smartLabelId, ...amend};
 
-                setCached(`product_${req.params.slug}`, product);
+                setCached(`products_${req.params.slug}`, product);
                 res.send(product);
             } else {
                 res.status(404).send({ok: false, error: 'not found'});

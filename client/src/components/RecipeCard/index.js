@@ -18,7 +18,7 @@ export default class RecipeCard extends Component {
         return (
             <div className="l--col-12-at-s l--col-4-at-l">
                 <div className={styles.container} style={{backgroundImage: `url(${imageFile})`}}>
-                    <Link to={`/recipe/${recipe}`}></Link>
+                    <Link to={`/recipes/${recipe}`}></Link>
                     <h3>{title}</h3>
                     <p>{cookTime} minutes - {difficulty}</p>
                 </div>

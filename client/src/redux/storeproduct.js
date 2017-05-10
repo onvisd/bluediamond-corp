@@ -6,7 +6,7 @@ const handler = createHandler(settings);
 export const getStoreProduct = action({
     namespace: 'STORE_PRODUCT',
     event: 'GET_STORE_PRODUCT',
-    action: (slug, http) => http.get(`/api/store/product/${slug}`),
+    action: (slug, http) => http.get(`/api/store/products/${slug}`),
     result: (state, result) => ({
         ...state,
         storeProduct: result

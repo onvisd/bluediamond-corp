@@ -70,7 +70,7 @@ export default class FAQ extends Component {
                 </ul>
                 <ul className={styles.content}>
                     {data.map((d) => (
-                        <li key={d._id}>
+                        <li key={d._id} className={styles.item}>
                             <h4>{d.question}</h4>
                             <p dangerouslySetInnerHTML={this.renderMarkup(d.answer)} />
                         </li>
