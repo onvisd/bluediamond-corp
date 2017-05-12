@@ -37,8 +37,8 @@ const navData = {
 }))
 export default class Navigation extends Component {
     state = {
-        visible: true,
-        navStack: ['company']
+        visible: false,
+        navStack: []
     }
 
     static propTypes = {
