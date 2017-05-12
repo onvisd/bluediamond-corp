@@ -4,6 +4,7 @@
 .container {
     @mixin container;
 
+    margin-top: -8px;
     max-width: 74rem;
     overflow: hidden;
 }
@@ -12,10 +13,8 @@
     max-width: 100%;
     float: left;
     background-color: var(--c--white);
-    border: 2px solid var(--c--gray-lighter);
-    border-top: none;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border: 1px solid var(--c--gray-lighter);
+    border-radius: 8px;
     overflow: hidden;
 }
 

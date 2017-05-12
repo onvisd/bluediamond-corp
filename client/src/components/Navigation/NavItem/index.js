@@ -3,7 +3,7 @@ import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 import styles from './styles.module.css';
 
-const NavItem = ({active, type, href, extHref, onClick, children}) => {
+const NavItem = ({active, theme, href, extHref, onClick, children}) => {
     let button = (
         <button
             onClick={onClick}
@@ -30,7 +30,7 @@ const NavItem = ({active, type, href, extHref, onClick, children}) => {
     }
 
     return (
-        <li className={styles[type]}>
+        <li className={styles[theme]}>
             {button}
         </li>
     );
@@ -38,7 +38,7 @@ const NavItem = ({active, type, href, extHref, onClick, children}) => {
 
 NavItem.propTypes = {
     active: PropTypes.bool,
-    type: PropTypes.string,
+    theme: PropTypes.string,
     href: PropTypes.string,
     extHref: PropTypes.string,
     onClick: PropTypes.func,
@@ -46,7 +46,7 @@ NavItem.propTypes = {
 };
 
 NavItem.defaultProps = {
-    type: 'primary'
+    theme: 'primary'
 };
 
 export default NavItem;

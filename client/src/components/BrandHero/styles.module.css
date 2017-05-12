@@ -4,24 +4,30 @@
 .container {
     display: flex;
     position: relative;
-    height: 80vh;
-    align-items: center;
+    height: 45rem;
+    padding-top: 4rem;
     background-color: var(--c--gray-dark);
     background-size: cover;
     background-position: center;
     overflow: hidden;
 
     & p,
-    & .tagline {
+    & img,
+    & h2 {
         margin-right: auto;
         margin-left: auto;
-        color: var(--c--white);
         text-align: center;
+    }
+
+    & img {
+        display: block;
+        margin-bottom: 2rem;
     }
 
     & p {
         margin-bottom: 0;
-        max-width: 50vw;
+        padding: 0 1rem;
+        max-width: 40rem;
     }
 }
 

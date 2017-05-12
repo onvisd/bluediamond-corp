@@ -18,9 +18,9 @@ export default class ProductNavMobile extends Component {
         const {onUpdateView} = this.props;
 
         return (
-            <View theme="brand">
+            <View theme={`brand--${brand.themeColor}`}>
                 <Breadcrumb
-                    theme="yellow_light"
+                    theme={`brand--${brand.themeColor}_light`}
                     onClick={() => onUpdateView(['products'])}
                 >
                     {brand.name}
@@ -29,7 +29,7 @@ export default class ProductNavMobile extends Component {
                     {brand.categories.map((child) => (
                         <NavItem
                             key={child._id}
-                            type="brand"
+                            theme={`brand--${brand.themeColor}`}
                             onClick={() => onUpdateView([child.name, brand.slug, 'products'])}
                         >
                             {child.name}
@@ -46,7 +46,7 @@ export default class ProductNavMobile extends Component {
         return (
             <View>
                 <Breadcrumb
-                    theme="yellow"
+                    theme={`brand--${brand.themeColor}`}
                     onClick={() => onUpdateView([brand.slug, 'products'])}
                 >
                     {category.name}

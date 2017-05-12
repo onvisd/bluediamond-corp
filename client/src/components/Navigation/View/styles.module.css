@@ -12,23 +12,33 @@
     }
 
     @media (--mq-gt-s) {
-        width: calc(0.25 * 74rem);
-        height: 280px;
+        width: 11.5rem;
+        height: 14.5rem;
         background-color: var(--c--gray-light);
     }
 }
 
-.brand {
+.brand--yellow {
     composes: default;
     background-color: var(--c--yellow-dark);
+}
+
+.brand--blue {
+    composes: default;
+    background-color: var(--c--blue-dark);
+}
+
+.brand--green {
+    composes: default;
+    background-color: var(--c--green-dark);
 }
 
 .two_wide {
     composes: default;
 
     @media (--mq-gt-s) {
-        width: calc(0.5 * 74rem);
-        height: 280px;
+        width: calc(74rem - 23rem);
+        height: 14.5rem;
         background-color: var(--c--white);
     }
 }

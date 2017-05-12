@@ -25,6 +25,7 @@
     --t--weight-extra-bold: 800;
     --t--weight-bold: 700;
     --t--weight-semi-bold: 600;
+    --t--weight-medium: 500;
     --t--weight-normal: 400;
     --t--weight-light: 300;
 
@@ -33,6 +34,7 @@
     --t--size-xl: 3rem;
     --t--size-l: 2.5rem;
     --t--size-m: 1.5rem;
+    --t--size-ms: 1.25rem;
     --t--size-s: 1rem;
     --t--size-xs: 0.88rem;
 }

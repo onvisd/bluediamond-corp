@@ -2,19 +2,44 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Title, preload} from 'react-isomorphic-render';
 
-import {connector, getBrand} from '../redux/brand';
+import {connector as brandConnector, getBrand} from '../redux/brand';
+import {
+    connector as navConnector,
+    setNavigationStyle,
+    setNavBreadcrumbs
+} from '../redux/navigation';
 import {parseModel} from '../tools/parseApi';
 
-import Breadcrumbs from '../components/Breadcrumbs';
 import BrandHero from '../components/BrandHero';
 import BrandStories from '../components/BrandStories';
 import BrandCategory from '../components/BrandCategory';
 import BrandRecipePanel from '../components/BrandRecipePanel';
 
-@preload(({dispatch, parameters}) => dispatch(getBrand(parameters.slug)))
+@preload(async ({dispatch, parameters}) => {
+    const brand = await dispatch(getBrand(parameters.slug));
+    const {fields} = brand.items[0];
+
+    dispatch(setNavigationStyle({
+        className: `brand--${fields.themeColor}`
+    }));
+
+    dispatch(setNavBreadcrumbs([{
+        name: fields.name,
+        path: `brand/${fields.slug}`
+    }]));
+
+    return brand;
+})
 @connect(
-    (state) => ({...connector(state.brand)}),
-    {getBrand}
+    (state) => ({
+        ...brandConnector(state.brand),
+        ...navConnector(state.navigation)
+    }),
+    {
+        getBrand,
+        setNavigationStyle,
+        setNavBreadcrumbs
+    }
 )
 export default class Brand extends Component {
     static propTypes = {
@@ -23,13 +48,18 @@ export default class Brand extends Component {
                 fields: PropTypes.shape({
                     name: PropTypes.string.isRequired,
                     slug: PropTypes.string.isRequired,
+                    themeColor: PropTypes.string,
+                    logo: PropTypes.shape({
+                        sys: PropTypes.shape({
+                            id: PropTypes.string.isRequired
+                        })
+                    }),
                     heroImage: PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string.isRequired
                         })
                     }),
                     heroTagline: PropTypes.string.isRequired,
-                    heroContent: PropTypes.string.isRequired,
                     stories: PropTypes.arrayOf(PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string.isRequired
@@ -62,24 +92,22 @@ export default class Brand extends Component {
         })
     }
 
+    componentWillUnmount() {
+        this.props.setNavigationStyle({});
+        this.props.setNavBreadcrumbs([]);
+    }
+
     render() {
         const brand = parseModel(this.props.brand)[0].fields;
 
         return (
             <section className="content">
                 <Title>{brand.name}</Title>
-                <Breadcrumbs
-                    crumbs={[
-                        {
-                            name: brand.name,
-                            path: brand.slug
-                        }
-                    ]}
-                />
                 <BrandHero
                     image={brand.heroImage.file.url}
+                    title={brand.name}
+                    logo={brand.logo.file.url}
                     tagline={brand.heroTagline}
-                    content={brand.heroContent}
                 />
                 <BrandStories stories={brand.stories} />
                 {brand.categories.map((category) => (

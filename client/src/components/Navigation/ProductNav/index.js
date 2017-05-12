@@ -19,16 +19,16 @@ export default class ProductNav extends Component {
         const {onUpdateView, navStack} = this.props;
 
         return (
-            <View theme="brand">
+            <View theme={`brand--${brand.themeColor}`}>
                 <NavList>
                     {brand.categories.map((child) => (
                         <NavItem
                             key={child._id}
-                            type="brand"
+                            theme={`brand--${brand.themeColor}`}
                             active={navStack.indexOf(child.name) !== -1}
                             onClick={() => onUpdateView([child.name, brand.slug, 'products'])}
                         >
-                            {child.name}
+                            {child.name.replace('Flavors', '')}
                         </NavItem>
                     ))}
                 </NavList>
@@ -39,7 +39,7 @@ export default class ProductNav extends Component {
     renderCategory = (brand, category) => (
         <View theme="two_wide">
             {category.products &&
-                <ProductList products={category.products.slice(0, 3)} />}
+                <ProductList products={category.products.slice(0, 4)} />}
             <Button
                 theme="yellow"
                 href={`/brand/${brand.slug}`}
@@ -48,7 +48,7 @@ export default class ProductNav extends Component {
                     position: 'absolute',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    bottom: '2rem'
+                    bottom: '1rem'
                 }}
             >
                 {`See All ${brand.name}`}

@@ -24,16 +24,22 @@
 
     & button {
         width: 100%;
-        padding: 0 24px;
+        padding: 0 1rem;
         justify-content: space-between;
+        color: var(--c--gray-dark);
 
         &::after {
-            content: '\25b6'; /* right-carret */
+            content: '';
             opacity: 0.4;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-left: 9px solid var(--c--black);
             vertical-align: middle;
         }
 
+        &:hover,
         &.active {
+            color: var(--c--black);
             background-color: var(--c--gray-lighter);
         }
 
@@ -51,7 +57,7 @@
     }
 }
 
-.brand {
+.brand--yellow {
     composes: primary;
     background-color: var(--c--yellow);
 
@@ -59,8 +65,60 @@
         border-bottom: 1px solid var(--c--yellow-dark);
     }
 
+    & button {
+        color: var(--c--yellow-darker);
+    }
+
+    & button:hover,
     & button.active {
+        color: var(--c--black);
         background-color: var(--c--yellow-light);
+    }
+
+    & button.active::after {
+        opacity: 0.8;
+    }
+}
+
+.brand--green {
+    composes: primary;
+    background-color: var(--c--green);
+
+    &:not(:last-of-type) {
+        border-bottom: 1px solid var(--c--green-dark);
+    }
+
+    & button {
+        color: var(--c--green-darker);
+    }
+
+    & button:hover,
+    & button.active {
+        color: var(--c--black);
+        background-color: var(--c--green-light);
+    }
+
+    & button.active::after {
+        opacity: 0.8;
+    }
+}
+
+.brand--blue {
+    composes: primary;
+    background-color: var(--c--blue);
+
+    &:not(:last-of-type) {
+        border-bottom: 1px solid var(--c--blue-dark);
+    }
+
+    & button {
+        color: var(--c--blue-darker);
+    }
+
+    & button:hover,
+    & button.active {
+        color: var(--c--black);
+        background-color: var(--c--blue-light);
     }
 
     & button.active::after {

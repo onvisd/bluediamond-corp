@@ -2,16 +2,29 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Title, Meta, preload} from 'react-isomorphic-render';
 
-import {connector, getNavigation} from '../redux/navigation';
+import {
+    connector,
+    getNavigationData,
+    setNavigationStyle,
+    setNavBreadcrumbs
+} from '../redux/navigation';
 import {parseModel} from '../tools/parseApi';
 
 import Preloading from '../components/Preloading';
 import Navigation from '../components/Navigation';
 
-@preload(({dispatch}) => dispatch(getNavigation()))
+@preload(({dispatch}) => {
+    dispatch(setNavigationStyle({}));
+    dispatch(setNavBreadcrumbs([]));
+    return dispatch(getNavigationData());
+})
 @connect(
     (state) => ({...connector(state.navigation)}),
-    {getNavigation}
+    {
+        getNavigationData,
+        setNavigationStyle,
+        setNavBreadcrumbs
+    }
 )
 export default class Layout extends Component {
     static propTypes = {
@@ -21,8 +34,8 @@ export default class Layout extends Component {
 
     render() {
         const {children, navigation} = this.props;
-        const brands = parseModel(navigation.brands).map((b) => b.fields);
-        const companyNavTiles = parseModel(navigation.companyNavTiles).map((c) => c.fields);
+        const brands = parseModel(navigation.data.brands).map((b) => b.fields);
+        const companyNavTiles = parseModel(navigation.data.companyNavTiles).map((c) => c.fields);
 
         const title = 'WebApp';
 
