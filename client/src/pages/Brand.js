@@ -110,13 +110,19 @@ export default class Brand extends Component {
                     tagline={brand.heroTagline}
                 />
                 <BrandStories stories={brand.stories} />
-                {brand.categories.map((category) => (
-                    <BrandCategory
-                        key={category._id}
-                        {...category}
-                    />
-                ))}
-                <BrandRecipePanel {...brand.recipePanel} />
+                <div className="container">
+                    {brand.categories.map((category) => (
+                        <BrandCategory
+                            key={category._id}
+                            {...category}
+                        />
+                    ))}
+                </div>
+                <BrandRecipePanel
+                    name={brand.name}
+                    theme={brand.themeColor}
+                    recipes={brand.recipePanel.recipes}
+                />
             </section>
         );
     }

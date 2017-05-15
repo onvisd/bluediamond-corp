@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {ViewPager, Frame, Track, View} from 'react-view-pager';
+import classnames from 'classnames';
 import styles from './styles.module.css';
 
 import BrandStory from '../BrandStory';
@@ -20,7 +21,18 @@ export default class BrandStories extends Component {
         })).isRequired
     }
 
+    state = {
+        activeTab: 0
+    }
+
+    handleSwipe = (currentIndices) => {
+        this.setState(() => ({
+            activeTab: currentIndices[0]
+        }));
+    }
+
     render() {
+        const {activeTab} = this.state;
         const {stories} = this.props;
 
         return (
@@ -29,13 +41,14 @@ export default class BrandStories extends Component {
                     <Track
                         viewsToShow={1}
                         infinite
+                        onViewChange={this.handleSwipe}
                         style={{display: 'flex'}}
                         ref={(track) => {
                             this.carouselTrack = track;
                         }}
                     >
-                        {stories.map((story, idx) => (
-                            <View style={{flex: '1'}} key={`brandStory${idx}`}>
+                        {stories.map((story) => (
+                            <View style={{flex: '1'}} key={story._id}>
                                 <BrandStory
                                     tagline={story.tagline}
                                     content={story.content}
@@ -56,6 +69,16 @@ export default class BrandStories extends Component {
                     className={styles.next}
                     onClick={() => this.carouselTrack.next()}
                 />
+                <div className={styles.tabs}>
+                    {stories.map((story, idx) => (
+                        <div
+                            key={story._id}
+                            className={classnames(styles.tab, {
+                                [styles.tabActive]: activeTab === idx
+                            })}
+                        />
+                    ))}
+                </div>
             </ViewPager>
         );
     }

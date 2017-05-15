@@ -1,9 +1,12 @@
+@import 'constants/grid';
+@import 'constants/color';
+
 .container {
     position: relative;
 }
 
 .arrow {
-    display: flex;
+    display: none;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -13,6 +16,10 @@
     margin-bottom: auto;
     border-radius: 50%;
     cursor: pointer;
+
+    @media (--mq-gt-s) {
+        display: flex;
+    }
 }
 
 .prev {
@@ -23,4 +30,28 @@
 .next {
     right: 40px;
     composes: arrow;
+}
+
+.tabs {
+    display: flex;
+    position: absolute;
+    bottom: 4px;
+    width: 100%;
+    justify-content: center;
+
+    @media (--mq-gt-s) {
+        display: none;
+    }
+}
+
+.tab {
+    width: 14px;
+    height: 14px;
+    margin: 6px;
+    border: 2px solid var(--c--white);
+    border-radius: 50%;
+}
+
+.tabActive {
+    background: var(--c--gray-lighter);
 }

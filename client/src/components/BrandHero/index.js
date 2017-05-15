@@ -6,7 +6,7 @@ const BrandHero = ({logo, image, title, tagline}) => (
         <div className={styles.innerContainer}>
             <img src={logo} className={styles.logo} />
             <h2>{title}</h2>
-            <p className="t--type-prose">{tagline}</p>
+            <p>{tagline}</p>
         </div>
     </div>
 );

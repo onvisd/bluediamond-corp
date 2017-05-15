@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-isomorphic-render';
+
+import ProductCarousel from '../ProductCarousel';
 import styles from './styles.module.css';
 
 export default class BrandCategory extends Component {
@@ -17,16 +18,7 @@ export default class BrandCategory extends Component {
                 <div className={styles.innerContainer}>
                     <h2>{name}</h2>
                     <p>{description}</p>
-                    <ul className={styles.productList}>
-                        {products.map((product) => (
-                            <li className={styles.product} key={product._id}>
-                                <Link to={`/${product.slug}`}>
-                                    <img src={product.productPhotos[0].file.url} />
-                                    {product.name}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+                    <ProductCarousel products={products} />
                 </div>
             </div>
         );

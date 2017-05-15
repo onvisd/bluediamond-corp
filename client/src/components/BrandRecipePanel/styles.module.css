@@ -1,18 +1,68 @@
 @import 'constants/color';
 @import 'constants/grid';
+@import 'constants/type';
 
 .container {
-    padding: 3rem 0;
+    padding: 0 0.5rem;
     background-color: var(--c--white);
 }
 
 .innerContainer {
     @mixin container;
 
+    position: relative;
+    padding: 4.5rem 0;
     text-align: center;
+
+    & h2 {
+        font-size: var(--t--size-m);
+    }
+
+    @media (--mq-gt-s) {
+        & h2 {
+            margin-bottom: 3rem;
+            font-size: var(--t--size-l);
+        }
+    }
 }
 
 .recipeCards {
+    display: none;
+    padding-bottom: 3rem;
+
+    @media (--mq-gt-s) {
+        display: flex;
+    }
+}
+
+.recipeCardsMobile {
+    padding-bottom: 2rem;
+
+    @media (--mq-gt-s) {
+        display: none;
+    }
+}
+
+.tabs {
     display: flex;
-    margin-bottom: 3rem;
+    position: absolute;
+    bottom: 4px;
+    width: 100%;
+    justify-content: center;
+
+    @media (--mq-gt-s) {
+        display: none;
+    }
+}
+
+.tab {
+    width: 10px;
+    height: 10px;
+    margin: 6px;
+    background-color: var(--c--gray-light);
+    border-radius: 50%;
+}
+
+.tabActive {
+    background-color: var(--c--gray-darker);
 }

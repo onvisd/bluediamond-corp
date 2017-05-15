@@ -17,7 +17,7 @@ const BrandStory = ({image, tagline, content, align}) => (
     >
         <div className={styles.innerContainer}>
             <h2>{tagline}</h2>
-            <p className="t--type-prose">{content}</p>
+            <p>{content}</p>
         </div>
     </div>
 );

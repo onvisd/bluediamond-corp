@@ -1,14 +1,15 @@
 @import 'constants/grid';
 @import 'constants/color';
+@import 'constants/type';
 
 .container {
     display: flex;
     position: relative;
-    height: 45rem;
-    padding-top: 4rem;
+    height: 100vh;
+    padding-top: 7rem;
     background-color: var(--c--gray-dark);
-    background-size: cover;
-    background-position: center;
+    background-size: fill;
+    background-position: 50% 0;
     overflow: hidden;
 
     & p,
@@ -22,20 +23,37 @@
     & img {
         display: block;
         margin-bottom: 2rem;
+        max-width: 90vw;
     }
 
     & p {
         margin-bottom: 0;
         padding: 0 1rem;
-        max-width: 40rem;
+    }
+
+    @media (--mq-gt-s) {
+        height: 45rem;
+        padding-top: 4rem;
+        background-size: cover;
+        background-position: center;
+
+        & p {
+            max-width: 40rem;
+            font-size: var(--t--size-m);
+        }
     }
 }
 
 .tagline {
     margin-bottom: 2rem;
-    max-width: 30vw;
-    font-size: 5rem;
+    padding: 0 1rem;
+    font-size: 2rem;
     font-weight: 900;
+
+    @media (--mq-gt-s) {
+        max-width: 50vw;
+        font-size: 5rem;
+    }
 }
 
 .innerContainer {
