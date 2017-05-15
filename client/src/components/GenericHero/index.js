@@ -7,6 +7,7 @@ export default class GenericHero extends Component {
     static propTypes = {
         headline: PropTypes.string,
         title: PropTypes.string.isRequired,
+        color: PropTypes.string,
         ctaText: PropTypes.string,
         ctaUrl: PropTypes.string,
         ctaTheme: PropTypes.string,
@@ -14,10 +15,15 @@ export default class GenericHero extends Component {
         backgroundImage: PropTypes.string.isRequired
     }
 
+    static defaultProps = {
+        color: 'light'
+    }
+
     render() {
         const {
             headline,
             title,
+            color,
             ctaText,
             ctaUrl,
             ctaTheme,
@@ -29,9 +35,9 @@ export default class GenericHero extends Component {
 
         return (
             <div className={`${styles.container} ${verticalAlign ? styles[alignClass] : styles.alignBottom}`} style={{backgroundImage: `url(${backgroundImage})`}}>
-                <div className={styles.innerContainer}>
+                <div className={`${styles.innerContainer} ${styles[color]}`}>
                     {headline && <h3>{headline}</h3>}
-                    <h1 className="t--type-display-one">{title}</h1>
+                    <h1 className="t--size-xxl">{title}</h1>
                     {ctaText && ctaUrl && ctaTheme && (
                         <Button href={ctaUrl} theme={ctaTheme}>
                             {ctaText}

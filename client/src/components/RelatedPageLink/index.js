@@ -18,7 +18,6 @@ export default class RelatedPageLink extends Component {
 
     render() {
         const {
-            headline,
             title,
             linkText,
             linkUrl,
@@ -33,8 +32,7 @@ export default class RelatedPageLink extends Component {
         return (
             <div className={styles.container} style={style}>
                 <div style={{width: '100%'}}>
-                    {headline && <h4>{headline}</h4>}
-                    <h1 className="t--type-display-two">{title}</h1>
+                    <h1>{title}</h1>
                     <Button href={linkUrl} theme={linkTheme}>
                         {linkText}
                     </Button>

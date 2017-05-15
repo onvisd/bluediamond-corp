@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Recipe from './pages/Recipe';
 import RecipeIndex from './pages/RecipeIndex';
 import HistoryIndex from './pages/History';
+import Craft from './pages/Craft';
 import Manifesto from './pages/Manifesto';
 import Brand from './pages/Brand';
 import Contact from './pages/Contact';
@@ -17,6 +18,7 @@ export default (
     <Route path="/" component={Layout}>
         <IndexRoute component={Home} />
         <Route path="/manifesto" component={Manifesto} />
+        <Route path="/craft" component={Craft} />
         <Route path="/history" component={HistoryIndex} />
         <Route path="/recipes" component={RecipeIndex} />
         <Route path="/recipes/:slug" component={Recipe} />

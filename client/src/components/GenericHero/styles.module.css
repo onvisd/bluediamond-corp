@@ -50,7 +50,14 @@
     & h1,
     & h3,
     & p {
-        max-width: 50vw;
-        color: var(--c--white);
+        max-width: 30vw;
     }
+}
+
+.light {
+    color: var(--c--white);
+}
+
+.dark {
+    color: var(--c--black);
 }

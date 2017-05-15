@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Title, preload} from 'react-isomorphic-render';
 
-import {connector, getTemplate} from '../../redux/template';
+import {connector, getContact} from '../../redux/contact';
 import Button from '../../components/Button';
 import ContactDetails from '../../components/ContactDetails';
 import ContactForm from '../../components/ContactForm';
@@ -11,14 +11,14 @@ import styles from './styles.module.css';
 
 import {parseModel} from '../../tools/parseApi';
 
-@preload(({dispatch}) => dispatch(getTemplate('contact')))
+@preload(({dispatch}) => dispatch(getContact()))
 @connect(
-    (state) => ({...connector(state.template)}),
-    {getTemplate}
+    (state) => ({...connector(state.contact)}),
+    {getContact}
 )
 export default class Contact extends Component {
     static propTypes = {
-        template: PropTypes.shape({
+        contact: PropTypes.shape({
             items: PropTypes.arrayOf(PropTypes.shape({
                 fields: PropTypes.shape({
                     title: PropTypes.string.isRequired,
@@ -55,8 +55,8 @@ export default class Contact extends Component {
     };
 
     render() {
-        const {template} = this.props;
-        const {title, description, faq, form, details} = parseModel(template)[0].fields;
+        const {contact} = this.props;
+        const {title, description, faq, form, details} = parseModel(contact)[0].fields;
 
         return (
             <section className="content">

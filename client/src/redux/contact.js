@@ -3,18 +3,18 @@ import settings from '../react-isomorphic-render-async';
 
 const handler = createHandler(settings);
 
-export const getTemplate = action({
-    namespace: 'TEMPLATE',
-    event: 'GET_TEMPLATE',
-    action: (name, http) => http.get(`/api/template/${name}`),
+export const getContact = action({
+    namespace: 'CONTACT',
+    event: 'GET_CONTACT',
+    action: (http) => http.get('/api/template/contact'),
     result: (state, result) => ({
         ...state,
-        template: result
+        contact: result
     })
 }, handler);
 
-handler.addStateProperties('template');
+handler.addStateProperties('contact');
 
 export const connector = stateConnector(handler);
 
-export default handler.reducer({template: {}});
+export default handler.reducer({contact: {}});
