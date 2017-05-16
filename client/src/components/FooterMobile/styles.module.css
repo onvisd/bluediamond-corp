@@ -1,0 +1,45 @@
+@import 'constants/color';
+@import 'constants/grid';
+@import 'constants/type';
+
+.container {
+    border-top: 2px solid var(--c--gray-lighter);
+
+    @media (--mq-gt-s) {
+        display: none;
+    }
+}
+
+.section {
+    padding: 1rem 0;
+    text-align: center;
+
+    &:first-child {
+        border-bottom: 1px solid var(--c--gray-light);
+    }
+
+    & a {
+        color: var(--c--black);
+    }
+
+    & svg {
+        fill: var(--c--black);
+        vertical-align: middle;
+    }
+
+    & a:not(:last-child) {
+        margin-right: 0.5rem;
+
+        & svg {
+            margin-right: 0.5rem;
+        }
+    }
+
+    & > div:first-child {
+        margin-bottom: 0.5rem;
+    }
+}
+
+.copyright {
+    color: var(--c--gray);
+}

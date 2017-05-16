@@ -12,6 +12,8 @@ import {parseModel} from '../tools/parseApi';
 
 import Preloading from '../components/Preloading';
 import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
+import FooterMobile from '../components/FooterMobile';
 
 @preload(({dispatch}) => {
     dispatch(setNavigationStyle({}));
@@ -19,7 +21,10 @@ import Navigation from '../components/Navigation';
     return dispatch(getNavigationData());
 })
 @connect(
-    (state) => ({...connector(state.navigation)}),
+    (state) => ({
+        responsive: state.responsive,
+        ...connector(state.navigation)
+    }),
     {
         getNavigationData,
         setNavigationStyle,
@@ -33,9 +38,13 @@ export default class Layout extends Component {
     }
 
     render() {
-        const {children, navigation} = this.props;
+        const {children, navigation, responsive} = this.props;
         const brands = parseModel(navigation.data.brands).map((b) => b.fields);
         const companyNavTiles = parseModel(navigation.data.companyNavTiles).map((c) => c.fields);
+        const footerData = brands.map((brand) => ({
+            name: brand.name,
+            categories: brand.categories.map((category) => category.name)
+        }));
 
         const title = 'WebApp';
 
@@ -56,6 +65,19 @@ export default class Layout extends Component {
                 {property: 'og:locale', content: 'ru-RU'}
             ];
 
+        let footer = (
+            <div>
+                <FooterMobile />
+                <Footer data={footerData} />
+            </div>
+        );
+
+        if(responsive.small !== undefined && responsive.small) { // eslint-disable-line
+            footer = <FooterMobile />;
+        } else if(responsive.small !== undefined && !responsive.small) { // eslint-disable-line
+            footer = <Footer data={footerData} />;
+        }
+
         return (
             <div className="content">
                 <Title>{title}</Title>
@@ -67,7 +89,7 @@ export default class Layout extends Component {
 
                 {children}
 
-                <footer></footer>
+                {footer}
             </div>
         );
     }

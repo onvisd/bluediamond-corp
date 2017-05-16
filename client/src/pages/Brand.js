@@ -110,7 +110,7 @@ export default class Brand extends Component {
                     tagline={brand.heroTagline}
                 />
                 <BrandStories stories={brand.stories} />
-                <div className="container">
+                <div>
                     {brand.categories.map((category) => (
                         <BrandCategory
                             key={category._id}
