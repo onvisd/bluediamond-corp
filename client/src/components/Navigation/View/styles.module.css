@@ -12,8 +12,8 @@
     }
 
     @media (--mq-gt-s) {
-        width: 11.5rem;
-        height: 14.5rem;
+        width: 14rem;
+        height: 14rem;
         background-color: var(--c--gray-light);
     }
 }
@@ -37,8 +37,8 @@
     composes: default;
 
     @media (--mq-gt-s) {
-        width: calc(74rem - 23rem);
-        height: 14.5rem;
+        width: calc(74rem - 28rem);
+        height: 14rem;
         background-color: var(--c--white);
     }
 }

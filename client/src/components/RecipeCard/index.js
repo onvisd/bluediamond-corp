@@ -16,12 +16,16 @@ export default class RecipeCard extends Component {
         const {title, imageFile, cookTime, difficulty, recipe} = this.props;
 
         return (
-            <div className="l--col-12-at-s l--col-4-at-l">
-                <div className={styles.container} style={{backgroundImage: `url(${imageFile})`}}>
-                    <Link to={`/recipes/${recipe}`}></Link>
-                    <h3>{title}</h3>
-                    <p>{cookTime} minutes - {difficulty}</p>
-                </div>
+            <div className={styles.container}>
+                <Link
+                    to={`/recipes/${recipe}`}
+                    className={styles.image}
+                    style={{backgroundImage: `url(${imageFile})`}}
+                />
+                <Link to={`/recipes/${recipe}`}>
+                    <h3 className={styles.title}>{title}</h3>
+                    <p className={styles.meta}>{cookTime} minutes <span>|</span> {difficulty}</p>
+                </Link>
             </div>
         );
     }

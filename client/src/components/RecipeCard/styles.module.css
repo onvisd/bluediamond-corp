@@ -1,62 +1,34 @@
 @import 'constants/color';
 @import 'constants/type';
-
-/* Recipe Card Component */
+@import 'constants/grid';
 
 .container {
-    display: flex;
-    position: relative;
-    height: 28rem;
-    padding: 1rem;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    @media (--mq-gt-s) {
+        width: calc(33.33% - 1rem);
+        margin: 0 0.5rem 1rem;
+    }
+}
+
+.image {
+    display: block;
+    margin-bottom: 1rem;
+    padding-bottom: 100%;
     background-size: cover;
     background-position: center;
+}
 
-    & a {
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 20;
-    }
+.title {
+    margin-bottom: 0.5rem;
+    color: var(--c--black);
+    text-align: center;
+}
 
-    & h3,
-    & p {
-        position: relative;
-        z-index: 15;
-        color: var(--c--white);
-    }
-
-    & h3 {
-        margin-bottom: 0.5rem;
-        max-width: 75%;
-        text-align: left;
-    }
-
-    & p {
-        font-size: var(--t--size-xs);
-    }
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 10;
-        background-color: var(--c--black);
-        opacity: 0.5;
-        transition: opacity 200ms ease;
-    }
-
-    &:hover {
-        &::after {
-            opacity: 0;
-        }
-    }
+.meta {
+    margin-bottom: 0;
+    font-size: var(--t--size-xs);
+    color: var(--c--black);
+    text-align: center;
 }
