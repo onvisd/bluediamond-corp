@@ -12,3 +12,7 @@ deployment:
         branch: development
         commands:
         - ssh bluediamond@planetary.io '~/development/redeploy'
+    staging:
+        branch: staging
+        commands:
+        - ssh bluediamond@planetary.io '~/staging/redeploy'
