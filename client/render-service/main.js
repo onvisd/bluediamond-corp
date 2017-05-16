@@ -46,7 +46,7 @@ export default function(parameters) {
             // (this `head()` function is optional and is not required)
             // (its gonna work with or without this `head()` parameter)
             head() {
-                if(process.env.NODE_ENV !== 'production') {
+                if(process.env.NODE_ENV === 'development') {
                     // `devtools` just tampers with CSS styles a bit.
                     // It's not required for operation and can be omitted.
                     // It just removes the "flash of unstyled content" in development mode.

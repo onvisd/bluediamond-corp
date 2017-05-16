@@ -7,3 +7,8 @@ test:
     override:
         - node_modules/.bin/eslint .
         - node_modules/.bin/stylelint ./**/*.css
+deployment:
+    development:
+        branch: development
+        commands:
+        - ssh bluediamond@planetary.io '~/development/redeploy'
