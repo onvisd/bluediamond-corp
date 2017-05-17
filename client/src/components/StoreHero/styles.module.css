@@ -1,0 +1,58 @@
+@import 'constants/grid';
+@import 'constants/color';
+@import 'constants/type';
+
+.container {
+    display: flex;
+    position: relative;
+    height: auto;
+    padding: 7rem 2rem 4rem;
+    background-color: var(--c--gray-light);
+    background-size: fill;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-position: 50% 0;
+    overflow: hidden;
+
+    & p,
+    & h2 {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 60rem;
+        text-align: center;
+    }
+
+    & p {
+        margin-bottom: 0;
+        padding: 0 1rem;
+    }
+
+    @media (--mq-gt-s) {
+        height: 25rem;
+        padding: 4rem 0;
+        background-size: cover;
+        background-position: center;
+
+        & p {
+            max-width: 40rem;
+            font-size: var(--t--size-m);
+        }
+    }
+}
+
+.tagline {
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+    font-size: 2rem;
+    font-weight: 900;
+
+    @media (--mq-gt-s) {
+        max-width: 50vw;
+        font-size: 5rem;
+    }
+}
+
+.innerContainer {
+    @mixin container;
+}

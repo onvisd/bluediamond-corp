@@ -4,6 +4,8 @@ import styles from './styles.module.css';
 
 export default class ProductCard extends Component {
     static PropTypes = {
+        id: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         slug: PropTypes.string.isRequired,
         imageFile: PropTypes.string.isRequired,
@@ -11,15 +13,18 @@ export default class ProductCard extends Component {
     }
 
     render() {
-        const {title, slug, imageFile, imageAlt} = this.props;
+        const {type, title, slug, imageFile, imageAlt} = this.props;
 
         return (
-            <div className={`${styles.container} l--col-auto`}>
-                <a href={`/product/${slug}`}>
+            <div className={styles.container}>
+                <a href={slug}>
                     <div className={styles.image}>
                         <img src={imageFile} alt={imageAlt} />
                     </div>
-                    <h4>{title}</h4>
+                    <p>
+                        <strong>{type}</strong><br />
+                        {title}
+                    </p>
                 </a>
             </div>
         );

@@ -1,0 +1,28 @@
+@import 'constants/type';
+
+.container {
+    margin-bottom: 2rem;
+
+    & p {
+        margin: 0;
+    }
+
+    & label {
+        margin: 0;
+        padding: 0;
+        font-size: var(--t--size-xs);
+    }
+}
+
+.seeMore {
+    font-size: var(--t--size-xs);
+
+    &:hover,
+    &:focus {
+        cursor: pointer;
+    }
+
+    &.isHidden {
+        display: none;
+    }
+}

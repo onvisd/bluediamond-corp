@@ -1,20 +1,32 @@
 @import 'constants/color';
 @import 'constants/type';
+@import 'constants/grid';
 
 .container {
-    width: 125px;
+    @mixin column-flex;
+
+    margin-bottom: 1%;
+    max-width: 150px;
+    text-align: center;
 
     & a {
         font-size: var(--t--size-xs);
         color: var(--c--black);
     }
+
+    & p {
+        margin: 0;
+        line-height: 1.4;
+    }
 }
 
 .image {
     display: flex;
-    height: 150px;
-    margin-bottom: 0.5rem;
-    padding: 10%;
+    margin-bottom: 1rem;
     align-items: center;
-    background-color: var(--c--gray-lighter);
+    justify-content: center;
+
+    & img {
+        max-width: 125px;
+    }
 }

@@ -13,10 +13,12 @@ import Craft from './pages/Craft';
 import Manifesto from './pages/Manifesto';
 import Brand from './pages/Brand';
 import Contact from './pages/Contact';
+import Store from './pages/Store';
 
 export default (
     <Route path="/" component={Layout}>
         <IndexRoute component={Home} />
+        <Route path="store" component={Store} />
         <Route path="/manifesto" component={Manifesto} />
         <Route path="/craft" component={Craft} />
         <Route path="/history" component={HistoryIndex} />

@@ -7,3 +7,5 @@ export {default as pageData} from './pageData';
 export {default as brand} from './brand';
 export {default as contact} from './contact';
 export {default as craft} from './craft';
+export {default as storeProducts} from './storeproducts';
+export {default as storeProduct} from './storeproduct';

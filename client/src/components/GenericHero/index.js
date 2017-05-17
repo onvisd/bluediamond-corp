@@ -12,7 +12,8 @@ export default class GenericHero extends Component {
         ctaUrl: PropTypes.string,
         ctaTheme: PropTypes.string,
         verticalAlign: PropTypes.string,
-        backgroundImage: PropTypes.string.isRequired
+        backgroundImage: PropTypes.string.isRequired,
+        pageClass: PropTypes.string // used for static pages only
     }
 
     static defaultProps = {
