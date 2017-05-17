@@ -5,6 +5,7 @@ export {default as recipe} from './recipe';
 export {default as recipes} from './recipes';
 export {default as pageData} from './pageData';
 export {default as brand} from './brand';
+export {default as home} from './home';
 export {default as contact} from './contact';
 export {default as craft} from './craft';
 export {default as storeProducts} from './storeproducts';

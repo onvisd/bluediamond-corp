@@ -60,9 +60,9 @@ export default class Layout extends Component {
                 },
 
                 // <meta property="..." content="..."/>
-                {property: 'og:title', content: 'International Bodybuilders Club'},
-                {property: 'og:description', content: 'Do some push ups'},
-                {property: 'og:locale', content: 'ru-RU'}
+                {property: 'og:title', content: 'Blue Diamond Growers'},
+                {property: 'og:description', content: 'From our hearts to your hands'},
+                {property: 'og:locale', content: 'en-US'}
             ];
 
         let footer = (

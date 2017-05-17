@@ -34,7 +34,7 @@ Button.propTypes = {
     layout: PropTypes.string,
     href: PropTypes.string,
     onClick: PropTypes.func,
-    children: PropTypes.string.isRequired
+    children: PropTypes.node.isRequired
 };
 
 Button.defaultProps = {
