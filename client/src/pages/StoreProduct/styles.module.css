@@ -1,0 +1,23 @@
+@import 'constants/grid';
+
+.related {
+    @mixin container;
+}
+
+.relatedCards {
+    display: flex;
+    padding: 1rem 0 3.5rem;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.reviews {
+    @mixin container;
+}
+
+.reviewCards {
+    display: flex;
+    padding: 2rem 0 1rem;
+    justify-content: flex-start;
+    flex-direction: row;
+}

@@ -117,6 +117,8 @@
 .l--mar-left-s { margin-left: var(--l--space-s); }
 
 .l--align-center { align-items: center; }
+.l--no-pad { padding: 0; }
+.l--no-mar { margin: 0; }
 
 /* Accessibility Classes */
 .l--acc-hidden {

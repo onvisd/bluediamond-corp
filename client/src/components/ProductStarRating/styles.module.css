@@ -1,0 +1,32 @@
+@import 'constants/color';
+
+.container {
+    display: flex;
+    margin: 1% 0;
+    flex: 1;
+    align-items: center;
+}
+
+.stars {
+    display: block;
+    width: 150px;
+    overflow: hidden;
+
+    & span {
+        padding: 0 2%;
+
+        &:first-of-type {
+            padding-left: 0;
+        }
+
+        &:last-of-type {
+            padding-right: 0;
+        }
+    }
+}
+
+.reviewCount {
+    & p {
+        margin: 0;
+    }
+}

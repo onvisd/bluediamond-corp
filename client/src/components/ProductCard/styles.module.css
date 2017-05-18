@@ -5,9 +5,16 @@
 .container {
     @mixin column-flex;
 
-    margin-bottom: 1%;
     max-width: 150px;
     text-align: center;
+
+    &:first-of-type {
+        margin-left: 0;
+    }
+
+    &:last-of-type {
+        margin-right: 0;
+    }
 
     & a {
         font-size: var(--t--size-xs);

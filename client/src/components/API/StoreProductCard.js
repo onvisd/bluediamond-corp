@@ -26,7 +26,7 @@ export default class StoreProductCard extends Component {
                 id={products.id}
                 type={products.product_type}
                 title={products.title}
-                slug={`/store/product/${products.handle}`}
+                slug={`/store/products/${products.handle}`}
                 imageFile={products.image.src}
                 imageAlt={products.title}
             />

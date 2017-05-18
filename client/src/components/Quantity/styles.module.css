@@ -1,0 +1,83 @@
+@import 'constants/color';
+@import 'constants/type';
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: var(--c--gray);
+}
+
+.input {
+    display: flex;
+    width: 5rem;
+    height: 36px;
+    margin-left: 1rem;
+    align-items: center;
+    border: 1px solid var(--c--gray-light);
+    border-radius: 3px;
+}
+
+.quantity {
+    width: 75%;
+    padding: 0;
+    color: var(--c--gray-darker);
+
+    & input {
+        width: 100%;
+        padding: 0 0.5rem;
+        font-size: 1rem;
+        border: 0;
+    }
+
+    & input::-webkit-inner-spin-button,
+    & input::-webkit-outer-spin-button {
+        margin: 0;
+        appearance: none;
+    }
+}
+
+.decrement,
+.increment {
+    display: block;
+    position: relative;
+    width: 18px;
+    height: 1.1rem;
+    overflow: hidden;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 0;
+        height: 0;
+        margin-top: -0.25em;
+        z-index: 10;
+        border-width: 0.5em 0.33em 0;
+        border-color: var(--c--gray) transparent transparent;
+        border-style: solid;
+        pointer-events: none;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:hover::after {
+        border-color: var(--c--gray-darker) transparent transparent;
+    }
+}
+
+.decrement {
+    &::after {
+        top: 30%;
+    }
+}
+
+.increment {
+    &::after {
+        top: 70%;
+        right: 7px;
+        transform: rotate(180deg);
+    }
+}

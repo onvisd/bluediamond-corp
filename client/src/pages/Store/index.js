@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {preload, Title} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
-import {connector, getStoreProducts} from '../../redux/storeproducts';
+import {connector, getStoreProducts} from '../../redux/storeProducts';
 import StoreHero from '../../components/StoreHero';
 import ProductFilter from '../../components/ProductFilter';
 import StoreProductCard from '../../components/API/StoreProductCard';

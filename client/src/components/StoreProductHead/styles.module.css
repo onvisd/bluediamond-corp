@@ -1,0 +1,71 @@
+@import 'constants/color';
+@import 'constants/type';
+@import 'constants/grid';
+
+.container {
+    @mixin container;
+
+    display: flex;
+    padding: 2rem 0 4rem;
+}
+
+.images {
+    flex: 0 0 50%;
+}
+
+.productInfo {
+    flex: 0 0 50%;
+}
+
+.title {
+    margin: 0;
+}
+
+.meta {
+    font-size: var(--t--size-xs);
+    font-weight: var(--t--weight-bold);
+    color: var(--c--gray);
+
+    & span {
+        display: inline-block;
+    }
+
+    & span + span {
+        margin-left: 2%;
+    }
+}
+
+.description {
+    margin: 2% 0 2rem;
+
+    & p {
+        color: var(--c--gray-darker);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.formOptions {
+    display: flex;
+
+    & .options {
+        padding-right: 2.75rem;
+        flex: 2;
+    }
+}
+
+.formPurchase {
+    display: flex;
+    align-items: center;
+
+    & .price {
+        margin: 1.5rem 0;
+        flex: 0 0 50%;
+    }
+
+    & button {
+        width: 100%;
+    }
+}
