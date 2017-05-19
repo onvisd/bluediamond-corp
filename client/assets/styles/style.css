@@ -11,10 +11,8 @@
 @import 'global/form';
 
 /* component styles - styles groups of elements */
-@import 'components/related';
 @import 'components/recipeCards';
 
 /* layout styles - styles pages of elements */
 @import 'layouts/history';
-@import 'layouts/manifesto';
 @import 'layouts/recipes';

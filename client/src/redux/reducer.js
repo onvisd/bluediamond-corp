@@ -10,3 +10,4 @@ export {default as contact} from './contact';
 export {default as craft} from './craft';
 export {default as storeProducts} from './storeProducts';
 export {default as storeProduct} from './storeProduct';
+export {default as manifesto} from './manifesto';

@@ -96,8 +96,9 @@ export default class PageHero extends Component {
         const {videoOpen} = this.state;
 
         return (
-            <div className={`${styles.container} ${videoOpen ? styles.videoOpen : ''}`}>
-                <div className={styles.innerContainer}>
+            <div className={`${styles.container} ${videoOpen ? styles.videoOpen : ''}
+                ${video ? styles.hasVideo : ''}`}>
+                <div className={`${styles.innerContainer} ${video ? styles.hasVideo : ''}`}>
                     {showHeadline && <h1>{headline}</h1>}
                     {content &&
                         <div
@@ -111,7 +112,7 @@ export default class PageHero extends Component {
                     {(video && playVideo) &&
                         <div className={styles.playIcon}>
                             <a href="#" onClick={this.toggleVideoPlayer}>
-                                <PlayIcon />
+                                <PlayIcon /> {buttonText}
                             </a>
                         </div>
                     }

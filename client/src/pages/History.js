@@ -2,6 +2,7 @@ import React from 'react';
 import {Title} from 'react-isomorphic-render';
 
 import GenericHero from '../components/GenericHero';
+import RelatedPages from '../components/RelatedPages';
 import RelatedPageLink from '../components/RelatedPageLink';
 
 import Diamond from '../../assets/images/diamond.svg';
@@ -127,7 +128,7 @@ export default () => (
                 </div>
             </div>
         </div>
-        <div className="related--container">
+        <RelatedPages>
             <RelatedPageLink
                 headline="Co-op headline"
                 title="Quality doesn't happen by chance"
@@ -142,7 +143,6 @@ export default () => (
                 linkUrl="/craft"
                 linkTheme="yellow"
             />
-            <div className="related--seperator" />
-        </div>
+        </RelatedPages>
     </section>
 );

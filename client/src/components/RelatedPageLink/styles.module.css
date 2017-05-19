@@ -10,7 +10,8 @@
     align-items: center;
     text-align: center;
     background-color: var(--c--white);
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
     overflow: hidden;
 

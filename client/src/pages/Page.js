@@ -15,7 +15,8 @@ const pageModules = {
     GenericHero: require('../components/API/GenericHero').default,
     Hero: require('../components/API/PageHero').default,
     ParagraphWithHeader: require('../components/API/ParagraphWithHeader').default,
-    ParagraphWithImage: require('../components/API/ParagraphWithImage').default
+    ParagraphWithImage: require('../components/API/ParagraphWithImage').default,
+    ImageCluster: require('../components/API/ImageCluster').default
 };
 
 const pageLayouts = {

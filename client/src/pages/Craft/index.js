@@ -6,6 +6,7 @@ import {connector, getCraft} from '../../redux/craft';
 import {parseModel} from '../../tools/parseApi';
 
 import GenericHero from '../../components/GenericHero';
+import RelatedPages from '../../components/RelatedPages';
 import RelatedPageLink from '../../components/RelatedPageLink';
 import styles from './styles.module.css';
 
@@ -178,7 +179,7 @@ export default class Craft extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="related--container">
+                <RelatedPages>
                     <RelatedPageLink
                         title="Perfected Over Generations"
                         linkText="Our history"
@@ -191,8 +192,7 @@ export default class Craft extends Component {
                         linkUrl="/manifesto"
                         linkTheme="blue"
                     />
-                    <div className="related--seperator" />
-                </div>
+                </RelatedPages>
             </section>
         );
     }

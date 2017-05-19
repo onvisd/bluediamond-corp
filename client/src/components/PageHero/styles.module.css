@@ -1,12 +1,13 @@
 @import 'constants/grid';
 @import 'constants/color';
+@import 'constants/type';
 
 /* Hero Styles */
 
 .container {
     display: flex;
     position: relative;
-    height: 40vw;
+    height: 50vw;
     justify-content: center;
     align-items: center;
     background-color: var(--c--gray-dark);
@@ -14,6 +15,19 @@
 
     @media (--mq-s) {
         height: 20rem;
+    }
+
+    &.hasVideo {
+        align-items: flex-end;
+        justify-content: flex-start;
+
+        & h1 {
+            max-width: 25%;
+        }
+
+        & .background {
+            opacity: 1;
+        }
     }
 
     &.videoOpen {
@@ -37,6 +51,15 @@
     text-align: center;
     opacity: 1;
     transition: opacity 200ms ease;
+
+    &.hasVideo {
+        padding-bottom: 5rem;
+        text-align: left;
+
+        & .playIcon a {
+            justify-content: flex-start;
+        }
+    }
 
     & h1,
     & p {
@@ -66,12 +89,19 @@
 }
 
 .playIcon {
-    text-align: center;
+    & a {
+        display: flex;
+        color: var(--c--white);
+        font-weight: var(--t--weight-bold);
+        justify-content: center;
+        align-items: center;
+    }
 
     & svg {
         display: inline-block;
-        width: 70px;
-        height: 70px;
+        width: 42px;
+        height: 42px;
+        margin-right: 1rem;
     }
 }
 

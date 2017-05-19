@@ -1,10 +1,21 @@
-.related--container {
+@import 'constants/color';
+
+.container {
     display: flex;
     position: relative;
     justify-content: space-between;
+    background-color: var(--c--white);
+
+    & div {
+        background-position: right center;
+    }
+
+    & div:first-child {
+        background-position: left center;
+    }
 }
 
-.related--seperator {
+.seperator {
     position: absolute;
     top: 0;
     right: 0;
