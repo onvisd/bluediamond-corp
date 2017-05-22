@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import styles from './styles.module.css';
 
 @Formsy.Decorator()
-export default class Select extends Component {
+export default class FormSelect extends Component {
     componentDidMount() {
         this.props.setValue('No subject');
     }

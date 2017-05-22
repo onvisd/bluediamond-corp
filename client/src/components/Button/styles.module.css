@@ -37,6 +37,18 @@
     }
 }
 
+.blueOutline {
+    composes: base;
+    color: var(--c--blue);
+    background-color: transparent;
+    border: 1px solid var(--c--blue);
+
+    &:hover {
+        color: var(--c--white);
+        background-color: var(--c--blue-light);
+    }
+}
+
 .yellow {
     composes: base;
     color: var(--c--black);

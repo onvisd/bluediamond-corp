@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import styles from './styles.module.css';
 
 @Formsy.Decorator()
-export default class Input extends Component {
+export default class FormInput extends Component {
     changeValue = (event) => {
         this.props.setValue(event.currentTarget.value);
     }

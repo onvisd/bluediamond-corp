@@ -3,8 +3,8 @@ import axios from 'axios';
 import {Form} from 'formsy-react';
 
 import Button from '../Button';
-import Input from './Input';
-import Select from './Select';
+import Input from '../FormInput';
+import Select from '../FormSelect';
 import Textarea from './Textarea';
 import Checkbox from './Checkbox';
 
@@ -17,8 +17,10 @@ export default class ContactForm extends Component {
         header: PropTypes.string.isRequired,
         emailTo: PropTypes.string.isRequired,
         allowSubject: PropTypes.bool.isRequired,
+        allowCompany: PropTypes.bool.isRequired,
         allowMessage: PropTypes.bool.isRequired,
-        predefinedSubjects: PropTypes.arrayOf(PropTypes.string)
+        predefinedSubjects: PropTypes.arrayOf(PropTypes.string),
+        showNote: PropTypes.bool.isRequired
     }
 
     enableSubmit = () => {
@@ -38,6 +40,7 @@ export default class ContactForm extends Component {
             toEmail: this.props.emailTo,
             fromEmail: model.email,
             name: model.name,
+            company: model.name,
             subject: model.subject,
             message: model.message,
             subscribe: model.subscribe
@@ -51,7 +54,13 @@ export default class ContactForm extends Component {
     }
 
     render() {
-        const {allowSubject, allowMessage, predefinedSubjects} = this.props;
+        const {
+            allowSubject,
+            allowCompany,
+            allowMessage,
+            predefinedSubjects,
+            showNote
+        } = this.props;
 
         return (
             <Form
@@ -79,6 +88,12 @@ export default class ContactForm extends Component {
                         options={predefinedSubjects}
                     />
                 )}
+                {allowCompany && (
+                    <Input
+                        name="company"
+                        label="Company"
+                    />
+                )}
                 {allowMessage && (
                     <Textarea
                         name="message"
@@ -87,11 +102,13 @@ export default class ContactForm extends Component {
                         required
                     />
                 )}
-                <p className="t--type-incidental">
-                    In order for us to better serve you (or address your concerns),
-                    please include the product's Lot Code,
-                    Best Before Date, Time Stamp, and UPC code.
-                </p>
+                {showNote &&
+                    <p className="t--type-incidental">
+                        In order for us to better serve you (or address your concerns),
+                        please include the product's Lot Code,
+                        Best Before Date, Time Stamp, and UPC code.
+                    </p>
+                }
                 <Checkbox
                     name="subscribe"
                     defaultChecked
