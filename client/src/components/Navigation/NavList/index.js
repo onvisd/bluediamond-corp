@@ -13,7 +13,7 @@ NavList.propTypes = {
 };
 
 NavList.defaultProps = {
-    type: 'primary'
+    type: 'base'
 };
 
 export default NavList;

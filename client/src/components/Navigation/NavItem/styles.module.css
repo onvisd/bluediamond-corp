@@ -1,4 +1,5 @@
 @import 'constants/color';
+@import 'constants/grid';
 
 .primary {
     width: 100%;
@@ -11,33 +12,39 @@
     }
 
     & a,
-    & button {
+    & div {
         display: flex;
         height: 100%;
+        padding: 0 1.5rem;
         align-items: center;
     }
 
     & a {
-        padding: 0 24px;
         color: var(--c--black);
     }
 
-    & button {
-        width: 100%;
-        padding: 0 1rem;
+    & div {
+        position: relative;
         justify-content: space-between;
         color: var(--c--gray-dark);
 
         &::after {
             content: '';
-            opacity: 0.4;
+            position: absolute;
+            top: 0;
+            right: 1.5rem;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            margin: auto 0;
+            vertical-align: middle;
             border-top: 7px solid transparent;
             border-bottom: 7px solid transparent;
             border-left: 9px solid var(--c--black);
-            vertical-align: middle;
+            opacity: 0.4;
         }
 
-        &:hover,
+        &:focus,
         &.active {
             color: var(--c--black);
             background-color: var(--c--gray-lighter);
@@ -45,6 +52,24 @@
 
         &.active::after {
             opacity: 0.8;
+        }
+    }
+
+    @media (--mq-gt-s) {
+        height: 60px;
+
+        & a,
+        & div {
+            padding: 0 1rem;
+        }
+
+        & div:hover {
+            color: var(--c--black);
+            background-color: var(--c--gray-lighter);
+        }
+
+        & div::after {
+            right: 1rem;
         }
     }
 }
@@ -65,18 +90,25 @@
         border-bottom: 1px solid var(--c--yellow-dark);
     }
 
-    & button {
+    & div {
         color: var(--c--yellow-darker);
     }
 
-    & button:hover,
-    & button.active {
+    & div:focus,
+    & div.active {
         color: var(--c--black);
         background-color: var(--c--yellow-light);
     }
 
-    & button.active::after {
+    & div.active::after {
         opacity: 0.8;
+    }
+
+    @media (--mq-gt-s) {
+        & div:hover {
+            color: var(--c--black);
+            background-color: var(--c--yellow-light);
+        }
     }
 }
 
@@ -88,18 +120,25 @@
         border-bottom: 1px solid var(--c--green-dark);
     }
 
-    & button {
+    & div {
         color: var(--c--green-darker);
     }
 
-    & button:hover,
-    & button.active {
+    & div:focus,
+    & div.active {
         color: var(--c--black);
         background-color: var(--c--green-light);
     }
 
-    & button.active::after {
+    & div.active::after {
         opacity: 0.8;
+    }
+
+    @media (--mq-gt-s) {
+        & div:hover {
+            color: var(--c--black);
+            background-color: var(--c--green-light);
+        }
     }
 }
 
@@ -111,17 +150,24 @@
         border-bottom: 1px solid var(--c--blue-dark);
     }
 
-    & button {
+    & div {
         color: var(--c--blue-darker);
     }
 
-    & button:hover,
-    & button.active {
+    & div:focus,
+    & div.active {
         color: var(--c--black);
         background-color: var(--c--blue-light);
     }
 
-    & button.active::after {
+    & div.active::after {
         opacity: 0.8;
+    }
+
+    @media (--mq-gt-s) {
+        & div:hover {
+            color: var(--c--black);
+            background-color: var(--c--blue-light);
+        }
     }
 }

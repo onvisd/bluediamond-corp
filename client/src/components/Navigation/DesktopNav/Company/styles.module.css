@@ -1,25 +1,27 @@
-@import 'constants/grid';
 @import 'constants/color';
+@import 'constants/type';
 
 .container {
-    @mixin container;
-
-    margin-top: -8px;
-    max-width: 74rem;
+    width: 72rem;
+    height: 100%;
     background-color: var(--c--white);
     border: 1px solid var(--c--gray-lighter);
     border-radius: 8px;
+    overflow: hidden;
 }
 
 .tiles {
     display: flex;
+    height: calc(100% - 50px);
+    margin: 0;
+    padding: 0;
 }
 
 .companyLinks {
     display: flex;
     height: 50px;
     margin: 0;
-    padding: 0 0 0 24px;
+    padding: 0 0 0 1.5rem;
     align-items: center;
     list-style-type: none;
     background-color: var(--c--gray-lighter);
@@ -34,5 +36,7 @@
 
     & a {
         color: var(--c--black);
+        font-size: var(--t--size-s);
+        font-weight: var(--t--weight-normal);
     }
 }

@@ -21,6 +21,7 @@
     bottom: 0;
     left: 0;
     margin: auto;
+    z-index: var(--l--z-highest);
 }
 
 .innerContainer {
@@ -92,15 +93,16 @@
     @mixin container;
 
     display: flex;
+    position: relative;
     height: 72px;
     align-items: center;
     justify-content: space-between;
-    font-size: var(--t--size-ms);
 }
 
 .primaryNavLinks {
     height: 100%;
     line-height: 72px;
+    font-size: var(--t--size-ms);
 }
 
 .primaryNavLink {
@@ -114,28 +116,78 @@
         color: var(--c--blue);
     }
 
-    &.active button::after {
-        border-top-color: var(--c--blue);
-    }
-
     & a {
         color: var(--c--black);
-    }
-
-    & button {
-        padding: 0;
     }
 
     & svg {
         vertical-align: middle;
     }
+}
 
-    & button::after {
+.navPanelToggles {
+    position: relative;
+    height: 100%;
+}
+
+.navPanelToggle {
+    display: inline-block;
+    font-size: var(--t--size-ms);
+    font-weight: var(--t--weight-medium);
+    line-height: 72px;
+    cursor: pointer;
+
+    &:first-child {
+        padding-right: 1.25rem;
+    }
+
+    &:not(:first-child):not(:last-child) {
+        padding-left: 1.25rem;
+    }
+
+    &.active {
+        color: var(--c--blue);
+    }
+
+    &.active::after {
+        border-top-color: var(--c--blue);
+    }
+
+    &::after {
         content: '';
         display: inline-block;
         margin-left: 1rem;
         border-left: 7px solid transparent;
         border-right: 7px solid transparent;
         border-top: 9px solid var(--c--blue-dark);
+    }
+}
+
+.navPanel {
+    position: absolute;
+    top: 72px;
+    left: -1rem;
+    height: calc(61px * 4);
+    margin-top: -0.5rem;
+    max-width: 72rem;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    transform:
+        perspective(400px)
+        rotate3d(-1, 0, 0, 5deg)
+        scale3d(0.9, 0.9, 1);
+    will-change: transform, opacity;
+    transition:
+        transform 150ms ease-in-out,
+        opacity 100ms linear;
+
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+        transform:
+            perspective(400px)
+            rotate3d(1, 0, 0, 0)
+            scale3d(1, 1, 1);
     }
 }

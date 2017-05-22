@@ -1,6 +1,14 @@
 @import 'constants/color';
 
+.base {
+    margin: 0;
+    padding: 0;
+    min-width: 100%;
+    list-style-type: none;
+}
+
 .secondary {
+    composes: base;
     border-top: 3px solid var(--c--gray-lighter);
     border-bottom: 3px solid var(--c--gray-lighter);
 }

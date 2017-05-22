@@ -1,18 +1,19 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
+
 import styles from './styles.module.css';
 
 const NavItem = ({active, theme, href, extHref, onClick, children}) => {
     let button = (
-        <button
+        <div
             onClick={onClick}
             className={classnames({
                 [styles.active]: active
             })}
         >
             {children}
-        </button>
+        </div>
     );
 
     if(href) {

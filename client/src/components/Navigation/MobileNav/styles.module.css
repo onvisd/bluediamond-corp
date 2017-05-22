@@ -8,27 +8,6 @@
     right: 0;
     left: 0;
     z-index: 9999;
-    background: var(--c--white);
-
-    & .drawer {
-        position: fixed;
-        top: 60px;
-        width: 100%;
-        height: calc(100% - 60px);
-        background: var(--c--white);
-        overflow: auto;
-        transform: translateX(100vw);
-
-        &.visible {
-            transform: translateX(0);
-        }
-
-        & ul {
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
-        }
-    }
 
     @media (--mq-gt-s) {
         display: none;
@@ -38,16 +17,11 @@
 .head {
     display: flex;
     height: 60px;
-    padding: 0 24px;
+    padding: 0 0.5rem 0 1.5rem;
     align-items: center;
     justify-content: space-between;
+    background-color: var(--c--white);
     border-bottom: 2px solid var(--c--gray-lighter);
-
-    @media (--mq-gt-s) {
-        height: 96px;
-        justify-content: center;
-        border-top: 4px solid var(--c--blue);
-    }
 }
 
 .logo {
@@ -67,10 +41,6 @@
     border-radius: 50%;
     justify-content: center;
     cursor: pointer;
-
-    @media (--mq-gt-s) {
-        display: none;
-    }
 }
 
 .toggle {
@@ -99,7 +69,7 @@
         transform: translateY(7px);
     }
 
-    &.toggleActive {
+    &.active {
         background: transparent;
 
         &::after {
@@ -110,4 +80,53 @@
             transform: translateY(0) rotate(-45deg);
         }
     }
+}
+
+.drawer {
+    position: relative;
+    height: calc(100vh - 60px);
+    background-color: var(--c--white);
+    transform: translateX(100vw);
+    transition: transform 200ms ease-in-out;
+    overflow: hidden;
+
+    &.visible {
+        transform: translateX(0);
+    }
+}
+
+.enter-right {
+    transform: translateX(100vw);
+}
+
+.enter-right-active {
+    transform: translateX(0);
+    transition: transform 200ms ease-in-out;
+}
+
+.enter-left {
+    transform: translateX(-100vw);
+}
+
+.enter-left-active {
+    transform: translateX(0);
+    transition: transform 200ms ease-in-out;
+}
+
+.leave-right {
+    transform: translateX(0);
+}
+
+.leave-right-active {
+    transform: translateX(100vw);
+    transition: transform 200ms ease-in-out;
+}
+
+.leave-left {
+    transform: translateX(0);
+}
+
+.leave-left-active {
+    transform: translateX(-100vw);
+    transition: transform 200ms ease-in-out;
 }
