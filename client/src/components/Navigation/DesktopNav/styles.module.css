@@ -20,6 +20,8 @@
     right: 0;
     bottom: 0;
     left: 0;
+    width: 158px;
+    height: 98px;
     margin: auto;
     z-index: var(--l--z-highest);
 }

@@ -3,7 +3,7 @@ import TransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
-import BDLogo from '../../../../assets/images/bd-logo.png';
+import BDLogo from '../../../../assets/images/bd-logo.svg';
 import styles from './styles.module.css';
 
 export default class MobileNav extends Component {
@@ -71,7 +71,7 @@ export default class MobileNav extends Component {
                 <div className={styles.head}>
                     <div className={styles.logo}>
                         <Link to="/" onClick={this.toggleNav.hide}>
-                            <img src={BDLogo} />
+                            <BDLogo className={styles.logo} />
                         </Link>
                     </div>
                     <div

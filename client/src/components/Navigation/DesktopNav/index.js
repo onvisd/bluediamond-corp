@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import {connector} from '../../../redux/navigation';
 
 import ShoppingCart from '../../../../assets/images/shopping-cart.svg';
-import BDLogo from '../../../../assets/images/bd-logo.png';
+import BDLogo from '../../../../assets/images/bd-logo.svg';
 import Breadcrumbs from './Breadcrumbs';
 import styles from './styles.module.css';
 
@@ -59,7 +59,7 @@ export default class DesktopNav extends Component {
         return (
             <nav className={styles.container}>
                 <Link to="/">
-                    <img src={BDLogo} className={styles.logo} />
+                    <BDLogo className={styles.logo} />
                 </Link>
                 <div className={`${styles.secondaryNav} ${styles[navColor]}`}>
                     <div className={styles.innerContainer}>
