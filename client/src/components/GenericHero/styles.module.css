@@ -1,5 +1,6 @@
 @import 'constants/grid';
 @import 'constants/color';
+@import 'constants/type';
 
 /* Hero Styles */
 
@@ -13,31 +14,41 @@
     overflow: hidden;
 
     @media (--mq-s) {
-        height: 20rem;
+        padding: 2rem;
     }
+}
 
-    &.alignTop {
-        align-items: flex-start;
+.alignTop {
+    align-items: flex-start;
 
-        & .innerContainer {
-            padding: 12vh 0;
-        }
+    & .innerContainer {
+        padding: 12vh 0;
     }
+}
 
-    &.alignCenter {
-        align-items: center;
+.alignCenter {
+    align-items: center;
 
-        & .innerContainer {
-            padding: 12vh 0;
-            text-align: center;
-        }
+    & .innerContainer {
+        padding: 12vh 0;
+        text-align: center;
     }
+}
 
-    &.alignBottom {
-        align-items: flex-end;
+.alignBottom {
+    align-items: flex-end;
 
-        & .innerContainer {
-            padding: 0 0 12vh;
+    & .innerContainer {
+        padding: 0 0 12vh;
+    }
+}
+
+.alignTop,
+.alignCenter,
+.alignBottom {
+    & .innerContainer {
+        @media (--mq-s) {
+            padding: 0;
         }
     }
 }
@@ -51,6 +62,22 @@
     & h3,
     & p {
         max-width: 30vw;
+
+        @media (--mq-s) {
+            max-width: 75%;
+        }
+    }
+
+    & h1 {
+        @media (--mq-s) {
+            font-size: var(--t--size-l);
+        }
+    }
+
+    & h3 {
+        @media (--mq-s) {
+            font-size: var(--t--size-s);
+        }
     }
 }
 

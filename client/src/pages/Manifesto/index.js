@@ -12,9 +12,9 @@ import FullBleedImage from '../../components/FullBleedImage';
 import RelatedPages from '../../components/RelatedPages';
 import RelatedPageLink from '../../components/RelatedPageLink';
 
-import Diamond from '../../../assets/images/diamond.svg';
-import BgDirt from '../../../assets/images/bg-appetizer-dirt.png';
-import BgAlmond from '../../../assets/images/bg-appetizer-almond.png';
+import Diamond from '../../../assets/images/icons/diamond.svg';
+import BgLeaves from '../../../assets/images/backgrounds/almond-leaves-left.png';
+import BgAlmond from '../../../assets/images/backgrounds/almonds.png';
 
 import styles from './styles.module.css';
 
@@ -165,7 +165,7 @@ export default class Manifesto extends Component {
                         linkText="Learn about our history"
                         linkUrl="/history"
                         linkTheme="green"
-                        backgroundImage={BgDirt}
+                        backgroundImage={BgLeaves}
                     />
                     <RelatedPageLink
                         headline="Craft section headline"

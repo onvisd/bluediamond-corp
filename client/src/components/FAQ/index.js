@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import classnames from 'classnames';
 import marked from 'marked';
 
-import CaretRight from '../../../assets/images/caret-right.svg';
+import CaretRight from '../../../assets/images/icons/caret-right.svg';
 import styles from './styles.module.css';
 
 export default class FAQ extends Component {

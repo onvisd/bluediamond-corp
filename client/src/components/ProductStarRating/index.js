@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import styles from './styles.module.css';
 
-import Full from '../../../assets/images/starFull.svg';
-import Empty from '../../../assets/images/starEmpty.svg';
+import Full from '../../../assets/images/icons/star-full.svg';
+import Empty from '../../../assets/images/icons/star-empty.svg';
 
 export default class ProductStarRating extends Component {
     static propTypes = {

@@ -2,9 +2,9 @@ import React from 'react';
 import {Link} from 'react-isomorphic-render';
 import styles from './styles.module.css';
 
-import Facebook from '../../../assets/images/facebook.svg';
-import Instagram from '../../../assets/images/instagram.svg';
-import Twitter from '../../../assets/images/twitter.svg';
+import Facebook from '../../../assets/images/icons/facebook.svg';
+import Instagram from '../../../assets/images/icons/instagram.svg';
+import Twitter from '../../../assets/images/icons/twitter.svg';
 
 const Footer = () => (
     <footer className={styles.container}>

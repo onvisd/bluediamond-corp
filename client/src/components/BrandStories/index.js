@@ -4,8 +4,8 @@ import classnames from 'classnames';
 import styles from './styles.module.css';
 
 import BrandStory from '../BrandStory';
-import leftArrow from '../../../assets/images/arrow_left.png';
-import rightArrow from '../../../assets/images/arrow_right.png';
+import leftArrow from '../../../assets/images/icons/arrow-left.png';
+import rightArrow from '../../../assets/images/icons/arrow-right.png';
 
 export default class BrandStories extends Component {
     static propTypes = {

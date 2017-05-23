@@ -10,7 +10,7 @@ import StoreProductCard from '../../components/API/StoreProductCard';
 import Button from '../../components/Button';
 import styles from './styles.module.css';
 
-import HeroBg from '../../../assets/images/storeHero.png';
+import Hero from '../../../assets/images/store/hero.png';
 
 @preload(({dispatch}) => dispatch(getStoreProducts()))
 @connect(
@@ -158,7 +158,7 @@ export default class Store extends Component {
             <section className="content">
                 <Title>Store</Title>
                 <StoreHero
-                    image={HeroBg}
+                    image={Hero}
                     title="Fire up your Memorial Day Barbeque with 20 percentage off
                     Smokehouse Snack Almonds"
                     buttonText="Go To Sale"

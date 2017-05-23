@@ -4,7 +4,7 @@ import marked from 'marked';
 
 import styles from './styles.module.css';
 
-import CaretDown from '../../../assets/images/caret-down.svg';
+import CaretDown from '../../../assets/images/icons/caret-down.svg';
 
 export default class RecipeHead extends Component {
     state = {

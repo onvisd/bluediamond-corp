@@ -3,8 +3,8 @@ import classnames from 'classnames';
 
 import styles from './styles.module.css';
 
-import CaretDown from '../../../assets/images/caret-down.svg';
-import SmartLabel from '../../../assets/images/smartLabel.png';
+import CaretDown from '../../../assets/images/icons/caret-down.svg';
+import SmartLabel from '../../../assets/images/icons/smart-label.png';
 
 export default class ProductAccordion extends Component {
     state = {

@@ -2,13 +2,13 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
 import styles from './styles.module.css';
 
-import Facebook from '../../../assets/images/facebook.svg';
-import Youtube from '../../../assets/images/youtube.svg';
-import Instagram from '../../../assets/images/instagram.svg';
-import Pinterest from '../../../assets/images/pinterest.svg';
-import Twitter from '../../../assets/images/twitter.svg';
-import Phone from '../../../assets/images/phone.svg';
-import Mail from '../../../assets/images/mail.svg';
+import Facebook from '../../../assets/images/icons/facebook.svg';
+import Youtube from '../../../assets/images/icons/youtube.svg';
+import Instagram from '../../../assets/images/icons/instagram.svg';
+import Pinterest from '../../../assets/images/icons/pinterest.svg';
+import Twitter from '../../../assets/images/icons/twitter.svg';
+import Phone from '../../../assets/images/icons/phone.svg';
+import Mail from '../../../assets/images/icons/mail.svg';
 
 const Footer = ({data}) => (
     <footer className={styles.container}>

@@ -3,7 +3,7 @@ import marked from 'marked';
 
 import Button from '../Button';
 
-import PlayIcon from '../../../assets/images/icon-play.svg';
+import PlayIcon from '../../../assets/images/icons/play.svg';
 
 import styles from './styles.module.css';
 
