@@ -1,0 +1,43 @@
+@import 'constants/type';
+@import 'constants/grid';
+
+.facts {
+    display: flex;
+
+    @media (--mq-s) {
+        display: block;
+    }
+
+    & .table {
+        flex: 1;
+    }
+
+    & .table + .table {
+        @media (--mq-gt-s) {
+            margin-left: 2rem;
+        }
+    }
+
+    & table {
+        width: 100%;
+    }
+
+    & tr {
+        line-height: 1.2;
+    }
+
+    & td {
+        padding: 0;
+    }
+
+    & td:first-child {
+        width: 75%;
+        font-weight: var(--t--weight-bold);
+    }
+}
+
+.inline {
+    & td {
+        padding-left: 2rem;
+    }
+}

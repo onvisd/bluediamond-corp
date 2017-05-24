@@ -1,0 +1,55 @@
+@import 'constants/color';
+@import 'constants/grid';
+@import 'constants/type';
+
+.container {
+    margin: 0 0 2rem;
+    background-color: var(--c--white);
+}
+
+.innerContainer {
+    @mixin container;
+
+    position: relative;
+    text-align: center;
+}
+
+.recipeCards {
+    display: none;
+    padding-bottom: 2rem;
+
+    @media (--mq-gt-s) {
+        display: flex;
+    }
+}
+
+.recipeCardsMobile {
+    padding-bottom: 1rem;
+
+    @media (--mq-gt-s) {
+        display: none;
+    }
+}
+
+.tabs {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+    justify-content: center;
+
+    @media (--mq-gt-s) {
+        display: none;
+    }
+}
+
+.tab {
+    width: 10px;
+    height: 10px;
+    margin: 6px;
+    background-color: var(--c--gray-light);
+    border-radius: 50%;
+}
+
+.tabActive {
+    background-color: var(--c--gray-darker);
+}

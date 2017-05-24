@@ -1,72 +1,136 @@
 @import 'constants/color';
+@import 'constants/type';
+@import 'constants/grid';
 
 .container {
-    margin: 2rem auto;
+    display: flex;
+    min-height: 32rem;
+    background-color: var(--c--blue);
+
+    @media (--mq-s) {
+        display: block;
+    }
+
+    & .left,
+    & .right {
+        flex: 0 0 50%;
+
+        @media (--mq-s) {
+            width: 100%;
+        }
+    }
+}
+
+.left {
+    background-size: cover;
+    background-position: center;
+
+    @media (--mq-s) {
+        height: 28rem;
+    }
+}
+
+.content {
+    display: flex;
+    height: 100%;
+    padding: 2rem;
+    flex-direction: column;
+    max-width: 85%;
+
+    @media (--mq-s) {
+        padding: 1.5rem;
+        max-width: 100%;
+    }
+
+    & h2 {
+        color: var(--c--white);
+    }
+}
+
+.head,
+.foot,
+.footContent {
+    width: 100%;
+}
+
+.head {
+    flex: 1;
+    align-self: flex-start;
+}
+
+.foot {
+    display: flex;
+    flex: 2;
+    align-self: flex-end;
+    align-items: flex-end;
+    flex-direction: row;
+}
+
+.labels {
+    display: flex;
+
+    & .label {
+        margin-right: 10%;
+        color: var(--c--white);
+    }
 }
 
 .meta {
     display: flex;
 
-    & div:first-of-type {
+    @media (--mq-s) {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+    }
+
+    & .metaItem {
         margin-right: 10%;
+
+        @media (--mq-s) {
+            margin-right: 0;
+            flex: 0 0 50%;
+        }
     }
 
     & p {
         margin: 0;
-        color: var(--c--gray);
+        color: var(--c--black);
+    }
+
+    & h3 {
+        color: var(--c--white);
     }
 }
 
-.accordionItem {
-    border-top: 1px solid var(--c--gray-light);
-
-    &:last-of-type {
-        border-bottom: 1px solid var(--c--gray-light);
-    }
-}
-
-.isOpen {
-    & .accordionContent {
-        max-height: 100rem;
-    }
-
-    & svg {
-        transform: rotate(180deg);
-    }
-}
-
-.accordionTitle {
+.share {
     display: flex;
-    position: relative;
-    height: 3rem;
     align-items: center;
+    font-weight: var(--t--weight-bold);
 
-    &:hover,
-    &:focus {
-        cursor: pointer;
-    }
-
-    & h4 {
-        margin: 0;
-        flex: 1;
-        line-height: 3rem;
+    & a {
+        margin-left: 0.75rem;
+        margin-bottom: -7px;
     }
 
     & svg {
-        width: 25px;
-        height: 25px;
-        fill: var(--c--gray-light);
-        transition: transform 100ms ease;
+        fill: var(--c--black);
+    }
+
+    & a:hover {
+        & svg {
+            opacity: 0.75;
+        }
     }
 }
 
-.accordionContent {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 400ms ease;
+.nutritionFacts {
+    margin: 0 0 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--c--black);
+    border-bottom: 1px solid var(--c--black);
 
-    & ul {
-        padding: 0;
-        list-style-type: none;
+    & p,
+    & table {
+        color: var(--c--white);
     }
 }

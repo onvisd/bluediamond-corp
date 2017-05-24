@@ -1,0 +1,88 @@
+@import 'constants/color';
+@import 'constants/grid';
+@import 'constants/type';
+
+.container {
+    @mixin container;
+
+    display: flex;
+    padding: 2rem 0 0;
+
+    @media (--mq-s) {
+        flex-direction: column;
+        overflow-x: hidden;
+
+        & h3 {
+            text-align: center;
+            font-size: var(--t--size-l);
+        }
+    }
+
+    &.isRecipes {
+        flex-direction: column;
+    }
+}
+
+.left {
+    padding-right: 3%;
+    flex: 0 0 70%;
+
+    @media (--mq-s) {
+        padding: 1rem;
+        order: 2;
+    }
+}
+
+.right {
+    flex: 0 0 30%;
+
+    @media (--mq-s) {
+        padding: 1rem;
+        order: 1;
+    }
+}
+
+.notes {
+    margin-top: 2rem;
+
+    @media (--mq-gt-s) {
+        margin-left: 4rem;
+        padding-right: 10%;
+    }
+
+    & .noteTitle {
+        @media (--mq-s) {
+            text-align: center;
+            font-size: var(--t--size-m);
+        }
+    }
+
+    & ol
+    & ul {
+        @media (--mq-s) {
+            padding-left: 0.75rem;
+        }
+    }
+
+    & li {
+        margin-bottom: 1rem;
+    }
+}
+
+.ingredients {
+    margin-bottom: 2rem;
+
+    @media (--mq-gt-s) {
+        padding: 1rem 0;
+    }
+
+    & ul {
+        margin-top: 2rem;
+        padding-left: 1rem;
+    }
+
+    & li {
+        margin: 0;
+        font-weight: var(--t--weight-bold);
+    }
+}

@@ -13,9 +13,20 @@ export default class RecipeHead extends Component {
                             id: PropTypes.string
                         })
                     }).isRequired,
-                    ingredients: PropTypes.array.isRequired,
-                    nutrition: PropTypes.string.isRequired,
-                    steps: PropTypes.array.isRequired
+                    consumerSymbols: PropTypes.array,
+                    servingSize: PropTypes.number.isRequired,
+                    servingSizeOz: PropTypes.number.isRequired,
+                    serviceSizeG: PropTypes.number.isRequired,
+                    totalFat: PropTypes.string.isRequired,
+                    totalCarbohydrates: PropTypes.string.isRequired,
+                    cholesterol: PropTypes.string.isRequired,
+                    sodium: PropTypes.string.isRequired,
+                    potassium: PropTypes.string.isRequired,
+                    dietaryFiber: PropTypes.string.isRequired,
+                    sugars: PropTypes.string.isRequired,
+                    protein: PropTypes.string.isRequired,
+                    difficulty: PropTypes.string.isRequired,
+                    cookTime: PropTypes.number.isRequired
                 })
             })),
             includes: PropTypes.shape({
@@ -43,15 +54,28 @@ export default class RecipeHead extends Component {
             assetsById[asset.sys.id] = asset.fields;
         });
 
+        const nutrition = [{
+            servingSize: fields.servingSize,
+            servingSizeOz: fields.servingSizeOz,
+            serviceSizeG: fields.serviceSizeG,
+            totalFat: fields.totalFat,
+            totalCarbohydrates: fields.totalCarbohydrates,
+            cholesterol: fields.cholesterol,
+            sodium: fields.sodium,
+            potassium: fields.potassium,
+            dietaryFiber: fields.dietaryFiber,
+            sugars: fields.sugars,
+            protein: fields.protein
+        }];
+
         return (
             <RecipeHeadComponent
                 title={fields.name}
                 heroImage={assetsById[fields.heroImage.sys.id].file.url}
-                ingredients={fields.ingredients}
-                nutrition={fields.nutrition}
-                steps={fields.steps}
+                consumerSymbols={fields.consumerSymbols || null}
+                nutrition={nutrition}
+                difficulty={fields.difficulty}
                 cookTime={fields.cookTime}
-                servingSize={fields.servingSize}
             />
         );
     }
