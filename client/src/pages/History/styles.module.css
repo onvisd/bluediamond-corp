@@ -32,6 +32,10 @@
         background-position: right center;
     }
 
+    &.isLeaves {
+        background-size: 12%, initial;
+    }
+
     &.isPaint {
         background-position: left center;
     }

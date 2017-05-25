@@ -8,7 +8,8 @@ import RelatedPageLink from '../../components/RelatedPageLink';
 import styles from './styles.module.css';
 
 import Diamond from '../../../assets/images/icons/diamond.svg';
-import Leaves from '../../../assets/images/backgrounds/almond-leaves-right.png';
+import Leaves from '../../../assets/images/backgrounds/almond-leaf-right.png';
+import Almonds from '../../../assets/images/backgrounds/almonds-left.png';
 import Texture from '../../../assets/images/backgrounds/texture.png';
 import Blossom from '../../../assets/images/backgrounds/almond-blossom.png';
 import Burlap from '../../../assets/images/backgrounds/burlap.png';
@@ -449,7 +450,7 @@ export default () => (
                 linkText="Our Craft"
                 linkUrl="/our-craft"
                 linkTheme="yellow"
-                backgroundImage={Leaves}
+                backgroundImage={Almonds}
             />
             <RelatedPageLink
                 title="Quality is our legacy"
