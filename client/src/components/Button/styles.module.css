@@ -47,6 +47,17 @@
     }
 }
 
+.blueLight {
+    composes: base;
+    color: var(--c--white);
+    background-color: var(--c--blue-light);
+
+    &:hover {
+        color: var(--c--white);
+        background-color: var(--c--blue);
+    }
+}
+
 .blueOutline {
     composes: base;
     color: var(--c--blue);

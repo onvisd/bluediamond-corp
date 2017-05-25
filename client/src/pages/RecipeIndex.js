@@ -138,7 +138,7 @@ export default class RecipeIndex extends Component {
                     <div className={classnames({isHidden: visibleCardCount >= totalCardCount})}>
                         <div className="l--row l--mar-top-m l--mar-btm-m">
                             <div className="l--col-12 t--align-center">
-                                <Button onClick={this.handleLoadMore}>
+                                <Button onClick={this.handleLoadMore} theme="blueLight">
                                     Load more recipes
                                 </Button>
                             </div>
