@@ -54,7 +54,7 @@ export default class Recipe extends Component {
                 asset.sys.id === entryItem.fields.cardBackgroundImage.sys.id
             );
 
-            entryItem.cardBackgroundImage = entryAsset[0].fields.file.url;
+            entryItem.fields.cardBackgroundImage = entryAsset[0];
 
             return entryItem;
         });

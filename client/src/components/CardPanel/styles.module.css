@@ -30,7 +30,6 @@
     }
 
     @media (--mq-gt-s) {
-        padding-top: 0;
         padding-bottom: 2.5rem;
     }
 }

@@ -160,16 +160,16 @@ export default class BrandCategory extends Component {
                 {brand.fields.waysToUse && (
                     <CardPanel
                         type="instagram"
-                        name={brand.fields.name}
+                        title={`Ways to use ${brand.fields.name}`}
                         cards={brand.fields.waysToUse}
                     />
                 )}
-                {brand.fields.recipePanel && (
+                {brand.fields.recipes && (
                     <CardPanel
                         type="recipes"
-                        name={brand.fields.name}
+                        title="Try out these delicious recipes:"
                         theme={brand.fields.themeColor}
-                        cards={brand.fields.recipePanel.recipes}
+                        cards={brand.fields.recipes}
                     />
                 )}
             </section>

@@ -13,6 +13,14 @@
     background-position: center;
     overflow: hidden;
 
+    &.dark * {
+        color: var(--c--black);
+    }
+
+    &.light * {
+        color: var(--c--white);
+    }
+
     & p,
     & h2 {
         display: none;

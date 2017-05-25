@@ -13,6 +13,7 @@ import CardPanel from '../../components/CardPanel';
 import Hero from './Hero';
 import Stories from './Stories';
 import Category from './Category';
+import styles from './styles.module.css';
 
 @preload(async ({dispatch, parameters}) => {
     const brand = await dispatch(getBrand(parameters.slug));
@@ -103,14 +104,17 @@ export default class Brand extends Component {
                 <Hero
                     image={brand.fields.heroImage.fields.file.url}
                     title={brand.fields.name}
+                    textColor={brand.fields.heroTextColor}
                     logo={brand.fields.logo.fields.file.url}
                     tagline={brand.fields.heroTagline}
                 />
-                <Stories stories={brand.fields.stories} />
+                {brand.fields.stories &&
+                    <Stories stories={brand.fields.stories} />}
                 <div>
                     {brand.fields.categories.map((category) => (
                         <Category
                             key={category.sys.id}
+                            backgroundTexture={brand.fields.backgroundTexture.fields.file.url}
                             products={
                                 brand.fields.products.filter((product) =>
                                     product.fields.brandCategory === category.fields.name
@@ -123,16 +127,22 @@ export default class Brand extends Component {
                 {brand.fields.waysToUse && (
                     <CardPanel
                         type="instagram"
-                        name={brand.fields.name}
+                        title={`Ways to use ${brand.fields.name}`}
                         cards={brand.fields.waysToUse}
                     />
                 )}
-                {brand.fields.recipePanel && (
+                {brand.fields.brandRecipesImage && (
+                    <div className={styles.hero} style={{
+                        backgroundImage: `url(${brand.fields.brandRecipesImage.fields.file.url})`
+                    }}>
+                        <h2>Try out these delicious recipes below</h2>
+                    </div>
+                )}
+                {brand.fields.recipes && (
                     <CardPanel
                         type="recipes"
-                        name={brand.fields.name}
                         theme={brand.fields.themeColor}
-                        cards={brand.fields.recipePanel.recipes}
+                        cards={brand.fields.recipes}
                     />
                 )}
             </section>

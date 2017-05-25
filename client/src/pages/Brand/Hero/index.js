@@ -1,9 +1,13 @@
 import React, {PropTypes} from 'react';
+import classnames from 'classnames';
 import styles from './styles.module.css';
 
-const Hero = ({logo, image, title, tagline}) => (
+const Hero = ({logo, image, title, textColor, tagline}) => (
     <div>
-        <div className={styles.container} style={{backgroundImage: `url(${image})`}}>
+        <div
+            className={classnames(styles.container, styles[textColor])}
+            style={{backgroundImage: `url(${image})`}}
+        >
             <div className={styles.innerContainer}>
                 <img src={logo} className={styles.logo} />
                 <h2>{title}</h2>
@@ -21,6 +25,7 @@ Hero.propTypes = {
     logo: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    textColor: PropTypes.string.isRequired,
     tagline: PropTypes.string.isRequired
 };
 

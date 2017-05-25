@@ -10,7 +10,7 @@ export default class CardPanel extends Component {
     static PropTypes = {
         type: PropTypes.string.isRequired,
         cards: PropTypes.array.isRequired,
-        name: PropTypes.string,
+        title: PropTypes.string,
         theme: PropTypes.string
     }
 
@@ -31,7 +31,7 @@ export default class CardPanel extends Component {
         let linkToUrl = data;
         let children = null;
         if(type === 'recipes') {
-            imageUrl = data.cardBackgroundImage;
+            imageUrl = data.fields.cardBackgroundImage.fields.file.url;
             linkToUrl = `/recipes/${data.fields.slug}`;
             children = [
                 <h3 key={0}>{data.fields.name}</h3>,
@@ -56,12 +56,12 @@ export default class CardPanel extends Component {
 
     render() {
         const {activeTab} = this.state;
-        const {type, name, theme, cards} = this.props;
+        const {type, title, theme, cards} = this.props;
 
         return (
             <div className={styles.container}>
                 <div className={styles.innerContainer}>
-                    {type === 'instagram' && <h2>Ways to use {name}</h2>}
+                    {title && <h2>{title}</h2>}
                     <div className={styles.cards}>
                         {cards.map((card) => this.renderCard(card))}
                     </div>
