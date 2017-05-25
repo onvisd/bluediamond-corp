@@ -4,7 +4,12 @@ export default (api, spaceId, client) => {
     const getBrands = () =>
         client.getEntries({
             content_type: 'brand', // eslint-disable-line camelcase
-            select: 'fields'
+            select: [
+                'fields.name',
+                'fields.slug',
+                'fields.themeColor',
+                'fields.categories'
+            ].join()
         })
         .then((entries) => entries.items);
 
