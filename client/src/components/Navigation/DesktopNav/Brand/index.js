@@ -6,20 +6,20 @@ import NavItem from '../../NavItem';
 import Category from '../Category';
 
 const Brand = ({brand, setProductCards, productCards}) => (
-    <Card theme={brand.themeColor}>
+    <Card theme={brand.fields.themeColor}>
         <NavList>
-            {brand.categories.map((category) => (
+            {brand.fields.categories.map((category) => (
                 <NavItem
-                    key={category._id}
-                    theme={`brand--${brand.themeColor}`}
-                    active={productCards[1] && productCards[1].name === category.name}
+                    key={category.sys.id}
+                    theme={`brand--${brand.fields.themeColor}`}
+                    active={productCards[1] && productCards[1].name === category.fields.name}
                     onClick={() => setProductCards(productCards.splice(0, 1).concat([{
                         element: Category,
-                        name: category.name,
+                        name: category.fields.name,
                         props: {brand, category}
                     }]))}
                 >
-                    {category.name.replace('Flavors', '')}
+                    {category.fields.name.replace('Flavors', '')}
                 </NavItem>
             ))}
         </NavList>

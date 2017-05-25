@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 import Button from '../Button';
 import Quantity from '../Quantity';
-import ProductAccordion from '../StoreProductAccordion';
+import ProductAccordion from '../ProductAccordion';
 import ProductStarRating from '../ProductStarRating';
 
 export default class StoreProductHead extends Component {

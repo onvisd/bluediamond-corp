@@ -1,0 +1,80 @@
+@import 'constants/color';
+@import 'constants/grid';
+@import 'constants/type';
+
+.container {
+    padding: 0 0.5rem;
+    background-color: var(--c--white);
+
+    @media (--mq-gt-s) {
+        padding: 0;
+    }
+}
+
+.innerContainer {
+    @mixin container;
+
+    position: relative;
+    padding: 0 0 1.5rem;
+    text-align: center;
+
+    & h2 {
+        margin-top: 2.5rem;
+        font-size: var(--t--size-m);
+
+        @media (--mq-gt-s) {
+            margin-top: 4.5rem;
+            margin-bottom: 3rem;
+            font-size: var(--t--size-l);
+        }
+    }
+
+    @media (--mq-gt-s) {
+        padding-top: 0;
+        padding-bottom: 2.5rem;
+    }
+}
+
+.cards {
+    display: none;
+    padding-bottom: 3rem;
+
+    @media (--mq-gt-s) {
+        display: flex;
+        padding-bottom: 0.5rem;
+    }
+}
+
+.cardsMobile {
+    @media (--mq-gt-s) {
+        display: none;
+    }
+}
+
+.tabs {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+    justify-content: center;
+
+    &.padded {
+        margin-top: 1rem;
+        margin-bottom: 0;
+    }
+
+    @media (--mq-gt-s) {
+        display: none;
+    }
+}
+
+.tab {
+    width: 10px;
+    height: 10px;
+    margin: 6px;
+    background-color: var(--c--gray-light);
+    border-radius: 50%;
+}
+
+.tabActive {
+    background-color: var(--c--gray-darker);
+}

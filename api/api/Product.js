@@ -19,7 +19,7 @@ export default (api, spaceId) => {
             return 'No Smart Label data found';
         });
 
-    api.get('/products/:slug', async (req, res) => {
+    api.get('/product/:slug', async (req, res) => {
         try {
             const product = await getProduct(req.apiParams, req.params.slug);
 

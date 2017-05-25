@@ -1,12 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Title, Link, preload} from 'react-isomorphic-render';
-import classnames from 'classnames';
+import {Title, preload} from 'react-isomorphic-render';
 
 import {connector, getHome} from '../../redux/home';
 import {parseModel} from '../../tools/parseApi';
 
 import Button from '../../components/Button';
+import ButtonDropdown from '../../components/ButtonDropdown';
 import styles from './styles.module.css';
 
 @preload(({dispatch}) => dispatch(getHome()))
@@ -74,22 +74,6 @@ export default class Home extends Component {
         })
     }
 
-    state = {
-        showDropdown: false
-    }
-
-    showDropdown = () => {
-        this.setState(() => ({
-            showDropdown: true
-        }));
-    }
-
-    hideDropdown = () => {
-        this.setState(() => ({
-            showDropdown: false
-        }));
-    }
-
     render() {
         const {home} = this.props;
         const homeFields = parseModel(home)[0].fields;
@@ -111,35 +95,16 @@ export default class Home extends Component {
                     <div className={styles.heroContent}>
                         <h1 className="t--size-xxl">{homeFields.heroHeadline}</h1>
                         <h3>{homeFields.heroText}</h3>
-                        <Button
-                            onMouseOver={this.showDropdown}
-                            onMouseLeave={this.hideDropdown}
+                        <ButtonDropdown
+                            items={[
+                                {slug: '/brand/snack-almonds', name: 'Snack Almonds'},
+                                {slug: '/brand/almond-breeze', name: 'Almond Breeze'},
+                                {slug: '/brand/nut-thins', name: 'Nut Thins'}
+                            ]}
+                            theme="blue"
                         >
                             Browse Products
-                            <div className={styles.dropdown}>
-                                <div className={classnames(styles.dropdownInner, {
-                                    [styles.active]: this.state.showDropdown
-                                })}>
-                                    <ul className={styles.dropdownBrands}>
-                                        <li>
-                                            <Link to="/brand/snack-almonds">
-                                                Snack Almonds
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/brand/almond-breeze">
-                                                Almond Breeze
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/brand/nut-thins">
-                                                Nut Thins
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </Button>
+                        </ButtonDropdown>
                     </div>
                 </div>
                 <div className={styles.corporate}>

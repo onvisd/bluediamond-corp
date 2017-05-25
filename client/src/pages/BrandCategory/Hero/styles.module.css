@@ -1,0 +1,144 @@
+@import 'constants/color';
+@import 'constants/type';
+@import 'constants/grid';
+
+.hero {
+    position: relative;
+    height: 28rem;
+    margin-top: 60px;
+    overflow: hidden;
+
+    @media (--mq-gt-s) {
+        height: 48rem;
+        margin-top: 0;
+    }
+}
+
+.background,
+.shelf {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-repeat: no-repeat;
+}
+
+.background {
+    background-size: cover;
+    background-position: center;
+    filter: blur(4px);
+    transform: scale(1.02);
+}
+
+.shelf {
+    background-size: 550%;
+    background-position: bottom;
+
+    @media (--mq-gt-s) {
+        background-size: 160%;
+    }
+}
+
+.product {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0 auto;
+    text-align: center;
+
+    @media (--mq-gt-s) {
+        top: auto;
+        bottom: 9rem;
+        justify-content: space-between;
+        max-width: 48rem;
+        text-align: left;
+    }
+}
+
+.photo {
+    & img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    @media (--mq-s) {
+        position: absolute;
+        right: 0;
+        bottom: 4.5rem;
+        left: 0;
+        width: 65%;
+        margin: 0 auto;
+    }
+
+    @media (--mq-gt-s) {
+        max-width: 20rem;
+    }
+}
+
+.info {
+    position: relative;
+    width: 100%;
+
+    @media (--mq-s) {
+        margin: 0 auto;
+        max-width: 80%;
+
+        & > button {
+            position: absolute;
+            right: 0;
+            bottom: 1rem;
+            left: 0;
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    @media (--mq-gt-s) {
+        width: 22rem;
+        margin-top: -2rem;
+    }
+}
+
+.name {
+    color: var(--c--white);
+    font-size: var(--t--size-l);
+
+    @media (--mq-gt-s) {
+        font-size: var(--t--size-xxl);
+    }
+}
+
+.tag {
+    width: 8rem;
+    margin: 1.5rem auto 1rem;
+    font-size: 12px;
+    font-weight: var(--t--weight-bold);
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid;
+    border-radius: 4px;
+
+    &.yellow {
+        color: var(--c--yellow);
+        border-color: var(--c--yellow);
+    }
+
+    &.green {
+        color: var(--c--green);
+        border-color: var(--c--green);
+    }
+
+    &.blue {
+        color: var(--c--blue);
+        border-color: var(--c--blue);
+    }
+
+    @media (--mq-gt-s) {
+        margin: 0;
+    }
+}

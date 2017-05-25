@@ -1,0 +1,101 @@
+@import 'constants/color';
+@import 'constants/type';
+@import 'constants/grid';
+
+.dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    left: 0;
+    z-index: var(--l--z-highest);
+    pointer-events: none;
+
+    &.active {
+        pointer-events: auto;
+    }
+}
+
+.dropUp {
+    @media (--mq-s) {
+        top: auto;
+        bottom: calc(40px + 1rem);
+
+        & .dropdownInner::before {
+            top: auto;
+            bottom: -8px;
+            border-top: 8px solid var(--c--white);
+            border-bottom: none;
+        }
+    }
+}
+
+.dropdownInner {
+    margin-top: 1rem;
+    color: var(--c--black);
+    font-weight: var(--t--weight-normal);
+    background-color: var(--c--white);
+    border-radius: 8px;
+    box-shadow: 0 0 0.5rem 0.25rem rgba(0, 0, 0, 0.1);
+    transform:
+        perspective(400px)
+        rotate3d(-1, 0, 0, 5deg)
+        scale3d(0.9, 0.9, 1);
+    opacity: 0;
+    transition: transform 150ms ease-in-out, opacity 150ms linear;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        left: calc(50% - 8px);
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid var(--c--white);
+        border-left: 8px solid transparent;
+    }
+
+    &.active {
+        transform:
+            perspective(400px)
+            rotate3d(1, 0, 0, 0)
+            scale3d(1, 1, 1);
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.dropdownItems {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    & li {
+        height: 3rem;
+        line-height: 3rem;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid var(--c--gray-lighter);
+        }
+    }
+}
+
+.link {
+    display: block;
+    color: var(--c--black);
+
+    &.wide {
+        padding: 0 1rem;
+        text-align: left;
+    }
+
+    &.external {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--c--gray);
+
+        & svg {
+            vertical-align: middle;
+            fill: var(--c--gray);
+        }
+    }
+}

@@ -1,0 +1,73 @@
+@import 'constants/grid';
+@import 'constants/color';
+@import 'constants/type';
+
+.container {
+    @mixin container;
+
+    @media (--mq-s) {
+        padding: 0 1rem;
+    }
+}
+
+.heading {
+    @media (--mq-s) {
+        margin-bottom: 2rem;
+        font-size: var(--t--size-s);
+        text-align: center;
+    }
+}
+
+.products {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+
+    @media (--mq-gt-s) {
+        flex-wrap: no-wrap;
+        justify-content: flex-start;
+    }
+}
+
+.product {
+    width: 48%;
+    margin-bottom: 1.5rem;
+    text-align: center;
+
+    & p {
+        margin: 0;
+        color: var(--c--black);
+    }
+
+    @media (--mq-gt-s) {
+        width: 15%;
+        margin-bottom: 0;
+
+        &:not(:last-child) {
+            margin-right: 1.67%;
+        }
+    }
+}
+
+.image {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    background-color: var(--c--white);
+    background-size: contain;
+    background-position: center;
+
+    & img {
+        vertical-align: middle;
+    }
+
+    @media (--mq-s) {
+        display: flex;
+        height: 9rem;
+        align-items: center;
+    }
+}

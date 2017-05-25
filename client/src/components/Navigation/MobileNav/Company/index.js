@@ -32,10 +32,10 @@ export default class Company extends Component {
                 </Breadcrumb>
                 <ul className={styles.container}>
                     {companyNavTiles.map((navTile) => (
-                        <Tile key={navTile._id}>
-                            <Link to={`/${navTile.linkUrl}`} onClick={toggleNav.hide}>
-                                <p>{navTile.headline}</p>
-                                <h2>{navTile.title}</h2>
+                        <Tile key={navTile.sys.id}>
+                            <Link to={`/${navTile.fields.linkUrl}`} onClick={toggleNav.hide}>
+                                <p>{navTile.fields.headline}</p>
+                                <h2>{navTile.fields.title}</h2>
                             </Link>
                         </Tile>
                     ))}

@@ -57,11 +57,11 @@ const Footer = ({data}) => (
                         return 0;
                     }).map((brand) => (
                         <div className={styles.navListWrap} key={brand.name}>
-                            <p>{brand.name}</p>
+                            <Link to={`/brand/${brand.slug}`}>{brand.name}</Link>
                             <ul className={styles.navList}>
                                 {brand.categories.map((category) => (
                                     <li key={category}>
-                                        <Link to={`/brand/${brand.name}`}>
+                                        <Link to={`/brand/${brand.slug}`}>
                                             {category}
                                         </Link>
                                     </li>

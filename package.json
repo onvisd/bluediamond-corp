@@ -9,11 +9,8 @@
   "homepage": "https://github.com/planetary/bluediamond-corp",
   "scripts": {
     "start": "npm run --silent dev",
-
     "lint:watch": "esw -w .",
-
     "dev": "run-s development:client:render-service:build:prepare development",
-
     "development": "run-p development:client:build development:client:render-service:build development:services lint:watch",
     "development:client:render-service:build:prepare": "universal-webpack --settings ./client/webpack/universal-webpack-settings.json --config ./client/webpack/webpack.config.js prepare",
     "development:client:build": "babel-node ./client/webpack/webpack-dev-server.js",
@@ -22,7 +19,6 @@
     "development:client": "nodemon ./client/render-service/index.js --watch ./client/render-service --watch ./client/build/server",
     "development:server": "nodemon ./server/index.js --watch ./server",
     "development:services": "run-p development:api development:client development:server",
-
     "staging": "run-s staging:build staging:services",
     "staging:build": "run-s staging:client:build staging:client:render-service:build",
     "staging:client:build": "webpack --colors --display-error-details --config ./client/webpack/webpack.config.client.staging.babel.js",
@@ -31,7 +27,6 @@
     "staging:client": "better-npm-run staging:client",
     "staging:server": "better-npm-run staging:server",
     "staging:services": "run-p staging:api staging:client staging:server",
-
     "production": "run-s production:build production:services",
     "production:build": "run-s production:client:build production:client:render-service:build",
     "production:client:build": "webpack --colors --display-error-details --config ./client/webpack/webpack.config.client.production.babel.js",
@@ -60,7 +55,6 @@
         "NODE_ENV": "staging"
       }
     },
-
     "production:client": {
       "command": "node ./client/render-service/index.js",
       "env": {
@@ -103,6 +97,7 @@
     "body-parser": "^1.17.1",
     "classnames": "^2.2.5",
     "clean-webpack-plugin": "^0.1.14",
+    "contentful": "^4.3.0",
     "css-loader": "^0.26.1",
     "css-modularscale": "^1.1.1",
     "dotenv": "^4.0.0",

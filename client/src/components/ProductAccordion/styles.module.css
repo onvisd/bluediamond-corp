@@ -1,0 +1,63 @@
+@import 'constants/color';
+@import 'constants/type';
+
+.accordionItem {
+    border-top: 1px solid var(--c--gray-dark);
+
+    &:nth-child(2) {
+        border-bottom: 1px solid var(--c--gray-dark);
+    }
+}
+
+.isOpen {
+    & .accordionContent {
+        max-height: 100rem;
+    }
+
+    & svg {
+        transform: rotate(180deg);
+    }
+}
+
+.accordionTitle {
+    display: flex;
+    position: relative;
+    height: 3rem;
+    align-items: center;
+
+    &:hover,
+    &:focus {
+        cursor: pointer;
+    }
+
+    & p {
+        display: block;
+        margin: 0;
+        flex: 1;
+    }
+
+    & svg {
+        width: 25px;
+        height: 25px;
+        fill: var(--c--gray-dark);
+    }
+}
+
+.accordionContent {
+    max-height: 0;
+    overflow: hidden;
+
+    & ul {
+        padding: 0;
+        list-style-type: none;
+    }
+}
+
+.smartLabelLogo {
+    padding: 0.75rem 0;
+    text-align: right;
+
+    & img {
+        height: 20px;
+    }
+}

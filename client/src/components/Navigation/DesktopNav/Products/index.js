@@ -42,15 +42,18 @@ export default class Products extends Component {
                     <NavList>
                         {brands.map((brand) => (
                             <NavItem
-                                key={brand.slug}
-                                active={productCards[0] && productCards[0].name === brand.name}
+                                key={brand.fields.slug}
+                                active={
+                                    productCards[0] &&
+                                    productCards[0].name === brand.fields.name
+                                }
                                 onClick={() => setProductCards([{
                                     element: this.cards.Brand,
-                                    name: brand.name,
+                                    name: brand.fields.name,
                                     props: {brand}
                                 }])}
                             >
-                                {brand.name}
+                                {brand.fields.name}
                             </NavItem>
                         ))}
                     </NavList>

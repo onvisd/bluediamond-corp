@@ -8,10 +8,10 @@ const Company = ({navData, companyNavTiles, toggleNav}) => (
     <div className={styles.container}>
         <ul className={styles.tiles}>
             {companyNavTiles.map((navTile) => (
-                <Tile key={navTile._id}>
-                    <p>{navTile.headline}</p>
-                    <Link to={`/${navTile.linkUrl}`} onClick={toggleNav.hide}>
-                        <h2>{navTile.title}</h2>
+                <Tile key={navTile.sys.id}>
+                    <p>{navTile.fields.headline}</p>
+                    <Link to={`/${navTile.fields.linkUrl}`} onClick={toggleNav.hide}>
+                        <h2>{navTile.fields.title}</h2>
                     </Link>
                 </Tile>
             ))}

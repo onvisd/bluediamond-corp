@@ -22,4 +22,8 @@
         margin: 0 auto;
         max-width: 150px;
     }
+
+    & a {
+        color: var(--c--black);
+    }
 }

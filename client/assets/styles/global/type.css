@@ -102,7 +102,9 @@ a {
     font-size: var(--t--size-l);
     text-transform: uppercase;
 }
-.t--type-prose { font-size: var(--t--size-m); }
+.t--type-prose {
+    font-size: var(--t--size-m);
+}
 .t--type-incidental { color: var(--c--gray); }
 
 .t--size-ms-xl { font-size: var(--ms2); }

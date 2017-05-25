@@ -7,6 +7,7 @@ import NavItem from '../../NavItem';
 
 export default class Brand extends Component {
     static propTypes = {
+        brand: PropTypes.object.isRequired,
         navigate: PropTypes.func.isRequired
     }
 
@@ -27,21 +28,21 @@ export default class Brand extends Component {
         const {brand} = this.props;
 
         return (
-            <Card theme={brand.themeColor}>
+            <Card theme={brand.fields.themeColor}>
                 <Breadcrumb
-                    theme={`brand--${brand.themeColor}_light`}
+                    theme={`brand--${brand.fields.themeColor}_light`}
                     onClick={this.navigate.backwards}
                 >
-                    {brand.name}
+                    {brand.fields.name}
                 </Breadcrumb>
                 <NavList>
-                    {brand.categories.map((category) => (
+                    {brand.fields.categories.map((category) => (
                         <NavItem
-                            key={category._id}
-                            theme={`brand--${brand.themeColor}`}
+                            key={category.sys.id}
+                            theme={`brand--${brand.fields.themeColor}`}
                             onClick={() => this.navigate.forwards(brand, category)}
                         >
-                            {category.name}
+                            {category.fields.name}
                         </NavItem>
                     ))}
                 </NavList>

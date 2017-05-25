@@ -1,0 +1,55 @@
+@import 'constants/grid';
+@import 'constants/color';
+@import 'constants/type';
+
+.container {
+    @mixin container;
+
+    margin-bottom: 2rem;
+
+    @media (--mq-gt-s) {
+        margin-bottom: 4rem;
+    }
+}
+
+.heading {
+    @media (--mq-s) {
+        font-size: var(--t--size-s);
+        text-align: center;
+    }
+}
+
+.panels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    @media (--mq-gt-s) {
+        flex-wrap: no-wrap;
+    }
+}
+
+.panel {
+    display: flex;
+    width: 100%;
+    height: 13.5rem;
+    margin-bottom: 2px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--c--white);
+
+    & h2 {
+        margin-bottom: 2rem;
+
+        @media (--mq-s) {
+            font-size: var(--t--size-lm);
+        }
+    }
+
+    @media (--mq-gt-s) {
+        width: 48%;
+        margin-bottom: 0;
+        border-radius: 8px;
+    }
+}

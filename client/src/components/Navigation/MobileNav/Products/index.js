@@ -30,10 +30,10 @@ export default class Products extends Component {
                 <NavList>
                     {brands.map((brand) => (
                         <NavItem
-                            key={brand.slug}
+                            key={brand.fields.slug}
                             onClick={() => this.navigate.forwards(brand)}
                         >
-                            {brand.name}
+                            {brand.fields.name}
                         </NavItem>
                     ))}
                 </NavList>

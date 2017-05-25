@@ -1,3 +1,5 @@
+@import 'constants/color';
+
 .products {
     display: flex;
     height: 75%;
@@ -16,5 +18,9 @@
         display: block;
         margin: 0 auto;
         max-width: 125px;
+    }
+
+    & a {
+        color: var(--c--black);
     }
 }

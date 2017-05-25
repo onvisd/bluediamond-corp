@@ -8,7 +8,7 @@ import {connector, getRecipe} from '../../redux/recipe';
 import RecipeHead from '../../components/API/RecipeHead';
 import RecipeStep from '../../components/API/RecipeStep';
 import ProductCard from '../../components/API/ProductCard';
-import RecipesPanel from '../../components/RecipesPanel';
+import CardPanel from '../../components/CardPanel';
 
 import styles from './styles.module.css';
 
@@ -98,10 +98,10 @@ export default class Recipe extends Component {
                 </div>
                 <div className={`${styles.container} ${styles.isRecipes}`}>
                     <h3>Related Recipes</h3>
-                    <RecipesPanel
-                        recipes={includedRecipes}
+                    <CardPanel
+                        cards={includedRecipes}
+                        type="recipes"
                         theme="blue"
-                        name="relatedRecipes"
                     />
                 </div>
             </section>

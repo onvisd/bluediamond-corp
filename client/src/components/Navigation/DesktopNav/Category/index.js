@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-isomorphic-render';
 
 import Button from '../../../Button';
 import Card from '../../Card';
@@ -7,16 +8,29 @@ import styles from './styles.module.css';
 const Category = ({brand, category, toggleNav}) => (
     <Card theme="wide">
         <ul className={styles.products}>
-            {category.products.map((product) => (
-                <li className={styles.product} key={product.name}>
-                    <img src={product.productPhotos[0].file.url} />
-                    {product.name}
+            {brand.fields.products.filter(
+                (product) => product.fields.brandCategory === category.fields.name)
+                .map((product) => (
+                <li className={styles.product} key={product.fields.name}>
+                    <Link
+                        to={`/brand/${
+                            brand.fields.slug
+                        }/${
+                            category.fields.slug
+                        }?product=${
+                            product.fields.slug
+                        }`}
+                        onClick={toggleNav.hide}
+                    >
+                        <img src={product.fields.productPhotos[0].fields.file.url} />
+                        {product.fields.name}
+                    </Link>
                 </li>
             ))}
         </ul>
         <Button
-            theme={brand.themeColor}
-            href={`/brand/${brand.slug}`}
+            theme={brand.fields.themeColor}
+            href={`/brand/${brand.fields.slug}`}
             onClick={toggleNav.hide}
         >
             See All Products

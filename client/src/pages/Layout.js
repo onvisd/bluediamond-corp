@@ -8,7 +8,6 @@ import {
     setNavigationStyle,
     setNavBreadcrumbs
 } from '../redux/navigation';
-import {parseModel} from '../tools/parseApi';
 
 import Preloading from '../components/Preloading';
 import Navigation from '../components/Navigation';
@@ -39,11 +38,11 @@ export default class Layout extends Component {
 
     render() {
         const {children, navigation, responsive} = this.props;
-        const brands = parseModel(navigation.data.brands).map((b) => b.fields);
-        const companyNavTiles = parseModel(navigation.data.companyNavTiles).map((c) => c.fields);
+        const {brands, companyNavTiles} = navigation.data;
         const footerData = brands.map((brand) => ({
-            name: brand.name,
-            categories: brand.categories.map((category) => category.name)
+            name: brand.fields.name,
+            slug: brand.fields.slug,
+            categories: brand.fields.categories.map((category) => category.fields.name)
         }));
 
         const title = 'WebApp';

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 
-import RecipeCardComponent from '../RecipeCard';
+import Card from '../Card';
 
 export default class RecipeCard extends Component {
     static propTypes = {
@@ -42,13 +42,14 @@ export default class RecipeCard extends Component {
         });
 
         return (
-            <RecipeCardComponent
-                title={fields.name}
-                cookTime={fields.cookTime}
-                recipe={fields.slug}
-                difficulty={fields.difficulty}
-                imageFile={assetsById[fields.cardBackgroundImage.sys.id].file.url}
-            />
+            <Card
+                imageUrl={assetsById[fields.cardBackgroundImage.sys.id].file.url}
+                linkTo={{url: `/recipes/${fields.slug}`}}
+                type="recipes"
+            >
+                <h3>{fields.name}</h3>
+                <p>{fields.cookTime} minutes <span>|</span> {fields.difficulty}</p>
+            </Card>
         );
     }
 }

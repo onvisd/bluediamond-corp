@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {Link} from 'react-isomorphic-render';
 
 import Button from '../../../Button';
 import Breadcrumb from '../Breadcrumb';
@@ -27,25 +28,36 @@ export default class Category extends Component {
         return (
             <Card>
                 <Breadcrumb
-                    theme={`brand--${brand.themeColor}`}
+                    theme={`brand--${brand.fields.themeColor}`}
                     fixed
                     onClick={this.navigate}
                 >
-                    {category.name}
+                    {category.fields.name}
                 </Breadcrumb>
-                {category.products && (
-                    <ul className={styles.products}>
-                        {category.products.map((product) => (
-                            <li className={styles.product} key={product._id} >
-                                <img src={product.productPhotos[0].file.url} />
-                                {product.name}
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                <ul className={styles.products}>
+                    {brand.fields.products.filter(
+                        (product) => product.fields.brandCategory === category.fields.name)
+                        .map((product) => (
+                        <li className={styles.product} key={product.sys.id} >
+                            <Link
+                                to={`/brand/${
+                                    brand.fields.slug
+                                }/${
+                                    category.fields.slug
+                                }?product=${
+                                    product.fields.slug
+                                }`}
+                                onClick={toggleNav.hide}
+                            >
+                                <img src={product.fields.productPhotos[0].fields.file.url} />
+                                {product.fields.name}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
                 <Button
                     theme="yellow"
-                    href={`/brand/${brand.slug}`}
+                    href={`/brand/${brand.fields.slug}`}
                     onClick={toggleNav.hide}
                     style={{
                         position: 'fixed',
@@ -54,7 +66,7 @@ export default class Category extends Component {
                         left: '1.5rem'
                     }}
                 >
-                    {`See All ${brand.name}`}
+                    {`See All ${brand.fields.name}`}
                 </Button>
             </Card>
         );

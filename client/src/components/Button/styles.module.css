@@ -25,7 +25,17 @@
     }
 }
 
+/* Layouts */
+.wide {
+    min-width: 16.5rem;
+}
+
 /* Themes */
+.white {
+    composes: base;
+    background-color: var(--c--white);
+}
+
 .blue {
     composes: base;
     color: var(--c--white);

@@ -67,10 +67,11 @@
         margin-left: 4rem;
     }
 
-    & p {
+    & > a {
         display: inline-block;
         margin-bottom: 0.75rem;
         padding-bottom: 0.5rem;
+        color: var(--c--black);
         line-height: 1;
         border-bottom: 2px solid var(--c--gray-lighter);
     }

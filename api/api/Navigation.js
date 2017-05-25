@@ -1,38 +1,41 @@
-import axios from 'axios';
-
 import {setCached} from '../services/cache';
 
-export default (api, spaceId) => {
-    const getBrands = (apiParams) =>
-        axios.get(
-            `${apiParams.base}/spaces/${spaceId}/entries?` +
-            `include=3&content_type=brand&access_token=${apiParams.token}`
-        )
-        .then((response) => response.data);
+export default (api, spaceId, client) => {
+    const getBrands = () =>
+        client.getEntries({
+            content_type: 'brand', // eslint-disable-line camelcase
+            select: 'fields'
+        })
+        .then((entries) => entries.items);
 
-    const getCompanyNavTiles = (apiParams) =>
-        axios.get(
-            `${apiParams.base}/spaces/${spaceId}/entries?` +
-            `include=3&content_type=pageModuleRelatedPageLink&access_token=${apiParams.token}`
-        )
-        .then((response) => response.data);
+    const getProducts = (brand) =>
+        client.getEntries({
+            content_type: 'product', // eslint-disable-line camelcase
+            'fields.brand': brand
+        })
+        .then((entries) => entries.items.map((entry) => entry));
+
+    const getCompanyNavTiles = () =>
+        client.getEntries({
+            content_type: 'pageModuleRelatedPageLink' // eslint-disable-line camelcase
+        })
+        .then((entries) => entries.items);
 
     api.get('/navigation', async (req, res) => {
         try {
             const brands = await getBrands(req.apiParams);
             const companyNavTiles = await getCompanyNavTiles(req.apiParams);
 
+            for (let i = 0; i < brands.length; i++)
+                brands[i].fields.products = await getProducts(brands[i].fields.name);
+
             const data = {
                 brands,
                 companyNavTiles
             };
 
-            if(brands.items.length) {
-                setCached('navigation', data);
-                res.send(data);
-            } else {
-                res.status(404).send({ok: false, error: 'not found'});
-            }
+            setCached('navigation', data);
+            res.send(data);
         } catch (err) {
             console.trace(err);
             res.status(500).send(err.message);

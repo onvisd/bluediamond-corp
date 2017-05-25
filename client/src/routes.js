@@ -13,6 +13,7 @@ import Craft from './pages/Craft';
 import Manifesto from './pages/Manifesto';
 import FoodService from './pages/FoodService';
 import Brand from './pages/Brand';
+import BrandCategory from './pages/BrandCategory';
 import Contact from './pages/Contact';
 import Store from './pages/Store';
 import StoreProduct from './pages/StoreProduct';
@@ -29,6 +30,7 @@ export default (
         <Route path="/recipes" component={RecipeIndex} />
         <Route path="/recipes/:slug" component={Recipe} />
         <Route path="/brand/:slug" component={Brand} />
+        <Route path="/brand/:brandSlug/:categorySlug" component={BrandCategory} />
         <Route path="/contact" component={Contact} />
         <Route path="/404" component={NotFound} status={404} />
         <Route path="/error" component={GenericError} />

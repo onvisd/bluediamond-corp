@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import requireAll from 'require-all';
+import * as contentful from 'contentful';
 
 import config from '../../config';
 import {getCached} from '../services/cache';
@@ -11,6 +12,11 @@ export default () => {
         prev: 'https://preview.contentful.com'
     };
     const {spaceId, accessToken, previewToken} = config.services.api;
+
+    const client = contentful.createClient({
+        space: spaceId,
+        accessToken
+    });
 
 	// perhaps expose some API metadata at the root
     api.get('/', (req, res) => {
@@ -35,7 +41,7 @@ export default () => {
         dirname: __dirname,
         filter: /^(?!index)(.+)\.js$/,
         recursive: false,
-        resolve: (endpoint) => endpoint.default(api, spaceId)
+        resolve: (endpoint) => endpoint.default(api, spaceId, client)
     });
 
     return api;

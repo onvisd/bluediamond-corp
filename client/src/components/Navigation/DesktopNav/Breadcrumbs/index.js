@@ -15,7 +15,7 @@ const Breadcrumbs = ({crumbs}) => (
 
             return (
                 <Link
-                    to={crumb.path}
+                    to={`/${crumb.path}`}
                     className={styles.crumbLink}
                     key={`crumb${idx}`}
                 >
