@@ -23,7 +23,7 @@ export default (
         <IndexRoute component={Home} />
         <Route path="store" component={Store} />
         <Route path="/store/products/:slug" component={StoreProduct} />
-        <Route path="/food-service" component={FoodService} />
+        <Route path="/foodservice" component={FoodService} />
         <Route path="/manifesto" component={Manifesto} />
         <Route path="/craft" component={Craft} />
         <Route path="/history" component={HistoryIndex} />
