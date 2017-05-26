@@ -17,6 +17,10 @@
     width: 21rem;
     max-width: 100%;
 
+    @media (--mq-s) {
+        width: 100%;
+    }
+
     & select {
         display: block;
         width: 100%;

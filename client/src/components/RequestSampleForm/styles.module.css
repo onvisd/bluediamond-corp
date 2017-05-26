@@ -1,9 +1,19 @@
+@import 'constants/grid';
+
 .container {
     display: flex;
     margin: 0 0 1rem;
+
+    @media (--mq-s) {
+        display: block;
+    }
 }
 
 .left,
 .right {
     flex: 1;
+
+    @media (--mq-s) {
+        width: 100%;
+    }
 }

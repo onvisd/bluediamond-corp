@@ -94,6 +94,10 @@ export default class FoodService extends Component {
         return <img src={`${image}?fit=fill&f=face&w=265&h=200`} />;
     }
 
+    scrollBottom = () => {
+        this.form.scrollIntoView({behavior: 'smooth'});
+    };
+
     handleClick = (space) => {
         this.setState((state) => ({
             requestOpen: space === 'request' ? !state.requestOpen : false,
@@ -107,12 +111,20 @@ export default class FoodService extends Component {
         const fields = parseModel(foodService)[0].fields;
 
         return (
-            <section className="content">
+            <section className={styles.pageContainer}>
                 <Title>{fields.title}</Title>
                 <div className={styles.hero} style={{
                     backgroundImage: `url(${fields.heroBackgroundImage.file.url})`
                 }}>
-                    <h2>{fields.heroHeadline}</h2>
+                    <div>
+                        <h2>{fields.heroHeadline}</h2>
+                        <Button theme="blue" onClick={() => {
+                            this.handleClick('request');
+                            this.scrollBottom();
+                        }}>
+                            Request a sample
+                        </Button>
+                    </div>
                 </div>
                 <div className={styles.container}>
                     <div className={styles.content} dangerouslySetInnerHTML={this.renderMarkup(
@@ -151,7 +163,12 @@ export default class FoodService extends Component {
                             this.handleClick('contact')}>Contact us</Button>
                     </div>
                 </div>
-                <div className={styles.form}>
+                <div
+                    ref={(el) => {
+                        this.form = el;
+                    }}
+                    className={styles.form}
+                >
                     {requestOpen &&
                         <div className={styles.formContent}>
                             <h2>Request a sample</h2>
