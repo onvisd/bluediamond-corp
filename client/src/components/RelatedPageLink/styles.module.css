@@ -1,5 +1,6 @@
 @import 'constants/grid';
 @import 'constants/color';
+@import 'constants/type';
 
 .container {
     display: flex;
@@ -16,11 +17,18 @@
     overflow: hidden;
 
     @media (--mq-s) {
-        height: 20rem;
+        width: 100%;
+        height: auto;
+        padding: 3rem 0;
     }
 
     & h1 {
         margin: 0 auto 2rem;
         max-width: 24vw;
+
+        @media (--mq-s) {
+            max-width: 58vw;
+            font-size: var(--t--size-l);
+        }
     }
 }

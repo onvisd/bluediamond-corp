@@ -1,10 +1,15 @@
 @import 'constants/color';
+@import 'constants/grid';
 
 .container {
     display: flex;
     position: relative;
     justify-content: space-between;
     background-color: var(--c--white);
+
+    @media (--mq-s) {
+        display: block;
+    }
 
     & div {
         background-position: right center;
@@ -25,4 +30,11 @@
     height: 160px;
     margin: auto;
     background-color: var(--c--black);
+
+    @media (--mq-s) {
+        right: 3rem;
+        left: 3rem;
+        width: 35%;
+        height: 2px;
+    }
 }
