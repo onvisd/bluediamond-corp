@@ -13,7 +13,7 @@ const Brand = ({brand, setProductCards, productCards}) => (
                     key={category.sys.id}
                     theme={`brand--${brand.fields.themeColor}`}
                     active={productCards[1] && productCards[1].name === category.fields.name}
-                    onClick={() => setProductCards(productCards.splice(0, 1).concat([{
+                    onMouseOver={() => setProductCards(productCards.splice(0, 1).concat([{
                         element: Category,
                         name: category.fields.name,
                         props: {brand, category}

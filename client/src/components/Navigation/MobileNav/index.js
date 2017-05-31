@@ -67,7 +67,9 @@ export default class MobileNav extends Component {
         const {brands, navData, companyNavTiles} = this.props;
 
         return (
-            <div className={styles.container}>
+            <div className={classnames(styles.container, {
+                [styles.visible]: navVisible
+            })}>
                 <div className={styles.head}>
                     <div className={styles.logo}>
                         <Link to="/" onClick={this.toggleNav.hide}>

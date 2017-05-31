@@ -22,7 +22,9 @@ export default class DesktopNav extends Component {
 
     cards = {
         Products: require('./Products').default,
-        Company: require('./Company').default
+        Company: require('./Company').default,
+        Brand: require('./Brand').default,
+        Category: require('./Category').default
     }
 
     state = {
@@ -33,16 +35,31 @@ export default class DesktopNav extends Component {
 
     toggleNav = {
         show: (card) => {
+            const {brands} = this.props;
+            const defaultBrand = brands[0];
+            const defaultCategory = defaultBrand.fields.categories[0];
+
             this.setState(() => ({
                 navVisible: true,
                 activeCard: {
                     name: card,
                     element: this.cards[card]
-                }
+                },
+                productCards: [
+                    {
+                        element: this.cards.Brand,
+                        name: defaultBrand.fields.name,
+                        props: {brand: defaultBrand}
+                    }, {
+                        element: this.cards.Category,
+                        name: defaultCategory.fields.name,
+                        props: {brand: defaultBrand, category: defaultCategory}
+                    }
+                ]
             }));
         },
         hide: () => {
-            this.setState(() => ({navVisible: false, productCards: []}));
+            this.setState(() => ({navVisible: false}));
         }
     }
 

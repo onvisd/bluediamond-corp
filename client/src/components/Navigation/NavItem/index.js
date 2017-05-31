@@ -4,10 +4,11 @@ import classnames from 'classnames';
 
 import styles from './styles.module.css';
 
-const NavItem = ({active, theme, href, extHref, onClick, children}) => {
+const NavItem = ({active, theme, href, extHref, onClick, onMouseOver, children}) => {
     let button = (
         <div
             onClick={onClick}
+            onMouseOver={onMouseOver}
             className={classnames({
                 [styles.active]: active
             })}
@@ -43,6 +44,7 @@ NavItem.propTypes = {
     href: PropTypes.string,
     extHref: PropTypes.string,
     onClick: PropTypes.func,
+    onMouseOver: PropTypes.func,
     children: PropTypes.node.isRequired
 };
 

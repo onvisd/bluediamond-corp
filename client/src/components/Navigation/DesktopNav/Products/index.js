@@ -19,43 +19,44 @@ export default class Products extends Component {
         Category: require('../Category').default
     }
 
-    getPanelStyles = () => {
-        const {productCards} = this.props;
+    renderBrand = (brand) => {
+        const {productCards, setProductCards} = this.props;
 
-        if(productCards.length === 0)
-            return {maxWidth: '12rem'};
-        if(productCards.length === 1)
-            return {maxWidth: '24rem'};
-        if(productCards.length === 2)
-            return {maxWidth: '72rem'};
+        let category = productCards[1];
+        if(brand.fields.name !== productCards[0].name) {
+            category = {
+                element: this.cards.Category,
+                name: brand.fields.categories[0].fields.name,
+                props: {brand, category: brand.fields.categories[0]}
+            };
+        }
+
+        return (
+            <NavItem
+                key={brand.fields.slug}
+                active={
+                    productCards[0] &&
+                    productCards[0].name === brand.fields.name
+                }
+                onMouseOver={() => setProductCards([{
+                    element: this.cards.Brand,
+                    name: brand.fields.name,
+                    props: {brand}
+                }, category])}
+            >
+                {brand.fields.name}
+            </NavItem>
+        );
     }
 
     render() {
         const {brands, productCards, setProductCards, toggleNav} = this.props;
 
         return (
-            <div
-                className={styles.container}
-                style={this.getPanelStyles()}
-            >
+            <div className={styles.container}>
                 <Card>
                     <NavList>
-                        {brands.map((brand) => (
-                            <NavItem
-                                key={brand.fields.slug}
-                                active={
-                                    productCards[0] &&
-                                    productCards[0].name === brand.fields.name
-                                }
-                                onClick={() => setProductCards([{
-                                    element: this.cards.Brand,
-                                    name: brand.fields.name,
-                                    props: {brand}
-                                }])}
-                            >
-                                {brand.fields.name}
-                            </NavItem>
-                        ))}
+                        {brands.map((brand) => this.renderBrand(brand))}
                     </NavList>
                 </Card>
                 <TransitionGroup

@@ -182,7 +182,7 @@
     will-change: transform, opacity;
     transition:
         transform 150ms ease-in-out,
-        opacity 100ms linear;
+        opacity 150ms linear;
 
     &.active {
         opacity: 1;

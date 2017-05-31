@@ -4,12 +4,11 @@
     display: flex;
     position: relative;
     height: calc(100% - 2px);
+    max-width: 72rem;
     box-sizing: content-box;
     border: 1px solid var(--c--gray-lighter);
     border-radius: 8px;
     overflow: hidden;
-    will-change: max-width;
-    transition: max-width 150ms ease-in-out;
 
     & > span {
         display: flex;
