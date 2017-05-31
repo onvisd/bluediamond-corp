@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import styles from './styles.module.css';
 
 export default class Quantity extends Component {
@@ -6,12 +6,8 @@ export default class Quantity extends Component {
         value: 1
     };
 
-    static propTypes = {
-        handleChange: PropTypes.func || this.onChange
-    }
-
     onDecrement = () => {
-        if(this.state.value <= 0) return;
+        if(this.state.value <= 1) return;
 
         this.setState((state) => ({
             value: --state.value
@@ -24,7 +20,7 @@ export default class Quantity extends Component {
         }));
     }
 
-    onChange = (e) => {
+    handleChange = (e) => {
         e.persist();
 
         this.setState(() => ({
@@ -32,9 +28,25 @@ export default class Quantity extends Component {
         }));
     }
 
+    handleValidation = (e) => {
+        const target = e.target;
+        const wholeValue = Math.floor(target.value);
+
+        let value = target.value;
+
+        if(value <= 0)
+            value = 1;
+
+        else if(value !== wholeValue)
+            value = wholeValue;
+
+        this.setState(() => ({
+            value
+        }));
+    }
+
     render() {
         const {value} = this.state;
-        const {handleChange} = this.props;
 
         return (
             <div className={styles.container}>
@@ -42,7 +54,10 @@ export default class Quantity extends Component {
                 <div className={styles.input}>
                     <div className={styles.quantity}>
                         <input
-                            onChange={handleChange}
+                            onChange={this.handleChange}
+                            onKeyPress={this.handleChange}
+                            onBlur={this.handleValidation}
+                            min="1"
                             type="number"
                             value={value}
                         />
