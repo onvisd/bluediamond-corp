@@ -4,6 +4,8 @@ import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
 import BDLogo from '../../../../assets/images/bd-logo.svg';
+import User from '../../../../assets/images/icons/user.svg';
+import Cart from '../../../../assets/images/icons/cart.svg';
 import styles from './styles.module.css';
 
 export default class MobileNav extends Component {
@@ -71,6 +73,10 @@ export default class MobileNav extends Component {
                 [styles.visible]: navVisible
             })}>
                 <div className={styles.head}>
+                    <div className={styles.ecomm}>
+                        <User />
+                        <Cart />
+                    </div>
                     <div className={styles.logo}>
                         <Link to="/" onClick={this.toggleNav.hide}>
                             <BDLogo className={styles.logo} />

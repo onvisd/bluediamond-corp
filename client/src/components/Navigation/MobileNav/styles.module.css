@@ -21,8 +21,9 @@
 
 .head {
     display: flex;
+    position: relative;
     height: 60px;
-    padding: 0 0.5rem 0 1.5rem;
+    padding: 0 0.5rem 0 1rem;
     align-items: center;
     justify-content: space-between;
     background-color: var(--c--white);
@@ -30,9 +31,24 @@
     pointer-events: auto;
 }
 
+.ecomm svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--c--black);
+    vertical-align: middle;
+
+    &:first-child {
+        margin-right: 1rem;
+    }
+}
+
 .logo {
+    position: absolute;
+    right: 0;
+    left: 0;
     height: 80%;
-    margin-left: -10px;
+    margin-right: auto;
+    margin-left: auto;
     z-index: 9999;
 
     & svg {

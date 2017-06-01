@@ -5,9 +5,9 @@ import classnames from 'classnames';
 
 import {connector} from '../../../redux/navigation';
 
-import ShoppingCart from '../../../../assets/images/shopping-cart.svg';
+import ShoppingCart from '../../../../assets/images/icons/cart.svg';
+import User from '../../../../assets/images/icons/user.svg';
 import BDLogo from '../../../../assets/images/bd-logo.svg';
-import Breadcrumbs from './Breadcrumbs';
 import styles from './styles.module.css';
 
 @connect(
@@ -80,7 +80,6 @@ export default class DesktopNav extends Component {
                 </Link>
                 <div className={`${styles.secondaryNav} ${styles[navColor]}`}>
                     <div className={styles.innerContainer}>
-                        <Breadcrumbs crumbs={navigation.breadcrumbs} />
                         <ul className={styles.secondaryNavLinks}>
                             {navData.secondary.map((link) => (
                                 <li key={link.slug}>
@@ -89,6 +88,14 @@ export default class DesktopNav extends Component {
                                     </a>
                                 </li>
                             ))}
+                        </ul>
+                        <ul className={styles.secondaryNavLinks}>
+                            <li>
+                                <Link to="/login">Log In</Link>
+                                {' '}or{' '}
+                                <Link to="/create-account">Create Account</Link>
+                                <User />
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -79,6 +79,7 @@
 .secondaryNavLinks {
     height: 100%;
     margin: 0;
+    font-size: var(--t--size-xs);
     text-align: right;
 
     & li:not(:first-of-type) {
@@ -87,7 +88,15 @@
 
     & a {
         color: var(--c--white);
-        font-size: var(--t--size-xs);
+    }
+
+    & svg {
+        width: 16px;
+        height: 16px;
+        margin-left: 0.5rem;
+        fill: var(--c--white);
+        vertical-align: middle;
+        transform: translateY(-1px);
     }
 }
 

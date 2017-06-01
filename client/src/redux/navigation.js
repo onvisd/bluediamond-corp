@@ -33,23 +33,6 @@ export const setNavigationStyle = action({
     })
 }, handler);
 
-export const setNavBreadcrumbs = action({
-    namespace: 'NAVIGATION',
-    event: 'SET_NAVIGATION_BREADCRUMBS',
-    action(breadcrumbs) {
-        return new Promise((resolve) => {
-            resolve(breadcrumbs);
-        });
-    },
-    result: (state, result) => ({
-        ...state,
-        navigation: {
-            ...state.navigation,
-            breadcrumbs: result
-        }
-    })
-}, handler);
-
 handler.addStateProperties('navigation');
 
 export const connector = stateConnector(handler);

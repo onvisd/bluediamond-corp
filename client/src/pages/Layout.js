@@ -5,8 +5,7 @@ import {Title, Meta, preload} from 'react-isomorphic-render';
 import {
     connector,
     getNavigationData,
-    setNavigationStyle,
-    setNavBreadcrumbs
+    setNavigationStyle
 } from '../redux/navigation';
 
 import Preloading from '../components/Preloading';
@@ -16,7 +15,6 @@ import FooterMobile from '../components/FooterMobile';
 
 @preload(({dispatch}) => {
     dispatch(setNavigationStyle({}));
-    dispatch(setNavBreadcrumbs([]));
     return dispatch(getNavigationData());
 })
 @connect(
@@ -26,8 +24,7 @@ import FooterMobile from '../components/FooterMobile';
     }),
     {
         getNavigationData,
-        setNavigationStyle,
-        setNavBreadcrumbs
+        setNavigationStyle
     }
 )
 export default class Layout extends Component {

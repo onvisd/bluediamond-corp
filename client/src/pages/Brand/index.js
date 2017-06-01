@@ -5,8 +5,7 @@ import {Title, preload} from 'react-isomorphic-render';
 import {connector as brandConnector, getBrand} from '../../redux/brand';
 import {
     connector as navConnector,
-    setNavigationStyle,
-    setNavBreadcrumbs
+    setNavigationStyle
 } from '../../redux/navigation';
 
 import CardPanel from '../../components/CardPanel';
@@ -22,11 +21,6 @@ import styles from './styles.module.css';
         className: `brand--${brand.fields.themeColor}`
     }));
 
-    dispatch(setNavBreadcrumbs([{
-        name: brand.fields.name,
-        path: `brand/${brand.fields.slug}`
-    }]));
-
     return brand;
 })
 @connect(
@@ -36,8 +30,7 @@ import styles from './styles.module.css';
     }),
     {
         getBrand,
-        setNavigationStyle,
-        setNavBreadcrumbs
+        setNavigationStyle
     }
 )
 export default class Brand extends Component {
@@ -83,16 +76,20 @@ export default class Brand extends Component {
         this.props.setNavigationStyle({
             className: `brand--${brand.fields.themeColor}`
         });
+    }
 
-        this.props.setNavBreadcrumbs([{
-            name: brand.fields.name,
-            path: `brand/${brand.fields.slug}`
-        }]);
+    componentWillUpdate(nextProps) {
+        const {brand} = this.props;
+
+        if(!nextProps.navigation.style.className) {
+            this.props.setNavigationStyle({
+                className: `brand--${brand.fields.themeColor}`
+            });
+        }
     }
 
     componentWillUnmount() {
         this.props.setNavigationStyle({});
-        this.props.setNavBreadcrumbs([]);
     }
 
     render() {

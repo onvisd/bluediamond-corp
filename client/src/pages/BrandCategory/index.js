@@ -5,8 +5,7 @@ import {Title, preload} from 'react-isomorphic-render';
 import {connector as brandConnector, getBrand} from '../../redux/brand';
 import {
     connector as navConnector,
-    setNavigationStyle,
-    setNavBreadcrumbs
+    setNavigationStyle
 } from '../../redux/navigation';
 
 import CardPanel from '../../components/CardPanel';
@@ -19,20 +18,9 @@ import styles from './styles.module.css';
 @preload(({dispatch, parameters}) =>
     dispatch(getBrand(parameters.brandSlug))
     .then((brand) => {
-        const category = brand.fields.categories.filter((cat) =>
-            cat.fields.slug === parameters.categorySlug)[0];
-
         dispatch(setNavigationStyle({
             className: `brand--${brand.fields.themeColor}`
         }));
-
-        dispatch(setNavBreadcrumbs([{
-            name: brand.fields.name,
-            path: `brand/${brand.fields.slug}`
-        }, {
-            name: category.fields.name,
-            path: `brand/${category.fields.slug}`
-        }]));
     })
 )
 @connect(
@@ -42,8 +30,7 @@ import styles from './styles.module.css';
     }),
     {
         getBrand,
-        setNavigationStyle,
-        setNavBreadcrumbs
+        setNavigationStyle
     }
 )
 export default class BrandCategory extends Component {
@@ -103,28 +90,28 @@ export default class BrandCategory extends Component {
 
     componentWillMount() {
         const {brand} = this.props;
-        const {category} = this.state;
 
         this.props.setNavigationStyle({
             className: `brand--${brand.fields.themeColor}`
         });
-
-        this.props.setNavBreadcrumbs([{
-            name: brand.fields.name,
-            path: `brand/${brand.fields.slug}`
-        }, {
-            name: category.fields.name,
-            path: `brand/${category.fields.slug}`
-        }]);
     }
 
     setActiveProduct = (activeProduct) => {
         this.setState(() => ({activeProduct}));
     }
 
+    componentWillUpdate(nextProps) {
+        const {brand} = this.props;
+
+        if(!nextProps.navigation.style.className) {
+            this.props.setNavigationStyle({
+                className: `brand--${brand.fields.themeColor}`
+            });
+        }
+    }
+
     componentWillUnmount() {
         this.props.setNavigationStyle({});
-        this.props.setNavBreadcrumbs([]);
     }
 
     render() {

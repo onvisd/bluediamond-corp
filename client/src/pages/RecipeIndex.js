@@ -4,15 +4,24 @@ import {preload, Title} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
 import {connector, getRecipes} from '../redux/recipes';
+import {connector as navConnector, setNavigationStyle} from '../redux/navigation';
 import RecipeCard from '../components/API/RecipeCard';
 
 import GenericHero from '../components/GenericHero';
 import Button from '../components/Button';
 
-@preload(({dispatch}) => dispatch(getRecipes()))
+@preload(async ({dispatch}) => {
+    const recipes = await dispatch(getRecipes());
+    dispatch(setNavigationStyle({className: 'brand--blue'}));
+
+    return recipes;
+})
 @connect(
-    (state) => ({...connector(state.recipes)}),
-    {getRecipes}
+    (state) => ({
+        ...connector(state.recipes),
+        ...navConnector(state.navigation)
+    }),
+    {getRecipes, setNavigationStyle}
 )
 export default class RecipeIndex extends Component {
     state = {
@@ -84,6 +93,17 @@ export default class RecipeIndex extends Component {
         this.setState(() => ({
             totalCardCount: this.props.recipes.items.length
         }));
+
+        this.props.setNavigationStyle({className: 'brand--blue'});
+    }
+
+    componentWillUpdate(nextProps) {
+        if(!nextProps.navigation.style.className)
+            this.props.setNavigationStyle({className: 'brand--blue'});
+    }
+
+    componentWillUnmount() {
+        this.props.setNavigationStyle({});
     }
 
     render() {

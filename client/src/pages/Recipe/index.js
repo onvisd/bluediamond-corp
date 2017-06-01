@@ -4,6 +4,7 @@ import {Title, preload} from 'react-isomorphic-render';
 import marked from 'marked';
 
 import {connector, getRecipe} from '../../redux/recipe';
+import {connector as navConnector, setNavigationStyle} from '../../redux/navigation';
 
 import RecipeHead from '../../components/API/RecipeHead';
 import RecipeStep from '../../components/API/RecipeStep';
@@ -12,14 +13,35 @@ import CardPanel from '../../components/CardPanel';
 
 import styles from './styles.module.css';
 
-@preload(({dispatch, parameters}) => dispatch(getRecipe(parameters.slug)))
+@preload(async ({dispatch, parameters}) => {
+    const recipe = await dispatch(getRecipe(parameters.slug));
+    dispatch(setNavigationStyle({className: 'brand--blue'}));
+
+    return recipe;
+})
 @connect(
-    (state) => ({...connector(state.recipe)}),
-    {getRecipe}
+    (state) => ({
+        ...connector(state.recipe),
+        ...navConnector(state.navigation)
+    }),
+    {getRecipe, setNavigationStyle}
 )
 export default class Recipe extends Component {
     renderMarkup(field) {
         return {__html: marked(field)};
+    }
+
+    componentWillMount() {
+        this.props.setNavigationStyle({className: 'brand--blue'});
+    }
+
+    componentWillUpdate(nextProps) {
+        if(!nextProps.navigation.style.className)
+            this.props.setNavigationStyle({className: 'brand--blue'});
+    }
+
+    componentWillUnmount() {
+        this.props.setNavigationStyle({});
     }
 
     render() {
