@@ -68,7 +68,7 @@ export default class Contact extends Component {
                             <div className={styles.intro}>
                                 <h1>{title}</h1>
                                 <p>{description}</p>
-                                <Button theme="blue" onClick={this.scrollBottom}>
+                                <Button onClick={this.scrollBottom}>
                                     Send us a message
                                 </Button>
                             </div>

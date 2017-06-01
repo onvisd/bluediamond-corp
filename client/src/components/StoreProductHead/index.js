@@ -137,7 +137,7 @@ export default class StoreProductHead extends Component {
                     </div>
                     <div className={styles.formPurchase}>
                         <h2 className={styles.price}>${price}</h2>
-                        <Button theme="blue">+ Add to cart</Button>
+                        <Button>+ Add to cart</Button>
                     </div>
                     <ProductAccordion
                         nutrition={nutrition}

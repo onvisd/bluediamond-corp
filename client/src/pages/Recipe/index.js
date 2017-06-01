@@ -123,7 +123,7 @@ export default class Recipe extends Component {
                     <CardPanel
                         cards={includedRecipes}
                         type="recipes"
-                        theme="blue"
+                        theme="blueLight"
                     />
                 </div>
             </section>

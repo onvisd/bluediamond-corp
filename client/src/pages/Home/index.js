@@ -101,7 +101,7 @@ export default class Home extends Component {
                                 {slug: '/brand/almond-breeze', name: 'Almond Breeze'},
                                 {slug: '/brand/nut-thins', name: 'Nut Thins'}
                             ]}
-                            theme="blue"
+                            layout="large"
                         >
                             Browse Products
                         </ButtonDropdown>

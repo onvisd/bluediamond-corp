@@ -118,7 +118,7 @@ export default class FoodService extends Component {
                 }}>
                     <div>
                         <h2>{fields.heroHeadline}</h2>
-                        <Button theme="blue" onClick={() => {
+                        <Button onClick={() => {
                             this.handleClick('request');
                             this.scrollBottom();
                         }}>
@@ -159,7 +159,7 @@ export default class FoodService extends Component {
                     <div className={styles.buttons}>
                         <Button theme="blueOutline" onClick={() =>
                             this.handleClick('request')}>Request a sample</Button>
-                        <Button theme="blue" onClick={() =>
+                        <Button onClick={() =>
                             this.handleClick('contact')}>Contact us</Button>
                     </div>
                 </div>

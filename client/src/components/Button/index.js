@@ -38,7 +38,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-    theme: 'blue'
+    theme: 'blueDark'
 };
 
 export default Button;
