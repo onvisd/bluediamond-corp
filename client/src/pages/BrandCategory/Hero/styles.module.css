@@ -113,29 +113,31 @@
 }
 
 .tag {
-    width: 8rem;
+    display: inline-block;
+    height: 1.5rem;
     margin: 1.5rem auto 1rem;
+    padding: 0 1rem;
     font-size: 12px;
     font-weight: var(--t--weight-bold);
     letter-spacing: 1px;
+    line-height: 1.5rem;
     text-align: center;
     text-transform: uppercase;
-    border: 1px solid;
     border-radius: 4px;
 
     &.yellow {
-        color: var(--c--yellow);
-        border-color: var(--c--yellow);
+        color: var(--c--black);
+        background-color: var(--c--yellow);
     }
 
     &.green {
-        color: var(--c--green);
-        border-color: var(--c--green);
+        color: var(--c--black);
+        background-color: var(--c--green);
     }
 
     &.blue {
-        color: var(--c--blue);
-        border-color: var(--c--blue);
+        color: var(--c--white);
+        background-color: var(--c--blue);
     }
 
     @media (--mq-gt-s) {

@@ -20,7 +20,7 @@ const Hero = ({brand, category, product}) => (
             </div>
             <div className={styles.info}>
                 <div className={classnames(styles.tag, styles[brand.fields.themeColor])}>
-                    {category.fields.name.replace('Flavors', '')}
+                    {category.fields.name}
                 </div>
                 <h1 className={styles.name}>
                     {product.fields.name}

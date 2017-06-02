@@ -5,7 +5,7 @@
 .container {
     display: flex;
     position: relative;
-    height: 20rem;
+    height: 32rem;
     padding: 12vh 0;
     align-items: center;
     background-color: var(--c--gray-dark);

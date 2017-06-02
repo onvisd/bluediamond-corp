@@ -100,7 +100,7 @@ export default class Brand extends Component {
                 <Title>{brand.fields.name}</Title>
                 <Hero
                     image={brand.fields.heroImage.fields.file.url}
-                    title={brand.fields.name}
+                    title={brand.fields.heroTitle}
                     textColor={brand.fields.heroTextColor}
                     logo={brand.fields.logo.fields.file.url}
                     tagline={brand.fields.heroTagline}
