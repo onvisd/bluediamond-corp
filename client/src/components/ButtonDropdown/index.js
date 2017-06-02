@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 export default class ButtonDropdown extends Component {
     static propTypes = {
         items: PropTypes.array.isRequired,
-        theme: PropTypes.string.isRequired,
         children: PropTypes.node.isRequired,
+        theme: PropTypes.string,
         layout: PropTypes.string,
         style: PropTypes.object,
         dropUp: PropTypes.bool
