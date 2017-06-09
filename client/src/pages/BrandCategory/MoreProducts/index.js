@@ -10,11 +10,11 @@ const MoreProducts = ({products}) => (
             {products.map((product) => (
                 <li className={styles.product} key={product.sys.id}>
                     <Link
-                        to={`/brand/${
-                            product.fields.brand.replace(' ', '-').toLowerCase()
-                        }/${
-                            product.fields.brandCategory.replace(' ', '-').toLowerCase()
-                        }?product=${product.fields.slug}`}
+                        to={
+                        '/brand' +
+                        `/${product.fields.brand.replace(' ', '-').toLowerCase()}` +
+                        `/${product.fields.brandCategory.replace(' ', '-').toLowerCase()}` +
+                        `/${product.fields.slug}`}
                     >
                         <div className={styles.image}>
                             <img src={product.fields.productPhotos[0].fields.file.url} />

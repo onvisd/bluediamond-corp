@@ -31,6 +31,7 @@ export default (
         <Route path="/recipes/:slug" component={Recipe} />
         <Route path="/brand/:slug" component={Brand} />
         <Route path="/brand/:brandSlug/:categorySlug" component={BrandCategory} />
+        <Route path="/brand/:brandSlug/:categorySlug/:productSlug" component={BrandCategory} />
         <Route path="/contact" component={Contact} />
         <Route path="/404" component={NotFound} status={404} />
         <Route path="/error" component={GenericError} />

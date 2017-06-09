@@ -2,6 +2,12 @@ import React, {Component, PropTypes} from 'react';
 
 import styles from './styles.module.css';
 
+import GlutenFree from '../../../assets/images/icons/gluten-free.svg';
+import HeartHealthy from '../../../assets/images/icons/heart-healthy.svg';
+import Kosher from '../../../assets/images/icons/kosher.svg';
+import ReducedSugar from '../../../assets/images/icons/reduced-sugar.svg';
+import Unsweetened from '../../../assets/images/icons/unsweetened.svg';
+import Vegan from '../../../assets/images/icons/vegan.svg';
 import Button from '../Button';
 import Quantity from '../Quantity';
 import ProductAccordion from '../ProductAccordion';
@@ -23,6 +29,15 @@ export default class StoreProductHead extends Component {
         nutrition: PropTypes.object.isRequired,
         ingredients: PropTypes.string.isRequired,
         reviews: PropTypes.object.isRequired
+    }
+
+    metaIcons = {
+        GlutenFree,
+        HeartHealthy,
+        Kosher,
+        ReducedSugar,
+        Unsweetened,
+        Vegan
     }
 
     renderMarkup(field) {
@@ -53,7 +68,8 @@ export default class StoreProductHead extends Component {
             <div className={styles.meta}>
                 {metaTags.map((tag, i) => {
                     const value = tag.split(':')[1].replace(',', '');
-                    return <span key={`metaItem${i}`}>{value}</span>;
+                    const Icon = this.metaIcons[value.replace(' ', '')];
+                    return <span key={`metaItem${i}`}><Icon />{value}</span>;
                 })}
             </div>
         );

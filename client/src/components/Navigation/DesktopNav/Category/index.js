@@ -13,13 +13,11 @@ const Category = ({brand, category, toggleNav}) => (
                 .map((product) => (
                 <li className={styles.product} key={product.fields.name}>
                     <Link
-                        to={`/brand/${
-                            brand.fields.slug
-                        }/${
-                            category.fields.slug
-                        }?product=${
-                            product.fields.slug
-                        }`}
+                        to={
+                        '/brand' +
+                        `/${brand.fields.slug}` +
+                        `/${category.fields.slug}` +
+                        `/${product.fields.slug}`}
                         onClick={toggleNav.hide}
                     >
                         <img src={product.fields.productPhotos[0].fields.file.url} />

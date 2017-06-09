@@ -72,14 +72,8 @@ export default class BrandCategory extends Component {
             product.fields.brandCategory === category.fields.name
         );
 
-        let activeProduct = categoryProducts[0];
-        const productQuery = this.props.location.query.product;
-
-        if(productQuery) {
-            activeProduct = categoryProducts.filter((product) =>
-                product.fields.slug === productQuery
-            )[0];
-        }
+        const {productSlug} = this.props.params;
+        const activeProduct = this.getActiveProduct(productSlug, categoryProducts);
 
         this.state = {
             activeProduct,
@@ -96,17 +90,35 @@ export default class BrandCategory extends Component {
         });
     }
 
+    getActiveProduct = (productSlug, categoryProducts) => {
+        let activeProduct = categoryProducts[0];
+
+        if(productSlug) {
+            activeProduct = categoryProducts.filter((product) =>
+                product.fields.slug === productSlug
+            )[0];
+        }
+
+        return activeProduct;
+    }
+
     setActiveProduct = (activeProduct) => {
         this.setState(() => ({activeProduct}));
     }
 
     componentWillUpdate(nextProps) {
-        const {brand} = this.props;
+        const {brand, params} = this.props;
 
         if(!nextProps.navigation.style.className) {
             this.props.setNavigationStyle({
                 className: `brand--${brand.fields.themeColor}`
             });
+        }
+
+        if(nextProps.params.productSlug !== params.productSlug) {
+            this.setActiveProduct(
+                this.getActiveProduct(nextProps.params.productSlug, this.state.categoryProducts)
+            );
         }
     }
 

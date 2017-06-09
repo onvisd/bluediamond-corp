@@ -49,6 +49,7 @@ export default class ProductSection extends Component {
                         activeProduct={activeProduct}
                         type="selector"
                         onClick={setActiveProduct}
+                        linkAction="push"
                     />
                 </div>
                 <div className={styles.innerContainer}>
