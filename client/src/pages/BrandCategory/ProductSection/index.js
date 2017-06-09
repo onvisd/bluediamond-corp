@@ -47,6 +47,7 @@ export default class ProductSection extends Component {
                     <ProductPanel
                         products={products}
                         activeProduct={activeProduct}
+                        carousel
                         type="selector"
                         onClick={setActiveProduct}
                         linkAction="push"

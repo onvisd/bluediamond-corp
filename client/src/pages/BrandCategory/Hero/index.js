@@ -19,24 +19,26 @@ const Hero = ({brand, category, product}) => (
                 <img src={product.fields.productPhotos[0].fields.file.url} />
             </div>
             <div className={styles.info}>
-                <div className={classnames(styles.tag, styles[brand.fields.themeColor])}>
-                    {category.fields.name}
+                <div>
+                    <div className={classnames(styles.tag, styles[brand.fields.themeColor])}>
+                        {category.fields.name}
+                    </div>
+                    <h1 className={styles.name}>
+                        {product.fields.name}
+                    </h1>
+                    <ButtonDropdown
+                        items={[
+                            {slug: '/store', name: 'Blue Diamond Store'},
+                            {slug: 'https://www.amazon.com', name: 'Amazon.com', external: true},
+                            {slug: 'https://www.jet.com', name: 'Jet.com', external: true}
+                        ]}
+                        theme={brand.fields.themeColor}
+                        layout="wide"
+                        dropUp
+                    >
+                        Buy Online
+                    </ButtonDropdown>
                 </div>
-                <h1 className={styles.name}>
-                    {product.fields.name}
-                </h1>
-                <ButtonDropdown
-                    items={[
-                        {slug: '/store', name: 'Blue Diamond Store'},
-                        {slug: 'https://www.amazon.com', name: 'Amazon.com', external: true},
-                        {slug: 'https://www.jet.com', name: 'Jet.com', external: true}
-                    ]}
-                    theme={brand.fields.themeColor}
-                    layout="wide"
-                    dropUp
-                >
-                    Buy Online
-                </ButtonDropdown>
             </div>
         </div>
     </div>

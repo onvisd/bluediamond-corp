@@ -98,8 +98,10 @@
     }
 
     @media (--mq-gt-s) {
+        display: flex;
         width: 22rem;
         margin-top: -2rem;
+        align-items: center;
     }
 }
 

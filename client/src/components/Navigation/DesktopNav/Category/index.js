@@ -8,8 +8,12 @@ import styles from './styles.module.css';
 const Category = ({brand, category, toggleNav}) => (
     <Card theme="wide">
         <ul className={styles.products}>
-            {brand.fields.products.filter(
-                (product) => product.fields.brandCategory === category.fields.name)
+            {brand.fields.products
+                .filter((product) =>
+                    product.fields.brandCategory === category.fields.name &&
+                    product.fields.featured
+                )
+                .slice(0, 4)
                 .map((product) => (
                 <li className={styles.product} key={product.fields.name}>
                     <Link
@@ -20,7 +24,9 @@ const Category = ({brand, category, toggleNav}) => (
                         `/${product.fields.slug}`}
                         onClick={toggleNav.hide}
                     >
-                        <img src={product.fields.productPhotos[0].fields.file.url} />
+                        <div className={styles.imageWrap}>
+                            <img src={product.fields.productPhotos[0].fields.file.url} />
+                        </div>
                         {product.fields.name}
                     </Link>
                 </li>

@@ -5,14 +5,14 @@
 .hero {
     display: flex;
     height: 28rem;
-    margin-bottom: 1.5rem;
     align-items: center;
     justify-content: center;
     background-size: cover;
     background-position: center;
+    text-align: center;
 
     & h2 {
-        margin: 0;
+        margin-bottom: 2rem;
 
         @media (--mq-s) {
             font-size: var(--t--size-lm);
@@ -21,9 +21,5 @@
 
     @media (--mq-s) {
         padding: 2rem;
-    }
-
-    @media (--mq-gt-s) {
-        margin-bottom: 4.5rem;
     }
 }

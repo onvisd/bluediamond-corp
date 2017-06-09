@@ -51,5 +51,6 @@
         width: 48%;
         margin-bottom: 0;
         border-radius: 8px;
+        flex-grow: 1;
     }
 }

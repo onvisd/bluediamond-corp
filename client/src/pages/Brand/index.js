@@ -8,6 +8,7 @@ import {
     setNavigationStyle
 } from '../../redux/navigation';
 
+import Button from '../../components/Button';
 import CardPanel from '../../components/CardPanel';
 import Hero from './Hero';
 import Stories from './Stories';
@@ -132,15 +133,13 @@ export default class Brand extends Component {
                     <div className={styles.hero} style={{
                         backgroundImage: `url(${brand.fields.brandRecipesImage.fields.file.url})`
                     }}>
-                        <h2>Try out these delicious recipes below</h2>
+                        <div>
+                            <h2>Try our delicious recipes</h2>
+                            <Button href="/recipes" theme="blueLight">
+                                Click here
+                            </Button>
+                        </div>
                     </div>
-                )}
-                {brand.fields.recipes && (
-                    <CardPanel
-                        type="recipes"
-                        theme={brand.fields.themeColor}
-                        cards={brand.fields.recipes}
-                    />
                 )}
             </section>
         );
