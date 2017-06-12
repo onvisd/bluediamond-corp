@@ -1,10 +1,16 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Title, preload} from 'react-isomorphic-render';
+import {ViewPager, Frame, Track, View} from 'react-view-pager';
+import classnames from 'classnames';
 
 import {connector, getCraft} from '../../redux/craft';
 import {parseModel} from '../../tools/parseApi';
 
+import BDLogo from '../../../assets/images/bd-logo.svg';
+import GrowersHands from '../../../assets/images/icons/growers-hands.svg';
+import ProductManufacturing from '../../../assets/images/icons/product-manufacturing.svg';
+import QualityAssurance from '../../../assets/images/icons/quality-assurance.svg';
 import GenericHero from '../../components/GenericHero';
 import RelatedPages from '../../components/RelatedPages';
 import RelatedPageLink from '../../components/RelatedPageLink';
@@ -40,26 +46,20 @@ export default class Craft extends Component {
                     detailTwoText: PropTypes.string.isRequired,
                     detailThreeTitle: PropTypes.string.isRequired,
                     detailThreeText: PropTypes.string.isRequired,
-                    innovationOneBackgroundImage: PropTypes.shape({
+                    innovationBackgroundImage: PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string.isRequired
                         })
                     }),
-                    innovationOneTitle: PropTypes.string.isRequired,
-                    innovationOneText: PropTypes.string.isRequired,
-                    innovationTwoBackgroundImage: PropTypes.shape({
-                        sys: PropTypes.shape({
-                            id: PropTypes.string.isRequired
-                        })
-                    }),
-                    innovationTwoTitle: PropTypes.string.isRequired,
-                    innovationTwoText: PropTypes.string.isRequired,
-                    factsHeadline: PropTypes.string.isRequired,
+                    innovationTitle: PropTypes.string.isRequired,
+                    innovationText: PropTypes.string.isRequired,
                     factsBackgroundImage: PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string.isRequired
                         })
                     }),
+                    factsTitle: PropTypes.string.isRequired,
+                    factsHeadline: PropTypes.string.isRequired,
                     factOneTitle: PropTypes.string,
                     factOneText: PropTypes.string,
                     factTwoTitle: PropTypes.string,
@@ -83,9 +83,37 @@ export default class Craft extends Component {
         })
     }
 
+    state = {
+        activeTab: 0
+    }
+
+    handleSwipe = (currentIndices) => {
+        this.setState(() => ({
+            activeTab: currentIndices[0]
+        }));
+    }
+
     render() {
+        const {activeTab} = this.state;
         const {craft} = this.props;
         const craftFields = parseModel(craft)[0].fields;
+        const hotspots = [
+            {
+                title: craftFields.factOneTitle,
+                text: craftFields.factOneText,
+                coords: {x: 40, y: 30}
+            },
+            {
+                title: craftFields.factTwoTitle,
+                text: craftFields.factTwoText,
+                coords: {x: 0, y: 50}
+            },
+            {
+                title: craftFields.factThreeTitle,
+                text: craftFields.factThreeText,
+                coords: {x: 80, y: 70}
+            }
+        ];
 
         return (
             <section className="content">
@@ -100,50 +128,47 @@ export default class Craft extends Component {
                 <div
                     className={styles.details}
                     style={{
-                        backgroundImage: `
-                        linear-gradient(
-                            to top,
-                            rgba(255, 255, 255, 1) 0%,
-                            rgba(255, 255, 255, 0.9) 40%,
-                            rgba(255, 255, 255, 0) 80%
-                        ),
-                        url(${
+                        backgroundImage: `url(${
                             craftFields.detailsBackgroundImage.file.url
                         })`
                     }}
                 >
+                    <div className={styles.detailsOverlay} />
                     <div className={styles.detailsContainer}>
-                        <h1>{craftFields.detailsHeadline}</h1>
+                        <div>
+                            <BDLogo />
+                            <h2>{craftFields.detailsHeadline}</h2>
+                        </div>
                         <ul className={styles.detailColumns}>
                             <li className={styles.detail}>
+                                <GrowersHands />
                                 <h3>{craftFields.detailOneTitle}</h3>
                                 <p>{craftFields.detailOneText}</p>
                             </li>
                             <li className={styles.detail}>
+                                <ProductManufacturing />
                                 <h3>{craftFields.detailTwoTitle}</h3>
                                 <p>{craftFields.detailTwoText}</p>
                             </li>
                             <li className={styles.detail}>
+                                <QualityAssurance />
                                 <h3>{craftFields.detailThreeTitle}</h3>
                                 <p>{craftFields.detailThreeText}</p>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div className={styles.innovationBlue}>
-                    <div className={styles.container}>
-                        <h2>Innovation</h2>
-                        <div className={styles.innovationContent}>
-                            <h3>{craftFields.innovationOneTitle}</h3>
-                            <p className="t--type-prose">{craftFields.innovationOneText}</p>
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.innovationYellow}>
+                <div
+                    className={styles.innovation}
+                    style={{
+                        backgroundImage: `url(${craftFields.innovationBackgroundImage.file.url})`
+                    }}
+                >
+                    <div className={styles.innovationOverlay} />
                     <div className={styles.container}>
                         <div className={styles.innovationContent}>
-                            <h3>{craftFields.innovationTwoTitle}</h3>
-                            <p className="t--type-prose">{craftFields.innovationTwoText}</p>
+                            <h2>{craftFields.innovationTitle}</h2>
+                            <p>{craftFields.innovationText}</p>
                         </div>
                     </div>
                 </div>
@@ -154,28 +179,61 @@ export default class Craft extends Component {
                     }}
                 >
                     <div className={styles.container}>
-                        <h2>Almond Facts</h2>
-                        <p className="t--type-prose">{craftFields.factsHeadline}</p>
-                        <div className={styles.hotspot} style={{top: '20%', left: '40%'}}>
-                            <span>+</span>
-                            <div className={styles.hotspotContentR}>
-                                <h3>{craftFields.factOneTitle}</h3>
-                                <p className="t--type-prose">{craftFields.factOneText}</p>
-                            </div>
+                        <h2>{craftFields.factsTitle}</h2>
+                        <p className={styles.factsHeadline}>{craftFields.factsHeadline}</p>
+                        <div className={styles.hotspots}>
+                            {hotspots.map((hotspot) => (
+                                <div
+                                    className={styles.hotspot}
+                                    key={`${hotspot.coords.y}${hotspot.coords.x}`}
+                                    style={{
+                                        top: `${hotspot.coords.y}%`,
+                                        left: `${hotspot.coords.x}%`
+                                    }}
+                                >
+                                    <span>+</span>
+                                    <div
+                                        className={styles[`hotspotContent${
+                                            hotspot.coords.x > 50 ? 'L' : 'R'
+                                        }`]}
+                                    >
+                                        <h3>{hotspot.title}</h3>
+                                        <p>{hotspot.text}</p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                        <div className={styles.hotspot} style={{top: '50%', left: '0'}}>
-                            <span>+</span>
-                            <div className={styles.hotspotContentR}>
-                                <h3>{craftFields.factTwoTitle}</h3>
-                                <p className="t--type-prose">{craftFields.factTwoText}</p>
-                            </div>
-                        </div>
-                        <div className={styles.hotspot} style={{top: '70%', left: '80%'}}>
-                            <span>+</span>
-                            <div className={styles.hotspotContentL}>
-                                <h3>{craftFields.factThreeTitle}</h3>
-                                <p className="t--type-prose">{craftFields.factThreeText}</p>
-                            </div>
+                        <ViewPager className={styles.hotspotsMobile}>
+                            <Frame>
+                                <Track
+                                    viewsToShow={1}
+                                    infinite
+                                    onViewChange={this.handleSwipe}
+                                    style={{display: 'flex'}}
+                                    ref={(track) => {
+                                        this.carouselTrack = track;
+                                    }}
+                                >
+                                    {hotspots.map((hotspot, idx) => (
+                                        <View style={{flex: '1'}} key={`hotspot-${idx}`}>
+                                            <div className={styles.hotspotContent}>
+                                                <h3>{hotspot.title}</h3>
+                                                <p>{hotspot.text}</p>
+                                            </div>
+                                        </View>
+                                    ))}
+                                </Track>
+                            </Frame>
+                        </ViewPager>
+                        <div className={styles.tabs}>
+                            {hotspots.map((hotspot, idx) => (
+                                <div
+                                    key={`hotspot-${idx}`}
+                                    className={classnames(styles.tab, {
+                                        [styles.tabActive]: activeTab === idx
+                                    })}
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.34 90.26">
+  <defs>
+    <style>
+      .prdct-cls-1,.prdct-cls-2,.prdct-cls-3,.prdct-cls-4{fill:none;stroke:#223b4c;stroke-linejoin:round;}.prdct-cls-1,.prdct-cls-2{stroke-linecap:round;}.prdct-cls-1{stroke-width:2.26px;}.prdct-cls-2{stroke-width:2.42px;}.prdct-cls-3{stroke-width:2.44px;}.prdct-cls-4{stroke-width:2.63px;}
+    </style>
+  </defs>
+  <title>
+    Asset 10
+  </title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_3" data-name="Layer 3">
+      <path class="prdct-cls-1" d="M36.1 83.49H9.03V20.31h32.1v40.61M15.79 6.77H4.51v-3.6a2 2 0 0 1 2-2h27.55a2 2 0 0 1 2 2v3.6h-6.73M9.03 20.31L4.51 6.77 1.13 20.31h7.9z"/>
+      <path class="prdct-cls-1" d="M1.13 20.31v58.66l7.9 4.52"/>
+      <ellipse class="prdct-cls-1" cx="23.13" cy="7.9" rx="6.21" ry="3.95"/>
+      <path class="prdct-cls-1" d="M16.92 7.9v3.95c0 2.18 2.78 3.95 6.21 3.95s6.21-1.77 6.21-3.95V7.9"/>
+      <ellipse class="prdct-cls-1" cx="51.9" cy="63.18" rx="15.79" ry="2.26"/>
+      <path class="prdct-cls-1" d="M67.69 67.69c0 1.25-7.07 2.26-15.79 2.26s-15.79-1-15.79-2.26"/>
+      <path class="prdct-cls-1" d="M67.69 63.18v22.56c0 1.25-7.07 3.38-15.79 3.38S36.1 87 36.1 85.74V63.18"/>
+      <path class="prdct-cls-2" d="M41.13 15.79h48v63.18H68.44"/>
+      <path class="prdct-cls-1" d="M63.18 76.72L51.9 85.09l-11.28-8.37 11.28-5.3 11.28 5.3zM76.41 30.2l-11.28 8.38-11.28-8.38 11.28-5.29 11.28 5.29z"/>
+      <path class="prdct-cls-3" d="M41.36 30.75l23.16-10.84L88.9 31.36"/>
+      <path class="prdct-cls-1" d="M32.41 28.77l-7.33 5.44-7.34-5.44 7.34-3.45 7.33 3.45z"/>
+      <path class="prdct-cls-4" d="M89.13 67.75A78.32 78.32 0 0 1 67.84 73"/>
+      <path class="prdct-cls-1" d="M36.1 6.77l5.03 13.36"/>
+    </g>
+  </g>
+</svg>

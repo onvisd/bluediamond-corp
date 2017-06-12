@@ -19,7 +19,7 @@
     @media (--mq-s) {
         width: 100%;
         height: auto;
-        padding: 3rem 0;
+        padding: 3rem 2rem;
     }
 
     & h1 {
@@ -27,8 +27,8 @@
         max-width: 24vw;
 
         @media (--mq-s) {
-            max-width: 58vw;
-            font-size: var(--t--size-l);
+            max-width: 100%;
+            font-size: var(--t--size-lm);
         }
     }
 }

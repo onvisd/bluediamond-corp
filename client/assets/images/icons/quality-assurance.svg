@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74 97.99">
+  <defs>
+    <style>
+      .qlty-cls-1,.qlty-cls-3,.qlty-cls-4,.qlty-cls-5{fill:none;}.qlty-cls-1,.qlty-cls-3,.qlty-cls-4,.qlty-cls-5,.qlty-cls-6{stroke:#223b4c;stroke-width:2px;}.qlty-cls-1,.qlty-cls-3,.qlty-cls-5,.qlty-cls-6{stroke-linecap:round;}.qlty-cls-1,.qlty-cls-4{stroke-miterlimit:10;}.qlty-cls-2{fill:#223b4c;}.qlty-cls-3{stroke-linejoin:bevel;}.qlty-cls-5,.qlty-cls-6{stroke-linejoin:round;}.qlty-cls-6{fill:#fff;}
+    </style>
+  </defs>
+  <title>
+    Asset 11
+  </title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_3" data-name="Layer 3">
+      <path class="qlty-cls-1" d="M23 13V7.39A6.21 6.21 0 0 1 29 1a6.21 6.21 0 0 1 6 6.39V13"/>
+      <circle class="qlty-cls-2" cx="29" cy="7.46" r="2"/>
+      <path class="qlty-cls-3" d="M13 28.99h32m-32 9.88h32m-32 9.58h32"/>
+      <path class="qlty-cls-4" d="M37 89H5a4 4 0 0 1-4-4V13a4 4 0 0 1 4-4h18m12 0h18a4 4 0 0 1 4 4v44"/>
+      <path class="qlty-cls-1" d="M20.16 13h17.68A7.16 7.16 0 0 1 45 20.14V21H13v-.84A7.16 7.16 0 0 1 20.16 13z"/>
+      <path class="qlty-cls-5" d="M34.67 85H17m27.26-68H49a4 4 0 0 1 4 4v36M5 73V21a4 4 0 0 1 4-4h4.74M14 73H5l12 12v-9a3 3 0 0 0-3-3z"/>
+      <circle class="qlty-cls-6" cx="53" cy="76.99" r="20"/>
+      <path class="qlty-cls-2" d="M43.7 77.74a42.26 42.26 0 0 0 5.2 8 1.51 1.51 0 0 0 2.36-.3 51.76 51.76 0 0 1 10.8-13.7c1.44-1.29-.69-3.41-2.12-2.12A54.2 54.2 0 0 0 48.67 83.9l2.33-.3a38.73 38.73 0 0 1-4.73-7.37c-.86-1.73-3.45-.21-2.59 1.51z"/>
+    </g>
+  </g>
+</svg>
