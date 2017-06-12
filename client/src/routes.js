@@ -17,6 +17,7 @@ import BrandCategory from './pages/BrandCategory';
 import Contact from './pages/Contact';
 import Store from './pages/Store';
 import StoreProduct from './pages/StoreProduct';
+import Press from './pages/Press';
 
 export default (
     <Route path="/" component={Layout}>
@@ -33,6 +34,7 @@ export default (
         <Route path="/brand/:brandSlug/:categorySlug" component={BrandCategory} />
         <Route path="/brand/:brandSlug/:categorySlug/:productSlug" component={BrandCategory} />
         <Route path="/contact" component={Contact} />
+        <Route path="/press" component={Press} />
         <Route path="/404" component={NotFound} status={404} />
         <Route path="/error" component={GenericError} />
         <Route path="*" component={Page} />

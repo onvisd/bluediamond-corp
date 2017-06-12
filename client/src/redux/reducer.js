@@ -13,3 +13,4 @@ export {default as storeProduct} from './storeProduct';
 export {default as manifesto} from './manifesto';
 export {default as foodService} from './foodService';
 export {default as product} from './product';
+export {default as press} from './press';
