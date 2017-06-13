@@ -49,7 +49,7 @@
     overflow: hidden;
 
     &.active {
-        max-height: 100vh;
+        max-height: 400vh; /* arbitrary high number */
         transition: max-height 150ms ease-in-out;
     }
 

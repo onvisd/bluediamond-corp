@@ -22,7 +22,10 @@ export default class Category extends Component {
                 <div className={styles.innerContainer}>
                     <h2>{name}</h2>
                     <p>{description}</p>
-                    <ProductPanel products={products} />
+                    <ProductPanel
+                        products={products}
+                        showActiveClasses={false}
+                    />
                 </div>
             </div>
         );

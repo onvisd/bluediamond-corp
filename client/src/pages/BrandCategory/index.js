@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Title, preload} from 'react-isomorphic-render';
+import {Title, preload, pushLocation} from 'react-isomorphic-render';
+import {withRouter} from 'react-router';
 
 import {connector as brandConnector, getBrand} from '../../redux/brand';
 import {
@@ -33,6 +34,7 @@ import styles from './styles.module.css';
         setNavigationStyle
     }
 )
+@withRouter
 export default class BrandCategory extends Component {
     static propTypes = {
         brand: PropTypes.shape({
@@ -103,7 +105,15 @@ export default class BrandCategory extends Component {
     }
 
     setActiveProduct = (activeProduct) => {
-        this.setState(() => ({activeProduct}));
+        this.setState(() => ({activeProduct}), () => {
+            const pathname =
+                '/brand' +
+                `/${activeProduct.fields.brand.split(' ').join('-').toLowerCase()}` +
+                `/${activeProduct.fields.brandCategory.split(' ').join('-').toLowerCase()}` +
+                `/${activeProduct.fields.slug}`;
+
+            pushLocation({pathname}, this.props.router);
+        });
     }
 
     componentWillUpdate(nextProps) {

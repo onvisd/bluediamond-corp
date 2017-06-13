@@ -52,5 +52,9 @@
         margin-bottom: 0;
         border-radius: 8px;
         flex-grow: 1;
+
+        &:not(:last-child) {
+            margin-right: 2%;
+        }
     }
 }

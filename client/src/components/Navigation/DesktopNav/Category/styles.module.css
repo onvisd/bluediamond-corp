@@ -2,11 +2,9 @@
 
 .products {
     display: flex;
-    height: 70%;
-    margin: 0;
+    height: 68.5%;
     padding: 1.5rem 2rem 0;
     justify-content: center;
-    list-style-type: none;
 }
 
 .product {

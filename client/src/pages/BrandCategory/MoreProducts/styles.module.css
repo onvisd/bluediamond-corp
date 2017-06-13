@@ -23,7 +23,6 @@
     margin: 0;
     padding: 0;
     flex-wrap: wrap;
-    justify-content: space-between;
     list-style: none;
 
     @media (--mq-gt-s) {
@@ -33,45 +32,19 @@
 
 .product {
     width: 48%;
-    margin-bottom: 1.5rem;
+    margin: 0 1% 1.5rem;
     text-align: center;
 
-    & p {
-        margin: 0;
-        color: var(--c--black);
+    & > div {
+        max-width: 100%;
     }
 
     @media (--mq-gt-s) {
         width: 15%;
-        margin-bottom: 0;
+        margin: 0;
 
         &:not(:last-child) {
-            margin-right: 1.67%;
+            margin-right: 2%;
         }
-    }
-}
-
-.image {
-    display: flex;
-    width: 100%;
-    height: 11.5rem;
-    margin-bottom: 0.5rem;
-    padding: 1rem;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--c--white);
-    background-size: contain;
-    background-position: center;
-
-    & img {
-        max-width: 138px;
-        max-height: 156px;
-        vertical-align: middle;
-    }
-
-    @media (--mq-s) {
-        display: flex;
-        height: 9rem;
-        align-items: center;
     }
 }

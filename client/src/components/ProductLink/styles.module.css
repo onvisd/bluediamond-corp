@@ -1,0 +1,77 @@
+@import 'constants/color';
+@import 'constants/type';
+@import 'constants/grid';
+
+.base {
+    width: 10rem;
+    margin: 0 0.5rem;
+
+    & a {
+        color: var(--c--black);
+        text-align: center;
+    }
+
+    @media (--mq-s) {
+        width: 50%;
+        margin: 0;
+    }
+}
+
+.nav,
+.carousel {
+    composes: base;
+}
+
+.panel {
+    padding: 0 0.5rem;
+    composes: base;
+}
+
+.card {
+    composes: base;
+
+    & .image {
+        height: 10rem;
+    }
+
+    @media (--mq-s) {
+        width: 100%;
+    }
+}
+
+.image {
+    display: flex;
+    height: 125px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--c--white);
+
+    & img {
+        max-width: 125px;
+        max-height: 125px;
+
+        @media (--mq-s) {
+            max-width: 100%;
+        }
+    }
+
+    @media (--mq-s) {
+        padding: 0 0.5rem;
+    }
+}
+
+.info {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.brand,
+.title {
+    display: block;
+    width: 100%;
+    line-height: 1.2;
+}
+
+.brand {
+    font-weight: var(--t--weight-bold);
+}

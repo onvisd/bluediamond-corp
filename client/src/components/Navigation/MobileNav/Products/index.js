@@ -2,8 +2,8 @@ import React, {Component, PropTypes} from 'react';
 
 import Breadcrumb from '../Breadcrumb';
 import Card from '../../Card';
-import NavList from '../../NavList';
-import NavItem from '../../NavItem';
+
+import styles from './styles.module.css';
 
 export default class Products extends Component {
     static propTypes = {
@@ -15,7 +15,7 @@ export default class Products extends Component {
             this.props.navigate('Root', {enter: 'left', leave: 'right'});
         },
         forwards: (brand) => {
-            this.props.navigate('Brand', {enter: 'right', leave: 'left'}, {brand});
+            this.props.navigate('Category', {enter: 'right', leave: 'left'}, {brand});
         }
     }
 
@@ -27,16 +27,17 @@ export default class Products extends Component {
                 <Breadcrumb onClick={this.navigate.backwards}>
                     Our Products
                 </Breadcrumb>
-                <NavList>
+                <ul className={styles.container}>
                     {brands.map((brand) => (
-                        <NavItem
+                        <li
                             key={brand.fields.slug}
+                            className={styles.tile}
                             onClick={() => this.navigate.forwards(brand)}
                         >
-                            {brand.fields.name}
-                        </NavItem>
+                            <h2>{brand.fields.name}</h2>
+                        </li>
                     ))}
-                </NavList>
+                </ul>
             </Card>
         );
     }

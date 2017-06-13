@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-isomorphic-render';
 
 import Button from '../../../Button';
+import ProductLink from '../../../ProductLink';
 import Breadcrumb from '../Breadcrumb';
 import Card from '../../Card';
 import styles from './styles.module.css';
@@ -10,20 +10,19 @@ export default class Category extends Component {
     static propTypes = {
         navigate: PropTypes.func.isRequired,
         brand: PropTypes.object.isRequired,
-        category: PropTypes.object.isRequired,
         toggleNav: PropTypes.object.isRequired
     }
 
     navigate = () => {
         this.props.navigate(
-            'Brand',
+            'Products',
             {enter: 'left', leave: 'right'},
             {brand: this.props.brand}
         );
     }
 
     render() {
-        const {brand, category, toggleNav} = this.props;
+        const {brand, toggleNav} = this.props;
 
         return (
             <Card>
@@ -32,29 +31,31 @@ export default class Category extends Component {
                     fixed
                     onClick={this.navigate}
                 >
-                    {category.fields.name}
+                    {brand.fields.name}
                 </Breadcrumb>
-                <ul className={styles.products}>
-                    {brand.fields.products.filter(
-                        (product) => product.fields.brandCategory === category.fields.name)
-                        .map((product) => (
-                        <li className={styles.product} key={product.sys.id} >
-                            <Link
-                                to={
-                                '/brand' +
-                                `/${brand.fields.slug}` +
-                                `/${category.fields.slug}` +
-                                `/${product.fields.slug}`}
-                                onClick={toggleNav.hide}
-                            >
-                                <img src={product.fields.productPhotos[0].fields.file.url} />
-                                {product.fields.name}
-                            </Link>
-                        </li>
+                <div className={styles.categories}>
+                    {brand.fields.categories.map((category) => (
+                        <div className={styles.category} key={category.fields.slug}>
+                            <div className={styles.title}>
+                                {category.fields.name}
+                            </div>
+                            <div className={styles.products}>
+                                {brand.fields.products.filter((product) =>
+                                    product.fields.brandCategory === category.fields.name)
+                                    .map((product) => (
+                                        <ProductLink
+                                            key={product.fields.slug}
+                                            product={product}
+                                            small
+                                            onClick={toggleNav.hide}
+                                        />
+                                ))}
+                            </div>
+                        </div>
                     ))}
-                </ul>
+                </div>
                 <Button
-                    theme="yellow"
+                    theme={brand.fields.themeColor}
                     href={`/brand/${brand.fields.slug}`}
                     onClick={toggleNav.hide}
                     style={{

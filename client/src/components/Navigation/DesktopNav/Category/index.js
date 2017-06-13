@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react';
-import {Link} from 'react-isomorphic-render';
 
 import Button from '../../../Button';
 import Card from '../../Card';
+import ProductLink from '../../../ProductLink';
 import styles from './styles.module.css';
 
 const Category = ({brand, category, toggleNav}) => (
     <Card theme="wide">
-        <ul className={styles.products}>
+        <div className={styles.products}>
             {brand.fields.products
                 .filter((product) =>
                     product.fields.brandCategory === category.fields.name &&
@@ -15,23 +15,14 @@ const Category = ({brand, category, toggleNav}) => (
                 )
                 .slice(0, 4)
                 .map((product) => (
-                <li className={styles.product} key={product.fields.name}>
-                    <Link
-                        to={
-                        '/brand' +
-                        `/${brand.fields.slug}` +
-                        `/${category.fields.slug}` +
-                        `/${product.fields.slug}`}
-                        onClick={toggleNav.hide}
-                    >
-                        <div className={styles.imageWrap}>
-                            <img src={product.fields.productPhotos[0].fields.file.url} />
-                        </div>
-                        {product.fields.name}
-                    </Link>
-                </li>
+                <ProductLink
+                    key={product.fields.slug}
+                    product={product}
+                    type="nav"
+                    onClick={toggleNav.hide}
+                />
             ))}
-        </ul>
+        </div>
         <Button
             theme={brand.fields.themeColor}
             href={`/brand/${brand.fields.slug}`}

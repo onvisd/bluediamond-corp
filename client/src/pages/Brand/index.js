@@ -10,8 +10,9 @@ import {
 
 import Button from '../../components/Button';
 import CardPanel from '../../components/CardPanel';
+import Carousel from '../../components/Carousel';
 import Hero from './Hero';
-import Stories from './Stories';
+import Story from './Story';
 import Category from './Category';
 import styles from './styles.module.css';
 
@@ -106,8 +107,26 @@ export default class Brand extends Component {
                     logo={brand.fields.logo.fields.file.url}
                     tagline={brand.fields.heroTagline}
                 />
-                {brand.fields.stories &&
-                    <Stories stories={brand.fields.stories} />}
+                {brand.fields.stories && (
+                    <Carousel
+                        classNames={{container: styles.carousel}}
+                        showArrows
+                        showTabs
+                        tabColor="light"
+                        settings={{
+                            viewsToShow: 1,
+                            infinite: true
+                        }}
+                        cards={brand.fields.stories.map((story) => (
+                            <Story
+                                tagline={story.fields.tagline}
+                                content={story.fields.content}
+                                image={story.fields.backgroundImage.fields.file.url}
+                                align={story.fields.textAlignment}
+                            />
+                        ))}
+                    />
+                )}
                 <div>
                     {brand.fields.categories.map((category) => (
                         <Category

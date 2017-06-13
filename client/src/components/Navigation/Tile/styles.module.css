@@ -8,10 +8,6 @@
     flex-grow: 1;
     color: var(--c--black);
 
-    &:not(:last-child) {
-        border-right: 1px solid var(--c--gray-lighter);
-    }
-
     & a {
         color: var(--c--black);
     }
@@ -38,6 +34,10 @@
         padding-bottom: 5rem;
         flex-wrap: wrap;
         align-items: center;
+
+        &:not(:last-child) {
+            border-right: 1px solid var(--c--gray-lighter);
+        }
 
         & h2 {
             max-width: 80%;

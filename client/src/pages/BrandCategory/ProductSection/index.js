@@ -47,9 +47,8 @@ export default class ProductSection extends Component {
                     <ProductPanel
                         products={products}
                         activeProduct={activeProduct}
-                        carousel
-                        type="selector"
-                        onClick={setActiveProduct}
+                        setActiveProduct={setActiveProduct}
+                        overflowType="carousel"
                         linkAction="push"
                     />
                 </div>

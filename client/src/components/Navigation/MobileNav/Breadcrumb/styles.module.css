@@ -45,6 +45,7 @@
 
 .brand--blue {
     composes: default;
+    color: var(--c--white);
     background-color: var(--c--blue);
 }
 

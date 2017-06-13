@@ -3,14 +3,14 @@
 @import 'constants/grid';
 
 .hero {
+    display: flex;
     position: relative;
-    height: 28rem;
     margin-top: 60px;
     overflow: hidden;
 
     @media (--mq-gt-s) {
-        height: 48rem;
         margin-top: 0;
+        min-height: 48rem;
     }
 }
 
@@ -41,37 +41,39 @@
 }
 
 .product {
-    display: flex;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: 0 auto;
-    text-align: center;
+    @mixin container;
 
-    @media (--mq-gt-s) {
-        top: auto;
-        bottom: 9rem;
-        justify-content: space-between;
-        max-width: 48rem;
-        text-align: left;
+    display: flex;
+    position: relative;
+    padding: 12rem 0 9rem;
+    max-width: 48rem;
+    align-items: flex-end;
+    justify-content: space-between;
+    text-align: left;
+
+    @media (--mq-s) {
+        padding: 2rem 0 4rem;
+        flex-wrap: wrap;
     }
 }
 
 .photo {
+    z-index: var(--l--z-high);
+
     & img {
         max-width: 100%;
         vertical-align: middle;
+
+        @media (--mq-s) {
+            max-height: 20rem;
+        }
     }
 
     @media (--mq-s) {
-        position: absolute;
-        right: 0;
-        bottom: 4.5rem;
-        left: 0;
         width: 65%;
         margin: 0 auto;
+        order: 2;
+        text-align: center;
     }
 
     @media (--mq-gt-s) {
@@ -80,21 +82,27 @@
 }
 
 .info {
-    position: relative;
     width: 100%;
+    align-self: center;
 
     @media (--mq-s) {
         margin: 0 auto;
         max-width: 80%;
 
-        & > button {
+        & > div > button {
             position: absolute;
-            right: 0;
+            right: 1rem;
             bottom: 1rem;
-            left: 0;
-            width: 100%;
+            left: 1rem;
+            width: calc(100% - 2rem);
             min-width: 0;
         }
+    }
+
+    @media (--mq-s) {
+        padding-bottom: 4rem;
+        order: 1;
+        text-align: center;
     }
 
     @media (--mq-gt-s) {

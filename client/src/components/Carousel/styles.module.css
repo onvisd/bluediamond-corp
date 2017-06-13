@@ -1,0 +1,69 @@
+@import 'constants/color';
+
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image:
+        linear-gradient(
+            to left,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 0) 10%
+        ),
+        linear-gradient(
+            to right,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 0) 10%
+        );
+    pointer-events: none;
+}
+
+.prev,
+.next {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.15));
+}
+
+.prev {
+    left: 1rem;
+}
+
+.next {
+    right: 1rem;
+}
+
+.tabs {
+    display: flex;
+    position: absolute;
+    bottom: 4px;
+    width: 100%;
+    justify-content: center;
+
+    &.dark .tab {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &.dark .tabActive {
+        background-color: var(--c--black);
+    }
+
+    &.light .tab {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    &.light .tabActive {
+        background-color: var(--c--white);
+    }
+}
+
+.tab {
+    width: 8px;
+    height: 8px;
+    margin: 6px;
+    border-radius: 50%;
+}

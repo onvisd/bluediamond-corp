@@ -46,6 +46,7 @@
 
 .secondaryNav {
     height: 40px;
+    font-weight: var(--t--weight-bold);
     line-height: 40px;
     background-color: var(--c--blue-dark);
 
@@ -64,6 +65,11 @@
     &.brand--yellow *,
     &.brand--green * {
         color: var(--c--black);
+    }
+
+    &.brand--yellow svg,
+    &.brand--green svg {
+        fill: var(--c--black);
     }
 
     & .innerContainer {
@@ -178,7 +184,7 @@
     position: absolute;
     top: 72px;
     left: -1rem;
-    height: calc(61px * 4);
+    height: calc(65px * 4);
     margin-top: -0.5rem;
     max-width: 72rem;
     opacity: 0;

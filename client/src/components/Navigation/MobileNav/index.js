@@ -18,7 +18,6 @@ export default class MobileNav extends Component {
     cards = {
         Root: require('./Root').default,
         Products: require('./Products').default,
-        Brand: require('./Brand').default,
         Category: require('./Category').default,
         Company: require('./Company').default
     }
