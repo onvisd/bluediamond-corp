@@ -18,10 +18,15 @@ import Hero from '../../../assets/images/history/hero.png';
 import Timeline1850 from '../../../assets/images/history/timeline-1850.png';
 import Timeline1910 from '../../../assets/images/history/timeline-1910.png';
 import Timeline1914 from '../../../assets/images/history/timeline-1914.png';
+import Timeline1915 from '../../../assets/images/history/timeline-1915.jpg';
 import Timeline1931First from '../../../assets/images/history/timeline-1931-first.png';
 import Timeline1931Second from '../../../assets/images/history/timeline-1931-second.png';
+import Timeline1949 from '../../../assets/images/history/timeline-1949.jpg';
 import Timeline1980 from '../../../assets/images/history/timeline-1980.png';
-import TimelineEmpty from '../../../assets/images/history/timeline-empty.png';
+import Timeline1986 from '../../../assets/images/history/timeline-1986.jpg';
+import Timeline2010 from '../../../assets/images/history/timeline-2010.jpg';
+import Timeline2013First from '../../../assets/images/history/timeline-2013.jpg';
+import Timeline2013Second from '../../../assets/images/history/timeline-2013-2.png';
 
 export default () => (
     <section className={styles.pageContainer}>
@@ -120,7 +125,6 @@ export default () => (
                         </div>
                     </div>
                     <div className={styles.right}>
-
                         <div className={styles.content}>
                             <h2>1914</h2>
                             <p>
@@ -154,7 +158,7 @@ export default () => (
                             <div
                                 className={styles.image}
                                 style={{
-                                    backgroundImage: `url(${TimelineEmpty})`
+                                    backgroundImage: `url(${Timeline1915})`
                                 }}
                             />
                         </div>
@@ -235,7 +239,10 @@ export default () => (
                             <div
                                 className={styles.image}
                                 style={{
-                                    backgroundImage: `url(${TimelineEmpty})`
+                                    backgroundImage: `url(${Timeline1949})`,
+                                    backgroundSize: 'contain',
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: '50% 100%'
                                 }}
                             />
                         </div>
@@ -292,7 +299,7 @@ export default () => (
                 </div>
             </div>
 
-            {/* 1995 */}
+            {/* 1986 */}
             <div className={styles.container}>
                 <div className={styles.row}>
                     <div className={styles.left}>
@@ -300,7 +307,7 @@ export default () => (
                             <div
                                 className={styles.image}
                                 style={{
-                                    backgroundImage: `url(${TimelineEmpty})`
+                                    backgroundImage: `url(${Timeline1986})`
                                 }}
                             />
                         </div>
@@ -314,11 +321,11 @@ export default () => (
                     </div>
                     <div className={styles.right}>
                         <div className={styles.content}>
-                            <h2>1995</h2>
+                            <h2>1986</h2>
                             <p>
-                                Blue Diamond Growers launches a 10-year, $30 million plant
-                                improvement program resulting in the creation of an enclosed,
-                                gated campus with security.
+                                Blue Diamond launches <em>A Can A Week</em> ad campaign,
+                                in which real almond growers made the pitch "A can a week,
+                                that's all we ask"
                             </p>
                         </div>
                     </div>
@@ -349,7 +356,7 @@ export default () => (
                             <div
                                 className={styles.image}
                                 style={{
-                                    backgroundImage: `url(${TimelineEmpty})`
+                                    backgroundImage: `url(${Timeline2010})`
                                 }}
                             />
                         </div>
@@ -365,7 +372,7 @@ export default () => (
                             <div
                                 className={styles.image}
                                 style={{
-                                    backgroundImage: `url(${TimelineEmpty})`
+                                    backgroundImage: `url(${Timeline2013First})`
                                 }}
                             />
                         </div>
@@ -415,7 +422,7 @@ export default () => (
                             <div
                                 className={styles.image}
                                 style={{
-                                    backgroundImage: `url(${TimelineEmpty})`
+                                    backgroundImage: `url(${Timeline2013Second})`
                                 }}
                             />
                         </div>

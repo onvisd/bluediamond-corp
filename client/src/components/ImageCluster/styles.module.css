@@ -35,7 +35,8 @@
 .threeUp {
     & .clusterImage {
         &:nth-child(n+2) {
-            margin-left: -15%;
+            margin-left: -10%;
+            z-index: 0;
         }
     }
 }
