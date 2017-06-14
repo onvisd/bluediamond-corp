@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
-import ExternalLink from '../../../assets/images/icons/external-link.svg';
+import ExternalLink from 'images/icons/external-link.svg';
 import Button from '../Button';
 import styles from './styles.module.css';
 

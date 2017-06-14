@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
 
-import Tile from '../../Tile';
+import Tile from 'components/Navigation/Tile';
 import styles from './styles.module.css';
 
 const Company = ({navData, companyNavTiles, toggleNav}) => (

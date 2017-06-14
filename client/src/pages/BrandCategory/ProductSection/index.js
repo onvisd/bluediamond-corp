@@ -1,10 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import classnames from 'classnames';
 
-import Button from '../../../components/Button';
-import ButtonDropdown from '../../../components/ButtonDropdown';
-import ProductPanel from '../../../components/ProductPanel';
-import ProductAccordion from '../../../components/ProductAccordion';
+import Button from 'components/Button';
+import ButtonDropdown from 'components/ButtonDropdown';
+import ProductPanel from 'components/ProductPanel';
+import ProductAccordion from 'components/ProductAccordion';
 import styles from './styles.module.css';
 
 export default class ProductSection extends Component {

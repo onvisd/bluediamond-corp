@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import classnames from 'classnames';
 
-import ButtonDropdown from '../../../components/ButtonDropdown';
+import ButtonDropdown from 'components/ButtonDropdown';
 import styles from './styles.module.css';
 
 const Hero = ({brand, category, product}) => (

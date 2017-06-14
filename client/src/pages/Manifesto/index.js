@@ -3,18 +3,18 @@ import {connect} from 'react-redux';
 import {Title, preload} from 'react-isomorphic-render';
 import marked from 'marked';
 
-import {connector, getManifesto} from '../../redux/manifesto';
-import {parseModel} from '../../tools/parseApi';
+import {connector, getManifesto} from 'state/manifesto';
+import {parseModel} from 'tools/parseApi';
 
-import PageHero from '../../components/PageHero';
-import ImageCluster from '../../components/ImageCluster';
-import FullBleedImage from '../../components/FullBleedImage';
-import RelatedPages from '../../components/RelatedPages';
-import RelatedPageLink from '../../components/RelatedPageLink';
+import PageHero from 'components/PageHero';
+import ImageCluster from 'components/ImageCluster';
+import FullBleedImage from 'components/FullBleedImage';
+import RelatedPages from 'components/RelatedPages';
+import RelatedPageLink from 'components/RelatedPageLink';
 
-import Diamond from '../../../assets/images/icons/diamond.svg';
-import BgLeaves from '../../../assets/images/backgrounds/almond-leaves-left.png';
-import BgAlmond from '../../../assets/images/backgrounds/almonds.png';
+import Diamond from 'images/icons/diamond.svg';
+import BgLeaves from 'images/backgrounds/almond-leaves-left.png';
+import BgAlmond from 'images/backgrounds/almonds.png';
 
 import styles from './styles.module.css';
 

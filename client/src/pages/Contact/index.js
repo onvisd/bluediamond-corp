@@ -2,14 +2,14 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Title, preload} from 'react-isomorphic-render';
 
-import {connector, getContact} from '../../redux/contact';
-import Button from '../../components/Button';
-import ContactDetails from '../../components/ContactDetails';
-import ContactForm from '../../components/ContactForm';
-import FAQ from '../../components/FAQ';
+import {connector, getContact} from 'state/contact';
+import Button from 'components/Button';
+import ContactDetails from 'components/ContactDetails';
+import ContactForm from 'components/ContactForm';
+import FAQ from 'components/FAQ';
 import styles from './styles.module.css';
 
-import {parseModel} from '../../tools/parseApi';
+import {parseModel} from 'tools/parseApi';
 
 @preload(({dispatch}) => dispatch(getContact()))
 @connect(

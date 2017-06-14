@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 
-import Button from '../../../Button';
-import Card from '../../Card';
-import ProductLink from '../../../ProductLink';
+import Button from 'components/Button';
+import ProductLink from 'components/ProductLink';
+import Card from 'components/Navigation/Card';
 import styles from './styles.module.css';
 
 const Category = ({brand, category, toggleNav}) => (

@@ -1,32 +1,33 @@
 import React from 'react';
 import {Title} from 'react-isomorphic-render';
 
-import GenericHero from '../../components/GenericHero';
-import RelatedPages from '../../components/RelatedPages';
-import RelatedPageLink from '../../components/RelatedPageLink';
+import GenericHero from 'components/GenericHero';
+import RelatedPages from 'components/RelatedPages';
+import RelatedPageLink from 'components/RelatedPageLink';
 
 import styles from './styles.module.css';
 
-import Diamond from '../../../assets/images/icons/diamond.svg';
-import Leaves from '../../../assets/images/backgrounds/almond-leaf-right.png';
-import Almonds from '../../../assets/images/backgrounds/almonds-left.png';
-import Texture from '../../../assets/images/backgrounds/texture.png';
-import Blossom from '../../../assets/images/backgrounds/almond-blossom.png';
-import Burlap from '../../../assets/images/backgrounds/burlap.png';
-import Paint from '../../../assets/images/backgrounds/blue-paint.png';
-import Hero from '../../../assets/images/history/hero.png';
-import Timeline1850 from '../../../assets/images/history/timeline-1850.png';
-import Timeline1910 from '../../../assets/images/history/timeline-1910.png';
-import Timeline1914 from '../../../assets/images/history/timeline-1914.png';
-import Timeline1915 from '../../../assets/images/history/timeline-1915.jpg';
-import Timeline1931First from '../../../assets/images/history/timeline-1931-first.png';
-import Timeline1931Second from '../../../assets/images/history/timeline-1931-second.png';
-import Timeline1949 from '../../../assets/images/history/timeline-1949.jpg';
-import Timeline1980 from '../../../assets/images/history/timeline-1980.png';
-import Timeline1986 from '../../../assets/images/history/timeline-1986.jpg';
-import Timeline2010 from '../../../assets/images/history/timeline-2010.jpg';
-import Timeline2013First from '../../../assets/images/history/timeline-2013.jpg';
-import Timeline2013Second from '../../../assets/images/history/timeline-2013-2.png';
+import Diamond from 'images/icons/diamond.svg';
+import Leaves from 'images/backgrounds/almond-leaf-right.png';
+import Almonds from 'images/backgrounds/almonds-left.png';
+import Texture from 'images/backgrounds/texture.png';
+import Blossom from 'images/backgrounds/almond-blossom.png';
+import Burlap from 'images/backgrounds/burlap.png';
+import Paint from 'images/backgrounds/blue-paint.png';
+import Hero from 'images/history/hero.png';
+import Timeline1850 from 'images/history/timeline-1850.png';
+import Timeline1910 from 'images/history/timeline-1910.png';
+import Timeline1914 from 'images/history/timeline-1914.png';
+import Timeline1915 from 'images/history/timeline-1915.jpg';
+import Timeline1931First from 'images/history/timeline-1931-first.png';
+import Timeline1931Second from 'images/history/timeline-1931-second.png';
+import Timeline1949 from 'images/history/timeline-1949.jpg';
+import Timeline1980 from 'images/history/timeline-1980.png';
+import Timeline1986 from 'images/history/timeline-1986.jpg';
+import Timeline2010 from 'images/history/timeline-2010.jpg';
+import Timeline2013First from 'images/history/timeline-2013.jpg';
+import Timeline2013Second from 'images/history/timeline-2013-2.png';
+import TimelineToday from 'images/history/timeline-today.png';
 
 export default () => (
     <section className={styles.pageContainer}>
@@ -432,7 +433,12 @@ export default () => (
         </div>
 
         {/* Today */}
-        <div className={styles.today}>
+        <div
+            className={styles.today}
+            style={{
+                backgroundImage: `url(${TimelineToday})`
+            }}
+        >
             <div className="l--container">
                 <div className={styles.timelineRow}>
                     <div className="l--col-5 l--col-12-at-s">

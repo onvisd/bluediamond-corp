@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 
-import ProductPanel from '../../../components/ProductPanel';
+import ProductPanel from 'components/ProductPanel';
 import styles from './styles.module.css';
 
 export default class Category extends Component {

@@ -2,11 +2,11 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Title, preload} from 'react-isomorphic-render';
 
-import {connector, getHome} from '../../redux/home';
-import {parseModel} from '../../tools/parseApi';
+import {connector, getHome} from 'state/home';
+import {parseModel} from 'tools/parseApi';
 
-import Button from '../../components/Button';
-import ButtonDropdown from '../../components/ButtonDropdown';
+import Button from 'components/Button';
+import ButtonDropdown from 'components/ButtonDropdown';
 import styles from './styles.module.css';
 
 @preload(({dispatch}) => dispatch(getHome()))

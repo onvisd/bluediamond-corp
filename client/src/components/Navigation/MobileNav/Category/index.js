@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 
-import Button from '../../../Button';
-import ProductLink from '../../../ProductLink';
+import Button from 'components/Button';
+import ProductLink from 'components/ProductLink';
+import Card from 'components/Navigation/Card';
 import Breadcrumb from '../Breadcrumb';
-import Card from '../../Card';
 import styles from './styles.module.css';
 
 export default class Category extends Component {

@@ -2,8 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {ViewPager, Frame, Track, View} from 'react-view-pager';
 import classnames from 'classnames';
 
-import ArrowLeft from '../../../assets/images/icons/arrow-left.svg';
-import ArrowRight from '../../../assets/images/icons/arrow-right.svg';
+import ArrowLeft from 'images/icons/arrow-left.svg';
+import ArrowRight from 'images/icons/arrow-right.svg';
 import styles from './styles.module.css';
 
 export default class Carousel extends Component {

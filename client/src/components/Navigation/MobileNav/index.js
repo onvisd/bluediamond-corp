@@ -3,9 +3,9 @@ import TransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
-import BDLogo from '../../../../assets/images/bd-logo.svg';
-import User from '../../../../assets/images/icons/user.svg';
-import Cart from '../../../../assets/images/icons/cart.svg';
+import BDLogo from 'images/bd-logo.svg';
+import User from 'images/icons/user.svg';
+import Cart from 'images/icons/cart.svg';
 import styles from './styles.module.css';
 
 export default class MobileNav extends Component {

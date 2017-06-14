@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import TransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
-import Card from '../../Card';
-import NavList from '../../NavList';
-import NavItem from '../../NavItem';
+import Card from 'components/Navigation/Card';
+import NavList from 'components/Navigation/NavList';
+import NavItem from 'components/Navigation/NavItem';
 import styles from './styles.module.css';
 
 export default class Products extends Component {

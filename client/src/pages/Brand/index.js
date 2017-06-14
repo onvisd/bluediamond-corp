@@ -2,15 +2,15 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Title, preload} from 'react-isomorphic-render';
 
-import {connector as brandConnector, getBrand} from '../../redux/brand';
+import {connector as brandConnector, getBrand} from 'state/brand';
 import {
     connector as navConnector,
     setNavigationStyle
-} from '../../redux/navigation';
+} from 'state/navigation';
 
-import Button from '../../components/Button';
-import CardPanel from '../../components/CardPanel';
-import Carousel from '../../components/Carousel';
+import Button from 'components/Button';
+import CardPanel from 'components/CardPanel';
+import Carousel from 'components/Carousel';
 import Hero from './Hero';
 import Story from './Story';
 import Category from './Category';

@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 
-import NavList from '../../NavList';
-import NavItem from '../../NavItem';
-import Card from '../../Card';
+import NavList from 'components/Navigation/NavList';
+import NavItem from 'components/Navigation/NavItem';
+import Card from 'components/Navigation/Card';
 
 export default class Root extends Component {
     static propTypes = {

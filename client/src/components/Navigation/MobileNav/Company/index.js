@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
 
-import Tile from '../../Tile';
+import Tile from 'components/Navigation/Tile';
+import Card from 'components/Navigation/Card';
 import Breadcrumb from '../Breadcrumb';
-import Card from '../../Card';
 import styles from './styles.module.css';
 
 export default class Company extends Component {

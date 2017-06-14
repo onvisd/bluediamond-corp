@@ -3,8 +3,8 @@ import classnames from 'classnames';
 
 import styles from './styles.module.css';
 
-import CaretDown from '../../../assets/images/icons/caret-down.svg';
-import SmartLabel from '../../../assets/images/icons/smart-label.png';
+import CaretDown from 'images/icons/caret-down.svg';
+import SmartLabel from 'images/icons/smart-label.png';
 
 export default class ProductAccordion extends Component {
     static propTypes = {

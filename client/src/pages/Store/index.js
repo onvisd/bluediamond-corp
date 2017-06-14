@@ -3,14 +3,14 @@ import {connect} from 'react-redux';
 import {preload, Title} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
-import {connector, getStoreProducts} from '../../redux/storeProducts';
-import StoreHero from '../../components/StoreHero';
-import ProductFilter from '../../components/ProductFilter';
-import StoreProductCard from '../../components/API/StoreProductCard';
-import Button from '../../components/Button';
+import {connector, getStoreProducts} from 'state/storeProducts';
+import StoreHero from 'components/StoreHero';
+import ProductFilter from 'components/ProductFilter';
+import StoreProductCard from 'components/API/StoreProductCard';
+import Button from 'components/Button';
 import styles from './styles.module.css';
 
-import Hero from '../../../assets/images/store/hero.png';
+import Hero from 'images/store/hero.png';
 
 @preload(({dispatch}) => dispatch(getStoreProducts()))
 @connect(

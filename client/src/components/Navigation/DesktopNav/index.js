@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
-import {connector} from '../../../redux/navigation';
+import {connector} from 'state/navigation';
 
-import ShoppingCart from '../../../../assets/images/icons/cart.svg';
-import User from '../../../../assets/images/icons/user.svg';
-import BDLogo from '../../../../assets/images/bd-logo.svg';
+import ShoppingCart from 'images/icons/cart.svg';
+import User from 'images/icons/user.svg';
+import BDLogo from 'images/bd-logo.svg';
 import styles from './styles.module.css';
 
 @connect(

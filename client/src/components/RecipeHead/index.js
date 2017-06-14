@@ -3,9 +3,9 @@ import marked from 'marked';
 
 import NutritionFacts from '../NutritionFacts';
 
-import Facebook from '../../../assets/images/icons/facebook.svg';
-import Pinterest from '../../../assets/images/icons/pinterest.svg';
-import Twitter from '../../../assets/images/icons/twitter.svg';
+import Facebook from 'images/icons/facebook.svg';
+import Pinterest from 'images/icons/pinterest.svg';
+import Twitter from 'images/icons/twitter.svg';
 
 import styles from './styles.module.css';
 

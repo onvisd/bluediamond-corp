@@ -6,7 +6,7 @@ import {
     connector,
     getNavigationData,
     setNavigationStyle
-} from '../redux/navigation';
+} from '../state/navigation';
 
 import Preloading from '../components/Preloading';
 import Navigation from '../components/Navigation';

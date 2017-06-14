@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 
-import {connector, getPageData} from '../redux/pageData';
+import {connector, getPageData} from '../state/pageData';
 import NotFound from './NotFound';
 
 // require pageModules ahead of time here using the format

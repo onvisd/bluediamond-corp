@@ -237,7 +237,6 @@
     position: relative;
     height: 50rem;
     background-color: var(--c--gray-dark);
-    background-image: url(../../../assets/images/history/timeline-today.png);
     background-size: cover;
     background-position: center;
     overflow: hidden;

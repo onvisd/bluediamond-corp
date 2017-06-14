@@ -2,12 +2,12 @@ import React, {Component, PropTypes} from 'react';
 
 import styles from './styles.module.css';
 
-import GlutenFree from '../../../assets/images/icons/gluten-free.svg';
-import HeartHealthy from '../../../assets/images/icons/heart-healthy.svg';
-import Kosher from '../../../assets/images/icons/kosher.svg';
-import ReducedSugar from '../../../assets/images/icons/reduced-sugar.svg';
-import Unsweetened from '../../../assets/images/icons/unsweetened.svg';
-import Vegan from '../../../assets/images/icons/vegan.svg';
+import GlutenFree from 'images/icons/gluten-free.svg';
+import HeartHealthy from 'images/icons/heart-healthy.svg';
+import Kosher from 'images/icons/kosher.svg';
+import ReducedSugar from 'images/icons/reduced-sugar.svg';
+import Unsweetened from 'images/icons/unsweetened.svg';
+import Vegan from 'images/icons/vegan.svg';
 import Button from '../Button';
 import Quantity from '../Quantity';
 import ProductAccordion from '../ProductAccordion';

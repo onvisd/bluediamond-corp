@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import {Title, preload, pushLocation} from 'react-isomorphic-render';
 import {withRouter} from 'react-router';
 
-import {connector as brandConnector, getBrand} from '../../redux/brand';
+import {connector as brandConnector, getBrand} from 'state/brand';
 import {
     connector as navConnector,
     setNavigationStyle
-} from '../../redux/navigation';
+} from 'state/navigation';
 
-import CardPanel from '../../components/CardPanel';
+import CardPanel from 'components/CardPanel';
 import Hero from './Hero';
 import ProductSection from './ProductSection';
 import MoreFlavors from './MoreFlavors';

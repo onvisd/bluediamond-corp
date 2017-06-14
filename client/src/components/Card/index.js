@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
-import Instagram from '../../../assets/images/icons/instagram.svg';
+import Instagram from 'images/icons/instagram.svg';
 import styles from './styles.module.css';
 
 export default class Card extends Component {

@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 import {Title, preload} from 'react-isomorphic-render';
 import moment from 'moment';
 
-import {connector, getPress} from '../../redux/press';
-import {parseModel} from '../../tools/parseApi';
+import {connector, getPress} from 'state/press';
+import {parseModel} from 'tools/parseApi';
 
-import ExternalLink from '../../../assets/images/icons/external-link.svg';
-import Button from '../../components/Button';
+import ExternalLink from 'images/icons/external-link.svg';
+import Button from 'components/Button';
 import styles from './styles.module.css';
 
 @preload(({dispatch}) => dispatch(getPress()))

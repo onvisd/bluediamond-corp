@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Title, preload} from 'react-isomorphic-render';
 
-import {connector, getStoreProduct} from '../../redux/storeProduct';
+import {connector, getStoreProduct} from 'state/storeProduct';
 
-import StoreProductHead from '../../components/API/StoreProductHead';
-import StoreProductCard from '../../components/API/StoreProductCard';
-import StoreProductReview from '../../components/StoreProductReview';
+import StoreProductHead from 'components/API/StoreProductHead';
+import StoreProductCard from 'components/API/StoreProductCard';
+import StoreProductReview from 'components/StoreProductReview';
 
 import styles from './styles.module.css';
 

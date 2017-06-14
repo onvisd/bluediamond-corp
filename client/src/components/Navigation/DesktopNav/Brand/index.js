@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 
-import Card from '../../Card';
-import NavList from '../../NavList';
-import NavItem from '../../NavItem';
+import Card from 'components/Navigation/Card';
+import NavList from 'components/Navigation/NavList';
+import NavItem from 'components/Navigation/NavItem';
 import Category from '../Category';
 
 const Brand = ({brand, setProductCards, productCards}) => (

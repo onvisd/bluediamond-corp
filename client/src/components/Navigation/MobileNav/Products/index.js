@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
+import Card from 'components/Navigation/Card';
 import Breadcrumb from '../Breadcrumb';
-import Card from '../../Card';
 
 import styles from './styles.module.css';
 

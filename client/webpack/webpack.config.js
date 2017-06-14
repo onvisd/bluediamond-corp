@@ -33,6 +33,16 @@ const config = {
         chunkFilename: '[name].[hash].js'
     },
 
+    resolve: {
+        alias: {
+            pages: path.resolve(__dirname, '../src/pages/'),
+            components: path.resolve(__dirname, '../src/components/'),
+            state: path.resolve(__dirname, '../src/state/'),
+            tools: path.resolve(__dirname, '../src/tools'),
+            images: path.resolve(__dirname, '../assets/images/')
+        }
+    },
+
     module: {
         rules: [
             {

@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-import ProductLink from '../../../components/ProductLink';
+import ProductLink from 'components/ProductLink';
 import styles from './styles.module.css';
 
 const MoreProducts = ({products}) => (

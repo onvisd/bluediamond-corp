@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import {Title, preload} from 'react-isomorphic-render';
 import marked from 'marked';
 
-import {connector, getFoodService} from '../../redux/foodService';
-import {parseModel} from '../../tools/parseApi';
+import {connector, getFoodService} from 'state/foodService';
+import {parseModel} from 'tools/parseApi';
 
-import Button from '../../components/Button';
-import RequestSampleForm from '../../components/RequestSampleForm';
-import ContactForm from '../../components/ContactForm';
+import Button from 'components/Button';
+import RequestSampleForm from 'components/RequestSampleForm';
+import ContactForm from 'components/ContactForm';
 
 import styles from './styles.module.css';
 

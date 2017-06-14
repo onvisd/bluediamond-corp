@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-import Button from '../../../components/Button';
+import Button from 'components/Button';
 import styles from './styles.module.css';
 
 const MoreFlavors = ({brand, otherCategories}) => (

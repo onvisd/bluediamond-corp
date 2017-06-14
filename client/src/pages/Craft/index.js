@@ -4,16 +4,16 @@ import {Title, preload} from 'react-isomorphic-render';
 import {ViewPager, Frame, Track, View} from 'react-view-pager';
 import classnames from 'classnames';
 
-import {connector, getCraft} from '../../redux/craft';
-import {parseModel} from '../../tools/parseApi';
+import {connector, getCraft} from 'state/craft';
+import {parseModel} from 'tools/parseApi';
 
-import BDLogo from '../../../assets/images/bd-logo.svg';
-import GrowersHands from '../../../assets/images/icons/growers-hands.svg';
-import ProductManufacturing from '../../../assets/images/icons/product-manufacturing.svg';
-import QualityAssurance from '../../../assets/images/icons/quality-assurance.svg';
-import GenericHero from '../../components/GenericHero';
-import RelatedPages from '../../components/RelatedPages';
-import RelatedPageLink from '../../components/RelatedPageLink';
+import BDLogo from 'images/bd-logo.svg';
+import GrowersHands from 'images/icons/growers-hands.svg';
+import ProductManufacturing from 'images/icons/product-manufacturing.svg';
+import QualityAssurance from 'images/icons/quality-assurance.svg';
+import GenericHero from 'components/GenericHero';
+import RelatedPages from 'components/RelatedPages';
+import RelatedPageLink from 'components/RelatedPageLink';
 import styles from './styles.module.css';
 
 

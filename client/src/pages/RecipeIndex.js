@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import {preload, Title} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
-import {connector, getRecipes} from '../redux/recipes';
-import {connector as navConnector, setNavigationStyle} from '../redux/navigation';
+import {connector, getRecipes} from '../state/recipes';
+import {connector as navConnector, setNavigationStyle} from '../state/navigation';
 import RecipeCard from '../components/API/RecipeCard';
 
 import GenericHero from '../components/GenericHero';
