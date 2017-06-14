@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Title, preload} from 'react-isomorphic-render';
+import {Parallax} from 'react-parallax';
 
 import {connector, getHome} from 'state/home';
 import {parseModel} from 'tools/parseApi';
@@ -83,8 +84,11 @@ export default class Home extends Component {
                 <Title>Home</Title>
                 <div
                     className={styles.hero}
-                    style={{backgroundImage: `url(${homeFields.heroBackground.file.url})`}}
                 >
+                    <Parallax
+                        className={styles.heroBackground}
+                        bgImage={homeFields.heroBackground.file.url}
+                    />
                     <img className={styles.blossom} src={homeFields.heroBlossomImage.file.url} />
                     <div
                         className={styles.products}
@@ -145,20 +149,20 @@ export default class Home extends Component {
                         </div>
                     </div>
                 </div>
-                <div
+                <Parallax
                     className={styles.coop}
-                    style={{backgroundImage: `url(${homeFields.coopImage.file.url})`}}
+                    bgImage={homeFields.coopImage.file.url}
                 >
                     <div className={styles.coopContent}>
                         <div>
-                            <h1 className="t--size-xxl">{homeFields.coopHeadline}</h1>
+                            <h2>{homeFields.coopHeadline}</h2>
                             <p>{homeFields.coopText}</p>
-                            <Button>
-                                Watch Video
+                            <Button href="/manifesto">
+                                Our Story
                             </Button>
                         </div>
                     </div>
-                </div>
+                </Parallax>
             </section>
         );
     }
