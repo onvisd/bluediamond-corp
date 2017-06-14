@@ -91,9 +91,7 @@ export default class DesktopNav extends Component {
                         </ul>
                         <ul className={styles.secondaryNavLinks}>
                             <li>
-                                <Link to="/login">Log In</Link>
-                                {' '}or{' '}
-                                <Link to="/create-account">Create Account</Link>
+                                <Link to="/signin">Sign In or Create Account</Link>
                                 <User />
                             </li>
                         </ul>

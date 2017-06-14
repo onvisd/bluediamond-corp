@@ -7,9 +7,9 @@
 
     & input {
         display: block;
+        width: 21rem;
         height: 2.5rem;
         padding: 0 0.5rem;
-        min-width: 21rem;
         max-width: 100%;
         font-size: var(--t--size-s);
         border: 1px solid var(--c--gray-light);
@@ -23,13 +23,11 @@
 }
 
 .label {
-    font-size: var(--t--size-xs);
-    font-weight: 500;
+    font-weight: var(--t--weight-medium);
 }
 
 .error {
     color: var(--c--red);
-    font-size: var(--t--size-xs);
 
     & input,
     & input:focus {

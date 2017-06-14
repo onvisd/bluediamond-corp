@@ -37,6 +37,10 @@
     min-width: 16.5rem;
 }
 
+.fw {
+    width: 100%;
+}
+
 .large {
     height: 3rem;
     padding: 0 2.5rem;
