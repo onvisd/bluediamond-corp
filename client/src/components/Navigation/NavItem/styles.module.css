@@ -11,21 +11,13 @@
         border-bottom: 1px solid var(--c--gray-lighter);
     }
 
-    & a,
-    & div {
+    & .button {
         display: flex;
+        position: relative;
         height: 100%;
         padding: 0 1.5rem;
         align-items: center;
         cursor: pointer;
-    }
-
-    & a {
-        color: var(--c--black);
-    }
-
-    & div {
-        position: relative;
         justify-content: space-between;
         color: var(--c--gray-dark);
 
@@ -56,20 +48,24 @@
         }
     }
 
+    & a {
+        color: var(--c--black);
+    }
+
     @media (--mq-gt-s) {
         height: 64px;
 
         & a,
-        & div {
+        & .button {
             padding: 0 1rem;
         }
 
-        & div:hover {
+        & .button:hover {
             color: var(--c--black);
             background-color: var(--c--gray-lighter);
         }
 
-        & div::after {
+        & .button::after {
             right: 1rem;
         }
     }
@@ -91,22 +87,22 @@
         border-bottom: 1px solid var(--c--yellow-dark);
     }
 
-    & div {
+    & .button {
         color: var(--c--yellow-darker);
     }
 
-    & div:focus,
-    & div.active {
+    & .button:focus,
+    & .button.active {
         color: var(--c--black);
         background-color: var(--c--yellow-light);
     }
 
-    & div.active::after {
+    & .button.active::after {
         opacity: 0.8;
     }
 
     @media (--mq-gt-s) {
-        & div:hover {
+        & .button:hover {
             color: var(--c--black);
             background-color: var(--c--yellow-light);
         }
@@ -121,22 +117,22 @@
         border-bottom: 1px solid var(--c--green-dark);
     }
 
-    & div {
+    & .button {
         color: var(--c--green-darker);
     }
 
-    & div:focus,
-    & div.active {
+    & .button:focus,
+    & .button.active {
         color: var(--c--black);
         background-color: var(--c--green-light);
     }
 
-    & div.active::after {
+    & .button.active::after {
         opacity: 0.8;
     }
 
     @media (--mq-gt-s) {
-        & div:hover {
+        & .button:hover {
             color: var(--c--black);
             background-color: var(--c--green-light);
         }
@@ -151,22 +147,22 @@
         border-bottom: 1px solid var(--c--blue-dark);
     }
 
-    & div {
+    & .button {
         color: var(--c--blue-darker);
     }
 
-    & div:focus,
-    & div.active {
+    & .button:focus,
+    & .button.active {
         color: var(--c--black);
         background-color: var(--c--blue-light);
     }
 
-    & div.active::after {
+    & .button.active::after {
         opacity: 0.8;
     }
 
     @media (--mq-gt-s) {
-        & div:hover {
+        & .button:hover {
             color: var(--c--black);
             background-color: var(--c--blue-light);
         }

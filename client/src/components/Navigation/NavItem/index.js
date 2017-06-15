@@ -9,7 +9,7 @@ const NavItem = ({active, theme, href, extHref, onClick, onMouseOver, children})
         <div
             onClick={onClick}
             onMouseOver={onMouseOver}
-            className={classnames({
+            className={classnames(styles.button, {
                 [styles.active]: active
             })}
         >
@@ -19,13 +19,20 @@ const NavItem = ({active, theme, href, extHref, onClick, onMouseOver, children})
 
     if(href) {
         button = (
-            <Link to={href} onClick={onClick}>
+            <Link
+                to={href}
+                onClick={onClick}
+                onMouseOver={onMouseOver}
+                className={classnames(styles.button, {
+                    [styles.active]: active
+                })}
+            >
                 {children}
             </Link>
         );
     } else if(extHref) {
         button = (
-            <a href={extHref} target="_blank">
+            <a href={extHref} target="_blank" className={styles.button}>
                 {children}
             </a>
         );

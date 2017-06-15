@@ -38,6 +38,7 @@ export default class Products extends Component {
                     productCards[0] &&
                     productCards[0].name === brand.fields.name
                 }
+                href={`/brand/${brand.fields.slug}`}
                 onMouseOver={() => setProductCards([{
                     element: this.cards.Brand,
                     name: brand.fields.name,
