@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Title, preload, pushLocation} from 'react-isomorphic-render';
+import {preload, pushLocation} from 'react-isomorphic-render';
 import {withRouter} from 'react-router';
 
 import {connector as brandConnector, getBrand} from 'state/brand';
@@ -9,6 +9,7 @@ import {
     setNavigationStyle
 } from 'state/navigation';
 
+import Title from 'components/Title';
 import CardPanel from 'components/CardPanel';
 import Hero from './Hero';
 import ProductSection from './ProductSection';

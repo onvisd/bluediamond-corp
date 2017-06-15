@@ -1,11 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Title, preload} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 import {ViewPager, Frame, Track, View} from 'react-view-pager';
 import classnames from 'classnames';
 
 import {connector, getCraft} from 'state/craft';
 import {parseModel} from 'tools/parseApi';
+
+import Title from 'components/Title';
 
 import BDLogo from 'images/bd-logo.svg';
 import GrowersHands from 'images/icons/growers-hands.svg';

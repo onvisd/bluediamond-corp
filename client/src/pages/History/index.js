@@ -1,6 +1,6 @@
 import React from 'react';
-import {Title} from 'react-isomorphic-render';
 
+import Title from 'components/Title';
 import GenericHero from 'components/GenericHero';
 import RelatedPages from 'components/RelatedPages';
 import RelatedPageLink from 'components/RelatedPageLink';

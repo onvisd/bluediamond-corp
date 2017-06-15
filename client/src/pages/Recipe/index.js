@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Title, preload} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 import marked from 'marked';
 
 import {connector, getRecipe} from 'state/recipe';
 import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 
+import Title from 'components/Title';
 import RecipeHead from 'components/API/RecipeHead';
 import RecipeStep from 'components/API/RecipeStep';
 import ProductCard from 'components/API/ProductCard';

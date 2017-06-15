@@ -1,5 +1,6 @@
 import React from 'react';
-import {Title} from 'react-isomorphic-render';
+
+import Title from 'components/Title';
 
 export default () => (
     <div>

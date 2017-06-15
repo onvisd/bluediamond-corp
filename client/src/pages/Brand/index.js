@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Title, preload} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 
 import {connector as brandConnector, getBrand} from 'state/brand';
 import {
@@ -8,6 +8,7 @@ import {
     setNavigationStyle
 } from 'state/navigation';
 
+import Title from 'components/Title';
 import Button from 'components/Button';
 import CardPanel from 'components/CardPanel';
 import Carousel from 'components/Carousel';

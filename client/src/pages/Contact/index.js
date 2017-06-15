@@ -1,8 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Title, preload} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 
 import {connector, getContact} from 'state/contact';
+
+import Title from 'components/Title';
 import Button from 'components/Button';
 import ContactDetails from 'components/ContactDetails';
 import ContactForm from 'components/ContactForm';

@@ -1,10 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Title, preload} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 import moment from 'moment';
 
 import {connector, getPress} from 'state/press';
 import {parseModel} from 'tools/parseApi';
+
+import Title from 'components/Title';
 
 import ExternalLink from 'images/icons/external-link.svg';
 import Button from 'components/Button';

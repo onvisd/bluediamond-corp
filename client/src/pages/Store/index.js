@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {preload, Title} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
 import {connector, getStoreProducts} from 'state/storeProducts';
+
+import Title from 'components/Title';
 import StoreHero from 'components/StoreHero';
 import ProductFilter from 'components/ProductFilter';
 import StoreProductCard from 'components/API/StoreProductCard';

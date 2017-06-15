@@ -1,11 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Title, preload} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 import marked from 'marked';
 
 import {connector, getFoodService} from 'state/foodService';
 import {parseModel} from 'tools/parseApi';
 
+import Title from 'components/Title';
 import Button from 'components/Button';
 import RequestSampleForm from 'components/RequestSampleForm';
 import ContactForm from 'components/ContactForm';

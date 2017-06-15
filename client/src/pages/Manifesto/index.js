@@ -1,11 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Title, preload} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 import marked from 'marked';
 
 import {connector, getManifesto} from 'state/manifesto';
 import {parseModel} from 'tools/parseApi';
 
+import Title from 'components/Title';
 import PageHero from 'components/PageHero';
 import ImageCluster from 'components/ImageCluster';
 import FullBleedImage from 'components/FullBleedImage';

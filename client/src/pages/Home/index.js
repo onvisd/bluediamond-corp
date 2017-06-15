@@ -1,11 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Title, preload} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 import {Parallax} from 'react-parallax';
 
 import {connector, getHome} from 'state/home';
 import {parseModel} from 'tools/parseApi';
 
+import Title from 'components/Title';
 import Button from 'components/Button';
 import ButtonDropdown from 'components/ButtonDropdown';
 import styles from './styles.module.css';
@@ -81,7 +82,7 @@ export default class Home extends Component {
 
         return (
             <section className={styles.container}>
-                <Title>Home</Title>
+                <Title>From Our Hearts to Your Hands</Title>
                 <div
                     className={styles.hero}
                 >

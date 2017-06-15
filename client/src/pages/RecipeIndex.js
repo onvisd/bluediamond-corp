@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {preload, Title} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
-import {connector, getRecipes} from '../state/recipes';
-import {connector as navConnector, setNavigationStyle} from '../state/navigation';
-import RecipeCard from '../components/API/RecipeCard';
+import {connector, getRecipes} from 'state/recipes';
+import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 
-import GenericHero from '../components/GenericHero';
-import Button from '../components/Button';
+import Title from 'components/Title';
+import RecipeCard from 'components/API/RecipeCard';
+import GenericHero from 'components/GenericHero';
+import Button from 'components/Button';
 
 @preload(async ({dispatch}) => {
     const recipes = await dispatch(getRecipes());

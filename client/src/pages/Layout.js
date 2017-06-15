@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Title, Meta, preload} from 'react-isomorphic-render';
+import {Meta, preload} from 'react-isomorphic-render';
 
 import {
     connector,
@@ -8,6 +8,7 @@ import {
     setNavigationStyle
 } from '../state/navigation';
 
+import Title from 'components/Title';
 import Preloading from '../components/Preloading';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -42,7 +43,7 @@ export default class Layout extends Component {
             categories: brand.fields.categories.map((category) => category.fields.name)
         }));
 
-        const title = 'WebApp';
+        const title = 'From Our Hearts to Your Hands';
 
         const meta =
             [
