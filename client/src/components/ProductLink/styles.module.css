@@ -17,6 +17,11 @@
     }
 }
 
+.container {
+    cursor: pointer;
+    text-align: center;
+}
+
 .nav,
 .carousel {
     composes: base;

@@ -11,7 +11,10 @@ const MoreFlavors = ({brand, otherCategories}) => (
                 <div className={styles.panel} key={category.sys.id}>
                     <div>
                         <h2>{category.fields.name}</h2>
-                        <Button href={`/${brand.fields.slug}/${category.fields.slug}`} theme={brand.fields.themeColor}>
+                        <Button
+                            href={`/brand/${brand.fields.slug}/${category.fields.slug}`}
+                            theme={brand.fields.themeColor}
+                        >
                             See Products
                         </Button>
                     </div>

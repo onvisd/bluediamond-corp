@@ -23,14 +23,6 @@ export default class ProductLink extends Component {
         type: 'panel'
     }
 
-    componentWillMount() {
-        this.pathname =
-            '/brand' +
-            `/${this.props.product.fields.brand.split(' ').join('-').toLowerCase()}` +
-            `/${this.props.product.fields.brandCategory.split(' ').join('-').toLowerCase()}` +
-            `/${this.props.product.fields.slug}`;
-    }
-
     render() {
         const {
             product,
@@ -43,8 +35,14 @@ export default class ProductLink extends Component {
             type
         } = this.props;
 
+        const pathname =
+            '/brand' +
+            `/${product.fields.brand.split(' ').join('-').toLowerCase()}` +
+            `/${product.fields.brandCategory.split(' ').join('-').toLowerCase()}` +
+            `/${product.fields.slug}`;
+
         let child = (
-            <Link to={this.pathname} onClick={onClick}>
+            <Link className={styles.container} to={pathname} onClick={onClick}>
                 <div className={styles.image}>
                     <img src={product.fields.productPhotos[0].fields.file.url} />
                 </div>
@@ -58,7 +56,7 @@ export default class ProductLink extends Component {
 
         if(action === 'push') {
             child = (
-                <a onClick={onClick}>
+                <div className={styles.container} onClick={onClick}>
                     <div className={styles.image}>
                         <img src={product.fields.productPhotos[0].fields.file.url} />
                     </div>
@@ -67,7 +65,7 @@ export default class ProductLink extends Component {
                             <span className={styles.brand}>{product.fields.brand}</span>}
                         <span className={styles.title}>{product.fields.name}</span>
                     </div>
-                </a>
+                </div>
             );
         }
 
