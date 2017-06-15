@@ -1,0 +1,73 @@
+@import 'constants/color';
+@import 'constants/type';
+@import 'constants/grid';
+
+.card {
+    display: flex;
+    padding: 1rem;
+    border-bottom: 2px solid var(--c--gray-lighter);
+    text-align: left;
+
+    & .price {
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+        color: var(--c--orange);
+        font-weight: var(--t--weight-bold);
+
+        @media (--mq-gt-s) {
+            margin-bottom: 0;
+        }
+    }
+
+    @media (--mq-gt-s) {
+        padding: 1rem 0 1rem 0.5rem;
+    }
+}
+
+.image {
+    width: 40%;
+    margin-right: 1rem;
+    padding: 0.5rem;
+
+    @media (--mq-gt-s) {
+        width: 30%;
+        margin-right: 0.5rem;
+    }
+}
+
+.title {
+    margin-bottom: 0.5rem;
+    font-size: var(--t--size-s);
+}
+
+.info {
+    line-height: 1;
+
+    @media (--mq-gt-s) {
+        margin-right: 0.5rem;
+    }
+}
+
+.remove {
+    color: var(--c--gray);
+    text-decoration: underline;
+
+    @media (--mq-gt-s) {
+        display: none;
+    }
+}
+
+.delete {
+    display: none;
+    margin-top: -2px;
+    padding: 0;
+    flex-direction: column;
+
+    & svg {
+        fill: var(--c--blue);
+    }
+
+    @media (--mq-gt-s) {
+        display: flex;
+    }
+}

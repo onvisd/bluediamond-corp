@@ -5,9 +5,10 @@ import classnames from 'classnames';
 
 import {connector} from 'state/navigation';
 
-import ShoppingCart from 'images/icons/cart.svg';
+import ShoppingCartIcon from 'images/icons/cart.svg';
 import User from 'images/icons/user.svg';
 import BDLogo from 'images/bd-logo.svg';
+import ShoppingCart from '../ShoppingCart';
 import styles from './styles.module.css';
 
 @connect(
@@ -29,8 +30,18 @@ export default class DesktopNav extends Component {
 
     state = {
         navVisible: false,
+        cartVisible: false,
         activeCard: {},
         productCards: []
+    }
+
+    toggleShoppingCart = {
+        show: () => {
+            this.setState(() => ({cartVisible: true}));
+        },
+        hide: () => {
+            this.setState(() => ({cartVisible: false}));
+        }
     }
 
     toggleNav = {
@@ -68,7 +79,7 @@ export default class DesktopNav extends Component {
     }
 
     render() {
-        const {navVisible, productCards} = this.state;
+        const {navVisible, cartVisible, productCards} = this.state;
         const {name, element, props} = this.state.activeCard;
         const {brands, navData, companyNavTiles, navigation} = this.props;
         const navColor = navigation.style ? navigation.style.className : null;
@@ -138,8 +149,27 @@ export default class DesktopNav extends Component {
                                 </Link>
                             </li>
                         ))}
-                        <li className={styles.primaryNavLink}>
-                            <ShoppingCart />
+                        <li className={classnames(styles.primaryNavLink, styles.wide)}>
+                            <div
+                                className={classnames(styles.cart, {
+                                    [styles.active]: cartVisible
+                                })}
+                                onMouseOver={() => {
+                                    this.toggleShoppingCart.show();
+                                }}
+                                onMouseLeave={() => {
+                                    this.toggleShoppingCart.hide();
+                                }}
+                            >
+                                <ShoppingCartIcon />
+                                <div
+                                    className={classnames(styles.dropdown, {
+                                        [styles.active]: cartVisible
+                                    })}
+                                >
+                                    <ShoppingCart onToggle={this.toggleShoppingCart} />
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>

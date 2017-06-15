@@ -4,6 +4,7 @@
 
 .container {
     border-top: 2px solid var(--c--gray-lighter);
+    background-color: var(--c--white);
 
     @media (--mq-gt-s) {
         display: none;

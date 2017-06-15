@@ -31,14 +31,18 @@
     pointer-events: auto;
 }
 
-.ecomm svg {
-    width: 24px;
-    height: 24px;
-    fill: var(--c--black);
-    vertical-align: middle;
+.ecomm {
+    z-index: var(--l--z-highest);
 
-    &:first-child {
-        margin-right: 1rem;
+    & svg {
+        width: 24px;
+        height: 24px;
+        fill: var(--c--black);
+        vertical-align: middle;
+
+        &:first-child {
+            margin-right: 1rem;
+        }
     }
 }
 

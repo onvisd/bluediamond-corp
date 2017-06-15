@@ -19,7 +19,9 @@ export default class MobileNav extends Component {
         Root: require('./Root').default,
         Products: require('./Products').default,
         Category: require('./Category').default,
-        Company: require('./Company').default
+        Company: require('./Company').default,
+        ShoppingCart: require('../ShoppingCart').default,
+        FooterMobile: require('../../FooterMobile').default
     }
 
     state = {
@@ -29,16 +31,16 @@ export default class MobileNav extends Component {
     }
 
     toggleNav = {
-        show: () => {
+        show: (activeCard = {
+            element: this.cards.Root,
+            props: {key: 'Root'}
+        }) => {
             document.documentElement.classList.add('no-scroll');
             document.body.classList.add('no-scroll');
 
             this.setState(() => ({
                 navVisible: true,
-                activeCard: {
-                    element: this.cards.Root,
-                    props: {key: 'Root'}
-                }
+                activeCard
             }));
         },
         hide: () => {
@@ -74,7 +76,21 @@ export default class MobileNav extends Component {
                 <div className={styles.head}>
                     <div className={styles.ecomm}>
                         <User />
-                        <Cart />
+                        <button
+                            className={styles.cart}
+                            onClick={() => {
+                                this.toggleNav.show({
+                                    element: this.cards.ShoppingCart,
+                                    props: {
+                                        key: 'Cart',
+                                        onToggle: this.toggleNav,
+                                        children: React.createElement(this.cards.FooterMobile)
+                                    }
+                                });
+                            }}
+                        >
+                            <Cart />
+                        </button>
                     </div>
                     <div className={styles.logo}>
                         <Link to="/" onClick={this.toggleNav.hide}>
@@ -83,7 +99,12 @@ export default class MobileNav extends Component {
                     </div>
                     <div
                         className={styles.toggleWrap}
-                        onClick={navVisible ? this.toggleNav.hide : this.toggleNav.show}
+                        onClick={() => {
+                            if(navVisible)
+                                this.toggleNav.hide();
+                            else
+                                this.toggleNav.show();
+                        }}
                     >
                         <div
                             className={classnames(styles.toggle, {
