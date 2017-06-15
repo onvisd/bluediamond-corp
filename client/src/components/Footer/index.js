@@ -75,8 +75,13 @@ const Footer = ({data}) => (
                         <p>Information</p>
                         <ul className={styles.navList}>
                             <li>
-                                <Link to="/tos">
-                                    TOS & Privacy
+                                <Link to="/terms">
+                                    Terms of Use
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/privacy">
+                                    Privacy Policy
                                 </Link>
                             </li>
                             <li>
@@ -91,7 +96,7 @@ const Footer = ({data}) => (
                             </li>
                             <li>
                                 <Link to="/foodservice">
-                                    Food Service
+                                    Foodservice
                                 </Link>
                             </li>
                             <li>
@@ -116,7 +121,7 @@ const Footer = ({data}) => (
                             </li>
                             <li>
                                 <Link to="/manifesto">
-                                    Co-op Manifesto
+                                    Our Story
                                 </Link>
                             </li>
                             <li>
