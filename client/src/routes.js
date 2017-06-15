@@ -19,11 +19,13 @@ import Store from './pages/Store';
 import StoreProduct from './pages/StoreProduct';
 import Press from './pages/Press';
 import Signin from './pages/Signin';
+import CheckoutConfirmation from './pages/CheckoutConfirmation';
 
 export default (
     <Route path="/" component={Layout}>
         <IndexRoute component={Home} />
-        <Route path="store" component={Store} />
+        <Route path="/store/checkout/success/:slug" component={CheckoutConfirmation} />
+        <Route path="/store" component={Store} />
         <Route path="/store/products/:slug" component={StoreProduct} />
         <Route path="/foodservice" component={FoodService} />
         <Route path="/manifesto" component={Manifesto} />

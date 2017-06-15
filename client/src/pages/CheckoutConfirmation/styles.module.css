@@ -1,0 +1,42 @@
+@import 'constants/grid';
+@import 'constants/type';
+
+.container {
+    @mixin container;
+
+    padding: 5rem 1rem 2rem;
+
+    @media (--mq-gt-s) {
+        padding: 2rem 0 4rem;
+    }
+
+    & h1 {
+        margin-bottom: 2rem;
+
+        @media (--mq-s) {
+            text-align: center;
+            font-size: var(--t--size-m);
+        }
+    }
+}
+
+.content {
+    @media (--mq-gt-s) {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.half {
+    @media (--mq-gt-s) {
+        width: 50%;
+
+        &:first-child {
+            padding-right: 4rem;
+        }
+
+        &:last-child {
+            padding-left: 4rem;
+        }
+    }
+}
