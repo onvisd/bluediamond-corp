@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 import Diamond from 'images/icons/diamond.svg';
 import Leaves from 'images/backgrounds/almond-leaf-right.png';
 import Almonds from 'images/backgrounds/almonds-left.png';
-import Texture from 'images/backgrounds/texture.png';
 import Blossom from 'images/backgrounds/almond-blossom.png';
 import Burlap from 'images/backgrounds/burlap.png';
 import Paint from 'images/backgrounds/blue-paint.png';
@@ -26,8 +25,8 @@ import Timeline1980 from 'images/history/timeline-1980.png';
 import Timeline1986 from 'images/history/timeline-1986.jpg';
 import Timeline2010 from 'images/history/timeline-2010.jpg';
 import Timeline2013First from 'images/history/timeline-2013.jpg';
-import Timeline2013Second from 'images/history/timeline-2013-2.png';
-import TimelineToday from 'images/history/timeline-today.png';
+import Timeline2013Second from 'images/history/timeline-2013-2.jpg';
+import TimelineToday from 'images/history/timeline-today.jpg';
 
 export default () => (
     <section className={styles.pageContainer}>
@@ -41,7 +40,7 @@ export default () => (
 
             {/* 1850 */}
             <div className={`${styles.container} ${styles.isLeaves}`} style={{
-                backgroundImage: `url(${Leaves}), url(${Texture})`
+                backgroundImage: `url(${Leaves})`
             }}>
                 <div className={styles.row}>
                     <div className={styles.left}>
@@ -169,7 +168,7 @@ export default () => (
 
             {/* 1931 */}
             <div className={`${styles.container} ${styles.isBurlap}`} style={{
-                backgroundImage: `url(${Burlap}), url(${Texture})`
+                backgroundImage: `url(${Burlap})`
             }}>
                 <div className={styles.row}>
                     <div className={styles.left}>
@@ -259,7 +258,7 @@ export default () => (
                         <div className={styles.content}>
                             <h2>1949</h2>
                             <p>
-                                The 6-ounce can of Blue Diamond Smokehouse almonds is first
+                                The 6-ounce can of Blue Diamond Smokehouse® almonds is first
                                 introduced.
                             </p>
                         </div>
@@ -269,14 +268,14 @@ export default () => (
 
             {/* 1980 */}
             <div className={`${styles.container} ${styles.isPaint}`} style={{
-                backgroundImage: `url(${Paint}), url(${Texture})`
+                backgroundImage: `url(${Paint})`
             }}>
                 <div className={styles.row}>
                     <div className={styles.left}>
                         <div className={styles.content}>
                             <h2>1980</h2>
                             <p>
-                                <em>The Exchange</em> officially becomes known as Blue Diamond Growers.
+                                <em>The Exchange</em> officially becomes known as <em>Blue Diamond Growers.</em>
                             </p>
                         </div>
                     </div>
@@ -326,7 +325,7 @@ export default () => (
                             <p>
                                 Blue Diamond launches <em>A Can A Week</em> ad campaign,
                                 in which real almond growers made the pitch "A can a week,
-                                that's all we ask"
+                                that's all we ask."
                             </p>
                         </div>
                     </div>
@@ -435,9 +434,6 @@ export default () => (
         {/* Today */}
         <div
             className={styles.today}
-            style={{
-                backgroundImage: `url(${TimelineToday})`
-            }}
         >
             <div className="l--container">
                 <div className={styles.timelineRow}>
@@ -449,25 +445,28 @@ export default () => (
                         </div>
                         <h2>Today</h2>
                         <p className="t--type-prose">
-                            A final line about the generations of farmers that make Blue Diamond
-                            great.
+                            Working with a new generation of growers, Blue Diamond continues
+                            its legacy of bringing the benefits of almonds to the world.
                         </p>
                     </div>
                 </div>
             </div>
+            <div className={styles.todayImage} style={{
+                backgroundImage: `url(${TimelineToday})`
+            }} />
         </div>
 
         <RelatedPages>
             <RelatedPageLink
                 title="Almonds are all we do"
                 linkText="Our Craft"
-                linkUrl="/our-craft"
+                linkUrl="/craft"
                 linkTheme="yellow"
                 backgroundImage={Almonds}
             />
             <RelatedPageLink
                 title="Quality is our legacy"
-                linkText="Read our Manifesto"
+                linkText="Our Story"
                 linkUrl="/manifesto"
                 linkTheme="blue"
                 backgroundImage={Blossom}

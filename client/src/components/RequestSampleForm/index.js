@@ -82,7 +82,7 @@ export default class RequestSampleForm extends Component {
                         />
                         <Select
                             name="nutThins"
-                            label="Nut Thins"
+                            label="Nut-Thins"
                             options={nutThinsOptions}
                         />
                         <Select

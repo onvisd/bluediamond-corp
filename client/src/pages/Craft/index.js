@@ -240,13 +240,13 @@ export default class Craft extends Component {
                 <RelatedPages>
                     <RelatedPageLink
                         title="Perfected Over Generations"
-                        linkText="Our history"
+                        linkText="Our History"
                         linkUrl="/history"
                         linkTheme="green"
                     />
                     <RelatedPageLink
                         title="Quality is our legacy"
-                        linkText="Read our Manifesto"
+                        linkText="Our Story"
                         linkUrl="/manifesto"
                         linkTheme="blue"
                     />

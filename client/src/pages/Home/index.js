@@ -103,7 +103,7 @@ export default class Home extends Component {
                             items={[
                                 {slug: '/brand/snack-almonds', name: 'Snack Almonds'},
                                 {slug: '/brand/almond-breeze', name: 'Almond Breeze'},
-                                {slug: '/brand/nut-thins', name: 'Nut Thins'}
+                                {slug: '/brand/nut-thins', name: 'Nut-Thins'}
                             ]}
                             layout="large"
                         >

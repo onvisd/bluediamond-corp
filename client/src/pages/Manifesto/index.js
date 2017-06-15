@@ -85,7 +85,7 @@ export default class Manifesto extends Component {
 
         return (
             <section className={styles.content}>
-                <Title>Our Manifesto</Title>
+                <Title>Our Story</Title>
                 <PageHero
                     headline={manifestoFields.heroHeadline}
                     showHeadline={true}
@@ -162,7 +162,7 @@ export default class Manifesto extends Component {
                     <RelatedPageLink
                         headline="We take pride in our work"
                         title="Perfected Over Generations"
-                        linkText="Learn about our history"
+                        linkText="Our History"
                         linkUrl="/history"
                         linkTheme="green"
                         backgroundImage={BgLeaves}
@@ -170,7 +170,7 @@ export default class Manifesto extends Component {
                     <RelatedPageLink
                         headline="Craft section headline"
                         title="Our Almonds are our story"
-                        linkText="Learn about our craft"
+                        linkText="Our Craft"
                         linkUrl="/craft"
                         linkTheme="yellow"
                         backgroundImage={BgAlmond}

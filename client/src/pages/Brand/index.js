@@ -153,9 +153,9 @@ export default class Brand extends Component {
                         backgroundImage: `url(${brand.fields.brandRecipesImage.fields.file.url})`
                     }}>
                         <div>
-                            <h2>Try our delicious recipes</h2>
+                            <h2>Try Our Delicious Recipes</h2>
                             <Button href="/recipes" theme="blueLight">
-                                Click here
+                                Click Here
                             </Button>
                         </div>
                     </div>
