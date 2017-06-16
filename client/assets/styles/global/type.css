@@ -78,11 +78,11 @@ ol {
 
 /* links */
 a {
-    color: var(--c--blue);
+    color: var(--c--black);
 
     &:focus,
     &:hover {
-        color: var(--c--blue-light);
+        color: var(--c--blue-dark);
     }
 }
 

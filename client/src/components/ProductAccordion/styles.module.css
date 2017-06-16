@@ -3,15 +3,34 @@
 
 .accordionItem {
     border-top: 1px solid var(--c--gray-dark);
+    will-change: border-top;
+    transition: border-top 300ms ease;
 
     &:nth-child(2) {
         border-bottom: 1px solid var(--c--gray-dark);
+    }
+
+    &:hover,
+    &.isOpen {
+        border-top-color: var(--c--black);
+
+        &:nth-child(2) {
+            border-bottom-color: var(--c--black);
+        }
+
+        &:not(:nth-child(2)) + .accordionItem {
+            border-top-color: var(--c--black);
+        }
+
+        & svg {
+            fill: var(--c--black);
+        }
     }
 }
 
 .isOpen {
     & .accordionContent {
-        max-height: 100rem;
+        max-height: 50rem;
     }
 
     & svg {
@@ -40,12 +59,16 @@
         width: 25px;
         height: 25px;
         fill: var(--c--gray-dark);
+        will-change: fill;
+        transition: fill 300ms ease;
     }
 }
 
 .accordionContent {
     max-height: 0;
     overflow: hidden;
+    will-change: max-height;
+    transition: max-height 300ms ease;
 
     & ul {
         padding: 0;

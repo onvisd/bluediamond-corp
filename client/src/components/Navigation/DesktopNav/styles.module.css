@@ -65,6 +65,10 @@
     &.brand--yellow *,
     &.brand--green * {
         color: var(--c--black);
+
+        & a:hover {
+            color: var(--c--gray-darker);
+        }
     }
 
     &.brand--yellow svg,
@@ -94,6 +98,12 @@
 
     & a {
         color: var(--c--white);
+        will-change: color;
+        transition: color 300ms ease;
+
+        &:hover {
+            color: var(--c--gray-light);
+        }
     }
 
     & svg {
@@ -157,6 +167,7 @@
     font-weight: var(--t--weight-medium);
     line-height: 72px;
     cursor: pointer;
+    transition: color 300ms ease;
 
     &:first-child {
         padding-right: 1.25rem;
@@ -194,22 +205,14 @@
     opacity: 0;
     pointer-events: none;
     overflow: hidden;
-    transform:
-        perspective(400px)
-        rotate3d(-1, 0, 0, 5deg)
-        scale3d(0.9, 0.9, 1);
+    transform: translate3d(0, 20px, 0);
     will-change: transform, opacity;
-    transition:
-        transform 150ms ease-in-out,
-        opacity 150ms linear;
+    transition: transform 300ms ease, opacity 300ms ease;
 
     &.active {
         opacity: 1;
         pointer-events: all;
-        transform:
-            perspective(400px)
-            rotate3d(1, 0, 0, 0)
-            scale3d(1, 1, 1);
+        transform: translate3d(0, 0, 0);
     }
 }
 

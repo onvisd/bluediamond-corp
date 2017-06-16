@@ -81,6 +81,10 @@
 
     & li a {
         color: var(--c--gray-dark);
+
+        &:hover {
+            color: var(--c--gray-darker);
+        }
     }
 }
 

@@ -6,6 +6,13 @@
     display: flex;
     width: 100%;
     flex-direction: column;
+    overflow: hidden;
+
+    &:hover {
+        & .image {
+            transform: scale3d(1.02, 1.02, 1);
+        }
+    }
 
     @media (--mq-gt-s) {
         width: calc(33.33% - 1rem);
@@ -27,6 +34,8 @@
     padding-bottom: 100%;
     background-size: cover;
     background-position: center;
+    will-change: transform;
+    transition: transform 300ms ease;
 
     & svg {
         position: absolute;
@@ -38,6 +47,7 @@
 
 .meta {
     display: flex;
+    position: relative;
     padding: 1rem;
     flex-direction: column;
     justify-content: space-between;

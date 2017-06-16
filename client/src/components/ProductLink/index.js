@@ -71,7 +71,7 @@ export default class ProductLink extends Component {
 
         return (
             <div
-                className={classnames(styles[type], {
+                className={classnames(styles.container, styles[type], {
                     [activeClassName]: activeClassName && active,
                     [inactiveClassName]: inactiveClassName && !active
                 })}

@@ -17,6 +17,8 @@
     border-radius: 80px;
     outline: 0;
     user-select: none;
+    will-change: background-color;
+    transition: background-color 300ms ease;
 
     &:disabled {
         color: var(--c--gray-lighter);
@@ -52,7 +54,13 @@
 /* Themes */
 .white {
     composes: base;
+    color: var(--c--black);
     background-color: var(--c--white);
+
+    &:hover,
+    &:focus {
+        color: var(--c--black);
+    }
 }
 
 .blue {
@@ -60,9 +68,10 @@
     color: var(--c--white);
     background-color: var(--c--blue);
 
-    &:hover {
+    &:hover,
+    &:focus {
         color: var(--c--white);
-        background-color: var(--c--blue-light);
+        background-color: var(--c--blue-dark);
     }
 }
 
@@ -71,7 +80,8 @@
     color: var(--c--white);
     background-color: var(--c--blue-dark);
 
-    &:hover {
+    &:hover,
+    &:focus {
         color: var(--c--white);
         background-color: var(--c--blue);
     }
@@ -82,7 +92,8 @@
     color: var(--c--white);
     background-color: var(--c--blue-light);
 
-    &:hover {
+    &:hover,
+    &:focus {
         color: var(--c--white);
         background-color: var(--c--blue);
     }
@@ -93,7 +104,8 @@
     color: var(--c--blue-dark);
     border-color: var(--c--blue-dark);
 
-    &:hover {
+    &:hover,
+    &:focus {
         color: var(--c--blue);
         border-color: var(--c--blue);
     }
@@ -104,8 +116,10 @@
     color: var(--c--black);
     background-color: #fcca40;
 
-    &:hover {
-        background-color: var(--c--yellow-light);
+    &:hover,
+    &:focus {
+        color: var(--c--black);
+        background-color: var(--c--yellow-medium);
     }
 }
 
@@ -114,8 +128,10 @@
     color: var(--c--black);
     background-color: var(--c--green);
 
-    &:hover {
-        background-color: var(--c--green-light);
+    &:hover,
+    &:focus {
+        color: var(--c--black);
+        background-color: var(--c--green-medium);
     }
 }
 
@@ -125,4 +141,9 @@
     line-height: 36px;
     background: transparent;
     border: 2px solid var(--c--gray-light);
+
+    &:hover,
+    &:focus {
+        color: var(--c--black);
+    }
 }

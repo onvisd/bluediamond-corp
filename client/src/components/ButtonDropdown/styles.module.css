@@ -36,12 +36,9 @@
     background-color: var(--c--white);
     border-radius: 8px;
     box-shadow: 0 0 0.5rem 0.25rem rgba(0, 0, 0, 0.1);
-    transform:
-        perspective(400px)
-        rotate3d(-1, 0, 0, 5deg)
-        scale3d(0.9, 0.9, 1);
+    transform: translate3d(0, 0, 0);
     opacity: 0;
-    transition: transform 150ms ease-in-out, opacity 150ms linear;
+    transition: transform 300ms ease, opacity 300ms ease;
 
     &::before {
         content: '';
@@ -54,10 +51,7 @@
     }
 
     &.active {
-        transform:
-            perspective(400px)
-            rotate3d(1, 0, 0, 0)
-            scale3d(1, 1, 1);
+        transform: translate3d(0, 10px, 0);
         visibility: visible;
         opacity: 1;
     }

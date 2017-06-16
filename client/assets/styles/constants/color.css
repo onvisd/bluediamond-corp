@@ -11,7 +11,7 @@
     --c--gray-darker: #2f506b;
 
     /* blues */
-    --c--blue: #1daeec;
+    --c--blue: #1690d6;
     --c--blue-light: #45c2f4;
     --c--blue-dark: #127dbd;
     --c--blue-darker: #074b8e;
@@ -19,12 +19,14 @@
     /* yellows */
     --c--yellow: #fdbb30;
     --c--yellow-light: #fed158;
+    --c--yellow-medium: #fdbb30;
     --c--yellow-dark: #f1a512;
     --c--yellow-darker: #c3890f;
 
     /* greens */
     --c--green: #47e2af;
     --c--green-light: #46f2b9;
+    --c--green-medium: #40b98f;
     --c--green-dark: #13bc84;
     --c--green-darker: #088c60;
 

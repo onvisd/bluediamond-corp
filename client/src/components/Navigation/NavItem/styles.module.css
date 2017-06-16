@@ -58,6 +58,7 @@
         & a,
         & .button {
             padding: 0 1rem;
+            transition: color 300ms ease, background-color 300ms ease;
         }
 
         & .button:hover {

@@ -32,6 +32,20 @@
     composes: base;
 }
 
+.container {
+    &:hover {
+        & .image img {
+            transform: translate3d(0, -4px, 0);
+        }
+    }
+
+    &:active {
+        & .image img {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+}
+
 .card {
     composes: base;
 
@@ -52,6 +66,8 @@
     background-color: var(--c--white);
 
     & img {
+        will-change: transform;
+        transition: transform 300ms ease;
         max-width: 125px;
         max-height: 125px;
 
