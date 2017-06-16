@@ -15,7 +15,7 @@ import RelatedPageLink from 'components/RelatedPageLink';
 
 import Diamond from 'images/icons/diamond.svg';
 import BgLeaves from 'images/relatedLinks/leaf-on-left.png';
-import BgAlmond from 'images/relatedLinks/almonds-on-right.png'; 
+import BgAlmond from 'images/relatedLinks/almonds-on-right.png';
 
 import styles from './styles.module.css';
 

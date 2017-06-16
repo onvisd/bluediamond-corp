@@ -7,17 +7,20 @@ const flexAlign = {
     bottom: 'flex-end'
 };
 
-const Story = ({image, tagline, content, align}) => (
+const Story = ({image, tagline, content, verticalAlign, horizontalAlign, theme}) => (
     <div
         className={styles.container}
         style={{
             backgroundImage: `url(${image})`,
-            alignItems: flexAlign[align.toLowerCase()]
+            alignItems: flexAlign[verticalAlign.toLowerCase()],
+            textAlign: horizontalAlign.toLowerCase()
         }}
     >
         <div className={styles.innerContainer}>
-            <h2>{tagline}</h2>
-            <p>{content}</p>
+            <h2 className={styles[`is${theme}`]} style={{textAlign: horizontalAlign.toLowerCase()}}>
+                {tagline}
+            </h2>
+            {content && <p>{content}</p>}
         </div>
     </div>
 );
@@ -25,8 +28,10 @@ const Story = ({image, tagline, content, align}) => (
 Story.propTypes = {
     image: PropTypes.string.isRequired,
     tagline: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    align: PropTypes.string.isRequired
+    content: PropTypes.string,
+    verticalAlign: PropTypes.string.isRequired,
+    horizontalAlign: PropTypes.string.isRequired,
+    theme: PropTypes.string.isRequired
 };
 
 export default Story;

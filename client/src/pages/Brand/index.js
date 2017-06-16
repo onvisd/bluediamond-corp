@@ -121,9 +121,11 @@ export default class Brand extends Component {
                         cards={brand.fields.stories.map((story) => (
                             <Story
                                 tagline={story.fields.tagline}
-                                content={story.fields.content}
+                                content={story.fields.content || null}
                                 image={story.fields.backgroundImage.fields.file.url}
-                                align={story.fields.textAlignment}
+                                verticalAlign={story.fields.textAlignment}
+                                horizontalAlign={story.fields.textHorizontalAlignment}
+                                theme={story.fields.theme}
                             />
                         ))}
                     />

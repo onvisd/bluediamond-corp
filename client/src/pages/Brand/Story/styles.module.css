@@ -18,23 +18,23 @@
         margin-right: auto;
         margin-left: auto;
         padding: 0 1rem;
-        color: var(--c--white);
         text-align: center;
     }
 
     & h2 {
         font-size: var(--t--size-m);
+
+        &.isLight {
+            color: var(--c--white);
+        }
+
+        &.isDark {
+            color: var(--c--black);
+        }
     }
 
     & p {
         margin-bottom: 0;
-    }
-
-    @media (--mq-gt-s) {
-        & p,
-        & h2 {
-            max-width: 50vw;
-        }
     }
 
     @media (--mq-gt-s) {
