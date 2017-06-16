@@ -23,6 +23,9 @@
     align-items: center;
     color: var(--c--black);
     border-bottom: 1px solid var(--c--gray-lighter);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 135% 50%;
 
     & h2 {
         margin-bottom: 0;

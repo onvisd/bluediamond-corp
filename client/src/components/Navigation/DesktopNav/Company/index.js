@@ -4,11 +4,21 @@ import {Link} from 'react-isomorphic-render';
 import Tile from 'components/Navigation/Tile';
 import styles from './styles.module.css';
 
+import Blossom from 'images/backgrounds/almond-blossom-no-shadow.png';
+import Almonds from 'images/backgrounds/almonds-nav.png';
+import Leaf from 'images/backgrounds/almond-leaf-nav.png';
+
+const bgs = [
+    Blossom,
+    Almonds,
+    Leaf
+];
+
 const Company = ({navData, companyNavTiles, toggleNav}) => (
     <div className={styles.container}>
         <ul className={styles.tiles}>
-            {companyNavTiles.map((navTile) => (
-                <Tile key={navTile.sys.id}>
+            {companyNavTiles.map((navTile, i) => (
+                <Tile key={navTile.sys.id} bgImage={bgs[i]}>
                     <p>{navTile.fields.headline}</p>
                     <Link to={`/${navTile.fields.linkUrl}`} onClick={toggleNav.hide}>
                         <h2>{navTile.fields.title}</h2>

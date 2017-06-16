@@ -3,8 +3,11 @@
 .products {
     display: flex;
     height: 68.5%;
-    padding: 1.5rem 2rem 0;
+    padding: 1.5rem 3rem 0;
     justify-content: center;
+    background-position: -20% 50%, 120% 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .product {

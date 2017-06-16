@@ -7,17 +7,20 @@ export default class Category extends Component {
     static PropTypes = {
         name: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
-        backgroundTexture: PropTypes.string,
         products: PropTypes.array
     }
 
     render() {
-        const {name, description, backgroundTexture, products} = this.props;
+        const {name, description, products, appetizerImages} = this.props;
 
         return (
             <div
                 className={styles.container}
-                style={{backgroundImage: `url(${backgroundTexture})`}}
+                style={{
+                    backgroundImage:
+                        `url(${appetizerImages[0].fields.file.url}), ` +
+                        `url(${appetizerImages[1].fields.file.url})`
+                }}
             >
                 <div className={styles.innerContainer}>
                     <h2>{name}</h2>

@@ -38,6 +38,17 @@
     justify-content: center;
     text-align: center;
     background-color: var(--c--white);
+    background-repeat: no-repeat;
+    background-position: -35% 25px, 135% -25px;
+    background-size: contain;
+
+    &.single {
+        background-position: -10% 25px, 110%, 25px;
+
+        @media (--mq-s) {
+            background-position: -125% 50px, 225% -125px;
+        }
+    }
 
     & h2 {
         margin-bottom: 2rem;
@@ -45,6 +56,10 @@
         @media (--mq-s) {
             font-size: var(--t--size-lm);
         }
+    }
+
+    @media (--mq-s) {
+        background-position: -125% 50px, 225% -125px;
     }
 
     @media (--mq-gt-s) {

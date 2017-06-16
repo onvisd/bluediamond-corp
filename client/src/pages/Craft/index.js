@@ -13,6 +13,8 @@ import BDLogo from 'images/bd-logo.svg';
 import GrowersHands from 'images/icons/growers-hands.svg';
 import ProductManufacturing from 'images/icons/product-manufacturing.svg';
 import QualityAssurance from 'images/icons/quality-assurance.svg';
+import Blossom from 'images/relatedLinks/blossom-on-right.png';
+import Leaves from 'images/relatedLinks/leaf-on-left.png';
 import GenericHero from 'components/GenericHero';
 import RelatedPages from 'components/RelatedPages';
 import RelatedPageLink from 'components/RelatedPageLink';
@@ -245,12 +247,14 @@ export default class Craft extends Component {
                         linkText="Our History"
                         linkUrl="/history"
                         linkTheme="green"
+                        backgroundImage={Leaves}
                     />
                     <RelatedPageLink
                         title="Quality is our legacy"
                         linkText="Our Story"
                         linkUrl="/manifesto"
                         linkTheme="blue"
+                        backgroundImage={Blossom}
                     />
                 </RelatedPages>
             </section>

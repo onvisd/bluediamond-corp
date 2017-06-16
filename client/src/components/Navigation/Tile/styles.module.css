@@ -7,6 +7,9 @@
     padding: 0 1.5rem;
     flex-grow: 1;
     color: var(--c--black);
+    background-size: 48%;
+    background-position: center right -3px;
+    background-repeat: no-repeat;
 
     & a {
         color: var(--c--black);

@@ -14,8 +14,8 @@ import RelatedPages from 'components/RelatedPages';
 import RelatedPageLink from 'components/RelatedPageLink';
 
 import Diamond from 'images/icons/diamond.svg';
-import BgLeaves from 'images/backgrounds/almond-leaves-left.png';
-import BgAlmond from 'images/backgrounds/almonds.png';
+import BgLeaves from 'images/relatedLinks/leaf-on-left.png';
+import BgAlmond from 'images/relatedLinks/almonds-on-right.png'; 
 
 import styles from './styles.module.css';
 

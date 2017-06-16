@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 
 import Diamond from 'images/icons/diamond.svg';
 import Leaves from 'images/backgrounds/almond-leaf-right.png';
-import Almonds from 'images/backgrounds/almonds-left.png';
-import Blossom from 'images/backgrounds/almond-blossom.png';
+import Almonds from 'images/relatedLinks/almonds-on-left.png';
+import Blossom from 'images/relatedLinks/blossom-on-right.png';
 import Burlap from 'images/backgrounds/burlap.png';
 import Paint from 'images/backgrounds/blue-paint.png';
 import Hero from 'images/history/hero.png';

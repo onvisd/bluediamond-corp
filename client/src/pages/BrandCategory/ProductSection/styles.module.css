@@ -4,6 +4,12 @@
 
 .container {
     position: relative;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    @media (--mq-s) {
+        background-image: none !important; /* stylelint-disable-line */
+    }
 
     @media (--mq-gt-s) {
         margin-bottom: 4rem;

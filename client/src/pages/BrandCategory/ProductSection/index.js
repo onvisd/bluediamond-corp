@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 export default class ProductSection extends Component {
     static propTypes = {
         brand: PropTypes.object.isRequired,
+        category: PropTypes.object.isRequired,
         products: PropTypes.array.isRequired,
         activeProduct: PropTypes.object.isRequired,
         setActiveProduct: PropTypes.func.isRequired
@@ -27,10 +28,18 @@ export default class ProductSection extends Component {
 
     render() {
         const {isOpen} = this.state;
-        const {brand, products, activeProduct, setActiveProduct} = this.props;
+        const {brand, category, products, activeProduct, setActiveProduct} = this.props;
 
         return (
-            <div className={styles.container}>
+            <div
+                className={styles.container}
+                style={{
+                    backgroundImage:
+                        `url(${category.fields.appetizerImages[0].fields.file.url}), ` +
+                        `url(${category.fields.appetizerImages[1].fields.file.url})`,
+                    backgroundPosition: '-25% 50%, 125% 50%'
+                }}
+            >
                 <div
                     className={classnames(styles.showMore, {
                         [styles.active]: isOpen

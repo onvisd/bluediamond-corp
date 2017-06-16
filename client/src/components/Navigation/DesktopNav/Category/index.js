@@ -5,9 +5,16 @@ import ProductLink from 'components/ProductLink';
 import Card from 'components/Navigation/Card';
 import styles from './styles.module.css';
 
-const Category = ({brand, category, toggleNav}) => (
-    <Card theme="wide">
-        <div className={styles.products}>
+const Category = ({bgImage, brand, category, toggleNav}) => (
+    <Card theme="wide" style={{backgroundImage: `url(${bgImage})`}}>
+        <div
+            className={styles.products}
+            style={{
+                backgroundImage:
+                    `url(${category.fields.appetizerImages[0].fields.file.url}), ` +
+                    `url(${category.fields.appetizerImages[1].fields.file.url})`
+            }}
+        >
             {brand.fields.products
                 .filter((product) =>
                     product.fields.brandCategory === category.fields.name &&
@@ -34,6 +41,7 @@ const Category = ({brand, category, toggleNav}) => (
 );
 
 Category.propTypes = {
+    bgImage: PropTypes.string,
     brand: PropTypes.object.isRequired,
     category: PropTypes.object.isRequired,
     toggleNav: PropTypes.object.isRequired

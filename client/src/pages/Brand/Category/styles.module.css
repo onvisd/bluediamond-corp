@@ -7,7 +7,14 @@
     padding: 0 0 4rem;
     max-width: 100%;
     align-items: center;
-    background-color: var(--c--gray-lighter);
+    background-repeat: no-repeat;
+    background-size: 30%;
+    background-position: -25% 50%, 125% 50%;
+
+    @media (--mq-s) {
+        background-size: 75%;
+        background-position: -200% 0, 300% 0;
+    }
 
     &:first-child {
         padding-top: 2rem;
@@ -28,13 +35,13 @@
     padding: 0 1rem;
     text-align: center;
 
-    & h2,
-    & p {
+    & h2 {
         padding: 0 1rem;
     }
 
     & p {
         margin-bottom: 1rem;
+        padding: 0 2rem;
     }
 
     @media (--mq-s) {
@@ -46,6 +53,7 @@
     @media (--mq-gt-s) {
         & p {
             margin: 0 auto 2.5rem;
+            padding: 0 1rem;
             max-width: 50%;
             font-size: var(--t--size-m);
         }

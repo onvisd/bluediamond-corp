@@ -22,6 +22,8 @@ export default class Products extends Component {
     render() {
         const {brands} = this.props;
 
+        console.log(brands);
+
         return (
             <Card>
                 <Breadcrumb onClick={this.navigate.backwards}>
@@ -33,6 +35,10 @@ export default class Products extends Component {
                             key={brand.fields.slug}
                             className={styles.tile}
                             onClick={() => this.navigate.forwards(brand)}
+                            style={{
+                                backgroundImage:
+                                    `url(${brand.fields.mobileNavImage.fields.file.url})`
+                            }}
                         >
                             <h2>{brand.fields.name}</h2>
                         </li>

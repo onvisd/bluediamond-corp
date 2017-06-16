@@ -8,7 +8,8 @@ export default (api, spaceId, client) => {
                 'fields.name',
                 'fields.slug',
                 'fields.themeColor',
-                'fields.categories'
+                'fields.categories',
+                'fields.mobileNavImage'
             ].join()
         })
         .then((entries) => entries.items);

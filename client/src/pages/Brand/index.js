@@ -128,11 +128,10 @@ export default class Brand extends Component {
                         ))}
                     />
                 )}
-                <div>
+                <div style={{backgroundImage: `url(${brand.fields.backgroundTexture.fields.file.url})`}}>
                     {brand.fields.categories.map((category) => (
                         <Category
                             key={category.sys.id}
-                            backgroundTexture={brand.fields.backgroundTexture.fields.file.url}
                             products={
                                 brand.fields.products.filter((product) =>
                                     product.fields.brandCategory === category.fields.name
