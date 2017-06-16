@@ -9,6 +9,7 @@ import Pinterest from 'images/icons/pinterest.svg';
 import Twitter from 'images/icons/twitter.svg';
 import Phone from 'images/icons/phone.svg';
 import Mail from 'images/icons/mail.svg';
+import FooterBG from 'images/backgrounds/wood-footer.jpg';
 
 const Footer = ({data}) => (
     <footer className={styles.container}>
@@ -139,7 +140,10 @@ const Footer = ({data}) => (
                 </div>
             </nav>
         </div>
-        <div className={styles.copyright}>
+        <div
+            className={styles.copyright}
+            style={{backgroundImage: `url(${FooterBG})`}}
+        >
             <div className="l--container">
                 © {new Date().getFullYear()} Blue Diamond Growers
             </div>
