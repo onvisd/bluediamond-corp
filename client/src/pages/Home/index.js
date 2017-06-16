@@ -89,6 +89,7 @@ export default class Home extends Component {
                     <Parallax
                         className={styles.heroBackground}
                         bgImage={homeFields.heroBackground.file.url}
+                        strength={200}
                     />
                     <img className={styles.blossom} src={homeFields.heroBlossomImage.file.url} />
                     <div
