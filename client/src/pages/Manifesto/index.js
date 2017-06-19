@@ -90,11 +90,8 @@ export default class Manifesto extends Component {
                 <PageHero
                     headline={manifestoFields.heroHeadline}
                     showHeadline={true}
-                    buttonText={manifestoFields.heroVideoText}
                     backgroundImage={manifestoFields.heroImage.file.url}
                     video={manifestoFields.heroVideo.file.url}
-                    backgroundVideo={false}
-                    playVideo={true}
                 />
                 <div className={styles.container}>
                     <div className="l--container">
@@ -116,6 +113,7 @@ export default class Manifesto extends Component {
                                 url: manifestoFields.firstImageCluster[1].file.url
                             }
                         ]}
+                        className={styles.imageCluster}
                         change={false}
                     />
                     <div className="l--container">
@@ -140,6 +138,7 @@ export default class Manifesto extends Component {
                                 url: manifestoFields.secondImageCluster[2].file.url
                             }
                         ]}
+                        className={styles.imageCluster}
                         change={false}
                     />
                     <div className="l--container">

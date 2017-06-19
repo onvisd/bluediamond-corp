@@ -1,10 +1,12 @@
 import React, {Component, PropTypes} from 'react';
+import classNames from 'classnames';
 import styles from './styles.module.css';
 
 export default class ImageCluster extends Component {
     static propTypes = {
         images: PropTypes.array.isRequired,
-        change: PropTypes.bool.isRequired
+        change: PropTypes.bool.isRequired,
+        className: PropTypes.any
     }
 
     renderImage(image, id, width, height) {
@@ -23,10 +25,10 @@ export default class ImageCluster extends Component {
 
     // 2:1 Aspect Ratio
     renderTwoUp(images) {
-        const {change} = this.props;
+        const {change, className} = this.props;
 
         return (
-            <div className={`${styles.cluster} ${styles.twoUp} l--col-12`}>
+            <div className={classNames(styles.cluster, styles.twoUp, 'l--col-12', className)}>
                 {change && images.map((image, idx) => this.renderImage(image, idx, '800', '400'))}
                 {!change && images.map((image, idx) => this.renderImage(image, idx))}
             </div>
@@ -35,10 +37,10 @@ export default class ImageCluster extends Component {
 
     // 1.50:1 Aspect Ratio
     renderThreeUp(images) {
-        const {change} = this.props;
+        const {change, className} = this.props;
 
         return (
-            <div className={`${styles.cluster} ${styles.threeUp} l--col-12`}>
+            <div className={classNames(styles.cluster, styles.threeUp, 'l--col-12', className)}>
                 {change && images.map((image, idx) => this.renderImage(image, idx, '800', '533'))}
                 {!change && images.map((image, idx) => this.renderImage(image, idx))}
             </div>
@@ -47,10 +49,10 @@ export default class ImageCluster extends Component {
 
     // 1:1 Aspect Ratio
     renderFourPlus(images) {
-        const {change} = this.props;
+        const {change, className} = this.props;
 
         return (
-            <div className={`${styles.cluster} ${styles.fourPlus} l--col-12`}>
+            <div className={classNames(styles.cluster, styles.fourPlus, 'l--col-12', className)}>
                 {change && images.map((image, idx) => this.renderImage(image, idx, '800', '800'))}
                 {!change && images.map((image, idx) => this.renderImage(image, idx))}
             </div>

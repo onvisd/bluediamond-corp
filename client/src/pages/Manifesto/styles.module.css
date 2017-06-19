@@ -20,6 +20,10 @@
     & h2 {
         margin: 0;
     }
+
+    & .imageCluster {
+        flex: 0 0 120%;
+    }
 }
 
 .diamond {
