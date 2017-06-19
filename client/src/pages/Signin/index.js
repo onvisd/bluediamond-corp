@@ -1,12 +1,19 @@
 import React, {Component} from 'react';
-import {Link} from 'react-isomorphic-render';
+import {Link, goto} from 'react-isomorphic-render';
+import {connect} from 'react-redux';
 import {Form} from 'formsy-react';
 import classnames from 'classnames';
 
-import FormInput from '../../components/FormInput';
-import Button from '../../components/Button';
+import {registerCustomer, signinCustomer} from 'state/auth';
+
+import FormInput from 'components/FormInput';
+import Button from 'components/Button';
 import styles from './styles.module.css';
 
+@connect(
+    null,
+    {registerCustomer, signinCustomer, goto}
+)
 export default class Signin extends Component {
     state = {
         view: 'signin',
@@ -25,12 +32,24 @@ export default class Signin extends Component {
         });
     }
 
-    handleSignIn = (model) => {
-        console.log(model);
+    handleSignIn = (creds) => {
+        this.props.signinCustomer(creds)
+            .then((result) => {
+                this.props.goto('/contact'); // contact is used for demo purposes only
+
+                return result;
+            })
+            .catch((err) => console.log(err));
     }
 
-    handleCreateAccount = (model) => {
-        console.log(model);
+    handleRegister = (creds) => {
+        this.props.registerCustomer(creds)
+            .then((result) => {
+                this.props.goto('/contact'); // contact is used for demo purposes only
+
+                return result;
+            })
+            .catch((err) => console.log(err));
     }
 
     render() {
@@ -68,7 +87,12 @@ export default class Signin extends Component {
                         </button>
                     </div>
                     {view === 'signin' && (
-                        <Form className={styles.form}>
+                        <Form
+                            className={styles.form}
+                            onValidSubmit={this.handleSignIn}
+                            onValid={this.enableSubmit}
+                            onInvalid={this.disableSubmit}
+                        >
                             <FormInput
                                 name="email"
                                 label="Email Address"
@@ -77,6 +101,7 @@ export default class Signin extends Component {
                                 required
                             />
                             <FormInput
+                                type="password"
                                 name="password"
                                 label="Password"
                                 validations="minLength:1"
@@ -92,7 +117,12 @@ export default class Signin extends Component {
                         </Form>
                     )}
                     {view === 'create' && (
-                        <Form className={styles.form}>
+                        <Form
+                            className={styles.form}
+                            onValidSubmit={this.handleRegister}
+                            onValid={this.enableSubmit}
+                            onInvalid={this.disableSubmit}
+                        >
                             <FormInput
                                 name="email"
                                 label="Email Address"
@@ -101,13 +131,15 @@ export default class Signin extends Component {
                                 required
                             />
                             <FormInput
+                                type="password"
                                 name="password"
                                 label="Password"
                                 validations="minLength:1"
                                 required
                             />
                             <FormInput
-                                name="confirm"
+                                type="password"
+                                name="password_confirmation"
                                 label="Confirm password"
                                 validations="minLength:1"
                                 required

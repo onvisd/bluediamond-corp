@@ -3,27 +3,35 @@ import {connect} from 'react-redux';
 import {Meta, preload} from 'react-isomorphic-render';
 
 import {
-    connector,
+    connector as navConnector,
     getNavigationData,
     setNavigationStyle
 } from '../state/navigation';
 
+import {
+    connector as authConnector,
+    getCustomer
+} from '../state/auth';
+
 import Title from 'components/Title';
-import Preloading from '../components/Preloading';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
-import FooterMobile from '../components/FooterMobile';
+import Preloading from 'components/Preloading';
+import Navigation from 'components/Navigation';
+import Footer from 'components/Footer';
+import FooterMobile from 'components/FooterMobile';
 
 @preload(({dispatch}) => {
+    dispatch(getCustomer());
     dispatch(setNavigationStyle({}));
     return dispatch(getNavigationData());
 })
 @connect(
     (state) => ({
         responsive: state.responsive,
-        ...connector(state.navigation)
+        ...navConnector(state.navigation),
+        ...authConnector(state.auth)
     }),
     {
+        getCustomer,
         getNavigationData,
         setNavigationStyle
     }

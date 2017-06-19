@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
-import {connector} from 'state/navigation';
+import {connector as authConnector} from 'state/auth';
+import {connector as navConnector} from 'state/navigation';
 
 import ShoppingCartIcon from 'images/icons/cart.svg';
 import User from 'images/icons/user.svg';
@@ -12,7 +13,7 @@ import ShoppingCart from '../ShoppingCart';
 import styles from './styles.module.css';
 
 @connect(
-    (state) => ({...connector(state.navigation)})
+    (state) => ({...authConnector(state.auth), ...navConnector(state.navigation)})
 )
 export default class DesktopNav extends Component {
     static propTypes = {
@@ -81,7 +82,7 @@ export default class DesktopNav extends Component {
     render() {
         const {navVisible, cartVisible, productCards} = this.state;
         const {name, element, props} = this.state.activeCard;
-        const {brands, navData, companyNavTiles, navigation} = this.props;
+        const {brands, navData, companyNavTiles, navigation, auth} = this.props;
         const navColor = navigation.style ? navigation.style.className : null;
 
         return (
@@ -102,7 +103,9 @@ export default class DesktopNav extends Component {
                         </ul>
                         <ul className={styles.secondaryNavLinks}>
                             <li>
-                                <Link to="/signin">Sign In or Create Account</Link>
+                                {auth.authenticated
+                                    ? <Link to="/account">Account</Link>
+                                    : <Link to="/signin">Sign In or Create Account</Link>}
                                 <User />
                             </li>
                         </ul>

@@ -1,4 +1,5 @@
 export {reducer as responsive} from 'redux-mediaquery';
+export {default as auth} from './auth';
 export {default as navigation} from './navigation';
 export {default as preload} from './preload';
 export {default as recipe} from './recipe';
