@@ -20,6 +20,7 @@ import StoreProduct from './pages/StoreProduct';
 import Press from './pages/Press';
 import Signin from './pages/Signin';
 import CheckoutConfirmation from './pages/CheckoutConfirmation';
+import Account from './pages/Account';
 
 export default (
     <Route path="/" component={Layout}>
@@ -39,6 +40,7 @@ export default (
         <Route path="/contact" component={Contact} />
         <Route path="/press" component={Press} />
         <Route path="/signin" component={Signin} />
+        <Route path="/account/:view" component={Account} />
         <Route path="/404" component={NotFound} status={404} />
         <Route path="/error" component={GenericError} />
         <Route path="*" component={Page} />

@@ -1,0 +1,170 @@
+@import 'constants/type';
+@import 'constants/grid';
+@import 'constants/color';
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (--mq-gt-s) {
+        flex-wrap: nowrap;
+    }
+}
+
+.main {
+    @media (--mq-gt-s) {
+        margin-right: 1.5rem;
+        flex-grow: 1;
+    }
+}
+
+.sidebar {
+    width: 100%;
+
+    @media (--mq-gt-s) {
+        width: 22.5rem;
+    }
+}
+
+.inputGroup {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+    &:last-child > label {
+        margin-bottom: 1rem;
+    }
+
+    & > * {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    & > label {
+        margin-bottom: 0.5rem;
+        font-weight: var(--t--weight-normal);
+    }
+
+    & input {
+        width: 100%;
+    }
+
+    @media (--mq-gt-s) {
+        flex-wrap: nowrap;
+
+        &:last-child > label {
+            margin-bottom: 0.5rem;
+        }
+
+        & > * {
+            width: 50%;
+            margin-bottom: 0;
+            padding: 0;
+        }
+
+        & > button {
+            margin-bottom: 0.5rem;
+        }
+
+        & > :first-child {
+            margin-right: 1rem;
+        }
+    }
+}
+
+.addresses {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.address {
+    width: 100%;
+    margin-bottom: 1.5rem;
+
+    &.editing {
+        font-style: italic;
+    }
+
+    &.hidden {
+        opacity: 0.3;
+    }
+
+    & .edit {
+        margin-top: 1rem;
+        color: var(--c--blue);
+        font-weight: var(--t--weight-bold);
+        cursor: pointer;
+    }
+
+    @media (--mq-gt-s) {
+        width: 33%;
+
+        &:not(:last-child) {
+            margin-right: 1rem;
+        }
+    }
+}
+
+.name {
+    font-weight: var(--t--weight-bold);
+}
+
+.actions {
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.action {
+    display: inline-block;
+    padding: 0 1rem;
+    font-weight: var(--t--weight-bold);
+    cursor: pointer;
+
+    &:not(:last-child) {
+        margin-right: 1rem;
+    }
+
+    &:first-of-type {
+        padding: 0;
+    }
+
+    &.delete {
+        color: var(--c--red);
+
+        @media (--mq-s) {
+            order: 2;
+        }
+    }
+}
+
+.submit {
+    @media (--mq-s) {
+        display: flex;
+        width: 100%;
+        margin-bottom: 1rem;
+        align-items: center;
+        justify-content: space-between;
+        order: 1;
+    }
+}
+
+.giftCardInfo {
+    padding-bottom: 1rem;
+    line-height: 1;
+    border-bottom: 1px solid var(--c--gray-light);
+
+    & .title {
+        font-weight: var(--t--weight-bold);
+    }
+}
+
+.giftCardCheck {
+    & > label {
+        padding: 0.5rem 0;
+        font-weight: var(--t--weight-normal);
+    }
+}

@@ -6,8 +6,9 @@ import styles from './styles.module.css';
 
 @Formsy.Decorator()
 export default class FormInput extends Component {
-    static defaultProps = {
-        type: 'text'
+    componentWillMount() {
+        if(this.props.initialValue)
+            this.props.setValue(this.props.initialValue || '');
     }
 
     changeValue = (event) => {
@@ -28,6 +29,7 @@ export default class FormInput extends Component {
             name,
             label,
             type,
+            placeholder,
             getValue,
             getErrorMessage
         } = this.props;
@@ -40,6 +42,7 @@ export default class FormInput extends Component {
                 <input
                     type={type}
                     name={name}
+                    placeholder={placeholder}
                     onChange={this.changeValue}
                     value={getValue() || ''}
                 />

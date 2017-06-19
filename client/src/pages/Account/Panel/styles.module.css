@@ -1,0 +1,31 @@
+@import 'constants/color';
+@import 'constants/type';
+@import 'constants/grid';
+
+.panel {
+    border: 1px solid var(--c--gray-lighter);
+    overflow: hidden;
+
+    &:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+
+    @media (--mq-s) {
+        border-bottom: 0;
+    }
+
+    @media (--mq-gt-s) {
+        border-radius: 4px;
+    }
+}
+
+.header {
+    padding: 1rem;
+    font-weight: var(--t--weight-bold);
+    line-height: 1;
+    background-color: var(--c--gray-lighter);
+}
+
+.body {
+    padding: 1rem;
+}
