@@ -86,11 +86,6 @@ const Footer = ({data}) => (
                                 </Link>
                             </li>
                             <li>
-                                <a href="https://careers.bluediamond.com" target="_blank">
-                                    Careers
-                                </a>
-                            </li>
-                            <li>
                                 <Link to="/press">
                                     Press
                                 </Link>
@@ -134,6 +129,11 @@ const Footer = ({data}) => (
                                 <Link to="/product-locator">
                                     Product Locator
                                 </Link>
+                            </li>
+                            <li>
+                                <a href="https://careers.bluediamond.com" target="_blank">
+                                    Careers
+                                </a>
                             </li>
                         </ul>
                     </div>
