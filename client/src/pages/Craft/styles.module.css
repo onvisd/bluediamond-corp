@@ -134,6 +134,7 @@
 .innovation {
     composes: section;
     background-position: 20% 50%;
+    min-height: 45rem;
 
     & h2 {
         margin-bottom: 2rem;
