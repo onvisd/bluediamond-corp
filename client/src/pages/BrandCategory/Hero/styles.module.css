@@ -9,8 +9,8 @@
     overflow: hidden;
 
     @media (--mq-gt-s) {
+        height: 40rem;
         margin-top: 0;
-        min-height: 48rem;
     }
 }
 
@@ -119,6 +119,10 @@
 
     @media (--mq-gt-s) {
         font-size: var(--t--size-xxl);
+    }
+
+    &.dark {
+        color: var(--c--black);
     }
 }
 

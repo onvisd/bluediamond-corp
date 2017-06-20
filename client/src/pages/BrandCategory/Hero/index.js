@@ -23,7 +23,10 @@ const Hero = ({brand, category, product}) => (
                     <div className={classnames(styles.tag, styles[brand.fields.themeColor])}>
                         {category.fields.name}
                     </div>
-                    <h1 className={styles.name}>
+                    <h1 className={classnames(
+                        styles.name,
+                        styles[category.fields.productTextColor]
+                    )}>
                         {product.fields.name}
                     </h1>
                     <ButtonDropdown
