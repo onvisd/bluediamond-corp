@@ -8,5 +8,6 @@
 
     @media (--mq-gt-s) {
         padding-bottom: 4rem;
+        padding-top: 3vh;
     }
 }

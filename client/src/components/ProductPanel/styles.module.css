@@ -5,7 +5,7 @@
 .container {
     display: inline-block;
     margin: 0 auto;
-    padding: 2rem 4rem;
+    padding: 2.5% 5%;
     background-color: var(--c--white);
     border-radius: 12px;
     overflow: hidden;
@@ -13,7 +13,9 @@
     &.wrap {
         @mixin container;
 
-        padding-bottom: 0;
+        @media (--mq-m) {
+            padding: 0;
+        }
     }
 
     @media (--mq-s) {
@@ -30,7 +32,11 @@
 }
 
 .productCarousel {
-    padding: 2rem;
+    padding: 1.5rem 2rem;
+
+    @media (--mq-m) {
+        padding: 1rem;
+    }
 }
 
 .products {

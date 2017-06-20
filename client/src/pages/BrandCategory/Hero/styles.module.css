@@ -5,11 +5,13 @@
 .hero {
     display: flex;
     position: relative;
+    height: 39rem;
     margin-top: 60px;
+    z-index: var(--l--z-base);
     overflow: hidden;
 
     @media (--mq-gt-s) {
-        height: 40rem;
+        height: 48vw;
         margin-top: 0;
     }
 }
@@ -29,6 +31,11 @@
     background-position: center;
     filter: blur(4px);
     transform: scale(1.02);
+
+    @media (--mq-gt-s) {
+        background-size: 100% auto;
+        background-position: top;
+    }
 }
 
 .shelf {
@@ -36,20 +43,27 @@
     background-position: bottom;
 
     @media (--mq-gt-s) {
-        background-size: 160%;
+        background-size: 160vw auto;
+    }
+
+    @media (--mq-gt-m) {
+        background-size: 150vw auto;
     }
 }
 
 .product {
-    @mixin container;
-
     display: flex;
-    position: relative;
-    padding: 12rem 0 9rem;
-    max-width: 48rem;
+    position: absolute;
+    bottom: 11vw;
+    width: 100%;
+    padding: 12rem 4rem 0;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: center;
     text-align: left;
+
+    @media (--mq-gt-m) {
+        bottom: 9vw;
+    }
 
     @media (--mq-s) {
         padding: 2rem 0 4rem;
@@ -58,6 +72,7 @@
 }
 
 .photo {
+    margin-right: 10vw;
     z-index: var(--l--z-high);
 
     & img {
@@ -65,7 +80,7 @@
         vertical-align: middle;
 
         @media (--mq-s) {
-            max-height: 20rem;
+            max-height: 17.5rem;
         }
     }
 
@@ -77,7 +92,7 @@
     }
 
     @media (--mq-gt-s) {
-        max-width: 20rem;
+        max-width: 20vw;
     }
 }
 

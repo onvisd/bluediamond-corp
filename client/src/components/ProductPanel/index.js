@@ -79,14 +79,14 @@ export default class ProductPanel extends Component {
                 <Carousel
                     cards={productLinks}
                     settings={{
-                        viewsToShow: 6,
-                        viewsToMove: 6,
+                        viewsToShow: 7,
+                        viewsToMove: 7,
                         align: 0,
                         infinite: false,
                         swipe: false,
-                        currentView: activeIndex - (activeIndex % 6)
+                        currentView: activeIndex - (activeIndex % 7)
                     }}
-                    activeIndex={activeIndex - (activeIndex % 6)}
+                    activeIndex={activeIndex - (activeIndex % 7)}
                     classNames={{container: styles.productCarousel}}
                     showOverlay
                     showArrows

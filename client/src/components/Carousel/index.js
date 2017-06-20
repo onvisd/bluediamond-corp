@@ -109,6 +109,9 @@ export default class Carousel extends Component {
         const tabs = cards.map((card, idx) => idx)
             .filter((card, idx) => idx % settings.viewsToShow === 0);
 
+        if(tabs.length === 1)
+            return null;
+
         return (
             <div className={`${styles.tabs} ${styles[tabColor]}`}>
                 {tabs.map((tab) => (
@@ -125,6 +128,9 @@ export default class Carousel extends Component {
 
     render() {
         const {cards, settings, classNames, showOverlay, showArrows, showTabs} = this.props;
+
+        const pages = cards.map((card, idx) => idx)
+            .filter((card, idx) => idx % settings.viewsToShow === 0);
 
         return (
             <ViewPager className={classNames.container}>
@@ -144,12 +150,12 @@ export default class Carousel extends Component {
                         ))}
                     </Track>
                 </Frame>
-                {showOverlay && (
+                {showOverlay && pages.length > 1 ? (
                     <div
                         className={styles.overlay}
                         style={this.getOverlayStyle()}
                     />
-                )}
+                ) : null}
                 {showArrows && this.renderArrow()}
                 {showTabs && this.renderTabs()}
             </ViewPager>

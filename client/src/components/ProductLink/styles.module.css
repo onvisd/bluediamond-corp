@@ -5,6 +5,7 @@
 .base {
     width: 10rem;
     margin: 0 0.5rem;
+    padding: 0.5rem 0;
 
     & a {
         color: var(--c--black);
@@ -22,13 +23,13 @@
     text-align: center;
 
     &:hover {
-        & .image img {
+        & .image {
             transform: translate3d(0, -4px, 0);
         }
     }
 
     &:active {
-        & .image img {
+        & .image {
             transform: translate3d(0, 0, 0);
         }
     }
@@ -37,6 +38,26 @@
 .nav,
 .carousel {
     composes: base;
+}
+
+.carousel {
+    width: 100%;
+    margin: 0;
+
+    & .image {
+        height: 115px;
+
+        & img {
+            max-width: 115px;
+            max-height: 115px;
+        }
+    }
+
+    @media (--mq-m) {
+        & .title {
+            font-size: var(--t--size-xs);
+        }
+    }
 }
 
 .panel {
@@ -62,10 +83,10 @@
     height: 125px;
     align-items: center;
     justify-content: center;
+    will-change: transform;
+    transition: transform 300ms ease;
 
     & img {
-        will-change: transform;
-        transition: transform 300ms ease;
         max-width: 125px;
         max-height: 125px;
 
