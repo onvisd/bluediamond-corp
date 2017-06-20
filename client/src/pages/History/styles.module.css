@@ -92,6 +92,10 @@
     & .content {
         margin-right: 1rem;
 
+        @media (--mq-m) {
+            margin-left: 25%;
+        }
+
         @media (--mq-s) {
             margin-right: 0;
         }
@@ -115,6 +119,10 @@
 
     & .content {
         margin-left: 1rem;
+
+        @media (--mq-m) {
+            margin-right: 25%;
+        }
 
         @media (--mq-s) {
             margin-left: 0;
