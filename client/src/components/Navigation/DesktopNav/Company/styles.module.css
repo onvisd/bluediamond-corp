@@ -20,6 +20,10 @@
         background-size: 68%;
         background-position: bottom -56px right -22px;
     }
+
+    & h2 {
+        max-width: 50%;
+    }
 }
 
 .companyLinks {

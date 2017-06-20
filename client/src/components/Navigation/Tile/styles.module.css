@@ -25,6 +25,10 @@
         font-size: var(--t--size-m);
     }
 
+    &.hasLink {
+        padding: 0;
+    }
+
     @media (--mq-s) {
         &:first-child {
             padding-top: 3rem;
@@ -38,12 +42,22 @@
         flex-wrap: wrap;
         align-items: center;
 
+        &.hasLink {
+            padding-bottom: 0;
+        }
+
         &:not(:last-child) {
             border-right: 1px solid var(--c--gray-lighter);
         }
 
         & h2 {
-            max-width: 80%;
+            max-width: 60%;
         }
     }
+}
+
+.tileLink {
+    width: 100%;
+    height: 100%;
+    padding: 0 1.5rem 5rem;
 }

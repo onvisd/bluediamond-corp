@@ -136,7 +136,8 @@ export default class Home extends Component {
                             <div
                                 className={styles.image}
                                 style={{
-                                    backgroundImage: `url(${homeFields.historyImage.file.url})`
+                                    backgroundImage:
+                                        `url(${homeFields.historyImage.file.url})`
                                 }}
                             />
                         </div>

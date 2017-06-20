@@ -15,8 +15,8 @@ export default class Navigation extends Component {
     navData = {
         primary: {
             actions: [
-                {name: 'Our Products', card: 'Products'},
-                {name: 'Our Company', card: 'Company'}
+                {name: 'Products', card: 'Products'},
+                {name: 'Company', card: 'Company'}
             ],
             globalLinks: [
                 {name: 'Product Locator', slug: '/product-locator'},

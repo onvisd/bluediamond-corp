@@ -1,0 +1,27 @@
+@keyframes loading {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+
+    100% {
+        width: 90%;
+        opacity: 1;
+    }
+}
+
+@keyframes done {
+    0% {
+        width: 90%;
+    }
+
+    50% {
+        width: 100%;
+        opacity: 1;
+    }
+
+    100% {
+        width: 100%;
+        opacity: 0;
+    }
+}

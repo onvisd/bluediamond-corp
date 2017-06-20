@@ -1,9 +1,18 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-isomorphic-render';
+import classNames from 'classnames';
 import styles from './styles.module.css';
 
-const Tile = ({bgImage, children}) => (
-    <li className={styles.tile} style={{backgroundImage: `url(${bgImage})`}}>
-        {children}
+const Tile = ({bgImage, children, to, onClick}) => (
+    <li
+        className={classNames(styles.tile, {[styles.hasLink]: to})}
+        style={{backgroundImage: `url(${bgImage})`}}
+        onClick={!to && onClick ? onClick : null}
+    >
+        {to
+            ? (<Link to={to} onClick={onClick} className={styles.tileLink}>{children}</Link>)
+            : children
+        }
     </li>
 );
 

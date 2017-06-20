@@ -3,8 +3,10 @@ import styles from './styles.module.css';
 
 const flexAlign = {
     top: 'flex-start',
+    left: 'flex-start',
     center: 'center',
-    bottom: 'flex-end'
+    bottom: 'flex-end',
+    right: 'flex-end'
 };
 
 const Story = ({image, tagline, content, verticalAlign, horizontalAlign, theme}) => (
@@ -12,14 +14,20 @@ const Story = ({image, tagline, content, verticalAlign, horizontalAlign, theme})
         className={styles.container}
         style={{
             backgroundImage: `url(${image})`,
-            alignItems: flexAlign[verticalAlign.toLowerCase()],
-            textAlign: horizontalAlign.toLowerCase()
+            alignItems: flexAlign[verticalAlign.toLowerCase()]
         }}
     >
-        <div className={styles.innerContainer}>
-            <h2 className={styles[`is${theme}`]} style={{textAlign: horizontalAlign.toLowerCase()}}>
-                {tagline}
-            </h2>
+        <div
+            className={styles.innerContainer}
+            style={{
+                alignItems: flexAlign[horizontalAlign.toLowerCase()],
+                textAlign: horizontalAlign.toLowerCase()
+            }}
+        >
+            <h2
+                className={styles[`is${theme}`]}
+                dangerouslySetInnerHTML={{__html: tagline.replace(/ ([^ ]*)$/, '&nbsp;$1')}}
+            />
             {content && <p>{content}</p>}
         </div>
     </div>

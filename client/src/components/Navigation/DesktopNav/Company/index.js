@@ -18,11 +18,14 @@ const Company = ({navData, companyNavTiles, toggleNav}) => (
     <div className={styles.container}>
         <ul className={styles.tiles}>
             {companyNavTiles.map((navTile, i) => (
-                <Tile key={navTile.sys.id} bgImage={bgs[i]}>
+                <Tile
+                    key={navTile.sys.id}
+                    bgImage={bgs[i]}
+                    to={`/${navTile.fields.linkUrl}`}
+                    onClick={toggleNav.hide}
+                >
                     <p>{navTile.fields.headline}</p>
-                    <Link to={`/${navTile.fields.linkUrl}`} onClick={toggleNav.hide}>
-                        <h2>{navTile.fields.title}</h2>
-                    </Link>
+                    <h2>{navTile.fields.title}</h2>
                 </Tile>
             ))}
         </ul>

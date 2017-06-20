@@ -270,7 +270,7 @@
 
     @media (--mq-gt-s) {
         padding: 0.75rem;
-        min-width: 70%;
+        min-width: 50vw;
         max-width: 70%;
     }
 

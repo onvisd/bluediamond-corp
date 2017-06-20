@@ -9,6 +9,7 @@
 @import 'global/type';
 @import 'global/grid';
 @import 'global/form';
+@import 'global/animations';
 
 /* component styles - styles groups of elements */
 @import 'components/recipeCards';

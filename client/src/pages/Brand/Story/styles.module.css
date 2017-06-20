@@ -15,10 +15,8 @@
 
     & p,
     & h2 {
-        margin-right: auto;
-        margin-left: auto;
         padding: 0 1rem;
-        text-align: center;
+        max-width: 65%;
     }
 
     & h2 {
@@ -46,4 +44,7 @@
 
 .innerContainer {
     @mixin container;
+
+    display: flex;
+    flex-direction: column;
 }
