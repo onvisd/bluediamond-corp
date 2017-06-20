@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
 import Button from 'components/Button';
@@ -9,27 +10,28 @@ const MoreFlavors = ({brand, otherCategories}) => (
         <h3 className={styles.heading}>More {brand.fields.name} flavors</h3>
         <div className={styles.panels}>
             {otherCategories.map((category) => (
-                <div
+                <Link to={`/brand/${brand.fields.slug}/${category.fields.slug}`}
                     className={classnames(styles.panel, {
                         [styles.single]: otherCategories.length === 1
                     })}
                     key={category.sys.id}
-                    style={{
-                        backgroundImage:
-                            `url(${category.fields.appetizerImages[0].fields.file.url}), ` +
-                            `url(${category.fields.appetizerImages[1].fields.file.url})`
-                    }}
                 >
+                    <div className={styles.background}
+                        style={{
+                            backgroundImage:
+                                `url(${category.fields.appetizerImages[0].fields.file.url}), ` +
+                                `url(${category.fields.appetizerImages[1].fields.file.url})`
+                        }}
+                    />
                     <div>
                         <h2>{category.fields.name}</h2>
                         <Button
-                            href={`/brand/${brand.fields.slug}/${category.fields.slug}`}
                             theme={brand.fields.themeColor}
                         >
                             See Products
                         </Button>
                     </div>
-                </div>
+                </Link>
             ))}
         </div>
     </div>
