@@ -13,6 +13,3 @@
 
 /* component styles - styles groups of elements */
 @import 'components/recipeCards';
-
-/* layout styles - styles pages of elements */
-@import 'layouts/recipes';

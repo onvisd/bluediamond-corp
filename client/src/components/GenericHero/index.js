@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import classNames from 'classnames';
 
 import Button from '../Button';
 import styles from './styles.module.css';
@@ -13,7 +14,8 @@ export default class GenericHero extends Component {
         ctaTheme: PropTypes.string,
         verticalAlign: PropTypes.string,
         backgroundImage: PropTypes.string.isRequired,
-        pageClass: PropTypes.string // used for static pages only
+        pageClass: PropTypes.string, // used for static pages only
+        className: PropTypes.any
     }
 
     static defaultProps = {
@@ -29,13 +31,21 @@ export default class GenericHero extends Component {
             ctaUrl,
             ctaTheme,
             verticalAlign,
-            backgroundImage
+            backgroundImage,
+            className
         } = this.props;
 
         const alignClass = `align${verticalAlign}`;
 
         return (
-            <div className={`${styles.container} ${verticalAlign ? styles[alignClass] : styles.alignBottom}`} style={{backgroundImage: `url(${backgroundImage})`}}>
+            <div
+                className={classNames(
+                    styles.container,
+                    verticalAlign ? styles[alignClass] : styles.alignBottom,
+                    className
+                )}
+                style={{backgroundImage: `url(${backgroundImage})`}}
+            >
                 <div className={`${styles.innerContainer} ${styles[color]}`}>
                     {headline && <h3>{headline}</h3>}
                     <h1 className="t--size-xxl">{title}</h1>

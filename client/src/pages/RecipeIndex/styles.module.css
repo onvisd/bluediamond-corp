@@ -1,0 +1,45 @@
+@import 'constants/grid';
+@import 'constants/type';
+@import 'constants/color';
+
+.hero {
+    display: flex;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.heroInner {
+    padding: 0 1rem;
+    text-align: center;
+
+    & h2 {
+        @media (--mq-s) {
+            font-size: var(--t--size-m);
+        }
+    }
+}
+
+.container {
+    margin: 3rem auto;
+}
+
+.filter {
+    margin: 2.5rem 0 1.5rem;
+}
+
+.title {
+    margin: 0;
+
+    & small {
+        font-weight: var(--t--weight-normal);
+        font-size: var(--t--size-m);
+        color: var(--c--gray);
+    }
+}
+
+.list {
+    justify-content: flex-start;
+}

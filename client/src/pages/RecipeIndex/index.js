@@ -8,8 +8,11 @@ import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 
 import Title from 'components/Title';
 import RecipeCard from 'components/API/RecipeCard';
-import GenericHero from 'components/GenericHero';
 import Button from 'components/Button';
+
+import styles from './styles.module.css';
+
+import HeroImage from 'images/backgrounds/recipe-hero.jpg';
 
 @preload(async ({dispatch}) => {
     const recipes = await dispatch(getRecipes());
@@ -113,14 +116,15 @@ export default class RecipeIndex extends Component {
         return (
             <section className="content">
                 <Title>Recipes</Title>
-                <GenericHero
-                    title="Recipes"
-                    backgroundImage="http://images.contentful.com/v50q1scweni9/3fypafNNVYK2SAgEyeoCQe/b646ac4edfbc6e14d58f9eef7a30c65b/cool.jpg"
-                />
-                <div className="l--container recipes--index">
+                <div className={styles.hero} style={{backgroundImage: `url(${HeroImage})`}}>
+                    <div className={styles.heroInner}>
+                        <h2>Creativity Never Came So Smoothly</h2>
+                    </div>
+                </div>
+                <div className={`l--container ${styles.container}`}>
                     <div className="l--row l--align-center">
-                        <div className="l--col-12-at-s l--col-5">
-                            <h3 className="recipes--title">
+                        <div className={`l--col-12-at-s l--col-5 ${styles.filter}`}>
+                            <h3 className={styles.title}>
                                 All recipes
                                 <small> ({totalCardCount})</small>
                             </h3>
@@ -153,7 +157,7 @@ export default class RecipeIndex extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="l--row recipes--list">
+                    <div className={`l--row ${styles.list}`}>
                         {this.renderRecipeCards()}
                     </div>
                     <div className={classnames({isHidden: visibleCardCount >= totalCardCount})}>
