@@ -6,6 +6,16 @@ import Card from 'components/Navigation/Card';
 import Breadcrumb from '../Breadcrumb';
 import styles from './styles.module.css';
 
+import Blossom from 'images/backgrounds/almond-blossom-no-shadow.png';
+import Almonds from 'images/backgrounds/almonds-nav.png';
+import Leaf from 'images/backgrounds/almond-leaf-nav.png';
+
+const bgs = [
+    Blossom,
+    Almonds,
+    Leaf
+];
+
 export default class Company extends Component {
     static propTypes = {
         navigate: PropTypes.func.isRequired,
@@ -31,8 +41,8 @@ export default class Company extends Component {
                     Our Company
                 </Breadcrumb>
                 <ul className={styles.container}>
-                    {companyNavTiles.map((navTile) => (
-                        <Tile key={navTile.sys.id}>
+                    {companyNavTiles.map((navTile, i) => (
+                        <Tile key={navTile.sys.id} bgImage={bgs[i]}>
                             <Link to={`/${navTile.fields.linkUrl}`} onClick={toggleNav.hide}>
                                 <p>{navTile.fields.headline}</p>
                                 <h2>{navTile.fields.title}</h2>

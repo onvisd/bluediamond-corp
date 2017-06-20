@@ -23,6 +23,10 @@
     & h2 {
         margin-bottom: 0;
         font-size: var(--t--size-m);
+
+        @media (--mq-s) {
+            max-width: 65%;
+        }
     }
 
     &.hasLink {
@@ -30,9 +34,11 @@
     }
 
     @media (--mq-s) {
-        &:first-child {
-            padding-top: 3rem;
-        }
+        padding: 1.5rem;
+        border: 1px solid var(--c--gray-lighter);
+        background-size: 55%;
+        background-position: center right -88px;
+        background-repeat: no-repeat;
     }
 
     @media (--mq-gt-s) {
