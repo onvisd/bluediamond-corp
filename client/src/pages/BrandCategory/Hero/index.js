@@ -5,7 +5,7 @@ import ButtonDropdown from 'components/ButtonDropdown';
 import styles from './styles.module.css';
 
 const Hero = ({brand, category, product}) => (
-    <div className={styles.hero}>
+    <div className={classnames(styles.hero, styles[category.fields.productTextColor])}>
         <div
             className={styles.background}
             style={{backgroundImage: `url(${category.fields.heroBackground.fields.file.url})`}}

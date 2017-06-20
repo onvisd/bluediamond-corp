@@ -5,10 +5,18 @@
 .hero {
     display: flex;
     position: relative;
-    height: 39rem;
+    height: 35rem;
     margin-top: 60px;
     z-index: var(--l--z-base);
     overflow: hidden;
+
+    &.light {
+        background: var(--c--black);
+
+        & .background {
+            opacity: 0.8;
+        }
+    }
 
     @media (--mq-gt-s) {
         height: 48vw;
@@ -39,7 +47,7 @@
 }
 
 .shelf {
-    background-size: 550%;
+    background-size: 1500px auto;
     background-position: bottom;
 
     @media (--mq-gt-s) {
@@ -54,12 +62,16 @@
 .product {
     display: flex;
     position: absolute;
-    bottom: 11vw;
+    bottom: 0;
     width: 100%;
     padding: 12rem 4rem 0;
     align-items: flex-end;
     justify-content: center;
     text-align: left;
+
+    @media (--mq-gt-s) {
+        bottom: 11vw;
+    }
 
     @media (--mq-gt-m) {
         bottom: 9vw;
@@ -110,12 +122,14 @@
             bottom: 1rem;
             left: 1rem;
             width: calc(100% - 2rem);
+            margin: 0 auto;
             min-width: 0;
+            max-width: 16rem;
         }
     }
 
     @media (--mq-s) {
-        padding-bottom: 4rem;
+        padding-bottom: 1rem;
         order: 1;
         text-align: center;
     }
@@ -130,10 +144,14 @@
 
 .name {
     color: var(--c--white);
-    font-size: var(--t--size-l);
+    font-size: var(--t--size-lm);
+
+    @media (--mq-gt-m) {
+        font-size: var(--t--size-xxl);
+    }
 
     @media (--mq-gt-s) {
-        font-size: var(--t--size-xxl);
+        font-size: var(--t--size-l);
     }
 
     &.dark {
