@@ -1,9 +1,15 @@
+@import 'constants/grid';
+
 /* Image Cluster styles */
 
 .cluster {
     display: flex;
     position: relative;
     justify-content: space-between;
+
+    @media (--mq-xs) {
+        flex-direction: column;
+    }
 }
 
 .clusterImage {
@@ -13,6 +19,10 @@
     & img {
         position: relative;
         margin: 3rem 0;
+
+        @media (--mq-xs) {
+            margin: 0;
+        }
     }
 
     &:nth-child(even) {
@@ -20,31 +30,70 @@
     }
 }
 
-.twoUp {
-    & .clusterImage {
-        &:nth-child(1) {
-            z-index: 10;
-        }
+.twoUp .clusterImage {
+    &:nth-child(1) {
+        z-index: 10;
 
-        &:nth-child(2) {
-            margin-left: -25%;
+        @media (--mq-xs) {
+            margin-right: 15%;
+        }
+    }
+
+    &:nth-child(2) {
+        margin-left: -25%;
+
+        @media (--mq-xs) {
+            margin-top: -25%;
+            margin-left: 15%;
         }
     }
 }
 
-.threeUp {
-    & .clusterImage {
-        &:nth-child(n+2) {
-            margin-left: -10%;
-            z-index: 0;
+.threeUp .clusterImage {
+    &:not(:first-child) {
+        @media (--mq-xs) {
+            margin-top: -25%;
+        }
+    }
+
+    &:nth-child(n+2) {
+        margin-left: -10%;
+        z-index: 0;
+
+        @media (--mq-xs) {
+            margin-left: 0;
+        }
+    }
+
+    @media (--mq-xs) {
+        &:nth-child(2n) {
+            margin-left: 15%;
+        }
+
+        &:nth-child(2n-1) {
+            margin-right: 15%;
         }
     }
 }
 
-.fourPlus {
-    & .clusterImage {
-        &:nth-child(n+2) {
-            margin-left: -10%;
+.fourPlus .clusterImage {
+    &:not(:first-child) {
+        @media (--mq-xs) {
+            margin-top: -25%;
+        }
+    }
+
+    &:nth-child(n+2) {
+        margin-left: -10%;
+
+        @media (--mq-xs) {
+            margin-left: 0;
+        }
+    }
+
+    @media (--mq-xs) {
+        &:nth-child(2n) {
+            margin-left: 15%;
         }
     }
 }

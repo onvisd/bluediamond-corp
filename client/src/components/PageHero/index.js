@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import marked from 'marked';
+import classnames from 'classnames';
 
 import Button from '../Button';
 
@@ -21,7 +22,8 @@ export default class PageHero extends Component {
         backgroundImage: PropTypes.string,
         video: PropTypes.string,
         backgroundVideo: PropTypes.bool,
-        playVideo: PropTypes.bool
+        playVideo: PropTypes.bool,
+        classNames: PropTypes.object
     }
 
     // Toggler video player visabiity,
@@ -90,19 +92,28 @@ export default class PageHero extends Component {
             buttonLink,
             buttonText,
             video,
-            playVideo
+            playVideo,
+            classNames
         } = this.props;
 
         const {videoOpen} = this.state;
 
         return (
-            <div className={`${styles.container} ${videoOpen ? styles.videoOpen : ''}
-                ${video ? styles.hasVideo : ''}`}>
-                <div className={`${styles.innerContainer} ${video ? styles.hasVideo : ''}`}>
+            <div className={classnames(
+                styles.container,
+                videoOpen ? styles.videoOpen : '',
+                video ? styles.hasVideo : '',
+                classNames.container
+            )}>
+                <div className={classnames(
+                    styles.innerContainer,
+                    video ? styles.hasVideo : '',
+                    classNames.innerContainer
+                )}>
                     {showHeadline && <h1>{headline}</h1>}
                     {content &&
                         <div
-                            className={styles.content}
+                            className={classnames(styles.content, classNames.content)}
                             dangerouslySetInnerHTML={this.renderMarkup(content)}
                         />
                     }

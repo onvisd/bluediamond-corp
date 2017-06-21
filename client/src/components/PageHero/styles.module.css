@@ -10,7 +10,7 @@
     height: 50vw;
     justify-content: center;
     align-items: center;
-    background-color: var(--c--gray-dark);
+    background-color: var(--c--black);
     overflow: hidden;
 
     @media (--mq-s) {
@@ -23,10 +23,6 @@
 
         & h1 {
             max-width: 25%;
-        }
-
-        & .background {
-            opacity: 1;
         }
     }
 
@@ -53,7 +49,7 @@
     transition: opacity 200ms ease;
 
     &.hasVideo {
-        padding-bottom: 5rem;
+        padding-bottom: 5.5vw;
         text-align: left;
 
         & .playIcon a {
@@ -77,7 +73,11 @@
     z-index: 5;
     background-size: cover;
     background-position: center;
-    opacity: 0.5;
+    opacity: 1;
+
+    @media (--mq-m) {
+        opacity: 0.6;
+    }
 
     & video {
         width: 100%;

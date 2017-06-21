@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import marked from 'marked';
+import classnames from 'classnames';
 
 import {connector, getManifesto} from 'state/manifesto';
 import {parseModel} from 'tools/parseApi';
@@ -92,12 +93,15 @@ export default class Manifesto extends Component {
                     showHeadline={true}
                     backgroundImage={manifestoFields.heroImage.file.url}
                     video={manifestoFields.heroVideo.file.url}
+                    classNames={{
+                        innerContainer: styles.heroInner
+                    }}
                 />
                 <div className={styles.container}>
                     <div className="l--container">
                         <div className="l--row">
                             <div
-                                className="l--col-12 t--align-center"
+                                className={`t--align-center ${styles.headline}`}
                                 dangerouslySetInnerHTML={this.renderMarkup(
                                     manifestoFields.introHeadline
                                 )}
@@ -119,7 +123,7 @@ export default class Manifesto extends Component {
                     <div className="l--container">
                         <div className="l--row">
                             <div
-                                className="l--col-7 t--align-center"
+                                className={`t--align-center ${styles.contentBlock}`}
                                 dangerouslySetInnerHTML={this.renderMarkup(
                                     manifestoFields.firstContentBlock
                                 )}
@@ -138,13 +142,13 @@ export default class Manifesto extends Component {
                                 url: manifestoFields.secondImageCluster[2].file.url
                             }
                         ]}
-                        className={styles.imageCluster}
+                        className={classnames(styles.imageCluster, styles.secondImageCluster)}
                         change={false}
                     />
                     <div className="l--container">
                         <div className="l--row">
                             <div
-                                className="l--col-7 t--align-center"
+                                className={`t--align-center ${styles.contentBlock}`}
                                 dangerouslySetInnerHTML={this.renderMarkup(
                                     manifestoFields.secondContentBlock
                                 )}

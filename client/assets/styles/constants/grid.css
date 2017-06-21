@@ -26,6 +26,9 @@
     @custom-media --mq-gt-s (width > 768px);
     @custom-media --mq-lt-s (width < 768px);
     @custom-media --mq-s (width <= 768px);
+    @custom-media --mq-gt-xs (width > 520px);
+    @custom-media --mq-lt-xs (width < 520px);
+    @custom-media --mq-xs (width <= 520px);
 
     @define-mixin visually-hidden {
         position: absolute;
@@ -42,7 +45,8 @@
         max-width: var(--l--grid-width);
 
         @media (--mq-gt-s) and (--mq-m) {
-            padding: 0 1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
     }
 
