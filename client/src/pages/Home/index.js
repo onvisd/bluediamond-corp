@@ -84,33 +84,40 @@ export default class Home extends Component {
             <section className={styles.container}>
                 <Title>From Our Hearts to Your Hands</Title>
                 <div
-                    className={styles.hero}
+                    className={styles.heroWrapper}
                 >
-                    <Parallax
-                        className={styles.heroBackground}
-                        bgImage={homeFields.heroBackground.file.url}
-                        strength={200}
-                    />
-                    <img className={styles.blossom} src={homeFields.heroBlossomImage.file.url} />
                     <div
-                        className={styles.products}
-                        style={{backgroundImage: `url(${
-                            homeFields.heroProductImage.file.url
-                        })`}}
-                    />
-                    <div className={styles.heroContent}>
-                        <h1 className="t--size-xxl">{homeFields.heroHeadline}</h1>
-                        <h3>{homeFields.heroText}</h3>
-                        <ButtonDropdown
-                            items={[
-                                {slug: '/brand/snack-almonds', name: 'Snack Almonds'},
-                                {slug: '/brand/almond-breeze', name: 'Almond Breeze'},
-                                {slug: '/brand/nut-thins', name: 'Nut-Thins'}
-                            ]}
-                            layout="large"
-                        >
-                            Browse Products
-                        </ButtonDropdown>
+                        className={styles.hero}
+                    >
+                        <Parallax
+                            className={styles.heroBackground}
+                            bgImage={homeFields.heroBackground.file.url}
+                            strength={200}
+                        />
+                        <img
+                            className={styles.blossom}
+                            src={homeFields.heroBlossomImage.file.url}
+                        />
+                        <div className={styles.heroContent}>
+                            <h1 className="t--size-xxl">{homeFields.heroHeadline}</h1>
+                            <h3>{homeFields.heroText}</h3>
+                            <ButtonDropdown
+                                items={[
+                                    {slug: '/brand/snack-almonds', name: 'Snack Almonds'},
+                                    {slug: '/brand/almond-breeze', name: 'Almond Breeze'},
+                                    {slug: '/brand/nut-thins', name: 'Nut-Thins'}
+                                ]}
+                                layout="large"
+                            >
+                                Browse Products
+                            </ButtonDropdown>
+                        </div>
+                        <div
+                            className={styles.products}
+                            style={{backgroundImage: `url(${
+                                homeFields.heroProductImage.file.url
+                            })`}}
+                        />
                     </div>
                 </div>
                 <div className={styles.corporate}>
@@ -157,13 +164,11 @@ export default class Home extends Component {
                     bgImage={homeFields.coopImage.file.url}
                 >
                     <div className={styles.coopContent}>
-                        <div>
-                            <h2>{homeFields.coopHeadline}</h2>
-                            <p>{homeFields.coopText}</p>
-                            <Button href="/manifesto">
-                                Our Story
-                            </Button>
-                        </div>
+                        <h2>{homeFields.coopHeadline}</h2>
+                        <p>{homeFields.coopText}</p>
+                        <Button href="/manifesto">
+                            Our Story
+                        </Button>
                     </div>
                 </Parallax>
             </section>

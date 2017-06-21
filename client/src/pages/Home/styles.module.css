@@ -11,8 +11,9 @@
 .hero {
     display: flex;
     position: relative;
-    height: 110vh;
+    height: 107.5vh;
     padding-top: 6.25rem;
+    max-height: 85rem;
     align-items: flex-start;
     background-color: rgba(0, 0, 0, 0.25);
     background-blend-mode: soft-light;
@@ -33,6 +34,7 @@
     top: 0;
     width: 100vw;
     height: 100vh;
+    max-height: 80rem;
 
     @media (--mq-m) {
         background: rgba(0, 0, 0, 1);
@@ -58,12 +60,10 @@
     align-self: flex-start;
 
     @media (--mq-gt-s) {
+        margin-top: auto;
+        margin-bottom: 22.5%;
         padding: 0 4rem;
         text-align: left;
-    }
-
-    @media (--mq-gt-m) {
-        padding: 45vh 0 0;
     }
 
     & h1,
@@ -162,7 +162,7 @@
 .blossom {
     display: none;
     position: absolute;
-    top: 3rem;
+    bottom: 57%;
     left: -4rem;
 
     @media (--mq-gt-m) {
@@ -173,21 +173,20 @@
 .products {
     position: absolute;
     right: 0;
-    bottom: -6rem;
     left: 0;
     width: 100%;
-    padding-bottom: 100%;
     background-size: cover;
-    background-position: 100%;
+    background-position: 100% bottom;
     background-repeat: no-repeat;
 
-    @media (--mq-lt-s) {
+    @media (--mq-s) {
         top: 22.5rem;
         bottom: -2rem;
     }
 
     @media (--mq-gt-s) {
-        padding-bottom: 55%;
+        height: 115vh;
+        max-height: 90rem;
         background-size: 107.5% auto;
     }
 }
@@ -316,15 +315,21 @@
     background-size: cover;
     background-position: center;
 
+    & img {
+        max-width: none;
+    }
+
     @media (--mq-gt-s) {
+        width: 110vw;
         height: 32rem;
+        margin-left: -5vw;
     }
 
     @media (--mq-s) {
         & img {
             top: -20%;
-            left: 130% !important; /* stylelint-disable-line declaration-no-important */
-            opacity: 0.65;
+            left: 50vw !important; /* stylelint-disable-line declaration-no-important */
+            opacity: 0.6;
             zoom: 2;
             max-width: none;
         }
@@ -340,8 +345,15 @@
     padding: 0 1rem;
     z-index: 10;
     color: var(--c--white);
+    flex-direction: column;
     text-align: center;
     align-items: center;
+    justify-content: center;
+
+    & p,
+    & h2 {
+        max-width: 450px;
+    }
 
     & p {
         margin-bottom: 2rem;
@@ -355,30 +367,20 @@
 
     @media (--mq-gt-s) {
         margin-right: 4rem;
+        margin-left: 10vw;
+        padding-bottom: 5%;
         text-align: left;
         align-items: flex-start;
+        justify-content: flex-end;
 
         & h2,
         & p {
             padding: 0;
-            max-width: 350px;
+            max-width: 25vw;
         }
 
         & h2 {
             font-size: var(--t--size-l);
-        }
-    }
-
-    @media (--mq-gt-m) {
-        margin: 0 auto;
-        padding: 12rem 0 0;
-
-        & p {
-            max-width: 350px;
-        }
-
-        & h2 {
-            max-width: 250px;
         }
     }
 }
