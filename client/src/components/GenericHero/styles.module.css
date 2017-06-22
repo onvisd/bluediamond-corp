@@ -22,7 +22,8 @@
     align-items: flex-start;
 
     & .innerContainer {
-        padding: 12vh 0;
+        padding-top: 12vh;
+        padding-bottom: 12vh;
     }
 }
 
@@ -30,7 +31,8 @@
     align-items: center;
 
     & .innerContainer {
-        padding: 12vh 0;
+        padding-top: 12vh;
+        padding-bottom: 12vh;
         text-align: center;
     }
 }
@@ -39,7 +41,7 @@
     align-items: flex-end;
 
     & .innerContainer {
-        padding: 0 0 12vh;
+        padding-bottom: 12vh;
     }
 }
 

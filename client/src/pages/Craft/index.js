@@ -110,7 +110,7 @@ export default class Craft extends Component {
             {
                 title: craftFields.factTwoTitle,
                 text: craftFields.factTwoText,
-                coords: {x: 0, y: 50}
+                coords: {x: 1, y: 50}
             },
             {
                 title: craftFields.factThreeTitle,

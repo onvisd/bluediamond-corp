@@ -11,8 +11,9 @@
 .section {
     display: flex;
     position: relative;
-    height: 90vh;
     padding: 6rem 0;
+    min-height: 45rem;
+    max-height: 56rem;
     background-color: var(--c--gray-dark);
     background-size: cover;
     background-position: center;
@@ -22,6 +23,8 @@
     @media (--mq-s) {
         height: auto;
         padding: 2rem 0;
+        min-height: 0;
+        max-height: none;
     }
 }
 
@@ -35,14 +38,14 @@
 
 .details {
     composes: section;
-    background-position: 50% -10%;
+    background-position: 50% top;
     background-size: 400%;
 
     & svg {
         display: block;
         width: 100px;
         height: 62px;
-        margin: 0 auto 1rem;
+        margin: 0 auto 1.25rem;
 
         @media (--mq-gt-s) {
             width: 158px;
@@ -69,7 +72,7 @@
 
     @media (--mq-gt-s) {
         background-position: top;
-        background-size: 120%;
+        background-size: cover;
         background-repeat: no-repeat;
     }
 }
@@ -78,21 +81,18 @@
     composes: overlay;
     background-image:
         linear-gradient(
-            to top,
-            rgba(255, 255, 255, 1) 0%,
-            rgba(255, 255, 255, 1) 50%,
-            rgba(255, 255, 255, 0.9) 80%,
-            rgba(255, 255, 255, 0) 100%
+            to bottom,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 1) 35%,
+            rgba(255, 255, 255, 1) 100%
         );
 
     @media (--mq-gt-s) {
         background-image:
             linear-gradient(
-                to top,
-                rgba(255, 255, 255, 1) 0%,
-                rgba(255, 255, 255, 1) 30%,
-                rgba(255, 255, 255, 0.9) 50%,
-                rgba(255, 255, 255, 0) 100%
+                to bottom,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 1) 60%
             );
     }
 }
@@ -134,7 +134,10 @@
 .innovation {
     composes: section;
     background-position: 20% 50%;
-    min-height: 45rem;
+
+    @media (--mq-s) {
+        min-height: 0;
+    }
 
     & h2 {
         margin-bottom: 2rem;
@@ -194,8 +197,15 @@
 
     & h2 {
         @media (--mq-s) {
-            padding: 0 1rem;
+            margin: -1rem 0 0;
+            padding: 1rem;
             font-size: var(--t--size-lm);
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    var(--c--white) 0%,
+                    rgba(255, 255, 255, 0) 70%
+                );
         }
     }
 
@@ -210,10 +220,21 @@
             padding: 0;
             font-size: var(--t--size-m);
         }
+
+        @media (--mq-s) {
+            margin: -1rem auto 1rem;
+            padding: 1rem;
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    var(--c--white) 0%,
+                    rgba(255, 255, 255, 0) 70%
+                );
+        }
     }
 
     @media (--mq-s) {
-        background-size: 400%;
+        background-size: cover;
         background-position: 50% 0;
     }
 }
@@ -265,8 +286,7 @@
 .hotspotContent {
     padding: 1rem;
     z-index: 9999;
-    background-color: rgba(250, 250, 250, 0.95);
-    border: 3px solid var(--c--white);
+    background-color: rgba(250, 250, 250, 0.98);
     border-radius: 12px;
     opacity: 0;
     pointer-events: none;
@@ -275,9 +295,16 @@
     &::after {
         content: '';
         position: absolute;
-        top: 72px;
-        border-top: 12px solid transparent;
-        border-bottom: 12px solid transparent;
+        top: 77px;
+        width: 24px;
+        height: 24px;
+        background: rgba(250, 250, 250, 0.98);
+        transform: rotate(45deg);
+        clip-path: polygon(0 100%, 100% 83%, 17% 0%);
+
+        @media (--mq-s) {
+            display: none;
+        }
     }
 
     & h3 {
@@ -308,8 +335,7 @@
     composes: hotspotContent; /* stylelint-disable-line */
 
     &::after {
-        left: -12px;
-        border-right: 12px solid rgba(240, 240, 240, 0.8);
+        left: -14.5px;
     }
 }
 
@@ -318,8 +344,8 @@
     composes: hotspotContent; /* stylelint-disable-line */
 
     &::after {
-        right: -12px;
-        border-left: 12px solid rgba(240, 240, 240, 0.8);
+        right: -14px;
+        transform: rotate(225deg);
     }
 }
 
