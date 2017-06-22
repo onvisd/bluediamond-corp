@@ -18,7 +18,7 @@ export default class ProductSection extends Component {
 
     state = {
         isOpen: false
-    }
+    };
 
     toggleProductPanel = () => {
         this.setState((state) => ({
@@ -36,8 +36,7 @@ export default class ProductSection extends Component {
                 style={{
                     backgroundImage:
                         `url(${category.fields.appetizerImages[0].fields.file.url}), ` +
-                        `url(${category.fields.appetizerImages[1].fields.file.url})`,
-                    backgroundPosition: '-25% 50%, 125% 50%'
+                        `url(${category.fields.appetizerImages[1].fields.file.url})`
                 }}
             >
                 <div

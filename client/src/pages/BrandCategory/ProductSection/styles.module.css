@@ -5,7 +5,16 @@
 .container {
     position: relative;
     background-repeat: no-repeat;
-    background-size: contain;
+
+    @media (--mq-gt-m) {
+        background-position: -15vw 50%, 75vw 50%;
+        background-size: contain;
+    }
+
+    @media (--mq-m) {
+        background-position: -15vw 50%, 80vw 50%;
+        background-size: 35vw, 30vw;
+    }
 
     @media (--mq-s) {
         background-image: none !important; /* stylelint-disable-line */
