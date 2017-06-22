@@ -11,7 +11,7 @@
 .hero {
     display: flex;
     position: relative;
-    height: 107.5vh;
+    height: 97.5vh;
     padding-top: 6.25rem;
     max-height: 85rem;
     align-items: flex-start;
@@ -61,7 +61,7 @@
 
     @media (--mq-gt-s) {
         margin-top: auto;
-        margin-bottom: 22.5%;
+        margin-bottom: 18.5%;
         padding: 0 4rem;
         text-align: left;
     }
@@ -161,9 +161,9 @@
 
 .blossom {
     display: none;
-    position: absolute;
-    bottom: 57%;
+    position: relative;
     left: -4rem;
+    margin: auto 0 40%;
 
     @media (--mq-gt-m) {
         display: inline;
@@ -171,10 +171,12 @@
 }
 
 .products {
+    display: flex;
     position: absolute;
     right: 0;
     left: 0;
     width: 100%;
+    align-items: flex-start;
     background-size: cover;
     background-position: 100% bottom;
     background-repeat: no-repeat;
