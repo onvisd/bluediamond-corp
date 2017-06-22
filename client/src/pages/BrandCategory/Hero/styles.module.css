@@ -24,6 +24,18 @@
     }
 }
 
+.productHero {
+    position: relative;
+    width: 100%;
+    height: 35rem;
+    margin-top: -35rem;
+
+    @media (--mq-gt-s) {
+        height: 48vw;
+        margin-top: -48vw;
+    }
+}
+
 .background,
 .shelf {
     position: absolute;
