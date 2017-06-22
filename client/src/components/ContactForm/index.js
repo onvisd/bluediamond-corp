@@ -6,7 +6,7 @@ import Button from '../Button';
 import Input from '../FormInput';
 import Select from '../FormSelect';
 import Textarea from './Textarea';
-import Checkbox from './Checkbox';
+import Checkbox from '../Checkbox';
 
 export default class ContactForm extends Component {
     state = {

@@ -1,5 +1,6 @@
 @import 'constants/color';
 @import 'constants/type';
+@import 'constants/grid';
 
 .container {
     display: block;
@@ -14,6 +15,10 @@
         font-size: var(--t--size-s);
         border: 1px solid var(--c--gray-light);
         border-radius: 4px;
+
+        @media (--mq-gt-s) {
+            min-width: 21rem;
+        }
 
         &:focus {
             outline: none;

@@ -1,0 +1,42 @@
+@import 'constants/color';
+@import 'constants/grid';
+@import 'constants/type';
+
+.container {
+    margin-bottom: 2rem;
+    border: 2px solid var(--c--gray-lighter);
+    border-radius: var(--l--border-radius);
+}
+
+.title {
+    padding: 0.5rem 1rem;
+    background-color: var(--c--gray-lighter);
+    text-align: center;
+}
+
+.content {
+    @mixin row;
+
+    margin: 0 1rem;
+    padding: 1rem 0;
+}
+
+.half {
+    width: 50%;
+
+    & p {
+        margin: 0;
+    }
+}
+
+.total {
+    border-top: 2px solid var(--c--gray-lighter);
+
+    & h3 {
+        margin: 0;
+    }
+}
+
+.orange {
+    color: var(--c--orange);
+}

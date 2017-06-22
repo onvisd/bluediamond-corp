@@ -1,0 +1,46 @@
+@import 'constants/color';
+@import 'constants/grid';
+@import 'constants/type';
+
+.container {
+    @media (--mq-s) {
+        margin-top: 2rem;
+    }
+
+    @media (--mq-gt-s) {
+        border: 2px solid var(--c--gray-lighter);
+        border-radius: var(--l--border-radius);
+    }
+}
+
+.title {
+    @media (--mq-s) {
+        font-weight: var(--t--weight-bold);
+    }
+
+    @media (--mq-gt-s) {
+        position: relative;
+        padding: 0.5rem 1rem;
+        background-color: var(--c--gray-lighter);
+        text-align: center;
+    }
+}
+
+.content {
+    @media (--mq-gt-s) {
+        padding: 1rem;
+    }
+}
+
+.edit {
+    @media (--mq-s) {
+        display: none;
+    }
+
+    @media (--mq-gt-s) {
+        position: absolute;
+        right: 1rem;
+        color: var(--c--gray);
+        text-decoration: underline;
+    }
+}
