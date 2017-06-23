@@ -10,8 +10,8 @@ import Leaf from 'images/backgrounds/almond-leaf-nav.png';
 
 const bgs = [
     Blossom,
-    Almonds,
-    Leaf
+    Leaf,
+    Almonds
 ];
 
 const Company = ({navData, companyNavTiles, toggleNav}) => (

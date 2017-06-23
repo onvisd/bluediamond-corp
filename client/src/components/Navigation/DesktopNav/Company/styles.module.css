@@ -16,9 +16,13 @@
     margin: 0;
     padding: 0;
 
-    & li:nth-child(2) {
-        background-size: 68%;
+    & li:nth-child(3) {
+        background-size: 66%;
         background-position: bottom -56px right -22px;
+
+        &:hover {
+            background-size: 68%;
+        }
     }
 
     & h2 {

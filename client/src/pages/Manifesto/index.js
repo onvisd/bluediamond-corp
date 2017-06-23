@@ -164,7 +164,6 @@ export default class Manifesto extends Component {
                 />
                 <RelatedPages>
                     <RelatedPageLink
-                        headline="We take pride in our work"
                         title="Perfected Over Generations"
                         linkText="Our History"
                         linkUrl="/history"
@@ -172,8 +171,7 @@ export default class Manifesto extends Component {
                         backgroundImage={BgLeaves}
                     />
                     <RelatedPageLink
-                        headline="Craft section headline"
-                        title="Our Almonds are our story"
+                        title="Almonds Are All We Do"
                         linkText="Our Craft"
                         linkUrl="/craft"
                         linkTheme="yellow"

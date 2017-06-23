@@ -33,7 +33,7 @@ export default () => (
         <Title>History Page</Title>
         <GenericHero
             headline="Our History"
-            title="How we've grown"
+            title="How We've Grown"
             backgroundImage={Hero}
         />
         <div className={styles.timeline}>
@@ -458,14 +458,14 @@ export default () => (
 
         <RelatedPages>
             <RelatedPageLink
-                title="Almonds are all we do"
+                title="Almonds Are All We Do"
                 linkText="Our Craft"
                 linkUrl="/craft"
                 linkTheme="yellow"
                 backgroundImage={Almonds}
             />
             <RelatedPageLink
-                title="Quality is our legacy"
+                title="Quality is Our Legacy"
                 linkText="Our Story"
                 linkUrl="/manifesto"
                 linkTheme="blue"

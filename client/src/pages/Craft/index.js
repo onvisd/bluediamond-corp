@@ -250,7 +250,7 @@ export default class Craft extends Component {
                         backgroundImage={Leaves}
                     />
                     <RelatedPageLink
-                        title="Quality is our legacy"
+                        title="Quality is Our Legacy"
                         linkText="Our Story"
                         linkUrl="/manifesto"
                         linkTheme="blue"
