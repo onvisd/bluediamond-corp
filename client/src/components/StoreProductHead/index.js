@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 
+import {connector, createCheckout, updateCheckout} from 'state/checkout';
 import styles from './styles.module.css';
 
 import GlutenFree from 'images/icons/gluten-free.svg';
@@ -13,15 +15,19 @@ import Quantity from '../Quantity';
 import ProductAccordion from '../ProductAccordion';
 import ProductStarRating from '../ProductStarRating';
 
+@connect(
+    (state) => ({...connector(state.checkout)}),
+    {createCheckout, updateCheckout}
+)
 export default class StoreProductHead extends Component {
     state = {
-        price: 0
+        quantity: 1,
+        variant: {}
     };
 
     static propTypes = {
         title: PropTypes.string.isRequired,
         tags: PropTypes.string.isRequired,
-        price: PropTypes.string.isRequired,
         variants: PropTypes.array.isRequired,
         options: PropTypes.array.isRequired,
         images: PropTypes.array.isRequired,
@@ -96,8 +102,7 @@ export default class StoreProductHead extends Component {
                         {variants.map((variant) =>
                             <option
                                 key={`variant${variant.id}`}
-                                value={variant.price}
-                                data-id={variant.id}
+                                value={variant.id}
                             >
                                 {variant.title}
                             </option>
@@ -109,19 +114,38 @@ export default class StoreProductHead extends Component {
     }
 
     handleSelect = (e) => {
-        const target = e.target;
+        const {value} = e.target;
+        const variant = this.props.variants.find((v) => v.id.toString() === value);
 
-        this.setState(() => ({
-            price: target.value
-        }));
+        this.setState(() => ({variant}));
+    }
+
+    updateQuantity = (quantity) => {
+        this.setState(() => ({quantity}));
     }
 
     componentWillMount() {
-        const {price} = this.props;
+        this.setState(() => ({variant: this.props.variants[0]}));
+    }
 
-        this.setState(() => ({
-            price
-        }));
+    addToCart = () => {
+        const {variant, quantity} = this.state;
+
+        if(this.props.checkout.token) {
+            const lineItems = this.props.checkout.lineItems.concat({
+                variant_id: variant.id, // eslint-disable-line camelcase
+                quantity
+            });
+
+            this.props.updateCheckout({
+                token: this.props.checkout.token,
+                lineItems
+            });
+        } else {
+            this.props.createCheckout({lineItems: [
+                {variant_id: variant.id, quantity} // eslint-disable-line camelcase
+            ]});
+        }
     }
 
     render() {
@@ -132,7 +156,7 @@ export default class StoreProductHead extends Component {
             reviews
         } = this.props;
 
-        const {price} = this.state;
+        const {variant, quantity} = this.state;
 
         return (
             <section className={styles.container}>
@@ -149,11 +173,13 @@ export default class StoreProductHead extends Component {
                     {this.renderDescription()}
                     <div className={styles.formOptions}>
                         {this.renderOptions()}
-                        <Quantity />
+                        <Quantity onChange={this.updateQuantity} />
                     </div>
                     <div className={styles.formPurchase}>
-                        <h2 className={styles.price}>${price}</h2>
-                        <Button>+ Add to cart</Button>
+                        <h2 className={styles.price}>${(quantity * variant.price).toFixed(2).toLocaleString('en-US')}</h2>
+                        <Button onClick={this.addToCart}>
+                            + Add to cart
+                        </Button>
                     </div>
                     <ProductAccordion
                         nutrition={nutrition}

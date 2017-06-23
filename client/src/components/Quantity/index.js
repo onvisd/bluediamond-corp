@@ -1,7 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import styles from './styles.module.css';
 
 export default class Quantity extends Component {
+    static propTypes = {
+        onChange: PropTypes.func.isRequired
+    }
+
     state = {
         value: 1
     };
@@ -11,13 +15,17 @@ export default class Quantity extends Component {
 
         this.setState((state) => ({
             value: --state.value
-        }));
+        }), () => {
+            this.props.onChange(this.state.value);
+        });
     }
 
     onIncrement = () => {
         this.setState((state) => ({
             value: ++state.value
-        }));
+        }), () => {
+            this.props.onChange(this.state.value);
+        });
     }
 
     handleChange = (e) => {
@@ -25,7 +33,9 @@ export default class Quantity extends Component {
 
         this.setState(() => ({
             value: e.target.value
-        }));
+        }), () => {
+            this.props.onChange(this.state.value);
+        });
     }
 
     handleValidation = (e) => {

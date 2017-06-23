@@ -22,8 +22,6 @@ export default class Products extends Component {
     render() {
         const {brands} = this.props;
 
-        console.log(brands);
-
         return (
             <Card>
                 <Breadcrumb onClick={this.navigate.backwards}>

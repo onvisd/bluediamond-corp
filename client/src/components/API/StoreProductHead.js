@@ -12,6 +12,7 @@ export default class StoreProductHead extends Component {
                 tags: PropTypes.string.isRequired,
                 variants: PropTypes.arrayOf(PropTypes.shape({
                     id: PropTypes.number,
+                    product_id: PropTypes.number, // eslint-disable-line
                     title: PropTypes.string,
                     price: PropTypes.string,
                     option1: PropTypes.string,
@@ -83,10 +84,10 @@ export default class StoreProductHead extends Component {
             <StorePrdctHeadCmpnt
                 title={item.title}
                 tags={item.tags}
-                price={item.variants[0].price}
                 variants={item.variants}
                 options={item.options}
                 images={item.images}
+                image={item.image}
                 description={item.body_html}
                 nutrition={item.smartLabel}
                 ingredients={item.smartLabel.rawIngredients}

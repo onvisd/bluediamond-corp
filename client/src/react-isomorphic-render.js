@@ -1,3 +1,4 @@
+import persistState from 'redux-localstorage';
 import routes from './routes';
 import * as reducer from './state/reducer';
 import wrapper from './wrapper';
@@ -7,10 +8,16 @@ import asyncSettings from './react-isomorphic-render-async';
 // since no assets are emitted on the server side
 // export {default as icon} from '../assets/images/icon.png';
 
+const enhancers = [];
+if(typeof localStorage !== 'undefined')
+    enhancers.push(persistState('checkout'));
+
 export default {
     reducer,
     routes,
     wrapper,
+
+    reduxStoreEnhancers: () => enhancers,
 
     preload: {
         catch(error, {url, redirect}) {

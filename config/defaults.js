@@ -34,7 +34,8 @@ export default {
     },
     shopify: {
         key: process.env.SHOPIFY_API_KEY,
-        pass: process.env.SHOPIFY_API_PASS
+        pass: process.env.SHOPIFY_API_PASS,
+        apiToken: process.env.SHOPIFY_API_TOKEN
     },
     yotpo: {
         key: process.env.YOTPO_KEY,

@@ -1,35 +1,43 @@
-import axios from 'axios';
+/* eslint-disable camelcase */
+import ApolloClient, {createNetworkInterface} from 'apollo-client';
+import gql from 'graphql-tag';
+
+// Polyfill fetch for node
+import fetch from 'node-fetch'; // eslint-disable-line no-shadow
+global.fetch = fetch;
 
 import config from '../../config';
 
-import {setCached} from '../services/cache';
+const client = new ApolloClient({
+    networkInterface: createNetworkInterface({
+        uri: 'https://bdgrowers.myshopify.com/api/graphql',
+        opts: {
+            headers: {
+                'X-Shopify-Storefront-Access-Token': config.shopify.apiToken
+            }
+        }
+    })
+});
 
 export default (api) => {
-    const getCartByToken = (query) =>
-        axios.get(
-            `https://${config.shopify.key}:${config.shopify.pass}` +
-            '@bdgrowers.myshopify.com/admin/' +
-            `checkouts/${query}.json`
-        )
-        .then((response) => response.data)
+    // Temporary, to show how to form queries
+    api.post('/store/checkout-test', (req, res) =>
+        client.query({
+            query: gql`
+                {
+                  shop {
+                    name
+                    primaryDomain {
+                      url
+                      host
+                    }
+                  }
+                }
+            `
+        })
+        .then((data) => res.send(data))
         .catch((err) => {
             console.trace(err);
-            return 'No Shopify data found';
-        });
-
-    api.get('/store/checkout/:slug', async (req, res) => {
-        try {
-            const cart = await getCartByToken(req.params.slug);
-
-            if(cart.length) {
-                setCached(`store_cart_${req.params.slug}`, cart);
-                res.send(cart);
-            } else {
-                res.status(404).send({ok: false, error: 'not found'});
-            }
-        } catch (err) {
-            console.trace(err);
             res.status(500).send(err.message);
-        }
-    });
+        }));
 };
