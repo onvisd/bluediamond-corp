@@ -2,10 +2,10 @@ import axios from 'axios';
 
 import {setCached} from '../services/cache';
 
-export default (api, spaceId) => {
+export default (api, {contentful}) => {
     const getProduct = (apiParams, slug) =>
         axios.get(
-            `${apiParams.base}/spaces/${spaceId}/entries?` +
+            `${apiParams.base}/spaces/${contentful.spaceId}/entries?` +
             `fields.slug=${slug}&` +
             `access_token=${apiParams.token}&content_type=product`
         )

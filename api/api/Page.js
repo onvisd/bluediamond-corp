@@ -30,6 +30,6 @@ const requestSlugFromType = (req, res, spaceId, typeIndex) => {
     });
 };
 
-export default (api, spaceId) => {
-    api.get('/page/:slug', (req, res) => requestSlugFromType(req, res, spaceId, 0));
+export default (api, {contentful}) => {
+    api.get('/page/:slug', (req, res) => requestSlugFromType(req, res, contentful.spaceId, 0));
 };

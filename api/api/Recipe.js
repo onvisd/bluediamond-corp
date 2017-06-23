@@ -2,10 +2,10 @@ import axios from 'axios';
 
 import {setCached} from '../services/cache';
 
-export default (api, spaceId) => {
+export default (api, {contentful}) => {
     api.get('/recipes', (req, res) =>
         axios.get(
-            `${req.apiParams.base}/spaces/${spaceId}/entries?` +
+            `${req.apiParams.base}/spaces/${contentful.spaceId}/entries?` +
             `access_token=${req.apiParams.token}&content_type=recipe` +
             '&limit=100'
         )
@@ -21,7 +21,7 @@ export default (api, spaceId) => {
 
     api.get('/recipes/:slug', (req, res) =>
         axios.get(
-            `${req.apiParams.base}/spaces/${spaceId}/entries?` +
+            `${req.apiParams.base}/spaces/${contentful.spaceId}/entries?` +
             `fields.slug=${req.params.slug}&` +
             `access_token=${req.apiParams.token}&content_type=recipe`
         )

@@ -1,8 +1,8 @@
 import {setCached} from '../services/cache';
 
-export default (api, spaceId, client) => {
+export default (api, {contentful}) => {
     const getBrands = () =>
-        client.getEntries({
+        contentful.client.getEntries({
             content_type: 'brand', // eslint-disable-line camelcase
             select: [
                 'fields.name',
@@ -15,14 +15,14 @@ export default (api, spaceId, client) => {
         .then((entries) => entries.items);
 
     const getProducts = (brand) =>
-        client.getEntries({
+        contentful.client.getEntries({
             content_type: 'product', // eslint-disable-line camelcase
             'fields.brand': brand
         })
         .then((entries) => entries.items.map((entry) => entry));
 
     const getCompanyNavTiles = () =>
-        client.getEntries({
+        contentful.client.getEntries({
             content_type: 'pageModuleRelatedPageLink' // eslint-disable-line camelcase
         })
         .then((entries) => entries.items);

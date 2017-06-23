@@ -1,6 +1,11 @@
 import {Router} from 'express';
 import requireAll from 'require-all';
-import * as contentful from 'contentful';
+import * as contentfulSdk from 'contentful';
+import ApolloClient, {createNetworkInterface} from 'apollo-client';
+
+// Polyfill fetch for node
+import fetch from 'node-fetch'; // eslint-disable-line no-shadow
+global.fetch = fetch;
 
 import config from '../../config';
 import {getCached} from '../services/cache';
@@ -13,10 +18,28 @@ export default () => {
     };
     const {spaceId, accessToken, previewToken} = config.services.api;
 
-    const client = contentful.createClient({
+    const client = contentfulSdk.createClient({
         space: spaceId,
         accessToken
     });
+
+    const contentful = {spaceId, client};
+
+    const apolloClient = new ApolloClient({
+        networkInterface: createNetworkInterface({
+            uri: 'https://bdgrowers.myshopify.com/api/graphql',
+            opts: {
+                headers: {
+                    'X-Shopify-Storefront-Access-Token': config.shopify.apiToken
+                }
+            }
+        })
+    });
+
+    const clients = {
+        contentful,
+        apolloClient
+    };
 
 	// perhaps expose some API metadata at the root
     api.get('/', (req, res) => {
@@ -41,7 +64,7 @@ export default () => {
         dirname: __dirname,
         filter: /^(?!index)(.+)\.js$/,
         recursive: false,
-        resolve: (endpoint) => endpoint.default(api, spaceId, client)
+        resolve: (endpoint) => endpoint.default(api, clients)
     });
 
     return api;

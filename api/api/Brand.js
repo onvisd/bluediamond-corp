@@ -18,9 +18,9 @@ const getRandomEntries = (count, entries) => {
     return entries.items;
 };
 
-export default (api, spaceId, client) => {
+export default (api, {contentful}) => {
     const getBrand = (slug) =>
-        client.getEntries({
+        contentful.client.getEntries({
             limit: 1,
             content_type: 'brand', // eslint-disable-line camelcase
             'fields.slug': slug,
@@ -29,14 +29,14 @@ export default (api, spaceId, client) => {
         .then((entries) => entries.items[0]);
 
     const getProducts = (brand) =>
-        client.getEntries({
+        contentful.client.getEntries({
             content_type: 'product', // eslint-disable-line camelcase
             'fields.brand': brand
         })
         .then((entries) => entries.items.map((entry) => entry));
 
     const getRandomRecipes = () =>
-        client.getEntries({
+        contentful.client.getEntries({
             content_type: 'recipe', // eslint-disable-line camelcase
             select: [
                 'fields.name',
@@ -49,7 +49,7 @@ export default (api, spaceId, client) => {
         .then((entries) => getRandomEntries(3, entries));
 
     const getRandomProducts = () =>
-        client.getEntries({
+        contentful.client.getEntries({
             content_type: 'product' // eslint-disable-line camelcase
         })
         .then((entries) => getRandomEntries(6, entries));
