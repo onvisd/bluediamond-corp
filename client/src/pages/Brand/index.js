@@ -81,6 +81,17 @@ export default class Brand extends Component {
         });
     }
 
+    componentDidMount() {
+        if(location.hash) {
+            setTimeout(() => {
+                const posTop = document.querySelector(
+                    `#${location.hash.replace(/^#/, '')}`
+                ).offsetTop;
+                window.scrollTo(0, posTop);
+            }, 500);
+        }
+    }
+
     componentWillUpdate(nextProps) {
         const {brand} = this.props;
 

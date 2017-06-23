@@ -23,6 +23,8 @@
     text-align: center;
 
     &:hover {
+        color: inherit;
+
         & .image {
             transform: translate3d(0, -4px, 0);
         }

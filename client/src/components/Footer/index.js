@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
+
+import slugify from 'tools/slugify';
 import styles from './styles.module.css';
 
 import Facebook from 'images/icons/facebook.svg';
@@ -62,7 +64,9 @@ const Footer = ({data}) => (
                             <ul className={styles.navList}>
                                 {brand.categories.map((category) => (
                                     <li key={category}>
-                                        <Link to={`/brand/${brand.slug}`}>
+                                        <Link to={`/brand/${brand.slug}#category-${
+                                            slugify(category)
+                                        }`}>
                                             {category}
                                         </Link>
                                     </li>

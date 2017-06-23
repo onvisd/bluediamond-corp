@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import ProductPanel from 'components/ProductPanel';
+import slugify from 'tools/slugify';
 import styles from './styles.module.css';
 
 export default class Category extends Component {
@@ -15,6 +16,7 @@ export default class Category extends Component {
 
         return (
             <div
+                id={`category-${slugify(name)}`}
                 className={styles.container}
                 style={{
                     backgroundImage:
