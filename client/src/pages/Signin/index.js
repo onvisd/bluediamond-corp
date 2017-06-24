@@ -43,13 +43,17 @@ export default class Signin extends Component {
     }
 
     handleRegister = (creds) => {
-        this.props.registerCustomer(creds)
-            .then((result) => {
-                this.props.goto('/contact'); // contact is used for demo purposes only
+        if(creds.password === creds.password_confirmation) {
+            this.props.registerCustomer(creds)
+                .then((result) => {
+                    this.props.goto('/contact'); // contact is used for demo purposes only
 
-                return result;
-            })
-            .catch((err) => console.log(err));
+                    return result;
+                })
+                .catch((err) => console.log(err));
+        } else {
+            console.log('Passwords dont match');
+        }
     }
 
     render() {
