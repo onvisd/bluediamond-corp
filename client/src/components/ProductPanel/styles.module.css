@@ -4,7 +4,6 @@
 
 .container {
     display: inline-block;
-    margin: 0 auto;
     padding: 2.5% 5%;
     background-color: var(--c--white);
     border-radius: 12px;
@@ -61,14 +60,13 @@
     padding: 1.5rem 0.5rem 0;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     list-style: none;
     text-align: center;
     background-color: var(--c--white);
     border-radius: 12px;
 
     & > div {
-        width: 50%;
         margin: 0 0 1.5rem;
     }
 

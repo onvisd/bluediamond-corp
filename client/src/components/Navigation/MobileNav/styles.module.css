@@ -14,7 +14,7 @@
         pointer-events: auto;
     }
 
-    @media (--mq-gt-s) {
+    @media (--mq-gt-m) {
         display: none;
     }
 }
@@ -48,6 +48,7 @@
 
 .logo {
     position: absolute;
+    top: 0;
     right: 0;
     left: 0;
     height: 80%;
@@ -121,6 +122,14 @@
     &.visible {
         transform: translateX(0);
         overflow-y: visible;
+
+        @media (--mq-gt-s) {
+            transform: translateX(50vw);
+        }
+    }
+
+    @media (--mq-gt-s) {
+        width: 50vw;
     }
 }
 

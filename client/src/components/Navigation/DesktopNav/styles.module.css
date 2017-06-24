@@ -8,7 +8,7 @@
     z-index: 9999;
     background-color: var(--c--white);
 
-    @media (--mq-s) {
+    @media (--mq-m) {
         display: none;
     }
 }
@@ -157,7 +157,6 @@
 }
 
 .navPanelToggles {
-    position: relative;
     height: 100%;
 }
 
@@ -198,8 +197,9 @@
 .navPanel {
     position: absolute;
     top: 72px;
-    left: -1rem;
-    height: calc(65px * 4);
+    right: 0;
+    left: 0;
+    height: 260px;
     margin-top: -0.5rem;
     max-width: 72rem;
     opacity: 0;

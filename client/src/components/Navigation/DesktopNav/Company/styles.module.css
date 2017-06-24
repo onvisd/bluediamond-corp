@@ -2,8 +2,9 @@
 @import 'constants/type';
 
 .container {
-    width: 72rem;
+    width: 100vw;
     height: 100%;
+    max-width: 72rem;
     background-color: var(--c--white);
     border: 1px solid var(--c--gray-lighter);
     border-radius: 8px;

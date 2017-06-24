@@ -28,7 +28,6 @@ export default class Category extends Component {
             <Card>
                 <Breadcrumb
                     theme={`brand--${brand.fields.themeColor}`}
-                    fixed
                     onClick={this.navigate}
                 >
                     {brand.fields.name}
@@ -59,7 +58,7 @@ export default class Category extends Component {
                     href={`/brand/${brand.fields.slug}`}
                     onClick={toggleNav.hide}
                     style={{
-                        position: 'fixed',
+                        position: 'absolute',
                         right: '1.5rem',
                         bottom: '1rem',
                         left: '1.5rem'

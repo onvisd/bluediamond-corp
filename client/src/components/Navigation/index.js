@@ -54,7 +54,7 @@ export default class Navigation extends Component {
             </header>
         );
 
-        if(responsive.small !== undefined && responsive.small) { // eslint-disable-line
+        if(responsive.medium !== undefined && responsive.medium) { // eslint-disable-line
             nav = (
                 <header>
                     <MobileNav
@@ -64,7 +64,7 @@ export default class Navigation extends Component {
                     />
                 </header>
             );
-        } else if(responsive.small !== undefined && !responsive.small) { // eslint-disable-line
+        } else if(responsive.medium !== undefined && !responsive.medium) { // eslint-disable-line
             nav = (
                 <header>
                     <DesktopNav

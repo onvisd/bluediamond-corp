@@ -3,7 +3,7 @@
 @import 'constants/grid';
 
 .base {
-    width: 10rem;
+    width: 135px;
     margin: 0 0.5rem;
     padding: 0.5rem 0;
 
@@ -21,6 +21,7 @@
 .container {
     cursor: pointer;
     text-align: center;
+    color: inherit;
 
     &:hover {
         color: inherit;
@@ -70,9 +71,12 @@
 .card {
     composes: base;
 
+    & .imageWrap {
+        background-color: var(--c--white);
+    }
+
     & .image {
         height: 10rem;
-        background-color: var(--c--white);
     }
 
     @media (--mq-s) {
@@ -81,17 +85,17 @@
 }
 
 .image {
-    display: flex;
     height: 125px;
-    align-items: center;
-    justify-content: center;
     will-change: transform;
     transition: transform 300ms ease;
     border-radius: 8px;
 
     & img {
-        max-width: 125px;
+        position: relative;
+        top: 50%;
+        max-width: 80%;
         max-height: 125px;
+        transform: translateY(-50%);
 
         @media (--mq-s) {
             max-width: 100%;

@@ -43,8 +43,10 @@ export default class ProductLink extends Component {
 
         let child = (
             <Link className={styles.container} to={pathname} onClick={onClick}>
-                <div className={styles.image}>
-                    <img src={product.fields.productPhotos[0].fields.file.url} />
+                <div className={styles.imageWrap}>
+                    <div className={styles.image}>
+                        <img src={product.fields.productPhotos[0].fields.file.url} />
+                    </div>
                 </div>
                 <div className={styles.info}>
                     {showBrand &&
@@ -57,8 +59,10 @@ export default class ProductLink extends Component {
         if(action === 'push') {
             child = (
                 <div className={styles.container} onClick={onClick}>
-                    <div className={styles.image}>
-                        <img src={product.fields.productPhotos[0].fields.file.url} />
+                    <div className={styles.imageWrap}>
+                        <div className={styles.image}>
+                            <img src={product.fields.productPhotos[0].fields.file.url} />
+                        </div>
                     </div>
                     <div className={styles.info}>
                         {showBrand &&

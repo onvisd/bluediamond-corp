@@ -9,6 +9,7 @@
     justify-content: center;
     font-weight: var(--t--weight-bold);
     background-color: var(--c--gray-lighter);
+    cursor: pointer;
 
     &.fixed {
         position: fixed;

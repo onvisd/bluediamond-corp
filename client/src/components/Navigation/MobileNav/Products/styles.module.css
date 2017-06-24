@@ -26,6 +26,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 135% 50%;
+    cursor: pointer;
 
     & h2 {
         margin-bottom: 0;
