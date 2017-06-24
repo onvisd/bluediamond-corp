@@ -10,12 +10,11 @@
 }
 
 .hero {
-    display: flex;
     position: relative;
     height: 97.5vh;
     padding-top: 6.25rem;
-    max-height: 85rem;
-    align-items: flex-start;
+    max-height: 100vw;
+    min-height: 38rem;
     background-color: rgba(0, 0, 0, 0.25);
     background-blend-mode: soft-light;
     background-size: cover;
@@ -23,6 +22,7 @@
     overflow: visible;
 
     @media (--mq-gt-s) {
+        display: flex;
         padding-top: 0;
         align-items: center;
         background-blend-mode: normal;
@@ -34,8 +34,8 @@
     position: absolute !important; /* stylelint-disable-line declaration-no-important */
     top: 0;
     width: 100vw;
-    height: 100vh;
-    max-height: 80rem;
+    height: 100%;
+    overflow: hidden;
 
     @media (--mq-m) {
         background: rgba(0, 0, 0, 1);
@@ -53,16 +53,14 @@
 .heroContent {
     width: 100%;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
     z-index: 10;
     max-width: 67rem;
     color: var(--c--white);
     text-align: center;
-    align-self: flex-start;
 
     @media (--mq-gt-s) {
-        margin-top: auto;
-        margin-bottom: 18.5%;
+        margin-bottom: 21.5%;
         padding: 0 4rem;
         text-align: left;
     }
@@ -160,11 +158,31 @@
     }
 }
 
+.contentWrap {
+    display: flex;
+    position: absolute;
+    top: -20rem;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-direction: column;
+
+    @media (--mq-m) {
+        top: 6.25rem;
+    }
+
+    @media (--mq-s) {
+        justify-content: flex-start;
+    }
+}
+
 .blossom {
     display: none;
     position: relative;
     left: -4rem;
-    margin: auto 0 40%;
+    margin: auto 0 -5rem;
 
     @media (--mq-gt-m) {
         display: inline;
@@ -174,6 +192,7 @@
 .products {
     display: flex;
     position: absolute;
+    top: 0;
     right: 0;
     left: 0;
     width: 100%;
@@ -183,13 +202,17 @@
     background-repeat: no-repeat;
 
     @media (--mq-s) {
-        top: 22.5rem;
+        top: 16.5rem;
         bottom: -2rem;
     }
 
+    @media (--mq-xs) {
+        top: 19.5rem;
+    }
+
     @media (--mq-gt-s) {
-        height: 115vh;
-        max-height: 90rem;
+        height: 105%;
+        max-height: 105vh;
         background-size: 107.5% auto;
     }
 }
@@ -317,8 +340,10 @@
     background: var(--c--gray-darker);
     background-size: cover;
     background-position: center;
+    overflow: hidden;
 
     & img {
+        top: -20%;
         max-width: none;
     }
 

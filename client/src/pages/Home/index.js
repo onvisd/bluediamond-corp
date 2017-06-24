@@ -94,31 +94,32 @@ export default class Home extends Component {
                             bgImage={homeFields.heroBackground.file.url}
                             strength={200}
                         />
-                        <div className={styles.heroContent}>
-                            <h1 className="t--size-xxl">{homeFields.heroHeadline}</h1>
-                            <h3>{homeFields.heroText}</h3>
-                            <ButtonDropdown
-                                items={[
-                                    {slug: '/brand/snack-almonds', name: 'Snack Almonds'},
-                                    {slug: '/brand/almond-breeze', name: 'Almond Breeze'},
-                                    {slug: '/brand/nut-thins', name: 'Nut-Thins'}
-                                ]}
-                                layout="large"
-                            >
-                                Browse Products
-                            </ButtonDropdown>
+                        <div className={styles.contentWrap}>
+                            <img
+                                className={styles.blossom}
+                                src={homeFields.heroBlossomImage.file.url}
+                            />
+                            <div className={styles.heroContent}>
+                                <h1 className="t--size-xxl">{homeFields.heroHeadline}</h1>
+                                <h3>{homeFields.heroText}</h3>
+                                <ButtonDropdown
+                                    items={[
+                                        {slug: '/brand/snack-almonds', name: 'Snack Almonds'},
+                                        {slug: '/brand/almond-breeze', name: 'Almond Breeze'},
+                                        {slug: '/brand/nut-thins', name: 'Nut-Thins'}
+                                    ]}
+                                    layout="large"
+                                >
+                                    Browse Products
+                                </ButtonDropdown>
+                            </div>
                         </div>
                         <div
                             className={styles.products}
                             style={{backgroundImage: `url(${
                                 homeFields.heroProductImage.file.url
                             })`}}
-                        >
-                            <img
-                                className={styles.blossom}
-                                src={homeFields.heroBlossomImage.file.url}
-                            />
-                        </div>
+                        />
                     </div>
                 </div>
                 <div className={styles.corporate}>

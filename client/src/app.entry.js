@@ -1,3 +1,5 @@
+requestAnimationFrame = requestAnimationFrame.bind(window); // eslint-disable-line
+
 // use bluebird for Promises
 require('babel-runtime/core-js/promise').default = require('bluebird');
 

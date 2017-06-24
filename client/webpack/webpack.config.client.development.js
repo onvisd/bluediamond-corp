@@ -35,6 +35,7 @@ config.plugins.push(
 
 // enable webpack development server
 config.entry.main = [
+    'babel-polyfill',
     `webpack-hot-middleware/client?path=http://localhost:${appConfig.webpack.devserver.port}/__webpack_hmr`,
     'react-hot-loader/patch',
     config.entry.main
