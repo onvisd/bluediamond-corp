@@ -202,8 +202,8 @@
     background-repeat: no-repeat;
 
     @media (--mq-s) {
-        top: 16.5rem;
-        bottom: -2rem;
+        top: 17.5rem;
+        bottom: -3rem;
     }
 
     @media (--mq-xs) {
@@ -211,8 +211,8 @@
     }
 
     @media (--mq-gt-s) {
-        height: 105%;
-        max-height: 105vh;
+        height: 110%;
+        max-height: 110vh;
         background-size: 107.5% auto;
     }
 }
