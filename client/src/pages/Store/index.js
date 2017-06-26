@@ -15,6 +15,8 @@ import styles from './styles.module.css';
 
 import Hero from 'images/store/hero.jpg';
 
+const escapeRegEx = (str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+
 @preload(({dispatch}) => dispatch(getStoreProducts()))
 @connect(
     (state) => ({...storeConnector(state.store)}),
@@ -31,7 +33,7 @@ export default class Store extends Component {
             sizes: []
         },
         sort: null,
-        search: []
+        search: ''
     };
 
     handleLoadMore = () => {
@@ -63,7 +65,7 @@ export default class Store extends Component {
 
     handleSearch = () => {
         this.setState(() => ({
-            search: this.search.value === '' ? null : this.search.value
+            search: this.search.value
         }));
     };
 
@@ -88,7 +90,7 @@ export default class Store extends Component {
         let match = false;
 
         for (let i = 0; i < arr.length; i++) {
-            if(arr[i].match(index.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')))
+            if(arr[i].match(escapeRegEx(index)))
                 match = true;
         }
 
@@ -96,7 +98,8 @@ export default class Store extends Component {
     }
 
     filterCards = (card) => {
-        const {filter} = this.state;
+        const {filter, search} = this.state;
+        const title = card.node.title;
         const type = card.node.productType;
         const tags = JSON.stringify(card.node.tags);
 
@@ -123,9 +126,14 @@ export default class Store extends Component {
                 sizeMatch = true;
         }
 
+        let searchMatch = false;
+        if(title.toLowerCase().match(escapeRegEx(search.toLowerCase())))
+            searchMatch = true;
+
         if((brandMatch || !filter.brands.length) &&
             (typeMatch || !filter.types.length) &&
-            (sizeMatch || !filter.sizes.length)
+            (sizeMatch || !filter.sizes.length) &&
+            (searchMatch || !search.length)
         )
             return true;
 
@@ -151,12 +159,14 @@ export default class Store extends Component {
 
     renderProductCards = () => {
         const {products} = this.props;
-        const {visibleCardCount, filter, sort} = this.state;
+        const {visibleCardCount, filter, sort, search} = this.state;
 
         let cards = products.slice(0, visibleCardCount);
 
-        if(filter) cards = cards.filter(this.filterCards);
-        if(sort) cards = cards.sort(this.sortCards(sort));
+        if(filter || search)
+            cards = cards.filter(this.filterCards);
+        if(sort)
+            cards = cards.sort(this.sortCards(sort));
 
         return cards.map((card) => (
             <StoreProductCard
@@ -239,7 +249,7 @@ export default class Store extends Component {
                                             this.search = search;
                                         }}
                                         type="text"
-                                        placeholder="Search and press enter"
+                                        placeholder="Search"
                                     />
                                 </div>
                             </div>
