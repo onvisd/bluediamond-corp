@@ -95,18 +95,19 @@ export default class DesktopNav extends Component {
                 <Link to="/">
                     <BDLogo className={styles.logo} />
                 </Link>
-                <div className={`${styles.secondaryNav} ${styles[navColor]}`}>
+                <div className={classnames(styles.secondaryNav, styles[navColor])}>
                     <div className={styles.innerContainer}>
                         <ul className={styles.secondaryNavLinks}>
                             {navData.secondary.map((link) => (
                                 <li key={link.slug}>
                                     <a href={link.slug} target="_blank">
+                                        {React.createElement(link.icon)}
                                         {link.name}
                                     </a>
                                 </li>
                             ))}
                         </ul>
-                        <ul className={styles.secondaryNavLinks}>
+                        <ul className={classnames(styles.secondaryNavLinks, styles.auth)}>
                             <li>
                                 {auth.authenticated
                                     ? <Link to="/account/settings">Account</Link>

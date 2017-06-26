@@ -4,6 +4,10 @@ import {connect} from 'react-redux';
 import DesktopNav from './DesktopNav';
 import MobileNav from './MobileNav';
 
+import Growers from 'images/icons/growers-site.svg';
+import GlobalIngredients from 'images/icons/global-ingredients.svg';
+import International from 'images/icons/international-site.svg';
+
 @connect((state) => ({
     responsive: state.responsive
 }))
@@ -30,9 +34,21 @@ export default class Navigation extends Component {
             ]
         },
         secondary: [
-            {name: 'Growers', slug: 'http://bluediamondgrowers.com'},
-            {name: 'Global Ingredients', slug: 'http://bdingredients.com'},
-            {name: 'International', slug: 'http://bluediamond.com'}
+            {
+                name: 'Growers',
+                slug: 'http://bluediamondgrowers.com',
+                icon: Growers
+            },
+            {
+                name: 'Global Ingredients',
+                slug: 'http://bdingredients.com',
+                icon: GlobalIngredients
+            },
+            {
+                name: 'International',
+                slug: 'http://bluediamond.com',
+                icon: International
+            }
         ]
     }
 
