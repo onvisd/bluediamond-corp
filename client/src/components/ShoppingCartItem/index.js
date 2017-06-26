@@ -22,7 +22,7 @@ const ShoppingCartItem = ({
             {description}<br />
             Qty: {quantity}
             <p className={styles.price}>
-                {price}
+                ${price}
             </p>
             <a className={styles.remove} onClick={onRemoveItem}>
                 Remove
