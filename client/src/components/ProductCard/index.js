@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 export default class ProductCard extends Component {
     static PropTypes = {
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         slug: PropTypes.string.isRequired,

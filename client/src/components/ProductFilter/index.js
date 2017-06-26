@@ -48,6 +48,7 @@ export default class ProductFilter extends Component {
 
         for (let i = 0; i < arr.length; i++) {
             const item = arr[i].match(new RegExp(`${query}:([^,]*)`, 'g'));
+
             if(item)
                 items.push(item[0].split(':')[1]);
         }
@@ -79,14 +80,14 @@ export default class ProductFilter extends Component {
 
         let items;
 
-        if(filter === 'product_type')
-            items = this.compressArray(products.map((product) => product[filter]));
+        if(filter === 'productType')
+            items = this.compressArray(products.map((product) => product.node[filter]));
 
         if(filter === 'tags')
-            items = this.filterByTag(products.map((product) => product[filter]));
+            items = this.filterByTag(products.map((product) => product.node[filter]));
 
         if(filter === 'options')
-            items = this.filterByOption(products.map((product) => product[filter]));
+            items = this.filterByOption(products.map((product) => product.node[filter]));
 
         return items.slice(0, visibleOptionCount);
     }

@@ -9,7 +9,7 @@ export {default as brand} from './brand';
 export {default as home} from './home';
 export {default as contact} from './contact';
 export {default as craft} from './craft';
-export {default as storeProducts} from './storeProducts';
+export {default as store} from './storeProducts';
 export {default as storeProduct} from './storeProduct';
 export {default as manifesto} from './manifesto';
 export {default as foodService} from './foodService';

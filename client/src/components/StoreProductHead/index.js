@@ -27,7 +27,7 @@ export default class StoreProductHead extends Component {
 
     static propTypes = {
         title: PropTypes.string.isRequired,
-        tags: PropTypes.string.isRequired,
+        tags: PropTypes.array.isRequired,
         variants: PropTypes.array.isRequired,
         options: PropTypes.array.isRequired,
         images: PropTypes.array.isRequired,
@@ -58,7 +58,7 @@ export default class StoreProductHead extends Component {
             <div className={styles.images}>
                 {images.map((image, i) => {
                     if(i <= 0) // only show one photo until design approves multi-images
-                        return <img key={`productImage${i}`} src={image.src} alt={title} />;
+                        return <img key={`productImage${i}`} src={image.node.src} alt={title} />;
                 })}
             </div>
         );
@@ -68,7 +68,11 @@ export default class StoreProductHead extends Component {
     // tags with the preface `meta:`.
     renderMeta() {
         const {tags} = this.props;
-        const metaTags = tags.match(/meta:(\S*)/igm);
+        const metaTags = JSON.stringify(tags).match(/meta:(\S*)/igm);
+
+        // TODO : fix render method, breaking 6/24/2017
+        if(!metaTags || metaTags)
+            return;
 
         return (
             <div className={styles.meta}>
@@ -101,10 +105,10 @@ export default class StoreProductHead extends Component {
                     <select onChange={this.handleSelect} name="productSizeOption">
                         {variants.map((variant) =>
                             <option
-                                key={`variant${variant.id}`}
-                                value={variant.id}
+                                key={`variant${variant.node.id}`}
+                                value={variant.node.id}
                             >
-                                {variant.title}
+                                {variant.node.title}
                             </option>
                         )}
                     </select>
@@ -125,7 +129,7 @@ export default class StoreProductHead extends Component {
     }
 
     componentWillMount() {
-        this.setState(() => ({variant: this.props.variants[0]}));
+        this.setState(() => ({variant: this.props.variants[0].node}));
     }
 
     addToCart = () => {
@@ -166,8 +170,8 @@ export default class StoreProductHead extends Component {
                 <div className={styles.productInfo}>
                     <h2 className={styles.title}>{title}</h2>
                     <ProductStarRating
-                        rating={reviews.response.bottomline.average_score}
-                        reviewCount={reviews.response.bottomline.total_review}
+                        rating={reviews.bottomline.average_score}
+                        reviewCount={reviews.bottomline.total_review}
                     />
                     {this.renderMeta()}
                     {this.renderDescription()}

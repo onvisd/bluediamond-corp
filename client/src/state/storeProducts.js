@@ -4,17 +4,20 @@ import settings from '../react-isomorphic-render-async';
 const handler = createHandler(settings);
 
 export const getStoreProducts = action({
-    namespace: 'STORE_PRODUCTS',
-    event: 'GET_STORE_PRODUCTS',
-    action: (http) => http.get('/api/store/products'),
+    namespace: 'STORE',
+    event: 'GET_PRODUCTS',
+    action: (http) =>
+        http.get('/api/store/products')
+        .then((result) => result)
+        .catch((err) => console.log(err)),
     result: (state, result) => ({
         ...state,
-        storeProducts: result
+        products: result
     })
 }, handler);
 
-handler.addStateProperties('storeProducts');
+handler.addStateProperties('products');
 
 export const connector = stateConnector(handler);
 
-export default handler.reducer({storeProducts: {}});
+export default handler.reducer({products: {}});

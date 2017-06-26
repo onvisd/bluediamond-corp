@@ -1,62 +1,162 @@
 import axios from 'axios';
+import gql from 'graphql-tag';
 
 import config from '../../config';
-
 import {setCached} from '../services/cache';
 
-export default (api) => {
-    api.get('/store/products', (req, res) =>
-        axios.get(
-            `https://${config.shopify.key}:${config.shopify.pass}` +
-            '@bdgrowers.myshopify.com/admin/' +
-            'products.json'
-        )
-        .then((response) => {
-            setCached('store_products', response.data);
-            res.send(response.data);
-        })
-        .catch((err) => {
-            console.trace(err);
-            res.status(500).send(err.message);
-        })
-    );
+export default (api, {apolloClient}) => {
+    const getProducts = () =>
+        apolloClient.query({
+            query: gql`
+                query {
+                    shop {
+                        products(first: 250) {
+                            edges {
+                                node {
+                                    id
+                                    handle
+                                    productType
+                                    tags
+                                    vendor
+                                    title
+                                    descriptionHtml
+                                    options(first: 3) {
+                                        id
+                                        name
+                                        values
+                                    }
+                                    images(first: 10) {
+                                        edges {
+                                            node {
+                                                id
+                                                src
+                                                altText
+                                            }
+                                        }
+                                    }
+                                    variants(first: 3) {
+                                        edges {
+                                            node {
+                                                id
+                                                title
+                                                weight
+                                                availableForSale
+                                                price
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            `
+        }).then((result) => result.data.shop.products.edges);
 
-    const getProductsByType = (query) =>
-        axios.get(
-            `https://${config.shopify.key}:${config.shopify.pass}` +
-            '@bdgrowers.myshopify.com/admin/' +
-            `products.json?product_type=${query}`
-        )
-        .then((response) => response.data)
-        .catch((err) => {
-            console.trace(err);
-            return 'No Shopify data found';
-        });
+    const getProductsByType = (type) =>
+        apolloClient.query({
+            query: gql`
+                query {
+                    shop {
+                        products(first: 6, query:"productType=${type}") {
+                            edges {
+                                node {
+                                    id
+                                    handle
+                                    productType
+                                    tags
+                                    vendor
+                                    title
+                                    descriptionHtml
+                                    options(first: 3) {
+                                        id
+                                        name
+                                        values
+                                    }
+                                    images(first: 10) {
+                                        edges {
+                                            node {
+                                                id
+                                                src
+                                                altText
+                                            }
+                                        }
+                                    }
+                                    variants(first: 3) {
+                                        edges {
+                                            node {
+                                                id
+                                                title
+                                                weight
+                                                availableForSale
+                                                price
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            `
+        }).then((result) => result.data.shop.products.edges);
 
     const getProduct = (slug) =>
-        axios.get(
-            `https://${config.shopify.key}:${config.shopify.pass}` +
-            '@bdgrowers.myshopify.com/admin/' +
-            `products.json?handle=${slug}`
-        )
-        .then((response) => response.data)
-        .catch((err) => {
-            console.trace(err);
-            return 'No Shopify data found';
-        });
+        apolloClient.query({
+            query: gql`
+                query {
+                    shop {
+                        productByHandle(handle: "${slug}") {
+                            id
+                            handle
+                            productType
+                            tags
+                            vendor
+                            title
+                            descriptionHtml
+                            options(first: 3) {
+                                id
+                                name
+                                values
+                            }
+                            images(first: 10) {
+                                edges {
+                                    node {
+                                        id
+                                        src
+                                        altText
+                                    }
+                                }
+                            }
+                            variants(first: 3) {
+                                edges {
+                                    node {
+                                        id
+                                        title
+                                        weight
+                                        availableForSale
+                                        price
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            `
+        }).then((result) => result.data.shop.productByHandle);
 
-    const getSmartLabel = (smartLabelId) =>
-        axios.get(`https://smartlabel-api.labelinsight.com/api/v2/${smartLabelId}`)
+    const getSmartLabel = (id) =>
+        axios.get(`https://smartlabel-api.labelinsight.com/api/v2/${id}`)
         .then((response) => response.data)
         .catch((err) => {
             console.trace(err);
             return 'No Smart Label data found';
         });
 
-    const getYotpo = (productId) =>
+    const getYotpo = (id) =>
         axios.get(
             `https://api.yotpo.com/v1/widget/${config.yotpo.key}` +
-            `/products/${productId}/reviews.json`
+            `/products/${id}/reviews.json`
         )
         .then((response) => response.data)
         .catch((err) => {
@@ -64,14 +164,31 @@ export default (api) => {
             return 'No YotPo data found';
         });
 
-    api.get('/store/products/:slug', async (req, res) => {
+    api.get('/store/products', async (req, res) => {
         try {
-            const product = await getProduct(req.params.slug);
+            const products = await getProducts();
 
-            if(product.products.length) {
-                const productId = product.products[0].id;
-                const smartLabelId = product.products[0].tags.match(/smartLabel:(\d*)/)[1];
-                const productType = product.products[0].product_type;
+            if(products)
+                res.status(200).send(products);
+            else
+                res.status(401).send({message: 'No products found!'});
+        } catch (err) {
+            console.trace(err);
+            res.status(500).send(err.message);
+        }
+    });
+
+    api.get('/store/product/:slug', async (req, res) => {
+        try {
+            const theProduct = await getProduct(req.params.slug);
+
+            if(theProduct) {
+                const product = {...theProduct};
+
+                const productTags = JSON.stringify(product.tags);
+                const smartLabelId = productTags.match(/smartLabel:(\d*)/)[1];
+                const productId = productTags.match(/id:(\d*)/)[1];
+                const productType = product.productType;
 
                 const yotpo = await getYotpo(productId);
                 const smartLabel = await getSmartLabel(smartLabelId);
@@ -89,14 +206,14 @@ export default (api) => {
                     ? {error: productsByType}
                     : productsByType;
 
-                product.products[0].smartLabel = {id: smartLabelId, ...amendSmartLabel};
-                product.products[0].reviews = {id: productId, ...amendYotpo};
-                product.products[0].related = {type: productType, ...amendRelated};
+                product.smartLabel = {...amendSmartLabel};
+                product.reviews = {...amendYotpo.response};
+                product.related = [...amendRelated];
 
                 setCached(`store_products_${req.params.slug}`, product);
                 res.send(product);
             } else {
-                res.status(404).send({ok: false, error: 'not found'});
+                res.status(401).send({message: 'No product found!'});
             }
         } catch (err) {
             console.trace(err);

@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
-import {connector, getStoreProducts} from 'state/storeProducts';
+import {getStoreProducts} from 'state/storeProducts';
+import {connector as storeConnector} from 'state/storeProducts';
 
 import Title from 'components/Title';
 import StoreHero from 'components/StoreHero';
@@ -16,7 +17,7 @@ import Hero from 'images/store/hero.png';
 
 @preload(({dispatch}) => dispatch(getStoreProducts()))
 @connect(
-    (state) => ({...connector(state.storeProducts)}),
+    (state) => ({...storeConnector(state.store)}),
     {getStoreProducts}
 )
 export default class Store extends Component {
@@ -93,7 +94,7 @@ export default class Store extends Component {
 
     filterCards = (card) => {
         const {filter} = this.state;
-        const type = card.product_type;
+        const type = card.productType;
         const tag = card.tags.match(/flavor:([^,]*)/)[1];
         const sizes = this.getOptions(card, 'Size');
 
@@ -116,10 +117,10 @@ export default class Store extends Component {
         let getCardField = (card) => card[field];
 
         if(sort === 'name')
-            getCardField = (card) => card.title.toUpperCase();
+            getCardField = (card) => card.node.title.toUpperCase();
 
         if(sort === 'brand')
-            getCardField = (card) => card.product_type.toUpperCase();
+            getCardField = (card) => card.node.productType.toUpperCase();
 
         return (cardA, cardB) => {
             if(getCardField(cardA) > getCardField(cardB)) return 1;
@@ -129,9 +130,8 @@ export default class Store extends Component {
     };
 
     renderProductCards = () => {
-        const {storeProducts} = this.props;
+        const {products} = this.props;
         const {visibleCardCount, filter, sort} = this.state;
-        const products = storeProducts.products;
 
         let cards = products.slice(0, visibleCardCount);
 
@@ -140,21 +140,23 @@ export default class Store extends Component {
 
         return cards.map((card) => (
             <StoreProductCard
-                data={{products: card}}
-                key={`card${card.id}`}
+                data={card.node}
+                key={`card${card.node.id}`}
             />
         ));
     }
 
     componentWillMount() {
+        const {products} = this.props;
+
         this.setState(() => ({
-            totalCardCount: this.props.storeProducts.products.length
+            totalCardCount: products.length
         }));
     }
 
     render() {
-        const {visibleCardCount, totalCardCount} = this.state;
-        const {storeProducts} = this.props;
+        const {totalCardCount, visibleCardCount} = this.state;
+        const {products} = this.props;
 
         return (
             <section className="content">
@@ -170,26 +172,26 @@ export default class Store extends Component {
                     <div className="l--row">
                         <div className="l--col-2">
                             <p className={`t--type-incidental ${styles.refine}`}>Refine by:</p>
-                            <ProductFilter
+                            {/* <ProductFilter
                                 title="Brand"
-                                products={storeProducts.products}
-                                filter="product_type"
+                                products={products}
+                                filter="productType"
                                 onClick={this.handleFilter}
                             />
                             <ProductFilter
                                 title="Flavor"
-                                products={storeProducts.products}
+                                products={products}
                                 filter="tags"
                                 query="flavor"
                                 onClick={this.handleFilter}
                             />
                             <ProductFilter
                                 title="Size"
-                                products={storeProducts.products}
+                                products={products}
                                 filter="options"
                                 query="values"
                                 onClick={this.handleFilter}
-                            />
+                            /> */}
                         </div>
                         <div className="l--col-auto">
                             <div className="l--row">
