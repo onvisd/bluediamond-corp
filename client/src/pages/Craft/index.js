@@ -23,7 +23,10 @@ import styles from './styles.module.css';
 
 @preload(({dispatch}) => dispatch(getCraft()))
 @connect(
-    (state) => ({...connector(state.craft)}),
+    (state) => ({
+        responsive: state.responsive,
+        ...connector(state.craft)
+    }),
     {getCraft}
 )
 export default class Craft extends Component {
@@ -88,13 +91,24 @@ export default class Craft extends Component {
     }
 
     state = {
-        activeTab: 0
+        activeTab: 0,
+        activeHotspot: null
     }
 
     handleSwipe = (currentIndices) => {
         this.setState(() => ({
             activeTab: currentIndices[0]
         }));
+    }
+
+    handleHotspotClick = (hotspot) => {
+        if(this.props.responsive.large)
+            this.setState({activeHotspot: hotspot});
+    }
+
+    hideHotspots = (evt) => {
+        if(this.props.responsive.large && !evt.target.closest(`.${styles.hotspot}`))
+            this.setState({activeHotspot: null});
     }
 
     render() {
@@ -182,18 +196,21 @@ export default class Craft extends Component {
                         backgroundImage: `url(${craftFields.factsBackgroundImage.file.url})`
                     }}
                 >
-                    <div className={styles.container}>
+                    <div className={styles.container} onClick={this.hideHotspots}>
                         <h2>{craftFields.factsTitle}</h2>
                         <p className={styles.factsHeadline}>{craftFields.factsHeadline}</p>
                         <div className={styles.hotspots}>
-                            {hotspots.map((hotspot) => (
+                            {hotspots.map((hotspot, idx) => (
                                 <div
-                                    className={styles.hotspot}
+                                    className={classnames(styles.hotspot, {
+                                        [styles.isActive]: this.state.activeHotspot === idx
+                                    })}
                                     key={`${hotspot.coords.y}${hotspot.coords.x}`}
                                     style={{
                                         top: `${hotspot.coords.y}%`,
                                         left: `${hotspot.coords.x}%`
                                     }}
+                                    onClick={() => this.handleHotspotClick(idx)}
                                 >
                                     <span>+</span>
                                     <div

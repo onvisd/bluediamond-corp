@@ -253,28 +253,31 @@
 
 .hotspot {
     position: absolute;
-    width: 60px;
-    height: 60px;
-    background-color: rgba(240, 240, 240, 0.9);
-    border: 3px solid var(--c--white);
-    border-radius: 50%;
-    cursor: pointer;
 
     & span {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
+        display: block;
+        width: 60px;
+        height: 60px;
         color: var(--c--blue);
         font-size: 40px;
-        line-height: 60px;
-        transform: translate(1px, -3px);
+        line-height: 45px;
+        text-align: center;
+        background-color: rgba(240, 240, 240, 0.9);
+        border: 3px solid var(--c--white);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 150ms ease;
+        transform: scale(1);
     }
 
-    &:hover {
+    &.isActive {
+        & span {
+            transform: scale(0);
+        }
+
         & .hotspotContent {
             opacity: 1;
+            transform: scale(1);
         }
     }
 
@@ -289,8 +292,9 @@
     background-color: rgba(250, 250, 250, 0.98);
     border-radius: 12px;
     opacity: 0;
+    transform: scale(0);
     pointer-events: none;
-    transition: opacity 150ms linear;
+    transition: opacity 150ms linear, transform 150ms ease;
 
     &::after {
         content: '';
@@ -319,6 +323,7 @@
     @media (--mq-s) {
         margin: 0 1rem;
         opacity: 1;
+        transform: scale(1);
     }
 
     @media (--mq-gt-s) {
@@ -332,6 +337,7 @@
 
 .hotspotContentR {
     left: 80px;
+    transform-origin: left center;
     composes: hotspotContent; /* stylelint-disable-line */
 
     &::after {
@@ -341,6 +347,7 @@
 
 .hotspotContentL {
     right: 80px;
+    transform-origin: right center;
     composes: hotspotContent; /* stylelint-disable-line */
 
     &::after {
