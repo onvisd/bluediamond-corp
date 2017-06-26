@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 
 import Card from 'components/Navigation/Card';
+import sortByPriority from 'tools/sortByPriority';
 import Breadcrumb from '../Breadcrumb';
-
 import styles from './styles.module.css';
 
 export default class Products extends Component {
@@ -28,7 +28,7 @@ export default class Products extends Component {
                     Our Products
                 </Breadcrumb>
                 <ul className={styles.container}>
-                    {brands.map((brand) => (
+                    {brands.sort(sortByPriority).map((brand) => (
                         <li
                             key={brand.fields.slug}
                             className={styles.tile}

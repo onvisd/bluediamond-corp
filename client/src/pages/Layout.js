@@ -18,6 +18,7 @@ import Preloading from 'components/Preloading';
 import Navigation from 'components/Navigation';
 import Footer from 'components/Footer';
 import FooterMobile from 'components/FooterMobile';
+import sortByPriority from 'tools/sortByPriority';
 
 @preload(({dispatch}) => {
     dispatch(getCustomer());
@@ -45,7 +46,7 @@ export default class Layout extends Component {
     render() {
         const {children, navigation, responsive} = this.props;
         const {brands, companyNavTiles} = navigation.data;
-        const footerData = brands.map((brand) => ({
+        const footerData = brands.sort(sortByPriority).map((brand) => ({
             name: brand.fields.name,
             slug: brand.fields.slug,
             categories: brand.fields.categories.map((category) => category.fields.name)

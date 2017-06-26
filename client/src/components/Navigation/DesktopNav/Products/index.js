@@ -4,6 +4,7 @@ import TransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import Card from 'components/Navigation/Card';
 import NavList from 'components/Navigation/NavList';
 import NavItem from 'components/Navigation/NavItem';
+import sortByPriority from 'tools/sortByPriority';
 import styles from './styles.module.css';
 
 export default class Products extends Component {
@@ -57,7 +58,7 @@ export default class Products extends Component {
             <div className={styles.container}>
                 <Card>
                     <NavList>
-                        {brands.map((brand) => this.renderBrand(brand))}
+                        {brands.sort(sortByPriority).map((brand) => this.renderBrand(brand))}
                     </NavList>
                 </Card>
                 <TransitionGroup

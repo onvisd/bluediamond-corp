@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import classnames from 'classnames';
 
+import sortByPriority from 'tools/sortByPriority';
 import Carousel from '../Carousel';
 import ProductLink from '../ProductLink';
 import styles from './styles.module.css';
@@ -119,7 +120,7 @@ export default class ProductPanel extends Component {
 
         const mobilePanel = (
             <div className={styles.productList}>
-                {products.map((product) => (
+                {products.sort(sortByPriority).map((product) => (
                     <ProductLink
                         key={product.fields.slug}
                         product={product}
