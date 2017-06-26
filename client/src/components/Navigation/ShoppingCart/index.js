@@ -24,6 +24,13 @@ export default class ShoppingCart extends Component {
         this.props.removeFromCart({checkoutId: this.props.checkout.id, lineItemIds: [id]});
     }
 
+    getImageUrl = (variant) => {
+        if(!variant.image)
+            return variant.product.images.edges[0].node.src;
+
+        return variant.image.src;
+    }
+
     render() {
         const {children, checkout, onToggle} = this.props;
 
@@ -37,7 +44,7 @@ export default class ShoppingCart extends Component {
                                 checkout.lineItems.edges.map(({node: lineItem}) => (
                                 <ShoppingCartItem
                                     key={lineItem.id}
-                                    imageUrl={lineItem.variant.image && lineItem.variant.image.url} // eslint-disable-line
+                                    imageUrl={this.getImageUrl(lineItem.variant)}
                                     title={lineItem.title}
                                     description={lineItem.variant.title}
                                     quantity={lineItem.quantity}
