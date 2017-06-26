@@ -39,6 +39,7 @@
 
     &.isPaint {
         background-position: left center;
+        background-size: 25%, initial;
     }
 
     &.isLast {
