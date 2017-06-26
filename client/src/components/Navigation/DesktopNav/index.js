@@ -104,7 +104,7 @@ export default class DesktopNav extends Component {
                         <ul className={styles.secondaryNavLinks}>
                             <li>
                                 {auth.authenticated
-                                    ? <Link to="/account">Account</Link>
+                                    ? <Link to="/account/settings">Account</Link>
                                     : <Link to="/signin">Sign In or Create Account</Link>}
                                 <User />
                             </li>

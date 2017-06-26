@@ -35,7 +35,7 @@ export default class Signin extends Component {
     handleSignIn = (creds) => {
         this.props.signinCustomer(creds)
             .then((result) => {
-                this.props.goto('/contact'); // contact is used for demo purposes only
+                this.props.goto('/store');
 
                 return result;
             })
@@ -46,7 +46,7 @@ export default class Signin extends Component {
         if(creds.password === creds.password_confirmation) {
             this.props.registerCustomer(creds)
                 .then((result) => {
-                    this.props.goto('/contact'); // contact is used for demo purposes only
+                    this.props.goto('/store');
 
                     return result;
                 })

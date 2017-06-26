@@ -1,13 +1,19 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import TransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
+
+import {connector as authConnector} from 'state/auth';
 
 import BDLogo from 'images/bd-logo.svg';
 import User from 'images/icons/user.svg';
 import Cart from 'images/icons/cart.svg';
 import styles from './styles.module.css';
 
+@connect(
+    (state) => ({...authConnector(state.auth)})
+)
 export default class MobileNav extends Component {
     static propTypes = {
         brands: PropTypes.array.isRequired,
@@ -67,7 +73,7 @@ export default class MobileNav extends Component {
     render() {
         const {navVisible, transition} = this.state;
         const {element, props} = this.state.activeCard;
-        const {brands, navData, companyNavTiles} = this.props;
+        const {brands, navData, companyNavTiles, auth} = this.props;
 
         return (
             <div className={classnames(styles.container, {
@@ -75,7 +81,9 @@ export default class MobileNav extends Component {
             })}>
                 <div className={styles.head}>
                     <div className={styles.ecomm}>
-                        <User />
+                        {auth.authenticated
+                            ? <Link to="/account/settings"><User /></Link>
+                            : <Link to="/signin"><User /></Link>}
                         <button
                             className={styles.cart}
                             onClick={() => {

@@ -166,7 +166,7 @@ export default class Store extends Component {
                     title="Fire up your Memorial Day Barbeque with 20 percentage off
                     Smokehouse Snack Almonds"
                     buttonText="Go To Sale"
-                    buttonUrl="/store/products/other-test-product"
+                    buttonUrl="/store/product/other-test-product"
                 />
                 <div className={styles.container}>
                     <div className="l--row">
