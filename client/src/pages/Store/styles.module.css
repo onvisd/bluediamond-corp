@@ -30,6 +30,7 @@
 .cards {
     @mixin row;
 
+    margin-top: -2rem;
     justify-content: flex-start;
     align-items: flex-start;
 }

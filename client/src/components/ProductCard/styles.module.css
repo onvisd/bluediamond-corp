@@ -3,14 +3,9 @@
 @import 'constants/grid';
 
 .container {
-    @mixin column-flex;
-
+    margin: 2rem 2% 0 0;
     max-width: 150px;
     text-align: center;
-
-    &:first-of-type {
-        margin-left: 0;
-    }
 
     &:last-of-type {
         margin-right: 0;
@@ -34,6 +29,6 @@
     justify-content: center;
 
     & img {
-        max-width: 125px;
+        width: 125px;
     }
 }

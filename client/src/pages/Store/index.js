@@ -25,7 +25,11 @@ export default class Store extends Component {
         totalCardCount: 0,
         visibleCardCount: 15,
         perPage: 15,
-        filter: [],
+        filter: {
+            brands: [],
+            types: [],
+            sizes: []
+        },
         sort: null,
         search: []
     };
@@ -36,10 +40,9 @@ export default class Store extends Component {
         }));
     }
 
-    handleFilter = (e) => {
+    handleFilter = (filterType) => (e) => {
         const target = e.target;
-        const filters = this.state.filter.slice();
-
+        const filters = this.state.filter[filterType].slice();
         const index = filters.indexOf(target.value);
 
         if(!target.checked || index !== -1)
@@ -47,45 +50,45 @@ export default class Store extends Component {
         else if(target.checked)
             filters.push(target.value);
 
-        this.setState(() => ({
-            filter: filters
-        }));
+        const filter = {...this.state.filter, [filterType]: filters};
+
+        this.setState({filter});
     };
 
     handleSort = () => {
         this.setState(() => ({
-            sort: this.sort.value === 'null' ? null : this.sort.value
+            sort: this.sort.value === '' ? null : this.sort.value
         }));
     };
 
     handleSearch = () => {
         this.setState(() => ({
-            search: this.search.value === 'null' ? null : this.search.value
+            search: this.search.value === '' ? null : this.search.value
         }));
     };
 
     getOptions = (card, type) => {
-        const options = [];
+        let options = [];
 
-        for (let i = 0; i < card.options.length; i++) {
-            const option = card.options[i];
+        for (let i = 0; i < card.node.options.length; i++) {
+            const option = card.node.options[i];
             const name = option.name;
 
             if(name === type) // get specfic options based on it's name
-                options.push(option.values);
+                options = options.concat(option.values);
         }
 
-        return options[0];
+        return options;
     }
 
     compareOptions = (arr, index) => {
-        if(!arr)
-            return;
+        if(!arr || !arr.length)
+            return false;
 
         let match = false;
 
         for (let i = 0; i < arr.length; i++) {
-            if(arr[i].match(index))
+            if(arr[i].match(index.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')))
                 match = true;
         }
 
@@ -94,22 +97,39 @@ export default class Store extends Component {
 
     filterCards = (card) => {
         const {filter} = this.state;
-        const type = card.productType;
-        const tag = card.tags.match(/flavor:([^,]*)/)[1];
+        const type = card.node.productType;
+        const tags = JSON.stringify(card.node.tags);
+
+        let tag = '';
+        if(/flavor:([^,"]*)/.test(tags)) tag = tags.match(/flavor:([^,"]*)/)[1];
+
         const sizes = this.getOptions(card, 'Size');
 
-        let match = false;
-
-        for (let i = 0; i < filter.length; i++) {
-            if(
-                type.match(filter[i]) ||
-                tag.match(filter[i]) ||
-                this.compareOptions(sizes, filter[i])
-            )
-                match = true;
+        let brandMatch = false;
+        for (let i = 0; i < filter.brands.length; i++) {
+            if(type.match(filter.brands[i]))
+                brandMatch = true;
         }
 
-        return match;
+        let typeMatch = false;
+        for (let i = 0; i < filter.types.length; i++) {
+            if(tag && tag.match(filter.types[i]))
+                typeMatch = true;
+        }
+
+        let sizeMatch = false;
+        for (let i = 0; i < filter.sizes.length; i++) {
+            if(this.compareOptions(sizes, filter.sizes[i]))
+                sizeMatch = true;
+        }
+
+        if((brandMatch || !filter.brands.length) &&
+            (typeMatch || !filter.types.length) &&
+            (sizeMatch || !filter.sizes.length)
+        )
+            return true;
+
+        return false;
     };
 
     sortCards = (field) => {
@@ -135,7 +155,7 @@ export default class Store extends Component {
 
         let cards = products.slice(0, visibleCardCount);
 
-        if(filter.length) cards = cards.filter(this.filterCards);
+        if(filter) cards = cards.filter(this.filterCards);
         if(sort) cards = cards.sort(this.sortCards(sort));
 
         return cards.map((card) => (
@@ -172,26 +192,26 @@ export default class Store extends Component {
                     <div className="l--row">
                         <div className="l--col-2">
                             <p className={`t--type-incidental ${styles.refine}`}>Refine by:</p>
-                            {/* <ProductFilter
+                            <ProductFilter
                                 title="Brand"
                                 products={products}
                                 filter="productType"
-                                onClick={this.handleFilter}
+                                onClick={this.handleFilter('brands')}
                             />
                             <ProductFilter
                                 title="Flavor"
                                 products={products}
                                 filter="tags"
                                 query="flavor"
-                                onClick={this.handleFilter}
+                                onClick={this.handleFilter('types')}
                             />
                             <ProductFilter
                                 title="Size"
                                 products={products}
                                 filter="options"
                                 query="values"
-                                onClick={this.handleFilter}
-                            /> */}
+                                onClick={this.handleFilter('sizes')}
+                            />
                         </div>
                         <div className="l--col-auto">
                             <div className="l--row">
@@ -202,8 +222,9 @@ export default class Store extends Component {
                                             ref={(sort) => {
                                                 this.sort = sort;
                                             }}
+                                            defaultValue=""
                                         >
-                                            <option value="null">Sort by</option>
+                                            <option value="" disabled>Sort by</option>
                                             <option value="name">Name</option>
                                             <option value="brand">Brand</option>
                                         </select>

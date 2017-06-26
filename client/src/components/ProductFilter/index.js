@@ -47,10 +47,10 @@ export default class ProductFilter extends Component {
         const items = [];
 
         for (let i = 0; i < arr.length; i++) {
-            const item = arr[i].match(new RegExp(`${query}:([^,]*)`, 'g'));
+            const item = JSON.stringify(arr[i]).match(new RegExp(`${query}:([^,"]*)`, 'g'));
 
             if(item)
-                items.push(item[0].split(':')[1]);
+                items.push(item[0].split(':')[1].replace('"', ''));
         }
 
         return this.compressArray(items);
@@ -58,24 +58,22 @@ export default class ProductFilter extends Component {
 
     filterByOption = (arr) => {
         const {title, query} = this.props;
+        const options = arr.reduce((a, b) => a.concat(b), []);
         const items = [];
 
-        for (let i = 0; i < arr.length; i++) {
-            const item = arr[i];
+        for (let i = 0; i < options.length; i++) {
+            const option = options[i];
 
-            for (let idx = 0; idx < item.length; idx++) {
-                const option = item[i];
-
-                if(option && option.name === title)
-                    items.push(option[query]);
-            }
+            if(option && option.name === title)
+                items.push(option[query]);
         }
 
-        return this.compressArray(items.shift());
+        const flatItems = items.reduce((a, b) => a.concat(b), []);
+
+        return this.compressArray(flatItems);
     }
 
     options = () => {
-        const {visibleOptionCount} = this.state;
         const {products, filter} = this.props;
 
         let items;
@@ -89,7 +87,7 @@ export default class ProductFilter extends Component {
         if(filter === 'options')
             items = this.filterByOption(products.map((product) => product.node[filter]));
 
-        return items.slice(0, visibleOptionCount);
+        return items;
     }
 
     renderLoadMore = () => {
@@ -97,7 +95,7 @@ export default class ProductFilter extends Component {
 
         return (
             <div>
-                {(totalOptions > visibleOptionCount) && (clicked === false) &&
+                {(totalOptions >= visibleOptionCount) && (clicked === false) &&
                     <a onClick={this.handleClick} className={styles.seeMore}>
                         See More +
                     </a>
@@ -122,12 +120,14 @@ export default class ProductFilter extends Component {
     }
 
     render() {
+        const {visibleOptionCount} = this.state;
         const {title, onClick} = this.props;
+        const options = this.options().slice(0, visibleOptionCount);
 
         return (
             <div className={styles.container}>
                 <p><strong>{title}</strong></p>
-                {this.options().map((option) => (
+                {options.map((option) => (
                     <label key={`filter${option.value}`} htmlFor={option.value}>
                         <input
                             onChange={onClick}
