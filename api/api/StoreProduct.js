@@ -114,7 +114,7 @@ export default (api, {apolloClient}) => {
                             vendor
                             title
                             descriptionHtml
-                            options(first: 3) {
+                            options(first: 25) {
                                 id
                                 name
                                 values
@@ -128,7 +128,7 @@ export default (api, {apolloClient}) => {
                                     }
                                 }
                             }
-                            variants(first: 3) {
+                            variants(first: 4) {
                                 edges {
                                     node {
                                         id
@@ -184,31 +184,40 @@ export default (api, {apolloClient}) => {
 
             if(theProduct) {
                 const product = {...theProduct};
-
-                const productTags = JSON.stringify(product.tags);
-                const smartLabelId = productTags.match(/smartLabel:(\d*)/)[1];
-                const productId = productTags.match(/id:(\d*)/)[1];
+                const tags = product.tags;
+                const productTags = JSON.stringify(tags);
                 const productType = product.productType;
 
-                const yotpo = await getYotpo(productId);
-                const smartLabel = await getSmartLabel(smartLabelId);
-                const productsByType = await getProductsByType(productType);
+                console.log(tags.length)
 
-                const amendSmartLabel = typeof smartLabel === 'string'
-                    ? {error: smartLabel}
-                    : smartLabel;
+                const getLabel = (str) => str.match(/smartLabel:(\d*)/)[1];
+                const getProductId = (str) => str.match(/id:(\d*)/)[1];
 
-                const amendYotpo = typeof yotpo === 'string'
-                    ? {error: yotpo}
-                    : yotpo;
+                if(tags.length > 0 && /smartLabel:(\d*)/.test(productTags)) {
+                    const smartLabelId = getLabel(productTags);
+                    const smartLabel = await getSmartLabel(smartLabelId);
+                    const amendSmartLabel = typeof smartLabel === 'string'
+                        ? {error: smartLabel}
+                        : smartLabel;
+                    product.smartLabel = {...amendSmartLabel};
+                }
 
-                const amendRelated = typeof productsByType === 'string'
-                    ? {error: productsByType}
-                    : productsByType;
+                if(tags.length > 0 && /id:(\d*)/.test(productTags)) {
+                    const productId = getProductId(productTags);
+                    const yotpo = await getYotpo(productId);
+                    const amendYotpo = typeof yotpo === 'string'
+                        ? {error: yotpo}
+                        : yotpo;
+                    product.reviews = {...amendYotpo.response};
+                }
 
-                product.smartLabel = {...amendSmartLabel};
-                product.reviews = {...amendYotpo.response};
-                product.related = [...amendRelated];
+                if(productType) {
+                    const productsByType = await getProductsByType(productType);
+                    const amendRelated = typeof productsByType === 'string'
+                        ? {error: productsByType}
+                        : productsByType;
+                    product.related = [...amendRelated];
+                }
 
                 setCached(`store_products_${req.params.slug}`, product);
                 res.send(product);
