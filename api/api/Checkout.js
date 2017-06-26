@@ -74,6 +74,15 @@ export default (api, {apolloClient}) => {
                                                 src
                                             }
                                             price
+                                            product {
+                                                images(first: 1) {
+                                                    edges {
+                                                        node {
+                                                            src
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                         quantity
                                     }
@@ -113,6 +122,15 @@ export default (api, {apolloClient}) => {
                                                 src
                                             }
                                             price
+                                            product {
+                                                images(first: 1) {
+                                                    edges {
+                                                        node {
+                                                            src
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                         quantity
                                     }
