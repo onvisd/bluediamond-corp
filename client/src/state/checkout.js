@@ -9,27 +9,27 @@ export const createCheckout = action({
     action: (data, http) => http.post('/api/store/checkout', data),
     result: (state, result) => ({
         ...state,
-        checkout: result
+        ...result
     })
 }, handler);
 
-export const updateCheckout = action({
+export const addToCart = action({
     namespace: 'CHECKOUT',
-    event: 'UPDATE',
-    action: (data, http) => http.put('/api/store/checkout', data),
+    event: 'ADD_TO_CART',
+    action: (data, http) => http.put(`/api/store/checkout/cart/add/${data.checkoutId}`, data),
     result: (state, result) => ({
         ...state,
-        checkout: result
+        ...result
     })
 }, handler);
 
-export const removeCheckout = action({
+export const removeFromCart = action({
     namespace: 'CHECKOUT',
-    event: 'REMOVE',
-    action: (id, http) => http.delete('/api/store/checkout', id),
+    event: 'REMOVE_FROM_CART',
+    action: (data, http) => http.put(`/api/store/checkout/cart/remove/${data.checkoutId}`, data),
     result: (state, result) => ({
         ...state,
-        checkout: result
+        ...result
     })
 }, handler);
 

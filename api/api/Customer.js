@@ -31,7 +31,6 @@ export default (api, {apolloClient}) => {
                     }) {
                         customerAccessToken {
                             accessToken
-                            expiresAt
                         }
                         userErrors {
                             message

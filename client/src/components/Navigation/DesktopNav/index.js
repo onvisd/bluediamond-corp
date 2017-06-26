@@ -5,6 +5,7 @@ import classnames from 'classnames';
 
 import {connector as authConnector} from 'state/auth';
 import {connector as navConnector} from 'state/navigation';
+import {connector as checkoutConnector} from 'state/checkout';
 
 import ShoppingCartIcon from 'images/icons/cart.svg';
 import User from 'images/icons/user.svg';
@@ -13,7 +14,11 @@ import ShoppingCart from '../ShoppingCart';
 import styles from './styles.module.css';
 
 @connect(
-    (state) => ({...authConnector(state.auth), ...navConnector(state.navigation)})
+    (state) => ({
+        ...authConnector(state.auth),
+        ...navConnector(state.navigation),
+        ...checkoutConnector(state.checkout)
+    })
 )
 export default class DesktopNav extends Component {
     static propTypes = {
@@ -82,7 +87,7 @@ export default class DesktopNav extends Component {
     render() {
         const {navVisible, cartVisible, productCards} = this.state;
         const {name, element, props} = this.state.activeCard;
-        const {brands, navData, companyNavTiles, navigation, auth} = this.props;
+        const {brands, navData, companyNavTiles, navigation, auth, checkout} = this.props;
         const navColor = navigation.style ? navigation.style.className : null;
 
         return (
@@ -165,6 +170,11 @@ export default class DesktopNav extends Component {
                                 }}
                             >
                                 <ShoppingCartIcon />
+                                {checkout.lineItems && checkout.lineItems.edges.length > 0 && (
+                                    <div className={styles.cartBadge}>
+                                        {checkout.lineItems.edges.length}
+                                    </div>
+                                )}
                                 <div
                                     className={classnames(styles.dropdown, {
                                         [styles.active]: cartVisible

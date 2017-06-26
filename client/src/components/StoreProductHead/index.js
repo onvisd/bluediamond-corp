@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import {connector, createCheckout, updateCheckout} from 'state/checkout';
+import {connector, createCheckout, addToCart} from 'state/checkout';
 import styles from './styles.module.css';
 
 import GlutenFree from 'images/icons/gluten-free.svg';
@@ -17,7 +17,7 @@ import ProductStarRating from '../ProductStarRating';
 
 @connect(
     (state) => ({...connector(state.checkout)}),
-    {createCheckout, updateCheckout}
+    {createCheckout, addToCart}
 )
 export default class StoreProductHead extends Component {
     state = {
@@ -135,19 +135,14 @@ export default class StoreProductHead extends Component {
     addToCart = () => {
         const {variant, quantity} = this.state;
 
-        if(this.props.checkout.token) {
-            const lineItems = this.props.checkout.lineItems.concat({
-                variant_id: variant.id, // eslint-disable-line camelcase
-                quantity
-            });
-
-            this.props.updateCheckout({
-                token: this.props.checkout.token,
-                lineItems
+        if(this.props.checkout.id) {
+            this.props.addToCart({
+                checkoutId: this.props.checkout.id,
+                lineItems: [{variantId: variant.id, quantity}]
             });
         } else {
             this.props.createCheckout({lineItems: [
-                {variant_id: variant.id, quantity} // eslint-disable-line camelcase
+                {variantId: variant.id, quantity}
             ]});
         }
     }

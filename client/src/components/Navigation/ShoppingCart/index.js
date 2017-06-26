@@ -1,70 +1,75 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 
+import {connector, removeFromCart} from 'state/checkout';
 import Button from '../../Button';
 import ShoppingCartItem from '../../ShoppingCartItem';
 import styles from './styles.module.css';
 
+@connect(
+    (state) => ({...connector(state.checkout)}),
+    {removeFromCart}
+)
 export default class ShoppingCart extends Component {
     static propTypes = {
         children: PropTypes.node,
+        checkout: PropTypes.object,
         onToggle: PropTypes.shape({
             show: PropTypes.func.isRequired,
             hide: PropTypes.func.isRequired
         }).isRequired
     }
 
-    handleRemoveItem = (item) => {
-        console.log(`Deleted ${item}`);
+    handleRemoveItem = (id) => {
+        this.props.removeFromCart({checkoutId: this.props.checkout.id, lineItemIds: [id]});
     }
 
     render() {
-        const {children, onToggle} = this.props;
+        const {children, checkout, onToggle} = this.props;
 
         return (
             <div>
                 <div className={styles.cart}>
-                    <h2>My Shopping Cart</h2>
-                    <ShoppingCartItem
-                        imageUrl="//images.contentful.com/v50q1scweni9/Ek9LNGNDzMOSAuMWUec8W/3a1ee75aa45299abf727a465f1725f31/6oz_Can_Whole_Natural_Front.png" // eslint-disable-line
-                        title="Whole Natural Almonds"
-                        description="6 oz can (Case of 12)"
-                        quantity={1}
-                        price="$34.68"
-                        onRemoveItem={() => {
-                            this.handleRemoveItem('Whole Natural Almonds');
-                        }}
-                    />
-                    <ShoppingCartItem
-                        imageUrl="//images.contentful.com/v50q1scweni9/653q6EnyW4aW2EAcmGgKY0/45ca483ad09f8294646caf492f89c857/4.25oz_Box_Smokehouse_Nut-Thins_Front.png" // eslint-disable-line
-                        title="Smokehouse Nut-Thins"
-                        description="6 oz box (Case of 12)"
-                        quantity={1}
-                        price="$28.31"
-                        onRemoveItem={() => {
-                            this.handleRemoveItem('Smokehouse Nut-Thins');
-                        }}
-                    />
-                    <div className={styles.subtotal}>
-                        <h2>Subtotal</h2>
-                        <div className={styles.price}>
-                            $69.36
+                    {checkout.lineItems && checkout.lineItems.edges.length ? (
+                        <div>
+                            <h2>My Shopping Cart</h2>
+                            {checkout.lineItems &&
+                                checkout.lineItems.edges.map(({node: lineItem}) => (
+                                <ShoppingCartItem
+                                    key={lineItem.id}
+                                    imageUrl={lineItem.variant.image && lineItem.variant.image.url} // eslint-disable-line
+                                    title={lineItem.title}
+                                    description={lineItem.variant.title}
+                                    quantity={lineItem.quantity}
+                                    price={lineItem.variant.price}
+                                    onRemoveItem={() => {
+                                        this.handleRemoveItem(lineItem.id);
+                                    }}
+                                />
+                            ))}
+                            <div className={styles.subtotal}>
+                                <h2>Subtotal</h2>
+                                <div className={styles.price}>
+                                    ${checkout.subtotalPrice}
+                                </div>
+                            </div>
+                            <div className={styles.checkout}>
+                                <Button layout="fw" href={checkout.webUrl}>
+                                    Checkout
+                                </Button>
+                                <a
+                                    className={styles.continue}
+                                    onClick={() => {
+                                        onToggle.hide();
+                                    }}
+                                >
+                                    Continue Shopping
+                                </a>
+                            </div>
+                            {children}
                         </div>
-                    </div>
-                    <div className={styles.checkout}>
-                        <Button layout="fw">
-                            Checkout
-                        </Button>
-                        <a
-                            className={styles.continue}
-                            onClick={() => {
-                                onToggle.hide();
-                            }}
-                        >
-                            Continue Shopping
-                        </a>
-                    </div>
+                    ) : 'Your shopping cart is empty'}
                 </div>
-                {children}
             </div>
         );
     }
