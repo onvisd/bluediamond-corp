@@ -1,21 +1,27 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
 import {pushLocation} from 'react-isomorphic-render';
 import classnames from 'classnames';
+
+import {connector as authConnector} from 'state/auth';
 
 import Orders from './Orders';
 import Settings from './Settings';
 import styles from './styles.module.css';
 
 @withRouter
+@connect(
+    (state) => ({...authConnector(state.auth)})
+)
 export default class Account extends Component {
-
     updateView = (path) => {
         pushLocation({pathname: `/account/${path}`}, this.props.router);
     }
 
     render() {
         const {view} = this.props.params;
+        const {auth} = this.props;
 
         return (
             <div className={styles.container}>
@@ -44,8 +50,8 @@ export default class Account extends Component {
                         </button>
                     </div>
                     <div className={styles.panel}>
-                        {view === 'orders' && <Orders />}
-                        {view === 'settings' && <Settings />}
+                        {view === 'orders' && <Orders auth={auth} />}
+                        {view === 'settings' && <Settings auth={auth} />}
                     </div>
                 </div>
             </div>

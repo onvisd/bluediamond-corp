@@ -48,6 +48,14 @@ export default (api, {apolloClient}) => {
                 query ($customerAccessToken: String!) {
                     customer(customerAccessToken: $customerAccessToken) {
                         id
+                        displayName
+                        firstName
+                        lastName
+                        email
+                        phone
+                        updatedAt
+                        createdAt
+                        acceptsMarketing
                         defaultAddress {
                             address1
                             address2
@@ -61,11 +69,16 @@ export default (api, {apolloClient}) => {
                         orders(first: 5) {
                             edges {
                                 node {
+                                    id
+                                    orderNumber
+                                    customerUrl
+                                    processedAt
+                                    totalPrice
                                     lineItems(first: 5) {
                                         edges {
                                             node {
-                                                quantity
                                                 title
+                                                quantity
                                             }
                                         }
                                     }
