@@ -7,11 +7,6 @@ const StoreHero = ({image, title, tagline, buttonText, buttonUrl}) => (
         <div className={styles.innerContainer}>
             <h2>{title}</h2>
             <p>{tagline}</p>
-            {buttonText && buttonUrl && (
-                <Button href={buttonUrl} theme="yellow">
-                    {buttonText}
-                </Button>
-            )}
         </div>
     </div>
 );
