@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
+import image from 'tools/image';
+
 import styles from './styles.module.css';
 
 export default class ProductLink extends Component {
@@ -23,6 +25,66 @@ export default class ProductLink extends Component {
         type: 'panel'
     }
 
+    renderImage() {
+        const {
+            product
+        } = this.props;
+
+        return (
+            <div className={styles.imageWrap}>
+                <div className={styles.image}>
+                    <img
+                        src={image(
+                            product.fields.productPhotos[0].fields.file.url,
+                            {
+                                width: 125,
+                                height: 125
+                            }
+                        )}
+                        srcSet={`
+                            ${image(
+                                product.fields.productPhotos[0].fields.file.url,
+                                {
+                                    width: 125,
+                                    height: 125
+                                }
+                            )} 1x,
+                            ${image(
+                                product.fields.productPhotos[0].fields.file.url,
+                                {
+                                    width: 250,
+                                    height: 250
+                                }
+                            )} 2x,
+                            ${image(
+                                product.fields.productPhotos[0].fields.file.url,
+                                {
+                                    width: 375,
+                                    height: 375
+                                }
+                            )} 3x
+                        `}
+                    />
+                </div>
+            </div>
+        );
+    }
+
+    renderCopy() {
+        const {
+            product,
+            showBrand
+        } = this.props;
+
+        return (
+            <div className={styles.info}>
+                {showBrand &&
+                    <span className={styles.brand}>{product.fields.brand}</span>}
+                <span className={styles.title}>{product.fields.name}</span>
+            </div>
+        );
+    }
+
     render() {
         const {
             product,
@@ -31,7 +93,6 @@ export default class ProductLink extends Component {
             onClick,
             activeClassName,
             inactiveClassName,
-            showBrand,
             type,
             className
         } = this.props;
@@ -44,32 +105,16 @@ export default class ProductLink extends Component {
 
         let child = (
             <Link className={styles.container} to={pathname} onClick={onClick}>
-                <div className={styles.imageWrap}>
-                    <div className={styles.image}>
-                        <img src={product.fields.productPhotos[0].fields.file.url} />
-                    </div>
-                </div>
-                <div className={styles.info}>
-                    {showBrand &&
-                        <span className={styles.brand}>{product.fields.brand}</span>}
-                    <span className={styles.title}>{product.fields.name}</span>
-                </div>
+                {this.renderImage()}
+                {this.renderCopy()}
             </Link>
         );
 
         if(action === 'push') {
             child = (
                 <div className={styles.container} onClick={onClick}>
-                    <div className={styles.imageWrap}>
-                        <div className={styles.image}>
-                            <img src={product.fields.productPhotos[0].fields.file.url} />
-                        </div>
-                    </div>
-                    <div className={styles.info}>
-                        {showBrand &&
-                            <span className={styles.brand}>{product.fields.brand}</span>}
-                        <span className={styles.title}>{product.fields.name}</span>
-                    </div>
+                    {this.renderImage()}
+                    {this.renderCopy()}
                 </div>
             );
         }
