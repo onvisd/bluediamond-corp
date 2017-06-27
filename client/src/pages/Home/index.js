@@ -9,6 +9,7 @@ import {parseModel} from 'tools/parseApi';
 import Title from 'components/Title';
 import Button from 'components/Button';
 import ButtonDropdown from 'components/ButtonDropdown';
+import preventOrphan from 'tools/preventOrphan';
 import styles from './styles.module.css';
 
 @preload(({dispatch}) => dispatch(getHome()))
@@ -100,8 +101,10 @@ export default class Home extends Component {
                                 src={homeFields.heroBlossomImage.file.url}
                             />
                             <div className={styles.heroContent}>
-                                <h1 className="t--size-xxl">{homeFields.heroHeadline}</h1>
-                                <h3>{homeFields.heroText}</h3>
+                                <h1 className="t--size-xxl">
+                                    {preventOrphan(homeFields.heroHeadline)}
+                                </h1>
+                                <h3>{preventOrphan(homeFields.heroText)}</h3>
                                 <ButtonDropdown
                                     items={[
                                         {slug: '/brand/snack-almonds', name: 'Snack Almonds'},
@@ -132,8 +135,8 @@ export default class Home extends Component {
                         </div>
                         <div className={styles.corpContent}>
                             <div>
-                                <h1>{homeFields.craftHeadline}</h1>
-                                <p>{homeFields.craftText}</p>
+                                <h1>{preventOrphan(homeFields.craftHeadline)}</h1>
+                                <p>{preventOrphan(homeFields.craftText)}</p>
                                 <Button href="/craft" theme="yellow">
                                     Our Craft
                                 </Button>
@@ -152,8 +155,8 @@ export default class Home extends Component {
                         </div>
                         <div className={styles.corpContent}>
                             <div>
-                                <h1>{homeFields.historyHeadline}</h1>
-                                <p>{homeFields.historyText}</p>
+                                <h1>{preventOrphan(homeFields.historyHeadline)}</h1>
+                                <p>{preventOrphan(homeFields.historyText)}</p>
                                 <Button href="/history" theme="green">
                                     Our History
                                 </Button>
@@ -166,8 +169,8 @@ export default class Home extends Component {
                     bgImage={homeFields.coopImage.file.url}
                 >
                     <div className={styles.coopContent}>
-                        <h2>{homeFields.coopHeadline}</h2>
-                        <p>{homeFields.coopText}</p>
+                        <h2>{preventOrphan(homeFields.coopHeadline)}</h2>
+                        <p>{preventOrphan(homeFields.coopText)}</p>
                         <Button href="/manifesto">
                             Our Story
                         </Button>
