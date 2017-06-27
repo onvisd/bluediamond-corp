@@ -94,26 +94,26 @@ export default class RequestSampleForm extends Component {
                     <div className={styles.right}>
                         <Input
                             name="name"
-                            label="Your name*"
+                            label="Your name"
                             validations="minLength:1"
                             required
                         />
                         <Input
                             name="email"
-                            label="Email address*"
+                            label="Email address"
                             validations="isEmail"
                             validationError="This is not a valid email"
                             required
                         />
                         <Input
                             name="companyName"
-                            label="Company Name*"
+                            label="Company Name"
                             validations="minLength:1"
                             required
                         />
                         <Input
                             name="address"
-                            label="Address*"
+                            label="Address"
                             validations="minLength:1"
                             required
                         />

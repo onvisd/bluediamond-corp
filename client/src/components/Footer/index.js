@@ -100,6 +100,11 @@ const Footer = ({data}) => (
                                 </Link>
                             </li>
                             <li>
+                                <Link to="/faqs">
+                                    FAQs
+                                </Link>
+                            </li>
+                            <li>
                                 <Link to="/contact">
                                     Contact Us
                                 </Link>

@@ -9,7 +9,7 @@ import Textarea from '../FormTextarea';
 
 import styles from './styles.module.css';
 
-export default class ContactForm extends Component {
+export default class FoodserviceContact extends Component {
     state = {
         canSubmit: false
     };
@@ -57,8 +57,6 @@ export default class ContactForm extends Component {
     render() {
         const {
             allowSubject,
-            allowCompany,
-            allowMessage,
             predefinedSubjects
         } = this.props;
 
@@ -101,44 +99,6 @@ export default class ContactForm extends Component {
                     classNames={{container: styles.input, label: styles.label}}
                     required
                 />
-                <Input
-                    name="streetAddress"
-                    label="Street address"
-                    classNames={{container: styles.input, label: styles.label}}
-                />
-                <div className={styles.fieldPair}>
-                    <Input
-                        name="city"
-                        label="City"
-                        validations="minLength:1"
-                        classNames={{container: styles.input, label: styles.label}}
-                        required
-                    />
-                    <Input
-                        name="state"
-                        label="State"
-                        validations="minLength:1"
-                        classNames={{container: styles.input, label: styles.label}}
-                        required
-                    />
-                </div>
-                <div className={styles.fieldPair}>
-                    <Input
-                        name="country"
-                        label="Country"
-                        validations="minLength:1"
-                        classNames={{container: styles.input, label: styles.label}}
-                        required
-                    />
-                    <Input
-                        name="postalCode"
-                        label="Postal Code"
-                        validations="minLength:1,isAlphanumeric"
-                        validationError="Please enter a valid postal code"
-                        classNames={{container: styles.input, label: styles.label}}
-                        required
-                    />
-                </div>
                 {allowSubject && (
                     <Select
                         name="subject"
@@ -148,46 +108,18 @@ export default class ContactForm extends Component {
                         required
                     />
                 )}
-                <div className={styles.fieldPair}>
-                    <Input
-                        name="lotCode"
-                        label="Lot Code"
-                        classNames={{container: styles.input, label: styles.label}}
-                    />
-                    <Input
-                        name="bestBeforeDate"
-                        label="Best Before Date"
-                        classNames={{container: styles.input, label: styles.label}}
-                    />
-                </div>
-                <div className={styles.fieldPair}>
-                    <Input
-                        name="timeStamp"
-                        label="Time Stamp"
-                        classNames={{container: styles.input, label: styles.label}}
-                    />
-                    <Input
-                        name="upc"
-                        label="UPC Code"
-                        classNames={{container: styles.input, label: styles.label}}
-                    />
-                </div>
-                {allowCompany && (
-                    <Input
-                        name="company"
-                        label="Company"
-                        classNames={{container: styles.input, label: styles.label}}
-                    />
-                )}
-                {allowMessage && (
-                    <Textarea
-                        name="message"
-                        label="Your message"
-                        validations="minLength:1"
-                        classNames={{container: styles.input, label: styles.label}}
-                        required
-                    />
-                )}
+                <Input
+                    name="company"
+                    label="Company"
+                    classNames={{container: styles.input, label: styles.label}}
+                />
+                <Textarea
+                    name="message"
+                    label="Your message"
+                    validations="minLength:1"
+                    classNames={{container: styles.input, label: styles.label}}
+                    required
+                />
                 <Button type="submit" disabled={!this.state.canSubmit}>Send Message</Button>
             </Form>
         );

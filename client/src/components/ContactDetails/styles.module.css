@@ -6,7 +6,7 @@
 }
 
 .detail {
-    padding: 1.5rem 1rem;
+    padding: 1rem;
     background-color: var(--c--gray-lighter);
     border-radius: 4px;
 
@@ -17,5 +17,13 @@
     & p:last-child,
     & p > p:last-child {
         margin-bottom: 0;
+    }
+
+    & h4 {
+        margin-bottom: 0.5rem;
+    }
+
+    & a {
+        text-decoration: underline;
     }
 }

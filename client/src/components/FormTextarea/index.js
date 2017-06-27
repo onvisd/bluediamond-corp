@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import styles from './styles.module.css';
 
 @Formsy.Decorator()
-export default class Textarea extends Component {
+export default class FormTextarea extends Component {
     changeValue = (event) => {
         this.props.setValue(event.currentTarget.value);
     }
@@ -24,18 +24,30 @@ export default class Textarea extends Component {
             name,
             label,
             getValue,
-            getErrorMessage
+            getErrorMessage,
+            classNames,
+            required
         } = this.props;
 
         return (
-            <label className={classnames(styles.container, {
-                [styles.error]: this.showError()
-            })}>
-                <div className={styles.label}>{label}</div>
+            <label
+                data-required={required}
+                className={
+                    classnames(
+                        styles.container,
+                        classNames.container,
+                        {
+                            [styles.error]: this.showError()
+                        }
+                    )
+                }
+            >
+                <div className={classnames(styles.label, classNames.label)}>{label}</div>
                 <textarea
                     name={name}
                     onChange={this.changeValue}
                     value={getValue() || ''}
+                    required={required}
                 ></textarea>
                 <span>{getErrorMessage()}</span>
             </label>

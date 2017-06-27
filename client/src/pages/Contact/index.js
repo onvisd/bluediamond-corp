@@ -74,13 +74,17 @@ export default class Contact extends Component {
                                     Send us a message
                                 </Button>
                             </div>
-                            <h3>Frequently Asked Questions</h3>
-                            <FAQ data={faq} />
+                            <div className={styles.faq}>
+                                <h3>Frequently Asked Questions</h3>
+                                <FAQ data={faq} limit={3} />
+                            </div>
                             <div
+                                className={styles.contactForm}
                                 ref={(el) => {
                                     this.contactForm = el;
                                 }}
                             >
+                                <h3>Send Us A Message</h3>
                                 <ContactForm {...form} />
                             </div>
                         </div>

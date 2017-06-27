@@ -49,7 +49,9 @@ export default class Layout extends Component {
         const footerData = brands.sort(sortByPriority).map((brand) => ({
             name: brand.fields.name,
             slug: brand.fields.slug,
-            categories: brand.fields.categories.map((category) => category.fields.name)
+            categories: brand.fields.categories
+                .filter((category) => !category.fields.hidden)
+                .map((category) => category.fields.name)
         }));
 
         const title = 'From Our Hearts to Your Hands';

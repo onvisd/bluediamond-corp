@@ -9,7 +9,7 @@ const MoreFlavors = ({brand, otherCategories}) => (
     <div className={styles.container}>
         <h3 className={styles.heading}>More {brand.fields.name} flavors</h3>
         <div className={styles.panels}>
-            {otherCategories.map((category) => (
+            {otherCategories.filter((category) => !category.fields.hidden).map((category) => (
                 <Link to={`/brand/${brand.fields.slug}/${category.fields.slug}`}
                     className={classnames(styles.panel, {
                         [styles.single]: otherCategories.length === 1

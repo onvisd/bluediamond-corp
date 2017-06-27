@@ -19,6 +19,9 @@ const Footer = () => (
                 <a href="https://careers.bluediamond.com" target="_blank">
                     Careers
                 </a>
+                <Link to="/faqs">
+                    FAQs
+                </Link>
                 <Link to="/contact">
                     Contact
                 </Link>

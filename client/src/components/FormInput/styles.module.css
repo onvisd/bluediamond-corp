@@ -25,6 +25,11 @@
             border-color: var(--c--blue);
         }
     }
+
+    &[data-required='true'] .label::after {
+        content: ' *';
+        color: var(--c--red);
+    }
 }
 
 .label {

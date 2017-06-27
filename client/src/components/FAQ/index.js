@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import classnames from 'classnames';
 import marked from 'marked';
 
+import Button from 'components/Button';
+
 import CaretRight from 'images/icons/caret-right.svg';
 import styles from './styles.module.css';
 
@@ -12,7 +14,8 @@ export default class FAQ extends Component {
             question: PropTypes.string.isRequired,
             answer: PropTypes.string.isRequired,
             brand: PropTypes.string.isRequired
-        }))
+        })),
+        limit: PropTypes.number
     }
 
     state = {
@@ -46,6 +49,7 @@ export default class FAQ extends Component {
     }
 
     render() {
+        const {limit} = this.props;
         const {activeNavItem} = this.state;
         const data = this.props.data.filter((d) => d.brand === activeNavItem);
         const navItems = this.getNavItems();
@@ -69,12 +73,17 @@ export default class FAQ extends Component {
                     ))}
                 </ul>
                 <ul className={styles.content}>
-                    {data.map((d) => (
+                    {data.slice(0, limit || data.length).map((d) => (
                         <li key={d._id} className={styles.item}>
                             <h4>{d.question}</h4>
                             <p dangerouslySetInnerHTML={this.renderMarkup(d.answer)} />
                         </li>
                     ))}
+                    {limit && (
+                        <Button href="/faqs">
+                            See all FAQs
+                        </Button>
+                    )}
                 </ul>
             </div>
         );

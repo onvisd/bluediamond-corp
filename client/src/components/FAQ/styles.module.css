@@ -10,14 +10,13 @@
 }
 
 .nav {
-    width: 30%;
+    width: 11rem;
     padding-left: 0;
-    border-top: 1px solid var(--c--gray-lighter);
 }
 
 .navItem {
     display: flex;
-    height: 3.2rem;
+    height: 2.5rem;
     padding: 0 1rem;
     align-items: center;
     justify-content: space-between;

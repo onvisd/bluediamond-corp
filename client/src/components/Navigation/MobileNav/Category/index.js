@@ -33,25 +33,28 @@ export default class Category extends Component {
                     {brand.fields.name}
                 </Breadcrumb>
                 <div className={styles.categories}>
-                    {brand.fields.categories.map((category) => (
-                        <div className={styles.category} key={category.fields.slug}>
-                            <div className={styles.title}>
-                                {category.fields.name}
+                    {brand.fields.categories
+                        .filter((category) => !category.fields.hidden)
+                        .map((category) => (
+                            <div className={styles.category} key={category.fields.slug}>
+                                <div className={styles.title}>
+                                    {category.fields.name}
+                                </div>
+                                <div className={styles.products}>
+                                    {brand.fields.products.filter((product) =>
+                                        product.fields.brandCategory === category.fields.name)
+                                        .map((product) => (
+                                            <ProductLink
+                                                key={product.fields.slug}
+                                                product={product}
+                                                small
+                                                onClick={toggleNav.hide}
+                                            />
+                                    ))}
+                                </div>
                             </div>
-                            <div className={styles.products}>
-                                {brand.fields.products.filter((product) =>
-                                    product.fields.brandCategory === category.fields.name)
-                                    .map((product) => (
-                                        <ProductLink
-                                            key={product.fields.slug}
-                                            product={product}
-                                            small
-                                            onClick={toggleNav.hide}
-                                        />
-                                ))}
-                            </div>
-                        </div>
-                    ))}
+                        ))
+                    }
                 </div>
                 <Button
                     theme={brand.fields.themeColor}

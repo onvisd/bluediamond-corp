@@ -9,7 +9,8 @@ import {parseModel} from 'tools/parseApi';
 import Title from 'components/Title';
 import Button from 'components/Button';
 import RequestSampleForm from 'components/RequestSampleForm';
-import ContactForm from 'components/ContactForm';
+import FoodserviceContact from 'components/FoodserviceContactForm';
+import ProductLink from 'components/ProductLink';
 
 import styles from './styles.module.css';
 
@@ -60,7 +61,12 @@ export default class FoodService extends Component {
                     productFeature4Label: PropTypes.string.isRequired,
                     productFeature4Link: PropTypes.string.isRequired,
                     requestFormContent: PropTypes.string.isRequired,
-                    contacForm: PropTypes.shape({
+                    contactForm: PropTypes.shape({
+                        sys: PropTypes.shape({
+                            id: PropTypes.string.isRequired
+                        })
+                    }),
+                    featuredProduct: PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string.isRequired
                         })
@@ -95,10 +101,6 @@ export default class FoodService extends Component {
         return <img src={`${image}?fit=fill&f=face&w=265&h=200`} />;
     }
 
-    scrollBottom = () => {
-        this.form.scrollIntoView({behavior: 'smooth'});
-    };
-
     handleClick = (space) => {
         this.setState((state) => ({
             requestOpen: space === 'request' ? !state.requestOpen : false,
@@ -111,25 +113,39 @@ export default class FoodService extends Component {
         const {foodService} = this.props;
         const fields = parseModel(foodService)[0].fields;
 
+        /* Special case handling to render just the one product associated with this page */
+        const featuredProduct = {
+            fields: {
+                ...fields.featuredProduct,
+                productPhotos: [
+                    {
+                        fields: fields.featuredProduct.productPhotos[0]
+                    }
+                ]
+            }
+        };
+
         return (
             <section className={styles.pageContainer}>
                 <Title>{fields.title}</Title>
                 <div className={styles.hero} style={{
                     backgroundImage: `url(${fields.heroBackgroundImage.file.url})`
-                }}>
-                    <div>
-                        <h2>{fields.heroHeadline}</h2>
-                        <Button onClick={() => {
-                            this.handleClick('request');
-                            this.scrollBottom();
-                        }}>
-                            Request a sample
-                        </Button>
-                    </div>
-                </div>
+                }} />
                 <div className={styles.container}>
-                    <div className={styles.content} dangerouslySetInnerHTML={this.renderMarkup(
-                        fields.pageContent)}>
+                    <h2>{fields.heroHeadline}</h2>
+                    <div className={styles.main}>
+                        <div
+                            className={styles.content}
+                            dangerouslySetInnerHTML={this.renderMarkup(fields.pageContent)}
+                        />
+                        <div className={styles.featuredProduct}>
+                            <h4>Foodservice Products</h4>
+                            <ProductLink
+                                className={styles.product}
+                                product={featuredProduct}
+                                showBrand
+                            />
+                        </div>
                     </div>
                     <div className={styles.productFeatures}>
                         <div className={styles.productFeature}>
@@ -200,7 +216,7 @@ export default class FoodService extends Component {
                     {contactOpen &&
                         <div className={styles.formContent}>
                             <h2>Contact us</h2>
-                            <ContactForm {...fields.contactForm}/>
+                            <FoodserviceContact {...fields.contactForm}/>
                         </div>
                     }
                 </div>

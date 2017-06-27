@@ -6,6 +6,13 @@ import styles from './styles.module.css';
 
 @Formsy.Decorator()
 export default class FormInput extends Component {
+    static defaultProps = {
+        classNames: {
+            container: null,
+            label: null
+        }
+    }
+
     componentWillMount() {
         if(this.props.initialValue)
             this.props.setValue(this.props.initialValue || '');
@@ -31,20 +38,32 @@ export default class FormInput extends Component {
             type,
             placeholder,
             getValue,
-            getErrorMessage
+            getErrorMessage,
+            classNames,
+            required
         } = this.props;
 
         return (
-            <label className={classnames(styles.container, {
-                [styles.error]: this.showError()
-            })}>
-                <div className={styles.label}>{label}</div>
+            <label
+                data-required={required}
+                className={
+                    classnames(
+                        styles.container,
+                        classNames.container,
+                        {
+                            [styles.error]: this.showError()
+                        }
+                    )
+                }
+            >
+                <div className={classnames(styles.label, classNames.label)}>{label}</div>
                 <input
                     type={type}
                     name={name}
                     placeholder={placeholder}
                     onChange={this.changeValue}
                     value={getValue() || ''}
+                    required={required}
                 />
                 <span>{getErrorMessage()}</span>
             </label>

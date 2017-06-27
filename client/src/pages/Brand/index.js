@@ -142,17 +142,20 @@ export default class Brand extends Component {
                     />
                 )}
                 <div style={{backgroundImage: `url(${brand.fields.backgroundTexture.fields.file.url})`}}>
-                    {brand.fields.categories.map((category) => (
-                        <Category
-                            key={category.sys.id}
-                            products={
-                                brand.fields.products.filter((product) =>
-                                    product.fields.brandCategory === category.fields.name
-                                )
-                            }
-                            {...category.fields}
-                        />
-                    ))}
+                    {brand.fields.categories
+                        .filter((category) => !category.fields.hidden)
+                        .map((category) => (
+                            <Category
+                                key={category.sys.id}
+                                products={
+                                    brand.fields.products.filter((product) =>
+                                        product.fields.brandCategory === category.fields.name
+                                    )
+                                }
+                                {...category.fields}
+                            />
+                        ))
+                    }
                 </div>
                 {brand.fields.waysToUse && (
                     <CardPanel

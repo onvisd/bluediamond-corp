@@ -9,7 +9,8 @@ export default (api, {contentful}) => {
                 'fields.slug',
                 'fields.themeColor',
                 'fields.categories',
-                'fields.mobileNavImage'
+                'fields.mobileNavImage',
+                'fields.priority'
             ].join()
         })
         .then((entries) => entries.items);

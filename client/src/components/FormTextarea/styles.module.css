@@ -5,6 +5,11 @@
     display: block;
     margin: 0.2rem 0 0.4rem;
 
+    &[data-required='true'] .label::after {
+        content: ' *';
+        color: var(--c--red);
+    }
+
     & textarea {
         display: block;
         width: 100%;
@@ -23,7 +28,6 @@
 }
 
 .label {
-    font-size: var(--t--size-xs);
     font-weight: 500;
 }
 

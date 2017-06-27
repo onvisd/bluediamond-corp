@@ -12,10 +12,21 @@
     @mixin container;
 
     position: relative;
-    padding: 3rem 0;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 
     @media (--mq-s) {
         padding-bottom: 1rem;
+    }
+
+    & h2 {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 62rem;
+
+        @media (--mq-s) {
+            text-align: center;
+        }
     }
 }
 
@@ -47,15 +58,33 @@
     }
 }
 
-.content {
+.main {
+    display: flex;
     margin: 0 auto;
-    max-width: 45rem;
+    max-width: 62rem;
 
     @media (--mq-s) {
+        display: block;
         padding: 0 1rem;
         max-width: 100%;
         text-align: center;
     }
+}
+
+.featuredProduct {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 320px;
+
+    & .product {
+        width: 100%;
+    }
+}
+
+.content {
+    flex: 1;
 }
 
 .productFeatures {
@@ -116,11 +145,6 @@
 
 .form {
     background-color: var(--c--gray-lighter);
-
-    & label {
-        padding-left: 0;
-        padding-right: 0;
-    }
 }
 
 .formContent {

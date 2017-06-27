@@ -6,6 +6,13 @@ import styles from './styles.module.css';
 
 @Formsy.Decorator()
 export default class FormSelect extends Component {
+    static defaultProps = {
+        classNames: {
+            container: null,
+            label: null
+        }
+    }
+
     componentDidMount() {
         this.props.setValue('No subject');
     }
@@ -30,17 +37,33 @@ export default class FormSelect extends Component {
             options,
             getValue,
             showRequired,
-            getErrorMessage
+            getErrorMessage,
+            classNames,
+            required
         } = this.props;
 
         return (
-            <label className={classnames(styles.container, {
-                required: showRequired(),
-                error: this.showError()
-            })}>
-                <div className={styles.label}>{label}</div>
+            <label
+                data-required={required}
+                className={
+                    classnames(
+                        styles.container,
+                        classNames.container,
+                        {
+                            required: showRequired(),
+                            error: this.showError()
+                        }
+                    )
+                }
+            >
+                <div className={classnames(classNames.label, styles.label)}>{label}</div>
                 <div className={styles.selectWrap}>
-                    <select name={name} onChange={this.changeValue} value={getValue() || 'No subject'}>
+                    <select
+                        name={name}
+                        onChange={this.changeValue}
+                        value={getValue() || 'No subject'}
+                        required={required}
+                    >
                         <option value="No subject">Please select one...</option>
                         {options.map((option) => (
                             <option value={option} key={option}>{option}</option>

@@ -32,7 +32,8 @@ export default class ProductLink extends Component {
             activeClassName,
             inactiveClassName,
             showBrand,
-            type
+            type,
+            className
         } = this.props;
 
         const pathname =
@@ -78,7 +79,7 @@ export default class ProductLink extends Component {
                 className={classnames(styles.container, styles[type], {
                     [activeClassName]: activeClassName && active,
                     [inactiveClassName]: inactiveClassName && !active
-                })}
+                }, className)}
             >
                 {child}
             </div>
