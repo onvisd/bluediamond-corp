@@ -28,6 +28,13 @@ export default class Root extends Component {
                             {action.name}
                         </NavItem>
                     ))}
+                    <NavItem
+                        key="/store"
+                        href="/store"
+                        onClick={toggleNav.hide}
+                    >
+                        Store
+                    </NavItem>
                 </NavList>
                 <NavList type="secondary">
                     {navData.secondary.map((link) => (
@@ -44,6 +51,9 @@ export default class Root extends Component {
                     {navData.primary.globalLinks.concat(
                         navData.primary.companyLinks
                     ).map((link) => {
+                        if(link.slug === '/store') // special case
+                            return;
+
                         let rest = {href: link.slug, onClick: toggleNav.hide};
                         if(link.external)
                             rest = {extHref: link.slug};
