@@ -71,8 +71,8 @@
         }
     }
 
-    &.brand--yellow svg,
-    &.brand--green svg {
+    &.brand--yellow svg path,
+    &.brand--green svg path {
         fill: var(--c--black);
     }
 
