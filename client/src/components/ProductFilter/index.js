@@ -73,6 +73,18 @@ export default class ProductFilter extends Component {
         return this.compressArray(flatItems);
     }
 
+    filterByCollection = (arr) => {
+        const collections = arr.reduce((a, b) => a.concat(b), []);
+        const items = [];
+
+        for (let i = 0; i < collections.length; i++) {
+            const collection = collections[i].node;
+            items.push(collection.title);
+        }
+
+        return this.compressArray(items);
+    }
+
     options = () => {
         const {products, filter} = this.props;
 
@@ -86,6 +98,9 @@ export default class ProductFilter extends Component {
 
         if(filter === 'options')
             items = this.filterByOption(products.map((product) => product.node[filter]));
+
+        if(filter === 'collections')
+            items = this.filterByCollection(products.map((product) => product.node[filter].edges));
 
         return items;
     }

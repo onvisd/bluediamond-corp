@@ -3,8 +3,8 @@
 @import 'constants/grid';
 
 .container {
-    margin: 2rem 2% 0 0;
-    max-width: 150px;
+    margin: 2rem 0 0;
+    flex-basis: 25%;
     text-align: center;
 
     &:last-of-type {
@@ -19,6 +19,10 @@
     & p {
         margin: 0;
         line-height: 1.4;
+    }
+
+    @media (--mq-s) {
+        flex-basis: 50%;
     }
 }
 

@@ -30,7 +30,8 @@ export default class Store extends Component {
         filter: {
             brands: [],
             types: [],
-            sizes: []
+            sizes: [],
+            categories: []
         },
         sort: null,
         search: ''
@@ -126,6 +127,14 @@ export default class Store extends Component {
                 sizeMatch = true;
         }
 
+        const collections = card.node.collections.edges
+                                .map((col) => col.node.title);
+        let categoryMatch = false;
+        for (let i = 0; i < filter.categories.length; i++) {
+            if(collections.indexOf(filter.categories[i]) > -1)
+                categoryMatch = true;
+        }
+
         let searchMatch = false;
         if(title.toLowerCase().match(escapeRegEx(search.toLowerCase())))
             searchMatch = true;
@@ -133,6 +142,7 @@ export default class Store extends Component {
         if((brandMatch || !filter.brands.length) &&
             (typeMatch || !filter.types.length) &&
             (sizeMatch || !filter.sizes.length) &&
+            (categoryMatch || !filter.categories.length) &&
             (searchMatch || !search.length)
         )
             return true;
@@ -199,7 +209,7 @@ export default class Store extends Component {
                 />
                 <div className={styles.container}>
                     <div className="l--row">
-                        <div className="l--col-2">
+                        <div className="l--col-3">
                             <p className={`t--type-incidental ${styles.refine}`}>Refine by:</p>
                             <ProductFilter
                                 title="Brand"
@@ -220,6 +230,13 @@ export default class Store extends Component {
                                 filter="options"
                                 query="values"
                                 onClick={this.handleFilter('sizes')}
+                            />
+                            <ProductFilter
+                                title="Category"
+                                products={products}
+                                filter="collections"
+                                query="values"
+                                onClick={this.handleFilter('categories')}
                             />
                         </div>
                         <div className="l--col-auto">

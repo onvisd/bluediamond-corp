@@ -20,6 +20,13 @@ export default (api, {apolloClient}) => {
                                     vendor
                                     title
                                     descriptionHtml
+                                    collections(first: 3) {
+                                        edges {
+                                            node {
+                                                title
+                                            }
+                                        }
+                                    }
                                     options(first: 3) {
                                         id
                                         name
@@ -68,6 +75,13 @@ export default (api, {apolloClient}) => {
                                     vendor
                                     title
                                     descriptionHtml
+                                    collections(first: 3) {
+                                        edges {
+                                            node {
+                                                title
+                                            }
+                                        }
+                                    }
                                     options(first: 3) {
                                         id
                                         name
@@ -114,6 +128,13 @@ export default (api, {apolloClient}) => {
                             vendor
                             title
                             descriptionHtml
+                            collections(first: 3) {
+                                edges {
+                                    node {
+                                        title
+                                    }
+                                }
+                            }
                             options(first: 25) {
                                 id
                                 name
@@ -187,8 +208,6 @@ export default (api, {apolloClient}) => {
                 const tags = product.tags;
                 const productTags = JSON.stringify(tags);
                 const productType = product.productType;
-
-                console.log(tags.length)
 
                 const getLabel = (str) => str.match(/smartLabel:(\d*)/)[1];
                 const getProductId = (str) => str.match(/id:(\d*)/)[1];
