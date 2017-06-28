@@ -5,8 +5,7 @@
     position: relative;
     width: 100%;
     height: calc(100% - 2px);
-    max-width: 72rem;
-    box-sizing: content-box;
+    max-width: 70rem;
     border: 1px solid var(--c--gray-lighter);
     border-radius: 8px;
     overflow: hidden;
