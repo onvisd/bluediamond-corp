@@ -1,6 +1,9 @@
 @import 'constants/grid';
+@import 'constants/color';
 
-.related {
+.related,
+.reviews,
+.back {
     @mixin container;
 }
 
@@ -20,4 +23,33 @@
     padding: 2rem 0 1rem;
     justify-content: flex-start;
     flex-direction: row;
+}
+
+.back {
+    margin-bottom: -2rem;
+}
+
+.backLink {
+    margin: 2rem 0 -4rem;
+    cursor: pointer;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        position: relative;
+        top: -2px;
+        margin-left: -5px;
+        margin-right: 10px;
+        border: 7px solid;
+        border-color: transparent var(--c--gray) transparent transparent;
+        vertical-align: middle;
+    }
+
+    &:hover {
+        color: var(--c--blue);
+
+        &::before {
+            border-right-color: var(--c--blue);
+        }
+    }
 }

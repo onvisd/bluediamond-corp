@@ -212,7 +212,7 @@ export default class Store extends Component {
                         <div className="l--col-3">
                             <p className={`t--type-incidental ${styles.refine}`}>Refine by:</p>
                             <ProductFilter
-                                title="Brand"
+                                title="Product"
                                 products={products}
                                 filter="productType"
                                 onClick={this.handleFilter('brands')}
