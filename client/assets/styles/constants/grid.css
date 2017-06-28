@@ -22,7 +22,8 @@
 
     /* Media queries */
     @custom-media --mq-gt-m (width > 1024px);
-    @custom-media --mq-m (width <= 1024px);
+    @custom-media --mq-m (width <= 1024px && width >= 768px);
+    @custom-media --mq-gt-sm (width > 600px);
     @custom-media --mq-gt-s (width > 768px);
     @custom-media --mq-lt-s (width < 768px);
     @custom-media --mq-s (width <= 768px);

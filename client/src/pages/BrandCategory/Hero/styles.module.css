@@ -103,8 +103,8 @@
         max-height: 30vw;
         vertical-align: middle;
 
-        @media (--mq-gt-s) {
-            max-width: 20vw;
+        @media (--mq-m) {
+            margin-bottom: -10%;
         }
 
         @media (--mq-s) {

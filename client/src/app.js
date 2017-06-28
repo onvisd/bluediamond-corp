@@ -19,7 +19,7 @@ render(settings, {
 .then(({store, rerender}) => {
     mediaQueryTracker({
         large: '(min-width: 1025px)',
-        medium: '(max-width: 1024px)',
+        medium: '(max-width: 1024px) and (min-width: 768px)',
         small: '(max-width: 768px)',
         innerWidth: true,
         innerHeight: true

@@ -54,6 +54,23 @@ export default class CardPanel extends Component {
         );
     }
 
+    renderTrack = (count, cards) =>
+        <Track
+            viewsToShow={count}
+            infinite
+            onViewChange={this.handleSwipe}
+            style={{display: 'flex'}}
+            ref={(track) => {
+                this.carouselTrack = track;
+            }}
+        >
+            {cards.map((card, idx) => (
+                <View style={{flex: '1'}} key={`card-${idx}`}>
+                    {this.renderCard(card)}
+                </View>
+            ))}
+        </Track>
+
     render() {
         const {activeTab} = this.state;
         const {type, title, theme, cards} = this.props;
@@ -67,21 +84,7 @@ export default class CardPanel extends Component {
                     </div>
                     <ViewPager className={styles.cardsMobile}>
                         <Frame>
-                            <Track
-                                viewsToShow={1}
-                                infinite
-                                onViewChange={this.handleSwipe}
-                                style={{display: 'flex'}}
-                                ref={(track) => {
-                                    this.carouselTrack = track;
-                                }}
-                            >
-                                {cards.map((card, idx) => (
-                                    <View style={{flex: '1'}} key={`card-${idx}`}>
-                                        {this.renderCard(card)}
-                                    </View>
-                                ))}
-                            </Track>
+                            {this.renderTrack(1, cards)}
                         </Frame>
                     </ViewPager>
                     <div className={classnames(styles.tabs, {
