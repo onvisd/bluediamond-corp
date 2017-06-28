@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {preload} from 'react-isomorphic-render';
-import {withRouter} from 'react-router';
+import {preload, Link} from 'react-isomorphic-render';
 
 import {getStoreProduct} from 'state/storeProduct';
 import {connector as storeProductConnector} from 'state/storeProduct';
@@ -22,10 +21,9 @@ import styles from './styles.module.css';
     (state) => ({...storeProductConnector(state.storeProduct)}),
     {getStoreProduct}
 )
-@withRouter
 export default class StoreProduct extends Component {
     render() {
-        const {product, router} = this.props; // eslint-disable-line
+        const {product} = this.props;
 
         const {reviews} = product.reviews;
         const related = product.related;
@@ -34,7 +32,7 @@ export default class StoreProduct extends Component {
             <section className="content">
                 <Title>{`Product: ${product.title}`}</Title>
                 <div className={styles.back}>
-                    <div className={styles.backLink} onClick={router.goBack}>Back to Store</div>
+                    <Link className={styles.backLink} href="/store">Continue Shopping</Link>
                 </div>
                 <StoreProductHead data={product} />
                 {related &&
