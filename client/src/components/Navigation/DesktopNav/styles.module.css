@@ -62,11 +62,24 @@
         background-color: var(--c--blue-light);
     }
 
-    &.brand--yellow *,
-    &.brand--green * {
+    & .innerContainer {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    & svg {
+        margin-right: 0.5rem;
+
+        & path {
+            fill: var(--c--white);
+        }
+    }
+
+    &.brand--yellow a,
+    &.brand--green a {
         color: var(--c--black);
 
-        & a:hover {
+        &:hover {
             color: var(--c--gray-darker);
         }
     }
@@ -74,20 +87,6 @@
     &.brand--yellow path,
     &.brand--green path {
         fill: var(--c--black);
-    }
-
-    & .innerContainer {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    & * {
-        color: var(--c--white);
-        fill: var(--c--white);
-    }
-
-    & svg {
-        margin-right: 0.5rem;
     }
 }
 
@@ -98,16 +97,21 @@
     text-align: right;
 
     & li:not(:first-of-type) {
-        padding-left: 2rem;
+        padding-left: 1rem;
     }
 
     & a {
+        padding: 0.3rem 0.5rem;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: var(--l--border-radius);
         color: var(--c--white);
-        will-change: color;
-        transition: color 300ms ease;
+        will-change: background;
+        transition: background 300ms ease;
 
-        &:hover {
-            color: var(--c--gray-light);
+        &:hover,
+        &:active,
+        &:focus {
+            background: rgba(255, 255, 255, 0.2);
         }
     }
 
