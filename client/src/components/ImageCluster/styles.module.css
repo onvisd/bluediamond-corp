@@ -58,7 +58,6 @@
 
     &:nth-child(n+2) {
         margin-left: -10%;
-        z-index: 0;
 
         @media (--mq-xs) {
             margin-left: 0;
