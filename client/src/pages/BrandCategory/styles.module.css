@@ -1,6 +1,11 @@
 @import 'constants/color';
 @import 'constants/grid';
 
+.content {
+    width: 100%;
+    overflow: hidden;
+}
+
 .background {
     padding-bottom: 0.5rem;
     background-color: var(--c--gray-lighter);
@@ -9,5 +14,43 @@
     @media (--mq-gt-s) {
         padding-bottom: 4rem;
         padding-top: 3vh;
+    }
+}
+
+.accents {
+    position: relative;
+    width: 100%;
+    pointer-events: none;
+}
+
+.accent {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+
+    &.accentLeft {
+        left: -8rem;
+
+        @media (max-width: 900px) {
+            left: -12rem;
+        }
+    }
+
+    &.accentRight {
+        right: -7rem;
+
+        @media (max-width: 900px) {
+            right: -11rem;
+        }
+    }
+
+    & img {
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    @media (--mq-m) {
+        display: none;
     }
 }

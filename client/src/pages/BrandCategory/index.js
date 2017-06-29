@@ -151,10 +151,18 @@ export default class BrandCategory extends Component {
         ).slice(0, 6);
 
         return (
-            <section className="content">
+            <section className={styles.content}>
                 <Title>{`${brand.fields.name} | ${category.fields.name}`}</Title>
                 <Hero brand={brand} category={category} product={activeProduct} />
                 <div className={styles.background}>
+                    <div className={styles.accents}>
+                        <div className={`${styles.accent} ${styles.accentLeft}`}>
+                            <img src={category.fields.appetizerImages[0].fields.file.url} />
+                        </div>
+                        <div className={`${styles.accent} ${styles.accentRight}`}>
+                            <img src={category.fields.appetizerImages[1].fields.file.url} />
+                        </div>
+                    </div>
                     <ProductSection
                         brand={brand}
                         category={category}

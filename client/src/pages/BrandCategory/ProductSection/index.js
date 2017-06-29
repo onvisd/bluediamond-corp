@@ -31,14 +31,7 @@ export default class ProductSection extends Component {
         const {brand, category, products, activeProduct, setActiveProduct} = this.props;
 
         return (
-            <div
-                className={styles.container}
-                style={{
-                    backgroundImage:
-                        `url(${category.fields.appetizerImages[0].fields.file.url}), ` +
-                        `url(${category.fields.appetizerImages[1].fields.file.url})`
-                }}
-            >
+            <div className={styles.container}>
                 <div
                     className={classnames(styles.showMore, {
                         [styles.active]: isOpen
