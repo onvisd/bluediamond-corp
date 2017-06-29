@@ -24,18 +24,21 @@ const Category = ({bgImage, brand, category, toggleNav}) => (
                 .sort(sortByPriority)
                 .slice(0, 4)
                 .map((product) => (
-                <ProductLink
-                    key={product.fields.slug}
-                    product={product}
-                    type="nav"
-                    onClick={toggleNav.hide}
-                />
-            ))}
+                    <ProductLink
+                        key={product.fields.slug}
+                        product={product}
+                        type="nav"
+                        onClick={toggleNav.hide}
+                        className={styles.product}
+                    />
+                ))
+            }
         </div>
         <Button
             theme={brand.fields.themeColor}
             href={`/brand/${brand.fields.slug}`}
             onClick={toggleNav.hide}
+            className={styles.seeAll}
         >
             See All Products
         </Button>

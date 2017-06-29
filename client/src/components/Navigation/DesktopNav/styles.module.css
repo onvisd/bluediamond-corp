@@ -59,7 +59,7 @@
     }
 
     &.brand--blue {
-        background-color: var(--c--blue);
+        background-color: var(--c--blue-light);
     }
 
     &.brand--yellow *,
@@ -71,8 +71,8 @@
         }
     }
 
-    &.brand--yellow svg path,
-    &.brand--green svg path {
+    &.brand--yellow path,
+    &.brand--green path {
         fill: var(--c--black);
     }
 
@@ -150,7 +150,7 @@
     }
 
     &.active {
-        color: var(--c--blue);
+        color: color(var(--c--black) shade(10%));
     }
 
     &.wide {
@@ -209,9 +209,9 @@
     top: 72px;
     right: 0;
     left: 0;
-    height: 260px;
     margin-top: -0.5rem;
-    max-width: 70rem;
+    min-height: 280px;
+    max-width: 72rem;
     opacity: 0;
     pointer-events: none;
     overflow: hidden;

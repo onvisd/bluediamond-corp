@@ -53,7 +53,7 @@
     }
 
     @media (--mq-gt-s) {
-        height: 64px;
+        height: 70px;
 
         & a,
         & .button {
@@ -112,20 +112,21 @@
 
 .brand--green {
     composes: primary;
-    background-color: var(--c--green);
+    background-color: var(--c--green-darker);
 
     &:not(:last-of-type) {
-        border-bottom: 1px solid var(--c--green-dark);
+        border-bottom: 1px solid var(--c--green-darker);
     }
 
     & .button {
+        background-color: var(--c--green-dark);
         color: var(--c--green-darker);
     }
 
     & .button:focus,
     & .button.active {
         color: var(--c--black);
-        background-color: var(--c--green-light);
+        background-color: var(--c--green);
     }
 
     & .button.active::after {
@@ -135,20 +136,21 @@
     @media (--mq-gt-s) {
         & .button:hover {
             color: var(--c--black);
-            background-color: var(--c--green-light);
+            background-color: var(--c--green);
         }
     }
 }
 
 .brand--blue {
     composes: primary;
-    background-color: var(--c--blue);
+    background-color: var(--c--blue-dark);
 
     &:not(:last-of-type) {
         border-bottom: 1px solid var(--c--blue-dark);
     }
 
     & .button {
+        background-color: var(--c--blue);
         color: var(--c--blue-darker);
     }
 
@@ -158,9 +160,17 @@
         background-color: var(--c--blue-light);
     }
 
-    & .button.active::after {
-        opacity: 0.8;
+     /* stylelint-disable */
+    & .button.active,
+    & .button.active:hover {
+        color: var(--c--white);
+
+        &::after {
+            opacity: 0.8;
+            border-left-color: var(--c--white);
+        }
     }
+    /* stylelint-enable */
 
     @media (--mq-gt-s) {
         & .button:hover {

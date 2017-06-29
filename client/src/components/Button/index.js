@@ -1,14 +1,16 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import styles from './styles.module.css';
 
 const Button = (props) => {
     const {theme, layout, href, onClick, children, ...rest} = props;
-    const className = `${
-        styles[theme] ||
-        styles.primary
-    } ${classNames({[styles[layout]]: layout})}`;
+    const className = classnames(
+        styles[theme] || styles.primary,
+        {[styles[layout]]: layout},
+        rest.className
+    );
+    delete rest.className;
 
     // Render a button element
     let button = (
