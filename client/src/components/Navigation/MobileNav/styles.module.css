@@ -3,12 +3,14 @@
 @import 'constants/type';
 
 .container {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     left: 0;
     z-index: 9999;
     pointer-events: none;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 
     &.visible {
         pointer-events: auto;
@@ -21,9 +23,12 @@
 
 .head {
     display: flex;
-    position: relative;
+    position: fixed;
+    right: 0;
+    left: 0;
     height: 60px;
     padding: 0 0.5rem 0 1rem;
+    z-index: 9999;
     align-items: center;
     justify-content: space-between;
     background-color: var(--c--white);
@@ -113,6 +118,7 @@
 
 .drawer {
     position: relative;
+    top: 60px;
     height: calc(100vh - 60px);
     background-color: var(--c--white);
     transform: translateX(100vw);

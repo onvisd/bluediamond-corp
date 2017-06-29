@@ -12,4 +12,6 @@
     flex-direction: column;
     list-style-type: none;
     background-color: var(--c--white);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
