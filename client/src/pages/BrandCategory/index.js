@@ -15,6 +15,7 @@ import Hero from './Hero';
 import ProductSection from './ProductSection';
 import MoreFlavors from './MoreFlavors';
 import MoreProducts from './MoreProducts';
+import sortByPriority from 'tools/sortByPriority';
 import styles from './styles.module.css';
 
 @preload(({dispatch, parameters}) =>
@@ -73,7 +74,7 @@ export default class BrandCategory extends Component {
 
         const categoryProducts = products.filter((product) =>
             product.fields.brandCategory === category.fields.name
-        );
+        ).sort(sortByPriority);
 
         const {productSlug} = this.props.params;
         const activeProduct = this.getActiveProduct(productSlug, categoryProducts);

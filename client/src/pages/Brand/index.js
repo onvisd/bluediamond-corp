@@ -15,6 +15,7 @@ import Carousel from 'components/Carousel';
 import Hero from './Hero';
 import Story from './Story';
 import Category from './Category';
+import sortByPriority from 'tools/sortByPriority';
 import styles from './styles.module.css';
 
 @preload(async ({dispatch, parameters}) => {
@@ -150,7 +151,7 @@ export default class Brand extends Component {
                                 products={
                                     brand.fields.products.filter((product) =>
                                         product.fields.brandCategory === category.fields.name
-                                    )
+                                    ).sort(sortByPriority)
                                 }
                                 {...category.fields}
                             />

@@ -4,6 +4,7 @@ import Button from 'components/Button';
 import ProductLink from 'components/ProductLink';
 import Card from 'components/Navigation/Card';
 import Breadcrumb from '../Breadcrumb';
+import sortByPriority from 'tools/sortByPriority';
 import styles from './styles.module.css';
 
 export default class Category extends Component {
@@ -43,6 +44,7 @@ export default class Category extends Component {
                                 <div className={styles.products}>
                                     {brand.fields.products.filter((product) =>
                                         product.fields.brandCategory === category.fields.name)
+                                        .sort(sortByPriority)
                                         .map((product) => (
                                             <ProductLink
                                                 key={product.fields.slug}

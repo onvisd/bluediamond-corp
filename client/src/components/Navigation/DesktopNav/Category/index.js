@@ -3,6 +3,7 @@ import React, {PropTypes} from 'react';
 import Button from 'components/Button';
 import ProductLink from 'components/ProductLink';
 import Card from 'components/Navigation/Card';
+import sortByPriority from 'tools/sortByPriority';
 import styles from './styles.module.css';
 
 const Category = ({bgImage, brand, category, toggleNav}) => (
@@ -20,6 +21,7 @@ const Category = ({bgImage, brand, category, toggleNav}) => (
                     product.fields.brandCategory === category.fields.name &&
                     product.fields.featured
                 )
+                .sort(sortByPriority)
                 .slice(0, 4)
                 .map((product) => (
                 <ProductLink
