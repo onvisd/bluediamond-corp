@@ -29,6 +29,7 @@ import styles from './styles.module.css';
 })
 @connect(
     (state) => ({
+        responsive: state.responsive,
         ...brandConnector(state.brand),
         ...navConnector(state.navigation)
     }),
@@ -50,6 +51,11 @@ export default class Brand extends Component {
                     })
                 }),
                 heroImage: PropTypes.shape({
+                    sys: PropTypes.shape({
+                        id: PropTypes.string.isRequired
+                    })
+                }),
+                mobileHeroImage: PropTypes.shape({
                     sys: PropTypes.shape({
                         id: PropTypes.string.isRequired
                     })
@@ -108,13 +114,17 @@ export default class Brand extends Component {
     }
 
     render() {
-        const {brand} = this.props;
+        const {brand, responsive} = this.props;
+
+        const heroImage = (responsive.small && brand.fields.mobileHeroImage)
+                            ? brand.fields.mobileHeroImage
+                            : brand.fields.heroImage;
 
         return (
             <section className="content">
                 <Title>{brand.fields.name}</Title>
                 <Hero
-                    image={brand.fields.heroImage.fields.file.url}
+                    image={heroImage.fields.file.url}
                     title={brand.fields.heroTitle}
                     textColor={brand.fields.heroTextColor}
                     logo={brand.fields.logo.fields.file.url}

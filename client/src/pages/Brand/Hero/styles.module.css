@@ -5,7 +5,7 @@
 .container {
     display: flex;
     position: relative;
-    height: 10rem;
+    height: 125vw; /* 1.25x browser width */
     margin-top: 60px;
     align-items: center;
     background-color: var(--c--gray-dark);
@@ -37,7 +37,7 @@
     & img {
         display: block;
         margin: 0 auto;
-        max-width: 8rem;
+        max-width: 80%;
     }
 
     @media (--mq-gt-s) {
