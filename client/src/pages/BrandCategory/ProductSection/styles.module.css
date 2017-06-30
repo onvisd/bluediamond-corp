@@ -63,7 +63,7 @@
     transition: max-height 150ms ease-in-out 150ms;
     will-change: max-height;
     overflow: hidden;
-    max-width: calc(100% - 2rem);
+    max-width: 100%;
 
     &.active {
         max-height: 400vh; /* arbitrary high number */
@@ -84,6 +84,7 @@
         max-height: 100vh;
         background-color: transparent;
         transform: translateY(-50%);
+        max-width: calc(100% - 2rem);
 
         & > * {
             opacity: 1;
