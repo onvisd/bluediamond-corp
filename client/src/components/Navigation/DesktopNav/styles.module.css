@@ -79,8 +79,10 @@
     &.brand--green a {
         color: var(--c--black);
 
-        &:hover {
-            color: var(--c--gray-darker);
+        &:hover,
+        &:active,
+        &:focus {
+            color: var(--c--black);
         }
     }
 
@@ -112,6 +114,7 @@
         &:active,
         &:focus {
             background: rgba(255, 255, 255, 0.2);
+            color: var(--c--white);
         }
     }
 
@@ -163,6 +166,10 @@
 
     & > a {
         color: var(--c--black);
+
+        &:hover {
+            color: var(--c--blue);
+        }
     }
 
     & svg {
