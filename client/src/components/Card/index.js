@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 export default class Card extends Component {
     static PropTypes = {
+        className: PropTypes.any,
         type: PropTypes.string,
         imageUrl: PropTypes.string.isRequired,
         linkTo: PropTypes.shape({
@@ -17,7 +18,7 @@ export default class Card extends Component {
     }
 
     render() {
-        const {type, imageUrl, linkTo, children} = this.props;
+        const {type, imageUrl, linkTo, children, className} = this.props;
 
         let imageLink = (
             <Link
@@ -41,14 +42,14 @@ export default class Card extends Component {
         }
 
         return (
-            <div className={styles.container}>
+            <div className={classnames(styles.container, {
+                [styles.recipe]: type === 'recipes'
+            }, className)}>
                 {imageLink}
                 {children && (
                     <Link
                         to={linkTo.url}
-                        className={classnames(styles.meta, {
-                            [styles.recipe]: type === 'recipes'
-                        })}
+                        className={styles.meta}
                     >
                         {children}
                     </Link>

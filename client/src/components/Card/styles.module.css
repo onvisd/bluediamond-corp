@@ -5,6 +5,7 @@
 .container {
     display: flex;
     width: 100%;
+    margin-bottom: 1rem;
     flex-direction: column;
     overflow: hidden;
     border-radius: 8px;
@@ -16,20 +17,14 @@
     }
 
     @media (--mq-m) {
-        padding: 0 0.5rem;
+        &:not(.recipe) {
+            padding: 0 0.5rem;
+        }
     }
 
     @media (--mq-gt-s) {
         width: calc(33.33% - 1rem);
         margin: 0 0.5rem 1rem;
-
-        &:first-child {
-            margin-left: 0;
-        }
-
-        &:last-child {
-            margin-right: 0;
-        }
     }
 }
 
@@ -77,11 +72,17 @@
             color: var(--c--gray);
         }
     }
+}
 
-    &.recipe {
-        @media (--mq-gt-s) {
+.recipe {
+    & .meta {
+        color: var(--c--white);
+        background-color: var(--c--blue-light);
+    }
+
+    @media (--mq-s) {
+        & .meta p {
             color: var(--c--white);
-            background-color: var(--c--blue-light);
         }
     }
 }

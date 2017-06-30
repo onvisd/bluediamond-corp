@@ -122,8 +122,8 @@ export default class RecipeIndex extends Component {
                     </div>
                 </div>
                 <div className={`l--container ${styles.container}`}>
-                    <div className="l--row l--align-center">
-                        <div className={`l--col-12-at-s l--col-5 ${styles.filter}`}>
+                    <div className={`l--row l--align-center ${styles.filter}`}>
+                        <div className="l--col-12-at-s l--col-5">
                             <h3 className={styles.title}>
                                 All recipes
                                 <small> ({totalCardCount})</small>

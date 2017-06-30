@@ -42,6 +42,7 @@ export default class CardPanel extends Component {
         return (
             <Card
                 key={data.sys ? data.sys.id : data}
+                className={styles.card}
                 type={type}
                 imageUrl={imageUrl}
                 linkTo={{
@@ -59,7 +60,7 @@ export default class CardPanel extends Component {
             viewsToShow={count}
             infinite
             onViewChange={this.handleSwipe}
-            style={{display: 'flex'}}
+            className={styles.cardTrack}
             ref={(track) => {
                 this.carouselTrack = track;
             }}
