@@ -12,6 +12,8 @@
     &.wrap {
         @mixin container;
 
+        margin: 0;
+
         @media (--mq-m) {
             padding: 0;
         }
@@ -27,6 +29,7 @@
 
     display: inline-block;
     position: relative;
+    margin: 0;
     padding: 0;
 }
 
