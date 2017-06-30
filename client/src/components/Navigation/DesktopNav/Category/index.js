@@ -8,14 +8,7 @@ import styles from './styles.module.css';
 
 const Category = ({bgImage, brand, category, toggleNav}) => (
     <Card theme="wide" style={{backgroundImage: `url(${bgImage})`}}>
-        <div
-            className={styles.products}
-            style={{
-                backgroundImage:
-                    `url(${category.fields.appetizerImages[0].fields.file.url}), ` +
-                    `url(${category.fields.appetizerImages[1].fields.file.url})`
-            }}
-        >
+        <div className={styles.products}>
             {brand.fields.products
                 .filter((product) =>
                     product.fields.brandCategory === category.fields.name &&
