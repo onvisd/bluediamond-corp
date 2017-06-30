@@ -26,7 +26,7 @@ export default class RelatedPageLink extends Component {
         } = this.props;
 
         const style = {
-            backgroundImage: `url(${backgroundImage && backgroundImage})`
+            backgroundImage: `url(${backgroundImage})`
         };
 
         return (
