@@ -92,9 +92,6 @@ export default class ProductPanel extends Component {
                     showOverlay
                     showArrows
                     showTabs
-                    onViewChange={(idx) => {
-                        setActiveProduct(products[idx]);
-                    }}
                 />
             );
         }
