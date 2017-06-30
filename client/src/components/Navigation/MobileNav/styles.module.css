@@ -137,6 +137,7 @@
 
     @media (--mq-gt-s) {
         width: 50vw;
+        border-left: 2px solid var(--c--gray-lighter);
     }
 }
 
