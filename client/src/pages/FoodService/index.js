@@ -192,24 +192,9 @@ export default class FoodService extends Component {
                             <div dangerouslySetInnerHTML={
                                 this.renderMarkup(fields.requestFormContent)
                             } />
-                            <p className="t--type-incidental">Available Products</p>
                             <RequestSampleForm
                                 header="Sample Request"
                                 emailTo="email@email.com"
-                                allowSubject={false}
-                                allowMessage={false}
-                                snackAlmondOptions={[
-                                    'Flavor 1'
-                                ]}
-                                almondBreezeOptions={[
-                                    'Flavor 1'
-                                ]}
-                                nutThinsOptions={[
-                                    'Flavor 1'
-                                ]}
-                                culinaryNutOptions={[
-                                    'Flavor 1'
-                                ]}
                             />
                         </div>
                     }

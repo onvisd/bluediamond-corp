@@ -4,7 +4,7 @@ import {Form} from 'formsy-react';
 
 import Button from '../Button';
 import Input from '../FormInput';
-import Select from '../FormSelect';
+import Textarea from '../FormTextarea';
 
 import styles from './styles.module.css';
 
@@ -15,11 +15,7 @@ export default class RequestSampleForm extends Component {
 
     static propTypes = {
         header: PropTypes.string.isRequired,
-        emailTo: PropTypes.string.isRequired,
-        snackAlmondOptions: PropTypes.arrayOf(PropTypes.string),
-        almondBreezeOptions: PropTypes.arrayOf(PropTypes.string),
-        nutThinsOptions: PropTypes.arrayOf(PropTypes.string),
-        culinaryNutOptions: PropTypes.arrayOf(PropTypes.string)
+        emailTo: PropTypes.string.isRequired
     }
 
     enableSubmit = () => {
@@ -41,10 +37,7 @@ export default class RequestSampleForm extends Component {
             name: model.name,
             companyName: model.companyName,
             address: model.address,
-            snackAlmonds: model.snackAlmonds,
-            almondBreeze: model.almondBreeze,
-            nutThins: model.nutThins,
-            culinaryNuts: model.culinaryNuts
+            request: model.request
         })
         .then(() => {
             console.log('Request sent successfully!');
@@ -55,13 +48,6 @@ export default class RequestSampleForm extends Component {
     }
 
     render() {
-        const {
-            snackAlmondOptions,
-            almondBreezeOptions,
-            nutThinsOptions,
-            culinaryNutOptions
-        } = this.props;
-
         return (
             <Form
                 onValidSubmit={this.submit}
@@ -69,55 +55,40 @@ export default class RequestSampleForm extends Component {
                 onInvalid={this.disableSubmit}
             >
                 <div className={styles.container}>
-                    <div className={styles.left}>
-                        <Select
-                            name="snackAlmonds"
-                            label="Snack Almonds"
-                            options={snackAlmondOptions}
-                        />
-                        <Select
-                            name="almondBreeze"
-                            label="Almond Breeze"
-                            options={almondBreezeOptions}
-                        />
-                        <Select
-                            name="nutThins"
-                            label="Nut-Thins"
-                            options={nutThinsOptions}
-                        />
-                        <Select
-                            name="culinaryNuts"
-                            label="Culinary Nuts"
-                            options={culinaryNutOptions}
-                        />
-                    </div>
-                    <div className={styles.right}>
-                        <Input
-                            name="name"
-                            label="Your name"
-                            validations="minLength:1"
-                            required
-                        />
-                        <Input
-                            name="email"
-                            label="Email address"
-                            validations="isEmail"
-                            validationError="This is not a valid email"
-                            required
-                        />
-                        <Input
-                            name="companyName"
-                            label="Company Name"
-                            validations="minLength:1"
-                            required
-                        />
-                        <Input
-                            name="address"
-                            label="Address"
-                            validations="minLength:1"
-                            required
-                        />
-                    </div>
+                    <Input
+                        classNames={{container: styles.field}}
+                        name="name"
+                        label="Your name"
+                        validations="minLength:1"
+                        required
+                    />
+                    <Input
+                        classNames={{container: styles.field}}
+                        name="email"
+                        label="Email address"
+                        validations="isEmail"
+                        validationError="This is not a valid email"
+                        required
+                    />
+                    <Input
+                        classNames={{container: styles.field}}
+                        name="companyName"
+                        label="Company Name"
+                        validations="minLength:1"
+                        required
+                    />
+                    <Input
+                        classNames={{container: styles.field}}
+                        name="address"
+                        label="Address"
+                        validations="minLength:1"
+                        required
+                    />
+                    <Textarea
+                        name="request"
+                        label="Which product(s) would you like to receive samples of?"
+                        required
+                    />
                 </div>
                 <Button type="submit" disabled={!this.state.canSubmit}>Submit Request</Button>
             </Form>

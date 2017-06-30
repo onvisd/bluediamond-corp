@@ -6,6 +6,10 @@ import styles from './styles.module.css';
 
 @Formsy.Decorator()
 export default class FormTextarea extends Component {
+    static defaultProps = {
+        classNames: {}
+    }
+
     changeValue = (event) => {
         this.props.setValue(event.currentTarget.value);
     }
