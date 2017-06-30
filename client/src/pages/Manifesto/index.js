@@ -8,7 +8,7 @@ import {connector, getManifesto} from 'state/manifesto';
 import {parseModel} from 'tools/parseApi';
 
 import Title from 'components/Title';
-import PageHero from 'components/PageHero';
+import GenericHero from 'components/GenericHero';
 import ImageCluster from 'components/ImageCluster';
 import FullBleedImage from 'components/FullBleedImage';
 import RelatedPages from 'components/RelatedPages';
@@ -88,14 +88,11 @@ export default class Manifesto extends Component {
         return (
             <section className={styles.content}>
                 <Title>Our Story</Title>
-                <PageHero
-                    headline={manifestoFields.heroHeadline}
-                    showHeadline={true}
+                <GenericHero
+                    className={styles.hero}
+                    headline="Our Story"
+                    title={manifestoFields.heroHeadline}
                     backgroundImage={manifestoFields.heroImage.file.url}
-                    video={manifestoFields.heroVideo.file.url}
-                    classNames={{
-                        innerContainer: styles.heroInner
-                    }}
                 />
                 <div className={styles.container}>
                     <div className="l--container">

@@ -32,27 +32,8 @@
     }
 }
 
-.heroInner {
-    margin-left: 12vw;
-    max-width: none;
-
-    @media (--mq-m) {
-        margin-left: 9vw;
-        padding-bottom: 1rem;
-
-        & h1 {
-            font-size: var(--t--size-lm);
-            max-width: 30% !important; /* stylelint-disable-line */
-        }
-    }
-
-    @media (max-width: 500px) {
-        margin-left: 5vw;
-
-        & h1 {
-            max-width: 60% !important; /* stylelint-disable-line */
-        }
-    }
+.hero {
+    background-position: left top;
 }
 
 .diamond {
