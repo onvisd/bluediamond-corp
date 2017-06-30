@@ -144,7 +144,7 @@ export default class BrandCategory extends Component {
 
         const otherBrandCategories = brand.fields.categories.filter((cat) =>
             cat.fields.name !== category.fields.name
-        ).slice(0, 2);
+        ).slice(0, 3);
 
         const moreProducts = brand.fields.moreProducts.filter((product) =>
             activeProduct.fields.name !== product.fields.name
