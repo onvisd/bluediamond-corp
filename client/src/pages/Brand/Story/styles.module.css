@@ -5,40 +5,14 @@
 .container {
     display: flex;
     position: relative;
-    height: 32rem;
-    padding: 12vh 0;
-    align-items: center;
+    height: 375px;
     background-color: var(--c--gray-dark);
     background-size: cover;
     background-position: center;
     overflow: hidden;
 
-    & p,
-    & h2 {
-        padding: 0 1rem;
-        max-width: 65%;
-    }
-
-    & h2 {
-        font-size: var(--t--size-m);
-
-        &.isLight {
-            color: var(--c--white);
-        }
-
-        &.isDark {
-            color: var(--c--black);
-        }
-    }
-
-    & p {
-        margin-bottom: 0;
-    }
-
     @media (--mq-gt-s) {
-        & h2 {
-            font-size: var(--t--size-l);
-        }
+        height: 512px;
     }
 }
 

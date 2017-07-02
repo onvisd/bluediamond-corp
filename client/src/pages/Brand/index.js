@@ -142,12 +142,9 @@ export default class Brand extends Component {
                         }}
                         cards={brand.fields.stories.map((story) => (
                             <Story
-                                tagline={story.fields.tagline}
-                                content={story.fields.content || null}
-                                image={story.fields.backgroundImage.fields.file.url}
-                                verticalAlign={story.fields.textAlignment}
-                                horizontalAlign={story.fields.textHorizontalAlignment}
-                                theme={story.fields.theme}
+                                desktopImage={story.fields.backgroundImage.fields.file.url}
+                                tabletImage={story.fields.tabletBackgroundImage.fields.file.url}
+                                mobileImage={story.fields.mobileBackgroundImage.fields.file.url}
                             />
                         ))}
                     />
