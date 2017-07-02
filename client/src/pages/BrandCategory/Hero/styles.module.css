@@ -161,12 +161,12 @@
     color: var(--c--white);
     font-size: var(--t--size-lm);
 
-    @media (--mq-gt-m) {
-        font-size: var(--t--size-xxl);
-    }
-
     @media (--mq-gt-s) {
         font-size: var(--t--size-l);
+    }
+
+    @media (--mq-gt-m) {
+        font-size: 3.5rem;
     }
 
     &.dark {
@@ -203,6 +203,6 @@
     }
 
     @media (--mq-gt-s) {
-        margin: 0;
+        margin: 0 0 0.5rem;
     }
 }
