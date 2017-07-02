@@ -80,6 +80,7 @@
     background-repeat: no-repeat;
     transition: transform 300ms ease;
     transform-origin: right;
+    pointer-events: none;
 
     @media (--mq-m) {
         background-size: 55%;
@@ -89,6 +90,7 @@
 }
 
 .tileLink {
+    position: relative;
     width: 100%;
     height: 100%;
     padding: 0 1.5rem 5rem;
