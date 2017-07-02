@@ -154,7 +154,12 @@ export default class BrandCategory extends Component {
             <section className={styles.content}>
                 <Title>{`${brand.fields.name} | ${category.fields.name}`}</Title>
                 <Hero brand={brand} category={category} product={activeProduct} />
-                <div className={styles.background}>
+                <div
+                    className={styles.background}
+                    style={{
+                        backgroundImage: `url(${brand.fields.backgroundTexture.fields.file.url})`
+                    }}
+                >
                     <div className={styles.accents}>
                         <div className={`${styles.accent} ${styles.accentLeft}`}>
                             <img src={category.fields.appetizerImages[0].fields.file.url} />
