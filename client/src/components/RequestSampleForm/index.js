@@ -33,11 +33,13 @@ export default class RequestSampleForm extends Component {
     submit(model) {
         axios.post('/api/email', {
             toEmail: this.props.emailTo,
-            fromEmail: model.email,
-            name: model.name,
-            companyName: model.companyName,
+            email: model.email,
+            firstName: model.firstName,
+            lastName: model.lastName,
+            company: model.company,
             address: model.address,
-            request: model.request
+            request: model.request,
+            template: 'FSRequestSample'
         })
         .then(() => {
             console.log('Request sent successfully!');
@@ -55,13 +57,22 @@ export default class RequestSampleForm extends Component {
                 onInvalid={this.disableSubmit}
             >
                 <div className={styles.container}>
-                    <Input
-                        classNames={{container: styles.field}}
-                        name="name"
-                        label="Your name"
-                        validations="minLength:1"
-                        required
-                    />
+                    <div className={styles.fieldPair}>
+                        <Input
+                            name="firstName"
+                            label="First Name"
+                            validations="minLength:1"
+                            classNames={{container: styles.input, label: styles.label}}
+                            required
+                        />
+                        <Input
+                            name="lastName"
+                            label="Last Name"
+                            validations="minLength:1"
+                            classNames={{container: styles.input, label: styles.label}}
+                            required
+                        />
+                    </div>
                     <Input
                         classNames={{container: styles.field}}
                         name="email"
@@ -72,7 +83,7 @@ export default class RequestSampleForm extends Component {
                     />
                     <Input
                         classNames={{container: styles.field}}
-                        name="companyName"
+                        name="company"
                         label="Company Name"
                         validations="minLength:1"
                         required

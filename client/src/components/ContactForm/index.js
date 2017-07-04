@@ -39,12 +39,22 @@ export default class ContactForm extends Component {
     submit(model) {
         axios.post('/api/email', {
             toEmail: this.props.emailTo,
-            fromEmail: model.email,
-            name: model.name,
-            company: model.name,
+            email: model.email,
+            firstName: model.firstName,
+            lastName: model.lastName,
+            streetAddress: model.streetAddress,
+            city: model.city,
+            state: model.state,
+            country: model.country,
+            postalCode: model.postalCode,
+            lotCode: model.lotCode,
+            bestBeforeDate: model.bestBeforeDate,
+            timeStamp: model.timeStamp,
+            upc: model.upc,
+            company: model.company,
             subject: model.subject,
             message: model.message,
-            subscribe: model.subscribe
+            template: 'Contact'
         })
         .then(() => {
             console.log('Message sent successfully!');

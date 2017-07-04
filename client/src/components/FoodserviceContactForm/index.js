@@ -39,12 +39,13 @@ export default class FoodserviceContact extends Component {
     submit(model) {
         axios.post('/api/email', {
             toEmail: this.props.emailTo,
-            fromEmail: model.email,
-            name: model.name,
-            company: model.name,
+            email: model.email,
+            firstName: model.firstName,
+            lastName: model.lastName,
+            company: model.company,
             subject: model.subject,
             message: model.message,
-            subscribe: model.subscribe
+            template: 'FSContact'
         })
         .then(() => {
             console.log('Message sent successfully!');
