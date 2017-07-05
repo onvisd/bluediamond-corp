@@ -1,0 +1,13 @@
+@import 'constants/color';
+@import 'constants/grid';
+@import 'constants/type';
+
+.pageContainer {
+    font-size: 0;
+
+    & iframe {
+        width: 100%;
+        height: 760px;
+        border: 0;
+    }
+}

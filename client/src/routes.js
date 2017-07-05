@@ -23,6 +23,7 @@ import CheckoutConfirmation from './pages/CheckoutConfirmation';
 import Account from './pages/Account';
 import Checkout from './pages/Checkout';
 import FAQs from './pages/FAQs';
+import ProductLocator from './pages/ProductLocator';
 
 export default (
     <Route path="/" component={Layout}>
@@ -43,6 +44,7 @@ export default (
         <Route path="/contact" component={Contact} />
         <Route path="/faqs" component={FAQs} />
         <Route path="/press" component={Press} />
+        <Route path="/product-locator" component={ProductLocator} />
         <Route path="/signin" component={Signin} />
         <Route path="/account/:view" component={Account} />
         <Route path="/404" component={NotFound} status={404} />

@@ -30,7 +30,7 @@ import TimelineToday from 'images/history/timeline-today.jpg';
 
 export default () => (
     <section className={styles.pageContainer}>
-        <Title>History Page</Title>
+        <Title>Our History</Title>
         <GenericHero
             headline="Our History"
             title="How We've Grown"
