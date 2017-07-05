@@ -22,6 +22,40 @@
     }
 }
 
+.filters,
+.products {
+    @media (--mq-s) {
+        width: 100%;
+        flex: 0 0 100% !important; /* stylelint-disable-line */
+    }
+}
+
+.filters {
+    @media (--mq-s) {
+        padding: 0 2%;
+    }
+}
+
+.products {
+    @media (--mq-s) {
+        & .search {
+            display: block;
+            margin: 0.5rem 0.5rem 1rem;
+            padding: 1rem 0;
+            border-top: 1px solid var(--c--gray-light);
+        }
+
+        & .search > div {
+            margin: 0;
+        }
+
+        & .searchSpacer {
+            height: 0.5rem;
+            overflow: hidden;
+        }
+    }
+}
+
 .refine {
     padding: 0.5rem 0;
     border-bottom: 1px solid var(--c--gray-light);

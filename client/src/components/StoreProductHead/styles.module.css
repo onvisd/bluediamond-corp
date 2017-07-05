@@ -5,8 +5,10 @@
 .container {
     @mixin container;
 
-    display: flex;
-    padding: 2rem 0 4rem;
+    @media (--mq-gt-s) {
+        display: flex;
+        padding: 2rem 0 4rem;
+    }
 }
 
 .images {
@@ -57,17 +59,26 @@
 }
 
 .formOptions {
-    display: flex;
+    @media (--mq-gt-s) {
+        display: flex;
+    }
 
     & .options {
-        padding-right: 2.75rem;
-        flex: 2;
+        @media (--mq-gt-s) {
+            padding-right: 2.75rem;
+            flex: 2;
+        }
     }
 }
 
 .formPurchase {
-    display: flex;
-    align-items: center;
+    margin: 0 0 1rem;
+
+    @media (--mq-gt-s) {
+        display: flex;
+        margin: 0;
+        align-items: center;
+    }
 
     & .price {
         margin: 1.5rem 0;

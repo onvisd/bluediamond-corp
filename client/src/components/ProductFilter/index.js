@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import classnames from 'classnames';
 
 import styles from './styles.module.css';
 
@@ -6,7 +7,8 @@ export default class ProductFilter extends Component {
     state = {
         visibleOptionCount: 3,
         totalOptions: 0,
-        clicked: false
+        clicked: false,
+        expanded: false
     };
 
     static propTypes = {
@@ -14,7 +16,8 @@ export default class ProductFilter extends Component {
         filter: PropTypes.string.isRequired,
         query: PropTypes.string,
         products: PropTypes.array.isRequired,
-        onClick: PropTypes.func.isRequired
+        onClick: PropTypes.func.isRequired,
+        dropdown: PropTypes.bool
     }
 
     compressArray = (arr) => {
@@ -128,6 +131,13 @@ export default class ProductFilter extends Component {
         }));
     }
 
+    toggleExpand = (e) => {
+        if(!e.target.closest('label')) {
+            e.preventDefault();
+            this.setState({expanded: !this.state.expanded});
+        }
+    }
+
     componentWillMount() {
         this.setState(() => ({
             totalOptions: this.options().length
@@ -135,14 +145,22 @@ export default class ProductFilter extends Component {
     }
 
     render() {
-        const {visibleOptionCount} = this.state;
-        const {title, onClick} = this.props;
-        const options = this.options().slice(0, visibleOptionCount);
+        const {visibleOptionCount, expanded} = this.state;
+        const {title, onClick, dropdown} = this.props;
+        const options = this.options();
 
         return (
-            <div className={styles.container}>
-                <p><strong>{title}</strong></p>
-                {options.map((option) => (
+            <div
+                className={classnames(
+                    styles.container, {
+                        [styles.expanded]: expanded,
+                        [styles.dropdown]: dropdown
+                    }
+                )}
+                onClick={dropdown ? this.toggleExpand : null}
+            >
+                <p className={styles.title}><strong>{title}</strong></p>
+                {options.slice(0, dropdown ? options.length : visibleOptionCount).map((option) => (
                     <label key={`filter${option.value}`} htmlFor={option.value}>
                         <input
                             onChange={onClick}
@@ -153,7 +171,7 @@ export default class ProductFilter extends Component {
                         {option.value} ({option.count})
                     </label>
                 ))}
-                {this.renderLoadMore()}
+                {!dropdown && this.renderLoadMore()}
             </div>
         );
     }

@@ -19,7 +19,10 @@ const escapeRegEx = (str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, 
 
 @preload(({dispatch}) => dispatch(getStoreProducts()))
 @connect(
-    (state) => ({...storeConnector(state.store)}),
+    (state) => ({
+        responsive: state.responsive,
+        ...storeConnector(state.store)
+    }),
     {getStoreProducts}
 )
 export default class Store extends Component {
@@ -196,7 +199,7 @@ export default class Store extends Component {
 
     render() {
         const {totalCardCount, visibleCardCount} = this.state;
-        const {products} = this.props;
+        const {products, responsive} = this.props;
 
         return (
             <section className="content">
@@ -209,13 +212,22 @@ export default class Store extends Component {
                 />
                 <div className={styles.container}>
                     <div className="l--row">
-                        <div className="l--col-3">
+                        <div className={`l--col-3 ${styles.filters}`}>
                             <p className={`t--type-incidental ${styles.refine}`}>Refine by:</p>
                             <ProductFilter
-                                title="Product"
+                                title="Gifts"
+                                products={products}
+                                filter="collections"
+                                query="values"
+                                onClick={this.handleFilter('categories')}
+                                dropdown={responsive.small}
+                            />
+                            <ProductFilter
+                                title="Products"
                                 products={products}
                                 filter="productType"
                                 onClick={this.handleFilter('brands')}
+                                dropdown={responsive.small}
                             />
                             <ProductFilter
                                 title="Flavor"
@@ -223,6 +235,7 @@ export default class Store extends Component {
                                 filter="tags"
                                 query="flavor"
                                 onClick={this.handleFilter('types')}
+                                dropdown={responsive.small}
                             />
                             <ProductFilter
                                 title="Size"
@@ -230,17 +243,11 @@ export default class Store extends Component {
                                 filter="options"
                                 query="values"
                                 onClick={this.handleFilter('sizes')}
-                            />
-                            <ProductFilter
-                                title="Category"
-                                products={products}
-                                filter="collections"
-                                query="values"
-                                onClick={this.handleFilter('categories')}
+                                dropdown={responsive.small}
                             />
                         </div>
-                        <div className="l--col-auto">
-                            <div className="l--row">
+                        <div className={`l--col-auto ${styles.products}`}>
+                            <div className={`l--row ${styles.search}`}>
                                 <div className="l--col-5">
                                     <div className="form--select noMargin">
                                         <select
@@ -256,7 +263,7 @@ export default class Store extends Component {
                                         </select>
                                     </div>
                                 </div>
-                                <div className="l--col-2">
+                                <div className={`l--col-2 ${styles.searchSpacer}`}>
                                     &nbsp;
                                 </div>
                                 <div className="l--col-5">

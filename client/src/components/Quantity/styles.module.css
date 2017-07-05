@@ -1,5 +1,6 @@
 @import 'constants/color';
 @import 'constants/type';
+@import 'constants/grid';
 
 .container {
     display: flex;
@@ -16,6 +17,11 @@
     align-items: center;
     border: 1px solid var(--c--gray-light);
     border-radius: 3px;
+
+    @media (--mq-s) {
+        width: auto;
+        flex: auto;
+    }
 }
 
 .quantity {
@@ -44,6 +50,10 @@
     width: 18px;
     height: 1.1rem;
     overflow: hidden;
+
+    @media (--mq-s) {
+        display: none;
+    }
 
     &::after {
         content: '';

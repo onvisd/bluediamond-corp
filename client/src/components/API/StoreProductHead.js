@@ -33,8 +33,8 @@ export default class StoreProductHead extends Component {
                 })
             }).isRequired,
             smartLabel: PropTypes.shape({
-                warnings: PropTypes.string.isRequired,
-                rawIngredients: PropTypes.string.isRequired,
+                warnings: PropTypes.string,
+                rawIngredients: PropTypes.string,
                 nutritionSection: PropTypes.shape({
                     nutritionPanels: PropTypes.arrayOf(PropTypes.shape({
                         name: PropTypes.string,
@@ -77,6 +77,8 @@ export default class StoreProductHead extends Component {
 
     render() {
         const {data} = this.props;
+        const smartLabel = data.smartLabel;
+        const ingredients = smartLabel ? smartLabel.rawIngredients : null;
 
         return (
             <StorePrdctHeadCmpnt
@@ -87,8 +89,8 @@ export default class StoreProductHead extends Component {
                 images={data.images.edges}
                 image={data.images.edges[0].node.src}
                 description={data.descriptionHtml}
-                nutrition={data.smartLabel}
-                ingredients={data.smartLabel.rawIngredients}
+                nutrition={smartLabel && smartLabel}
+                ingredients={ingredients}
                 reviews={data.reviews}
             />
         );

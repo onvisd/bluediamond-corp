@@ -12,6 +12,10 @@
     padding: 1rem 0 3.5rem;
     justify-content: flex-start;
     flex-direction: row;
+
+    @media (--mq-s) {
+        flex-wrap: wrap;
+    }
 }
 
 .reviews {
@@ -23,10 +27,18 @@
     padding: 2rem 0 1rem;
     justify-content: flex-start;
     flex-direction: row;
+
+    @media (--mq-s) {
+        flex-wrap: wrap;
+    }
 }
 
 .back {
-    margin-bottom: -2rem;
+    margin: 5rem 0 -2rem;
+
+    @media (--mq-gt-s) {
+        margin: 0 0 -2rem;
+    }
 }
 
 .backLink {

@@ -112,7 +112,7 @@ export default class ProductAccordion extends Component {
     }
 
     render() {
-        const {ingredients} = this.props;
+        const {nutrition, ingredients} = this.props;
 
         const nutritionClass = `${
             styles.accordionItem
@@ -124,7 +124,7 @@ export default class ProductAccordion extends Component {
 
         return (
             <div className={styles.accordion}>
-                <div className={nutritionClass}>
+                {nutrition && <div className={nutritionClass}>
                     <div
                         onClick={() => this.handleClick('nutrition')}
                         className={styles.accordionTitle}
@@ -135,8 +135,8 @@ export default class ProductAccordion extends Component {
                     <div className={styles.accordionContent}>
                         {this.renderNutrients()}
                     </div>
-                </div>
-                <div className={ingredientClass}>
+                </div>}
+                {ingredients && <div className={ingredientClass}>
                     <div
                         onClick={() => this.handleClick('ingredient')}
                         className={styles.accordionTitle}
@@ -147,10 +147,10 @@ export default class ProductAccordion extends Component {
                     <div className={styles.accordionContent}>
                         <p>{ingredients}</p>
                     </div>
-                </div>
-                <div className={styles.smartLabelLogo}>
+                </div>}
+                {nutrition && <div className={styles.smartLabelLogo}>
                     <img src={SmartLabel} />
-                </div>
+                </div>}
             </div>
         );
     }
