@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import ButtonDropdown from 'components/ButtonDropdown';
 import styles from './styles.module.css';
 
-const Hero = ({brand, category, product}) => (
+const Hero = ({brand, category, product, shopLinks}) => (
     <div>
         <div className={styles.hero}>
             <div
@@ -35,11 +35,7 @@ const Hero = ({brand, category, product}) => (
                             {product.fields.name}
                         </h1>
                         <ButtonDropdown
-                            items={[
-                                {slug: '/store', name: 'Blue Diamond Store'},
-                                {slug: 'https://www.amazon.com', name: 'Amazon.com', external: true},
-                                {slug: 'https://www.jet.com', name: 'Jet.com', external: true}
-                            ]}
+                            items={shopLinks}
                             theme={brand.fields.themeColor}
                             layout="wide"
                             dropUp
@@ -56,7 +52,8 @@ const Hero = ({brand, category, product}) => (
 Hero.propTypes = {
     brand: PropTypes.object.isRequired,
     category: PropTypes.object.isRequired,
-    product: PropTypes.object.isRequired
+    product: PropTypes.object.isRequired,
+    shopLinks: PropTypes.array.isRequired
 };
 
 export default Hero;

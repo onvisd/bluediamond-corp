@@ -150,10 +150,34 @@ export default class BrandCategory extends Component {
             activeProduct.fields.name !== product.fields.name
         ).slice(0, 6);
 
+        const shopLinks = [
+            {
+                slug: activeProduct.fields.shopifyLink || '/store',
+                name: 'Blue Diamond Store'
+            }
+        ];
+
+        if(activeProduct.fields.otherStoreLinks) {
+            activeProduct.fields.otherStoreLinks.forEach((link) => {
+                const name = link.match(/https?:\/\/(?:www\.)([^\/]+)\//i)[1];
+
+                shopLinks.push({
+                    slug: link,
+                    name: `${name[0].toUpperCase()}${name.slice(1)}`,
+                    external: true
+                });
+            });
+        }
+
         return (
             <section className={styles.content}>
                 <Title>{`${brand.fields.name} | ${category.fields.name}`}</Title>
-                <Hero brand={brand} category={category} product={activeProduct} />
+                <Hero
+                    brand={brand}
+                    category={category}
+                    product={activeProduct}
+                    shopLinks={shopLinks}
+                />
                 <div
                     className={styles.background}
                     style={{
@@ -174,6 +198,7 @@ export default class BrandCategory extends Component {
                         products={categoryProducts}
                         activeProduct={activeProduct}
                         setActiveProduct={this.setActiveProduct}
+                        shopLinks={shopLinks}
                     />
                     <MoreFlavors
                         brand={brand}

@@ -15,7 +15,8 @@ export default class ProductSection extends Component {
         category: PropTypes.object.isRequired,
         products: PropTypes.array.isRequired,
         activeProduct: PropTypes.object.isRequired,
-        setActiveProduct: PropTypes.func.isRequired
+        setActiveProduct: PropTypes.func.isRequired,
+        shopLinks: PropTypes.array.isRequired
     }
 
     state = {
@@ -30,7 +31,7 @@ export default class ProductSection extends Component {
 
     render() {
         const {isOpen} = this.state;
-        const {brand, category, products, activeProduct, setActiveProduct} = this.props;
+        const {brand, products, activeProduct, setActiveProduct, shopLinks} = this.props;
 
         return (
             <div className={styles.container}>
@@ -64,11 +65,7 @@ export default class ProductSection extends Component {
                             Find Product
                         </Button>
                         <ButtonDropdown
-                            items={[
-                                {slug: '/store', name: 'Blue Diamond Store'},
-                                {slug: 'https://www.amazon.com', name: 'Amazon.com', external: true},
-                                {slug: 'https://www.jet.com', name: 'Jet.com', external: true}
-                            ]}
+                            items={shopLinks}
                             theme={brand.fields.themeColor}
                             layout="wide"
                         >
