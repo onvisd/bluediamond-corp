@@ -5,6 +5,8 @@ import Button from 'components/Button';
 import ButtonDropdown from 'components/ButtonDropdown';
 import ProductPanel from 'components/ProductPanel';
 import ProductAccordion from 'components/ProductAccordion';
+import preventOrphan from 'tools/preventOrphan';
+
 import styles from './styles.module.css';
 
 export default class ProductSection extends Component {
@@ -55,7 +57,7 @@ export default class ProductSection extends Component {
                 </div>
                 <div className={styles.innerContainer}>
                     <p className={styles.description}>
-                        {activeProduct.fields.description}
+                        {preventOrphan(activeProduct.fields.description)}
                     </p>
                     <div className={styles.actions}>
                         <Button theme="white" href="/product-locator">
