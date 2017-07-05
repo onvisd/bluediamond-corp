@@ -84,3 +84,31 @@
         height: 20px;
     }
 }
+
+.nutritionPanel {
+    & h5 {
+        width: 100%;
+        margin: 0 auto 0.5rem;
+    }
+}
+
+.nutrition {
+    width: 100%;
+    margin: 0 auto 2rem;
+
+    & .divider {
+        background: var(--c--black);
+        font-size: 0;
+        line-height: 3px;
+    }
+
+    & .sublist {
+        & td:first-child {
+            padding-left: 1rem;
+        }
+    }
+
+    & td {
+        border-bottom: 1px solid var(--c--black);
+    }
+}
