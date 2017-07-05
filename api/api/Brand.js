@@ -55,7 +55,7 @@ export default (api, {contentful}) => {
         .then((entries) => getRandomEntries(6, entries));
 
     const getSmartLabel = (smartLabelId) =>
-        axios.get(`https://smartlabel-api.labelinsight.com/api/v2/${smartLabelId}`)
+        axios.get(`https://smartlabel-api.labelinsight.com/api/v3/${smartLabelId}`)
         .then((response) => response.data)
         .catch(() => 'No Smart Label data found');
 
