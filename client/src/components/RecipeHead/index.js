@@ -41,7 +41,8 @@ export default class RecipeHead extends Component {
             heroImage,
             nutrition,
             difficulty,
-            cookTime
+            cookTime,
+            consumerSymbols
         } = this.props;
 
         return (
@@ -53,7 +54,7 @@ export default class RecipeHead extends Component {
                     <div className={styles.content}>
                         <div className={styles.head}>
                             <h2>{title}</h2>
-                            {this.renderSymbols()}
+                            {consumerSymbols && this.renderSymbols()}
                         </div>
                         <div className={styles.foot}>
                             <div className={styles.footContent}>
@@ -72,10 +73,10 @@ export default class RecipeHead extends Component {
                                     </div>
                                 </div>
                                 <div className={styles.nutritionFacts}>
-                                    <NutritionFacts
+                                    {nutrition && <NutritionFacts
                                         nutrition={nutrition}
                                         pageType="recipe"
-                                    />
+                                    />}
                                 </div>
                                 <div className={styles.share}>
                                     <span>Share this recipe:</span>
