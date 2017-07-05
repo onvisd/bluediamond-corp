@@ -188,6 +188,8 @@
 }
 
 .facts {
+    padding: 5rem 0 6rem;
+    min-height: 51rem;
     composes: section;
 
     & h2,

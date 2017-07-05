@@ -344,7 +344,7 @@
     overflow: hidden;
 
     & img {
-        top: -20%;
+        top: -4rem;
         max-width: none;
     }
 
