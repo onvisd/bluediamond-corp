@@ -33,7 +33,11 @@
 }
 
 .hero {
-    background-position: left top;
+    @media (--mq-s) {
+        & img {
+            margin-left: 15rem;
+        }
+    }
 }
 
 .diamond {

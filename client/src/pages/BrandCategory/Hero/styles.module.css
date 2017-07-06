@@ -47,14 +47,18 @@
 }
 
 .background {
-    background-size: cover;
-    background-position: center;
+    /* react-parallax sets position: relative, which we don't want here */
+    position: absolute !important; /* stylelint-disable-line declaration-no-important */
+    top: 0;
+    width: 100vw;
+    height: 100%;
+    overflow: hidden;
     filter: blur(4px);
     transform: scale(1.02);
 
-    @media (--mq-gt-s) {
-        background-size: 100% auto;
-        background-position: top;
+    & img {
+        width: 100%; /* this will be overridden by react-parallax */
+        max-width: none;
     }
 }
 

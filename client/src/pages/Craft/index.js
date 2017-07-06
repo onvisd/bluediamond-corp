@@ -1,8 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
-import {ViewPager, Frame, Track, View} from 'react-view-pager';
+import {ViewPager, Frame, Track as PagerTrack, View} from 'react-view-pager';
 import classnames from 'classnames';
+import {Track, TrackDocument} from 'react-track';
+import {tween} from 'react-imation';
+import {topTop, calculateScrollY} from 'react-track/tracking-formulas';
+import {translate3d} from 'react-imation/tween-value-factories';
+import {Parallax} from 'react-parallax';
 
 import {connector, getCraft} from 'state/craft';
 import {parseModel} from 'tools/parseApi';
@@ -111,6 +116,17 @@ export default class Craft extends Component {
             this.setState({activeHotspot: null});
     }
 
+    trackDocument(children) {
+        return (
+            <TrackDocument formulas={[
+                calculateScrollY, topTop
+            ]}>
+                {(scrollY, topTop) => // eslint-disable-line no-shadow
+                    children(scrollY, topTop)}
+            </TrackDocument>
+        );
+    }
+
     render() {
         const {activeTab} = this.state;
         const {craft} = this.props;
@@ -133,7 +149,7 @@ export default class Craft extends Component {
             }
         ];
 
-        return (
+        return this.trackDocument((scrollY, topTop) => ( // eslint-disable-line no-shadow
             <section className="content">
                 <Title>Our Craft</Title>
                 <GenericHero
@@ -143,43 +159,92 @@ export default class Craft extends Component {
                     verticalAlign="Bottom"
                     backgroundImage={craftFields.heroImage.file.url}
                 />
-                <div
+                <Track
                     className={styles.details}
                     style={{
                         backgroundImage: `url(${
                             craftFields.detailsBackgroundImage.file.url
                         })`
                     }}
+                    formulas={[topTop]}
                 >
-                    <div className={styles.detailsOverlay} />
-                    <div className={styles.detailsContainer}>
-                        <div>
-                            <BDLogo />
-                            <h2>{craftFields.detailsHeadline}</h2>
-                        </div>
-                        <ul className={styles.detailColumns}>
-                            <li className={styles.detail}>
-                                <GrowersHands />
-                                <h3>{craftFields.detailOneTitle}</h3>
-                                <p>{craftFields.detailOneText}</p>
-                            </li>
-                            <li className={styles.detail}>
-                                <ProductManufacturing />
-                                <h3>{craftFields.detailTwoTitle}</h3>
-                                <p>{craftFields.detailTwoText}</p>
-                            </li>
-                            <li className={styles.detail}>
-                                <QualityAssurance />
-                                <h3>{craftFields.detailThreeTitle}</h3>
-                                <p>{craftFields.detailThreeText}</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                    {(Div, posTopTop) => (
+                        <Div>
+                            <div className={styles.detailsOverlay} />
+                            <div className={styles.detailsContainer}>
+                                <div>
+                                    <BDLogo />
+                                    <h2>{craftFields.detailsHeadline}</h2>
+                                </div>
+                                <ul className={styles.detailColumns}>
+                                    <li
+                                        className={styles.detail}
+                                        style={
+                                            tween(scrollY, [
+                                                [posTopTop - 200, {
+                                                    opacity: 0,
+                                                    transform: translate3d(0, 150, 0)
+                                                }],
+                                                [posTopTop, {
+                                                    opacity: 1,
+                                                    transform: translate3d(0, 0, 0)
+                                                }]
+                                            ])
+                                        }
+                                    >
+                                        <GrowersHands />
+                                        <h3>{craftFields.detailOneTitle}</h3>
+                                        <p>{craftFields.detailOneText}</p>
+                                    </li>
+                                    <li
+                                        className={styles.detail}
+                                        style={
+                                            tween(scrollY, [
+                                                [posTopTop - 150, {
+                                                    opacity: 0,
+                                                    transform: translate3d(0, 150, 0)
+                                                }],
+                                                [posTopTop, {
+                                                    opacity: 1,
+                                                    transform: translate3d(0, 0, 0)
+                                                }]
+                                            ])
+                                        }
+                                    >
+                                        <ProductManufacturing />
+                                        <h3>{craftFields.detailTwoTitle}</h3>
+                                        <p>{craftFields.detailTwoText}</p>
+                                    </li>
+                                    <li
+                                        className={styles.detail}
+                                        style={
+                                            tween(scrollY, [
+                                                [posTopTop - 100, {
+                                                    opacity: 0,
+                                                    transform: translate3d(0, 150, 0)
+                                                }],
+                                                [posTopTop, {
+                                                    opacity: 1,
+                                                    transform: translate3d(0, 0, 0)
+                                                }]
+                                            ])
+                                        }
+                                    >
+                                        <QualityAssurance />
+                                        <h3>{craftFields.detailThreeTitle}</h3>
+                                        <p>{craftFields.detailThreeText}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </Div>
+                    )}
+                </Track>
                 <div
                     className={styles.innovation}
                     style={{
-                        backgroundImage: `url(${craftFields.innovationBackgroundImage.file.url})`
+                        backgroundImage: `url(${
+                            craftFields.innovationBackgroundImage.file.url
+                        })`
                     }}
                 >
                     <div className={styles.innovationOverlay} />
@@ -192,10 +257,12 @@ export default class Craft extends Component {
                 </div>
                 <div
                     className={styles.facts}
-                    style={{
-                        backgroundImage: `url(${craftFields.factsBackgroundImage.file.url})`
-                    }}
                 >
+                    <Parallax
+                        className={styles.background}
+                        bgImage={craftFields.factsBackgroundImage.file.url}
+                        strength={100}
+                    />
                     <div className={styles.container} onClick={this.hideHotspots}>
                         <h2>{craftFields.factsTitle}</h2>
                         <p className={styles.factsHeadline}>{craftFields.factsHeadline}</p>
@@ -226,7 +293,7 @@ export default class Craft extends Component {
                         </div>
                         <ViewPager className={styles.hotspotsMobile}>
                             <Frame>
-                                <Track
+                                <PagerTrack
                                     viewsToShow={1}
                                     infinite
                                     onViewChange={this.handleSwipe}
@@ -243,7 +310,7 @@ export default class Craft extends Component {
                                             </div>
                                         </View>
                                     ))}
-                                </Track>
+                                </PagerTrack>
                             </Frame>
                         </ViewPager>
                         <div className={styles.tabs}>
@@ -275,6 +342,6 @@ export default class Craft extends Component {
                     />
                 </RelatedPages>
             </section>
-        );
+        ));
     }
 }

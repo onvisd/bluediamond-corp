@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import classnames from 'classnames';
+import {Parallax} from 'react-parallax';
 
 import ButtonDropdown from 'components/ButtonDropdown';
 import styles from './styles.module.css';
@@ -7,9 +8,10 @@ import styles from './styles.module.css';
 const Hero = ({brand, category, product, shopLinks}) => (
     <div>
         <div className={styles.hero}>
-            <div
+            <Parallax
                 className={styles.background}
-                style={{backgroundImage: `url(${category.fields.heroBackground.fields.file.url})`}}
+                bgImage={category.fields.heroBackground.fields.file.url}
+                strength={200}
             />
             <div
                 className={styles.shelf}

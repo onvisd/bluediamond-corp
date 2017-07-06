@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import classNames from 'classnames';
+import {Parallax} from 'react-parallax';
 
 import Button from '../Button';
 import styles from './styles.module.css';
@@ -44,8 +45,12 @@ export default class GenericHero extends Component {
                     verticalAlign ? styles[alignClass] : styles.alignBottom,
                     className
                 )}
-                style={{backgroundImage: `url(${backgroundImage})`}}
             >
+                <Parallax
+                    className={styles.background}
+                    bgImage={backgroundImage}
+                    strength={200}
+                />
                 <div className={`${styles.innerContainer} ${styles[color]}`}>
                     {headline && <h3>{headline}</h3>}
                     <h1 className="t--size-xxl">{title}</h1>

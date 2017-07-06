@@ -2,6 +2,10 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import {Parallax} from 'react-parallax';
+import {Track, TrackDocument} from 'react-track';
+import {tween} from 'react-imation';
+import {topTop, calculateScrollY} from 'react-track/tracking-formulas';
+import {translate3d, percent} from 'react-imation/tween-value-factories';
 
 import {connector, getHome} from 'state/home';
 import {parseModel} from 'tools/parseApi';
@@ -77,11 +81,22 @@ export default class Home extends Component {
         })
     }
 
+    trackDocument(children) {
+        return (
+            <TrackDocument formulas={[
+                calculateScrollY, topTop
+            ]}>
+                {(scrollY, topTop) => // eslint-disable-line no-shadow
+                    children(scrollY, topTop)}
+            </TrackDocument>
+        );
+    }
+
     render() {
         const {home} = this.props;
         const homeFields = parseModel(home)[0].fields;
 
-        return (
+        return this.trackDocument((scrollY, topTop) => ( // eslint-disable-line no-shadow
             <section className={styles.container}>
                 <Title>From Our Hearts to Your Hands</Title>
                 <div
@@ -126,43 +141,83 @@ export default class Home extends Component {
                     </div>
                 </div>
                 <div className={styles.corporate}>
-                    <div className={styles.craft}>
-                        <div className={styles.frame}>
+                    <Track
+                        className={styles.craft}
+                        formulas={[topTop]}
+                    >
+                    {(Div, posTopTop) => (
+                        <Div>
                             <div
-                                className={styles.image}
-                                style={{backgroundImage: `url(${homeFields.craftImage.file.url})`}}
-                            />
-                        </div>
-                        <div className={styles.corpContent}>
-                            <div>
-                                <h1>{homeFields.craftHeadline}</h1>
-                                <p>{preventOrphan(homeFields.craftText)}</p>
-                                <Button href="/craft" theme="yellow">
-                                    Our Craft
-                                </Button>
+                                className={styles.frame}
+                                style={
+                                    tween(scrollY, [
+                                        [posTopTop * 0.1, {
+                                            transform: translate3d(percent(-15), 70, 0)
+                                        }],
+                                        [posTopTop - 200, {
+                                            transform: translate3d(percent(-15), 0, 0)
+                                        }]
+                                    ])
+                                }
+                            >
+                                <div
+                                    className={styles.image}
+                                    style={{
+                                        backgroundImage: `url(${homeFields.craftImage.file.url})`
+                                    }}
+                                />
                             </div>
-                        </div>
-                    </div>
-                    <div className={styles.history}>
-                        <div className={styles.frame}>
+                            <div className={styles.corpContent}>
+                                <div>
+                                    <h1>{homeFields.craftHeadline}</h1>
+                                    <p>{preventOrphan(homeFields.craftText)}</p>
+                                    <Button href="/craft" theme="yellow">
+                                        Our Craft
+                                    </Button>
+                                </div>
+                            </div>
+                        </Div>
+                    )}
+                    </Track>
+                    <Track
+                        className={styles.history}
+                        formulas={[topTop]}
+                    >
+                    {(Div, posTopTop) => (
+                        <Div>
                             <div
-                                className={styles.image}
-                                style={{
-                                    backgroundImage:
-                                        `url(${homeFields.historyImage.file.url})`
-                                }}
-                            />
-                        </div>
-                        <div className={styles.corpContent}>
-                            <div>
-                                <h1>{homeFields.historyHeadline}</h1>
-                                <p>{preventOrphan(homeFields.historyText)}</p>
-                                <Button href="/history" theme="green">
-                                    Our History
-                                </Button>
+                                className={styles.frame}
+                                style={
+                                    tween(scrollY, [
+                                        [posTopTop * 0.2, {
+                                            transform: translate3d(percent(15), 50, 0)
+                                        }],
+                                        [posTopTop - 200, {
+                                            transform: translate3d(percent(15), -20, 0)
+                                        }]
+                                    ])
+                                }
+                            >
+                                <div
+                                    className={styles.image}
+                                    style={{
+                                        backgroundImage:
+                                            `url(${homeFields.historyImage.file.url})`
+                                    }}
+                                />
                             </div>
-                        </div>
-                    </div>
+                            <div className={styles.corpContent}>
+                                <div>
+                                    <h1>{homeFields.historyHeadline}</h1>
+                                    <p>{preventOrphan(homeFields.historyText)}</p>
+                                    <Button href="/history" theme="green">
+                                        Our History
+                                    </Button>
+                                </div>
+                            </div>
+                        </Div>
+                    )}
+                    </Track>
                 </div>
                 <Parallax
                     className={styles.coop}
@@ -177,6 +232,6 @@ export default class Home extends Component {
                     </div>
                 </Parallax>
             </section>
-        );
+        ));
     }
 }

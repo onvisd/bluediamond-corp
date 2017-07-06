@@ -18,6 +18,21 @@
     }
 }
 
+.background {
+    /* react-parallax sets position: relative, which we don't want here */
+    position: absolute !important; /* stylelint-disable-line declaration-no-important */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    overflow: hidden;
+
+    & img {
+        width: 100%; /* this will be overridden by react-parallax */
+        max-width: none;
+    }
+}
+
 .alignTop {
     align-items: flex-start;
 
