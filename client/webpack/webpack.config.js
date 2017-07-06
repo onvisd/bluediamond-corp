@@ -39,7 +39,8 @@ const config = {
             components: path.resolve(__dirname, '../src/components/'),
             state: path.resolve(__dirname, '../src/state/'),
             tools: path.resolve(__dirname, '../src/tools'),
-            images: path.resolve(__dirname, '../assets/images/')
+            images: path.resolve(__dirname, '../assets/images/'),
+            fonts: path.resolve(__dirname, '../assets/fonts/')
         }
     },
 
@@ -93,7 +94,7 @@ const config = {
                 ]
             },
             {
-                test: /\.(jpg|png)$/,
+                test: /\.(jpg|png|woff|woff2|eot)$/,
                 use: [
                     {
                         loader: 'url-loader',

@@ -24,7 +24,7 @@
 
     & h1 {
         margin: 0 auto 2rem;
-        max-width: 24vw;
+        max-width: 25vw;
 
         @media (--mq-s) {
             max-width: 100%;

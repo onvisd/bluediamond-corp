@@ -41,11 +41,13 @@
         background: rgba(0, 0, 0, 1);
 
         & img {
+            top: 0;
             opacity: 0.65;
         }
     }
 
     & img {
+        top: -5rem;
         max-width: none;
     }
 }
@@ -55,7 +57,7 @@
     margin: 0 auto;
     padding: 0 1rem;
     z-index: 10;
-    max-width: 67rem;
+    max-width: 77rem;
     color: var(--c--white);
     text-align: center;
 
@@ -72,7 +74,7 @@
         }
 
         @media (--mq-gt-m) {
-            max-width: 500px;
+            max-width: 524px;
         }
     }
 
@@ -328,7 +330,7 @@
 
         & h1,
         & p {
-            max-width: 24vw;
+            max-width: 25vw;
         }
     }
 }

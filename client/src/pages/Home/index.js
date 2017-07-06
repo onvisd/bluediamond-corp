@@ -135,7 +135,7 @@ export default class Home extends Component {
                         </div>
                         <div className={styles.corpContent}>
                             <div>
-                                <h1>{preventOrphan(homeFields.craftHeadline)}</h1>
+                                <h1>{homeFields.craftHeadline}</h1>
                                 <p>{preventOrphan(homeFields.craftText)}</p>
                                 <Button href="/craft" theme="yellow">
                                     Our Craft
@@ -155,7 +155,7 @@ export default class Home extends Component {
                         </div>
                         <div className={styles.corpContent}>
                             <div>
-                                <h1>{preventOrphan(homeFields.historyHeadline)}</h1>
+                                <h1>{homeFields.historyHeadline}</h1>
                                 <p>{preventOrphan(homeFields.historyText)}</p>
                                 <Button href="/history" theme="green">
                                     Our History
