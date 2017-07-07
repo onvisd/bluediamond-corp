@@ -1,3 +1,6 @@
+# app-generated data files
+grower_ids.cache
+
 # environment-specific file
 .env
 

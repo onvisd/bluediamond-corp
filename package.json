@@ -78,6 +78,7 @@
   "license": "Proprietary",
   "dependencies": {
     "apollo-client": "^1.5.0",
+    "async": "^2.5.0",
     "autoprefixer": "^6.6.1",
     "aws-sdk": "^2.40.0",
     "axios": "^0.15.3",
