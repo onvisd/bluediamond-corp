@@ -27,9 +27,8 @@ const escapeRegEx = (str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, 
 )
 export default class Store extends Component {
     state = {
-        totalCardCount: 0,
-        visibleCardCount: 15,
-        perPage: 15,
+        visibleCardCount: 16,
+        perPage: 16,
         filter: {
             brands: [],
             types: [],
@@ -170,36 +169,16 @@ export default class Store extends Component {
         };
     };
 
-    renderProductCards = () => {
-        const {products} = this.props;
-        const {visibleCardCount, filter, sort, search} = this.state;
+    render() {
+        const {totalCardCount, visibleCardCount, filter, search, sort} = this.state;
+        const {products, responsive} = this.props;
 
-        let cards = products.slice(0, visibleCardCount);
+        let cards = products;
 
         if(filter || search)
             cards = cards.filter(this.filterCards);
         if(sort)
             cards = cards.sort(this.sortCards(sort));
-
-        return cards.map((card) => (
-            <StoreProductCard
-                data={card.node}
-                key={`card${card.node.id}`}
-            />
-        ));
-    }
-
-    componentWillMount() {
-        const {products} = this.props;
-
-        this.setState(() => ({
-            totalCardCount: products.length
-        }));
-    }
-
-    render() {
-        const {totalCardCount, visibleCardCount} = this.state;
-        const {products, responsive} = this.props;
 
         return (
             <section className="content">
@@ -252,8 +231,8 @@ export default class Store extends Component {
                                     <div className="form--select noMargin">
                                         <select
                                             onChange={this.handleSort}
-                                            ref={(sort) => {
-                                                this.sort = sort;
+                                            ref={(select) => {
+                                                this.sort = select;
                                             }}
                                             defaultValue=""
                                         >
@@ -269,8 +248,8 @@ export default class Store extends Component {
                                 <div className="l--col-5">
                                     <input
                                         onChange={this.handleSearch}
-                                        ref={(search) => {
-                                            this.search = search;
+                                        ref={(input) => {
+                                            this.search = input;
                                         }}
                                         type="text"
                                         placeholder="Search"
@@ -280,16 +259,23 @@ export default class Store extends Component {
                             <div className="l--row">
                                 <div className="l--col-12 t--align-center">
                                     <h3 className={styles.title}>
-                                        All Products
-                                        <small> ({totalCardCount})</small>
+                                        {cards.length === products.length
+                                            ? 'All Products'
+                                            : 'Matching Products'}
+                                        <small> ({cards.length})</small>
                                     </h3>
                                 </div>
                             </div>
                             <div className={styles.cards}>
-                                {this.renderProductCards()}
+                                {cards.slice(0, visibleCardCount).map((card) => (
+                                    <StoreProductCard
+                                        data={card.node}
+                                        key={`card${card.node.id}`}
+                                    />
+                                ))}
                             </div>
                             <div className={classnames({
-                                isHidden: visibleCardCount >= totalCardCount
+                                isHidden: visibleCardCount >= cards.length
                             })}>
                                 <div className="l--row l--mar-top-m l--mar-btm-m">
                                     <div className="l--col-12 t--align-center">
