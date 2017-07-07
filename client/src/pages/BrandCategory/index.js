@@ -159,7 +159,7 @@ export default class BrandCategory extends Component {
 
         if(activeProduct.fields.otherStoreLinks) {
             activeProduct.fields.otherStoreLinks.forEach((link) => {
-                const name = link.match(/https?:\/\/(?:www\.)([^\/]+)\//i)[1];
+                const name = link.match(/https?:\/\/(?:www\.)?([^\/]+)\//i)[1];
 
                 shopLinks.push({
                     slug: link,
