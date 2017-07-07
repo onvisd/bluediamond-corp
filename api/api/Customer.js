@@ -42,6 +42,76 @@ export default (api, {apolloClient}) => {
         })
         .then((result) => result.data.customerAccessTokenCreate);
 
+    const updateCustomer = (customer, customerAccessToken) =>
+        apolloClient.mutate({
+            mutation: gql`
+                mutation ($customer: CustomerUpdateInput!, $customerAccessToken: String!) {
+                    customerUpdate(
+                        customer: $customer
+                        customerAccessToken: $customerAccessToken
+                    ) {
+                        userErrors {
+                            message
+                        }
+                    }
+                }
+            `,
+            variables: {customer, customerAccessToken}
+        });
+
+    const addCustomerAddress = (address, customerAccessToken) =>
+        apolloClient.mutate({
+            mutation: gql`
+                mutation ($address: MailingAddressInput!, $customerAccessToken: String!) {
+                    customerAddressCreate(
+                        address: $address
+                        customerAccessToken: $customerAccessToken
+                    ) {
+                        userErrors {
+                            message
+                        }
+                    }
+                }
+            `,
+            variables: {address, customerAccessToken}
+        });
+
+    const editCustomerAddress = (address, id, customerAccessToken) =>
+        apolloClient.mutate({
+            mutation: gql`
+                mutation (
+                  $address: MailingAddressInput!, $id: ID!, $customerAccessToken: String!) {
+                    customerAddressUpdate(
+                        address: $address
+                        id: $id
+                        customerAccessToken: $customerAccessToken
+                    ) {
+                        userErrors {
+                            message
+                        }
+                    }
+                }
+            `,
+            variables: {address, id, customerAccessToken}
+        });
+
+    const deleteAddress = (id, customerAccessToken) =>
+        apolloClient.mutate({
+            mutation: gql`
+                mutation ($id: ID!, $customerAccessToken: String!) {
+                    customerAddressDelete(
+                        id: $id
+                        customerAccessToken: $customerAccessToken
+                    ) {
+                        userErrors {
+                            message
+                        }
+                    }
+                }
+            `,
+            variables: {id, customerAccessToken}
+        });
+
     const getCustomer = (customerAccessToken) =>
         apolloClient.query({
             query: gql`
@@ -57,6 +127,7 @@ export default (api, {apolloClient}) => {
                         createdAt
                         acceptsMarketing
                         defaultAddress {
+                            id
                             address1
                             address2
                             city
@@ -88,6 +159,7 @@ export default (api, {apolloClient}) => {
                         addresses(first: 5) {
                             edges {
                                 node {
+                                    id
                                     address1
                                     address2
                                     city
@@ -102,10 +174,12 @@ export default (api, {apolloClient}) => {
                     }
                 }
             `,
-            variables: {customerAccessToken}
+            variables: {customerAccessToken},
+            fetchPolicy: 'network-only'
         })
         .then((result) => result.data.customer);
 
+    // Register the customer + sign the customer in
     api.post('/store/customer/register', async (req, res) => {
         if(!req.body.email || !req.body.password)
             res.status(400).send({message: 'You must provide a username and password'});
@@ -136,6 +210,7 @@ export default (api, {apolloClient}) => {
         }
     });
 
+    // Sign the customer in
     api.post('/store/customer/signin', async (req, res) => {
         if(!req.body.email || !req.body.password)
             res.status(400).send({message: 'You must provide a username and password'});
@@ -165,6 +240,98 @@ export default (api, {apolloClient}) => {
         }
     });
 
+    // Update Customer
+    api.post('/store/customer/update', async (req, res) => {
+        try {
+            const accessToken = req.cookies.access_token;
+
+            if(accessToken) {
+                const secureToken = await auth.decodeToken(accessToken);
+
+                if(secureToken) {
+                    await updateCustomer(req.body, secureToken.token);
+                    const customer = await getCustomer(secureToken.token);
+                    res.send({authenticated: true, data: {...customer}});
+                }
+            } else {
+                res.status(401).send({authenticated: false});
+            }
+        } catch (err) {
+            console.trace(err);
+            res.status(500).send(err.message);
+        }
+    });
+
+    // Create new customer address
+    api.post('/store/customer/createAddress', async (req, res) => {
+        try {
+            const accessToken = req.cookies.access_token;
+
+            if(accessToken) {
+                const secureToken = await auth.decodeToken(accessToken);
+
+                if(secureToken) {
+                    await addCustomerAddress(req.body, secureToken.token);
+                    const customer = await getCustomer(secureToken.token);
+                    res.send({authenticated: true, data: {...customer}});
+                }
+            } else {
+                res.status(401).send({authenticated: false});
+            }
+        } catch (err) {
+            console.trace(err);
+            res.status(500).send(err.message);
+        }
+    });
+
+    // Update customer address
+    api.post('/store/customer/updateAddress/:id', async (req, res) => {
+        try {
+            const accessToken = req.cookies.access_token;
+
+            if(accessToken) {
+                const secureToken = await auth.decodeToken(accessToken);
+
+                if(secureToken) {
+                    // mutation doesn't accept 'id' and fails, must remove
+                    delete req.body.id;
+
+                    await editCustomerAddress(req.body, req.params.id, secureToken.token);
+                    const customer = await getCustomer(secureToken.token);
+                    res.send({authenticated: true, data: {...customer}});
+                }
+            } else {
+                res.status(401).send({authenticated: false});
+            }
+        } catch (err) {
+            console.trace(err);
+            res.status(500).send(err.message);
+        }
+    });
+
+    // Delete customer address
+    api.post('/store/customer/deleteAddress/:id', async (req, res) => {
+        try {
+            const accessToken = req.cookies.access_token;
+
+            if(accessToken) {
+                const secureToken = await auth.decodeToken(accessToken);
+
+                if(secureToken) {
+                    await deleteAddress(req.params.id, secureToken.token);
+                    const customer = await getCustomer(secureToken.token);
+                    res.send({authenticated: true, data: {...customer}});
+                }
+            } else {
+                res.status(401).send({authenticated: false});
+            }
+        } catch (err) {
+            console.trace(err);
+            res.status(500).send(err.message);
+        }
+    });
+
+    // Get Customer
     api.get('/store/customer', async (req, res) => {
         try {
             const accessToken = req.cookies.access_token;

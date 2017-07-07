@@ -11,11 +11,15 @@ export default class Orders extends Component {
 
     render() {
         const user = this.props.auth.data;
+        const allOrders = user.orders;
 
-        const lastOrder = user.orders.edges[0].node;
-        const lineItems = lastOrder.lineItems.edges;
+        let lastOrder = [];
+        let lineItems = [];
+        let oldOrders = [];
 
-        const orders = user.orders.edges.slice(1);
+        if(allOrders.edges.length) lastOrder = allOrders.edges[0].node;
+        if(allOrders.edges.length) oldOrders = allOrders.edges.slice(1);
+        if(lastOrder.length) lineItems = lastOrder.lineItems.edges;
 
         const format = (date) => moment(date).format('MMMM D, YYYY');
 
@@ -23,9 +27,9 @@ export default class Orders extends Component {
             <div className={styles.container}>
                 <div className={styles.main}>
                     <Panel title="Current Order">
-                        <p className={styles.title}>Order Information</p>
-                        {lastOrder &&
+                        {lastOrder.length > 0 &&
                             <div>
+                                <p className={styles.title}>Order Information</p>
                                 <div className={styles.orderInfo}>
                                     <div className={styles.left}>
                                         <p><strong>Order Date : </strong> {format(lastOrder.processedAt)}</p>
@@ -63,21 +67,25 @@ export default class Orders extends Component {
                                 </div>
                             </div>
                         }
-                        {!lastOrder && <p>No current orders.</p>}
+                        {!lastOrder.length && <p>No current orders.</p>}
                     </Panel>
                 </div>
                 <div className={styles.sidebar}>
                     <Panel title="Order History">
-                        {orders.length > 0 && orders.map((order) =>
-                            <div key={order.orderNumber} className={styles.tinyOrder}>
-                                <p>
-                                    <strong>Order #{order.orderNumber}</strong> <br/>
-                                    Delivered on {format(order.processedAt)} <br />
-                                    <strong>Total:</strong> ${order.totalPrice}
-                                </p>
-                            </div>
-                        )}
-                        {orders.length <= 0 && <p className={styles.title}>No archived orders.</p>}
+                          {oldOrders.length > 0 &&
+                              oldOrders.map((order) =>
+                                  <div key={order.orderNumber} className={styles.tinyOrder}>
+                                      <p>
+                                          <strong>Order #{order.orderNumber}</strong> <br/>
+                                          Delivered on {format(order.processedAt)} <br />
+                                          <strong>Total:</strong> ${order.totalPrice}
+                                      </p>
+                                  </div>
+                              )
+                        }
+                        {!oldOrders.length &&
+                            <p className={styles.title}>No archived orders.</p>
+                        }
                     </Panel>
                 </div>
             </div>

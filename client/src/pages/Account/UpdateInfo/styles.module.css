@@ -1,0 +1,109 @@
+@import 'constants/type';
+@import 'constants/grid';
+@import 'constants/color';
+
+.inputGroup {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+    &:last-child > label {
+        margin-bottom: 1rem;
+    }
+
+    & > * {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    & > label {
+        margin-bottom: 0.5rem;
+        font-weight: var(--t--weight-normal);
+    }
+
+    & input {
+        width: 100%;
+    }
+
+    @media (--mq-gt-s) {
+        flex-wrap: nowrap;
+
+        &:last-child > label {
+            margin-bottom: 0.5rem;
+        }
+
+        & > * {
+            width: 50%;
+            margin-bottom: 0;
+            padding: 0;
+        }
+
+        & > button {
+            margin-bottom: 0.5rem;
+        }
+
+        & > :first-child {
+            margin-right: 1rem;
+        }
+    }
+}
+
+.actions {
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.action {
+    display: inline-block;
+    padding: 0 1rem;
+    font-weight: var(--t--weight-bold);
+    cursor: pointer;
+
+    &:not(:last-child) {
+        margin-right: 1rem;
+    }
+
+    &:first-of-type {
+        padding: 0;
+    }
+
+    &.delete {
+        color: var(--c--red);
+
+        @media (--mq-s) {
+            order: 2;
+        }
+    }
+}
+
+.submit {
+    @media (--mq-s) {
+        display: flex;
+        width: 100%;
+        margin-bottom: 1rem;
+        align-items: center;
+        justify-content: space-between;
+        order: 1;
+    }
+}
+
+.success,
+.success:focus,
+.success:hover {
+    pointer-events: none;
+    border: 1px solid var(--c--green);
+    color: var(--c--green);
+    background-color: var(--c--white);
+}
+
+.fail,
+.fail:focus,
+.fail:hover {
+    border: 1px solid var(--c--red);
+    color: var(--c--red);
+    background-color: var(--c--red);
+}

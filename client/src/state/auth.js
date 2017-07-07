@@ -36,6 +36,46 @@ export const getCustomer = action({
     })
 }, handler);
 
+export const updateCustomer = action({
+    namespace: 'AUTH',
+    event: 'UPDATE_CUSTOMER',
+    action: (data, http) => http.post('/api/store/customer/update', data),
+    result: (state, result) => ({
+        ...state,
+        auth: result
+    })
+}, handler);
+
+export const createAddress = action({
+    namespace: 'AUTH',
+    event: 'CREATE_CUSTOMER_ADDRESS',
+    action: (data, http) => http.post('/api/store/customer/createAddress', data),
+    result: (state, result) => ({
+        ...state,
+        auth: result
+    })
+}, handler);
+
+export const updateAddress = action({
+    namespace: 'AUTH',
+    event: 'UPDATE_CUSTOMER_ADDRESS',
+    action: (data, http) => http.post(`/api/store/customer/updateAddress/${data.id}`, data),
+    result: (state, result) => ({
+        ...state,
+        auth: result
+    })
+}, handler);
+
+export const deleteAddress = action({
+    namespace: 'AUTH',
+    event: 'DELETE_CUSTOMER_ADDRESS',
+    action: (data, http) => http.post(`/api/store/customer/deleteAddress/${data.id}`, data),
+    result: (state, result) => ({
+        ...state,
+        auth: result
+    })
+}, handler);
+
 handler.addStateProperties('auth');
 
 export const connector = stateConnector(handler);

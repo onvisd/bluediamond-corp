@@ -82,7 +82,7 @@ export default class MobileNav extends Component {
                 <div className={styles.head}>
                     <div className={styles.ecomm}>
                         {auth.authenticated
-                            ? <Link to="/store"><User /></Link>
+                            ? <Link to="/account/settings"><User /></Link>
                             : <Link to="/signin"><User /></Link>}
                         <button
                             className={styles.cart}
