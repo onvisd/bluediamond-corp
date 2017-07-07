@@ -22,7 +22,8 @@ import ProductStarRating from '../ProductStarRating';
 export default class StoreProductHead extends Component {
     state = {
         quantity: 1,
-        variant: {}
+        variant: {},
+        price: null
     };
 
     static propTypes = {
@@ -119,9 +120,12 @@ export default class StoreProductHead extends Component {
 
     handleSelect = (e) => {
         const {value} = e.target;
-        const variant = this.props.variants.find((v) => v.id.toString() === value);
+        const variant = this.props.variants.find((v) => v.node.id.toString() === value);
 
-        this.setState(() => ({variant}));
+        this.setState(() => ({
+            variant: variant.node,
+            price: variant.node.price
+        }));
     }
 
     updateQuantity = (quantity) => {
@@ -129,7 +133,10 @@ export default class StoreProductHead extends Component {
     }
 
     componentWillMount() {
-        this.setState(() => ({variant: this.props.variants[0].node}));
+        this.setState(() => ({
+            variant: this.props.variants[0].node,
+            price: this.props.variants[0].node.price
+        }));
     }
 
     addToCart = () => {
@@ -155,7 +162,7 @@ export default class StoreProductHead extends Component {
             reviews
         } = this.props;
 
-        const {variant, quantity} = this.state;
+        const {quantity, price} = this.state;
 
         return (
             <section className={styles.container}>
@@ -175,7 +182,7 @@ export default class StoreProductHead extends Component {
                         <Quantity onChange={this.updateQuantity} />
                     </div>
                     <div className={styles.formPurchase}>
-                        <h2 className={styles.price}>${(quantity * variant.price).toFixed(2).toLocaleString('en-US')}</h2>
+                        <h2 className={styles.price}>${(quantity * price).toFixed(2)}</h2>
                         <Button onClick={this.addToCart}>
                             + Add to cart
                         </Button>
