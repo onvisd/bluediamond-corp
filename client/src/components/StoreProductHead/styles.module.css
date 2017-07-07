@@ -18,10 +18,19 @@
 
 .productInfo {
     flex: 0 0 50%;
+
+    @media (--mq-gt-s) {
+        padding-right: 1rem;
+    }
 }
 
 .title {
     margin: 0;
+
+    @media (--mq-s) {
+        margin: 1rem 0;
+        font-size: var(--t--size-m);
+    }
 }
 
 .meta {
