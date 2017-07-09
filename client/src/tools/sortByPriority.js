@@ -1,8 +1,11 @@
 export default (a, b) => {
-    if(a.fields.priority > b.fields.priority)
+    const aPriority = a.fields.priority || 100000;
+    const bPriority = b.fields.priority || 100000;
+
+    if(aPriority > bPriority)
         return 1;
 
-    if(a.fields.priority < b.fields.priority)
+    if(aPriority < bPriority)
         return -1;
 
     return 0;

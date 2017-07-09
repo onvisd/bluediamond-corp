@@ -1,4 +1,5 @@
 import {action, createHandler, stateConnector} from 'react-isomorphic-render';
+import env from 'tools/env';
 import settings from '../react-isomorphic-render-async';
 
 const handler = createHandler(settings);
@@ -6,7 +7,10 @@ const handler = createHandler(settings);
 export const getPageData = action({
     namespace: 'PAGE_DATA',
     event: 'GET_PAGE_DATA',
-    action: (slug, search, http) => http.get(`/api/page${slug}${search}`),
+    action: (slug, search, http) =>
+        http.get(`/api/page${slug}${search}${
+            env.development ? `${search ? '&' : '?'}${Date.now()}` : ''
+        }`),
     result: (state, result) => ({
         ...state,
         pageData: result

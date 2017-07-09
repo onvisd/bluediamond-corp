@@ -1,4 +1,5 @@
 import {action, createHandler, stateConnector} from 'react-isomorphic-render';
+import env from 'tools/env';
 import settings from '../react-isomorphic-render-async';
 
 const handler = createHandler(settings);
@@ -6,7 +7,7 @@ const handler = createHandler(settings);
 export const getContact = action({
     namespace: 'CONTACT',
     event: 'GET_CONTACT',
-    action: (http) => http.get('/api/template/contact'),
+    action: (http) => http.get(`/api/template/contact${env.development ? `?${Date.now()}` : ''}`),
     result: (state, result) => ({
         ...state,
         contact: result

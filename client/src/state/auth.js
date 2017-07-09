@@ -1,4 +1,5 @@
 import {action, createHandler, stateConnector} from 'react-isomorphic-render';
+import env from 'tools/env';
 import settings from '../react-isomorphic-render-async';
 
 const handler = createHandler(settings);
@@ -27,7 +28,7 @@ export const getCustomer = action({
     namespace: 'AUTH',
     event: 'GET_CUSTOMER',
     action: (http) =>
-        http.get('/api/store/customer')
+        http.get(`/api/store/customer${env.development ? `?${Date.now()}` : ''}`)
         .then((result) => result)
         .catch(() => ({authenticated: false})),
     result: (state, result) => ({

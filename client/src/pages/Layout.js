@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Meta, preload} from 'react-isomorphic-render';
+import env from 'tools/env';
 
 import {
     connector as navConnector,
@@ -40,7 +41,15 @@ import sortByPriority from 'tools/sortByPriority';
 export default class Layout extends Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
-        navigation: PropTypes.object.isRequired
+        navigation: PropTypes.object.isRequired,
+        location: PropTypes.object.isRequired
+    }
+
+    componentWillMount() {
+        const {search} = this.props.location;
+
+        if(search.match('nocache'))
+            env.development = true;
     }
 
     render() {

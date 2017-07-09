@@ -1,4 +1,5 @@
 import {action, createHandler, stateConnector} from 'react-isomorphic-render';
+import env from 'tools/env';
 import settings from '../react-isomorphic-render-async';
 
 const handler = createHandler(settings);
@@ -6,7 +7,7 @@ const handler = createHandler(settings);
 export const getRecipes = action({
     namespace: 'RECIPES',
     event: 'GET_RECIPES',
-    action: (http) => http.get('/api/recipes'),
+    action: (http) => http.get(`/api/recipes${env.development ? `?${Date.now()}` : ''}`),
     result: (state, result) => ({
         ...state,
         recipes: result
