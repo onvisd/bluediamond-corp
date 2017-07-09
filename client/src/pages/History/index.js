@@ -1,4 +1,5 @@
 import React from 'react';
+import {Parallax} from 'react-parallax';
 
 import Title from 'components/Title';
 import GenericHero from 'components/GenericHero';
@@ -451,9 +452,11 @@ export default () => (
                     </div>
                 </div>
             </div>
-            <div className={styles.todayImage} style={{
-                backgroundImage: `url(${TimelineToday})`
-            }} />
+            <Parallax
+                className={styles.todayImage}
+                bgImage={TimelineToday}
+                strength={200}
+            />
         </div>
 
         <RelatedPages>
