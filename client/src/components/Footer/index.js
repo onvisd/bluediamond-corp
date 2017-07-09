@@ -135,9 +135,19 @@ const Footer = ({data}) => (
                                 </a>
                             </li>
                             <li>
+                                <a href="http://almondinsights.com/" target="_blank">
+                                    Almond Insights Blog
+                                </a>
+                            </li>
+                            <li>
                                 <Link to="/product-locator">
                                     Product Locator
                                 </Link>
+                            </li>
+                            <li>
+                                <a href="/store" target="_blank">
+                                    Store
+                                </a>
                             </li>
                             <li>
                                 <a href="https://careers.bluediamond.com" target="_blank">
