@@ -51,7 +51,7 @@
     position: absolute !important; /* stylelint-disable-line declaration-no-important */
     top: 0;
     width: 100vw;
-    height: 100%;
+    height: 80%;
     overflow: hidden;
     filter: blur(4px);
     transform: scale(1.02);

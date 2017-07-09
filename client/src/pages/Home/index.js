@@ -18,7 +18,10 @@ import styles from './styles.module.css';
 
 @preload(({dispatch}) => dispatch(getHome()))
 @connect(
-    (state) => ({...connector(state.home)}),
+    (state) => ({
+        responsive: state.responsive,
+        ...connector(state.home)
+    }),
     {getHome}
 )
 export default class Home extends Component {
@@ -93,7 +96,7 @@ export default class Home extends Component {
     }
 
     render() {
-        const {home} = this.props;
+        const {home, responsive} = this.props;
         const homeFields = parseModel(home)[0].fields;
 
         return this.trackDocument((scrollY, topTop) => ( // eslint-disable-line no-shadow
@@ -150,6 +153,7 @@ export default class Home extends Component {
                             <div
                                 className={styles.frame}
                                 style={
+                                    !responsive.medium &&
                                     tween(scrollY, [
                                         [posTopTop * 0.1, {
                                             transform: translate3d(percent(-15), 70, 0)
@@ -188,6 +192,7 @@ export default class Home extends Component {
                             <div
                                 className={styles.frame}
                                 style={
+                                    !responsive.medium &&
                                     tween(scrollY, [
                                         [posTopTop * 0.2, {
                                             transform: translate3d(percent(15), 50, 0)

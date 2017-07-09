@@ -11,7 +11,7 @@ const Hero = ({brand, category, product, shopLinks}) => (
             <Parallax
                 className={styles.background}
                 bgImage={category.fields.heroBackground.fields.file.url}
-                strength={200}
+                strength={100}
             />
             <div
                 className={styles.shelf}
