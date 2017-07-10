@@ -33,6 +33,13 @@
         background-position: right center;
     }
 
+    &.isBurlap {
+        @media (--mq-s) {
+            background-position: right top;
+            background-size: 80% auto;
+        }
+    }
+
     &.isLeaves {
         background-size: 12%, initial;
     }
@@ -66,10 +73,6 @@
 
     padding: 0;
     min-height: 442px;
-
-    @media (--mq-s) {
-        justify-content: flex-end;
-    }
 }
 
 .left,
@@ -99,6 +102,7 @@
 
         @media (--mq-s) {
             margin-right: 0;
+            margin-left: 0;
         }
     }
 
@@ -106,7 +110,7 @@
         transform: translateX(-3%) rotate(1deg);
 
         @media (--mq-s) {
-            transform: translateX(5%) rotate(0deg);
+            transform: translateX(0) rotate(0deg);
         }
     }
 }
@@ -126,6 +130,7 @@
         }
 
         @media (--mq-s) {
+            margin-right: 0;
             margin-left: 0;
         }
     }
@@ -134,7 +139,7 @@
         transform: translateX(3%) rotate(-1deg);
 
         @media (--mq-s) {
-            transform: translateX(5%) rotate(0deg);
+            transform: translateX(0) rotate(0deg);
         }
     }
 }
@@ -168,7 +173,7 @@
 
         &.isFirst {
             margin-top: -1rem;
-            transform: translateX(5%) rotate(1deg);
+            transform: translateX(0) rotate(1deg);
         }
     }
 
@@ -202,6 +207,10 @@
 }
 
 .timebar {
+    @media (--mq-s) {
+        display: none;
+    }
+
     &::after {
         content: '';
         display: block;
@@ -302,6 +311,14 @@
 .todayImage {
     width: 100%;
     height: 530px;
+
+    @media (--mq-s) {
+        height: 250px;
+    }
+
+    & img {
+        max-width: none;
+    }
 }
 
 .content {
