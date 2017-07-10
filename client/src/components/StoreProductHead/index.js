@@ -10,6 +10,7 @@ import Kosher from 'images/icons/kosher.svg';
 import ReducedSugar from 'images/icons/reduced-sugar.svg';
 import Unsweetened from 'images/icons/unsweetened.svg';
 import Vegan from 'images/icons/vegan.svg';
+
 import Button from '../Button';
 import Quantity from '../Quantity';
 import ProductAccordion from '../ProductAccordion';
@@ -69,7 +70,13 @@ export default class StoreProductHead extends Component {
     // tags with the preface `meta:`.
     renderMeta() {
         const {tags} = this.props;
-        const metaTags = JSON.stringify(tags).match(/meta:(\S*)/igm);
+
+        const metaTags = [];
+        tags.map((tag) => {
+            const meta = tag.match(/meta:([\s\S]*)/igm);
+            const value = JSON.stringify(meta).split(':')[1];
+            if(meta) metaTags.push(value.replace('"]', ''));
+        });
 
         if(!metaTags)
             return;
@@ -77,9 +84,12 @@ export default class StoreProductHead extends Component {
         return (
             <div className={styles.meta}>
                 {metaTags.map((tag, i) => {
-                    const value = tag.split(':')[1].replace(',', '');
-                    const Icon = this.metaIcons[value.replace(' ', '')];
-                    return <span key={`metaItem${i}`}><Icon />{value}</span>;
+                    const Icon = this.metaIcons[tag.replace(' ', '')];
+                    return (
+                        <span key={`metaItem${i}`}>
+                            {Icon && <Icon />} {tag}
+                        </span>
+                    );
                 })}
             </div>
         );
@@ -186,10 +196,12 @@ export default class StoreProductHead extends Component {
                             + Add to cart
                         </Button>
                     </div>
-                    <ProductAccordion
-                        nutrition={nutrition}
-                        ingredients={ingredients}
-                    />
+                    {(nutrition && ingredients) &&
+                        <ProductAccordion
+                            nutrition={nutrition}
+                            ingredients={ingredients}
+                        />
+                    }
                 </div>
             </section>
         );

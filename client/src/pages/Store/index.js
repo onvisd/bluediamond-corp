@@ -170,7 +170,7 @@ export default class Store extends Component {
     };
 
     render() {
-        const {totalCardCount, visibleCardCount, filter, search, sort} = this.state;
+        const {visibleCardCount, filter, search, sort} = this.state;
         const {products, responsive} = this.props;
 
         let cards = products;
