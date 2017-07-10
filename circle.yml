@@ -16,3 +16,8 @@ deployment:
         branch: staging
         commands:
         - ssh bluediamond@planetary.io '~/staging/redeploy'
+    production:
+        branch: master
+        commands:
+        - ssh site@45.55.190.115 '~/redeploy'
+        - ssh site@45.55.205.47 '~/redeploy'
