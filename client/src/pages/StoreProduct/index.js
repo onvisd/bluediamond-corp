@@ -25,8 +25,11 @@ export default class StoreProduct extends Component {
     render() {
         const {product} = this.props;
 
-        const {reviews} = product.reviews;
-        const related = product.related;
+        let reviews = [];
+        let related = [];
+
+        if(product.reviews) reviews = product.reviews.reviews;
+        if(product.related) related = product.related;
 
         return (
             <section className="content">
@@ -35,7 +38,7 @@ export default class StoreProduct extends Component {
                     <Link className={styles.backLink} href="/store">Continue Shopping</Link>
                 </div>
                 <StoreProductHead data={product} />
-                {related &&
+                {related.length > 0 &&
                     <div className={styles.related}>
                         <h3>Related Products</h3>
                         <div className={styles.relatedCards}>

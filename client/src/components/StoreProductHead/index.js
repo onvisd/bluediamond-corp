@@ -33,9 +33,9 @@ export default class StoreProductHead extends Component {
         options: PropTypes.array.isRequired,
         images: PropTypes.array.isRequired,
         description: PropTypes.string.isRequired,
-        nutrition: PropTypes.object.isRequired,
-        ingredients: PropTypes.string.isRequired,
-        reviews: PropTypes.object.isRequired
+        nutrition: PropTypes.object,
+        ingredients: PropTypes.string,
+        reviews: PropTypes.object
     }
 
     metaIcons = {
@@ -71,8 +71,7 @@ export default class StoreProductHead extends Component {
         const {tags} = this.props;
         const metaTags = JSON.stringify(tags).match(/meta:(\S*)/igm);
 
-        // TODO : fix render method, breaking 6/24/2017
-        if(!metaTags || metaTags)
+        if(!metaTags)
             return;
 
         return (
@@ -155,14 +154,12 @@ export default class StoreProductHead extends Component {
     }
 
     render() {
-        const {
-            title,
-            ingredients,
-            nutrition,
-            reviews
-        } = this.props;
+        const {title, ingredients, nutrition} = this.props;
 
         const {quantity, price} = this.state;
+
+        let reviews = [];
+        if(this.props.reviews) reviews = this.props.reviews;
 
         return (
             <section className={styles.container}>
@@ -171,10 +168,12 @@ export default class StoreProductHead extends Component {
                 </div>
                 <div className={styles.productInfo}>
                     <h2 className={styles.title}>{title}</h2>
-                    <ProductStarRating
-                        rating={reviews.bottomline.average_score}
-                        reviewCount={reviews.bottomline.total_review}
-                    />
+                    {reviews.length > 0 &&
+                        <ProductStarRating
+                            rating={reviews.bottomline.average_score}
+                            reviewCount={reviews.bottomline.total_review}
+                        />
+                    }
                     {this.renderMeta()}
                     {this.renderDescription()}
                     <div className={styles.formOptions}>

@@ -53,14 +53,14 @@ export default class StoreProductHead extends Component {
                             order: PropTypes.number
                         }))
                     }))
-                }).isRequired
-            }).isRequired,
+                })
+            }),
             reviews: PropTypes.shape({
                 bottomline: PropTypes.shape({
                     total_review: PropTypes.number, // eslint-disable-line
                     average_score: PropTypes.number, // eslint-disable-line
                     star_distribution: PropTypes.string // eslint-disable-line
-                }).isRequired,
+                }),
                 reviews: PropTypes.arrayOf(PropTypes.shape({
                     id: PropTypes.number.isRequired,
                     score: PropTypes.number.isRequired,
@@ -69,9 +69,9 @@ export default class StoreProductHead extends Component {
                     title: PropTypes.string,
                     user: PropTypes.shape({
                         display_name: PropTypes.string // eslint-disable-line
-                    }).isRequired
+                    })
                 }))
-            }).isRequired
+            })
         })
     }
 

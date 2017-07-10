@@ -8,8 +8,8 @@ import SmartLabel from 'images/icons/smart-label.png';
 
 export default class ProductAccordion extends Component {
     static propTypes = {
-        nutrition: PropTypes.object.isRequired,
-        ingredients: PropTypes.string.isRequired
+        nutrition: PropTypes.object,
+        ingredients: PropTypes.string
     }
 
     state = {
