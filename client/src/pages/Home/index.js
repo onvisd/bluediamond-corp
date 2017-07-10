@@ -153,8 +153,8 @@ export default class Home extends Component {
                             <div
                                 className={styles.frame}
                                 style={
-                                    !responsive.medium &&
-                                    tween(scrollY, [
+                                    responsive.large
+                                    ? tween(scrollY, [
                                         [posTopTop * 0.1, {
                                             transform: translate3d(percent(-15), 70, 0)
                                         }],
@@ -162,6 +162,7 @@ export default class Home extends Component {
                                             transform: translate3d(percent(-15), 0, 0)
                                         }]
                                     ])
+                                    : null
                                 }
                             >
                                 <div
@@ -192,8 +193,8 @@ export default class Home extends Component {
                             <div
                                 className={styles.frame}
                                 style={
-                                    !responsive.medium &&
-                                    tween(scrollY, [
+                                    responsive.large
+                                    ? tween(scrollY, [
                                         [posTopTop * 0.2, {
                                             transform: translate3d(percent(15), 50, 0)
                                         }],
@@ -201,6 +202,7 @@ export default class Home extends Component {
                                             transform: translate3d(percent(15), -20, 0)
                                         }]
                                     ])
+                                    : null
                                 }
                             >
                                 <div
