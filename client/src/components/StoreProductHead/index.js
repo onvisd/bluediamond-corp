@@ -83,7 +83,7 @@ export default class StoreProductHead extends Component {
 
         return (
             <div className={styles.meta}>
-                {metaTags.map((tag, i) => {
+                {metaTags.filter((tag) => tag !== 'N/A').map((tag, i) => {
                     const Icon = this.metaIcons[tag.replace(' ', '')];
                     return (
                         <span key={`metaItem${i}`}>

@@ -28,7 +28,7 @@ export default class RecipeHead extends Component {
 
         return (
             <div className={styles.labels}>
-                {consumerSymbols.map((item, i) =>
+                {consumerSymbols.filter((tag) => tag !== 'N/A').map((item, i) =>
                     <div key={`symbol${i}`} className={styles.label}>{item}</div>
                 )}
             </div>
