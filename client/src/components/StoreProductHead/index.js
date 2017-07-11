@@ -173,9 +173,7 @@ export default class StoreProductHead extends Component {
 
         return (
             <section className={styles.container}>
-                <div className={styles.images}>
-                    {this.renderImages()}
-                </div>
+                {this.renderImages()}
                 <div className={styles.productInfo}>
                     <h2 className={styles.title}>{title}</h2>
                     {reviews.length > 0 &&

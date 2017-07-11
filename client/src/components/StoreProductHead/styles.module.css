@@ -7,13 +7,21 @@
 
     @media (--mq-gt-s) {
         display: flex;
-        padding: 2rem 0 4rem;
+        padding: 3rem 0 4rem;
     }
 }
 
 .images {
-    margin-top: 2rem;
     flex: 0 0 50%;
+    text-align: center;
+
+    & img {
+        max-height: 540px;
+    }
+
+    @media (--mq-gt-s) {
+        padding-right: 1rem;
+    }
 }
 
 .productInfo {
