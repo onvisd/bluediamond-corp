@@ -2,7 +2,19 @@
 @import 'constants/color';
 @import 'constants/type';
 
-/* Page Paragraph Component */
-.container {
-    @mixin container;
+.container + .container:not(:nth-child(2)) {
+    border-top: 2px solid var(--c--gray-lighter);
+}
+
+.container + .container {
+    margin-top: 2rem;
+    padding-top: 2rem;
+}
+
+.large {
+    font-size: var(--t--size-xl);
+}
+
+.small {
+    font-size: var(--t--base-size);
 }

@@ -46,7 +46,7 @@ export default class Navigation extends Component {
             },
             {
                 name: 'International',
-                slug: 'http://bluediamond.com',
+                slug: '/international',
                 icon: International
             }
         ]

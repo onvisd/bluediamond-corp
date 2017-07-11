@@ -10,7 +10,8 @@ export default class ParagraphWithHeader extends Component {
             }),
             fields: PropTypes.shape({
                 header: PropTypes.string.isRequired,
-                paragraph: PropTypes.string.isRequired
+                paragraph: PropTypes.string.isRequired,
+                headerSize: PropTypes.string
             })
         })
     }
@@ -22,6 +23,7 @@ export default class ParagraphWithHeader extends Component {
             <ParagraphComponent
                 header={fields.header}
                 paragraph={fields.paragraph}
+                headerSize={fields.headerSize || 'normal'}
             />
         );
     }

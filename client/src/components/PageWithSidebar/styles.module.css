@@ -1,1 +1,51 @@
-/* Page with Sidebar Styles */
+@import 'constants/grid';
+@import 'constants/type';
+@import 'constants/color';
+
+.container {
+    @mixin container;
+
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+
+    & h1 {
+        margin-bottom: 1.5rem;
+        font-size: var(--t--size-lm);
+
+        @media (--mq-gt-s) {
+            font-size: var(--t--size-l);
+        }
+    }
+
+    @media (--mq-m) {
+        padding-top: calc(60px + 2rem);
+    }
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+
+    @media (--mq-s) {
+        display: block;
+    }
+}
+
+.colLeft {
+    width: 64%;
+    padding-right: 2rem;
+
+    @media (--mq-s) {
+        width: 100%;
+    }
+}
+
+.colRight {
+    width: 32%;
+    margin-left: 4%;
+
+    @media (--mq-s) {
+        width: 100%;
+        margin-left: 0;
+    }
+}

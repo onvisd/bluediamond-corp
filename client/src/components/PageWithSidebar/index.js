@@ -1,5 +1,8 @@
 import React, {Component, PropTypes} from 'react';
-import {Title} from 'react-isomorphic-render';
+
+import Title from 'components/Title';
+
+import styles from './styles.module.css';
 
 export default class PageWithSidebar extends Component {
     static propTypes = {
@@ -33,15 +36,17 @@ export default class PageWithSidebar extends Component {
         const {pageData} = this.props;
 
         return (
-            <div className="l--row">
-                <div className="l--col-8">
-                    <Title>{pageData.items[0].fields.title}</Title>
-                    {this.renderChildren(pageData, 'mainContentModules')}
-                </div>
-                <div className="l--col-4">
-                    {this.renderChildren(pageData, 'sidebarContentModules')}
-                </div>
-            </div>
+          <div className={styles.container}>
+              <Title>{pageData.items[0].fields.title}</Title>
+              <div className={styles.row}>
+                  <div className={styles.colLeft}>
+                        {this.renderChildren(pageData, 'mainContentModules')}
+                  </div>
+                  <div className={styles.colRight}>
+                      {this.renderChildren(pageData, 'sidebarContentModules')}
+                  </div>
+              </div>
+          </div>
         );
     }
 }
