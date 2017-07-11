@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 export default class Story extends Component {
     static propTypes = {
         desktopImage: PropTypes.string.isRequired,
+        smallDesktopImage: PropTypes.string.isRequired,
         tabletImage: PropTypes.string.isRequired,
         mobileImage: PropTypes.string.isRequired
     };
@@ -17,6 +18,7 @@ export default class Story extends Component {
     render() {
         const {
             desktopImage,
+            smallDesktopImage,
             tabletImage,
             mobileImage,
             responsive
@@ -27,6 +29,8 @@ export default class Story extends Component {
             image = mobileImage;
         else if(responsive.small)
             image = tabletImage;
+        else if(responsive.medium)
+            image = smallDesktopImage;
 
         return (
             <div

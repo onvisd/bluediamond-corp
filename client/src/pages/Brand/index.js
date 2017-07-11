@@ -143,6 +143,9 @@ export default class Brand extends Component {
                         cards={brand.fields.stories.map((story) => (
                             <Story
                                 desktopImage={story.fields.backgroundImage.fields.file.url}
+                                smallDesktopImage={
+                                    story.fields.smallDesktopBackgroundImage.fields.file.url
+                                }
                                 tabletImage={story.fields.tabletBackgroundImage.fields.file.url}
                                 mobileImage={story.fields.mobileBackgroundImage.fields.file.url}
                             />
