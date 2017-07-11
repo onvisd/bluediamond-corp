@@ -7,6 +7,10 @@
 
     padding-top: 2rem;
     padding-bottom: 4rem;
+
+    @media (--mq-m) {
+        padding-top: calc(60px + 2rem);
+    }
 }
 
 .intro {

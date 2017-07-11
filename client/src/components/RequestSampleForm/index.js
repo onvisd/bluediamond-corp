@@ -93,51 +93,52 @@ export default class RequestSampleForm extends Component {
                     )
                     : null
                 }
-                <div className={styles.container}>
-                    <div className={styles.fieldPair}>
-                        <Input
-                            name="firstName"
-                            label="First Name"
-                            validations="minLength:1"
-                            classNames={{container: styles.input, label: styles.label}}
-                            required
-                        />
-                        <Input
-                            name="lastName"
-                            label="Last Name"
-                            validations="minLength:1"
-                            classNames={{container: styles.input, label: styles.label}}
-                            required
-                        />
-                    </div>
+                <div className={styles.fieldPair}>
                     <Input
-                        classNames={{container: styles.field}}
-                        name="email"
-                        label="Email address"
-                        validations="isEmail"
-                        validationError="This is not a valid email"
-                        required
-                    />
-                    <Input
-                        classNames={{container: styles.field}}
-                        name="company"
-                        label="Company Name"
+                        name="firstName"
+                        label="First Name"
                         validations="minLength:1"
+                        classNames={{container: styles.input, label: styles.label}}
                         required
                     />
                     <Input
-                        classNames={{container: styles.field}}
-                        name="address"
-                        label="Address"
+                        name="lastName"
+                        label="Last Name"
                         validations="minLength:1"
-                        required
-                    />
-                    <Textarea
-                        name="request"
-                        label="Which product(s) would you like to receive samples of?"
+                        classNames={{container: styles.input, label: styles.label}}
                         required
                     />
                 </div>
+                <Input
+                    classNames={{container: styles.field}}
+                    name="email"
+                    label="Email address"
+                    validations="isEmail"
+                    validationError="This is not a valid email"
+                    classNames={{container: styles.input, label: styles.label}}
+                    required
+                />
+                <Input
+                    classNames={{container: styles.field}}
+                    name="company"
+                    label="Company Name"
+                    validations="minLength:1"
+                    classNames={{container: styles.input, label: styles.label}}
+                    required
+                />
+                <Input
+                    classNames={{container: styles.field}}
+                    name="address"
+                    label="Address"
+                    validations="minLength:1"
+                    classNames={{container: styles.input, label: styles.label}}
+                    required
+                />
+                <Textarea
+                    name="request"
+                    label="Which product(s) would you like to receive samples of?"
+                    required
+                />
                 <Button
                     type="submit"
                     disabled={!this.state.canSubmit}

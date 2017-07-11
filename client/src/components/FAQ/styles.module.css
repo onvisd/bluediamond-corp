@@ -1,7 +1,12 @@
+@import 'constants/grid';
 @import 'constants/color';
 
 .container {
     display: flex;
+
+    @media (--mq-s) {
+        display: block;
+    }
 }
 
 .nav,
@@ -12,6 +17,10 @@
 .nav {
     width: 11rem;
     padding-left: 0;
+
+    @media (--mq-s) {
+        width: 100%;
+    }
 }
 
 .navItem {
@@ -39,11 +48,37 @@
         & svg {
             fill: var(--c--blue);
         }
+
+        @media (--mq-s) {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--c--blue);
+        }
     }
 }
 
 .content {
     width: 70%;
+
+    @media (--mq-s) {
+        width: 100%;
+    }
+}
+
+/* For mobile collapsing FAQs */
+.navContent {
+    & > ul {
+        padding-left: 0;
+    }
+
+    &:not(.active) {
+        display: none;
+    }
+}
+
+.seeAll {
+    @media (--mq-s) {
+        display: block;
+    }
 }
 
 .item {

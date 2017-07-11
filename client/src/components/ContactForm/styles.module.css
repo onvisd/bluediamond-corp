@@ -1,8 +1,18 @@
 @import 'constants/color';
 @import 'constants/grid';
 
+.form {
+    @media (--mq-s) {
+        margin-bottom: 1rem;
+    }
+}
+
 .fieldPair {
     display: flex;
+
+    @media (--mq-s) {
+        display: block;
+    }
 }
 
 .input {

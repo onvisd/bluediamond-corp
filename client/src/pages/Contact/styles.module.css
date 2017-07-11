@@ -16,6 +16,10 @@
             font-size: var(--t--size-l);
         }
     }
+
+    @media (--mq-m) {
+        padding-top: calc(60px + 2rem);
+    }
 }
 
 .row {

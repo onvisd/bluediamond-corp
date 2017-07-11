@@ -13,10 +13,37 @@
 
 .fieldPair {
     display: flex;
+
+    & label {
+        width: auto;
+        flex: 1;
+
+        & input,
+        & select,
+        & textarea {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    @media (--mq-s) {
+        display: block;
+    }
 }
 
-.field input {
-    width: 100%;
+.form {
+    & .input {
+        & input,
+        & select {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+
+    & [data-required='true'] .label::after {
+        content: ' *';
+        color: var(--c--red);
+    }
 }
 
 .sent,

@@ -13,6 +13,10 @@ export default class FormSelect extends Component {
         }
     }
 
+    componentWillMount() {
+        this.props.setValue(this.props.value || '');
+    }
+
     changeValue = (event) => {
         this.props.setValue(event.currentTarget.value);
 
@@ -38,8 +42,7 @@ export default class FormSelect extends Component {
             showRequired,
             getErrorMessage,
             classNames,
-            required,
-            value
+            required
         } = this.props;
 
         return (
@@ -61,9 +64,8 @@ export default class FormSelect extends Component {
                     <select
                         name={name}
                         onChange={this.changeValue}
-                        value={getValue() || ''}
+                        value={getValue()}
                         required={required}
-                        defaultValue={value}
                     >
                         <option value="" disabled>Please select one...</option>
                         {options.map((option) => (
