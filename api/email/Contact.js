@@ -15,7 +15,9 @@ export default class Contact extends Component {
         timeStamp: PropTypes.string,
         upc: PropTypes.string,
         company: PropTypes.string,
-        message: PropTypes.string
+        message: PropTypes.string,
+        subject: PropTypes.string,
+        inquiry: PropTypes.string
     }
 
     render() {
@@ -33,7 +35,9 @@ export default class Contact extends Component {
             timeStamp,
             upc,
             company,
-            message
+            message,
+            subject,
+            inquiry
         } = this.props;
 
         return (
@@ -51,6 +55,14 @@ export default class Contact extends Component {
                     {streetAddress || 'N/A'}<br />
                     {city || 'N/A'}, {state || 'N/A'}, {country || 'N/A'} {postalCode || 'N/A'}
                 </div>
+                <p>
+                    <strong>What is your inquiry regarding: </strong>
+                    {subject || 'Not Provided'}
+                </p>
+                <p>
+                    <strong>Product I am inquring about: </strong>
+                    {inquiry || 'Not Provided'}
+                </p>
                 <p>
                     <strong>Lot Code: </strong>
                     {lotCode || 'Not Provided'}

@@ -30,6 +30,7 @@ export default class ContactForm extends Component {
         allowCompany: PropTypes.bool.isRequired,
         allowMessage: PropTypes.bool.isRequired,
         predefinedSubjects: PropTypes.arrayOf(PropTypes.string),
+        predefinedInquiry: PropTypes.arrayOf(PropTypes.string),
         showNote: PropTypes.bool.isRequired
     }
 
@@ -70,6 +71,7 @@ export default class ContactForm extends Component {
             company: model.company,
             subject: model.subject,
             message: model.message,
+            inquiry: model.inquiry,
             template: 'Contact'
         })
         .then(() => {
@@ -102,7 +104,8 @@ export default class ContactForm extends Component {
             allowSubject,
             allowCompany,
             allowMessage,
-            predefinedSubjects
+            predefinedSubjects,
+            predefinedInquiry
         } = this.props;
 
         return (
@@ -226,6 +229,15 @@ export default class ContactForm extends Component {
                         name="subject"
                         label="What is your inquiry regarding?"
                         options={predefinedSubjects}
+                        classNames={{container: styles.input, label: styles.label}}
+                        required
+                    />
+                )}
+                {allowSubject && (
+                    <Select
+                        name="inquiry"
+                        label="Product I am inquring about"
+                        options={predefinedInquiry}
                         classNames={{container: styles.input, label: styles.label}}
                         required
                     />
