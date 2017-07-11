@@ -16,7 +16,7 @@ const Footer = () => (
                 <Link to="/press">
                     Press
                 </Link>
-                <a href="https://careers.bluediamond.com" target="_blank">
+                <a href="http://careers.bluediamond.com" target="_blank">
                     Careers
                 </a>
                 <Link to="/faqs">

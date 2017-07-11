@@ -158,7 +158,7 @@ export default class Signin extends Component {
                         </Form>
                     )}
                 </div>
-                <Link to="/checkout" className={styles.continue}>
+                <Link to="/store" className={styles.continue}>
                     Continue as Guest
                 </Link>
             </div>

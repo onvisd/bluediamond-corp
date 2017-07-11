@@ -150,7 +150,7 @@ const Footer = ({data}) => (
                                 </a>
                             </li>
                             <li>
-                                <a href="https://careers.bluediamond.com" target="_blank">
+                                <a href="http://careers.bluediamond.com" target="_blank">
                                     Careers
                                 </a>
                             </li>

@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-isomorphic-render';
 
 import {connector, removeFromCart} from 'state/checkout';
 import Button from '../../Button';
@@ -64,14 +65,15 @@ export default class ShoppingCart extends Component {
                                 <Button layout="fw" href={checkout.webUrl}>
                                     Checkout
                                 </Button>
-                                <a
+                                <Link
                                     className={styles.continue}
+                                    href="/store"
                                     onClick={() => {
                                         onToggle.hide();
                                     }}
                                 >
                                     Continue Shopping
-                                </a>
+                                </Link>
                             </div>
                             {children}
                         </div>
