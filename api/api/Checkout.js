@@ -14,6 +14,7 @@ export default (api, {apolloClient}) => {
                             totalTax
                             subtotalPrice
                             totalPrice
+                            orderStatusUrl
                             lineItems(first: 250) {
                                 edges {
                                     node {
@@ -62,6 +63,7 @@ export default (api, {apolloClient}) => {
                             totalTax
                             subtotalPrice
                             totalPrice
+                            orderStatusUrl
                             lineItems(first: 250) {
                                 edges {
                                     node {
@@ -110,6 +112,7 @@ export default (api, {apolloClient}) => {
                             totalTax
                             subtotalPrice
                             totalPrice
+                            orderStatusUrl
                             lineItems(first: 250) {
                                 edges {
                                     node {

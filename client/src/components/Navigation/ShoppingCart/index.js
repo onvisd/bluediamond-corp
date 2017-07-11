@@ -38,7 +38,8 @@ export default class ShoppingCart extends Component {
         return (
             <div>
                 <div className={styles.cart}>
-                    {checkout.lineItems && checkout.lineItems.edges.length ? (
+                    {(!checkout.orderStatusUrl) &&
+                      (checkout.lineItems && checkout.lineItems.edges.length) ? (
                         <div>
                             <h2>My Shopping Cart</h2>
                             {checkout.lineItems &&

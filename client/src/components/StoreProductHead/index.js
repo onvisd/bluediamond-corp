@@ -151,7 +151,7 @@ export default class StoreProductHead extends Component {
     addToCart = () => {
         const {variant, quantity} = this.state;
 
-        if(this.props.checkout.id) {
+        if(this.props.checkout.id && !this.props.checkout.orderStatusUrl) {
             this.props.addToCart({
                 checkoutId: this.props.checkout.id,
                 lineItems: [{variantId: variant.id, quantity}]
