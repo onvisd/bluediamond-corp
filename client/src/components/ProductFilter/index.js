@@ -17,7 +17,8 @@ export default class ProductFilter extends Component {
         query: PropTypes.string,
         products: PropTypes.array.isRequired,
         onClick: PropTypes.func.isRequired,
-        dropdown: PropTypes.bool
+        dropdown: PropTypes.bool,
+        initState: PropTypes.array
     }
 
     compressArray = (arr) => {
@@ -89,7 +90,7 @@ export default class ProductFilter extends Component {
     }
 
     options = () => {
-        const {products, filter} = this.props;
+        const {products, filter, initState} = this.props;
 
         let items;
 
@@ -105,6 +106,14 @@ export default class ProductFilter extends Component {
         if(filter === 'collections')
             items = this.filterByCollection(products.map((product) => product.node[filter].edges));
 
+        // Check if items are selected via inital state (query params)
+        items.map((item) => {
+            if(initState && initState.includes(item.value))
+                item.checked = true;
+            else
+                item.checked = false;
+        });
+
         return items;
     }
 
@@ -113,7 +122,7 @@ export default class ProductFilter extends Component {
 
         return (
             <div>
-                {(totalOptions >= visibleOptionCount) && (clicked === false) &&
+                {(totalOptions > visibleOptionCount) && (clicked === false) &&
                     <a onClick={this.handleClick} className={styles.seeMore}>
                         See More +
                     </a>
@@ -126,7 +135,7 @@ export default class ProductFilter extends Component {
         e.preventDefault();
 
         this.setState((state) => ({
-            visibleOptionCount: 100,
+            visibleOptionCount: -1,
             clicked: !state.clicked
         }));
     }
@@ -160,17 +169,22 @@ export default class ProductFilter extends Component {
                 onClick={dropdown ? this.toggleExpand : null}
             >
                 <p className={styles.title}><strong>{title}</strong></p>
-                {options.slice(0, dropdown ? options.length : visibleOptionCount).map((option) => (
-                    <label key={`filter${option.value}`} htmlFor={option.value}>
-                        <input
-                            onChange={onClick}
-                            type="checkbox"
-                            value={option.value}
-                            id={option.value}
-                        />
-                        {option.value} ({option.count})
-                    </label>
-                ))}
+                {options.slice(0, dropdown ? options.length : visibleOptionCount).map((option) => {
+                    if(option.value) {
+                        return (
+                          <label key={`filter${option.value}`} htmlFor={option.value}>
+                              <input
+                                  onChange={onClick}
+                                  type="checkbox"
+                                  value={option.value}
+                                  id={option.value}
+                                  checked={option.checked}
+                              />
+                              {option.value} ({option.count})
+                          </label>
+                        );
+                    }
+                })}
                 {!dropdown && this.renderLoadMore()}
             </div>
         );
