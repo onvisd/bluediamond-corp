@@ -64,6 +64,18 @@
     }
 }
 
+.gray {
+    composes: base;
+    color: var(--c--black);
+    background-color: var(--c--gray-lighter);
+
+    &:hover,
+    &:focus {
+        color: var(--c--black);
+        background-color: var(--c--gray-light);
+    }
+}
+
 .blue {
     composes: base;
     color: var(--c--white);

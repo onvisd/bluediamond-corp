@@ -18,6 +18,16 @@
     }
 }
 
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & a + a {
+        margin-left: 1rem;
+    }
+}
+
 .imageWrap {
     display: flex;
     width: 110px;

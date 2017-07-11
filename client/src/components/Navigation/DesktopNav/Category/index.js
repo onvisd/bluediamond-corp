@@ -27,14 +27,24 @@ const Category = ({bgImage, brand, category, toggleNav}) => (
                 ))
             }
         </div>
-        <Button
-            theme={brand.fields.themeColor}
-            href={`/brand/${brand.fields.slug}`}
-            onClick={toggleNav.hide}
-            className={styles.seeAll}
-        >
-            See All Products
-        </Button>
+        <div className={styles.buttons}>
+            <Button
+                theme={brand.fields.themeColor}
+                href={`/brand/${brand.fields.slug}`}
+                onClick={toggleNav.hide}
+                className={styles.seeAll}
+            >
+                See All Products
+            </Button>
+            <Button
+                theme="gray"
+                href={`/store/?brands=${brand.fields.slug}`}
+                onClick={toggleNav.hide}
+                className={styles.seeAll}
+            >
+                Shop Online
+            </Button>
+        </div>
     </Card>
 );
 
