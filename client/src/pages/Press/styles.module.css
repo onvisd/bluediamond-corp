@@ -9,8 +9,9 @@
     padding: calc(60px + 1.5rem) 1.5rem 1.5rem;
     flex-wrap: wrap;
 
-    @media (--mq-gt-s) {
-        padding: 1.5rem 0;
+    @media (--mq-gt-m) {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
         flex-wrap: nowrap;
     }
 }
@@ -32,10 +33,6 @@
     & button {
         margin-bottom: 1rem;
     }
-
-    @media (--mq-gt-s) {
-        margin-right: 7.5rem;
-    }
 }
 
 .list {
@@ -45,6 +42,8 @@
 }
 
 .bulletList {
+    padding: 0 0 0 1.25rem;
+
     @media (--mq-gt-s) {
         margin: 0;
         padding: 0;
@@ -81,11 +80,20 @@
     }
 }
 
-.sidebar h1 {
-    margin-bottom: 0.5rem;
-    font-size: var(--t--size-s);
+.colLeft {
+    width: 64%;
 
     @media (--mq-s) {
-        margin-top: 1.5rem;
+        width: 100%;
+    }
+}
+
+.colRight {
+    width: 32%;
+    margin-left: 4%;
+
+    @media (--mq-s) {
+        width: 100%;
+        margin-left: 0;
     }
 }

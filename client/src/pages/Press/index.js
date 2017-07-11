@@ -7,6 +7,7 @@ import {connector, getPress} from 'state/press';
 import {parseModel} from 'tools/parseApi';
 
 import Title from 'components/Title';
+import ContactDetails from 'components/ContactDetails';
 
 import ExternalLink from 'images/icons/external-link.svg';
 import Button from 'components/Button';
@@ -66,7 +67,7 @@ export default class Press extends Component {
                 <Title>Press</Title>
 
                 <div className={styles.container}>
-                    <div className={styles.main}>
+                    <div className={`${styles.main} ${styles.colLeft}`}>
                         <h1>News Releases</h1>
                         <ul className={styles.list}>
                             {pressReleases.splice(0, pressReleasesPage * 5)
@@ -110,9 +111,12 @@ export default class Press extends Component {
                             </Button>
                         }
                     </div>
-                    <div className={styles.sidebar}>
-                        <h1>Contact</h1>
-                        <p>{contactDetail}</p>
+                    <div className={styles.colRight}>
+                        <ContactDetails data={[{
+                            _id: 'contactDetail',
+                            title: 'Contact',
+                            details: contactDetail
+                        }]} />
                     </div>
                 </div>
             </section>
