@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import config from '../../config';
 
 export const issueToken = (user) =>
-    jwt.sign(user, config.auth.tokenSecret, {expiresIn: '24h'});
+    jwt.sign(user, config.auth.tokenSecret, {expiresIn: '1825d'});
 
 export const decodeToken = (token) =>
     new Promise(function(resolve, reject) {

@@ -196,8 +196,7 @@ export default (api, {apolloClient}) => {
                 });
 
                 res.cookie('access_token', secureToken, {
-                    maxAge: 24 * 60 * 60 * 1000, // 24 hours,
-                    httpOnly: true
+                    maxAge: 1825 * 24 * 60 * 60 * 1000 // 5 years
                 });
 
                 const customer = await getCustomer(customerToken.customerAccessToken.accessToken);
@@ -226,8 +225,7 @@ export default (api, {apolloClient}) => {
                 });
 
                 res.cookie('access_token', secureToken, {
-                    maxAge: 24 * 60 * 60 * 1000, // 24 hours,
-                    httpOnly: true
+                    maxAge: 1825 * 24 * 60 * 60 * 1000 // 5 years
                 });
 
                 const customer = await getCustomer(customerToken.customerAccessToken.accessToken);
@@ -351,5 +349,13 @@ export default (api, {apolloClient}) => {
             console.trace(err);
             res.status(500).send(err.message);
         }
+    });
+
+    // Deauth/sign out
+    api.get('/store/customer/signout', (req, res) => {
+        res.cookie('access_token', '', {
+            maxAge: -10000
+        });
+        res.send({ok: true});
     });
 };

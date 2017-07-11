@@ -24,6 +24,16 @@ export const signinCustomer = action({
     })
 }, handler);
 
+export const signoutCustomer = action({
+    namespace: 'AUTH',
+    event: 'SIGNOUT_CUSTOMER',
+    action: (http) => http.get('/api/store/customer/signout'),
+    result: (state) => ({
+        ...state,
+        auth: {}
+    })
+}, handler);
+
 export const getCustomer = action({
     namespace: 'AUTH',
     event: 'GET_CUSTOMER',

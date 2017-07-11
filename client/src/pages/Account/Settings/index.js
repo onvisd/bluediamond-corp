@@ -1,13 +1,21 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {redirect} from 'react-isomorphic-render';
 
+import Button from 'components/Button';
 import Panel from '../Panel';
 import Address from '../Address';
 import UpdateInfo from '../UpdateInfo';
 import EditAddress from '../EditAddress';
 import AddAddress from '../AddAddress';
+import {signoutCustomer} from 'state/auth';
 
 import styles from './styles.module.css';
 
+@connect(
+    null,
+    {signoutCustomer}
+)
 export default class Settings extends Component {
     static propTypes = {
         auth: PropTypes.object.isRequired
@@ -47,6 +55,11 @@ export default class Settings extends Component {
 
     cancelAdd = () => {
         this.setState(() => ({addingAddress: false}));
+    }
+
+    handleSignOut = () => {
+        this.props.signoutCustomer();
+        redirect('/store');
     }
 
     render() {
@@ -96,6 +109,7 @@ export default class Settings extends Component {
                         />
                     }
                 </Panel>
+                <Button onClick={this.handleSignOut}>Sign out</Button>
             </div>
         );
     }

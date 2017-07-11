@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
-import {pushLocation} from 'react-isomorphic-render';
+import {redirect, pushLocation} from 'react-isomorphic-render';
 import classnames from 'classnames';
 
 import {connector as authConnector} from 'state/auth';
@@ -12,7 +12,8 @@ import styles from './styles.module.css';
 
 @withRouter
 @connect(
-    (state) => ({...authConnector(state.auth)})
+    (state) => ({...authConnector(state.auth)}),
+    {redirect}
 )
 export default class Account extends Component {
     updateView = (path) => {
@@ -21,7 +22,12 @@ export default class Account extends Component {
 
     render() {
         const {view} = this.props.params;
-        const {auth} = this.props;
+        const {auth, redirect} = this.props; // eslint-disable-line no-shadow
+
+        if(!auth || !auth.data) {
+            redirect('/store');
+            return (<div />);
+        }
 
         return (
             <div className={styles.container}>
