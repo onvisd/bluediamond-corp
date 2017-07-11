@@ -13,13 +13,13 @@ export default class Orders extends Component {
         const user = this.props.auth.data;
         const allOrders = user.orders;
 
-        let lastOrder = [];
+        let lastOrder = null;
         let lineItems = [];
         let oldOrders = [];
 
         if(allOrders.edges.length) lastOrder = allOrders.edges[0].node;
         if(allOrders.edges.length) oldOrders = allOrders.edges.slice(1);
-        if(lastOrder.length) lineItems = lastOrder.lineItems.edges;
+        if(lastOrder) lineItems = lastOrder.lineItems.edges;
 
         const format = (date) => moment(date).format('MMMM D, YYYY');
 
@@ -27,17 +27,15 @@ export default class Orders extends Component {
             <div className={styles.container}>
                 <div className={styles.main}>
                     <Panel title="Current Order">
-                        {lastOrder.length > 0 &&
-                            <div>
+                        {lastOrder
+                            ? (<div>
                                 <p className={styles.title}>Order Information</p>
                                 <div className={styles.orderInfo}>
                                     <div className={styles.left}>
                                         <p><strong>Order Date : </strong> {format(lastOrder.processedAt)}</p>
-                                        <p><strong>Order Number :</strong> {lastOrder.orderNumber}</p>
                                     </div>
                                     <div className={styles.right}>
-                                        <p><strong>Estimated Delivery Date : </strong></p>
-                                        <p><strong>Tracking Number : </strong></p>
+                                        <p><strong>Order Number :</strong> {lastOrder.orderNumber}</p>
                                     </div>
                                 </div>
                                 <div className={styles.orderLineItems}>
@@ -45,10 +43,14 @@ export default class Orders extends Component {
                                     {lineItems.map((item, i) =>
                                         <div key={`item${i}`}>
                                             <div className={styles.item}>
+                                                {item.node.variant.image &&
+                                                    (<div className={styles.itemImage}>
+                                                        <img src={item.node.variant.image.src} />
+                                                    </div>)}
                                                 <div className={styles.itemInfo}>
                                                     <p>
                                                         <strong>{item.node.title}</strong><br />
-                                                        Attributes
+                                                        {item.node.variant.title}
                                                     </p>
                                                 </div>
                                                 <div className={styles.itemQuantity}>
@@ -65,20 +67,19 @@ export default class Orders extends Component {
                                     <p>Final Total</p>
                                     <h3>${lastOrder.totalPrice}</h3>
                                 </div>
-                            </div>
-                        }
-                        {!lastOrder.length && <p>No current orders.</p>}
+                            </div>)
+                            : <p>No current orders.</p>}
                     </Panel>
                 </div>
                 <div className={styles.sidebar}>
                     <Panel title="Order History">
                           {oldOrders.length > 0 &&
                               oldOrders.map((order) =>
-                                  <div key={order.orderNumber} className={styles.tinyOrder}>
+                                  <div key={order.node.orderNumber} className={styles.tinyOrder}>
                                       <p>
-                                          <strong>Order #{order.orderNumber}</strong> <br/>
-                                          Delivered on {format(order.processedAt)} <br />
-                                          <strong>Total:</strong> ${order.totalPrice}
+                                          <strong>Order #{order.node.orderNumber}</strong> <br/>
+                                          Delivered on {format(order.node.processedAt)} <br />
+                                          <strong>Total:</strong> ${order.node.totalPrice}
                                       </p>
                                   </div>
                               )

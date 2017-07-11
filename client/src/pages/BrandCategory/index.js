@@ -18,14 +18,12 @@ import MoreProducts from './MoreProducts';
 import sortByPriority from 'tools/sortByPriority';
 import styles from './styles.module.css';
 
-@preload(({dispatch, parameters}) =>
-    dispatch(getBrand(parameters.brandSlug))
-    .then((brand) => {
-        dispatch(setNavigationStyle({
-            className: `brand--${brand.fields.themeColor}`
-        }));
-    })
-)
+@preload(async ({dispatch, parameters}) => {
+    const brand = await dispatch(getBrand(parameters.brandSlug));
+    await dispatch(setNavigationStyle({
+        className: `brand--${brand.fields.themeColor}`
+    }));
+})
 @connect(
     (state) => ({
         ...brandConnector(state.brand),

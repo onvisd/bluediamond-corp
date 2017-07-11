@@ -20,12 +20,9 @@ import styles from './styles.module.css';
 
 @preload(async ({dispatch, parameters}) => {
     const brand = await dispatch(getBrand(parameters.slug));
-
-    dispatch(setNavigationStyle({
+    await dispatch(setNavigationStyle({
         className: `brand--${brand.fields.themeColor}`
     }));
-
-    return brand;
 })
 @connect(
     (state) => ({

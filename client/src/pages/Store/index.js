@@ -33,8 +33,8 @@ const escapeRegEx = (str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, 
 @preload(async ({dispatch, location}) => {
     const query = location.query;
 
-    const products = await dispatch(getStoreProducts());
-    const search = await dispatch(setStoreSearch({
+    await dispatch(getStoreProducts());
+    await dispatch(setStoreSearch({
         visibleCardCount: Math.floor(location.query.visible) || 16,
         perPage: Math.floor(location.query.perPage) || 16,
         filter: {
@@ -46,8 +46,6 @@ const escapeRegEx = (str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, 
         sort: searchViaParam('search', query),
         search: sortViaParam('sort', query)
     }));
-
-    return ({products, search});
 })
 @connect(
     (state) => ({

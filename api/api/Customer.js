@@ -150,6 +150,13 @@ export default (api, {apolloClient}) => {
                                             node {
                                                 title
                                                 quantity
+                                                variant {
+                                                    image {
+                                                        src
+                                                    }
+                                                    title
+                                                    price
+                                                }
                                             }
                                         }
                                     }

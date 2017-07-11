@@ -21,10 +21,10 @@ import Footer from 'components/Footer';
 import FooterMobile from 'components/FooterMobile';
 import sortByPriority from 'tools/sortByPriority';
 
-@preload(({dispatch}) => {
-    dispatch(getCustomer());
-    dispatch(setNavigationStyle({}));
-    return dispatch(getNavigationData());
+@preload(async ({dispatch}) => {
+    await dispatch(getCustomer());
+    await dispatch(setNavigationStyle({}));
+    await dispatch(getNavigationData());
 })
 @connect(
     (state) => ({

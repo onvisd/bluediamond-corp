@@ -13,9 +13,7 @@ import StoreProductReview from 'components/StoreProductReview';
 import styles from './styles.module.css';
 
 @preload(async ({dispatch, parameters}) => {
-    const product = await dispatch(getStoreProduct(parameters.slug));
-
-    return product;
+    await dispatch(getStoreProduct(parameters.slug));
 })
 @connect(
     (state) => ({...storeProductConnector(state.storeProduct)}),
