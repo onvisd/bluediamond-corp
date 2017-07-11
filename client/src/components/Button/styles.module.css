@@ -19,6 +19,7 @@
     user-select: none;
     will-change: background-color;
     transition: background-color 300ms ease;
+    cursor: pointer;
 
     &:disabled {
         color: var(--c--gray-lighter);

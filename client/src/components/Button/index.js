@@ -14,9 +14,9 @@ const Button = (props) => {
 
     // Render a button element
     let button = (
-        <button className={className} onClick={onClick} {...rest}>
+        <div className={className} onClick={onClick} {...rest}>
             {children}
-        </button>
+        </div>
     );
 
     // If Button has an href prop, render an anchor element
