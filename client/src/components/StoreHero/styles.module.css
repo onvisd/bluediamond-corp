@@ -53,4 +53,6 @@
 
 .innerContainer {
     @mixin container;
+
+    max-width: 100%;
 }
