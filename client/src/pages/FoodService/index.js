@@ -149,28 +149,20 @@ export default class FoodService extends Component {
                     </div>
                     <div className={styles.productFeatures}>
                         <div className={styles.productFeature}>
-                            <a href={fields.productFeature1Link}>
-                                {this.renderImage(fields.productFeature1Image.file.url)}
-                                {fields.productFeature1Label}
-                            </a>
+                            {this.renderImage(fields.productFeature1Image.file.url)}
+                            {fields.productFeature1Label}
                         </div>
                         <div className={styles.productFeature}>
-                            <a href={fields.productFeature2Link}>
-                                {this.renderImage(fields.productFeature2Image.file.url)}
-                                {fields.productFeature2Label}
-                            </a>
+                            {this.renderImage(fields.productFeature2Image.file.url)}
+                            {fields.productFeature2Label}
                         </div>
                         <div className={styles.productFeature}>
-                            <a href={fields.productFeature3Link}>
-                                {this.renderImage(fields.productFeature3Image.file.url)}
-                                {fields.productFeature3Label}
-                            </a>
+                            {this.renderImage(fields.productFeature3Image.file.url)}
+                            {fields.productFeature3Label}
                         </div>
                         <div className={styles.productFeature}>
-                            <a href={fields.productFeature4Link}>
-                                {this.renderImage(fields.productFeature4Image.file.url)}
-                                {fields.productFeature4Label}
-                            </a>
+                            {this.renderImage(fields.productFeature4Image.file.url)}
+                            {fields.productFeature4Label}
                         </div>
                     </div>
                     <div className={styles.buttons}>

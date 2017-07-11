@@ -1,1 +1,8 @@
+@import 'constants/grid';
+@import 'constants/color';
+@import 'constants/type';
+
 /* Page Paragraph Component */
+.container {
+    @mixin container;
+}

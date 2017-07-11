@@ -7,11 +7,20 @@ import Input from '../FormInput';
 import Select from '../FormSelect';
 import Textarea from '../FormTextarea';
 
+import countryState from 'tools/countryState';
+
+const countries = countryState.countries.map((item) => item.country);
+const states = {};
+countryState.countries.forEach((item) => {
+    states[item.country] = item.states;
+});
+
 import styles from './styles.module.css';
 
 export default class ContactForm extends Component {
     state = {
-        canSubmit: false
+        canSubmit: false,
+        stateList: states['United States']
     };
 
     static propTypes = {
@@ -36,7 +45,14 @@ export default class ContactForm extends Component {
         });
     }
 
-    submit(model) {
+    submit = (model) => {
+        this.setState({
+            error: false,
+            sent: false,
+            canSubmit: false,
+            sending: true
+        });
+
         axios.post('/api/email', {
             toEmail: this.props.emailTo,
             email: model.email,
@@ -57,11 +73,28 @@ export default class ContactForm extends Component {
             template: 'Contact'
         })
         .then(() => {
-            console.log('Message sent successfully!');
+            this.form.reset();
+            this.setState({
+                error: false,
+                sent: true,
+                sending: false
+            }, () => {
+                this.sent.scrollIntoView({behavior: 'smooth'});
+            });
         })
-        .catch((err) => {
-            console.log('Something went wrong, please try again!', err);
+        .catch(() => {
+            this.setState({
+                sent: false,
+                error: true,
+                sending: false
+            }, () => {
+                this.error.scrollIntoView({behavior: 'smooth'});
+            });
         });
+    }
+
+    updateCountry = (country) => {
+        this.setState({stateList: states[country]});
     }
 
     render() {
@@ -78,7 +111,31 @@ export default class ContactForm extends Component {
                 onValid={this.enableSubmit}
                 onInvalid={this.disableSubmit}
                 className={styles.form}
+                ref={(form) => {
+                    this.form = form;
+                }}
             >
+                {this.state.sent
+                    ? (
+                        <p className={styles.sent} ref={(sent) => {
+                            this.sent = sent;
+                        }}>
+                            Your message has been received and we will follow up with you as
+                            soon as possible.
+                        </p>
+                    )
+                    : null
+                }
+                {this.state.error
+                    ? (
+                        <p className={styles.error} ref={(error) => {
+                            this.error = error;
+                        }}>
+                            There was a problem sending your message. Please try again.
+                        </p>
+                    )
+                    : null
+                }
                 <div className={styles.fieldPair}>
                     <Input
                         name="firstName"
@@ -124,20 +181,35 @@ export default class ContactForm extends Component {
                         classNames={{container: styles.input, label: styles.label}}
                         required
                     />
-                    <Input
-                        name="state"
-                        label="State"
-                        validations="minLength:1"
-                        classNames={{container: styles.input, label: styles.label}}
-                        required
-                    />
+                    {this.state.stateList
+                        ? (
+                            <Select
+                                name="state"
+                                label="State/Province"
+                                options={this.state.stateList}
+                                classNames={{container: styles.input, label: styles.label}}
+                                required
+                            />
+                        )
+                        : (
+                            <Input
+                                name="state"
+                                label="State/Province"
+                                validations="minLength:1"
+                                classNames={{container: styles.input, label: styles.label}}
+                                required
+                            />
+                        )
+                    }
                 </div>
                 <div className={styles.fieldPair}>
-                    <Input
+                    <Select
                         name="country"
                         label="Country"
-                        validations="minLength:1"
+                        options={countries}
                         classNames={{container: styles.input, label: styles.label}}
+                        onChange={this.updateCountry}
+                        value="United States"
                         required
                     />
                     <Input
@@ -198,7 +270,12 @@ export default class ContactForm extends Component {
                         required
                     />
                 )}
-                <Button type="submit" disabled={!this.state.canSubmit}>Send Message</Button>
+                <Button
+                    type="submit"
+                    disabled={!this.state.canSubmit}
+                >
+                    {this.state.sending ? 'Sending...' : 'Send Message'}
+                </Button>
             </Form>
         );
     }

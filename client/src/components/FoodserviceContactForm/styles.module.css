@@ -1,3 +1,4 @@
+@import 'constants/grid';
 @import 'constants/color';
 
 .fieldPair {
@@ -29,4 +30,21 @@
         content: ' *';
         color: var(--c--red);
     }
+}
+
+.sent,
+.error {
+    margin: 0 0.5rem 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--l--border-radius);
+}
+
+.sent {
+    background: var(--c--green-light);
+    color: var(--c--black);
+}
+
+.error {
+    background: color(var(--c--red) lightness(+30%));
+    color: var(--c--red-dark);
 }

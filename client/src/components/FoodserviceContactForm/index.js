@@ -48,10 +48,23 @@ export default class FoodserviceContact extends Component {
             template: 'FSContact'
         })
         .then(() => {
-            console.log('Message sent successfully!');
+            this.form.reset();
+            this.setState({
+                error: false,
+                sent: true,
+                sending: false
+            }, () => {
+                this.sent.scrollIntoView({behavior: 'smooth'});
+            });
         })
-        .catch((err) => {
-            console.log('Something went wrong, please try again!', err);
+        .catch(() => {
+            this.setState({
+                sent: false,
+                error: true,
+                sending: false
+            }, () => {
+                this.error.scrollIntoView({behavior: 'smooth'});
+            });
         });
     }
 
@@ -67,7 +80,31 @@ export default class FoodserviceContact extends Component {
                 onValid={this.enableSubmit}
                 onInvalid={this.disableSubmit}
                 className={styles.form}
+                ref={(form) => {
+                    this.form = form;
+                }}
             >
+                {this.state.sent
+                    ? (
+                        <p className={styles.sent} ref={(sent) => {
+                            this.sent = sent;
+                        }}>
+                            Your message has been received and we will follow up with you as
+                            soon as possible.
+                        </p>
+                    )
+                    : null
+                }
+                {this.state.error
+                    ? (
+                        <p className={styles.error} ref={(error) => {
+                            this.error = error;
+                        }}>
+                            There was a problem sending your message. Please try again.
+                        </p>
+                    )
+                    : null
+                }
                 <div className={styles.fieldPair}>
                     <Input
                         name="firstName"
@@ -121,7 +158,12 @@ export default class FoodserviceContact extends Component {
                     classNames={{container: styles.input, label: styles.label}}
                     required
                 />
-                <Button type="submit" disabled={!this.state.canSubmit}>Send Message</Button>
+                <Button
+                    type="submit"
+                    disabled={!this.state.canSubmit}
+                >
+                    {this.state.sending ? 'Sending...' : 'Send Message'}
+                </Button>
             </Form>
         );
     }

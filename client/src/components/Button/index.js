@@ -19,6 +19,14 @@ const Button = (props) => {
         </div>
     );
 
+    if(rest.type) {
+        button = (
+            <button className={className} onClick={onClick} {...rest}>
+                {children}
+            </button>
+        );
+    }
+
     // If Button has an href prop, render an anchor element
     if(href) {
         button = (

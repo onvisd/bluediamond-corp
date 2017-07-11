@@ -28,7 +28,7 @@ export default class Navigation extends Component {
             ],
             companyLinks: [
                 {name: 'Foodservice', slug: '/foodservice'},
-                {name: 'Careers', slug: 'https://careers.bluediamond.com', external: true},
+                {name: 'Careers', slug: 'http://careers.bluediamond.com', external: true},
                 {name: 'Press', slug: '/press'},
                 {name: 'Contact Us', slug: '/contact'}
             ]

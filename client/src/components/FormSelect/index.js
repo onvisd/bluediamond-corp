@@ -13,12 +13,11 @@ export default class FormSelect extends Component {
         }
     }
 
-    componentDidMount() {
-        this.props.setValue('No subject');
-    }
-
     changeValue = (event) => {
         this.props.setValue(event.currentTarget.value);
+
+        if(this.props.onChange)
+            this.props.onChange(event.currentTarget.value);
     }
 
     showError = () => {
@@ -39,7 +38,8 @@ export default class FormSelect extends Component {
             showRequired,
             getErrorMessage,
             classNames,
-            required
+            required,
+            value
         } = this.props;
 
         return (
@@ -61,12 +61,18 @@ export default class FormSelect extends Component {
                     <select
                         name={name}
                         onChange={this.changeValue}
-                        value={getValue() || 'No subject'}
+                        value={getValue() || ''}
                         required={required}
+                        defaultValue={value}
                     >
-                        <option value="No subject">Please select one...</option>
+                        <option value="" disabled>Please select one...</option>
                         {options.map((option) => (
-                            <option value={option} key={option}>{option}</option>
+                            <option
+                                value={option}
+                                key={option}
+                            >
+                                {option}
+                            </option>
                         ))}
                     </select>
                 </div>

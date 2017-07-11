@@ -1,4 +1,5 @@
 @import 'constants/color';
+@import 'constants/grid';
 
 .fieldPair {
     display: flex;
@@ -14,4 +15,21 @@
         width: 100%;
         min-width: 0;
     }
+}
+
+.sent,
+.error {
+    margin: 0 0.5rem 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--l--border-radius);
+}
+
+.sent {
+    background: var(--c--green-light);
+    color: var(--c--black);
+}
+
+.error {
+    background: color(var(--c--red) lightness(+30%));
+    color: var(--c--red-dark);
 }
