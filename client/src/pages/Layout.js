@@ -84,15 +84,33 @@ export default class Layout extends Component {
 
         let footer = (
             <div>
-                <FooterMobile />
-                <Footer data={footerData} />
+                <FooterMobile
+                    params={this.props.params}
+                    path={this.props.location.pathname}
+                />
+                <Footer
+                    data={footerData}
+                    params={this.props.params}
+                    path={this.props.location.pathname}
+                />
             </div>
         );
 
         if(responsive.small !== undefined && responsive.small) { // eslint-disable-line
-            footer = <FooterMobile />;
+            footer = (
+                <FooterMobile
+                    params={this.props.params}
+                    path={this.props.location.pathname}
+                />
+            );
         } else if(responsive.small !== undefined && !responsive.small) { // eslint-disable-line
-            footer = <Footer data={footerData} />;
+            footer = (
+                <Footer
+                    data={footerData}
+                    params={this.props.params}
+                    path={this.props.location.pathname}
+                />
+            );
         }
 
         return (
