@@ -29,6 +29,9 @@
 
     & .imageCluster {
         flex: 0 0 120%;
+
+        /* IE11 fix, since flex: 0 0 120% doesn't auto-center as it does on Chrome/etc */
+        -ms-transform: translateX(-10%); /* stylelint-disable-line */
     }
 }
 

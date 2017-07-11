@@ -30,8 +30,9 @@
     padding: 0.5rem;
 
     @media (--mq-gt-s) {
-        width: 30%;
+        width: 20%;
         margin-right: 0.5rem;
+        padding: 0 0.5rem 0 0;
     }
 }
 
@@ -61,8 +62,9 @@
 .delete {
     display: none;
     margin-top: -2px;
-    padding: 0;
+    padding: 0.5rem;
     flex-direction: column;
+    cursor: pointer;
 
     & svg {
         fill: var(--c--blue);

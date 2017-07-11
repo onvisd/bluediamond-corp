@@ -36,6 +36,12 @@
     left: 0;
 }
 
+.logo {
+    display: block;
+    width: 158px;
+    margin: 0 auto 1rem;
+}
+
 .details {
     composes: section;
     background-position: 50% top;
@@ -256,6 +262,8 @@
 }
 
 .hotspots {
+    min-height: 51rem;
+
     @media (--mq-s) {
         display: none;
     }
@@ -307,6 +315,9 @@
 
 .hotspot :global {
     animation: pulsate 1.5s ease infinite alternate both; /* stylelint-disable-line */
+
+    /* Animations on the hotspots don't play well in IE11 */
+    -ms-animation: none; /* stylelint-disable-line */
 }
 
 .hotspotContent {
@@ -364,7 +375,7 @@
     composes: hotspotContent; /* stylelint-disable-line */
 
     &::after {
-        left: -14.5px;
+        left: -12px;
     }
 }
 
@@ -374,7 +385,7 @@
     composes: hotspotContent; /* stylelint-disable-line */
 
     &::after {
-        right: -14px;
+        right: -12px;
         transform: rotate(225deg);
     }
 }

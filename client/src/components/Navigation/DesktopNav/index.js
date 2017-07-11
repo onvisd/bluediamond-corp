@@ -9,7 +9,7 @@ import {connector as checkoutConnector} from 'state/checkout';
 
 import ShoppingCartIcon from 'images/icons/cart.svg';
 import User from 'images/icons/user.svg';
-import BDLogo from 'images/bd-logo.svg';
+import BDLogo from 'images/bd-logo.png';
 import ShoppingCart from '../ShoppingCart';
 import styles from './styles.module.css';
 
@@ -93,7 +93,7 @@ export default class DesktopNav extends Component {
         return (
             <nav className={styles.container}>
                 <Link to="/">
-                    <BDLogo className={styles.logo} />
+                    <img src={BDLogo} className={styles.logo} />
                 </Link>
                 <div className={classnames(styles.secondaryNav, styles[navColor])}>
                     <div className={styles.innerContainer}>

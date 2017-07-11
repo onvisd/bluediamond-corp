@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import {connector as authConnector} from 'state/auth';
 
-import BDLogo from 'images/bd-logo.svg';
+import BDLogo from 'images/bd-logo.png';
 import User from 'images/icons/user.svg';
 import Cart from 'images/icons/cart.svg';
 import styles from './styles.module.css';
@@ -102,7 +102,7 @@ export default class MobileNav extends Component {
                     </div>
                     <div className={styles.logo}>
                         <Link to="/" onClick={this.toggleNav.hide}>
-                            <BDLogo className={styles.logo} />
+                            <img src={BDLogo} className={styles.logo} />
                         </Link>
                     </div>
                     <div

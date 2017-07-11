@@ -36,6 +36,7 @@
     background-position: center;
     will-change: transform;
     transition: transform 300ms ease;
+    min-height: 300px;
 
     & svg {
         position: absolute;

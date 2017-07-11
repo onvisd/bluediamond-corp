@@ -14,7 +14,7 @@ import {parseModel} from 'tools/parseApi';
 
 import Title from 'components/Title';
 
-import BDLogo from 'images/bd-logo.svg';
+import BDLogo from 'images/bd-logo.png';
 import GrowersHands from 'images/icons/growers-hands.svg';
 import ProductManufacturing from 'images/icons/product-manufacturing.svg';
 import QualityAssurance from 'images/icons/quality-assurance.svg';
@@ -173,7 +173,7 @@ export default class Craft extends Component {
                             <div className={styles.detailsOverlay} />
                             <div className={styles.detailsContainer}>
                                 <div>
-                                    <BDLogo />
+                                    <img src={BDLogo} className={styles.logo} />
                                     <h2>{craftFields.detailsHeadline}</h2>
                                 </div>
                                 <ul className={styles.detailColumns}>

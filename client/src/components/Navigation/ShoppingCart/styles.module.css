@@ -19,6 +19,7 @@
 
 .subtotal {
     display: flex;
+    margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     padding: 0 1rem;
     align-items: center;
