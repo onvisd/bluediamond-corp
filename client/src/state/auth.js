@@ -7,7 +7,10 @@ const handler = createHandler(settings);
 export const registerCustomer = action({
     namespace: 'AUTH',
     event: 'REGISTER_CUSTOMER',
-    action: (creds, http) => http.post('/api/store/customer/register', creds),
+    action: (creds, http) =>
+      http.post('/api/store/customer/register', creds)
+      .then((result) => result)
+      .catch((err) => err),
     result: (state, result) => ({
         ...state,
         auth: result
@@ -17,7 +20,10 @@ export const registerCustomer = action({
 export const signinCustomer = action({
     namespace: 'AUTH',
     event: 'SIGNIN_CUSTOMER',
-    action: (creds, http) => http.post('/api/store/customer/signin', creds),
+    action: (creds, http) =>
+      http.post('/api/store/customer/signin', creds)
+      .then((result) => result)
+      .catch((err) => err),
     result: (state, result) => ({
         ...state,
         auth: result

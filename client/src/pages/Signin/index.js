@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Form} from 'formsy-react';
 import classnames from 'classnames';
 
+import {connector as authConnector} from 'state/auth';
 import {registerCustomer, signinCustomer} from 'state/auth';
 
 import FormInput from 'components/FormInput';
@@ -11,13 +12,17 @@ import Button from 'components/Button';
 import styles from './styles.module.css';
 
 @connect(
-    null,
+    (state) => ({...authConnector(state.auth)}),
     {registerCustomer, signinCustomer, goto}
 )
 export default class Signin extends Component {
     state = {
         view: 'signin',
-        canSubmit: false
+        submitting: false,
+        canSubmit: false,
+        error: null,
+        success: null,
+        message: ''
     }
 
     enableSubmit = () => {
@@ -32,32 +37,89 @@ export default class Signin extends Component {
         });
     }
 
-    handleSignIn = (creds) => {
-        this.props.signinCustomer(creds)
-            .then((result) => {
-                this.props.goto('/store');
+    message = (err) => {
+        if(!err)
+            return;
 
-                return result;
-            })
-            .catch((err) => console.log(err));
-    }
-
-    handleRegister = (creds) => {
-        if(creds.password === creds.password_confirmation) {
-            this.props.registerCustomer(creds)
-                .then((result) => {
-                    this.props.goto('/store');
-
-                    return result;
-                })
-                .catch((err) => console.log(err));
-        } else {
-            console.log('Passwords dont match');
+        switch (err) {
+            case 'Unidentified customer':
+                return 'Your email or password was incorrect. Please try again.';
+            default:
+                return 'We encountered a problem. Please try again.';
         }
     }
 
+    throwError = (err) => {
+        this.setState({
+            error: true,
+            message: this.message(err),
+            canSubmit: true,
+            submitting: false
+        });
+    }
+
+    handleSignIn = (creds) => {
+        this.setState({submitting: true});
+
+        this.props.signinCustomer(creds)
+            .then((result) => {
+                if(this.props.auth.authenticated === true) {
+                    this.setState({submitting: false, success: true});
+                    this.props.goto('/store');
+                } else {
+                    this.throwError(this.props.auth.response.text);
+                }
+
+                return result;
+            })
+            .catch(() => {
+                this.throwError(this.props.auth.response.text);
+            });
+    }
+
+    handleRegister = (creds) => {
+        this.setState({submitting: true});
+
+        if(creds.password === creds.password_confirmation) {
+            this.props.registerCustomer(creds)
+                .then((result) => {
+                    if(this.props.auth.authenticated === true) {
+                        this.setState({submitting: false, success: true});
+                        this.props.goto('/store');
+                    } else {
+                        this.throwError(this.props.auth.response.text);
+                    }
+
+                    return result;
+                })
+                .catch(() => {
+                    this.throwError(this.props.auth.response.text);
+                });
+        } else {
+            this.throwError('Passwords do not match');
+        }
+    }
+
+    signInState() {
+        if(this.state.submitting)
+            return 'Signing in…';
+        else if(this.state.success)
+            return 'Success! Please wait…';
+
+        return 'Sign in';
+    }
+
+    registerState() {
+        if(this.state.submitting)
+            return 'Creating account…';
+        else if(this.state.success)
+            return 'Success! Please wait…';
+
+        return 'Create Account';
+    }
+
     render() {
-        const {view, canSubmit} = this.state;
+        const {view, canSubmit, error, message} = this.state;
 
         return (
             <div className={styles.container}>
@@ -97,6 +159,14 @@ export default class Signin extends Component {
                             onValid={this.enableSubmit}
                             onInvalid={this.disableSubmit}
                         >
+                            {error
+                                ? (
+                                    <p className={styles.error}>
+                                        {message}
+                                    </p>
+                                )
+                                : null
+                            }
                             <FormInput
                                 name="email"
                                 label="Email Address"
@@ -116,7 +186,7 @@ export default class Signin extends Component {
                                 layout="fw"
                                 disabled={!canSubmit}
                             >
-                                Sign in
+                                {this.signInState()}
                             </Button>
                         </Form>
                     )}
@@ -127,6 +197,14 @@ export default class Signin extends Component {
                             onValid={this.enableSubmit}
                             onInvalid={this.disableSubmit}
                         >
+                            {error
+                                ? (
+                                    <p className={styles.error}>
+                                        {message}
+                                    </p>
+                                )
+                                : null
+                            }
                             <FormInput
                                 name="email"
                                 label="Email Address"
@@ -153,7 +231,7 @@ export default class Signin extends Component {
                                 layout="fw"
                                 disabled={!canSubmit}
                             >
-                                Create account
+                                {this.registerState()}
                             </Button>
                         </Form>
                     )}

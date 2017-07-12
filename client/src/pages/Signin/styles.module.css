@@ -7,7 +7,7 @@
 
     width: 100%;
     padding: 1rem;
-    max-width: 22.5rem;
+    max-width: 23rem;
 
     & h1 {
         font-size: var(--t--size-s);
@@ -71,6 +71,15 @@
             margin-bottom: 1rem;
         }
     }
+}
+
+.error {
+    width: 100%;
+    margin: 0 0 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--l--border-radius);
+    background: color(var(--c--red) lightness(+30%));
+    color: var(--c--red-dark);
 }
 
 .continue {

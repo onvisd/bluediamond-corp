@@ -119,5 +119,5 @@
 .fail:hover {
     border: 1px solid var(--c--red);
     color: var(--c--red);
-    background-color: var(--c--red);
+    background-color: var(--c--white);
 }
