@@ -56,11 +56,11 @@ export default class RecipeIndex extends Component {
         const {recipes} = this.props;
         const {visibleCardCount, filter, sort} = this.state;
 
-        let cards = recipes.items.slice(0, visibleCardCount);
+        let cards = recipes.items;
 
         const filterCards = (card) =>
-            card.fields.dietaryRestrictions &&
-            card.fields.dietaryRestrictions.indexOf(filter) !== -1;
+            card.fields.consumerSymbols &&
+            card.fields.consumerSymbols.indexOf(filter) !== -1;
 
         const sortCards = (field) => {
             const difficultyLevels = {easy: 0, medium: 1, hard: 2};
@@ -83,7 +83,7 @@ export default class RecipeIndex extends Component {
         if(filter) cards = cards.filter(filterCards);
         if(sort) cards = cards.sort(sortCards(sort));
 
-        return cards.map((card) => (
+        return cards.slice(0, visibleCardCount).map((card) => (
             <RecipeCard
                 data={{entry: card, assets: recipes.includes.Asset}}
                 key={`card${card.sys.id}`}
@@ -136,8 +136,9 @@ export default class RecipeIndex extends Component {
                                     }}
                                 >
                                     <option value="null">Dietary Restrictions</option>
-                                    <option value="Non-Diary">Non-Dairy</option>
-                                    <option value="Gluten Free">Gluten Free</option>
+                                    <option value="Dairy-Free">Dairy-Free</option>
+                                    <option value="Gluten-Free">Gluten-Free</option>
+                                    <option value="Vegan">Vegan</option>
                                 </select>
                             </div>
                             <div className="form--select">
