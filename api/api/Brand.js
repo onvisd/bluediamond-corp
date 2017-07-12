@@ -35,19 +35,6 @@ export default (api, {contentful}) => {
         })
         .then((entries) => entries.items.map((entry) => entry));
 
-    const getRandomRecipes = () =>
-        contentful.client.getEntries({
-            content_type: 'recipe', // eslint-disable-line camelcase
-            select: [
-                'fields.name',
-                'fields.slug',
-                'fields.cardBackgroundImage',
-                'fields.cookTime',
-                'fields.difficulty'
-            ].join()
-        })
-        .then((entries) => getRandomEntries(3, entries));
-
     const getRandomProducts = () =>
         contentful.client.getEntries({
             content_type: 'product' // eslint-disable-line camelcase
@@ -80,9 +67,6 @@ export default (api, {contentful}) => {
 
             brand.fields.products = products;
             brand.fields.moreProducts = randomProducts;
-
-            if(req.params.slug === 'almond-breeze')
-                brand.fields.recipes = await getRandomRecipes();
 
             setCached(`brands_${req.params.slug}`, {fields: brand.fields});
             res.status(200).send({fields: brand.fields});
