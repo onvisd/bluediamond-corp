@@ -38,29 +38,24 @@ export default class FoodService extends Component {
                         })
                     }),
                     productFeature1Label: PropTypes.string.isRequired,
-                    productFeature1Link: PropTypes.string.isRequired,
                     productFeature2Image: PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string.isRequired
                         })
                     }),
                     productFeature2Label: PropTypes.string.isRequired,
-                    productFeature2Link: PropTypes.string.isRequired,
                     productFeature3Image: PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string.isRequired
                         })
                     }),
                     productFeature3Label: PropTypes.string.isRequired,
-                    productFeature3Link: PropTypes.string.isRequired,
                     productFeature4Image: PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string.isRequired
                         })
                     }),
                     productFeature4Label: PropTypes.string.isRequired,
-                    productFeature4Link: PropTypes.string.isRequired,
-                    requestFormContent: PropTypes.string.isRequired,
                     contactForm: PropTypes.shape({
                         sys: PropTypes.shape({
                             id: PropTypes.string.isRequired
@@ -181,19 +176,13 @@ export default class FoodService extends Component {
                     {requestOpen &&
                         <div className={styles.formContent}>
                             <h2>Request a sample</h2>
-                            <div dangerouslySetInnerHTML={
-                                this.renderMarkup(fields.requestFormContent)
-                            } />
-                            <RequestSampleForm
-                                header="Sample Request"
-                                emailTo="email@email.com"
-                            />
+                            <RequestSampleForm {...fields.contactForm} />
                         </div>
                     }
                     {contactOpen &&
                         <div className={styles.formContent}>
                             <h2>Contact us</h2>
-                            <FoodserviceContact {...fields.contactForm}/>
+                            <FoodserviceContact {...fields.contactForm} />
                         </div>
                     }
                 </div>

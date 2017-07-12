@@ -39,6 +39,7 @@ export default class RequestSampleForm extends Component {
             company: model.company,
             address: model.address,
             request: model.request,
+            subject: 'Foodservice Sample Request',
             template: 'FSRequestSample'
         })
         .then(() => {
@@ -71,6 +72,7 @@ export default class RequestSampleForm extends Component {
                 ref={(form) => {
                     this.form = form;
                 }}
+                className={styles.form}
             >
                 {this.state.sent
                     ? (
@@ -110,7 +112,6 @@ export default class RequestSampleForm extends Component {
                     />
                 </div>
                 <Input
-                    classNames={{container: styles.field}}
                     name="email"
                     label="Email address"
                     validations="isEmail"
@@ -119,7 +120,6 @@ export default class RequestSampleForm extends Component {
                     required
                 />
                 <Input
-                    classNames={{container: styles.field}}
                     name="company"
                     label="Company Name"
                     validations="minLength:1"
@@ -127,7 +127,6 @@ export default class RequestSampleForm extends Component {
                     required
                 />
                 <Input
-                    classNames={{container: styles.field}}
                     name="address"
                     label="Address"
                     validations="minLength:1"
