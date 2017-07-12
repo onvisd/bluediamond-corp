@@ -12,6 +12,9 @@ const config = baseconfig({development: false});
 
 config.devtool = 'source-map';
 
+config.output.filename = '[name].[chunkhash:8].js';
+config.output.chunkFilename = '[name].[chunkhash:8].js';
+
 config.plugins.push(
 
     // clears the output folder
@@ -37,6 +40,20 @@ config.plugins.push(
     new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false
+    }),
+
+    // Assign the module and chunk ids by occurrence count.
+    new webpack.optimize.OccurrenceOrderPlugin(),
+
+    // extracts common javascript into a separate file
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'react-lib',
+        minChunks: (m) => /node_modules\/(?:react)/.test(m.context)
+    }),
+
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'manifest',
+        minChunks: Infinity
     }),
 
     // Compresses javascript files

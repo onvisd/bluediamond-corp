@@ -27,10 +27,10 @@ const config = {
         publicPath: '/assets/',
 
         // Specifies the name of each output entry file
-        filename: '[name].[hash].js',
+        filename: '[name].[hash:8].js',
 
         // Specifies the name of each (non-entry) chunk file
-        chunkFilename: '[name].[hash].js'
+        chunkFilename: '[name].[hash:8].js'
     },
 
     resolve: {

@@ -22,9 +22,11 @@ import FooterMobile from 'components/FooterMobile';
 import sortByPriority from 'tools/sortByPriority';
 
 @preload(async ({dispatch}) => {
-    await dispatch(getCustomer());
-    await dispatch(setNavigationStyle({}));
-    await dispatch(getNavigationData());
+    await Promise.all([
+        dispatch(getCustomer()),
+        dispatch(setNavigationStyle({})),
+        dispatch(getNavigationData())
+    ]);
 })
 @connect(
     (state) => ({

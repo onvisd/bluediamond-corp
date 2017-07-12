@@ -12,9 +12,7 @@ import StoreProductReview from 'components/StoreProductReview';
 
 import styles from './styles.module.css';
 
-@preload(async ({dispatch, parameters}) => {
-    await dispatch(getStoreProduct(parameters.slug));
-})
+@preload(({dispatch, parameters}) => dispatch(getStoreProduct(parameters.slug)))
 @connect(
     (state) => ({...storeProductConnector(state.storeProduct)}),
     {getStoreProduct}

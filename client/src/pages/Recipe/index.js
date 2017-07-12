@@ -15,8 +15,10 @@ import CardPanel from 'components/CardPanel';
 import styles from './styles.module.css';
 
 @preload(async ({dispatch, parameters}) => {
-    await dispatch(getRecipe(parameters.slug));
-    await dispatch(setNavigationStyle({className: 'brand--blue'}));
+    await Promise.all([
+        dispatch(getRecipe(parameters.slug)),
+        dispatch(setNavigationStyle({className: 'brand--blue'}))
+    ]);
 })
 @connect(
     (state) => ({

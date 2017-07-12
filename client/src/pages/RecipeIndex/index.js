@@ -15,8 +15,10 @@ import styles from './styles.module.css';
 import HeroImage from 'images/backgrounds/recipe-hero.jpg';
 
 @preload(async ({dispatch}) => {
-    await dispatch(getRecipes());
-    await dispatch(setNavigationStyle({className: 'brand--blue'}));
+    await Promise.all([
+        dispatch(getRecipes()),
+        dispatch(setNavigationStyle({className: 'brand--blue'}))
+    ]);
 })
 @connect(
     (state) => ({

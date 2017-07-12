@@ -9,7 +9,6 @@ const config = webpackBaseConfig({development: true, css_bundle: true});
 config.devtool = 'inline-eval-cheap-source-map';
 
 config.plugins.push(
-
     new StylelintPlugin({
         files: '**/*.css'
     }),
@@ -29,8 +28,16 @@ config.plugins.push(
     // prints more readable module names in the browser console on HMR updates
     new webpack.NamedModulesPlugin(),
 
-    // // extracts common javascript into a separate file (works)
-    // new webpack.optimize.CommonsChunkPlugin('common', 'common.[hash].js')
+    // extracts common javascript into a separate file
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'react-lib',
+        minChunks: (m) => /node_modules\/(?:react)/.test(m.context)
+    }),
+
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'manifest',
+        minChunks: Infinity
+    }),
 );
 
 // enable webpack development server
