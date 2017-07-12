@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import * as auth from '../services/auth';
 
 export default (api, {apolloClient}) => {
     const createCheckout = (lineItems) =>
@@ -51,6 +52,143 @@ export default (api, {apolloClient}) => {
             variables: {lineItems}
         })
         .then((result) => result.data.checkoutCreate);
+
+    const addCustomer = (checkoutId, customerAccessToken) =>
+        apolloClient.mutate({
+            mutation: gql`
+                mutation ($checkoutId: ID!, $customerAccessToken: String!) {
+                    checkoutCustomerAssociate(
+                        checkoutId: $checkoutId,
+                        customerAccessToken: $customerAccessToken
+                    ) {
+                        checkout {
+                            id
+                            webUrl
+                            totalTax
+                            subtotalPrice
+                            totalPrice
+                            customer {
+                                id
+                                email
+                                firstName
+                                lastName
+                                phone
+                                defaultAddress {
+                                    id
+                                    firstName
+                                    lastName
+                                    address1
+                                    address2
+                                    city
+                                    country
+                                    province
+                                    zip
+                                }
+                            }
+                            lineItems(first: 250) {
+                                edges {
+                                    node {
+                                        id
+                                        title
+                                        variant {
+                                            id
+                                            title
+                                            image {
+                                                src
+                                            }
+                                            price
+                                            product {
+                                                images(first: 1) {
+                                                    edges {
+                                                        node {
+                                                            src
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        quantity
+                                    }
+                                }
+                            }
+                        }
+                        userErrors {
+                            message
+                        }
+                    }
+                }
+            `,
+            variables: {checkoutId, customerAccessToken}
+        })
+        .then((result) => result.data.checkoutCustomerAssociate);
+
+    const setAddress = (checkoutId, shippingAddress) =>
+        apolloClient.mutate({
+            mutation: gql`
+                mutation ($checkoutId: ID!, $shippingAddress: MailingAddressInput!) {
+                    checkoutShippingAddressUpdate(
+                        checkoutId: $checkoutId,
+                        shippingAddress: $shippingAddress
+                    ) {
+                        checkout {
+                            id
+                            webUrl
+                            totalTax
+                            subtotalPrice
+                            totalPrice
+                            shippingAddress {
+                                firstName
+                                lastName
+                                address1
+                                address2
+                                city
+                                country
+                                province
+                                zip
+                            }
+                            customer {
+                                id
+                                email
+                                firstName
+                                lastName
+                                phone
+                            }
+                            lineItems(first: 250) {
+                                edges {
+                                    node {
+                                        id
+                                        title
+                                        variant {
+                                            id
+                                            title
+                                            image {
+                                                src
+                                            }
+                                            price
+                                            product {
+                                                images(first: 1) {
+                                                    edges {
+                                                        node {
+                                                            src
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        quantity
+                                    }
+                                }
+                            }
+                        }
+                        userErrors {
+                            message
+                        }
+                    }
+                }
+            `,
+            variables: {checkoutId, shippingAddress}
+        })
+        .then((result) => result.data.checkoutShippingAddressUpdate);
 
     const addToCart = (checkoutId, lineItems) =>
         apolloClient.mutate({
@@ -156,11 +294,39 @@ export default (api, {apolloClient}) => {
 
         try {
             const checkout = await createCheckout(req.body.lineItems);
+            const accessToken = req.cookies.access_token;
 
-            if(checkout.userErrors.length)
+            if(checkout.userErrors.length) {
                 res.status(400).send(checkout.userErrors[0].message);
-            else
+            } else if(accessToken) {
+                const secureToken = await auth.decodeToken(accessToken);
+
+                if(secureToken) {
+                    const associate = await addCustomer(
+                        checkout.checkout.id,
+                        secureToken.token
+                    );
+
+                    if(associate.checkout.customer.defaultAddress) {
+                        // remove items from array as it fails the next mutation
+                        delete associate.checkout.customer.defaultAddress.id;
+                        delete associate.checkout.customer.defaultAddress.__typename;
+
+                        const syncAddress = await setAddress(
+                            checkout.checkout.id,
+                            associate.checkout.customer.defaultAddress
+                        );
+
+                        res.status(201).send(syncAddress);
+                    } else {
+                        res.status(201).send(checkout);
+                    }
+                } else {
+                    res.status(201).send(checkout);
+                }
+            } else {
                 res.status(201).send(checkout);
+            }
         } catch (err) {
             console.trace(err);
             res.status(500).send(err.message);

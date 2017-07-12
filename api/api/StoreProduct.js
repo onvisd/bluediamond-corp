@@ -167,7 +167,7 @@ export default (api, {apolloClient}) => {
         }).then((result) => result.data.shop.productByHandle);
 
     const getSmartLabel = (id) =>
-        axios.get(`https://smartlabel-api.labelinsight.com/api/v2/${id}`)
+        axios.get(`https://smartlabel-api.labelinsight.com/api/v3/${id}`)
         .then((response) => response.data)
         .catch((err) => {
             console.trace(err);

@@ -190,7 +190,7 @@ export default class StoreProductHead extends Component {
                     </div>
                     <div className={styles.formPurchase}>
                         <h2 className={styles.price}>${(quantity * price).toFixed(2)}</h2>
-                        <Button onClick={this.addToCart}>
+                        <Button className={styles.button} onClick={this.addToCart}>
                             + Add to cart
                         </Button>
                     </div>

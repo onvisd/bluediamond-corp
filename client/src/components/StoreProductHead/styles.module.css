@@ -103,7 +103,7 @@
         flex: 0 0 50%;
     }
 
-    & button {
+    & .button {
         width: 100%;
     }
 }

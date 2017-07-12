@@ -181,7 +181,10 @@ export default class DesktopNav extends Component {
                                         [styles.active]: cartVisible
                                     })}
                                 >
-                                    <ShoppingCart onToggle={this.toggleShoppingCart} />
+                                    <ShoppingCart
+                                        auth={auth}
+                                        onToggle={this.toggleShoppingCart}
+                                    />
                                 </div>
                             </div>
                         </li>

@@ -18,7 +18,8 @@ export default class ShoppingCart extends Component {
         onToggle: PropTypes.shape({
             show: PropTypes.func.isRequired,
             hide: PropTypes.func.isRequired
-        }).isRequired
+        }).isRequired,
+        auth: PropTypes.object
     }
 
     handleRemoveItem = (id) => {
@@ -33,7 +34,8 @@ export default class ShoppingCart extends Component {
     }
 
     render() {
-        const {children, checkout, onToggle} = this.props;
+        const {children, checkout, auth, onToggle} = this.props;
+        const checkoutLink = auth ? `${checkout.webUrl}&auth=true` : checkout.webUrl;
 
         return (
             <div>
@@ -63,7 +65,7 @@ export default class ShoppingCart extends Component {
                                 </div>
                             </div>
                             <div className={styles.checkout}>
-                                <Button layout="fw" href={checkout.webUrl}>
+                                <Button layout="fw" href={checkoutLink}>
                                     Checkout
                                 </Button>
                                 <Link
