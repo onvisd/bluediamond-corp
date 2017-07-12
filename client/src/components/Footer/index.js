@@ -46,10 +46,10 @@ export default class Footer extends Component {
             email: 'support@bluediamond.com'
         };
 
-
-        console.log(path);
-        if(path.match(/^\/store/))
-            contact.email = 'customerservice@bdgrowers.com';
+        if(path.match(/^\/store/)) {
+            contact.phone = '(916) 446-8643';
+            contact.email = 'orders@bdgrowers.com';
+        }
 
         return (
             <footer className={styles.container}>
