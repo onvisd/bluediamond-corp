@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import TransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
+import ReactGA from 'react-ga';
 
 import {connector as authConnector} from 'state/auth';
 
@@ -48,6 +49,12 @@ export default class MobileNav extends Component {
                 navVisible: true,
                 activeCard
             }));
+
+            ReactGA.event({
+                category: 'navigation',
+                action: 'expand',
+                label: 'main navigation'
+            });
         },
         hide: () => {
             document.documentElement.classList.remove('no-scroll');

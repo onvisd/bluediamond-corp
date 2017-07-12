@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import ReactGA from 'react-ga';
 
 import {connector, createCheckout, addToCart} from 'state/checkout';
 import styles from './styles.module.css';
@@ -28,7 +29,9 @@ export default class StoreProductHead extends Component {
     };
 
     static propTypes = {
+        handle: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
+        productType: PropTypes.string.isRequired,
         tags: PropTypes.array.isRequired,
         variants: PropTypes.array.isRequired,
         options: PropTypes.array.isRequired,
@@ -149,7 +152,7 @@ export default class StoreProductHead extends Component {
     }
 
     addToCart = () => {
-        const {variant, quantity} = this.state;
+        const {variant, price, quantity} = this.state;
 
         if(this.props.checkout.id && !this.props.checkout.orderStatusUrl) {
             this.props.addToCart({
@@ -161,6 +164,23 @@ export default class StoreProductHead extends Component {
                 {variantId: variant.id, quantity}
             ]});
         }
+
+        ReactGA.plugin.execute('ec', 'addProduct', {
+            id: this.props.handle,
+            name: this.props.title,
+            brand: this.props.productType,
+            variant: variant.id,
+            price,
+            quantity
+        });
+
+        ReactGA.plugin.execute('ec', 'setAction', 'add');
+
+        ReactGA.event({
+            category: 'interaction',
+            action: 'click',
+            label: this.props.title
+        });
     }
 
     render() {

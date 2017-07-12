@@ -147,6 +147,7 @@ export default class Brand extends Component {
                                 mobileImage={story.fields.mobileBackgroundImage.fields.file.url}
                             />
                         ))}
+                        name={`${brand.fields.name} - Stories Carousel`}
                     />
                 )}
                 <div style={{backgroundImage: `url(${brand.fields.backgroundTexture.fields.file.url})`}}>

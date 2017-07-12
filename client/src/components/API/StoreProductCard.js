@@ -17,11 +17,12 @@ export default class StoreProductCard extends Component {
                     })
                 })
             }).isRequired
-        })
+        }),
+        onClick: PropTypes.func
     }
 
     render() {
-        const {data} = this.props;
+        const {data, onClick} = this.props;
 
         return (
             <ProductCardComponent
@@ -31,6 +32,7 @@ export default class StoreProductCard extends Component {
                 slug={`/store/product/${data.handle}`}
                 imageFile={data.images.edges[0].node.src}
                 imageAlt={data.title}
+                onClick={onClick}
             />
         );
     }

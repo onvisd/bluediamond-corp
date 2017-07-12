@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
+import ReactGA from 'react-ga';
 
 import {connector as authConnector} from 'state/auth';
 import {connector as navConnector} from 'state/navigation';
@@ -44,7 +45,14 @@ export default class DesktopNav extends Component {
     toggleShoppingCart = {
         show: () => {
             this.setState(() => ({cartVisible: true}));
+
+            ReactGA.event({
+                category: 'interaction',
+                action: 'click',
+                label: 'shopping cart fly out'
+            });
         },
+
         hide: () => {
             this.setState(() => ({cartVisible: false}));
         }
@@ -74,7 +82,14 @@ export default class DesktopNav extends Component {
                     }
                 ]
             }));
+
+            ReactGA.event({
+                category: 'navigation',
+                action: 'expand',
+                label: 'main navigation'
+            });
         },
+
         hide: () => {
             this.setState(() => ({navVisible: false}));
         }
@@ -166,12 +181,8 @@ export default class DesktopNav extends Component {
                                 className={classnames(styles.cart, {
                                     [styles.active]: cartVisible
                                 })}
-                                onMouseOver={() => {
-                                    this.toggleShoppingCart.show();
-                                }}
-                                onMouseLeave={() => {
-                                    this.toggleShoppingCart.hide();
-                                }}
+                                onMouseOver={this.toggleShoppingCart.show}
+                                onMouseLeave={this.toggleShoppingCart.hide}
                             >
                                 <ShoppingCartIcon />
                                 {checkout.lineItems && checkout.lineItems.edges.length > 0 && (

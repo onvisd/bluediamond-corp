@@ -13,7 +13,8 @@ export default class ButtonDropdown extends Component {
         theme: PropTypes.string,
         layout: PropTypes.string,
         style: PropTypes.object,
-        dropUp: PropTypes.bool
+        dropUp: PropTypes.bool,
+        onClick: PropTypes.func
     }
 
     state = {
@@ -33,7 +34,7 @@ export default class ButtonDropdown extends Component {
     }
 
     renderItem = (item) => {
-        const {layout} = this.props;
+        const {layout, onClick} = this.props;
 
         if(item.external) {
             return (
@@ -43,6 +44,7 @@ export default class ButtonDropdown extends Component {
                     className={classnames(styles.link, styles.external, {
                         [styles.wide]: layout === 'wide'
                     })}
+                    onClick={(evt) => onClick(evt, item.name)}
                 >
                     {item.name}
                     <ExternalLink />
@@ -52,9 +54,11 @@ export default class ButtonDropdown extends Component {
 
         return (
             <Link
-                to={item.slug} className={classnames(styles.link, {
+                to={item.slug}
+                className={classnames(styles.link, {
                     [styles.wide]: layout === 'wide'
                 })}
+                onClick={(evt) => onClick(evt, item.name)}
             >
                 {item.name}
             </Link>

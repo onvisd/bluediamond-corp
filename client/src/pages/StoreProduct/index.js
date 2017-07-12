@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {preload, Link} from 'react-isomorphic-render';
+import ReactGA from 'react-ga';
 
 import {getStoreProduct} from 'state/storeProduct';
 import {connector as storeProductConnector} from 'state/storeProduct';
@@ -18,6 +19,18 @@ import styles from './styles.module.css';
     {getStoreProduct}
 )
 export default class StoreProduct extends Component {
+    componentDidMount() {
+        const {product} = this.props;
+
+        ReactGA.plugin.execute('ec', 'addProduct', {
+            id: product.handle,
+            name: product.title,
+            brand: product.productType
+        });
+
+        ReactGA.plugin.execute('ec', 'setAction', 'detail');
+    }
+
     render() {
         const {product} = this.props;
 

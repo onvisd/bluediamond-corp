@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import classnames from 'classnames';
+import ReactGA from 'react-ga';
 
 import {getStoreProducts} from 'state/storeProducts';
 import {connector as storeConnector} from 'state/storeProducts';
@@ -81,6 +82,12 @@ export default class Store extends Component {
 
         if(sort) addQuery({sort: slug});
         else removeQuery('sort');
+
+        ReactGA.event({
+            category: 'interaction',
+            action: 'filter',
+            label: sort
+        });
     };
 
     // Handles updating the search state
@@ -96,6 +103,12 @@ export default class Store extends Component {
 
         if(search) addQuery({search: slug});
         else removeQuery('search');
+
+        ReactGA.event({
+            category: 'interaction',
+            action: 'search',
+            label: search
+        });
     };
 
     // Handels parsing & adding filter data
@@ -141,19 +154,19 @@ export default class Store extends Component {
         let brandMatch = false;
         for (let i = 0; i < filter.brands.length; i++) {
             if(type.match(filter.brands[i]))
-                brandMatch = true;
+                brandMatch = filter.brands[i];
         }
 
         let typeMatch = false;
         for (let i = 0; i < filter.types.length; i++) {
             if(tag && tag.match(filter.types[i]))
-                typeMatch = true;
+                typeMatch = filter.types[i];
         }
 
         let sizeMatch = false;
         for (let i = 0; i < filter.sizes.length; i++) {
             if(compareOptions(sizes, filter.sizes[i]))
-                sizeMatch = true;
+                sizeMatch = filter.sizes[i];
         }
 
         const collections = card.node.collections.edges.map((col) => col.node.title);
@@ -161,7 +174,7 @@ export default class Store extends Component {
         let categoryMatch = false;
         for (let i = 0; i < filter.categories.length; i++) {
             if(collections.indexOf(filter.categories[i]) > -1)
-                categoryMatch = true;
+                categoryMatch = filter.categories[i];
         }
 
         let searchMatch = false;
@@ -173,8 +186,17 @@ export default class Store extends Component {
             (sizeMatch || !filter.sizes.length) &&
             (categoryMatch || !filter.categories.length) &&
             (searchMatch || !search.length)
-        )
+        ) {
+            ReactGA.plugin.execute('ec', 'addImpression', {
+                id: card.node.handle,
+                name: card.node.title,
+                brand: card.node.productType,
+                category: categoryMatch || '',
+                variant: sizeMatch || ''
+            });
+
             return true;
+        }
 
         return false;
     };
@@ -196,6 +218,18 @@ export default class Store extends Component {
             return 0;
         };
     };
+
+    trackProduct = (card) => {
+        ReactGA.plugin.execute('ec', 'addProduct', {
+            id: card.node.handle,
+            name: card.node.title,
+            brand: card.node.productType
+        });
+
+        ReactGA.plugin.execute('ec', 'setAction', 'click', {
+            list: 'Search Results'
+        });
+    }
 
     render() {
         const {products, responsive} = this.props;
@@ -311,6 +345,7 @@ export default class Store extends Component {
                                   <StoreProductCard
                                       data={card.node}
                                       key={`card${card.node.id}`}
+                                      onClick={() => this.trackProduct(card)}
                                   />
                               ))}
                           </div>

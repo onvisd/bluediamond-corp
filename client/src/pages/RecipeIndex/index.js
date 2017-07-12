@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import classnames from 'classnames';
+import ReactGA from 'react-ga';
 
 import {connector, getRecipes} from 'state/recipes';
 import {connector as navConnector, setNavigationStyle} from 'state/navigation';
@@ -40,18 +41,36 @@ export default class RecipeIndex extends Component {
         this.setState((state) => ({
             visibleCardCount: state.visibleCardCount + state.perPage
         }));
+
+        ReactGA.event({
+            category: 'interaction',
+            action: 'click',
+            label: 'Recipes Load More'
+        });
     }
 
     handleFilter = () => {
         this.setState(() => ({
-            filter: this.restriction.value === 'null' ? null : this.restriction.value
+            filter: this.restriction.value === '' ? null : this.restriction.value
         }));
+
+        ReactGA.event({
+            category: 'interaction',
+            action: 'click',
+            label: `Recipes Dietary - ${this.restriction.value || 'None'}`
+        });
     };
 
     handleSort = () => {
         this.setState(() => ({
-            sort: this.sort.value === 'null' ? null : this.sort.value
+            sort: this.sort.value === '' ? null : this.sort.value
         }));
+
+        ReactGA.event({
+            category: 'interaction',
+            action: 'click',
+            label: `Recipes Sort - ${this.sort.value || 'None'}`
+        });
     };
 
     renderRecipeCards = () => {
@@ -137,7 +156,7 @@ export default class RecipeIndex extends Component {
                                         this.restriction = restriction;
                                     }}
                                 >
-                                    <option value="null">Dietary Restrictions</option>
+                                    <option value="">Dietary Restrictions</option>
                                     <option value="Dairy-Free">Dairy-Free</option>
                                     <option value="Gluten-Free">Gluten-Free</option>
                                     <option value="Vegan">Vegan</option>
@@ -150,7 +169,7 @@ export default class RecipeIndex extends Component {
                                         this.sort = sort;
                                     }}
                                 >
-                                    <option value="null">Sort by &hellip;</option>
+                                    <option value="">Sort by &hellip;</option>
                                     <option value="name">Name</option>
                                     <option value="cooktime">Cook Time</option>
                                     <option value="difficulty">Difficulty</option>

@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {ViewPager, Frame, Track, View} from 'react-view-pager';
 import classnames from 'classnames';
+import ReactGA from 'react-ga';
 
 import ArrowLeft from 'images/icons/arrow-left.svg';
 import ArrowRight from 'images/icons/arrow-right.svg';
@@ -17,7 +18,8 @@ export default class Carousel extends Component {
         showArrow: PropTypes.bool,
         showTabs: PropTypes.bool,
         tabColor: PropTypes.string,
-        onViewChange: PropTypes.func
+        onViewChange: PropTypes.func,
+        name: PropTypes.string
     }
 
     static defaultProps = {
@@ -47,6 +49,38 @@ export default class Carousel extends Component {
             if(this.props.onViewChange)
                 this.props.onViewChange(currentIndices[0]);
         });
+
+        if(this.props.name) {
+            ReactGA.event({
+                category: 'interaction',
+                action: 'swipe',
+                label: this.props.name
+            });
+        }
+    }
+
+    prev = () => {
+        this.carouselTrack.prev();
+
+        if(this.props.name) {
+            ReactGA.event({
+                category: 'interaction',
+                action: 'click',
+                label: this.props.name
+            });
+        }
+    }
+
+    next = () => {
+        this.carouselTrack.next();
+
+        if(this.props.name) {
+            ReactGA.event({
+                category: 'interaction',
+                action: 'click',
+                label: this.props.name
+            });
+        }
     }
 
     getOverlayStyle = () => {
@@ -85,7 +119,7 @@ export default class Carousel extends Component {
                 <ArrowLeft
                     key="arrowLeft"
                     className={styles.prev}
-                    onClick={() => this.carouselTrack.prev()}
+                    onClick={this.prev}
                 />
             );
         }
@@ -95,7 +129,7 @@ export default class Carousel extends Component {
                 <ArrowRight
                     key="arrowRight"
                     className={styles.next}
-                    onClick={() => this.carouselTrack.next()}
+                    onClick={this.next}
                 />
             );
         }

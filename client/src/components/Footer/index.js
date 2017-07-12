@@ -43,7 +43,7 @@ export default class Footer extends Component {
 
         const contact = {
             phone: '(800) 987-2329',
-            email: 'support@bluediamond.com'
+            email: 'support@bdgrowers.com'
         };
 
         if(path.match(/^\/store/)) {

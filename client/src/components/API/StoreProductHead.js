@@ -9,6 +9,7 @@ export default class StoreProductHead extends Component {
             title: PropTypes.string.isRequired,
             productType: PropTypes.string.isRequired, // eslint-disable-line
             descriptionHtml: PropTypes.string.isRequired, // eslint-disable-line
+            handle: PropTypes.string.isRequired,
             tags: PropTypes.array.isRequired,
             variants: PropTypes.shape({
                 edges: PropTypes.object({
@@ -82,7 +83,9 @@ export default class StoreProductHead extends Component {
 
         return (
             <StorePrdctHeadCmpnt
+                handle={data.handle}
                 title={data.title}
+                productType={data.productType}
                 tags={data.tags}
                 variants={data.variants.edges}
                 options={data.options}

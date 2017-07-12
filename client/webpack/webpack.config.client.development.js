@@ -19,6 +19,7 @@ config.plugins.push(
             NODE_ENV: JSON.stringify('development'),
             BABEL_ENV: JSON.stringify('development/client')
         },
+        ANALYTICS_ID: JSON.stringify(process.env.ANALYTICS_ID),
         REDUX_DEVTOOLS: true  // enable/disable redux-devtools
     }),
 

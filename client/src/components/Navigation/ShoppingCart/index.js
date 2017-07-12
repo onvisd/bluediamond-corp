@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-isomorphic-render';
+import ReactGA from 'react-ga';
 
 import {connector, removeFromCart} from 'state/checkout';
 import Button from '../../Button';
@@ -22,8 +23,14 @@ export default class ShoppingCart extends Component {
         auth: PropTypes.object
     }
 
-    handleRemoveItem = (id) => {
-        this.props.removeFromCart({checkoutId: this.props.checkout.id, lineItemIds: [id]});
+    handleRemoveItem = (item) => {
+        this.props.removeFromCart({checkoutId: this.props.checkout.id, lineItemIds: [item.id]});
+
+        ReactGA.event({
+            category: 'interaction',
+            action: 'click',
+            label: item.title
+        });
     }
 
     getImageUrl = (variant) => {
@@ -54,7 +61,7 @@ export default class ShoppingCart extends Component {
                                     quantity={lineItem.quantity}
                                     price={lineItem.variant.price}
                                     onRemoveItem={() => {
-                                        this.handleRemoveItem(lineItem.id);
+                                        this.handleRemoveItem(lineItem);
                                     }}
                                 />
                             ))}

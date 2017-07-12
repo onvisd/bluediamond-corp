@@ -31,6 +31,8 @@ config.plugins.push(
             NODE_ENV: JSON.stringify('production')
         },
 
+        ANALYTICS_ID: JSON.stringify(process.env.ANALYTICS_ID),
+
         // Just so that it doesn't throw "_development_tools_ is not defined"
         REDUX_DEVTOOLS: false
     }),

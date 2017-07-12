@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import classnames from 'classnames';
+import ReactGA from 'react-ga';
 
 import styles from './styles.module.css';
 
@@ -22,6 +23,12 @@ export default class ProductAccordion extends Component {
             nutritionOpen: space === 'nutrition' ? !state.nutritionOpen : false,
             ingredientOpen: space === 'ingredient' ? !state.ingredientOpen : false
         }));
+
+        ReactGA.event({
+            category: 'interaction',
+            action: 'click',
+            label: space
+        });
     }
 
     renderNutrients() {

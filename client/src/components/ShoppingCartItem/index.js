@@ -29,7 +29,7 @@ const ShoppingCartItem = ({
             </a>
         </div>
         <div className={styles.delete}>
-            <Close onClick={onRemoveItem} />
+            <Close onClick={() => onRemoveItem(this.props)} />
         </div>
     </div>
 );
