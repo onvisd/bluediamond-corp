@@ -37,6 +37,17 @@ config.plugins.push(
     new webpack.LoaderOptionsPlugin({
         minimize: false,
         debug: false
+    }),
+
+    // extracts common javascript into a separate file
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'react-lib',
+        minChunks: (m) => /node_modules\/(?:react)/.test(m.context)
+    }),
+
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'manifest',
+        minChunks: Infinity
     })
 );
 
