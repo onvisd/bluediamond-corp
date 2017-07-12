@@ -100,7 +100,10 @@ export default class DesktopNav extends Component {
                         <ul className={styles.secondaryNavLinks}>
                             {navData.secondary.map((link) => (
                                 <li key={link.slug}>
-                                    <a href={link.slug} target="_blank">
+                                    <a
+                                      href={link.slug}
+                                      target={link.slug === '/international' ? '' : '_blank'}
+                                    >
                                         {React.createElement(link.icon)}
                                         {link.name}
                                     </a>
