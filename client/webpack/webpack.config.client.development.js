@@ -6,7 +6,7 @@ import appConfig from '../../config';
 // eslint-disable-next-line camelcase
 const config = webpackBaseConfig({development: true, css_bundle: true});
 
-config.devtool = 'inline-eval-cheap-source-map';
+config.devtool = 'cheap-module-eval-source-map';
 
 config.plugins.push(
     new StylelintPlugin({

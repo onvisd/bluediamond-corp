@@ -21,7 +21,10 @@ export default class ProductCard extends Component {
             <div className={styles.container}>
                 <Link href={slug} onClick={onClick}>
                     <div className={styles.image}>
-                        <img src={imageFile} alt={imageAlt} />
+                        {imageFile
+                            ? (<img src={imageFile} alt={imageAlt} />)
+                            : 'Not Available'
+                        }
                     </div>
                     <p>
                         <strong>{type}</strong><br />

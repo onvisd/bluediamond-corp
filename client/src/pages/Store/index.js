@@ -290,14 +290,6 @@ export default class Store extends Component {
                               onClick={this.handleFilter('sizes')}
                               dropdown={responsive.small}
                           />
-                          <ProductFilter
-                              title="Category"
-                              products={products}
-                              filter="collections"
-                              query="values"
-                              initState={filter.categories}
-                              onClick={this.handleFilter('categories')}
-                          />
                       </div>
                       <div className={`l--col-auto ${styles.products}`}>
                           <div className={`l--row ${styles.search}`}>

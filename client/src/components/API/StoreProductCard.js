@@ -30,7 +30,7 @@ export default class StoreProductCard extends Component {
                 type={data.productType}
                 title={data.title}
                 slug={`/store/product/${data.handle}`}
-                imageFile={data.images.edges[0].node.src}
+                imageFile={data.images.edges.length ? data.images.edges[0].node.src : null}
                 imageAlt={data.title}
                 onClick={onClick}
             />

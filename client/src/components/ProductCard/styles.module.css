@@ -32,6 +32,8 @@
     margin-bottom: 1rem;
     align-items: center;
     justify-content: center;
+    font-size: 1rem;
+    color: var(--c--gray);
 
     & img {
         height: 100%;
