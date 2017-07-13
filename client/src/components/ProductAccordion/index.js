@@ -84,28 +84,28 @@ export default class ProductAccordion extends Component {
                     </tr>
                     <tr>
                         <td><strong>{totalFat.name}</strong></td>
-                        <td>{totalFat.value}{totalFat.uom}</td>
+                        <td>{totalFat.value || '0'}{totalFat.uom}</td>
                     </tr>
                     {otherFats.map((fat, i) => (
                         <tr className={styles.sublist} key={`fats${i}`}>
                             <td>{fat.name}</td>
-                            <td>{fat.value}{fat.uom}</td>
+                            <td>{fat.value || '0'}{fat.uom}</td>
                         </tr>
                     ))}
                     <tr>
                         <td><strong>{totalCarbs.name}</strong></td>
-                        <td>{totalCarbs.value}{totalCarbs.uom}</td>
+                        <td>{totalCarbs.value || '0'}{totalCarbs.uom}</td>
                     </tr>
                     {otherCarbs.map((carb, i) => (
                         <tr className={styles.sublist} key={`fats${i}`}>
                             <td>{carb.name}</td>
-                            <td>{carb.value}{carb.uom}</td>
+                            <td>{carb.value || '0'}{carb.uom}</td>
                         </tr>
                     ))}
                     {otherFacts.map((nutrient, i) => [
                         <tr key={`nutrient${i}`}>
                             <td><strong>{nutrient.name}</strong></td>
-                            <td>{nutrient.value}{nutrient.uom}</td>
+                            <td>{nutrient.value || '0'}{nutrient.uom}</td>
                         </tr>,
                         nutrient.name === 'Protein' ? (
                             <tr key="divider">
