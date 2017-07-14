@@ -6,7 +6,7 @@
     @mixin container;
 
     display: flex;
-    padding: 2rem 0 0;
+    padding: 2rem 1rem 0;
 
     @media (--mq-s) {
         flex-direction: column;
@@ -17,10 +17,14 @@
             font-size: var(--t--size-m);
         }
     }
+}
 
-    &.isRecipes {
-        flex-direction: column;
-    }
+.isRecipes {
+    flex-direction: column;
+}
+
+.recipeList {
+    margin: 0 -0.5rem 0;
 }
 
 .left {

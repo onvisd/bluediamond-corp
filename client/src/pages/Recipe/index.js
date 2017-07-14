@@ -121,11 +121,13 @@ export default class Recipe extends Component {
                 </div>
                 <div className={`${styles.container} ${styles.isRecipes}`}>
                     <h3>Related Recipes</h3>
-                    <CardPanel
-                        cards={includedRecipes}
-                        type="recipes"
-                        theme="blueLight"
-                    />
+                    <div className={styles.recipeList}>
+                        <CardPanel
+                            cards={includedRecipes}
+                            type="recipes"
+                            theme="blueLight"
+                        />
+                    </div>
                 </div>
             </section>
         );

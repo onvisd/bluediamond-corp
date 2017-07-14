@@ -80,7 +80,7 @@ export default class CardPanel extends Component {
             <div className={styles.container}>
                 <div className={styles.innerContainer}>
                     {title && <h2>{title}</h2>}
-                    <div className={styles.cards}>
+                    <div className={`${styles.cards}`}>
                         {cards.map((card) => this.renderCard(card))}
                     </div>
                     <ViewPager className={styles.cardsMobile}>

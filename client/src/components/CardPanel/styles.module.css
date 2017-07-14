@@ -22,14 +22,14 @@
         margin-top: 2.5rem;
         font-size: var(--t--size-m);
 
-        @media (--mq-gt-sm) {
+        @media (--mq-gt-m) {
             margin-top: 4.5rem;
             margin-bottom: 3rem;
             font-size: var(--t--size-l);
         }
     }
 
-    @media (--mq-gt-sm) {
+    @media (--mq-gt-m) {
         padding-bottom: 2.5rem;
     }
 }
@@ -38,14 +38,14 @@
     display: none;
     padding-bottom: 3rem;
 
-    @media (--mq-gt-sm) {
+    @media (--mq-gt-m) {
         display: flex;
         padding-bottom: 0.5rem;
     }
 }
 
 .cardsMobile {
-    @media (--mq-gt-sm) {
+    @media (--mq-gt-m) {
         display: none;
     }
 }
@@ -71,7 +71,7 @@
         margin-bottom: 0;
     }
 
-    @media (--mq-gt-sm) {
+    @media (--mq-gt-m) {
         display: none;
     }
 }

@@ -7,6 +7,13 @@ import Facebook from 'images/icons/facebook.svg';
 import Pinterest from 'images/icons/pinterest.svg';
 import Twitter from 'images/icons/twitter.svg';
 
+import GlutenFree from 'images/icons/gluten-free.svg';
+import HeartHealthy from 'images/icons/heart-healthy.svg';
+import Kosher from 'images/icons/kosher.svg';
+import ReducedSugar from 'images/icons/reduced-sugar.svg';
+import Unsweetened from 'images/icons/unsweetened.svg';
+import Vegan from 'images/icons/vegan.svg';
+
 import styles from './styles.module.css';
 
 export default class RecipeHead extends Component {
@@ -19,6 +26,15 @@ export default class RecipeHead extends Component {
         cookTime: PropTypes.number.isRequired
     }
 
+    metaIcons = {
+        GlutenFree,
+        HeartHealthy,
+        Kosher,
+        ReducedSugar,
+        Unsweetened,
+        Vegan
+    }
+
     renderMarkup(field) {
         return {__html: marked(field)};
     }
@@ -26,11 +42,19 @@ export default class RecipeHead extends Component {
     renderSymbols() {
         const {consumerSymbols} = this.props;
 
+        if(!consumerSymbols)
+            return;
+
         return (
             <div className={styles.labels}>
-                {consumerSymbols.filter((tag) => tag !== 'N/A').map((item, i) =>
-                    <div key={`symbol${i}`} className={styles.label}>{item}</div>
-                )}
+                {consumerSymbols.filter((tag) => tag !== 'N/A').map((tag, i) => {
+                    const Icon = this.metaIcons[tag.replace(' ', '')];
+                    return (
+                        <span key={`consumerSymbols${i}`}>
+                            {Icon && <Icon />} {tag}
+                        </span>
+                    );
+                })}
             </div>
         );
     }
