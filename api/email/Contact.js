@@ -42,53 +42,27 @@ export default class Contact extends Component {
 
         return (
             <div>
-                <p>
-                    <strong>Name: </strong>
-                    {firstName} {lastName}
-                </p>
-                <p>
-                    <strong>Email: </strong>
-                    {email || 'N/A'}
-                </p>
-                <div>
-                    <strong>Address: </strong><br />
-                    {streetAddress || 'N/A'}<br />
-                    {city || 'N/A'}, {state || 'N/A'}, {country || 'N/A'} {postalCode || 'N/A'}
-                </div>
-                <p>
-                    <strong>What is your inquiry regarding: </strong>
-                    {subject || 'Not Provided'}
-                </p>
-                <p>
-                    <strong>Product I am inquring about: </strong>
-                    {inquiry || 'Not Provided'}
-                </p>
-                <p>
-                    <strong>Lot Code: </strong>
-                    {lotCode || 'Not Provided'}
-                </p>
-                <p>
-                    <strong>Best Before Date: </strong>
-                    {bestBeforeDate || 'Not Provided'}
-                </p>
-                <p>
-                    <strong>Timestamp: </strong>
-                    {timeStamp || 'Not Provided'}
-                </p>
-                <p>
-                    <strong>UPC: </strong>
-                    {upc || 'Not Provided'}
-                </p>
+                <strong>First Name: </strong> {firstName}<br />
+                <strong>Last Name: </strong> {lastName}<br />
+                <strong>Email: </strong> {email || 'N/A'}<br />
+                <strong>Address: </strong> {streetAddress || 'N/A'}<br />
+                <strong>City: </strong> {city || 'N/A'}<br />
+                <strong>State/Province: </strong> {state || 'N/A'}<br />
+                <strong>Postal Code: </strong> {postalCode || 'N/A'}<br />
+                <strong>Country: </strong> {country || 'N/A'}<br />
+                <strong>What is your inquiry regarding: </strong> {subject || 'Not Provided'}<br />
+                <strong>Product I am inquring about: </strong> {inquiry || 'Not Provided'}<br />
+                <strong>Lot Code: </strong> {lotCode || 'Not Provided'}<br />
+                <strong>Best Before Date: </strong> {bestBeforeDate || 'Not Provided'}<br />
+                <strong>Timestamp: </strong> {timeStamp || 'Not Provided'}<br />
+                <strong>UPC: </strong> {upc || 'Not Provided'}<br />
                 {company && (
-                    <p>
-                        <strong>Company: </strong>
-                        {company}
-                    </p>
+                    <div>
+                        <strong>Company: </strong> {company}<br />
+                    </div>
                 )}
-                <div>
-                    <strong>Message: </strong>
-                    <p>{message || 'No message provided.'}</p>
-                </div>
+                <strong>Message: </strong><br />
+                {message || 'No message provided.'}
             </div>
         );
     }
