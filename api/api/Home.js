@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import {setCached} from '../services/cache';
-
 export default (api, {contentful}) => {
     api.get('/home', (req, res) =>
         axios.get(
@@ -9,8 +7,7 @@ export default (api, {contentful}) => {
             `access_token=${req.apiParams.token}&content_type=homepageModule`
         )
         .then((response) => {
-            setCached('home', response.data);
-            res.send(response.data);
+            res.cache(true).send(response.data);
         })
         .catch((err) => {
             console.trace(err);

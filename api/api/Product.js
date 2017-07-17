@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import {setCached} from '../services/cache';
-
 export default (api, {contentful}) => {
     const getProduct = (apiParams, slug) =>
         axios.get(
@@ -32,8 +30,7 @@ export default (api, {contentful}) => {
 
                 product.items[0].fields.smartLabel = {id: smartLabelId, ...amend};
 
-                setCached(`products_${req.params.slug}`, product);
-                res.send(product);
+                res.cache(true).send(product);
             } else {
                 res.status(404).send({ok: false, error: 'not found'});
             }

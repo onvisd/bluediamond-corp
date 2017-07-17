@@ -1,5 +1,3 @@
-import {setCached} from '../services/cache';
-
 export default (api, {contentful}) => {
     const getBrands = () =>
         contentful.client.getEntries({
@@ -41,8 +39,7 @@ export default (api, {contentful}) => {
                 companyNavTiles
             };
 
-            setCached('navigation', data);
-            res.send(data);
+            res.cache(true).send(data);
         } catch (err) {
             console.trace(err);
             res.status(500).send(err.message);

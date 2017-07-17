@@ -2,7 +2,6 @@ import axios from 'axios';
 import gql from 'graphql-tag';
 
 import config from '../../config';
-import {setCached} from '../services/cache';
 
 export default (api, {apolloClient}) => {
     const getProducts = () =>
@@ -238,8 +237,7 @@ export default (api, {apolloClient}) => {
                     product.related = [...amendRelated];
                 }
 
-                setCached(`store_products_${req.params.slug}`, product);
-                res.send(product);
+                res.cache(true).send(product);
             } else {
                 res.status(401).send({message: 'No product found!'});
             }

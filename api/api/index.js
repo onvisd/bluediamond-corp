@@ -47,8 +47,14 @@ export default () => {
     });
 
     // check the cache before hitting the endpoints
-    if(process.env.NODE_ENV === 'production')
+    if(process.env.NODE_ENV === 'production') {
         api.use(getCached);
+    } else {
+        api.use((req, res, next) => {
+            res.cache = () => res;
+            next();
+        });
+    }
 
     // setup the route params
     api.use((req, res, next) => {

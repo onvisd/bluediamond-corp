@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import {setCached} from '../services/cache';
-
 const getRandomEntries = (count, entries) => {
     if(entries.total > count) {
         const randomIndices = [];
@@ -68,8 +66,7 @@ export default (api, {contentful}) => {
             brand.fields.products = products;
             brand.fields.moreProducts = randomProducts;
 
-            setCached(`brands_${req.params.slug}`, {fields: brand.fields});
-            res.status(200).send({fields: brand.fields});
+            res.cache(true).status(200).send({fields: brand.fields});
         } catch (err) {
             console.trace(err);
             res.status(500).send(err.message);

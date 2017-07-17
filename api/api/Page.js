@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import {setCached} from '../services/cache';
-
 const contentTypes = [
     'page',
     'pageWithSidebar',
@@ -15,14 +13,12 @@ const requestSlugFromType = (req, res, spaceId, typeIndex) => {
         `access_token=${req.apiParams.token}&content_type=${contentTypes[typeIndex]}`
     )
     .then((response) => {
-        if(response.data.items.length) {
-            setCached(`page_${req.params.slug}`, response.data);
-            res.send(response.data);
-        } else if(typeIndex + 1 < contentTypes.length) {
+        if(response.data.items.length)
+            res.cache(true).send(response.data);
+        else if(typeIndex + 1 < contentTypes.length)
             requestSlugFromType(req, res, spaceId, typeIndex + 1);
-        } else {
+        else
             res.status(404).send({ok: false, error: 'not found'});
-        }
     })
     .catch((err) => {
         console.trace(err);
