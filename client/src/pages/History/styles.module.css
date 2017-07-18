@@ -7,6 +7,10 @@
     background-color: var(--c--gray-lighter);
     background-image: url(images/backgrounds/hub-texture.png);
     background-size: 25%;
+
+    @media (--mq-m) {
+        margin-top: 60px;
+    }
 }
 
 .timeline {

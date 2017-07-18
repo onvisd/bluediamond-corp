@@ -38,7 +38,7 @@
 .hero {
     @media (--mq-s) {
         & img {
-            margin-left: 15rem;
+            margin-left: 10rem;
         }
     }
 }

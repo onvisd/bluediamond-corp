@@ -1,10 +1,16 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import classNames from 'classnames';
 import {Parallax} from 'react-parallax';
 
 import Button from '../Button';
 import styles from './styles.module.css';
 
+@connect(
+    (state) => ({
+        responsive: state.responsive,
+    })
+)
 export default class GenericHero extends Component {
     static propTypes = {
         headline: PropTypes.string,
@@ -33,7 +39,8 @@ export default class GenericHero extends Component {
             ctaTheme,
             verticalAlign,
             backgroundImage,
-            className
+            className,
+            responsive
         } = this.props;
 
         const alignClass = `align${verticalAlign}`;
@@ -49,7 +56,7 @@ export default class GenericHero extends Component {
                 <Parallax
                     className={styles.background}
                     bgImage={backgroundImage}
-                    strength={200}
+                    strength={responsive.small ? 0 : 200}
                 />
                 <div className={`${styles.innerContainer} ${styles[color]}`}>
                     {headline && <h3>{headline}</h3>}

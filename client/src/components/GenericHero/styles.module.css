@@ -15,6 +15,7 @@
 
     @media (--mq-s) {
         padding: 2rem;
+        max-height: 450px;
     }
 }
 
