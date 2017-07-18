@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import {setCached} from '../services/cache';
-
 export default (api, {contentful}) => {
     api.get('/template/:name', (req, res) =>
         axios.get(
@@ -10,8 +8,7 @@ export default (api, {contentful}) => {
             `&content_type=${req.params.name}Template`
         )
         .then((response) => {
-            setCached(`template_${req.params.name}`, response.data);
-            res.send(response.data);
+            res.cache(true).status(200).send(response.data);
         })
         .catch((err) => {
             console.trace(err);
