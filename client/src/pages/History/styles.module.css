@@ -24,6 +24,20 @@
     }
 }
 
+.line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 1px;
+    transform: translateX(-50%);
+    background-color: var(--c--blue);
+
+    @media (--mq-s) {
+        left: 8%;
+    }
+}
+
 .container {
     @mixin container;
 
@@ -52,12 +66,6 @@
         background-position: left center;
         background-size: 25%, initial;
     }
-
-    &.isLast {
-        @media (--mq-s) {
-            overflow: hidden;
-        }
-    }
 }
 
 .container:nth-child(even) {
@@ -77,6 +85,40 @@
 
     padding: 0;
     min-height: 442px;
+}
+
+.frame {
+    position: relative;
+    padding: 0.5rem;
+    min-width: 100%;
+    max-width: 100%;
+    background: var(--c--white);
+    box-shadow: 0 0 1rem 0.25rem rgba(0, 0, 0, 0.1);
+
+    @media (--mq-gt-s) {
+        margin-bottom: -4rem;
+        padding: 0.75rem;
+    }
+
+    @media (--mq-s) {
+        max-width: 110%;
+        min-width: 110%;
+
+        &.isFirst {
+            margin-top: -1rem;
+            transform: translateX(0) rotate(1deg);
+        }
+    }
+
+    & .image {
+        width: 100%;
+        padding-bottom: 85%;
+        background-size: cover;
+
+        @media (--mq-s) {
+            padding-bottom: 75%;
+        }
+    }
 }
 
 .left,
@@ -114,7 +156,7 @@
         transform: translateX(-3%) rotate(1deg);
 
         @media (--mq-s) {
-            transform: translateX(0) rotate(0deg);
+            transform: translateX(10%) rotate(0deg);
         }
     }
 }
@@ -143,7 +185,7 @@
         transform: translateX(3%) rotate(-1deg);
 
         @media (--mq-s) {
-            transform: translateX(0) rotate(0deg);
+            transform: translateX(10%) rotate(0deg);
         }
     }
 }
@@ -154,131 +196,33 @@
     margin: 0;
 
     @media (--mq-s) {
+        margin: 0 1rem 0 -0.9rem;
         order: 1;
     }
 }
 
-.frame {
-    position: relative;
-    padding: 0.5rem;
-    min-width: 100%;
-    max-width: 100%;
-    background: var(--c--white);
-    box-shadow: 0 0 1rem 0.25rem rgba(0, 0, 0, 0.1);
-
-    @media (--mq-gt-s) {
-        margin-bottom: -4rem;
-        padding: 0.75rem;
-    }
-
-    @media (--mq-s) {
-        max-width: 110%;
-        min-width: 110%;
-
-        &.isFirst {
-            margin-top: -1rem;
-            transform: translateX(0) rotate(1deg);
-        }
-    }
-
-    & .image {
-        width: 100%;
-        padding-bottom: 85%;
-        background-size: cover;
-
-        @media (--mq-s) {
-            padding-bottom: 75%;
-        }
-    }
-}
-
-.timebarWrap {
-    display: flex;
-    position: relative;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
+.diamond {
+    fill: var(--c--blue);
 
     &.isEnd {
-        height: 35px;
-        margin-bottom: 4rem;
-        align-items: flex-end;
-
-        & svg {
-            margin-bottom: -2rem;
-        }
-    }
-}
-
-.timebar {
-    @media (--mq-s) {
-        display: none;
-    }
-
-    &::after {
-        content: '';
         display: block;
-        position: absolute;
-        top: 0;
-        bottom: -30px;
-        left: calc(50% - 2px);
-        width: 4px;
-        z-index: 10;
-        background-color: var(--c--blue);
-
-        @media (--mq-s) {
-            bottom: -150%;
-        }
+        margin: 0 auto 2rem;
+        max-width: 6.3vw;
     }
 
-    &.isStart {
-        &::after {
-            top: 50%;
-        }
-    }
-
-    &.isEnd {
-        &::after {
-            top: 0;
-            bottom: 0;
-        }
-    }
-
-    & svg {
-        width: 40px;
-        height: 40px;
-        fill: var(--c--blue);
-
-        @media (--mq-s) {
-            width: 20px;
-            height: 20px;
-        }
+    @media (--mq-s) {
+        margin: 1.5rem 0;
     }
 }
 
 .today {
     position: relative;
+    padding: 95px 0 0;
     overflow: hidden;
 
     @media (--mq-s) {
+        padding: 40px 1rem 0;
         overflow: initial;
-
-        & .timebarWrap {
-            @mixin column-fixed (2/12);
-
-            margin: -1rem 0 0;
-            z-index: 100;
-            max-width: 14%;
-        }
-
-        & .timebar svg {
-            margin-bottom: 9%;
-            margin-left: 6%;
-        }
-
-        & .timebar::after {
-            display: none;
-        }
     }
 
     & h2,
@@ -288,8 +232,9 @@
         max-width: 30rem;
 
         @media (--mq-s) {
-            margin: 0 auto 1rem;
-            max-width: 15rem;
+            margin: 0;
+            max-width: none;
+            text-align: left;
         }
     }
 
@@ -308,6 +253,47 @@
     & .timelineRow {
         @media (--mq-s) {
             align-items: center;
+        }
+    }
+
+    & .diamond {
+        display: block;
+        margin: 0 auto;
+        max-width: 6.33vw;
+
+        @media (--mq-s) {
+            margin: 0;
+        }
+    }
+
+    & .left {
+        flex: 0 0 100%;
+        order: 2;
+        align-items: flex-start;
+        justify-content: center;
+
+        @media (--mq-s) {
+            margin: 0 1%;
+            flex: 0 0 81.33%;
+        }
+    }
+
+    & .center {
+        margin-bottom: 2rem;
+        flex: 0 0 100%;
+
+        @media (--mq-s) {
+            margin-bottom: 0;
+            flex: 0 0 6.33%;
+        }
+    }
+
+    & .right {
+        order: 3;
+        flex: 0 0 100%;
+
+        @media (--mq-s) {
+            flex: 0 0 calc(100% + 2rem);
         }
     }
 }
