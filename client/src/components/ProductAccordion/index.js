@@ -174,9 +174,17 @@ export default class ProductAccordion extends Component {
                         <p>{ingredients}</p>
                     </div>
                 </div>}
-                {nutrition && <div className={styles.smartLabelLogo}>
-                    <img src={SmartLabel} />
-                </div>}
+                {nutrition && (
+                    <a
+                        className={styles.smartLabelLogo}
+                        href={
+                            `https://smartlabel.labelinsight.com/product/${nutrition.id}/nutrition`
+                        }
+                        target="_blank"
+                    >
+                        <img src={SmartLabel} />
+                    </a>
+                )}
             </div>
         );
     }
