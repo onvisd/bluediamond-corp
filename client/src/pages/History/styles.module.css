@@ -203,11 +203,11 @@
 
 .diamond {
     fill: var(--c--blue);
+    max-width: 6.3vw;
 
     &.isEnd {
         display: block;
         margin: 0 auto 2rem;
-        max-width: 6.3vw;
     }
 
     @media (--mq-s) {
