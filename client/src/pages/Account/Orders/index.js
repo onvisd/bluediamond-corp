@@ -45,7 +45,10 @@ export default class Orders extends Component {
                                             <div className={styles.item}>
                                                 {item.node.variant.image &&
                                                     (<div className={styles.itemImage}>
-                                                        <img src={item.node.variant.image.src} />
+                                                        <img
+                                                            src={item.node.variant.image.src}
+                                                            alt={item.node.variant.title}
+                                                        />
                                                     </div>)}
                                                 <div className={styles.itemInfo}>
                                                     <p>

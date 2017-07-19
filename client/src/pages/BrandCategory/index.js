@@ -184,10 +184,16 @@ export default class BrandCategory extends Component {
                 >
                     <div className={styles.accents}>
                         <div className={`${styles.accent} ${styles.accentLeft}`}>
-                            <img src={category.fields.appetizerImages[0].fields.file.url} />
+                            <img
+                                src={category.fields.appetizerImages[0].fields.file.url}
+                                alt="Accent Image"
+                            />
                         </div>
                         <div className={`${styles.accent} ${styles.accentRight}`}>
-                            <img src={category.fields.appetizerImages[1].fields.file.url} />
+                            <img
+                                src={category.fields.appetizerImages[1].fields.file.url}
+                                alt="Accent Image"
+                            />
                         </div>
                     </div>
                     <ProductSection

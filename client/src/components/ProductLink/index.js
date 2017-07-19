@@ -64,6 +64,7 @@ export default class ProductLink extends Component {
                                 }
                             )} 3x
                         `}
+                        alt={product.fields.name}
                     />
                 </div>
             </div>

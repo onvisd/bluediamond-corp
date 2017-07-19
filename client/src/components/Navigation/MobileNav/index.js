@@ -109,7 +109,7 @@ export default class MobileNav extends Component {
                     </div>
                     <div className={styles.logo}>
                         <Link to="/" onClick={this.toggleNav.hide}>
-                            <img src={BDLogo} className={styles.logo} />
+                            <img src={BDLogo} className={styles.logo} alt="Blue Diamond" />
                         </Link>
                     </div>
                     <div

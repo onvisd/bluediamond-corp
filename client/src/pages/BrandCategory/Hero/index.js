@@ -23,7 +23,10 @@ const Hero = ({brand, category, product, shopLinks}) => (
         <div className={classnames(styles.productHero, styles[category.fields.productTextColor])}>
             <div className={styles.product}>
                 <div className={styles.photo}>
-                    <img src={product.fields.productPhotos[0].fields.file.url} />
+                    <img
+                        src={product.fields.productPhotos[0].fields.file.url}
+                        alt={product.fields.name}
+                    />
                 </div>
                 <div className={styles.info}>
                     <div>

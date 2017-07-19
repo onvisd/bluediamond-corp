@@ -92,8 +92,8 @@ export default class FoodService extends Component {
         return {__html: marked(field)};
     }
 
-    renderImage(image) {
-        return <img src={`${image}?fit=fill&f=face&w=265&h=200`} />;
+    renderImage(image, alt) {
+        return <img src={`${image}?fit=fill&f=face&w=265&h=200`} alt={alt} />;
     }
 
     handleClick = (space) => {
@@ -144,19 +144,31 @@ export default class FoodService extends Component {
                     </div>
                     <div className={styles.productFeatures}>
                         <div className={styles.productFeature}>
-                            {this.renderImage(fields.productFeature1Image.file.url)}
+                            {this.renderImage(
+                                fields.productFeature1Image.file.url,
+                                fields.productFeature1Label
+                            )}
                             {fields.productFeature1Label}
                         </div>
                         <div className={styles.productFeature}>
-                            {this.renderImage(fields.productFeature2Image.file.url)}
+                            {this.renderImage(
+                                fields.productFeature2Image.file.url,
+                                fields.productFeature2Label
+                            )}
                             {fields.productFeature2Label}
                         </div>
                         <div className={styles.productFeature}>
-                            {this.renderImage(fields.productFeature3Image.file.url)}
+                            {this.renderImage(
+                                fields.productFeature3Image.file.url,
+                                fields.productFeature3Label
+                            )}
                             {fields.productFeature3Label}
                         </div>
                         <div className={styles.productFeature}>
-                            {this.renderImage(fields.productFeature4Image.file.url)}
+                            {this.renderImage(
+                                fields.productFeature4Image.file.url,
+                                fields.productFeature4Label
+                            )}
                             {fields.productFeature4Label}
                         </div>
                     </div>

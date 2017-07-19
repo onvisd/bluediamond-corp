@@ -17,10 +17,16 @@ const MoreFlavors = ({brand, otherCategories}) => (
                     key={category.sys.id}
                 >
                     <div className={`${styles.accent} ${styles.accentLeft}`}>
-                        <img src={category.fields.appetizerImages[0].fields.file.url} />
+                        <img
+                            src={category.fields.appetizerImages[0].fields.file.url}
+                            alt="Flavor Accent"
+                        />
                     </div>
                     <div className={`${styles.accent} ${styles.accentRight}`}>
-                        <img src={category.fields.appetizerImages[1].fields.file.url} />
+                        <img
+                            src={category.fields.appetizerImages[1].fields.file.url}
+                            alt="Flavor Accent"
+                        />
                     </div>
                     <div className={styles.text}>
                         <h2>{category.fields.name}</h2>

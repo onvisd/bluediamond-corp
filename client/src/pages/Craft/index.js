@@ -173,7 +173,7 @@ export default class Craft extends Component {
                             <div className={styles.detailsOverlay} />
                             <div className={styles.detailsContainer}>
                                 <div>
-                                    <img src={BDLogo} className={styles.logo} />
+                                    <img src={BDLogo} className={styles.logo} alt="Logo" />
                                     <h2>{craftFields.detailsHeadline}</h2>
                                 </div>
                                 <ul className={styles.detailColumns}>

@@ -108,7 +108,7 @@ export default class DesktopNav extends Component {
         return (
             <nav className={styles.container}>
                 <Link to="/">
-                    <img src={BDLogo} className={styles.logo} />
+                    <img src={BDLogo} className={styles.logo} alt="Blue Diamond" />
                 </Link>
                 <div className={classnames(styles.secondaryNav, styles[navColor])}>
                     <div className={styles.innerContainer}>

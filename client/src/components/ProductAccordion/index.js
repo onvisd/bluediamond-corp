@@ -181,6 +181,7 @@ export default class ProductAccordion extends Component {
                             `https://smartlabel.labelinsight.com/product/${nutrition.id}/nutrition`
                         }
                         target="_blank"
+                        alt="SmartLabel"
                     >
                         <img src={SmartLabel} />
                     </a>

@@ -126,6 +126,7 @@ export default class Home extends Component {
                             <img
                                 className={styles.blossom}
                                 src={homeFields.heroBlossomImage.file.url}
+                                alt="Blossom"
                             />
                             <div className={styles.heroContent}>
                                 <h1 className="t--size-xxl">
