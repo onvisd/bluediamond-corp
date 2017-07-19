@@ -42,6 +42,38 @@ export default (api, {apolloClient}) => {
         })
         .then((result) => result.data.customerAccessTokenCreate);
 
+    const recoverCustomer = (email) =>
+        apolloClient.mutate({
+            mutation: gql`
+                mutation ($email: String!) {
+                    customerRecover(email: $email) {
+                      userErrors {
+                          field
+                          message
+                      }
+                    }
+                }
+            `,
+            variables: {email}
+        })
+        .then((result) => result.data.customerRecover);
+
+    const resetCustomer = (id, input) =>
+        apolloClient.mutate({
+            mutation: gql`
+                mutation ($id: ID!, $input: CustomerResetInput!) {
+                    customerReset(id: $id, input: $input) {
+                        userErrors {
+                            field
+                            message
+                        }
+                    }
+                }
+            `,
+            variables: {id, input}
+        })
+        .then((result) => result.data.resetCustomer);
+
     const updateCustomer = (customer, customerAccessToken) =>
         apolloClient.mutate({
             mutation: gql`
@@ -239,6 +271,39 @@ export default (api, {apolloClient}) => {
 
                 res.status(201).send({authenticated: true, data: {...customer}});
             }
+        } catch (err) {
+            console.trace(err);
+            res.status(500).send(err.message);
+        }
+    });
+
+    // Recover Customer
+    api.post('/store/customer/recover', async (req, res) => {
+        if(!req.body.email)
+            res.status(400).send({message: 'You must provide an email address'});
+
+        try {
+            const customer = await recoverCustomer(req.body.email);
+            res.status(200).send({authenticated: false, data: {...customer}});
+        } catch (err) {
+            console.trace(err);
+            res.status(500).send(err.message);
+        }
+    });
+
+    // Reset Customer
+    api.post('/store/customer/reset', async (req, res) => {
+        if(!req.body.password)
+            res.status(400).send({message: 'You must provide a new password'});
+
+        const input = {
+            token: req.param.token,
+            password: req.body.password
+        };
+
+        try {
+            const customer = await resetCustomer(req.param.id, input);
+            res.status(201).send({authenticated: true, data: {...customer}});
         } catch (err) {
             console.trace(err);
             res.status(500).send(err.message);

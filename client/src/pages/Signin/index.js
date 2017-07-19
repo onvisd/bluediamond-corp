@@ -5,7 +5,7 @@ import {Form} from 'formsy-react';
 import classnames from 'classnames';
 
 import {connector as authConnector} from 'state/auth';
-import {registerCustomer, signinCustomer} from 'state/auth';
+import {registerCustomer, signinCustomer, recoverCustomerPass} from 'state/auth';
 
 import FormInput from 'components/FormInput';
 import Button from 'components/Button';
@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 @connect(
     (state) => ({...authConnector(state.auth)}),
-    {registerCustomer, signinCustomer, goto}
+    {registerCustomer, signinCustomer, recoverCustomerPass, goto}
 )
 export default class Signin extends Component {
     state = {
@@ -100,6 +100,19 @@ export default class Signin extends Component {
         }
     }
 
+    handleRecover = (creds) => {
+        this.setState({submitting: true});
+
+        this.props.recoverCustomerPass(creds)
+            .then((result) => {
+                this.setState({submitting: false, success: true});
+                return result;
+            })
+            .catch(() => {
+                this.throwError(this.props.auth.response.text);
+            });
+    }
+
     signInState() {
         if(this.state.submitting)
             return 'Signing in…';
@@ -116,6 +129,15 @@ export default class Signin extends Component {
             return 'Success! Please wait…';
 
         return 'Create Account';
+    }
+
+    recoverState() {
+        if(this.state.submitting)
+            return 'Looking up…';
+        else if(this.state.success)
+            return 'Success! Sending recovery email.';
+
+        return 'Recover Password';
     }
 
     render() {
@@ -188,6 +210,11 @@ export default class Signin extends Component {
                             >
                                 {this.signInState()}
                             </Button>
+                            <div className={styles.forgotPass}>
+                                <a onClick={() => this.setState(() => ({view: 'recover'})) }>
+                                    Forgot Password?
+                                </a>
+                            </div>
                         </Form>
                     )}
                     {view === 'create' && (
@@ -232,6 +259,37 @@ export default class Signin extends Component {
                                 disabled={!canSubmit}
                             >
                                 {this.registerState()}
+                            </Button>
+                        </Form>
+                    )}
+                    {view === 'recover' && (
+                        <Form
+                            className={styles.form}
+                            onValidSubmit={this.handleRecover}
+                            onValid={this.enableSubmit}
+                            onInvalid={this.disableSubmit}
+                        >
+                            {error
+                                ? (
+                                    <p className={styles.error}>
+                                        {message}
+                                    </p>
+                                )
+                                : null
+                            }
+                            <FormInput
+                                name="email"
+                                label="Email Address"
+                                validations="isEmail"
+                                validationError="This is not a valid email"
+                                required
+                            />
+                            <Button
+                                type="submit"
+                                layout="fw"
+                                disabled={!canSubmit}
+                            >
+                                {this.recoverState()}
                             </Button>
                         </Form>
                     )}

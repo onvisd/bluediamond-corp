@@ -16,6 +16,7 @@ import Brand from './pages/Brand';
 import BrandCategory from './pages/BrandCategory';
 import Contact from './pages/Contact';
 import Store from './pages/Store';
+import Reset from './pages/ResetPassword';
 import StoreProduct from './pages/StoreProduct';
 import Press from './pages/Press';
 import Signin from './pages/Signin';
@@ -47,6 +48,7 @@ export default (
         <Route path="/faqs" component={FAQs} />
         <Route path="/press" component={Press} />
         <Route path="/product-locator" component={ProductLocator} />
+        <Route path="/reset" component={Reset} />
         <Route path="/signin" component={Signin} />
         <Route path="/account/:view" component={Account} />
         <Route path="/404" component={NotFound} status={404} />

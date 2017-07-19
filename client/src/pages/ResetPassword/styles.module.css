@@ -86,19 +86,3 @@
     display: block;
     text-align: center;
 }
-
-.forgotPass {
-    padding: 1rem 0 0;
-    text-align: center;
-
-    & a {
-        font-size: var(--t--size-xs);
-        color: var(--c--gray);
-    }
-
-    & a:hover,
-    & a:focus {
-        cursor: pointer;
-        color: var(--c--blue);
-    }
-}

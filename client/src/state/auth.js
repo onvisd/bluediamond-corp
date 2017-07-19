@@ -30,6 +30,32 @@ export const signinCustomer = action({
     })
 }, handler);
 
+export const resetCustomer = action({
+    namespace: 'AUTH',
+    event: 'RESET_CUSTOMER',
+    action: (data, http) =>
+      http.post('/api/store/customer/reset', data)
+      .then((result) => result)
+      .catch((err) => err),
+    result: (state, result) => ({
+        ...state,
+        auth: result
+    })
+}, handler);
+
+export const recoverCustomerPass = action({
+    namespace: 'AUTH',
+    event: 'RECOVER_CUSTOMER',
+    action: (data, http) =>
+      http.post('/api/store/customer/recover', data)
+      .then((result) => result)
+      .catch((err) => err),
+    result: (state, result) => ({
+        ...state,
+        auth: result
+    })
+}, handler);
+
 export const signoutCustomer = action({
     namespace: 'AUTH',
     event: 'SIGNOUT_CUSTOMER',
