@@ -5,8 +5,8 @@ const {
 } = process.env;
 
 export default (api) => {
-    api.get('/cache/clear', (req, res) => {
-        if(req.query.token !== SECURED_API_TOKEN)
+    api.post('/cache/clear', (req, res) => {
+        if(req.query.token !== SECURED_API_TOKEN && req.body.token !== SECURED_API_TOKEN)
             return res.status(403).send({ok: false, err: 'Invalid token.'});
 
         clearCached();
