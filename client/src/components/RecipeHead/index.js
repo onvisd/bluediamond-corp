@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import marked from 'marked';
+import {ShareButtons} from 'react-share';
 
 import NutritionFacts from '../NutritionFacts';
 
@@ -15,6 +16,12 @@ import Unsweetened from 'images/icons/unsweetened.svg';
 import Vegan from 'images/icons/vegan.svg';
 
 import styles from './styles.module.css';
+
+const {
+    FacebookShareButton,
+    PinterestShareButton,
+    TwitterShareButton
+} = ShareButtons;
 
 export default class RecipeHead extends Component {
     static propTypes = {
@@ -91,10 +98,12 @@ export default class RecipeHead extends Component {
                                         <p>Difficulty</p>
                                         <h3>{difficulty}</h3>
                                     </div>
-                                    <div className={styles.metaItem}>
-                                        <p>Serves Up To</p>
-                                        <h3>{nutrition[0].servingSize}</h3>
-                                    </div>
+                                    {nutrition[0].servingSize > 0 && (
+                                        <div className={styles.metaItem}>
+                                            <p>Serves Up To</p>
+                                            <h3>{nutrition[0].servingSize}</h3>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className={styles.nutritionFacts}>
                                     {nutrition && <NutritionFacts
@@ -104,9 +113,32 @@ export default class RecipeHead extends Component {
                                 </div>
                                 <div className={styles.share}>
                                     <span>Share this recipe:</span>
-                                    <a href="#"><Facebook /></a>
-                                    <a href="#"><Pinterest /></a>
-                                    <a href="#"><Twitter /></a>
+                                    <FacebookShareButton
+                                        className={styles.shareButton}
+                                        url={typeof window === 'undefined' ? '' : location.href}
+                                    >
+                                            <Facebook />
+                                    </FacebookShareButton>
+                                    <PinterestShareButton
+                                        className={styles.shareButton}
+                                        media={heroImage}
+                                        description={
+                                            `A ${
+                                                cookTime
+                                            } minute recipe for ${
+                                                title
+                                            } with Almond Breeze.`
+                                        }
+                                        url={typeof window === 'undefined' ? '' : location.href}
+                                    >
+                                        <Pinterest />
+                                    </PinterestShareButton>
+                                    <TwitterShareButton
+                                        className={styles.shareButton}
+                                        url={typeof window === 'undefined' ? '' : location.href}
+                                    >
+                                        <Twitter />
+                                    </TwitterShareButton>
                                 </div>
                             </div>
                         </div>

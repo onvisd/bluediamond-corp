@@ -122,19 +122,20 @@
     display: flex;
     align-items: center;
     font-weight: var(--t--weight-bold);
+}
 
-    & a {
-        margin-left: 0.75rem;
-        margin-bottom: -7px;
-    }
+.shareButton {
+    margin-left: 0.75rem;
+    margin-bottom: -7px;
+    cursor: pointer;
 
     & svg {
         fill: var(--c--black);
     }
 
-    & a:hover {
+    &:hover {
         & svg {
-            opacity: 0.75;
+            fill: color(var(--c--black) lightness(-10%));
         }
     }
 }

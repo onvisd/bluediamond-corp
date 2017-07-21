@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {preload} from 'react-isomorphic-render';
+import {Meta, preload} from 'react-isomorphic-render';
 import marked from 'marked';
 
 import {connector, getRecipe} from 'state/recipe';
@@ -82,9 +82,38 @@ export default class Recipe extends Component {
             return entryItem;
         });
 
+        const assetsById = {};
+        recipe.includes.Asset.forEach((asset) => {
+            assetsById[asset.sys.id] = asset.fields;
+        });
+
         return (
             <section className="content">
                 <Title>{`Recipe: ${item.fields.name}`}</Title>
+                <Meta>{[
+                    // <meta charset="utf-8"/>
+                    {charset: 'utf-8'},
+
+                    // <meta name="..." content="..."/>
+                    {
+                        name: 'viewport',
+                        content: 'width=device-width, initial-scale=1.0, user-scalable=no'
+                    },
+
+                    // <meta property="..." content="..."/>
+                    {property: 'og:title', content: item.fields.name},
+                    {
+                        property: 'og:description',
+                        content: `A ${item.fields.cookTime} minute recipe for ${
+                            item.fields.name
+                        } with Almond Breeze.`
+                    },
+                    {
+                        property: 'og:image',
+                        content: assetsById[item.fields.heroImage.sys.id].file.url
+                    },
+                    {property: 'og:locale', content: 'en-US'}
+                ]}</Meta>
                 <RecipeHead data={recipe} />
                 <div className={styles.container}>
                     <div className={styles.left}>

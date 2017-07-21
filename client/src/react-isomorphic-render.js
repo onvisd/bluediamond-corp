@@ -19,34 +19,32 @@ export default {
 
     reduxStoreEnhancers: () => enhancers,
 
-    preload: {
-        catch(error, {url, redirect}) {
-            switch (error.status) {
-                case 404:
-                    return redirect('/404');
+    catch(error, {url, redirect}) {
+        switch (error.status) {
+            case 404:
+                return redirect('/404');
 
-                default:
-                    console.error(`Error while preloading "${url}"`);
-                    console.error(error);
+            default:
+                console.error(`Error while preloading "${url}"`);
+                console.error(error);
 
-                    if(process.env.NODE_ENV === 'production')
-                        redirect('/error');
-                    else
-                        throw error;
-            }
-
-            // // Not authenticated
-            // if (error.status === 401)
-            // {
-            // 	return redirect('/unauthenticated')
-            // }
-
-            // // Not authorized
-            // if (error.status === 403)
-            // {
-            // 	return redirect('/unauthorized')
-            // }
+                if(process.env.NODE_ENV === 'production')
+                    redirect('/error');
+                else
+                    throw error;
         }
+
+        // // Not authenticated
+        // if (error.status === 401)
+        // {
+        // 	return redirect('/unauthenticated')
+        // }
+
+        // // Not authorized
+        // if (error.status === 403)
+        // {
+        // 	return redirect('/unauthorized')
+        // }
     },
 
     ...asyncSettings
