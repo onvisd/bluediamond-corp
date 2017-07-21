@@ -301,6 +301,7 @@ export default class Store extends Component {
                                               this.sort = select;
                                           }}
                                           defaultValue=""
+                                          title="Select a field to sort by"
                                       >
                                           <option value="" disabled>Sort by</option>
                                           <option value="name">Name</option>
@@ -319,6 +320,7 @@ export default class Store extends Component {
                                       }}
                                       type="text"
                                       placeholder="Search"
+                                      title="Type search term here"
                                   />
                               </div>
                           </div>

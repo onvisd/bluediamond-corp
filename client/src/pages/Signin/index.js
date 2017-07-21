@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import {connector as authConnector} from 'state/auth';
 import {registerCustomer, signinCustomer, recoverCustomerPass} from 'state/auth';
 
+import Title from 'components/Title';
 import FormInput from 'components/FormInput';
 import Button from 'components/Button';
 import styles from './styles.module.css';
@@ -145,6 +146,7 @@ export default class Signin extends Component {
 
         return (
             <div className={styles.container}>
+                <Title>Sign In / Create Account</Title>
                 <h1>Shopped with us before?</h1>
                 <p>
                     If you have registered with us before, sign in

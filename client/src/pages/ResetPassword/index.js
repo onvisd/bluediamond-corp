@@ -6,6 +6,7 @@ import {Form} from 'formsy-react';
 import {connector as authConnector} from 'state/auth';
 import {resetCustomer} from 'state/auth';
 
+import Title from 'components/Title';
 import FormInput from 'components/FormInput';
 import Button from 'components/Button';
 import styles from './styles.module.css';
@@ -89,6 +90,7 @@ export default class Signin extends Component {
 
         return (
             <div className={styles.container}>
+                <Title>Reset Password</Title>
                 <h1>Reset Your Password</h1>
                 <div className={styles.formWrap}>
                     <Form
