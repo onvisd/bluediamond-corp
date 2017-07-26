@@ -63,7 +63,12 @@ export default function(parameters) {
                     </script>
                 `;
             }
-        }
+        },
+
+        localize: () => ({
+            locale: 'en',
+            messages: {}
+        })
     });
 
     // Start webpage rendering server

@@ -35,6 +35,7 @@ export default class Card extends Component {
                     target="_blank"
                     className={styles.image}
                     style={{backgroundImage: `url(${imageUrl})`}}
+                    title={linkTo.url}
                 >
                     <Instagram />
                 </a>

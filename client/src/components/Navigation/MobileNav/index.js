@@ -89,9 +89,10 @@ export default class MobileNav extends Component {
                 <div className={styles.head}>
                     <div className={styles.ecomm}>
                         {auth.authenticated
-                            ? <Link to="/account/settings"><User /></Link>
-                            : <Link to="/signin"><User /></Link>}
+                            ? <Link to="/account/settings" title="Account"><User /></Link>
+                            : <Link to="/signin" title="Sign in"><User /></Link>}
                         <button
+                            title="Cart"
                             className={styles.cart}
                             onClick={() => {
                                 this.toggleNav.show({

@@ -50,19 +50,19 @@ export default class Footer extends Component {
                         </Link>
                     </div>
                     <div className={styles.social}>
-                        <a href={social.facebook} target="_blank">
+                        <a href={social.facebook} target="_blank" title="Facebook">
                             <Facebook />
                         </a>
-                        <a href={social.youtube} target="_blank">
+                        <a href={social.youtube} target="_blank" title="YouTube">
                             <Youtube />
                         </a>
-                        <a href={social.instagram} target="_blank">
+                        <a href={social.instagram} target="_blank" title="Instagram">
                             <Instagram />
                         </a>
-                        <a href={social.pinterest} target="_blank">
+                        <a href={social.pinterest} target="_blank" title="Pinterest">
                             <Pinterest />
                         </a>
-                        <a href={social.twitter} target="_blank">
+                        <a href={social.twitter} target="_blank" title="Twitter">
                             <Twitter />
                         </a>
                     </div>

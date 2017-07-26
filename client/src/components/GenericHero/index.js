@@ -50,7 +50,8 @@ export default class GenericHero extends Component {
                 className={classNames(
                     styles.container,
                     verticalAlign ? styles[alignClass] : styles.alignBottom,
-                    className
+                    className,
+                    styles[color]
                 )}
             >
                 <Parallax
@@ -58,7 +59,7 @@ export default class GenericHero extends Component {
                     bgImage={backgroundImage}
                     strength={responsive.small ? 0 : 200}
                 />
-                <div className={`${styles.innerContainer} ${styles[color]}`}>
+                <div className={styles.innerContainer}>
                     {headline && <h3>{headline}</h3>}
                     <h1 className="t--size-xxl">{title}</h1>
                     {ctaText && ctaUrl && ctaTheme && (

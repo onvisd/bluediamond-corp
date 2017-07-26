@@ -60,6 +60,7 @@ export default class Footer extends Component {
                                 <a
                                     href={social.facebook}
                                     target="_blank"
+                                    title="Facebook"
                                 >
                                     <Facebook />
                                 </a>
@@ -68,6 +69,7 @@ export default class Footer extends Component {
                                 <a
                                     href={social.youtube}
                                     target="_blank"
+                                    title="YouTube"
                                 >
                                     <Youtube />
                                 </a>
@@ -76,6 +78,7 @@ export default class Footer extends Component {
                                 <a
                                     href={social.instagram}
                                     target="_blank"
+                                    title="Instagram"
                                 >
                                     <Instagram />
                                 </a>
@@ -84,6 +87,7 @@ export default class Footer extends Component {
                                 <a
                                     href={social.pinterest}
                                     target="_blank"
+                                    title="Pinterest"
                                 >
                                     <Pinterest />
                                 </a>
@@ -92,6 +96,7 @@ export default class Footer extends Component {
                                 <a
                                     href={social.twitter}
                                     target="_blank"
+                                    title="Twitter"
                                 >
                                     <Twitter />
                                 </a>
