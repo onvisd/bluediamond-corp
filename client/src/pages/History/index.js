@@ -150,10 +150,10 @@ export default class HistoryPage extends Component {
                                     <div className={styles.content}>
                                         <h2>1850</h2>
                                         <p>
-                                            California pioneers find an ideal Mediterranean climate
-                                            in the soils of Sacramento, Monterey and Los Angeles,
-                                            where they plant their first almonds, giving birth to
-                                            an industry.
+                                            California pioneers find an ideal Mediterranean
+                                            climate in the soils of Sacramento, Monterey and Los
+                                            Angeles, where they plant their first almonds, giving
+                                            birth to an industry.
                                         </p>
                                     </div>
                                 )
@@ -326,7 +326,7 @@ export default class HistoryPage extends Component {
                                         <h2>1980</h2>
                                         <p>
                                             <em>The Exchange</em> officially becomes known as
-                                            <em>Blue Diamond Growers.</em>
+                                            <em> Blue Diamond Growers.</em>
                                         </p>
                                     </div>
                                 ),
