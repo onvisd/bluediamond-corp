@@ -76,7 +76,9 @@ export default class ProductAccordion extends Component {
                             {calories[0].value}
                         </td>
                         <td className={styles.dvp}>
-                            {calories[1].name} {calories[1].value}
+                            {calories.length > 1 && (
+                                <span>{calories[1].name} {calories[1].value}</span>
+                            )}
                         </td>
                     </tr>
                     <tr key="divider">
