@@ -56,7 +56,8 @@ export default (api, {apolloClient}) => {
                         }
                     }
                 }
-            `
+            `,
+            fetchPolicy: 'network-only'
         }).then((result) => result.data.shop.products.edges);
 
     const getProductsByType = (type) =>
@@ -111,7 +112,8 @@ export default (api, {apolloClient}) => {
                         }
                     }
                 }
-            `
+            `,
+            fetchPolicy: 'network-only'
         }).then((result) => result.data.shop.products.edges);
 
     const getProduct = (slug) =>
@@ -162,7 +164,8 @@ export default (api, {apolloClient}) => {
                         }
                     }
                 }
-            `
+            `,
+            fetchPolicy: 'network-only'
         }).then((result) => result.data.shop.productByHandle);
 
     const getSmartLabel = (id) =>
