@@ -1,0 +1,24 @@
+@import 'constants/color';
+@import 'constants/grid';
+@import 'constants/type';
+
+.container {
+    display: flex;
+    height: 80vh;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--c--gray-lighter);
+
+    @media (--mq-s) {
+        margin-top: 3.75rem;
+    }
+}
+
+.content {
+    max-width: 600px;
+    text-align: center;
+
+    @media (--mq-s) {
+        padding: 0 1rem;
+    }
+}

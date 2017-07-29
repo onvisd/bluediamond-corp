@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 
 import {connector, getPageData} from '../state/pageData';
-import NotFound from './NotFound';
+import NotFound from './Error/404';
 
 // require pageModules ahead of time here using the format
 // PageModuleName: require('../components/API/PageModuleName').default

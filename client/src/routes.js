@@ -3,8 +3,8 @@ import {Route, IndexRoute} from 'react-router';
 
 import Layout from './pages/Layout';
 import Page from './pages/Page';
-import GenericError from './pages/Error';
-import NotFound from './pages/NotFound';
+import GenericError from './pages/Error/500';
+import NotFound from './pages/Error/404';
 import Home from './pages/Home';
 import Recipe from './pages/Recipe';
 import RecipeIndex from './pages/RecipeIndex';
