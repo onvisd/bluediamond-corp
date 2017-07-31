@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Form} from 'formsy-react';
 
 import {connector as authConnector} from 'state/auth';
-import {resetCustomer} from 'state/auth';
+import {resetCustomer, signoutCustomer} from 'state/auth';
 
 import Title from 'components/Title';
 import FormInput from 'components/FormInput';
@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 @connect(
     (state) => ({...authConnector(state.auth)}),
-    {resetCustomer, goto}
+    {resetCustomer, signoutCustomer, goto}
 )
 export default class Signin extends Component {
     state = {
@@ -86,7 +86,14 @@ export default class Signin extends Component {
     }
 
     render() {
+        const {auth, redirect} = this.props; // eslint-disable-line no-shadow
         const {canSubmit, error, message} = this.state;
+
+        if(!auth || !auth.data) {
+            this.props.signoutCustomer();
+            redirect('/signin');
+            return (<div />);
+        }
 
         return (
             <div className={styles.container}>
