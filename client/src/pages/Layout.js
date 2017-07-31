@@ -14,6 +14,11 @@ import {
     getCustomer
 } from '../state/auth';
 
+import {
+    connector as checkoutConnector,
+    getCheckout
+} from '../state/checkout';
+
 import Title from 'components/Title';
 import Preloading from 'components/Preloading';
 import Navigation from 'components/Navigation';
@@ -25,19 +30,22 @@ import sortByPriority from 'tools/sortByPriority';
     await Promise.all([
         dispatch(getCustomer()),
         dispatch(setNavigationStyle({})),
-        dispatch(getNavigationData())
+        dispatch(getNavigationData()),
+        dispatch(getCheckout())
     ]);
 })
 @connect(
     (state) => ({
         responsive: state.responsive,
         ...navConnector(state.navigation),
-        ...authConnector(state.auth)
+        ...authConnector(state.auth),
+        ...checkoutConnector(state.checkout)
     }),
     {
         getCustomer,
         getNavigationData,
-        setNavigationStyle
+        setNavigationStyle,
+        getCheckout
     }
 )
 export default class Layout extends Component {

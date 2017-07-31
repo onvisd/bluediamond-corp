@@ -13,6 +13,16 @@ export const createCheckout = action({
     })
 }, handler);
 
+export const getCheckout = action({
+    namespace: 'CHECKOUT',
+    event: 'GET',
+    action: (http) => http.post('/api/store/getCheckout'),
+    result: (state, result) => ({
+        ...state,
+        ...result
+    })
+}, handler);
+
 export const addToCart = action({
     namespace: 'CHECKOUT',
     event: 'ADD_TO_CART',

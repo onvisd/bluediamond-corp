@@ -288,6 +288,53 @@ export default (api, {apolloClient}) => {
         })
         .then((result) => result.data.checkoutLineItemsRemove);
 
+    const getCheckout = (id) =>
+        apolloClient.mutate({
+            query: gql`
+                query ($id: ID!) {
+                    node(id: $id) {
+                        id
+                        webUrl
+                        totalTax
+                        subtotalPrice
+                        totalPrice
+                        orderStatusUrl
+                        lineItems(first: 250) {
+                            edges {
+                                node {
+                                    id
+                                    title
+                                    variant {
+                                        id
+                                        title
+                                        image {
+                                            src
+                                        }
+                                        price
+                                        product {
+                                            images(first: 1) {
+                                                edges {
+                                                    node {
+                                                        src
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    quantity
+                                }
+                            }
+                        }
+                        userErrors {
+                            message
+                        }
+                    }
+                }
+            `,
+            variables: {id}
+        })
+        .then((result) => result.data.node);
+
     api.post('/store/checkout', async (req, res) => {
         if(!req.body.lineItems)
             res.status(400).send({message: 'You must add items to your cart'});
@@ -296,6 +343,11 @@ export default (api, {apolloClient}) => {
             const checkout = await createCheckout(req.body.lineItems);
             const accessToken = req.cookies.access_token;
 
+            const checkoutID = checkout.checkout.id;
+            res.cookie('checkout_id', checkoutID, {
+                maxAge: 365 * 24 * 60 * 60 * 1000 // 1 year
+            });
+
             if(checkout.userErrors.length) {
                 res.status(400).send(checkout.userErrors[0].message);
             } else if(accessToken) {
@@ -303,7 +355,7 @@ export default (api, {apolloClient}) => {
 
                 if(secureToken) {
                     const associate = await addCustomer(
-                        checkout.checkout.id,
+                        checkoutID,
                         secureToken.token
                     );
 
@@ -313,7 +365,7 @@ export default (api, {apolloClient}) => {
                         delete associate.checkout.customer.defaultAddress.__typename;
 
                         const syncAddress = await setAddress(
-                            checkout.checkout.id,
+                            checkoutID,
                             associate.checkout.customer.defaultAddress
                         );
 
@@ -325,7 +377,27 @@ export default (api, {apolloClient}) => {
                     res.status(201).send(checkout);
                 }
             } else {
+                res.cookie('checkout_id', checkoutID, {
+                    maxAge: 365 * 24 * 60 * 60 * 1000 // 1 year
+                });
+
                 res.status(201).send(checkout);
+            }
+        } catch (err) {
+            console.trace(err);
+            res.status(500).send(err.message);
+        }
+    });
+
+    api.post('/store/getCheckout', async (req, res) => {
+        const checkoutID = req.cookies['checkout_id'];
+
+        try {
+            if(checkoutID) {
+                const checkout = await getCheckout(res.get(checkoutID));
+                res.status(201).send(checkout);
+            } else {
+                res.status(201).send({message: 'No cart exists yet!'});
             }
         } catch (err) {
             console.trace(err);
@@ -339,6 +411,8 @@ export default (api, {apolloClient}) => {
 
         try {
             const updatedCheckout = await addToCart(req.params.checkoutId, req.body.lineItems);
+
+            res.cookie('checkout_id', req.params.checkoutId);
 
             res.status(201).send(updatedCheckout);
         } catch (err) {
