@@ -7,7 +7,8 @@ export default {
             port: process.env.RENDERING_PORT || 3002,
             ajax: {
                 host: process.env.AJAX_HOST || 'localhost',
-                port: process.env.AJAX_PORT || process.env.WEB_PORT || 3000
+                port: process.env.AJAX_PORT || process.env.WEB_PORT || 3000,
+                secure: process.env.AJAX_SECURE === 'true'
             }
         },
         api: {
