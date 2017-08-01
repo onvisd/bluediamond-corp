@@ -4,23 +4,14 @@ import {Link} from 'react-isomorphic-render';
 import Tile from 'components/Navigation/Tile';
 import Card from 'components/Navigation/Card';
 import Breadcrumb from '../Breadcrumb';
+import sortByPriority from 'tools/sortByPriority';
 import styles from './styles.module.css';
-
-import Blossom from 'images/backgrounds/almond-blossom-no-shadow.png';
-import Almonds from 'images/backgrounds/almonds-nav.png';
-import Leaf from 'images/backgrounds/almond-leaf-nav.png';
-
-const bgs = [
-    Blossom,
-    Almonds,
-    Leaf
-];
 
 export default class Company extends Component {
     static propTypes = {
         navigate: PropTypes.func.isRequired,
         toggleNav: PropTypes.object.isRequired,
-        companyNavTiles: PropTypes.array.isRequired
+        company: PropTypes.array.isRequired
     }
 
     navigate = {
@@ -33,7 +24,8 @@ export default class Company extends Component {
     }
 
     render() {
-        const {companyNavTiles, toggleNav} = this.props;
+        const {company, toggleNav} = this.props;
+        const tiles = company.filter((item) => item.fields.isTile).sort(sortByPriority);
 
         return (
             <Card>
@@ -41,11 +33,14 @@ export default class Company extends Component {
                     Our Company
                 </Breadcrumb>
                 <ul className={styles.container}>
-                    {companyNavTiles.map((navTile, i) => (
-                        <Tile key={navTile.sys.id} bgImage={bgs[i]}>
-                            <Link to={`/${navTile.fields.linkUrl}`} onClick={toggleNav.hide}>
-                                <p>{navTile.fields.headline}</p>
-                                <h2>{navTile.fields.title}</h2>
+                    {tiles.map((navTile) => (
+                        <Tile
+                            key={navTile.sys.id}
+                            bgImage={navTile.fields.backgroundImage.fields.file.url}
+                        >
+                            <Link to={navTile.fields.url} onClick={toggleNav.hide}>
+                                <p>{navTile.fields.linkSecondaryText}</p>
+                                <h2>{navTile.fields.linkText}</h2>
                             </Link>
                         </Tile>
                     ))}

@@ -2,7 +2,7 @@
 grower_ids.cache
 
 # environment-specific file
-.env
+.env*
 
 # webpack build target folder
 /client/build

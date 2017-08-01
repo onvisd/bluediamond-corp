@@ -19,7 +19,7 @@ export default class MobileNav extends Component {
     static propTypes = {
         brands: PropTypes.array.isRequired,
         navData: PropTypes.object.isRequired,
-        companyNavTiles: PropTypes.array.isRequired
+        company: PropTypes.array.isRequired
     }
 
     cards = {
@@ -80,7 +80,7 @@ export default class MobileNav extends Component {
     render() {
         const {navVisible, transition} = this.state;
         const {element, props} = this.state.activeCard;
-        const {brands, navData, companyNavTiles, auth} = this.props;
+        const {brands, navData, company, auth} = this.props;
 
         return (
             <div className={classnames(styles.container, {
@@ -152,7 +152,7 @@ export default class MobileNav extends Component {
                                 toggleNav: this.toggleNav,
                                 brands,
                                 navData,
-                                companyNavTiles,
+                                company,
                                 ...props
                             })
                         }

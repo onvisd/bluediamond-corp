@@ -22,21 +22,21 @@ export default (api, {contentful}) => {
 
     const getCompanyNavTiles = () =>
         contentful.client.getEntries({
-            content_type: 'pageModuleRelatedPageLink' // eslint-disable-line camelcase
+            content_type: 'companyNavigationItem' // eslint-disable-line camelcase
         })
         .then((entries) => entries.items);
 
     api.get('/navigation', async (req, res) => {
         try {
             const brands = await getBrands(req.apiParams);
-            const companyNavTiles = await getCompanyNavTiles(req.apiParams);
+            const companyNavItems = await getCompanyNavTiles(req.apiParams);
 
             for (let i = 0; i < brands.length; i++)
                 brands[i].fields.products = await getProducts(brands[i].fields.name);
 
             const data = {
                 brands,
-                companyNavTiles
+                companyNavItems
             };
 
             res.cache(true).send(data);

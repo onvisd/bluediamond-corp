@@ -25,7 +25,7 @@ export default class DesktopNav extends Component {
     static propTypes = {
         brands: PropTypes.array.isRequired,
         navData: PropTypes.object.isRequired,
-        companyNavTiles: PropTypes.array.isRequired
+        company: PropTypes.array.isRequired
     }
 
     cards = {
@@ -102,7 +102,7 @@ export default class DesktopNav extends Component {
     render() {
         const {navVisible, cartVisible, productCards} = this.state;
         const {name, element, props} = this.state.activeCard;
-        const {brands, navData, companyNavTiles, navigation, auth, checkout} = this.props;
+        const {brands, navData, company, navigation, auth, checkout} = this.props;
         const navColor = navigation.style ? navigation.style.className : null;
 
         return (
@@ -162,7 +162,7 @@ export default class DesktopNav extends Component {
                                     productCards,
                                     brands,
                                     navData,
-                                    companyNavTiles,
+                                    company,
                                     ...props
                                 })
                             }

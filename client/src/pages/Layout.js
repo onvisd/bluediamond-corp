@@ -64,7 +64,7 @@ export default class Layout extends Component {
 
     render() {
         const {children, navigation, responsive} = this.props;
-        const {brands, companyNavTiles} = navigation.data;
+        const {brands, companyNavItems} = navigation.data;
         const footerData = brands.sort(sortByPriority).map((brand) => ({
             name: brand.fields.name,
             slug: brand.fields.slug,
@@ -128,7 +128,7 @@ export default class Layout extends Component {
                 <Title>{title}</Title>
                 <Meta>{meta}</Meta>
 
-                <Navigation brands={brands} companyNavTiles={companyNavTiles} />
+                <Navigation brands={brands} company={companyNavItems} />
 
                 <Preloading />
 

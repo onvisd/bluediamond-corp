@@ -3,9 +3,11 @@ import React, {Component, PropTypes} from 'react';
 import NavList from 'components/Navigation/NavList';
 import NavItem from 'components/Navigation/NavItem';
 import Card from 'components/Navigation/Card';
+import sortByPriority from 'tools/sortByPriority';
 
 export default class Root extends Component {
     static propTypes = {
+        company: PropTypes.array.isRequired,
         navigate: PropTypes.func.isRequired,
         toggleNav: PropTypes.object.isRequired
     }
@@ -15,7 +17,8 @@ export default class Root extends Component {
     }
 
     render() {
-        const {navData, toggleNav} = this.props;
+        const {navData, toggleNav, company} = this.props;
+        const links = company.filter((item) => !item.fields.isTile).sort(sortByPriority);
 
         return (
             <Card>
@@ -48,9 +51,7 @@ export default class Root extends Component {
                     ))}
                 </NavList>
                 <NavList>
-                    {navData.primary.globalLinks.concat(
-                        navData.primary.companyLinks
-                    ).map((link) => {
+                    {navData.primary.globalLinks.map((link) => {
                         if(link.slug === '/store') // special case
                             return;
 
@@ -64,6 +65,20 @@ export default class Root extends Component {
                                 {...rest}
                             >
                                 {link.name}
+                            </NavItem>
+                        );
+                    })}
+                    {links.map((item) => {
+                        let rest = {href: item.fields.url, onClick: toggleNav.hide};
+                        if(item.fields.url.match('://') || item.fields.url.match('mailto:'))
+                            rest = {extHref: item.fields.url};
+
+                        return (
+                            <NavItem
+                                key={item.fields.linkText}
+                                {...rest}
+                            >
+                                {item.fields.linkText}
                             </NavItem>
                         );
                     })}

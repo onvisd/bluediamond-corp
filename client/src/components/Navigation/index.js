@@ -53,19 +53,19 @@ export default class Navigation extends Component {
     }
 
     render() {
-        const {responsive, brands, companyNavTiles} = this.props;
+        const {responsive, brands, company} = this.props;
 
         let nav = (
             <header>
                 <DesktopNav
                     navData={this.navData}
                     brands={brands}
-                    companyNavTiles={companyNavTiles}
+                    company={company}
                 />
                 <MobileNav
                     navData={this.navData}
                     brands={brands}
-                    companyNavTiles={companyNavTiles}
+                    company={company}
                 />
             </header>
         );
@@ -79,7 +79,7 @@ export default class Navigation extends Component {
                     <MobileNav
                         navData={this.navData}
                         brands={brands}
-                        companyNavTiles={companyNavTiles}
+                        company={company}
                     />
                 </header>
             );
@@ -89,7 +89,7 @@ export default class Navigation extends Component {
                     <DesktopNav
                         navData={this.navData}
                         brands={brands}
-                        companyNavTiles={companyNavTiles}
+                        company={company}
                     />
                 </header>
             );

@@ -2,53 +2,56 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
 
 import Tile from 'components/Navigation/Tile';
+import sortByPriority from 'tools/sortByPriority';
 import styles from './styles.module.css';
 
-import Blossom from 'images/backgrounds/almond-blossom-no-shadow.png';
-import Almonds from 'images/backgrounds/almonds-nav.png';
-import Leaf from 'images/backgrounds/almond-leaf-nav.png';
+const Company = ({company, toggleNav}) => {
+    const tiles = company.filter((item) => item.fields.isTile).sort(sortByPriority);
+    const links = company.filter((item) => !item.fields.isTile).sort(sortByPriority);
 
-const bgs = [
-    Blossom,
-    Leaf,
-    Almonds
-];
+    return (
+        <div className={styles.container}>
+            <ul className={styles.tiles}>
+                {tiles.map((navTile) => (
+                    <Tile
+                        key={navTile.sys.id}
+                        bgImage={navTile.fields.backgroundImage.fields.file.url}
+                        to={navTile.fields.url}
+                        onClick={toggleNav.hide}
+                    >
+                        <p>{navTile.fields.linkSecondaryText}</p>
+                        <h2>{navTile.fields.linkText}</h2>
+                    </Tile>
+                ))}
+            </ul>
+            <ul className={styles.companyLinks}>
+                {links.map((item) => {
+                    let child = (
+                        <Link to={item.fields.url} onClick={toggleNav.hide}>
+                            {item.fields.linkText}
+                        </Link>
+                    );
 
-const Company = ({navData, companyNavTiles, toggleNav}) => (
-    <div className={styles.container}>
-        <ul className={styles.tiles}>
-            {companyNavTiles.map((navTile, i) => (
-                <Tile
-                    key={navTile.sys.id}
-                    bgImage={bgs[i]}
-                    to={`/${navTile.fields.linkUrl}`}
-                    onClick={toggleNav.hide}
-                >
-                    <p>{navTile.fields.headline}</p>
-                    <h2>{navTile.fields.title}</h2>
-                </Tile>
-            ))}
-        </ul>
-        <ul className={styles.companyLinks}>
-            {navData.primary.companyLinks.map((link) => {
-                let child = <Link to={link.slug} onClick={toggleNav.hide}>{link.name}</Link>;
+                    if(item.fields.url.match('://') || item.fields.url.match('mailto:')) {
+                        child = (
+                            <a href={item.fields.url} target="_blank">{item.fields.linkText}</a>
+                        );
+                    }
 
-                if(link.external)
-                    child = <a href={link.slug} target="_blank">{link.name}</a>;
-
-                return (
-                    <li className={styles.companyLink} key={link.slug}>
-                        {child}
-                    </li>
-                );
-            })}
-        </ul>
-    </div>
-);
+                    return (
+                        <li className={styles.companyLink} key={item.fields.linkText}>
+                            {child}
+                        </li>
+                    );
+                })}
+            </ul>
+        </div>
+    );
+};
 
 Company.propTypes = {
     navData: PropTypes.object.isRequired,
-    companyNavTiles: PropTypes.array.isRequired,
+    company: PropTypes.array.isRequired,
     toggleNav: PropTypes.object.isRequired
 };
 
