@@ -2,5 +2,12 @@
 
 .container {
     display: flex;
+    margin: 2rem 0;
     justify-content: center;
+}
+
+.button {
+    &:not(:last-child) {
+        margin-right: 1rem;
+    }
 }

@@ -91,7 +91,7 @@
     display: flex;
     padding: 2rem 0;
 
-    @media (--mq-s) {
+    @media (--mq-xs) {
         display: block;
         padding-bottom: 0;
     }
@@ -102,7 +102,7 @@
     flex: 1;
     text-align: center;
 
-    @media (--mq-s) {
+    @media (--mq-xs) {
         margin: 0 1rem 1rem;
     }
 
@@ -122,13 +122,13 @@
     align-items: center;
     justify-content: center;
 
-    @media (--mq-s) {
+    @media (--mq-xs) {
         display: block;
         margin: 0 1rem;
     }
 
     & div {
-        @media (--mq-s) {
+        @media (--mq-xs) {
             width: 100%;
             margin: 0.5rem 0;
         }
@@ -137,7 +137,7 @@
     & div:first-of-type {
         margin-right: 1%;
 
-        @media (--mq-s) {
+        @media (--mq-xs) {
             margin-right: 0;
         }
     }

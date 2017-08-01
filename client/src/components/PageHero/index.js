@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import marked from 'marked';
 import classnames from 'classnames';
 
@@ -8,6 +9,11 @@ import PlayIcon from 'images/icons/play.svg';
 
 import styles from './styles.module.css';
 
+@connect(
+    (state) => ({
+        responsive: state.responsive
+    })
+)
 export default class PageHero extends Component {
     state = {
         videoOpen: false
@@ -67,13 +73,32 @@ export default class PageHero extends Component {
     // If background image, render it as the background image,
     // or load background video object.
     renderBackground() {
-        const {video, backgroundImage, backgroundVideo} = this.props;
+        const {
+            video,
+            backgroundImage,
+            backgroundImageTablet,
+            backgroundImageMobile,
+            backgroundVideo,
+            content,
+            showHeadline,
+            playVideo,
+            responsive
+        } = this.props;
+
+        let image = backgroundImage;
+        if(responsive.xsmall && backgroundImageMobile)
+            image = backgroundImageMobile;
+        else if(responsive.small && backgroundImageTablet)
+            image = backgroundImageTablet;
+
         const style = {
-            backgroundImage: `url(${!backgroundVideo && backgroundImage})`
+            backgroundImage: `url(${!backgroundVideo && image})`
         };
 
         return (
-            <div className={styles.background} style={style}>
+            <div className={classnames(styles.background,
+                (!content && !showHeadline && !video && !playVideo) ? styles.onlyImage : ''
+            )} style={style}>
                 {backgroundVideo &&
                     <video autoPlay loop muted>
                         <source src={video} />
@@ -98,35 +123,45 @@ export default class PageHero extends Component {
 
         const {videoOpen} = this.state;
 
+        let action;
+
+        if(video && playVideo) {
+            action = (
+                <div className={styles.playIcon}>
+                    <a href="#" onClick={this.toggleVideoPlayer}>
+                        <PlayIcon /> {buttonText}
+                    </a>
+                </div>
+            );
+        } else if(buttonLink) {
+            action = (
+                <Button href={buttonLink}>{buttonText}</Button>
+            );
+        }
+
         return (
             <div className={classnames(
                 styles.container,
                 videoOpen ? styles.videoOpen : '',
                 video ? styles.hasVideo : '',
-                classNames.container
+                classNames ? classNames.container : ''
             )}>
                 <div className={classnames(
                     styles.innerContainer,
                     video ? styles.hasVideo : '',
-                    classNames.innerContainer
+                    classNames ? classNames.innerContainer : ''
                 )}>
                     {showHeadline && <h1>{headline}</h1>}
                     {content &&
                         <div
-                            className={classnames(styles.content, classNames.content)}
+                            className={classnames(
+                                styles.content,
+                                classNames ? classNames.content : ''
+                            )}
                             dangerouslySetInnerHTML={this.renderMarkup(content)}
                         />
                     }
-                    {(buttonText && buttonLink) &&
-                        <Button href={buttonLink}>{buttonText}</Button>
-                    }
-                    {(video && playVideo) &&
-                        <div className={styles.playIcon}>
-                            <a href="#" onClick={this.toggleVideoPlayer}>
-                                <PlayIcon /> {buttonText}
-                            </a>
-                        </div>
-                    }
+                    {action}
                 </div>
                 {this.renderBackground()}
                 {(video && playVideo) && this.renderVideoPlayer()}

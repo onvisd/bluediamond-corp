@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 export default class GenericHero extends Component {
     static propTypes = {
         headline: PropTypes.string,
-        title: PropTypes.string.isRequired,
+        title: PropTypes.string,
         color: PropTypes.string,
         ctaText: PropTypes.string,
         ctaUrl: PropTypes.string,
@@ -61,7 +61,7 @@ export default class GenericHero extends Component {
                 />
                 <div className={styles.innerContainer}>
                     {headline && <h3>{headline}</h3>}
-                    <h1 className="t--size-xxl">{title}</h1>
+                    {title && <h1 className="t--size-xxl">{title}</h1>}
                     {ctaText && ctaUrl && ctaTheme && (
                         <Button href={ctaUrl} theme={ctaTheme}>
                             {ctaText}

@@ -23,12 +23,25 @@
     }
 
     & h1 {
-        margin: 0 auto 2rem;
+        margin: 0 auto 1rem;
         max-width: 25vw;
+
+        &:not(.headline) {
+            margin: 0 auto 2rem;
+        }
 
         @media (--mq-s) {
             max-width: 100%;
             font-size: var(--t--size-lm);
+        }
+    }
+
+    & .title {
+        margin: 0 auto;
+        max-width: 25vw;
+
+        @media (--mq-s) {
+            max-width: 100%;
         }
     }
 }

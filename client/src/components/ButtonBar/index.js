@@ -30,7 +30,12 @@ export default class ButtonBar extends Component {
 
     renderButton(button, i) {
         return (
-            <Button key={`button${i}`} href={button.link} appearance={{theme: button.style}}>
+            <Button
+                key={`button${i}`}
+                href={button.link}
+                theme={button.style}
+                className={styles.button}
+            >
                 {button.text}
             </Button>
         );

@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {Title} from 'react-isomorphic-render';
 
+import styles from './styles.module.css';
+
 export default class FullScreenPage extends Component {
     static propTypes = {
         pageModules: PropTypes.object,
@@ -22,7 +24,7 @@ export default class FullScreenPage extends Component {
         }))[0];
 
         return (
-            <div>
+            <div className={styles.container}>
                 <Title>{pageData.items[0].fields.title}</Title>
                 {pageModules[parsedModule.component]
                     ? React.createElement(pageModules[parsedModule.component], {

@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {Title} from 'react-isomorphic-render';
 
+import styles from './styles.module.css';
+
 export default class Page extends Component {
     static propTypes = {
         pageModules: PropTypes.object,
@@ -34,7 +36,7 @@ export default class Page extends Component {
         const {pageData} = this.props;
 
         return (
-            <div>
+            <div className={styles.container}>
                 <Title>{pageData.items[0].fields.title}</Title>
                 {this.renderChildren(pageData)}
             </div>

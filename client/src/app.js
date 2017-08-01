@@ -38,7 +38,7 @@ render(settings, {
         large: '(min-width: 1025px)',
         medium: '(max-width: 1024px)',
         small: '(max-width: 768px)',
-        xsmall: '(max-width: 375px)',
+        xsmall: '(max-width: 520px)',
         innerWidth: true,
         innerHeight: true
     })(store.dispatch);

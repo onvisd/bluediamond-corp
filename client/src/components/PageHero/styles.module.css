@@ -14,7 +14,11 @@
     overflow: hidden;
 
     @media (--mq-s) {
-        height: 20rem;
+        height: 59vw;
+    }
+
+    @media (--mq-xs) {
+        height: 125vw;
     }
 
     &.hasVideo {
@@ -77,6 +81,10 @@
 
     @media (--mq-m) {
         opacity: 0.6;
+
+        &.onlyImage {
+            opacity: 1;
+        }
     }
 
     & video {

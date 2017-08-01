@@ -19,6 +19,16 @@ export default class PageHero extends Component {
                         id: PropTypes.string.isRequired
                     })
                 }),
+                backgroundImageTablet: PropTypes.shape({
+                    sys: PropTypes.shape({
+                        id: PropTypes.string.isRequired
+                    })
+                }),
+                backgroundImageMobile: PropTypes.shape({
+                    sys: PropTypes.shape({
+                        id: PropTypes.string.isRequired
+                    })
+                }),
                 videoFile: PropTypes.shape({
                     sys: PropTypes.shape({
                         id: PropTypes.string.isRequired
@@ -57,7 +67,9 @@ export default class PageHero extends Component {
                 buttonText={fields.buttonText || null}
                 buttonLink={fields.buttonLink || null}
                 backgroundImage={assetsById[fields.backgroundImage.sys.id].file.url}
-                video={assetsById[fields.videoFile.sys.id].file.url || null}
+                backgroundImageTablet={assetsById[fields.backgroundImageTablet.sys.id].file.url}
+                backgroundImageMobile={assetsById[fields.backgroundImageMobile.sys.id].file.url}
+                video={fields.videoFile ? assetsById[fields.videoFile.sys.id].file.url : null}
                 backgroundVideo={fields.playVideoInBackground}
                 playVideo={fields.showVideoPlayIcon}
             />

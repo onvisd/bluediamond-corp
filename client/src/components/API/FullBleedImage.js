@@ -13,6 +13,16 @@ export default class FullBleedImage extends Component {
                         sys: PropTypes.shape({
                             id: PropTypes.string.isRequired
                         })
+                    }),
+                    imageTablet: PropTypes.shape({
+                        sys: PropTypes.shape({
+                            id: PropTypes.string.isRequired
+                        })
+                    }),
+                    imageMobile: PropTypes.shape({
+                        sys: PropTypes.shape({
+                            id: PropTypes.string.isRequired
+                        })
                     })
                 })
             }),
@@ -41,14 +51,18 @@ export default class FullBleedImage extends Component {
         const {data, assets} = this.props;
         const {fields} = data;
 
-        const image = assets.filter((asset) =>
-            asset.sys.id === data.fields.image.sys.id)[0];
+        const assetsById = {};
+        assets.forEach((asset) => {
+            assetsById[asset.sys.id] = asset.fields;
+        });
 
         return (
             <FullBleedImageCmpt
                 title={fields.title}
                 description={fields.description}
-                image={image.fields.file.url}
+                image={assetsById[fields.image.sys.id].file.url}
+                imageTablet={assetsById[fields.imageTablet.sys.id].file.url}
+                imageMobile={assetsById[fields.imageMobile.sys.id].file.url}
             />
         );
     }

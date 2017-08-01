@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import Button from '../Button';
+import marked from 'marked';
 import styles from './styles.module.css';
 
 export default class RelatedPageLink extends Component {
@@ -16,8 +17,13 @@ export default class RelatedPageLink extends Component {
         backgroundImage: ''
     }
 
+    renderMarkup(field) {
+        return {__html: marked(field)};
+    }
+
     render() {
         const {
+            headline,
             title,
             linkText,
             linkUrl,
@@ -32,7 +38,22 @@ export default class RelatedPageLink extends Component {
         return (
             <div className={styles.container} style={style}>
                 <div style={{width: '100%'}}>
-                    <h1>{title}</h1>
+                    {(title && headline) &&
+                      <div>
+                        <h1 className={styles.headline}>{headline}</h1>
+                        <div
+                            className={styles.title}
+                            dangerouslySetInnerHTML={this.renderMarkup(title)}
+                        />
+                      </div>
+                    }
+                    {(title && !headline) && <h1>{title}</h1>}
+                    {(!title && headline) &&
+                        <div
+                            className={styles.title}
+                            dangerouslySetInnerHTML={this.renderMarkup(title)}
+                        />
+                    }
                     <Button href={linkUrl} theme={linkTheme}>
                         {linkText}
                     </Button>

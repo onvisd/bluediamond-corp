@@ -1,1 +1,7 @@
-/* Page Styles */
+@import 'constants/grid';
+
+.container {
+    @media (--mq-m) {
+        margin-top: 60px;
+    }
+}
