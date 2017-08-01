@@ -34,7 +34,7 @@ export default class RecipeIndex extends Component {
         visibleCardCount: 6,
         perPage: 6,
         filter: null,
-        sort: null
+        sort: 'date'
     };
 
     handleLoadMore = () => {
@@ -93,6 +93,9 @@ export default class RecipeIndex extends Component {
                 getCardField = (card) => difficultyLevels[card.fields.difficulty.toLowerCase()];
             if(sort === 'cooktime')
                 getCardField = (card) => card.fields.cookTime;
+            if(sort === 'date')
+                getCardField = (card) => card.sys.createdAt;
+
 
             return (cardA, cardB) => {
                 if(getCardField(cardA) > getCardField(cardB)) return 1;
@@ -168,8 +171,10 @@ export default class RecipeIndex extends Component {
                                     ref={(sort) => {
                                         this.sort = sort;
                                     }}
+                                    defaultValue="date"
                                 >
                                     <option value="">Sort by &hellip;</option>
+                                    <option value="date">Date</option>
                                     <option value="name">Name</option>
                                     <option value="cooktime">Cook Time</option>
                                     <option value="difficulty">Difficulty</option>

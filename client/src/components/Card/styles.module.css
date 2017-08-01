@@ -37,6 +37,7 @@
     will-change: transform;
     transition: transform 300ms ease;
     min-height: 300px;
+    background-color: var(--c--gray-light);
 
     & svg {
         position: absolute;

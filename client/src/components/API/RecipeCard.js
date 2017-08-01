@@ -41,9 +41,13 @@ export default class RecipeCard extends Component {
             assetsById[asset.sys.id] = asset.fields;
         });
 
+        let image = '';
+        if(assetsById[fields.cardBackgroundImage.sys.id])
+            image = assetsById[fields.cardBackgroundImage.sys.id].file.url;
+
         return (
             <Card
-                imageUrl={assetsById[fields.cardBackgroundImage.sys.id].file.url}
+                imageUrl={image}
                 linkTo={{url: `/recipes/${fields.slug}`}}
                 type="recipes"
             >
