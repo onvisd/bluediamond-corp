@@ -68,6 +68,7 @@ export default class StoreProduct extends Component {
                                 <StoreProductReview
                                     key={`productReview${idx}`}
                                     review={review}
+                                    totalReviews={product.reviews.bottomline.total_review || 0}
                                 />
                             )}
                         </div>

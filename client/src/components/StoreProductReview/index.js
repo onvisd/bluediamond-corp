@@ -7,11 +7,12 @@ import styles from './styles.module.css';
 
 export default class StoreProductReview extends Component {
     static propTypes = {
-        review: PropTypes.object.isRequired
+        review: PropTypes.object.isRequired,
+        totalReviews: PropTypes.number.isRequired
     }
 
     render() {
-        const {review} = this.props;
+        const {review, totalReviews} = this.props;
 
         return (
             <div className={styles.container}>
@@ -22,9 +23,10 @@ export default class StoreProductReview extends Component {
                     </div>
                     <ProductStarRating
                         rating={review.score}
+                        reviewCount={totalReviews}
                     />
                 </div>
-                <p className="t--size-s">{review.content}</p>
+                <p className="t--size-s">{review.content.replace('&#x27;', "'")}</p>
                 <p className={styles.user}>By {review.user.display_name}</p>
             </div>
         );
