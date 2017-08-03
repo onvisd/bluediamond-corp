@@ -7,7 +7,7 @@
 .container {
     display: flex;
     position: relative;
-    height: 50vw;
+    height: 57vw;
     justify-content: center;
     align-items: center;
     background-color: var(--c--black);
