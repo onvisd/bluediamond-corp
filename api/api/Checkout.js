@@ -325,15 +325,26 @@ export default (api, {apolloClient}) => {
                                 }
                             }
                         }
-                        userErrors {
-                            message
-                        }
                     }
                 }
             `,
             variables: {id}
         })
         .then((result) => result.data.node);
+
+    const addAttribute = (checkoutId, input) =>
+        apolloClient.mutate({
+            mutation: gql`
+                mutation ($checkoutId: ID!, $input: CheckoutAttributesUpdateInput!) {
+                    checkoutAttributesUpdate(checkoutId: $checkoutId, input: $input) {
+                        userErrors {
+                            message
+                        }
+                    }
+                }
+            `,
+            variables: {checkoutId, input}
+        }).then((result) => result.data.checkout);
 
     api.post('/store/checkout', async (req, res) => {
         if(!req.body.lineItems)
@@ -428,6 +439,21 @@ export default (api, {apolloClient}) => {
         try {
             const updatedCheckout =
                 await removeFromCart(req.params.checkoutId, req.body.lineItemIds);
+
+            res.status(201).send(updatedCheckout);
+        } catch (err) {
+            console.trace(err);
+            res.status(500).send(err.message);
+        }
+    });
+
+    api.put('/store/checkout/cart/addAttribute/:checkoutId', async (req, res) => {
+        if(!req.body.attributes)
+            res.status(400).send({message: 'You must provide an attribute'});
+
+        try {
+            const updatedCheckout =
+                await addAttribute(req.params.checkoutId, req.body.attributes);
 
             res.status(201).send(updatedCheckout);
         } catch (err) {

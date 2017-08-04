@@ -1,16 +1,21 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {Form} from 'formsy-react';
 import {Link} from 'react-isomorphic-render';
 import ReactGA from 'react-ga';
 
-import {connector, removeFromCart} from 'state/checkout';
-import Button from '../../Button';
-import ShoppingCartItem from '../../ShoppingCartItem';
+import {connector, addAttribute, removeFromCart} from 'state/checkout';
+
+import Button from 'components/Button';
+import Textarea from 'components/FormTextarea';
+import Checkbox from 'components/Checkbox';
+import ShoppingCartItem from 'components/ShoppingCartItem';
+
 import styles from './styles.module.css';
 
 @connect(
     (state) => ({...connector(state.checkout)}),
-    {removeFromCart}
+    {addAttribute, removeFromCart}
 )
 export default class ShoppingCart extends Component {
     static propTypes = {
@@ -23,6 +28,10 @@ export default class ShoppingCart extends Component {
         auth: PropTypes.object
     }
 
+    state = {
+        note: false
+    };
+
     handleRemoveItem = (item) => {
         this.props.removeFromCart({checkoutId: this.props.checkout.id, lineItemIds: [item.id]});
 
@@ -33,6 +42,46 @@ export default class ShoppingCart extends Component {
         });
     }
 
+    handleToggleNote = () => {
+        this.setState({
+            note: !this.state.note
+        });
+
+        ReactGA.event({
+            category: 'interaction',
+            action: 'click',
+            label: 'This is a gift'
+        });
+    }
+
+    handleGoToCheckout = (data) => {
+        const {note} = this.state;
+        const {checkout, auth} = this.props;
+        const checkoutLink = auth ? `${checkout.webUrl}&auth=true` : checkout.webUrl;
+
+        ReactGA.event({
+            category: 'interaction',
+            action: 'click',
+            label: 'Checkout'
+        });
+
+        if(!note || !data)
+            return window.location.assign(checkoutLink);
+
+        const info = {
+            checkoutId: this.props.checkout.id,
+            attributes: {
+                note: data.note,
+                customAttributes: [{
+                    key: 'Gift?',
+                    value: 'True'
+                }]
+            }
+        };
+
+        this.props.addAttribute(info).then(() => window.location.assign(checkoutLink));
+    }
+
     getImageUrl = (variant) => {
         if(!variant.image)
             return variant.product.images.edges[0].node.src;
@@ -41,8 +90,8 @@ export default class ShoppingCart extends Component {
     }
 
     render() {
-        const {children, checkout, auth, onToggle} = this.props;
-        const checkoutLink = auth ? `${checkout.webUrl}&auth=true` : checkout.webUrl;
+        const {note} = this.state;
+        const {children, checkout, onToggle} = this.props;
 
         return (
             <div>
@@ -71,20 +120,50 @@ export default class ShoppingCart extends Component {
                                     ${checkout.subtotalPrice}
                                 </div>
                             </div>
-                            <div className={styles.checkout}>
-                                <Button layout="fw" href={checkoutLink}>
-                                    Checkout
-                                </Button>
-                                <Link
-                                    className={styles.continue}
-                                    href="/store"
-                                    onClick={() => {
-                                        onToggle.hide();
-                                    }}
-                                >
-                                    Continue Shopping
-                                </Link>
-                            </div>
+                            <Form
+                                onValidSubmit={this.handleGoToCheckout}
+                                className={styles.form}
+                                ref={(form) => {
+                                    this.form = form;
+                                }}
+                            >
+                              <div className={styles.gift}>
+                                  <div
+                                    className={styles.isGift}
+                                    onClick={() => this.handleToggleNote()}
+                                  >
+                                    <Checkbox
+                                        name="gift"
+                                        label="This is a gift"
+                                        checked={note}
+                                    />
+                                  </div>
+                                  <div className={`
+                                    ${styles.message}
+                                    ${note ? ` ${styles.open}` : null}
+                                  `}>
+                                    <Textarea
+                                        name="note"
+                                        lable="Gift Message (optional)"
+                                        value="Hi, enjoy your gift!"
+                                    />
+                                  </div>
+                              </div>
+                              <div className={styles.checkout}>
+                                  <Button layout="fw" type="submit">
+                                      Checkout
+                                  </Button>
+                                  <Link
+                                      className={styles.continue}
+                                      href="/store"
+                                      onClick={() => {
+                                          onToggle.hide();
+                                      }}
+                                  >
+                                      Continue Shopping
+                                  </Link>
+                              </div>
+                            </Form>
                             {children}
                         </div>
                     ) : 'Your shopping cart is empty'}

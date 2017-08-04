@@ -43,6 +43,18 @@ export const removeFromCart = action({
     })
 }, handler);
 
+export const addAttribute = action({
+    namespace: 'CHECKOUT',
+    event: 'ADD_ATTRIBUTE_TO_CART',
+    action: (data, http) => http.put(
+      `/api/store/checkout/cart/addAttribute/${data.checkoutId}`, data
+    ),
+    result: (state, result) => ({
+        ...state,
+        ...result
+    })
+}, handler);
+
 handler.addStateProperties('checkout');
 
 export const connector = stateConnector(handler);

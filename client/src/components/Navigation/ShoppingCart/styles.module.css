@@ -20,7 +20,6 @@
 .subtotal {
     display: flex;
     margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
     padding: 0 1rem;
     align-items: center;
     justify-content: space-between;
@@ -54,5 +53,32 @@
 
     @media (--mq-gt-s) {
         margin-top: 1rem;
+    }
+}
+
+.gift {
+    display: block;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+}
+
+.isGift {
+    padding: 0 1rem;
+    text-align: left;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.message {
+    height: 0;
+    margin-top: -1rem;
+    padding: 0 0.5rem;
+    overflow: hidden;
+    transition: height 300ms ease;
+
+    &.open {
+        height: auto;
     }
 }
