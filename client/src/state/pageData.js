@@ -8,8 +8,8 @@ export const getPageData = action({
     namespace: 'PAGE_DATA',
     event: 'GET_PAGE_DATA',
     action: (slug, search, http) =>
-        http.get(`/api/page${slug}${search}${
-            env.development ? `${search ? '&' : '?'}${Date.now()}` : ''
+        http.get(`/api/page${slug}?${search.replace(/^\?/, '')}${
+            env.development ? `&${Date.now()}` : ''
         }`),
     result: (state, result) => ({
         ...state,

@@ -396,7 +396,7 @@ export default (api, {apolloClient}) => {
             }
         } catch (err) {
             console.trace(err);
-            res.status(500).send(err.message);
+            res.status(201).send({message: 'No cart exists yet!'});
         }
     });
 
@@ -412,7 +412,7 @@ export default (api, {apolloClient}) => {
             }
         } catch (err) {
             console.trace(err);
-            res.status(500).send(err.message);
+            res.status(201).send({message: 'No cart exists yet!'});
         }
     });
 
