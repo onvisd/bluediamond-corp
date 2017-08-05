@@ -45,8 +45,8 @@ const escapeRegEx = (str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, 
                 sizes: filterViaParam('sizes', query),
                 categories: filterViaParam('categories', query)
             },
-            sort: searchViaParam('search', query),
-            search: sortViaParam('sort', query)
+            sort: searchViaParam('sort', query),
+            search: sortViaParam('search', query)
         }))
     ]);
 })
