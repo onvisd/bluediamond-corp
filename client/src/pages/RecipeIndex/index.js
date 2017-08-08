@@ -17,7 +17,7 @@ import HeroImage from 'images/backgrounds/recipe-hero.jpg';
 
 @preload(async ({dispatch}) => {
     await Promise.all([
-        dispatch(getRecipes(0)),
+        dispatch(getRecipes({skip: 0, sort: 'sys.createdAt'})),
         dispatch(setNavigationStyle({className: 'brand--blue'}))
     ]);
 })
@@ -36,7 +36,7 @@ export default class RecipeIndex extends Component {
         skip: 6,
         perPage: 6,
         filter: null,
-        sort: 'date',
+        sort: 'sys.createdAt',
         loading: false
     };
 
@@ -69,8 +69,22 @@ export default class RecipeIndex extends Component {
 
     handleSort = () => {
         this.setState(() => ({
-            sort: this.sort.value === '' ? null : this.sort.value
+            sort: this.sort.value === '' ? null : this.sort.value,
+            recipes: [],
+            assets: [],
+            loading: true
         }));
+
+        this.props.getRecipes({skip: 0, sort: this.sort.value})
+            .then((result) => {
+                this.setState(() => ({
+                    sort: this.sort.value === '' ? null : this.sort.value,
+                    recipes: [...result.items],
+                    assets: [...result.includes.Asset],
+                    loading: false
+                }));
+            })
+            .catch((err) => console.trace(err));
 
         ReactGA.event({
             category: 'interaction',
@@ -80,7 +94,7 @@ export default class RecipeIndex extends Component {
     };
 
     renderRecipeCards = () => {
-        const {recipes, filter, sort} = this.state;
+        const {recipes, filter} = this.state;
 
         let cards = recipes;
 
@@ -88,29 +102,7 @@ export default class RecipeIndex extends Component {
             card.fields.consumerSymbols &&
             card.fields.consumerSymbols.indexOf(filter) !== -1;
 
-        const sortCards = (field) => {
-            const difficultyLevels = {easy: 0, medium: 1, hard: 2};
-
-            let getCardField = (card) => card.fields[field];
-            if(sort === 'name')
-                getCardField = (card) => card.fields.name.toUpperCase();
-            if(sort === 'difficulty')
-                getCardField = (card) => difficultyLevels[card.fields.difficulty.toLowerCase()];
-            if(sort === 'cooktime')
-                getCardField = (card) => card.fields.cookTime;
-            if(sort === 'date')
-                getCardField = (card) => card.sys.createdAt;
-
-
-            return (cardA, cardB) => {
-                if(getCardField(cardA) > getCardField(cardB)) return 1;
-                if(getCardField(cardA) < getCardField(cardB)) return -1;
-                return 0;
-            };
-        };
-
         if(filter) cards = cards.filter(filterCards);
-        if(sort) cards = cards.sort(sortCards(sort));
 
         return cards.map((card, i) => (
             <RecipeCard
@@ -140,7 +132,7 @@ export default class RecipeIndex extends Component {
     }
 
     getNextRecipes() {
-        return this.props.getRecipes(this.state.skip)
+        return this.props.getRecipes({skip: this.state.skip, sort: this.state.sort})
             .then((result) => {
                 this.setState((state) => ({
                     recipes: [...state.recipes, ...result.items],
@@ -190,13 +182,13 @@ export default class RecipeIndex extends Component {
                                     ref={(sort) => {
                                         this.sort = sort;
                                     }}
-                                    defaultValue="date"
+                                    defaultValue="sys.createdAt"
                                 >
                                     <option value="">Sort by &hellip;</option>
-                                    <option value="date">Date</option>
-                                    <option value="name">Name</option>
-                                    <option value="cooktime">Cook Time</option>
-                                    <option value="difficulty">Difficulty</option>
+                                    <option value="sys.createdAt">Date</option>
+                                    <option value="fields.name">Name</option>
+                                    <option value="fields.cookTime">Cook Time</option>
+                                    <option value="fields.difficulty">Difficulty</option>
                                 </select>
                             </div>
                         </div>

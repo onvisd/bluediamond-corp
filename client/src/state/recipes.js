@@ -7,8 +7,15 @@ const handler = createHandler(settings);
 export const getRecipes = action({
     namespace: 'RECIPES',
     event: 'GET_RECIPES',
-    action: (skip, http) =>
-        http.get(`/api/recipes/${skip}${env.development ? `?${Date.now()}` : ''}`),
+    action: (options, http) =>
+        http.get(`/api/recipes?${
+            typeof options.skip === 'undefined' ? '' : `skip=${options.skip}`
+        }${
+            typeof options.sort === 'undefined' ? '' : `&sort=${options.sort}`
+        }${
+            env.development ? `&${Date.now()}` : ''
+        }`
+    ),
     result: (state, result) => ({
         ...state,
         recipes: result
