@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 export default (api, {contentful}) => {
-    api.get('/recipes', (req, res) =>
+    api.get('/recipes/:skip', (req, res) =>
         axios.get(
             `${req.apiParams.base}/spaces/${contentful.spaceId}/entries?` +
             `access_token=${req.apiParams.token}&content_type=recipe` +
-            '&limit=100'
+            `&limit=6&skip=${req.params.skip}`
         )
         .then((response) => {
             res.cache(true).send(response.data);

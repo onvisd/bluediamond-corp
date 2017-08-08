@@ -17,7 +17,7 @@ import HeroImage from 'images/backgrounds/recipe-hero.jpg';
 
 @preload(async ({dispatch}) => {
     await Promise.all([
-        dispatch(getRecipes()),
+        dispatch(getRecipes(0)),
         dispatch(setNavigationStyle({className: 'brand--blue'}))
     ]);
 })
@@ -30,17 +30,23 @@ import HeroImage from 'images/backgrounds/recipe-hero.jpg';
 )
 export default class RecipeIndex extends Component {
     state = {
+        recipes: [],
+        assets: [],
         totalCardCount: 0,
-        visibleCardCount: 6,
+        skip: 6,
         perPage: 6,
         filter: null,
-        sort: 'date'
+        sort: 'date',
+        loading: false
     };
 
     handleLoadMore = () => {
         this.setState((state) => ({
-            visibleCardCount: state.visibleCardCount + state.perPage
+            skip: state.skip + state.perPage,
+            loading: true
         }));
+
+        this.getNextRecipes();
 
         ReactGA.event({
             category: 'interaction',
@@ -74,10 +80,9 @@ export default class RecipeIndex extends Component {
     };
 
     renderRecipeCards = () => {
-        const {recipes} = this.props;
-        const {visibleCardCount, filter, sort} = this.state;
+        const {recipes, filter, sort} = this.state;
 
-        let cards = recipes.items;
+        let cards = recipes;
 
         const filterCards = (card) =>
             card.fields.consumerSymbols &&
@@ -107,17 +112,19 @@ export default class RecipeIndex extends Component {
         if(filter) cards = cards.filter(filterCards);
         if(sort) cards = cards.sort(sortCards(sort));
 
-        return cards.slice(0, visibleCardCount).map((card) => (
+        return cards.map((card, i) => (
             <RecipeCard
-                data={{entry: card, assets: recipes.includes.Asset}}
-                key={`card${card.sys.id}`}
+                data={{entry: card, assets: this.state.assets}}
+                key={`card${card.sys.id}${i}`}
             />
         ));
     }
 
     componentWillMount() {
         this.setState(() => ({
-            totalCardCount: this.props.recipes.items.length
+            totalCardCount: this.props.recipes.total,
+            recipes: this.props.recipes.items,
+            assets: this.props.recipes.includes.Asset
         }));
 
         this.props.setNavigationStyle({className: 'brand--blue'});
@@ -132,8 +139,20 @@ export default class RecipeIndex extends Component {
         this.props.setNavigationStyle({});
     }
 
+    getNextRecipes() {
+        return this.props.getRecipes(this.state.skip)
+            .then((result) => {
+                this.setState((state) => ({
+                    recipes: [...state.recipes, ...result.items],
+                    assets: [...state.assets, ...result.includes.Asset],
+                    loading: false
+                }));
+            })
+            .catch((err) => console.trace(err));
+    }
+
     render() {
-        const {visibleCardCount, totalCardCount} = this.state;
+        const {skip, totalCardCount, loading} = this.state;
 
         return (
             <section className="content">
@@ -185,11 +204,16 @@ export default class RecipeIndex extends Component {
                     <div className={`l--row ${styles.list}`}>
                         {this.renderRecipeCards()}
                     </div>
-                    <div className={classnames({isHidden: visibleCardCount >= totalCardCount})}>
+                    <div className={classnames({isHidden: skip >= totalCardCount})}>
                         <div className="l--row l--mar-top-m l--mar-btm-m">
                             <div className="l--col-12 t--align-center">
-                                <Button onClick={this.handleLoadMore} theme="blueLight">
-                                    Load more recipes
+                                <Button
+                                  onClick={this.handleLoadMore}
+                                  theme="blueLight"
+                                  type="button"
+                                  disabled={loading === true}
+                                >
+                                    {loading ? 'Loading...' : 'Load more recipes'}
                                 </Button>
                             </div>
                         </div>
