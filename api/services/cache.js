@@ -6,7 +6,11 @@ let redisClient;
 if(process.env.NODE_ENV === 'production')
     redisClient = redis.createClient(config.redis.port);
 
-const key = (req) => req.path.slice(1).replace(/\//g, '_').replace(/[^A-Za-z0-9]/, '_');
+const slugify = (str) => str.replace(/\//g, '_').replace(/[^A-Za-z0-9]/, '_');
+
+const key = (req) => `${slugify(req.path.slice(1))}_${
+    slugify(Object.keys(req.query).map((q) => `${q}=${req.query[q]}`).join('='))
+}`;
 
 export const setCached = (req, data, exp) => {
     if(process.env.NODE_ENV !== 'production')
