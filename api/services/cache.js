@@ -1,6 +1,7 @@
 import redis from 'redis';
 
 import config from '../../config';
+import logger from '../services/logger';
 
 let redisClient;
 if(process.env.NODE_ENV === 'production')
@@ -25,6 +26,7 @@ export const setCached = (req, data, exp) => {
 export const getCached = (req, res, next) => {
     redisClient.get(key(req), (err, data) => {
         if(err) {
+            logger.error('Problem getting cache', err, err.message);
             res.status(500).send(err.message);
         } else if(data === null) {
             res.cache = (shouldCache) => {

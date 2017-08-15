@@ -44,5 +44,10 @@ export default {
     },
     auth: {
         tokenSecret: process.env.AUTH_TOKEN_SECRET
+    },
+    logging: {
+        sentry: {
+            url: process.env.SENTRY_URL
+        }
     }
 };

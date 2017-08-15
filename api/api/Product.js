@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from '../services/logger';
 
 export default (api, {contentful}) => {
     const getProduct = (apiParams, slug) =>
@@ -7,13 +8,15 @@ export default (api, {contentful}) => {
             `fields.slug=${slug}&` +
             `access_token=${apiParams.token}&content_type=product`
         )
-        .then((response) => response.data);
+        .then((response) => response.data)
+        .catch((err) => logger.error('Problem getting product', err, err.body));
 
     const getSmartLabel = (smartLabelId) =>
         axios.get(`https://smartlabel-api.labelinsight.com/api/v3/${smartLabelId}`)
         .then((response) => response.data)
         .catch((err) => {
             console.trace(err);
+            logger.error('No Smart Label data found', err, err.body);
             return 'No Smart Label data found';
         });
 
@@ -36,6 +39,7 @@ export default (api, {contentful}) => {
             }
         } catch (err) {
             console.trace(err);
+            logger.error('Problem getting contentful product page', err, err.body);
             res.status(500).send(err.message);
         }
     });

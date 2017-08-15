@@ -4,6 +4,8 @@ import async from 'async';
 import fs from 'fs';
 import path from 'path';
 
+import logger from '../services/logger';
+
 const growerIDCacheFile = path.join(__dirname, '..', '..', 'grower_ids.cache');
 
 const diff = (a, b) => b.filter((i) => a.indexOf(i) < 0);
@@ -86,6 +88,7 @@ export default (api, {contentful}) => {
         })
         .catch((err) => {
             console.trace(err);
+            logger.error('Problem creating grower discount', err, err.body);
             done(err);
         });
 
@@ -105,6 +108,7 @@ export default (api, {contentful}) => {
         })
         .catch((err) => {
             console.trace(err);
+            logger.error('Problem removing grower discount', err, err.body);
             done(err);
         });
 
@@ -160,6 +164,7 @@ export default (api, {contentful}) => {
         })
         .catch((err) => {
             console.trace(err);
+            logger.error('Problem clearing grower discount list', err, err.message);
             res.status(500).send({ok: false, err: err.message});
         });
     });
@@ -216,6 +221,7 @@ export default (api, {contentful}) => {
         })
         .catch((err) => {
             console.trace(err);
+            logger.error('Problem getting grower discount list', err, err.message);
             res.status(500).send({ok: false, err: err.message});
         });
     });

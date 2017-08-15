@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from '../services/logger';
 
 export default (api, {contentful}) => {
     api.get('/home', (req, res) =>
@@ -11,6 +12,7 @@ export default (api, {contentful}) => {
         })
         .catch((err) => {
             console.trace(err);
+            logger.error('Problem getting the homepage', err, err.message);
             res.status(500).send(err.message);
         })
     );

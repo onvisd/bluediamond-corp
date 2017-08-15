@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from '../services/logger';
 
 export default (api, {contentful}) => {
     api.get('/recipes', (req, res) =>
@@ -16,6 +17,7 @@ export default (api, {contentful}) => {
         })
         .catch((err) => {
             console.trace(err);
+            logger.error('Problem getting recipes', err, err.body);
             res.status(500).send(err.message);
         })
     );
@@ -31,6 +33,7 @@ export default (api, {contentful}) => {
         })
         .catch((err) => {
             console.trace(err);
+            logger.error('Problem getting recipe', err, err.body);
             res.status(500).send(err.message);
         })
     );

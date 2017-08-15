@@ -6,6 +6,7 @@ import htmlToText from 'html-to-text';
 
 import * as emailTemplates from '../email';
 import config from '../../config';
+import logger from '../services/logger';
 
 aws.config.update({
     region: config.aws.region,
@@ -47,13 +48,16 @@ export default (api) => {
                 res.send(mailOptions);
             } else {
                 transporter.sendMail(mailOptions, (error) => {
-                    if(error)
+                    if(error) {
+                        logger.error('Problem sending email', error, error.message);
                         res.status(500).send(error.message);
-                    else
+                    } else {
                         res.status(200).send('Message sent successfully');
+                    }
                 });
             }
         } else {
+            logger.error('Problem sending email');
             res.status(500).send('Something went wrong');
         }
     });

@@ -2,6 +2,7 @@
 import gql from 'graphql-tag';
 
 import * as auth from '../services/auth';
+import logger from '../services/logger';
 
 export default (api, {apolloClient}) => {
     const registerCustomer = (email, password) =>
@@ -19,7 +20,8 @@ export default (api, {apolloClient}) => {
                 }
             `,
             variables: {email, password}
-        });
+        })
+        .catch((err) => logger.error('Problem with customerCreate mutation', err, err.body));
 
     const signinCustomer = (email, password) =>
         apolloClient.mutate({
@@ -40,7 +42,9 @@ export default (api, {apolloClient}) => {
             `,
             variables: {email, password}
         })
-        .then((result) => result.data.customerAccessTokenCreate);
+        .then((result) => result.data.customerAccessTokenCreate)
+        .catch((err) => logger.error(
+          'Problem with customerAccessTokenCreate (Sign In) mutation', err, err.body));
 
     const recoverCustomer = (email) =>
         apolloClient.mutate({
@@ -56,7 +60,8 @@ export default (api, {apolloClient}) => {
             `,
             variables: {email}
         })
-        .then((result) => result.data.customerRecover);
+        .then((result) => result.data.customerRecover)
+        .catch((err) => logger.error('Problem with customerRecover mutation', err, err.body));
 
     const resetCustomer = (id, input) =>
         apolloClient.mutate({
@@ -72,7 +77,8 @@ export default (api, {apolloClient}) => {
             `,
             variables: {id, input}
         })
-        .then((result) => result.data.resetCustomer);
+        .then((result) => result.data.resetCustomer)
+        .catch((err) => logger.error('Problem with resetCustomer mutation', err, err.body));
 
     const updateCustomer = (customer, customerAccessToken) =>
         apolloClient.mutate({
@@ -89,7 +95,8 @@ export default (api, {apolloClient}) => {
                 }
             `,
             variables: {customer, customerAccessToken}
-        });
+        })
+        .catch((err) => logger.error('Problem with customerUpdate mutation', err, err.body));
 
     const addCustomerAddress = (address, customerAccessToken) =>
         apolloClient.mutate({
@@ -106,7 +113,9 @@ export default (api, {apolloClient}) => {
                 }
             `,
             variables: {address, customerAccessToken}
-        });
+        })
+        .catch((err) => logger.error(
+          'Problem with customerAddressCreate mutation', err, err.body));
 
     const editCustomerAddress = (address, id, customerAccessToken) =>
         apolloClient.mutate({
@@ -125,7 +134,9 @@ export default (api, {apolloClient}) => {
                 }
             `,
             variables: {address, id, customerAccessToken}
-        });
+        })
+        .catch((err) => logger.error(
+          'Problem with customerAddressUpdate mutation', err, err.body));
 
     const deleteAddress = (id, customerAccessToken) =>
         apolloClient.mutate({
@@ -142,7 +153,9 @@ export default (api, {apolloClient}) => {
                 }
             `,
             variables: {id, customerAccessToken}
-        });
+        })
+        .catch((err) => logger.error(
+          'Problem with customerAddressDelete mutation', err, err.body));
 
     const getCustomer = (customerAccessToken) =>
         apolloClient.query({
@@ -216,7 +229,8 @@ export default (api, {apolloClient}) => {
             variables: {customerAccessToken},
             fetchPolicy: 'network-only'
         })
-        .then((result) => result.data.customer);
+        .then((result) => result.data.customer)
+        .catch((err) => logger.error('Problem with customer query', err, err.body));
 
     // Register the customer + sign the customer in
     api.post('/store/customer/register', async (req, res) => {
@@ -244,6 +258,7 @@ export default (api, {apolloClient}) => {
             }
         } catch (err) {
             console.trace(err);
+            logger.error('Problem with customer registration', err, err.body);
             res.status(500).send(err.message);
         }
     });
@@ -273,6 +288,7 @@ export default (api, {apolloClient}) => {
             }
         } catch (err) {
             console.trace(err);
+            logger.error('Problem with customer signin', err, err.body);
             res.status(500).send(err.message);
         }
     });
@@ -287,6 +303,7 @@ export default (api, {apolloClient}) => {
             res.status(200).send({authenticated: false, data: {...customer}});
         } catch (err) {
             console.trace(err);
+            logger.error('Problem with customer password recover', err, err.body);
             res.status(500).send(err.message);
         }
     });
@@ -306,6 +323,7 @@ export default (api, {apolloClient}) => {
             res.status(201).send({authenticated: true, data: {...customer}});
         } catch (err) {
             console.trace(err);
+            logger.error('Problem with customer password reset', err, err.body);
             res.status(500).send(err.message);
         }
     });
@@ -328,6 +346,7 @@ export default (api, {apolloClient}) => {
             }
         } catch (err) {
             console.trace(err);
+            logger.error('Problem with customer update', err, err.body);
             res.status(500).send(err.message);
         }
     });
@@ -350,6 +369,7 @@ export default (api, {apolloClient}) => {
             }
         } catch (err) {
             console.trace(err);
+            logger.error('Problem with customer create address', err, err.body);
             res.status(500).send(err.message);
         }
     });
@@ -375,6 +395,7 @@ export default (api, {apolloClient}) => {
             }
         } catch (err) {
             console.trace(err);
+            logger.error('Problem with customer update address', err, err.body);
             res.status(500).send(err.message);
         }
     });
@@ -397,6 +418,7 @@ export default (api, {apolloClient}) => {
             }
         } catch (err) {
             console.trace(err);
+            logger.error('Problem with customer delete address', err, err.body);
             res.status(500).send(err.message);
         }
     });
@@ -419,6 +441,7 @@ export default (api, {apolloClient}) => {
             }
         } catch (err) {
             console.trace(err);
+            logger.error('Problem getting customer', err, err.body);
             res.status(500).send(err.message);
         }
     });

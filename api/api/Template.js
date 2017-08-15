@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from '../services/logger';
 
 export default (api, {contentful}) => {
     api.get('/template/:name', (req, res) =>
@@ -12,6 +13,7 @@ export default (api, {contentful}) => {
         })
         .catch((err) => {
             console.trace(err);
+            logger.error('Problem getting contentful template', err, err.body);
             res.status(500).send(err.message);
         })
     );

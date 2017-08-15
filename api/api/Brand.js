@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from '../services/logger';
 
 const getRandomEntries = (count, entries) => {
     if(entries.total > count) {
@@ -24,25 +25,29 @@ export default (api, {contentful}) => {
             'fields.slug': slug,
             select: 'fields'
         })
-        .then((entries) => entries.items[0]);
+        .then((entries) => entries.items[0])
+        .catch((err) => logger.error('Problem getting brand from contentful', err, err.body));
 
     const getProducts = (brand) =>
         contentful.client.getEntries({
             content_type: 'product', // eslint-disable-line camelcase
             'fields.brand': brand
         })
-        .then((entries) => entries.items.map((entry) => entry));
+        .then((entries) => entries.items.map((entry) => entry))
+        .catch((err) => logger.error('Problem getting products from contentful', err, err.body));
 
     const getRandomProducts = () =>
         contentful.client.getEntries({
             content_type: 'product' // eslint-disable-line camelcase
         })
-        .then((entries) => getRandomEntries(6, entries));
+        .then((entries) => getRandomEntries(6, entries))
+        .catch((err) => logger.error(
+          'Problem getting random products from contentful', err, err.body));
 
     const getSmartLabel = (smartLabelId) =>
         axios.get(`https://smartlabel-api.labelinsight.com/api/v3/${smartLabelId}`)
         .then((response) => response.data)
-        .catch(() => 'No Smart Label data found');
+        .catch((err) => logger.error('No smartlabel found', err, err.body));
 
     api.get('/brands/:slug', async (req, res) => {
         try {
@@ -69,6 +74,7 @@ export default (api, {contentful}) => {
             res.cache(true).status(200).send({fields: brand.fields});
         } catch (err) {
             console.trace(err);
+            logger.error('Problem getting brands/:slug', err, err.body);
             res.status(500).send(err.message);
         }
     });

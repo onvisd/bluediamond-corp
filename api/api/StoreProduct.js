@@ -2,6 +2,7 @@ import axios from 'axios';
 import gql from 'graphql-tag';
 
 import config from '../../config';
+import logger from '../services/logger';
 
 export default (api, {apolloClient}) => {
     const getProducts = () =>
@@ -58,7 +59,9 @@ export default (api, {apolloClient}) => {
                 }
             `,
             fetchPolicy: 'network-only'
-        }).then((result) => result.data.shop.products.edges);
+        })
+        .then((result) => result.data.shop.products.edges)
+        .catch((err) => logger.error('Problem getting shopify products', err, err.body));
 
     const getProductsByType = (type) =>
         apolloClient.query({
@@ -114,7 +117,9 @@ export default (api, {apolloClient}) => {
                 }
             `,
             fetchPolicy: 'network-only'
-        }).then((result) => result.data.shop.products.edges);
+        })
+        .then((result) => result.data.shop.products.edges)
+        .catch((err) => logger.error('Problem getting shopify producByType', err, err.body));
 
     const getProduct = (slug) =>
         apolloClient.query({
@@ -166,13 +171,16 @@ export default (api, {apolloClient}) => {
                 }
             `,
             fetchPolicy: 'network-only'
-        }).then((result) => result.data.shop.productByHandle);
+        })
+        .then((result) => result.data.shop.productByHandle)
+        .catch((err) => logger.error('Problem getting shopify producByHandle', err, err.body));
 
     const getSmartLabel = (id) =>
         axios.get(`https://smartlabel-api.labelinsight.com/api/v3/${id}`)
         .then((response) => response.data)
         .catch((err) => {
             console.trace(err);
+            logger.error('No Smart Label data found', err, err.body);
             return 'No Smart Label data found';
         });
 
@@ -184,6 +192,7 @@ export default (api, {apolloClient}) => {
         .then((response) => response.data)
         .catch((err) => {
             console.trace(err);
+            logger.error('No YotPo data found', err, err.body);
             return 'No YotPo data found';
         });
 
@@ -197,6 +206,7 @@ export default (api, {apolloClient}) => {
                 res.status(401).send({message: 'No products found!'});
         } catch (err) {
             console.trace(err);
+            logger.error('Problem getting shopify products', err, err.body);
             res.status(500).send(err.message);
         }
     });
@@ -246,6 +256,7 @@ export default (api, {apolloClient}) => {
             }
         } catch (err) {
             console.trace(err);
+            logger.error('Problem getting shopify product', err, err.body);
             res.status(500).send(err.message);
         }
     });

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import logger from '../services/logger';
 
 const contentTypes = [
     'page',
@@ -22,6 +23,7 @@ const requestSlugFromType = (req, res, spaceId, typeIndex) => {
     })
     .catch((err) => {
         console.trace(err);
+        logger.error('Problem getting page', err, err.body);
         res.status(500).send(err.message);
     });
 };

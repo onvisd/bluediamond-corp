@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import * as auth from '../services/auth';
+import logger from '../services/logger';
 
 export default (api, {apolloClient}) => {
     const createCheckout = (lineItems) =>
@@ -51,7 +52,8 @@ export default (api, {apolloClient}) => {
             `,
             variables: {lineItems}
         })
-        .then((result) => result.data.checkoutCreate);
+        .then((result) => result.data.checkoutCreate)
+        .catch((err) => logger.error('Problem with checkoutCreate mutation', err, err.body));
 
     const addCustomer = (checkoutId, customerAccessToken) =>
         apolloClient.mutate({
@@ -120,7 +122,9 @@ export default (api, {apolloClient}) => {
             `,
             variables: {checkoutId, customerAccessToken}
         })
-        .then((result) => result.data.checkoutCustomerAssociate);
+        .then((result) => result.data.checkoutCustomerAssociate)
+        .catch((err) => logger.error(
+          'Problem with checkoutCustomerAssociate mutation', err, err.body));
 
     const setAddress = (checkoutId, shippingAddress) =>
         apolloClient.mutate({
@@ -188,7 +192,9 @@ export default (api, {apolloClient}) => {
             `,
             variables: {checkoutId, shippingAddress}
         })
-        .then((result) => result.data.checkoutShippingAddressUpdate);
+        .then((result) => result.data.checkoutShippingAddressUpdate)
+        .catch((err) => logger.error(
+          'Problem with checkoutShippingAddressUpdate mutation', err, err.body));
 
     const addToCart = (checkoutId, lineItems) =>
         apolloClient.mutate({
@@ -237,7 +243,9 @@ export default (api, {apolloClient}) => {
             `,
             variables: {checkoutId, lineItems}
         })
-        .then((result) => result.data.checkoutLineItemsAdd);
+        .then((result) => result.data.checkoutLineItemsAdd)
+        .catch((err) => logger.error(
+          'Problem with checkoutLineItemsAdd mutation', err, err.body));
 
     const removeFromCart = (checkoutId, lineItemIds) =>
         apolloClient.mutate({
@@ -286,7 +294,9 @@ export default (api, {apolloClient}) => {
             `,
             variables: {checkoutId, lineItemIds}
         })
-        .then((result) => result.data.checkoutLineItemsRemove);
+        .then((result) => result.data.checkoutLineItemsRemove)
+        .catch((err) => logger.error(
+          'Problem with checkoutLineItemsRemove mutation', err, err.body));
 
     const getCheckout = (id) =>
         apolloClient.mutate({
@@ -330,7 +340,8 @@ export default (api, {apolloClient}) => {
             `,
             variables: {id}
         })
-        .then((result) => result.data.node);
+        .then((result) => result.data.node)
+        .catch((err) => logger.error('Problem with getCheckout query', err, err.body));
 
     const addAttribute = (checkoutId, input) =>
         apolloClient.mutate({
@@ -344,7 +355,10 @@ export default (api, {apolloClient}) => {
                 }
             `,
             variables: {checkoutId, input}
-        }).then((result) => result.data.checkout);
+        })
+        .then((result) => result.data.checkout)
+        .catch((err) => logger.error(
+          'Problem with checkoutAttributesUpdate mutation', err, err.body));
 
     api.post('/store/checkout', async (req, res) => {
         if(!req.body.lineItems)
@@ -396,6 +410,7 @@ export default (api, {apolloClient}) => {
             }
         } catch (err) {
             console.trace(err);
+            logger.error('Problem creating new checkout', err, err.body);
             res.status(201).send({message: 'No cart exists yet!'});
         }
     });
@@ -412,6 +427,7 @@ export default (api, {apolloClient}) => {
             }
         } catch (err) {
             console.trace(err);
+            logger.error('Problem getting checkout', err, err.body);
             res.status(201).send({message: 'No cart exists yet!'});
         }
     });
@@ -428,6 +444,7 @@ export default (api, {apolloClient}) => {
             res.status(201).send(updatedCheckout);
         } catch (err) {
             console.trace(err);
+            logger.error('Problem adding product to cart', err, err.body);
             res.status(500).send(err.message);
         }
     });
@@ -443,6 +460,7 @@ export default (api, {apolloClient}) => {
             res.status(201).send(updatedCheckout);
         } catch (err) {
             console.trace(err);
+            logger.error('Problem removing item from cart', err, err.body);
             res.status(500).send(err.message);
         }
     });
@@ -458,6 +476,7 @@ export default (api, {apolloClient}) => {
             res.status(201).send(updatedCheckout);
         } catch (err) {
             console.trace(err);
+            logger.error('Problem adding note to cart', err, err.body);
             res.status(500).send(err.message);
         }
     });
