@@ -122,3 +122,17 @@
 .brand {
     font-weight: var(--t--weight-bold);
 }
+
+.short {
+    & .image {
+        height: 5rem;
+
+        & img {
+            max-height: 100%;
+        }
+    }
+
+    & .info {
+        font-size: var(--t--size-xs);
+    }
+}

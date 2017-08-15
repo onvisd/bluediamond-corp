@@ -15,7 +15,8 @@ export default class ProductLink extends Component {
         activeClassName: PropTypes.string,
         inactiveClassName: PropTypes.string,
         showBrand: PropTypes.bool,
-        type: PropTypes.string
+        type: PropTypes.string,
+        modifierClass: PropTypes.string
     }
 
     static defaultProps = {
@@ -95,7 +96,8 @@ export default class ProductLink extends Component {
             activeClassName,
             inactiveClassName,
             type,
-            className
+            className,
+            modifierClass
         } = this.props;
 
         const pathname =
@@ -122,7 +124,7 @@ export default class ProductLink extends Component {
 
         return (
             <div
-                className={classnames(styles.container, styles[type], {
+                className={classnames(styles.container, styles[type], styles[modifierClass], {
                     [activeClassName]: activeClassName && active,
                     [inactiveClassName]: inactiveClassName && !active
                 }, className)}

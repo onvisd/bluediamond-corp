@@ -13,7 +13,8 @@ import Title from 'components/Title';
 import CardPanel from 'components/CardPanel';
 import Hero from './Hero';
 import ProductSection from './ProductSection';
-import MoreFlavors from './MoreFlavors';
+import MoreFlavorsDesktop from './MoreFlavorsDesktop';
+import MoreFlavorsMobile from './MoreFlavorsMobile';
 import MoreProducts from './MoreProducts';
 import sortByPriority from 'tools/sortByPriority';
 import styles from './styles.module.css';
@@ -26,6 +27,7 @@ import styles from './styles.module.css';
 })
 @connect(
     (state) => ({
+        responsive: state.responsive,
         ...brandConnector(state.brand),
         ...navConnector(state.navigation)
     }),
@@ -138,7 +140,7 @@ export default class BrandCategory extends Component {
 
     render() {
         const {activeProduct, category, categoryProducts} = this.state;
-        const {brand} = this.props;
+        const {brand, responsive} = this.props;
 
         const otherBrandCategories = brand.fields.categories.filter((cat) =>
             cat.fields.name !== category.fields.name
@@ -204,10 +206,14 @@ export default class BrandCategory extends Component {
                         setActiveProduct={this.setActiveProduct}
                         shopLinks={shopLinks}
                     />
-                    <MoreFlavors
+                    {!responsive.small && <MoreFlavorsDesktop
                         brand={brand}
                         otherCategories={otherBrandCategories}
-                    />
+                    />}
+                    {responsive.small && <MoreFlavorsMobile
+                        brand={brand}
+                        otherCategories={otherBrandCategories}
+                    />}
                     <MoreProducts products={moreProducts} />
                 </div>
                 {brand.fields.waysToUse && (
