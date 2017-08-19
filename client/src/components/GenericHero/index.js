@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 @connect(
     (state) => ({
-        responsive: state.responsive,
+        responsive: state.responsive
     })
 )
 export default class GenericHero extends Component {

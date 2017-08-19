@@ -4,6 +4,7 @@
 
 .container {
     display: flex;
+    height: 1px; /* Fixes a flexbox issue on IE where a fixed height must at least be set */
     min-height: 32rem;
     background-color: var(--c--blue);
 
