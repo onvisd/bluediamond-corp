@@ -58,14 +58,15 @@ export default (api, {contentful}) => {
             for (let i = 0; i < products.length; i++) {
                 const smartLabel = await getSmartLabel(products[i].fields.smartLabel);
 
-                const amend = typeof smartLabel === 'string'
-                    ? {error: smartLabel}
-                    : smartLabel;
+                products[i].fields = {...products[i].fields};
 
-                products[i].fields = {
-                    ...products[i].fields,
-                    smartLabel: {id: products[i].fields.smartLabel, ...amend}
-                };
+                if(smartLabel) {
+                    const amend = typeof smartLabel === 'string'
+                        ? {error: smartLabel}
+                        : smartLabel;
+
+                    products[i].fields.smartLabel = {id: products[i].fields.smartLabel, ...amend};
+                }
             }
 
             brand.fields.products = products;
@@ -75,7 +76,7 @@ export default (api, {contentful}) => {
         } catch (err) {
             console.trace(err);
             logger.error('Problem getting brands/:slug', err, err.body);
-            res.status(500).send(err.message);
+            res.status(404).send({ok: false, error: 'Brand not found'});
         }
     });
 };

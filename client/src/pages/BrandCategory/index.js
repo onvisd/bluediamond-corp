@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {preload, pushLocation} from 'react-isomorphic-render';
+import {preload, redirect, pushLocation} from 'react-isomorphic-render';
 import {withRouter} from 'react-router';
 
 import {connector as brandConnector, getBrand} from 'state/brand';
@@ -33,7 +33,8 @@ import styles from './styles.module.css';
     }),
     {
         getBrand,
-        setNavigationStyle
+        setNavigationStyle,
+        redirect
     }
 )
 @withRouter
@@ -67,17 +68,23 @@ export default class BrandCategory extends Component {
         super(props);
 
         const {categories, products} = this.props.brand.fields;
+        let activeProduct = [];
+        let categoryProducts = [];
 
         const category = categories.filter((cat) =>
             cat.fields.slug === this.props.params.categorySlug
         )[0];
 
-        const categoryProducts = products.filter((product) =>
-            product.fields.brandCategory === category.fields.name
-        ).sort(sortByPriority);
+        if(category) {
+            categoryProducts = products.filter((product) =>
+                product.fields.brandCategory === category.fields.name
+            ).sort(sortByPriority);
+        }
 
-        const {productSlug} = this.props.params;
-        const activeProduct = this.getActiveProduct(productSlug, categoryProducts);
+        if(categoryProducts) {
+            const {productSlug} = this.props.params;
+            activeProduct = this.getActiveProduct(productSlug, categoryProducts);
+        }
 
         this.state = {
             activeProduct,
@@ -140,15 +147,26 @@ export default class BrandCategory extends Component {
 
     render() {
         const {activeProduct, category, categoryProducts} = this.state;
-        const {brand, responsive} = this.props;
+        const {brand, responsive, redirect} = this.props; // eslint-disable-line no-shadow
 
-        const otherBrandCategories = brand.fields.categories.filter((cat) =>
-            cat.fields.name !== category.fields.name
-        ).slice(0, 3);
+        if(!activeProduct && category && categoryProducts || !category) {
+            redirect('/404');
+            return (<div />);
+        }
 
-        const moreProducts = brand.fields.moreProducts.filter((product) =>
-            activeProduct.fields.name !== product.fields.name
-        ).slice(0, 6);
+        let otherBrandCategories = [];
+        if(category) {
+            otherBrandCategories = brand.fields.categories.filter((cat) =>
+                cat.fields.name !== category.fields.name
+            ).slice(0, 3);
+        }
+
+        let moreProducts = [];
+        if(activeProduct) {
+            moreProducts = brand.fields.moreProducts.filter((product) =>
+                activeProduct.fields.name !== product.fields.name
+            ).slice(0, 6);
+        }
 
         const shopLinks = [
             {

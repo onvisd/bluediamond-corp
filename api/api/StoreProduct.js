@@ -252,7 +252,7 @@ export default (api, {apolloClient}) => {
 
                 res.cache(true).send(product);
             } else {
-                res.status(401).send({message: 'No product found!'});
+                res.status(404).send({ok: false, error: 'not found'});
             }
         } catch (err) {
             console.trace(err);

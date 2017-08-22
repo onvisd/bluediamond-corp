@@ -29,7 +29,10 @@ export default (api, {contentful}) => {
             `access_token=${req.apiParams.token}&content_type=recipe`
         )
         .then((response) => {
-            res.cache(true).send(response.data);
+            if(response.data.length)
+                res.cache(true).send(response.data);
+            else
+                res.status(404).send({ok: false, error: 'not found'});
         })
         .catch((err) => {
             console.trace(err);

@@ -24,23 +24,19 @@ export default (api, {contentful}) => {
         try {
             const product = await getProduct(req.apiParams, req.params.slug);
 
-            if(product.items.length) {
-                const smartLabelId = product.items[0].fields.smartLabel;
-                const smartLabel = await getSmartLabel(smartLabelId);
-                const amend = typeof smartLabel === 'string'
-                    ? {error: smartLabel}
-                    : smartLabel;
+            const smartLabelId = product.items[0].fields.smartLabel;
+            const smartLabel = await getSmartLabel(smartLabelId);
+            const amend = typeof smartLabel === 'string'
+                ? {error: smartLabel}
+                : smartLabel;
 
-                product.items[0].fields.smartLabel = {id: smartLabelId, ...amend};
+            product.items[0].fields.smartLabel = {id: smartLabelId, ...amend};
 
-                res.cache(true).send(product);
-            } else {
-                res.status(404).send({ok: false, error: 'not found'});
-            }
+            res.cache(true).send(product);
         } catch (err) {
             console.trace(err);
             logger.error('Problem getting contentful product page', err, err.body);
-            res.status(500).send(err.message);
+            res.status(404).send({ok: false, error: 'not found'});
         }
     });
 };
