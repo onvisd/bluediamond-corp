@@ -304,34 +304,36 @@ export default (api, {apolloClient}) => {
                 query ($id: ID!) {
                     node(id: $id) {
                         id
-                        webUrl
-                        totalTax
-                        subtotalPrice
-                        totalPrice
-                        orderStatusUrl
-                        lineItems(first: 250) {
-                            edges {
-                                node {
-                                    id
-                                    title
-                                    variant {
+                        ... on Checkout {
+                            webUrl
+                            totalTax
+                            subtotalPrice
+                            totalPrice
+                            orderStatusUrl
+                            lineItems(first: 250) {
+                                edges {
+                                    node {
                                         id
                                         title
-                                        image {
-                                            src
-                                        }
-                                        price
-                                        product {
-                                            images(first: 1) {
-                                                edges {
-                                                    node {
-                                                        src
+                                        variant {
+                                            id
+                                            title
+                                            image {
+                                                src
+                                            }
+                                            price
+                                            product {
+                                                images(first: 1) {
+                                                    edges {
+                                                        node {
+                                                            src
+                                                        }
                                                     }
                                                 }
                                             }
                                         }
+                                        quantity
                                     }
-                                    quantity
                                 }
                             }
                         }
@@ -425,7 +427,7 @@ export default (api, {apolloClient}) => {
 
         try {
             if(checkoutID) {
-                const checkout = await getCheckout(res.get(checkoutID));
+                const checkout = await getCheckout(checkoutID);
                 res.status(201).send(checkout);
             } else {
                 res.status(201).send({message: 'No cart exists yet!'});
