@@ -368,45 +368,50 @@ export default (api, {apolloClient}) => {
             const checkout = await createCheckout(req.body.lineItems);
             const accessToken = req.cookies.access_token;
 
-            const checkoutID = checkout.checkout.id;
-            res.cookie('checkout_id', checkoutID, {
-                maxAge: 365 * 24 * 60 * 60 * 1000 // 1 year
-            });
+            if(checkout) {
+                const checkoutID = checkout.checkout.id;
 
-            if(checkout.userErrors.length) {
-                res.status(400).send(checkout.userErrors[0].message);
-            } else if(accessToken) {
-                const secureToken = await auth.decodeToken(accessToken);
-
-                if(secureToken) {
-                    const associate = await addCustomer(
-                        checkoutID,
-                        secureToken.token
-                    );
-
-                    if(associate.checkout.customer.defaultAddress) {
-                        // remove items from array as it fails the next mutation
-                        delete associate.checkout.customer.defaultAddress.id;
-                        delete associate.checkout.customer.defaultAddress.__typename;
-
-                        const syncAddress = await setAddress(
-                            checkoutID,
-                            associate.checkout.customer.defaultAddress
-                        );
-
-                        res.status(201).send(syncAddress);
-                    } else {
-                        res.status(201).send(checkout);
-                    }
-                } else {
-                    res.status(201).send(checkout);
-                }
-            } else {
                 res.cookie('checkout_id', checkoutID, {
                     maxAge: 365 * 24 * 60 * 60 * 1000 // 1 year
                 });
 
-                res.status(201).send(checkout);
+                if(checkout.userErrors.length) {
+                    res.status(400).send(checkout.userErrors[0].message);
+                } else if(accessToken) {
+                    const secureToken = await auth.decodeToken(accessToken);
+
+                    if(secureToken) {
+                        const associate = await addCustomer(
+                            checkoutID,
+                            secureToken.token
+                        );
+
+                        if(associate.checkout.customer.defaultAddress) {
+                            // remove items from array as it fails the next mutation
+                            delete associate.checkout.customer.defaultAddress.id;
+                            delete associate.checkout.customer.defaultAddress.__typename;
+
+                            const syncAddress = await setAddress(
+                                checkoutID,
+                                associate.checkout.customer.defaultAddress
+                            );
+
+                            res.status(201).send(syncAddress);
+                        } else {
+                            res.status(201).send(checkout);
+                        }
+                    } else {
+                        res.status(201).send(checkout);
+                    }
+                } else {
+                    res.cookie('checkout_id', checkoutID, {
+                        maxAge: 365 * 24 * 60 * 60 * 1000 // 1 year
+                    });
+
+                    res.status(201).send(checkout);
+                }
+            } else {
+                res.status(400).send({message: 'You must add items to your cart'});
             }
         } catch (err) {
             console.trace(err);
