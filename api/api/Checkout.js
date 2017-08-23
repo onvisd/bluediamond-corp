@@ -299,7 +299,7 @@ export default (api, {apolloClient}) => {
           'Problem with checkoutLineItemsRemove mutation', err, err.body));
 
     const getCheckout = (id) =>
-        apolloClient.mutate({
+        apolloClient.query({
             query: gql`
                 query ($id: ID!) {
                     node(id: $id) {
