@@ -187,13 +187,39 @@ export default (api, {apolloClient}) => {
     const getYotpo = (id) =>
         axios.get(
             `https://api.yotpo.com/v1/widget/${config.yotpo.key}` +
-            `/products/${id}/reviews.json`
+            `/products/${id}/reviews.json`,
+            {
+                timeout: 3000
+            }
         )
         .then((response) => response.data)
         .catch((err) => {
             console.trace(err);
             logger.error('No YotPo data found', err, err.body);
-            return 'No YotPo data found';
+
+            // Return an empty response so we don't fail because of a review load error
+            return {
+                status: {
+                    code: 200,
+                    message: 'OK'
+                },
+                response: {
+                    pagination: {
+                        page: 1,
+                        per_page: 5, // eslint-disable-line
+                        total: 0
+                    },
+                    bottomline: {
+                        total_review: 0, // eslint-disable-line
+                        average_score: 0, // eslint-disable-line
+                        star_distribution: null, // eslint-disable-line
+                        custom_fields_bottomline: null // eslint-disable-line
+                    },
+                    products: [],
+                    product_tags: null, // eslint-disable-line
+                    reviews: []
+                }
+            };
         });
 
     api.get('/store/products', async (req, res) => {
@@ -226,20 +252,21 @@ export default (api, {apolloClient}) => {
 
                 if(tags.length > 0 && /smartLabel:(\d*)/.test(productTags)) {
                     const smartLabelId = getLabel(productTags);
-                    const smartLabel = await getSmartLabel(smartLabelId);
-                    const amendSmartLabel = typeof smartLabel === 'string'
-                        ? {error: smartLabel}
-                        : smartLabel;
-                    product.smartLabel = {...amendSmartLabel};
+                    if(smartLabelId) {
+                        const smartLabel = await getSmartLabel(smartLabelId);
+                        const amendSmartLabel = typeof smartLabel === 'string'
+                            ? {error: smartLabel}
+                            : smartLabel;
+                        product.smartLabel = {...amendSmartLabel};
+                    } else {
+                        product.smartLabel = {error: 'No SmartLabel ID'};
+                    }
                 }
 
                 if(tags.length > 0 && /id:(\d*)/.test(productTags)) {
                     const productId = getProductId(productTags);
                     const yotpo = await getYotpo(productId);
-                    const amendYotpo = typeof yotpo === 'string'
-                        ? {error: yotpo}
-                        : yotpo;
-                    product.reviews = {...amendYotpo.response};
+                    product.reviews = {...yotpo.response};
                 }
 
                 if(productType) {
