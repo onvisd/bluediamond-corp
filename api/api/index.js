@@ -27,7 +27,7 @@ export default () => {
 
     const apolloClient = new ApolloClient({
         networkInterface: createNetworkInterface({
-            uri: 'https://bdgrowers.myshopify.com/api/graphql',
+            uri: `https://${config.shopify.storeName}.myshopify.com/api/graphql`,
             opts: {
                 headers: {
                     'X-Shopify-Storefront-Access-Token': config.shopify.apiToken

@@ -333,6 +333,7 @@ export default (api, {apolloClient}) => {
                             subtotalPrice
                             totalPrice
                             orderStatusUrl
+                            completedAt
                             lineItems(first: 250) {
                                 edges {
                                     node {

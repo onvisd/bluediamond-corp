@@ -156,7 +156,7 @@ export default class StoreProductHead extends Component {
 
         this.props.addToCart({
             checkoutId: this.props.checkout.id,
-            lineItems: [{variantId: variant.id, quantity}]
+            lineItems: [{variantId: variant.id, quantity: parseInt(quantity)}]
         });
 
         ReactGA.plugin.execute('ec', 'addProduct', {

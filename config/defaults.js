@@ -36,7 +36,8 @@ export default {
     shopify: {
         key: process.env.SHOPIFY_API_KEY,
         pass: process.env.SHOPIFY_API_PASS,
-        apiToken: process.env.SHOPIFY_API_TOKEN
+        apiToken: process.env.SHOPIFY_API_TOKEN,
+        storeName: process.env.SHOPIFY_STORE_NAME
     },
     yotpo: {
         key: process.env.YOTPO_KEY,
