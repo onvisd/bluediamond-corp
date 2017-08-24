@@ -30,8 +30,7 @@ import sortByPriority from 'tools/sortByPriority';
     await Promise.all([
         dispatch(getCustomer()),
         dispatch(setNavigationStyle({})),
-        dispatch(getNavigationData()),
-        dispatch(getCheckout())
+        dispatch(getNavigationData())
     ]);
 })
 @connect(
@@ -60,6 +59,10 @@ export default class Layout extends Component {
 
         if(search.match('nocache'))
             env.development = true;
+    }
+
+    componentDidMount() {
+        this.props.getCheckout();
     }
 
     render() {

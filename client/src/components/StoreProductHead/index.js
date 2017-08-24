@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import ReactGA from 'react-ga';
 
-import {connector, createCheckout, addToCart} from 'state/checkout';
+import {connector, addToCart} from 'state/checkout';
 import styles from './styles.module.css';
 
 import GlutenFree from 'images/icons/gluten-free.svg';
@@ -19,7 +19,7 @@ import ProductStarRating from '../ProductStarRating';
 
 @connect(
     (state) => ({...connector(state.checkout)}),
-    {createCheckout, addToCart}
+    {addToCart}
 )
 export default class StoreProductHead extends Component {
     state = {
@@ -154,16 +154,10 @@ export default class StoreProductHead extends Component {
     addToCart = () => {
         const {variant, price, quantity} = this.state;
 
-        if(this.props.checkout.id && !this.props.checkout.orderStatusUrl) {
-            this.props.addToCart({
-                checkoutId: this.props.checkout.id,
-                lineItems: [{variantId: variant.id, quantity}]
-            });
-        } else {
-            this.props.createCheckout({lineItems: [
-                {variantId: variant.id, quantity}
-            ]});
-        }
+        this.props.addToCart({
+            checkoutId: this.props.checkout.id,
+            lineItems: [{variantId: variant.id, quantity}]
+        });
 
         ReactGA.plugin.execute('ec', 'addProduct', {
             id: this.props.handle,

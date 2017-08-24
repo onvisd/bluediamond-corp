@@ -9,7 +9,7 @@ export const createCheckout = action({
     action: (data, http) => http.post('/api/store/checkout', data),
     result: (state, result) => ({
         ...state,
-        ...result
+        checkout: {...result}
     })
 }, handler);
 
@@ -19,7 +19,7 @@ export const getCheckout = action({
     action: (http) => http.post('/api/store/getCheckout'),
     result: (state, result) => ({
         ...state,
-        ...result
+        checkout: {...result}
     })
 }, handler);
 
@@ -29,7 +29,7 @@ export const addToCart = action({
     action: (data, http) => http.put(`/api/store/checkout/cart/add/${data.checkoutId}`, data),
     result: (state, result) => ({
         ...state,
-        ...result
+        checkout: {...result}
     })
 }, handler);
 
@@ -39,7 +39,7 @@ export const removeFromCart = action({
     action: (data, http) => http.put(`/api/store/checkout/cart/remove/${data.checkoutId}`, data),
     result: (state, result) => ({
         ...state,
-        ...result
+        checkout: {...result}
     })
 }, handler);
 
@@ -51,7 +51,7 @@ export const addAttribute = action({
     ),
     result: (state, result) => ({
         ...state,
-        ...result
+        checkout: {...result}
     })
 }, handler);
 

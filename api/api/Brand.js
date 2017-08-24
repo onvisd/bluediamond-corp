@@ -47,7 +47,7 @@ export default (api, {contentful}) => {
     const getSmartLabel = (smartLabelId) =>
         axios.get(`https://smartlabel-api.labelinsight.com/api/v3/${smartLabelId}`)
         .then((response) => response.data)
-        .catch((err) => logger.error('No smartlabel found', err, err.body));
+        .catch((err) => logger.error('No Smart Label found', err, err.body));
 
     api.get('/brands/:slug', async (req, res) => {
         try {
@@ -56,16 +56,18 @@ export default (api, {contentful}) => {
             const randomProducts = await getRandomProducts();
 
             for (let i = 0; i < products.length; i++) {
-                const smartLabel = await getSmartLabel(products[i].fields.smartLabel);
-
                 products[i].fields = {...products[i].fields};
 
-                if(smartLabel) {
+                if(products[i].fields.smartLabel) {
+                    const smartLabel = await getSmartLabel(products[i].fields.smartLabel);
+
                     const amend = typeof smartLabel === 'string'
                         ? {error: smartLabel}
                         : smartLabel;
 
                     products[i].fields.smartLabel = {id: products[i].fields.smartLabel, ...amend};
+                } else {
+                    products[i].fields.smartLabel = {error: 'No Smart Label data'};
                 }
             }
 

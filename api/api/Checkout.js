@@ -53,7 +53,7 @@ export default (api, {apolloClient}) => {
             variables: {lineItems}
         })
         .then((result) => result.data.checkoutCreate)
-        .catch((err) => logger.error('Problem with checkoutCreate mutation', err, err.body));
+        .catch((err) => logger.error('Problem with checkoutCreate mutation', err, {lineItems}));
 
     const addCustomer = (checkoutId, customerAccessToken) =>
         apolloClient.mutate({
@@ -123,8 +123,12 @@ export default (api, {apolloClient}) => {
             variables: {checkoutId, customerAccessToken}
         })
         .then((result) => result.data.checkoutCustomerAssociate)
-        .catch((err) => logger.error(
-          'Problem with checkoutCustomerAssociate mutation', err, err.body));
+        .catch((err) =>
+            logger.error('Problem with checkoutCustomerAssociate mutation', err, {
+                checkoutId,
+                customerAccessToken
+            })
+        );
 
     const setAddress = (checkoutId, shippingAddress) =>
         apolloClient.mutate({
@@ -193,8 +197,11 @@ export default (api, {apolloClient}) => {
             variables: {checkoutId, shippingAddress}
         })
         .then((result) => result.data.checkoutShippingAddressUpdate)
-        .catch((err) => logger.error(
-          'Problem with checkoutShippingAddressUpdate mutation', err, err.body));
+        .catch((err) =>
+            logger.error('Problem with checkoutShippingAddressUpdate mutation', err, {
+                checkoutId
+            })
+        );
 
     const addToCart = (checkoutId, lineItems) =>
         apolloClient.mutate({
@@ -244,8 +251,16 @@ export default (api, {apolloClient}) => {
             variables: {checkoutId, lineItems}
         })
         .then((result) => result.data.checkoutLineItemsAdd)
-        .catch((err) => logger.error(
-          'Problem with checkoutLineItemsAdd mutation', err, err.body));
+        .catch((err) => {
+            if(err.message.match('Checkout is already completed'))
+                return {completed: true};
+
+            logger.error('Problem with checkoutLineItemsAdd mutation', err, {
+                checkoutId,
+                lineItems
+            });
+            return {};
+        });
 
     const removeFromCart = (checkoutId, lineItemIds) =>
         apolloClient.mutate({
@@ -295,8 +310,16 @@ export default (api, {apolloClient}) => {
             variables: {checkoutId, lineItemIds}
         })
         .then((result) => result.data.checkoutLineItemsRemove)
-        .catch((err) => logger.error(
-          'Problem with checkoutLineItemsRemove mutation', err, err.body));
+        .catch((err) => {
+            if(err.message.match('Checkout is already completed'))
+                return {completed: true};
+
+            logger.error('Problem with checkoutLineItemsRemove mutation', err, {
+                checkoutId,
+                lineItemIds
+            });
+            return {};
+        });
 
     const getCheckout = (id) =>
         apolloClient.query({
@@ -343,7 +366,7 @@ export default (api, {apolloClient}) => {
             variables: {id}
         })
         .then((result) => result.data.node)
-        .catch((err) => logger.error('Problem with getCheckout query', err, err.body));
+        .catch((err) => logger.error('Problem with getCheckout query', err, {checkoutId: id}));
 
     const addAttribute = (checkoutId, input) =>
         apolloClient.mutate({
@@ -359,15 +382,20 @@ export default (api, {apolloClient}) => {
             variables: {checkoutId, input}
         })
         .then((result) => result.data.checkout)
-        .catch((err) => logger.error(
-          'Problem with checkoutAttributesUpdate mutation', err, err.body));
+        .catch((err) => {
+            if(err.message.match('Checkout is already completed'))
+                return {completed: true};
 
-    api.post('/store/checkout', async (req, res) => {
-        if(!req.body.lineItems)
-            res.status(400).send({message: 'You must add items to your cart'});
+            logger.error('Problem with checkoutAttributesUpdate mutation', err, {
+                checkoutId,
+                input
+            });
+            return {};
+        });
 
+    const createNewCheckout = async (req, res) => {
         try {
-            const checkout = await createCheckout(req.body.lineItems);
+            const checkout = await createCheckout(req.body.lineItems || []);
             const accessToken = req.cookies.access_token;
 
             if(checkout) {
@@ -398,29 +426,31 @@ export default (api, {apolloClient}) => {
                                 associate.checkout.customer.defaultAddress
                             );
 
-                            res.status(201).send(syncAddress);
+                            res.status(200).send(syncAddress);
                         } else {
-                            res.status(201).send(checkout);
+                            res.status(200).send(checkout.checkout);
                         }
                     } else {
-                        res.status(201).send(checkout);
+                        res.status(200).send(checkout.checkout);
                     }
                 } else {
                     res.cookie('checkout_id', checkoutID, {
                         maxAge: 365 * 24 * 60 * 60 * 1000 // 1 year
                     });
 
-                    res.status(201).send(checkout);
+                    res.status(200).send(checkout.checkout);
                 }
             } else {
-                res.status(400).send({message: 'You must add items to your cart'});
+                res.status(400).send({message: 'Problem creating new checkout, please try again'});
             }
         } catch (err) {
             console.trace(err);
-            logger.error('Problem creating new checkout', err, err.body);
-            res.status(201).send({message: 'No cart exists yet!'});
+            logger.error('Problem creating new checkout', err, req.body);
+            res.status(200).send({message: 'No cart exists yet!'});
         }
-    });
+    };
+
+    api.post('/store/checkout', createNewCheckout);
 
     api.post('/store/getCheckout', async (req, res) => {
         const checkoutID = req.cookies['checkout_id'];
@@ -428,62 +458,75 @@ export default (api, {apolloClient}) => {
         try {
             if(checkoutID) {
                 const checkout = await getCheckout(checkoutID);
-                res.status(201).send(checkout);
+
+                if(!checkout || checkout.completedAt)
+                    createNewCheckout(req, res);
+                else
+                    res.status(200).send(checkout);
             } else {
-                res.status(201).send({message: 'No cart exists yet!'});
+                createNewCheckout(req, res);
             }
         } catch (err) {
             console.trace(err);
-            logger.error('Problem getting checkout', err, err.body);
-            res.status(201).send({message: 'No cart exists yet!'});
+            logger.error('Problem getting checkout', err, req.body);
+            res.status(200).send({message: 'No cart exists yet!'});
         }
     });
 
     api.put('/store/checkout/cart/add/:checkoutId', async (req, res) => {
         if(!req.body.lineItems)
-            res.status(400).send({message: 'You must add items to your cart'});
+            return res.status(400).send({message: 'You must add items to your cart'});
 
         try {
             const updatedCheckout = await addToCart(req.params.checkoutId, req.body.lineItems);
 
-            res.cookie('checkout_id', req.params.checkoutId);
-
-            res.status(201).send(updatedCheckout);
+            if(updatedCheckout.checkout && !updatedCheckout.completed) {
+                res.cookie('checkout_id', req.params.checkoutId);
+                res.status(200).send(updatedCheckout.checkout);
+            } else {
+                createNewCheckout(req, res);
+            }
         } catch (err) {
             console.trace(err);
-            logger.error('Problem adding product to cart', err, err.body);
+            logger.error('Problem adding item to cart', err, req.body);
             res.status(500).send(err.message);
         }
     });
 
     api.put('/store/checkout/cart/remove/:checkoutId', async (req, res) => {
         if(!req.body.lineItemIds)
-            res.status(400).send({message: 'You must provide items to delete'});
+            return res.status(400).send({message: 'You must provide items to delete'});
 
         try {
             const updatedCheckout =
                 await removeFromCart(req.params.checkoutId, req.body.lineItemIds);
 
-            res.status(201).send(updatedCheckout);
+            if(updatedCheckout.checkout && !updatedCheckout.completed)
+                res.status(200).send(updatedCheckout.checkout);
+            else
+                createNewCheckout(req, res);
         } catch (err) {
             console.trace(err);
-            logger.error('Problem removing item from cart', err, err.body);
+            logger.error('Problem removing item from cart', err, req.body);
             res.status(500).send(err.message);
         }
     });
 
     api.put('/store/checkout/cart/addAttribute/:checkoutId', async (req, res) => {
         if(!req.body.attributes)
-            res.status(400).send({message: 'You must provide an attribute'});
+            return res.status(400).send({message: 'You must provide an attribute'});
 
         try {
             const updatedCheckout =
                 await addAttribute(req.params.checkoutId, req.body.attributes);
 
-            res.status(201).send(updatedCheckout);
+            if(updatedCheckout.checkout && !updatedCheckout.completed)
+                res.status(200).send(updatedCheckout.checkout);
+            else
+                createNewCheckout(req, res);
         } catch (err) {
             console.trace(err);
-            logger.error('Problem adding note to cart', err, err.body);
+            logger.error('Problem adding note to cart', err, req.body);
             res.status(500).send(err.message);
         }
     });
