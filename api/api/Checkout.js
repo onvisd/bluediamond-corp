@@ -364,7 +364,8 @@ export default (api, {apolloClient}) => {
                     }
                 }
             `,
-            variables: {id}
+            variables: {id},
+            fetchPolicy: 'network-only'
         })
         .then((result) => result.data.node)
         .catch((err) => logger.error('Problem with getCheckout query', err, {checkoutId: id}));
