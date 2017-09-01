@@ -5,6 +5,7 @@ import {preload} from 'react-isomorphic-render';
 import {connector, getContact} from 'state/contact';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import Button from 'components/Button';
 import ContactDetails from 'components/ContactDetails';
 import ContactForm from 'components/ContactForm';
@@ -63,6 +64,16 @@ export default class Contact extends Component {
         return (
             <section className="content">
                 <Title>Contact us</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content: 'Contact us'
+                    },
+                    {
+                        property: 'og:description',
+                        content: description
+                    }
+                ]}</Meta>
 
                 <div className={styles.container}>
                     <div className={styles.row}>

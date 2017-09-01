@@ -13,6 +13,7 @@ import {connector, getCraft} from 'state/craft';
 import {parseModel} from 'tools/parseApi';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 
 import BDLogo from 'images/bd-logo.png';
 import GrowersHands from 'images/icons/growers-hands.svg';
@@ -152,6 +153,20 @@ export default class Craft extends Component {
         return this.trackDocument((scrollY, topTop) => ( // eslint-disable-line no-shadow
             <section className="content">
                 <Title>Our Craft</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content: 'Our Craft'
+                    },
+                    {
+                        property: 'og:description',
+                        content: craftFields.heroTitle
+                    },
+                    {
+                        property: 'og:image',
+                        content: craftFields.heroImage.file.url
+                    }
+                ]}</Meta>
                 <GenericHero
                     headline={craftFields.heroHeadline}
                     title={craftFields.heroTitle}

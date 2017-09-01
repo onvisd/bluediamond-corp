@@ -8,6 +8,7 @@ import {connector as authConnector} from 'state/auth';
 import {registerCustomer, signinCustomer, recoverCustomerPass} from 'state/auth';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import FormInput from 'components/FormInput';
 import Button from 'components/Button';
 import styles from './styles.module.css';
@@ -147,6 +148,20 @@ export default class Signin extends Component {
         return (
             <div className={styles.container}>
                 <Title>Sign In / Create Account</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content: 'Sign In / Create Account'
+                    },
+                    {
+                        property: 'og:description',
+                        content: (
+                            'If you have registered with us before, sign in' +
+                            'now to save time during checkout. Signing in is optional.' +
+                            'You can check out without signing in.'
+                        )
+                    }
+                ]}</Meta>
                 <h1>Shopped with us before?</h1>
                 <p>
                     If you have registered with us before, sign in

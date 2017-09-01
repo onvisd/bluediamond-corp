@@ -10,6 +10,7 @@ import {
 } from 'state/navigation';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import CardPanel from 'components/CardPanel';
 import Hero from './Hero';
 import ProductSection from './ProductSection';
@@ -189,7 +190,25 @@ export default class BrandCategory extends Component {
 
         return (
             <section className={styles.content}>
-                <Title>{`${brand.fields.name} | ${category.fields.name}`}</Title>
+                <Title>{
+                    `${activeProduct.fields.name} | ${category.fields.name} | ${brand.fields.name}`
+                }</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content:
+                            `${activeProduct.fields.name} - ` +
+                            `${category.fields.name} - ${brand.fields.name}`
+                    },
+                    {
+                        property: 'og:description',
+                        content: activeProduct.fields.description
+                    },
+                    {
+                        property: 'og:image',
+                        content: activeProduct.fields.productPhotos[0].fields.file.url
+                    }
+                ]}</Meta>
                 <Hero
                     brand={brand}
                     category={category}

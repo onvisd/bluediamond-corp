@@ -7,6 +7,7 @@ import {getStoreProduct} from 'state/storeProduct';
 import {connector as storeProductConnector} from 'state/storeProduct';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import StoreProductHead from 'components/API/StoreProductHead';
 import StoreProductCard from 'components/API/StoreProductCard';
 import StoreProductReview from 'components/StoreProductReview';
@@ -42,7 +43,21 @@ export default class StoreProduct extends Component {
 
         return (
             <section className="content">
-                <Title>{`Product: ${product.title}`}</Title>
+                <Title>{`${product.title} | Store`}</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content: product.title
+                    },
+                    {
+                        property: 'og:description',
+                        content: product.descriptionHtml.replace(/<[^>]*>/g, '')
+                    },
+                    {
+                        property: 'og:image',
+                        content: product.images.edges[0].node.src
+                    }
+                ]}</Meta>
                 <div className={styles.back}>
                     <Link className={styles.backLink} href="/store">Continue Shopping</Link>
                 </div>

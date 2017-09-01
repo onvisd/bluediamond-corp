@@ -8,6 +8,7 @@ import {connector, getManifesto} from 'state/manifesto';
 import {parseModel} from 'tools/parseApi';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import GenericHero from 'components/GenericHero';
 import ImageCluster from 'components/ImageCluster';
 import FullBleedImage from 'components/FullBleedImage';
@@ -88,6 +89,20 @@ export default class Manifesto extends Component {
         return (
             <section className={styles.content}>
                 <Title>Our Story</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content: 'Our Story'
+                    },
+                    {
+                        property: 'og:description',
+                        content: marked(manifestoFields.introHeadline).replace(/<[^>]*>/g, '')
+                    },
+                    {
+                        property: 'og:image',
+                        content: manifestoFields.heroImage.file.url
+                    }
+                ]}</Meta>
                 <GenericHero
                     className={styles.hero}
                     headline="Our Story"

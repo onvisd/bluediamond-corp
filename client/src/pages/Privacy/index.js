@@ -1,12 +1,19 @@
 import React from 'react';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 
 import styles from './styles.module.css';
 
 export default () => (
     <section className={styles.container}>
         <Title>Privacy Policy</Title>
+        <Meta>{[
+            {
+                property: 'og:title',
+                content: 'Privacy Policy'
+            }
+        ]}</Meta>
         <h2>Privacy Policy</h2>
         <p>This website (&#8220;Site&#8221;) is owned and operated by Blue Diamond Growers, a California Corporation (&#8220;we&#8221;, &#8220;our,&#8221; or &#8220;us&#8221;). This Privacy Policy discloses our collection of information through any use of the Site by you (&#8220;you,&#8221; &#8220;your,&#8221; or &#8220;User&#8221;) and how we may use the information. By accessing, browsing, or otherwise using the Site, you acknowledge and consent to our collection and use of information as set forth in this Privacy Policy.</p>
         <p>PLEASE READ THIS PRIVACY POLICY CAREFULLY. YOUR USE OF THE SITE CONSTITUTES YOUR CONSENT TO THIS PRIVACY POLICY. DO NOT USE THE SITE IF YOU ARE UNWILLING OR UNABLE TO CONSENT TO THIS PRIVACY POLICY. Please check back periodically as this Privacy Policy may change from time to time.</p>

@@ -20,9 +20,7 @@ import Reset from './pages/ResetPassword';
 import StoreProduct from './pages/StoreProduct';
 import Press from './pages/Press';
 import Signin from './pages/Signin';
-import CheckoutConfirmation from './pages/CheckoutConfirmation';
 import Account from './pages/Account';
-import Checkout from './pages/Checkout';
 import FAQs from './pages/FAQs';
 import ProductLocator from './pages/ProductLocator';
 import Terms from './pages/Terms';
@@ -31,8 +29,6 @@ import Privacy from './pages/Privacy';
 export default (
     <Route path="/" component={Layout}>
         <IndexRoute component={Home} />
-        <Route path="/store/checkout/success" component={CheckoutConfirmation} />
-        <Route path="/store/checkout" component={Checkout} />
         <Route path="/store/product/:slug" component={StoreProduct} />
         <Route path="/store" component={Store} />
         <Route path="/foodservice" component={FoodService} />

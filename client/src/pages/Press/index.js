@@ -7,6 +7,7 @@ import {connector, getPress} from 'state/press';
 import {parseModel} from 'tools/parseApi';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import ContactDetails from 'components/ContactDetails';
 
 import ExternalLink from 'images/icons/external-link.svg';
@@ -65,6 +66,16 @@ export default class Press extends Component {
         return (
             <section className="content">
                 <Title>Press</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content: 'Press'
+                    },
+                    {
+                        property: 'og:description',
+                        content: 'Read the latest press releases and news from Blue Diamond.'
+                    }
+                ]}</Meta>
 
                 <div className={styles.container}>
                     <div className={`${styles.main} ${styles.colLeft}`}>

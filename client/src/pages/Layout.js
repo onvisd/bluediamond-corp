@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Meta, preload} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 import env from 'tools/env';
 
 import {
@@ -24,6 +24,7 @@ import Preloading from 'components/Preloading';
 import Navigation from 'components/Navigation';
 import Footer from 'components/Footer';
 import FooterMobile from 'components/FooterMobile';
+import Meta from 'components/Meta';
 import sortByPriority from 'tools/sortByPriority';
 
 @preload(async ({dispatch}) => {
@@ -76,25 +77,6 @@ export default class Layout extends Component {
                 .map((category) => category.fields.name)
         }));
 
-        const title = 'From Our Hearts to Your Hands';
-
-        const meta =
-            [
-                // <meta charset="utf-8"/>
-                {charset: 'utf-8'},
-
-                // <meta name="..." content="..."/>
-                {
-                    name: 'viewport',
-                    content: 'width=device-width, initial-scale=1.0, user-scalable=no'
-                },
-
-                // <meta property="..." content="..."/>
-                {property: 'og:title', content: 'Blue Diamond Growers'},
-                {property: 'og:description', content: 'From our hearts to your hands'},
-                {property: 'og:locale', content: 'en-US'}
-            ];
-
         let footer = (
             <div>
                 <FooterMobile
@@ -128,8 +110,8 @@ export default class Layout extends Component {
 
         return (
             <div className="content">
-                <Title>{title}</Title>
-                <Meta>{meta}</Meta>
+                <Title>From Our Hearts to Your Hands</Title>
+                <Meta />
 
                 <Navigation brands={brands} company={companyNavItems} />
 

@@ -21,6 +21,7 @@ import addQuery from 'tools/addQuery';
 import removeQuery from 'tools/removeQuery';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import StoreHero from 'components/StoreHero';
 import ProductFilter from 'components/ProductFilter';
 import StoreProductCard from 'components/API/StoreProductCard';
@@ -243,121 +244,135 @@ export default class Store extends Component {
             cards = cards.sort(this.sortCards(sort));
 
         return (
-          <section className="content">
-              <Title>Store</Title>
-              <StoreHero
-                  image={Hero}
-                  title="Almond Snacks and Gifts for Any Occasion"
-                  buttonText="Go To Sale"
-                  buttonUrl="/store/product/other-test-product"
-              />
-              <div className={styles.container}>
-                  <div className="l--row">
-                      <div className={`l--col-3 ${styles.filters}`}>
-                          <p className={`t--type-incidental ${styles.refine}`}>Refine by:</p>
-                          <ProductFilter
-                              title="Gifts"
-                              products={products}
-                              filter="collections"
-                              query="values"
-                              initState={filter.categories}
-                              onClick={this.handleFilter('categories')}
-                              dropdown={responsive.small}
-                          />
-                          <ProductFilter
-                              title="Products"
-                              products={products}
-                              filter="productType"
-                              initState={filter.brands}
-                              onClick={this.handleFilter('brands')}
-                              dropdown={responsive.small}
-                          />
-                          <ProductFilter
-                              title="Flavor"
-                              products={products}
-                              filter="tags"
-                              query="flavor"
-                              initState={filter.types}
-                              onClick={this.handleFilter('types')}
-                              dropdown={responsive.small}
-                          />
-                          <ProductFilter
-                              title="Size"
-                              products={products}
-                              filter="options"
-                              query="values"
-                              initState={filter.sizes}
-                              onClick={this.handleFilter('sizes')}
-                              dropdown={responsive.small}
-                          />
-                      </div>
-                      <div className={`l--col-auto ${styles.products}`}>
-                          <div className={`l--row ${styles.search}`}>
-                              <div className="l--col-5">
-                                  <div className="form--select noMargin">
-                                      <select
-                                          onChange={this.handleSort}
-                                          ref={(select) => {
-                                              this.sort = select;
-                                          }}
-                                          defaultValue=""
-                                          title="Select a field to sort by"
-                                      >
-                                          <option value="" disabled>Sort by</option>
-                                          <option value="name">Name</option>
-                                          <option value="brand">Brand</option>
-                                      </select>
-                                  </div>
-                              </div>
-                              <div className={`l--col-2 ${styles.searchSpacer}`}>
-                                  &nbsp;
-                              </div>
-                              <div className="l--col-5">
-                                  <input
-                                      onChange={this.handleSearch}
-                                      ref={(input) => {
-                                          this.search = input;
-                                      }}
-                                      type="text"
-                                      placeholder="Search"
-                                      title="Type search term here"
-                                  />
-                              </div>
-                          </div>
-                          <div className="l--row">
-                              <div className="l--col-12 t--align-center">
-                                  <h3 className={styles.title}>
-                                      {cards.length === products.length
-                                          ? 'All Products'
-                                          : 'Matching Products'}
-                                      <small> ({cards.length})</small>
-                                  </h3>
-                              </div>
-                          </div>
-                          <div className={styles.cards}>
-                              {cards.slice(0, visibleCardCount).map((card) => (
-                                  <StoreProductCard
-                                      data={card.node}
-                                      key={`card${card.node.id}`}
-                                      onClick={() => this.trackProduct(card)}
-                                  />
-                              ))}
-                          </div>
-                          <div className={classnames({
-                              isHidden: visibleCardCount >= cards.length
-                          })}>
-                              <div className="l--row l--mar-top-m l--mar-btm-m">
-                                  <div className="l--col-12 t--align-center">
-                                      <Button onClick={this.handleLoadMore}>
-                                          Load More Products
-                                      </Button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </section>
+            <section className="content">
+                <Title>Store</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content: 'Blue Diamond Online Store'
+                    },
+                    {
+                        property: 'og:description',
+                        content: 'Almond Snacks and Gifts for Any Occasion'
+                    },
+                    {
+                        property: 'og:image',
+                        content: Hero
+                    }
+                ]}</Meta>
+                <StoreHero
+                    image={Hero}
+                    title="Almond Snacks and Gifts for Any Occasion"
+                    buttonText="Go To Sale"
+                    buttonUrl="/store/product/other-test-product"
+                />
+                <div className={styles.container}>
+                    <div className="l--row">
+                        <div className={`l--col-3 ${styles.filters}`}>
+                            <p className={`t--type-incidental ${styles.refine}`}>Refine by:</p>
+                            <ProductFilter
+                                title="Gifts"
+                                products={products}
+                                filter="collections"
+                                query="values"
+                                initState={filter.categories}
+                                onClick={this.handleFilter('categories')}
+                                dropdown={responsive.small}
+                            />
+                            <ProductFilter
+                                title="Products"
+                                products={products}
+                                filter="productType"
+                                initState={filter.brands}
+                                onClick={this.handleFilter('brands')}
+                                dropdown={responsive.small}
+                            />
+                            <ProductFilter
+                                title="Flavor"
+                                products={products}
+                                filter="tags"
+                                query="flavor"
+                                initState={filter.types}
+                                onClick={this.handleFilter('types')}
+                                dropdown={responsive.small}
+                            />
+                            <ProductFilter
+                                title="Size"
+                                products={products}
+                                filter="options"
+                                query="values"
+                                initState={filter.sizes}
+                                onClick={this.handleFilter('sizes')}
+                                dropdown={responsive.small}
+                            />
+                        </div>
+                        <div className={`l--col-auto ${styles.products}`}>
+                            <div className={`l--row ${styles.search}`}>
+                                <div className="l--col-5">
+                                    <div className="form--select noMargin">
+                                        <select
+                                            onChange={this.handleSort}
+                                            ref={(select) => {
+                                                this.sort = select;
+                                            }}
+                                            defaultValue=""
+                                            title="Select a field to sort by"
+                                        >
+                                            <option value="" disabled>Sort by</option>
+                                            <option value="name">Name</option>
+                                            <option value="brand">Brand</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className={`l--col-2 ${styles.searchSpacer}`}>
+                                    &nbsp;
+                                </div>
+                                <div className="l--col-5">
+                                    <input
+                                        onChange={this.handleSearch}
+                                        ref={(input) => {
+                                            this.search = input;
+                                        }}
+                                        type="text"
+                                        placeholder="Search"
+                                        title="Type search term here"
+                                    />
+                                </div>
+                            </div>
+                            <div className="l--row">
+                                <div className="l--col-12 t--align-center">
+                                    <h3 className={styles.title}>
+                                        {cards.length === products.length
+                                            ? 'All Products'
+                                            : 'Matching Products'}
+                                        <small> ({cards.length})</small>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div className={styles.cards}>
+                                {cards.slice(0, visibleCardCount).map((card) => (
+                                    <StoreProductCard
+                                        data={card.node}
+                                        key={`card${card.node.id}`}
+                                        onClick={() => this.trackProduct(card)}
+                                    />
+                                ))}
+                            </div>
+                            <div className={classnames({
+                                isHidden: visibleCardCount >= cards.length
+                            })}>
+                                <div className="l--row l--mar-top-m l--mar-btm-m">
+                                    <div className="l--col-12 t--align-center">
+                                        <Button onClick={this.handleLoadMore}>
+                                            Load More Products
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         );
     }
 }

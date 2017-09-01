@@ -5,6 +5,7 @@ import {preload} from 'react-isomorphic-render';
 import {connector, getContact} from 'state/contact';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import Button from 'components/Button';
 import FAQ from 'components/FAQ';
 
@@ -39,6 +40,16 @@ export default class FAQs extends Component {
         return (
             <section className="content">
                 <Title>Frequently Asked Questions</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content: 'Frequenty Asked Questions'
+                    },
+                    {
+                        property: 'og:description',
+                        content: 'Frequently asked question about Blue Diamond products.'
+                    }
+                ]}</Meta>
 
                 <div className={styles.container}>
                     <div className={styles.intro}>

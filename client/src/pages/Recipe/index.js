@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Meta, preload} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 import marked from 'marked';
 
 import {connector, getRecipe} from 'state/recipe';
 import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import RecipeHead from 'components/API/RecipeHead';
 import RecipeStep from 'components/API/RecipeStep';
 import ProductCard from 'components/API/ProductCard';
@@ -91,17 +92,10 @@ export default class Recipe extends Component {
             <section className="content">
                 <Title>{`Recipe: ${item.fields.name}`}</Title>
                 <Meta>{[
-                    // <meta charset="utf-8"/>
-                    {charset: 'utf-8'},
-
-                    // <meta name="..." content="..."/>
                     {
-                        name: 'viewport',
-                        content: 'width=device-width, initial-scale=1.0, user-scalable=no'
+                        property: 'og:title',
+                        content: item.fields.name
                     },
-
-                    // <meta property="..." content="..."/>
-                    {property: 'og:title', content: item.fields.name},
                     {
                         property: 'og:description',
                         content: `A ${item.fields.cookTime} minute recipe for ${
@@ -111,8 +105,7 @@ export default class Recipe extends Component {
                     {
                         property: 'og:image',
                         content: assetsById[item.fields.heroImage.sys.id].file.url
-                    },
-                    {property: 'og:locale', content: 'en-US'}
+                    }
                 ]}</Meta>
                 <RecipeHead data={recipe} />
                 <div className={styles.container}>

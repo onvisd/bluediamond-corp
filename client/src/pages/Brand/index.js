@@ -9,6 +9,7 @@ import {
 } from 'state/navigation';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import Button from 'components/Button';
 import CardPanel from 'components/CardPanel';
 import Carousel from 'components/Carousel';
@@ -120,6 +121,20 @@ export default class Brand extends Component {
         return (
             <section className="content">
                 <Title>{brand.fields.name}</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content: brand.fields.name
+                    },
+                    {
+                        property: 'og:description',
+                        content: brand.fields.heroTitle
+                    },
+                    {
+                        property: 'og:image',
+                        content: heroImage.fields.file.url
+                    }
+                ]}</Meta>
                 <Hero
                     image={heroImage.fields.file.url}
                     title={brand.fields.heroTitle}

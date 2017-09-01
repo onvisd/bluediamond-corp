@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Meta, preload} from 'react-isomorphic-render';
+import {preload} from 'react-isomorphic-render';
 import classnames from 'classnames';
 import ReactGA from 'react-ga';
 
@@ -8,6 +8,7 @@ import {connector, getRecipes} from 'state/recipes';
 import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import RecipeCard from 'components/API/RecipeCard';
 import Button from 'components/Button';
 
@@ -150,29 +151,19 @@ export default class RecipeIndex extends Component {
             <section className="content">
                 <Title>Recipes</Title>
                 <Meta>{[
-                    // <meta charset="utf-8"/>
-                    {charset: 'utf-8'},
-
-                    // <meta name="..." content="..."/>
-                    {
-                        name: 'viewport',
-                        content: 'width=device-width, initial-scale=1.0, user-scalable=no'
-                    },
-
-                    // <meta property="..." content="..."/>
                     {
                         property: 'og:title',
                         content: 'Almond Breeze Recipes - Blue Diamond Growers'
                     },
                     {
                         property: 'og:description',
-                        content:
+                        content: (
                             'Find the perfect recipe or smoothie idea using the filters below. ' +
                             'Whether it&#39;s chocolate, coconut, vanilla, or something with a ' +
                             'touch of honey, you&#39;ll find dozens of ideas including low ' +
                             'calorie, low cholesterol, and dairy free recipes.'
-                    },
-                    {property: 'og:locale', content: 'en-US'}
+                        )
+                    }
                 ]}</Meta>
                 <div className={styles.hero} style={{backgroundImage: `url(${HeroImage})`}}>
                     <div className={styles.heroInner}>

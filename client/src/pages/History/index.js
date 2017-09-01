@@ -8,6 +8,7 @@ import {Parallax} from 'react-parallax';
 import classnames from 'classnames';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import GenericHero from 'components/GenericHero';
 import RelatedPages from 'components/RelatedPages';
 import RelatedPageLink from 'components/RelatedPageLink';
@@ -108,6 +109,21 @@ export default class HistoryPage extends Component {
         return this.trackDocument((scrollY, topTop, topBottom, bottomTop) => (
             <section className={styles.pageContainer}>
                 <Title>Our History</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content: 'Our History'
+                    },
+                    {
+                        property: 'og:description',
+                        content:
+                            'Read about the history of Blue Diamond Growers and how we\'ve grown.'
+                    },
+                    {
+                        property: 'og:image',
+                        content: Hero
+                    }
+                ]}</Meta>
                 <GenericHero
                     headline="Our History"
                     title="How We've Grown"

@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 
 import styles from './styles.module.css';
 
@@ -38,6 +39,16 @@ export default class PageWithSidebar extends Component {
         return (
           <div className={styles.container}>
               <Title>{pageData.items[0].fields.title}</Title>
+              <Meta>{[
+                  {
+                      property: 'og:title',
+                      content: pageData.items[0].fields.title
+                  },
+                  {
+                      property: 'og:description',
+                      content: ''
+                  }
+              ]}</Meta>
               <div className={styles.row}>
                   <div className={styles.colLeft}>
                         {this.renderChildren(pageData, 'mainContentModules')}

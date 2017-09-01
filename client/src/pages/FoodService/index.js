@@ -7,6 +7,7 @@ import {connector, getFoodService} from 'state/foodService';
 import {parseModel} from 'tools/parseApi';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import Button from 'components/Button';
 import RequestSampleForm from 'components/RequestSampleForm';
 import FoodserviceContact from 'components/FoodserviceContactForm';
@@ -123,6 +124,20 @@ export default class FoodService extends Component {
         return (
             <section className={styles.pageContainer}>
                 <Title>{fields.title}</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content: fields.title
+                    },
+                    {
+                        property: 'og:description',
+                        content: marked(fields.pageContent).replace(/<[^>]*>/g, '')
+                    },
+                    {
+                        property: 'og:image',
+                        content: fields.heroBackgroundImage.file.url
+                    }
+                ]}</Meta>
                 <div className={styles.hero} style={{
                     backgroundImage: `url(${fields.heroBackgroundImage.file.url})`
                 }} />
