@@ -17,6 +17,8 @@ import Quantity from '../Quantity';
 import ProductAccordion from '../ProductAccordion';
 import ProductStarRating from '../ProductStarRating';
 
+import callFloodlight from 'tools/callFloodlight';
+
 @connect(
     (state) => ({...connector(state.checkout)}),
     {addToCart}
@@ -175,6 +177,8 @@ export default class StoreProductHead extends Component {
             action: 'click',
             label: this.props.title
         });
+
+        callFloodlight.click('4035228', 'fy18s0', 'addto0');
     }
 
     render() {

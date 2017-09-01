@@ -12,6 +12,8 @@ import Meta from 'components/Meta';
 import RecipeCard from 'components/API/RecipeCard';
 import Button from 'components/Button';
 
+import callFloodlight from 'tools/callFloodlight';
+
 import styles from './styles.module.css';
 
 import HeroImage from 'images/backgrounds/recipe-hero.jpg';
@@ -130,6 +132,10 @@ export default class RecipeIndex extends Component {
 
     componentWillUnmount() {
         this.props.setNavigationStyle({});
+    }
+
+    componentDidMount() {
+        callFloodlight.load('4035228', 'fy18s0', 'indiv0');
     }
 
     getNextRecipes() {

@@ -11,6 +11,8 @@ import Textarea from 'components/FormTextarea';
 import Checkbox from 'components/Checkbox';
 import ShoppingCartItem from 'components/ShoppingCartItem';
 
+import callFloodlight from 'tools/callFloodlight';
+
 import styles from './styles.module.css';
 
 @connect(
@@ -64,6 +66,8 @@ export default class ShoppingCart extends Component {
             action: 'click',
             label: 'Checkout'
         });
+
+        callFloodlight.click('4035228', 'fy18s0', 'check0');
 
         if(!note || !data)
             return window.location.assign(checkoutLink);

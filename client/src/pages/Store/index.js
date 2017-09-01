@@ -19,6 +19,7 @@ import getOptions from 'tools/getProductOptions';
 import compareOptions from 'tools/compareProductOptions';
 import addQuery from 'tools/addQuery';
 import removeQuery from 'tools/removeQuery';
+import callFloodlight from 'tools/callFloodlight';
 
 import Title from 'components/Title';
 import Meta from 'components/Meta';
@@ -60,6 +61,10 @@ const escapeRegEx = (str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, 
     {setStoreSearch, getStoreProducts}
 )
 export default class Store extends Component {
+    componentDidMount() {
+        callFloodlight.load('4035228', 'fy18s0', 'store0');
+    }
+
     // Loads more products
     handleLoadMore = () => {
         const {visibleCardCount, perPage} = this.props.query;

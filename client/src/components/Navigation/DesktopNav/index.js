@@ -8,6 +8,8 @@ import {connector as authConnector} from 'state/auth';
 import {connector as navConnector} from 'state/navigation';
 import {connector as checkoutConnector} from 'state/checkout';
 
+import callFloodlight from 'tools/callFloodlight';
+
 import ShoppingCartIcon from 'images/icons/cart.svg';
 import User from 'images/icons/user.svg';
 import BDLogo from 'images/bd-logo.png';
@@ -99,6 +101,10 @@ export default class DesktopNav extends Component {
         this.setState(() => ({productCards}));
     }
 
+    trackSignIn() {
+        callFloodlight.click('4035228', 'fy18s0', 'signi00');
+    }
+
     render() {
         const {navVisible, cartVisible, productCards} = this.state;
         const {name, element, props} = this.state.activeCard;
@@ -128,9 +134,16 @@ export default class DesktopNav extends Component {
                         <ul className={classnames(styles.secondaryNavLinks, styles.auth)}>
                             <li>
                                 {auth.authenticated
-                                    ? <Link to="/account/settings">Account</Link>
-                                    : <Link to="/signin">Sign In or Create Account</Link>}
-                                <User />
+                                    ? <Link to="/account/settings">Account <User /></Link>
+                                    : (
+                                        <Link
+                                            to="/signin"
+                                            onClick={this.trackSignIn}
+                                        >
+                                            Sign In or Create Account
+                                            <User />
+                                        </Link>
+                                    )}
                             </li>
                         </ul>
                     </div>

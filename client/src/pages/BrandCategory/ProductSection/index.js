@@ -5,7 +5,9 @@ import Button from 'components/Button';
 import ButtonDropdown from 'components/ButtonDropdown';
 import ProductPanel from 'components/ProductPanel';
 import ProductAccordion from 'components/ProductAccordion';
+
 import preventOrphan from 'tools/preventOrphan';
+import callFloodlight from 'tools/callFloodlight';
 
 import styles from './styles.module.css';
 
@@ -61,13 +63,22 @@ export default class ProductSection extends Component {
                         {preventOrphan(activeProduct.fields.description)}
                     </p>
                     <div className={styles.actions}>
-                        <Button theme="white" href="/product-locator">
+                        <Button
+                            theme="white"
+                            href="/product-locator"
+                            onClick={() => callFloodlight.click('4035228', 'fy18s0', 'findp0')}
+                        >
                             Find Product
                         </Button>
                         <ButtonDropdown
                             items={shopLinks}
                             theme={brand.fields.themeColor}
                             layout="wide"
+                            onClick={(evt, name) => {
+                                callFloodlight.click('4035228', 'fy18s0', `${
+                                    name.replace(/[^a-z0-9]/i, '').slice(0, 5).toLowerCase()
+                                }0`);
+                            }}
                         >
                             Buy Online
                         </ButtonDropdown>

@@ -11,6 +11,9 @@ import Title from 'components/Title';
 import Meta from 'components/Meta';
 import FormInput from 'components/FormInput';
 import Button from 'components/Button';
+
+import callFloodlight from 'tools/callFloodlight';
+
 import styles from './styles.module.css';
 
 @connect(
@@ -63,6 +66,8 @@ export default class Signin extends Component {
     handleSignIn = (creds) => {
         this.setState({submitting: true});
 
+        callFloodlight.click('4035228', 'fy18s0', 'signi00');
+
         this.props.signinCustomer(creds)
             .then((result) => {
                 if(this.props.auth.authenticated === true) {
@@ -81,6 +86,8 @@ export default class Signin extends Component {
 
     handleRegister = (creds) => {
         this.setState({submitting: true});
+
+        callFloodlight.click('4035228', 'fy18s0', 'creat0');
 
         if(creds.password === creds.password_confirmation) {
             this.props.registerCustomer(creds)
