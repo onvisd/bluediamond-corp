@@ -4,6 +4,8 @@ import {ShareButtons} from 'react-share';
 
 import NutritionFacts from '../NutritionFacts';
 
+import callFloodlight from 'tools/callFloodlight';
+
 import Facebook from 'images/icons/facebook.svg';
 import Pinterest from 'images/icons/pinterest.svg';
 import Twitter from 'images/icons/twitter.svg';
@@ -66,6 +68,12 @@ export default class RecipeHead extends Component {
         );
     }
 
+    trackFloodlight(value) {
+        return () => {
+            callFloodlight.click('4035228', 'fy18s0', value);
+        };
+    }
+
     render() {
         const {
             title,
@@ -113,32 +121,50 @@ export default class RecipeHead extends Component {
                                 </div>
                                 <div className={styles.share}>
                                     <span>Share this recipe:</span>
-                                    <FacebookShareButton
-                                        className={styles.shareButton}
-                                        url={typeof window === 'undefined' ? '' : location.href}
+                                    <span
+                                        onClick={this.trackFloodlight('faceb0')}
                                     >
-                                            <Facebook />
-                                    </FacebookShareButton>
-                                    <PinterestShareButton
-                                        className={styles.shareButton}
-                                        media={heroImage}
-                                        description={
-                                            `A ${
-                                                cookTime
-                                            } minute recipe for ${
-                                                title
-                                            } with Almond Breeze.`
-                                        }
-                                        url={typeof window === 'undefined' ? '' : location.href}
+                                        <FacebookShareButton
+                                            className={styles.shareButton}
+                                            url={
+                                                typeof window === 'undefined' ? '' : location.href
+                                            }
+                                        >
+                                                <Facebook />
+                                        </FacebookShareButton>
+                                    </span>
+                                    <span
+                                        onClick={this.trackFloodlight('pinte0')}
                                     >
-                                        <Pinterest />
-                                    </PinterestShareButton>
-                                    <TwitterShareButton
-                                        className={styles.shareButton}
-                                        url={typeof window === 'undefined' ? '' : location.href}
+                                        <PinterestShareButton
+                                            className={styles.shareButton}
+                                            media={heroImage}
+                                            description={
+                                                `A ${
+                                                    cookTime
+                                                } minute recipe for ${
+                                                    title
+                                                } with Almond Breeze.`
+                                            }
+                                            url={
+                                                typeof window === 'undefined' ? '' : location.href
+                                            }
+                                        >
+                                            <Pinterest />
+                                        </PinterestShareButton>
+                                    </span>
+                                    <span
+                                        onClick={this.trackFloodlight('tweet0')}
                                     >
-                                        <Twitter />
-                                    </TwitterShareButton>
+                                        <TwitterShareButton
+                                            className={styles.shareButton}
+                                            url={
+                                                typeof window === 'undefined' ? '' : location.href
+                                            }
+                                        >
+                                            <Twitter />
+                                        </TwitterShareButton>
+                                    </span>
                                 </div>
                             </div>
                         </div>
