@@ -102,7 +102,7 @@ export default class DesktopNav extends Component {
     }
 
     trackSignIn() {
-        callFloodlight.click('4035228', 'fy18s0', 'signi00');
+        callFloodlight.click('4035228', 'fy18s0', 'signi0');
     }
 
     render() {

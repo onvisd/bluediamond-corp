@@ -7,6 +7,8 @@ import ReactGA from 'react-ga';
 
 import {connector as authConnector} from 'state/auth';
 
+import callFloodlight from 'tools/callFloodlight';
+
 import BDLogo from 'images/bd-logo.png';
 import User from 'images/icons/user.svg';
 import Cart from 'images/icons/cart.svg';
@@ -77,6 +79,10 @@ export default class MobileNav extends Component {
         }));
     }
 
+    trackSignIn() {
+        callFloodlight.click('4035228', 'fy18s0', 'signi0');
+    }
+
     render() {
         const {navVisible, transition} = this.state;
         const {element, props} = this.state.activeCard;
@@ -90,7 +96,16 @@ export default class MobileNav extends Component {
                     <div className={styles.ecomm}>
                         {auth.authenticated
                             ? <Link to="/account/settings" title="Account"><User /></Link>
-                            : <Link to="/signin" title="Sign in"><User /></Link>}
+                            : (
+                                <Link
+                                    to="/signin"
+                                    title="Sign in"
+                                    onClick={this.trackSignIn}
+                                >
+                                    <User />
+                                </Link>
+                            )
+                        }
                         <button
                             title="Cart"
                             className={styles.cart}
