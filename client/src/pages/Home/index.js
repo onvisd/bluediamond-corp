@@ -10,6 +10,7 @@ import ReactGA from 'react-ga';
 
 import {connector, getHome} from 'state/home';
 import {parseModel} from 'tools/parseApi';
+import image from 'tools/image';
 
 import Title from 'components/Title';
 import Button from 'components/Button';
@@ -108,6 +109,16 @@ export default class Home extends Component {
         const {home, responsive} = this.props;
         const homeFields = parseModel(home)[0].fields;
 
+        const heroBackground = image(
+            homeFields.heroBackground.file.url,
+            {
+                format: 'jpg',
+                quality: 70,
+                progressive: true,
+                width: 1000
+            }
+        );
+
         return this.trackDocument((scrollY, topTop) => ( // eslint-disable-line no-shadow
             <section className={styles.container}>
                 <Title>From Our Hearts to Your Hands</Title>
@@ -119,7 +130,7 @@ export default class Home extends Component {
                     >
                         <Parallax
                             className={styles.heroBackground}
-                            bgImage={homeFields.heroBackground.file.url}
+                            bgImage={heroBackground}
                             strength={200}
                         />
                         <div className={styles.contentWrap}>
@@ -179,7 +190,14 @@ export default class Home extends Component {
                                 <div
                                     className={styles.image}
                                     style={{
-                                        backgroundImage: `url(${homeFields.craftImage.file.url})`
+                                        backgroundImage: `url(${image(
+                                            homeFields.craftImage.file.url,
+                                            {
+                                                format: 'jpg',
+                                                quality: 70,
+                                                progressive: true
+                                            }
+                                        )})`
                                     }}
                                 />
                             </div>
@@ -220,7 +238,14 @@ export default class Home extends Component {
                                     className={styles.image}
                                     style={{
                                         backgroundImage:
-                                            `url(${homeFields.historyImage.file.url})`
+                                            `url(${image(
+                                                homeFields.historyImage.file.url,
+                                                {
+                                                    format: 'jpg',
+                                                    quality: 70,
+                                                    progressive: true
+                                                }
+                                            )})`
                                     }}
                                 />
                             </div>
@@ -239,7 +264,15 @@ export default class Home extends Component {
                 </div>
                 <Parallax
                     className={styles.coop}
-                    bgImage={homeFields.coopImage.file.url}
+                    bgImage={image(
+                        homeFields.coopImage.file.url,
+                        {
+                            format: 'jpg',
+                            quality: 70,
+                            progressive: true,
+                            width: responsive.xlarge ? 1920 : 1440
+                        }
+                    )}
                 >
                     <div className={styles.coopContent}>
                         <h2>{preventOrphan(homeFields.coopHeadline)}</h2>

@@ -12,6 +12,7 @@ import {
 import Title from 'components/Title';
 import Meta from 'components/Meta';
 import CardPanel from 'components/CardPanel';
+import image from 'tools/image';
 import Hero from './Hero';
 import ProductSection from './ProductSection';
 import MoreFlavorsDesktop from './MoreFlavorsDesktop';
@@ -224,13 +225,23 @@ export default class BrandCategory extends Component {
                     <div className={styles.accents}>
                         <div className={`${styles.accent} ${styles.accentLeft}`}>
                             <img
-                                src={category.fields.appetizerImages[0].fields.file.url}
+                                src={image(
+                                    category.fields.appetizerImages[0].fields.file.url,
+                                    {
+                                        width: 400
+                                    }
+                                )}
                                 alt="Accent Image"
                             />
                         </div>
                         <div className={`${styles.accent} ${styles.accentRight}`}>
                             <img
-                                src={category.fields.appetizerImages[1].fields.file.url}
+                                src={image(
+                                    category.fields.appetizerImages[1].fields.file.url,
+                                    {
+                                        width: 400
+                                    }
+                                )}
                                 alt="Accent Image"
                             />
                         </div>

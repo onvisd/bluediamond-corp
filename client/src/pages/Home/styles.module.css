@@ -5,7 +5,7 @@
 .container {
     overflow: hidden;
     background-color: var(--c--gray-lighter);
-    background-image: url(images/backgrounds/hub-texture.png);
+    background-image: url(images/backgrounds/hub-texture.jpg);
     background-size: 25%;
 }
 

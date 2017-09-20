@@ -35,6 +35,7 @@ render(settings, {
 })
 .then(({store, rerender}) => {
     mediaQueryTracker({
+        xlarge: '(min-width: 1441px)',
         large: '(min-width: 1025px)',
         medium: '(max-width: 1024px)',
         small: '(max-width: 768px)',

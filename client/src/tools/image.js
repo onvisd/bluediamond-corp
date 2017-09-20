@@ -29,7 +29,7 @@ export default (src, options) => {
         query.push(`h=${options.height}`);
 
     if(options.format)
-        query.push(`fmt=${options.format}`);
+        query.push(`fm=${options.format}`);
 
     if(options.quality)
         query.push(`q=${options.quality}`);

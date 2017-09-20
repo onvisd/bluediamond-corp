@@ -5,6 +5,9 @@ import ReactGA from 'react-ga';
 
 import Button from 'components/Button';
 import ProductLink from 'components/ProductLink';
+
+import image from 'tools/image';
+
 import styles from './styles.module.css';
 
 export default class MoreFlavorsDesktop extends Component {
@@ -97,13 +100,23 @@ export default class MoreFlavorsDesktop extends Component {
                         <div className={className} key={category.sys.id}>
                             <div className={`${styles.accent} ${styles.accentLeft}`}>
                                 <img
-                                    src={category.fields.appetizerImages[0].fields.file.url}
+                                    src={image(
+                                        category.fields.appetizerImages[0].fields.file.url,
+                                        {
+                                            width: 400
+                                        }
+                                    )}
                                     alt="Flavor Accent"
                                 />
                             </div>
                             <div className={`${styles.accent} ${styles.accentRight}`}>
                                 <img
-                                    src={category.fields.appetizerImages[1].fields.file.url}
+                                    src={image(
+                                        category.fields.appetizerImages[1].fields.file.url,
+                                        {
+                                            width: 400
+                                        }
+                                    )}
                                     alt="Flavor Accent"
                                 />
                             </div>
@@ -160,13 +173,23 @@ export default class MoreFlavorsDesktop extends Component {
                                 <div className={`${styles.panel} ${styles.hasProducts}`}>
                                     <div className={`${styles.accent} ${styles.accentLeft}`}>
                                         <img
-                                          src={category.fields.appetizerImages[0].fields.file.url}
+                                          src={image(
+                                              category.fields.appetizerImages[0].fields.file.url,
+                                              {
+                                                  width: 400
+                                              }
+                                          )}
                                           alt="Flavor Accent"
                                         />
                                     </div>
                                     <div className={`${styles.accent} ${styles.accentRight}`}>
                                         <img
-                                          src={category.fields.appetizerImages[1].fields.file.url}
+                                          src={image(
+                                              category.fields.appetizerImages[1].fields.file.url,
+                                              {
+                                                  width: 400
+                                              }
+                                          )}
                                           alt="Flavor Accent"
                                         />
                                     </div>
