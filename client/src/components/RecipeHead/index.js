@@ -12,7 +12,7 @@ import Twitter from 'images/icons/twitter.svg';
 
 import GlutenFree from 'images/icons/gluten-free.svg';
 import HeartHealthy from 'images/icons/heart-healthy.svg';
-import Kosher from 'images/icons/kosher.svg';
+import Kosher from 'images/icons/kosher-k.svg';
 import ReducedSugar from 'images/icons/reduced-sugar.svg';
 import Unsweetened from 'images/icons/unsweetened.svg';
 import Vegan from 'images/icons/vegan.svg';

@@ -58,9 +58,14 @@
     & svg {
         width: 24px;
         height: 24px;
+        margin-top: -3px;
         margin-right: 0.5rem;
         fill: var(--c--gray);
         vertical-align: middle;
+    }
+
+    & .kosherUDairy svg {
+        width: 34px;
     }
 }
 

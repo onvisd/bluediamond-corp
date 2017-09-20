@@ -7,9 +7,10 @@ import styles from './styles.module.css';
 
 import GlutenFree from 'images/icons/gluten-free.svg';
 import HeartHealthy from 'images/icons/heart-healthy.svg';
-import Kosher from 'images/icons/kosher.svg';
-import ReducedSugar from 'images/icons/reduced-sugar.svg';
-import Unsweetened from 'images/icons/unsweetened.svg';
+import KosherK from 'images/icons/kosher-k.svg';
+import KosherU from 'images/icons/kosher-u.svg';
+import KosherUDairy from 'images/icons/kosher-u-dairy.svg';
+import NonGMO from 'images/icons/non-gmo.svg';
 import Vegan from 'images/icons/vegan.svg';
 
 import Button from '../Button';
@@ -44,13 +45,35 @@ export default class StoreProductHead extends Component {
         reviews: PropTypes.object
     }
 
-    metaIcons = {
-        GlutenFree,
-        HeartHealthy,
-        Kosher,
-        ReducedSugar,
-        Unsweetened,
-        Vegan
+    certMap = {
+        'OU Kosher Dairy Cert': {
+            label: 'Kosher',
+            file: KosherUDairy
+        },
+        'OU Kosher Cert': {
+            label: 'Kosher',
+            file: KosherU
+        },
+        'Circle K (OK Kosher Certification)': {
+            label: 'Kosher',
+            file: KosherK
+        },
+        'Gluten Free GFCO': {
+            label: 'Gluten Free',
+            file: GlutenFree
+        },
+        'Non GMO Project Verified': {
+            label: 'Non GMO',
+            file: NonGMO
+        },
+        'American Heart Association Certified': {
+            label: 'Heart Healthy',
+            file: HeartHealthy
+        },
+        Vegan: {
+            label: 'Vegan',
+            file: Vegan
+        }
     }
 
     renderMarkup(field) {
@@ -74,28 +97,56 @@ export default class StoreProductHead extends Component {
     // Parse & render product meta from
     // tags with the preface `meta:`.
     renderMeta() {
-        const {tags} = this.props;
+        const {nutrition} = this.props;
 
-        const metaTags = [];
-        tags.map((tag) => {
-            const meta = tag.match(/meta:([\s\S]*)/igm);
-            const value = JSON.stringify(meta).split(':')[1];
-            if(meta) metaTags.push(value.replace('"]', ''));
+        if(!nutrition || !nutrition.otherSection)
+            return;
+
+        const certs = nutrition.otherSection.certifications.map((cert, idx) => {
+            const name = this.certMap[cert.name];
+
+            if(!name)
+                return;
+
+            const Icon = name.file;
+            const classNames = [];
+
+            if(cert.name === 'OU Kosher Dairy Cert')
+                classNames.push(styles.kosherUDairy);
+
+            return (
+                <span key={`metaItem${idx}`} className={classNames}>
+                    {Icon && <Icon />} {name.label}
+                </span>
+            );
         });
 
-        if(!metaTags)
+        let claims = [];
+
+        if(nutrition.otherSection.claims) {
+            claims = nutrition.otherSection.claims.claims.map((claim, idx) => {
+                const name = this.certMap[claim.name];
+
+                if(!name)
+                    return;
+
+                const Icon = name.file;
+
+                return (
+                    <span key={`metaItem${idx}`}>
+                        {Icon && <Icon />} {name.label}
+                    </span>
+                );
+            });
+        }
+
+        if(!certs.length && !claims.length)
             return;
 
         return (
             <div className={styles.meta}>
-                {metaTags.filter((tag) => tag !== 'N/A').map((tag, i) => {
-                    const Icon = this.metaIcons[tag.replace(' ', '')];
-                    return (
-                        <span key={`metaItem${i}`}>
-                            {Icon && <Icon />} {tag}
-                        </span>
-                    );
-                })}
+                {certs}
+                {claims}
             </div>
         );
     }
@@ -182,7 +233,7 @@ export default class StoreProductHead extends Component {
     }
 
     render() {
-        const {title, ingredients, nutrition} = this.props;
+        const {title, ingredients, nutrition, productType} = this.props;
 
         const {quantity, price} = this.state;
 
@@ -193,6 +244,7 @@ export default class StoreProductHead extends Component {
             <section className={styles.container}>
                 {this.renderImages()}
                 <div className={styles.productInfo}>
+                    {productType && (<h3>{productType}</h3>)}
                     <h2 className={styles.title}>{title}</h2>
                     {reviews.length > 0 &&
                         <ProductStarRating
