@@ -46,12 +46,31 @@ export default function(parameters) {
             // (this `head()` function is optional and is not required)
             // (its gonna work with or without this `head()` parameter)
             head() {
+                const output = [];
+
                 if(process.env.NODE_ENV === 'development') {
                     // `devtools` just tampers with CSS styles a bit.
                     // It's not required for operation and can be omitted.
                     // It just removes the "flash of unstyled content" in development mode.
-                    return `<script>${devtools({...parameters, entry: 'main'})}</script>`;
+                    output.push(`<script>${devtools({...parameters, entry: 'main'})}</script>`);
                 }
+
+                // For Pingdom RUM
+                output.push(
+                    `<script>
+                    var _prum = [['id', '59c5525f8d4ea3c8367b23c6'],
+                                 ['mark', 'firstbyte', (new Date()).getTime()]];
+                    (function() {
+                        var s = document.getElementsByTagName('script')[0]
+                          , p = document.createElement('script');
+                        p.async = 'async';
+                        p.src = '//rum-static.pingdom.net/prum.min.js';
+                        s.parentNode.insertBefore(p, s);
+                    })();
+                    </script>`
+                );
+
+                return output.join('\n');
             },
 
             // Isomorphic CSS flag
