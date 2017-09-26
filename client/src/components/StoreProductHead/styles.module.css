@@ -85,12 +85,17 @@
     @media (--mq-gt-s) {
         display: flex;
     }
+}
 
-    & .options {
-        @media (--mq-gt-s) {
-            padding-right: 2.75rem;
-            flex: 2;
-        }
+.options {
+    @media (--mq-gt-s) {
+        padding-right: 2.75rem;
+        flex: 2;
+    }
+
+    &.single {
+        display: flex;
+        align-items: center;
     }
 }
 

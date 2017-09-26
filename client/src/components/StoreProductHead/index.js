@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import ReactGA from 'react-ga';
+import classnames from 'classnames';
 
 import {connector, addToCart} from 'state/checkout';
 import styles from './styles.module.css';
@@ -166,19 +167,30 @@ export default class StoreProductHead extends Component {
         const {variants} = this.props;
 
         return (
-            <div className={styles.options}>
-                <div className="form--select">
-                    <select onChange={this.handleSelect} name="productSizeOption">
-                        {variants.map((variant) =>
-                            <option
-                                key={`variant${variant.node.id}`}
-                                value={variant.node.id}
-                            >
-                                {variant.node.title}
-                            </option>
-                        )}
-                    </select>
-                </div>
+            <div className={classnames(styles.options, variants.length === 1 && styles.single)}>
+                {variants.length > 1
+                    ? (
+                        <div className="form--select">
+                            <select onChange={this.handleSelect} name="productSizeOption">
+                                {variants.map((variant) =>
+                                    <option
+                                        key={`variant${variant.node.id}`}
+                                        value={variant.node.id}
+                                    >
+                                        {variant.node.title}
+                                    </option>
+                                )}
+                            </select>
+                        </div>
+                    )
+                    : (
+                        <div>{
+                            variants[0].node.title === 'Default Title'
+                                ? ''
+                                : variants[0].node.title
+                        }</div>
+                    )
+                }
             </div>
         );
     }

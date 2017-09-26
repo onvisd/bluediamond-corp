@@ -190,7 +190,7 @@ textarea {
         font-size: var(--t--size-s);
         border: 1px solid var(--c--gray-light);
         border-radius: var(--l--border-radius);
-        color: var(--c--gray);
+        color: var(--c--black);
         outline: none;
         appearance: none;
 
