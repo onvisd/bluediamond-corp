@@ -24,9 +24,9 @@ export default class StoreProduct extends Component {
         const {product} = this.props;
 
         ReactGA.plugin.execute('ec', 'addProduct', {
-            id: product.handle,
-            name: product.title,
-            brand: product.productType
+            id: product.product.handle,
+            name: product.product.title,
+            brand: product.product.productType
         });
 
         ReactGA.plugin.execute('ec', 'setAction', 'detail');
@@ -43,23 +43,23 @@ export default class StoreProduct extends Component {
 
         return (
             <section className="content">
-                <Title>{`${product.title} | Store`}</Title>
+                <Title>{`${product.product.title} | Store`}</Title>
                 <Meta>{[
                     {
                         property: 'og:title',
-                        content: product.title
+                        content: product.product.title
                     },
                     {
                         property: 'og:description',
-                        content: product.descriptionHtml.replace(/<[^>]*>/g, '')
+                        content: product.product.descriptionHtml.replace(/<[^>]*>/g, '')
                     },
                     {
                         property: 'og:image',
-                        content: product.images.edges[0].node.src
+                        content: product.product.images.edges[0].node.src
                     }
                 ]}</Meta>
                 <div className={styles.back}>
-                    <Link className={styles.backLink} href="/store">Continue Shopping</Link>
+                    <Link className={styles.backLink} to="/store">Continue Shopping</Link>
                 </div>
                 <StoreProductHead data={product} />
                 {related.length > 0 &&
@@ -69,6 +69,7 @@ export default class StoreProduct extends Component {
                             {related.map((card) =>
                                 <StoreProductCard
                                     data={card.node}
+                                    images={product.images[card.node.images.edges[0].node.id]}
                                     key={`card${card.node.id}`}
                                 />
                             )}

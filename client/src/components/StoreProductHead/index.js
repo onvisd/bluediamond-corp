@@ -83,14 +83,20 @@ export default class StoreProductHead extends Component {
 
     // Render product images
     renderImages() {
-        const {title, images} = this.props;
+        const {title, image} = this.props;
 
         return (
             <div className={styles.images}>
-                {images.map((image, i) => {
-                    if(i <= 0) // only show one photo until design approves multi-images
-                        return <img key={`productImage${i}`} src={image.node.src} alt={title} />;
-                })}
+                <img
+                    src={image[256]}
+                    srcSet={`
+                        ${image[256]},
+                        ${image[512]} 1.5x,
+                        ${image[1024]} 2x,
+                        ${image[2048]} 3x
+                    `}
+                    alt={title}
+                />
             </div>
         );
     }

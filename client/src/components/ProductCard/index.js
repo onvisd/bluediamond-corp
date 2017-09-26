@@ -9,20 +9,31 @@ export default class ProductCard extends Component {
         type: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         slug: PropTypes.string.isRequired,
-        imageFile: PropTypes.string.isRequired,
+        images: PropTypes.object.isRequired,
         imageAlt: PropTypes.string.isRequired,
         onClick: PropTypes.func
     }
 
     render() {
-        const {type, title, slug, imageFile, imageAlt, onClick} = this.props;
+        const {type, title, slug, images, imageAlt, onClick} = this.props;
 
         return (
             <div className={styles.container}>
-                <Link href={slug} onClick={onClick}>
+                <Link to={slug} onClick={onClick}>
                     <div className={styles.image}>
-                        {imageFile
-                            ? (<img src={imageFile} alt={imageAlt} />)
+                        {images
+                            ? (
+                                <img
+                                    src={images[128]}
+                                    srcSet={`
+                                        ${images[128]},
+                                        ${images[256]} 1.5x,
+                                        ${images[512]} 2x,
+                                        ${images[1024]} 3x
+                                    `}
+                                    alt={imageAlt}
+                                />
+                            )
                             : 'Not Available'
                         }
                     </div>

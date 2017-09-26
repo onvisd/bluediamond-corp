@@ -17,6 +17,8 @@
 
     & img {
         max-height: 540px;
+        min-height: 50%;
+        max-width: 90%;
     }
 
     @media (--mq-gt-s) {

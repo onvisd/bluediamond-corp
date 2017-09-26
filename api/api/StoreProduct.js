@@ -1,8 +1,14 @@
 import axios from 'axios';
 import gql from 'graphql-tag';
+import ImgixClient from 'imgix-core-js';
 
 import config from '../../config';
 import logger from '../services/logger';
+
+const imgixClient = new ImgixClient({
+    host: config.imgix.host,
+    secureURLToken: config.imgix.secureURLToken
+});
 
 export default (api, {apolloClient}) => {
     const getProducts = () =>
@@ -225,9 +231,28 @@ export default (api, {apolloClient}) => {
     api.get('/store/products', async (req, res) => {
         try {
             const products = await getProducts();
+            const images = {};
+
+            products.forEach((product) => {
+                product.node.images.edges.forEach((image) => {
+                    if(!images[image.node.id])
+                        images[image.node.id] = {};
+
+                    [128, 256, 512, 1024, 1536, 2048].map((size) => {
+                        images[image.node.id][size] = imgixClient.buildURL(image.node.src, {
+                            'max-w': size,
+                            'max-h': size,
+                            'min-w': size / 2,
+                            'min-h': size / 2,
+                            fit: 'fill',
+                            bg: 'fff'
+                        });
+                    });
+                });
+            });
 
             if(products)
-                res.status(200).send(products);
+                res.status(200).send({products, images});
             else
                 res.status(401).send({message: 'No products found!'});
         } catch (err) {
@@ -239,13 +264,14 @@ export default (api, {apolloClient}) => {
 
     api.get('/store/product/:slug', async (req, res) => {
         try {
-            const theProduct = await getProduct(req.params.slug);
+            const productData = await getProduct(req.params.slug);
+            const images = {};
 
-            if(theProduct) {
-                const product = {...theProduct};
-                const tags = product.tags;
+            if(productData) {
+                const product = {product: productData};
+                const tags = productData.tags;
                 const productTags = JSON.stringify(tags);
-                const productType = product.productType;
+                const productType = productData.productType;
 
                 const getLabel = (str) => str.match(/smartLabel:(\d*)/)[1];
                 const getProductId = (str) => str.match(/id:(\d*)/)[1];
@@ -254,10 +280,10 @@ export default (api, {apolloClient}) => {
                     const smartLabelId = getLabel(productTags);
                     if(smartLabelId) {
                         const smartLabel = await getSmartLabel(smartLabelId);
-                        const amendSmartLabel = typeof smartLabel === 'string'
+                        const smartLabelData = typeof smartLabel === 'string'
                             ? {error: smartLabel}
                             : smartLabel;
-                        product.smartLabel = {...amendSmartLabel};
+                        product.smartLabel = smartLabelData;
                     } else {
                         product.smartLabel = {error: 'No SmartLabel ID'};
                     }
@@ -266,16 +292,55 @@ export default (api, {apolloClient}) => {
                 if(tags.length > 0 && /id:(\d*)/.test(productTags)) {
                     const productId = getProductId(productTags);
                     const yotpo = await getYotpo(productId);
-                    product.reviews = {...yotpo.response};
+                    product.reviews = yotpo.response;
                 }
 
                 if(productType) {
                     const productsByType = await getProductsByType(productType);
-                    const amendRelated = typeof productsByType === 'string'
+                    const relatedProductsData = typeof productsByType === 'string'
                         ? {error: productsByType}
                         : productsByType;
-                    product.related = [...amendRelated];
+                    product.related = relatedProductsData;
                 }
+
+                if(product.related && !product.related.error) {
+                    product.related.forEach((prod) => {
+                        prod.node.images.edges.forEach((image) => {
+                            if(!images[image.node.id])
+                                images[image.node.id] = {};
+
+                            [128, 256, 512, 1024, 1536, 2048].map((size) => {
+                                images[image.node.id][size] = imgixClient.buildURL(
+                                    image.node.src, {
+                                        'max-w': size,
+                                        'max-h': size,
+                                        'min-w': size / 2,
+                                        'min-h': size / 2,
+                                        fit: 'fill',
+                                        bg: 'fff'
+                                    }
+                                );
+                            });
+                        });
+                    });
+                }
+
+                productData.images.edges.forEach((image) => {
+                    if(!images[image.node.id])
+                        images[image.node.id] = {};
+
+                    [128, 256, 512, 1024, 1536, 2048].map((size) => {
+                        images[image.node.id][size] = imgixClient.buildURL(image.node.src, {
+                            'max-w': size,
+                            'max-h': size,
+                            'min-w': size / 2,
+                            'min-h': size / 2,
+                            fit: 'fill',
+                            bg: 'fff'
+                        });
+                    });
+                });
+                product.images = images;
 
                 res.cache(true).send(product);
             } else {

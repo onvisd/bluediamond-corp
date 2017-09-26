@@ -50,5 +50,9 @@ export default {
         sentry: {
             url: process.env.SENTRY_URL
         }
+    },
+    imgix: {
+        host: process.env.IMGIX_HOST,
+        secureURLToken: process.env.IMGIX_SECURE_URL_TOKEN
     }
 };

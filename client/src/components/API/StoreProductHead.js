@@ -5,34 +5,36 @@ import StorePrdctHeadCmpnt from '../StoreProductHead';
 export default class StoreProductHead extends Component {
     static propTypes = {
         data: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            productType: PropTypes.string.isRequired, // eslint-disable-line
-            descriptionHtml: PropTypes.string.isRequired, // eslint-disable-line
-            handle: PropTypes.string.isRequired,
-            tags: PropTypes.array.isRequired,
-            variants: PropTypes.shape({
-                edges: PropTypes.object({
-                    node: PropTypes.shape({
-                        id: PropTypes.number,
-                        title: PropTypes.string,
-                        weight: PropTypes.number,
-                        price: PropTypes.string
+            product: PropTypes.shape({
+                id: PropTypes.string.isRequired,
+                title: PropTypes.string.isRequired,
+                productType: PropTypes.string.isRequired, // eslint-disable-line
+                descriptionHtml: PropTypes.string.isRequired, // eslint-disable-line
+                handle: PropTypes.string.isRequired,
+                tags: PropTypes.array.isRequired,
+                variants: PropTypes.shape({
+                    edges: PropTypes.object({
+                        node: PropTypes.shape({
+                            id: PropTypes.number,
+                            title: PropTypes.string,
+                            weight: PropTypes.number,
+                            price: PropTypes.string
+                        })
                     })
-                })
-            }).isRequired,
-            options: PropTypes.arrayOf(PropTypes.shape({
-                id: PropTypes.string,
-                name: PropTypes.string,
-                values: PropTypes.array
-            })).isRequired,
-            images: PropTypes.shape({
-                edges: PropTypes.object({
-                    node: PropTypes.shape({
-                        src: PropTypes.string
+                }).isRequired,
+                options: PropTypes.arrayOf(PropTypes.shape({
+                    id: PropTypes.string,
+                    name: PropTypes.string,
+                    values: PropTypes.array
+                })).isRequired,
+                images: PropTypes.shape({
+                    edges: PropTypes.object({
+                        node: PropTypes.shape({
+                            src: PropTypes.string
+                        })
                     })
-                })
-            }).isRequired,
+                }).isRequired
+            }),
             smartLabel: PropTypes.shape({
                 warnings: PropTypes.string,
                 rawIngredients: PropTypes.string,
@@ -72,7 +74,8 @@ export default class StoreProductHead extends Component {
                         display_name: PropTypes.string // eslint-disable-line
                     })
                 }))
-            })
+            }),
+            images: PropTypes.object
         })
     }
 
@@ -83,15 +86,15 @@ export default class StoreProductHead extends Component {
 
         return (
             <StorePrdctHeadCmpnt
-                handle={data.handle}
-                title={data.title}
-                productType={data.productType}
-                tags={data.tags}
-                variants={data.variants.edges}
-                options={data.options}
-                images={data.images.edges}
-                image={data.images.edges[0].node.src}
-                description={data.descriptionHtml}
+                handle={data.product.handle}
+                title={data.product.title}
+                productType={data.product.productType}
+                tags={data.product.tags}
+                variants={data.product.variants.edges}
+                options={data.product.options}
+                images={data.product.images.edges}
+                image={data.images[data.product.images.edges[0].node.id]}
+                description={data.product.descriptionHtml}
                 nutrition={smartLabel && smartLabel}
                 ingredients={ingredients}
                 reviews={data.reviews}

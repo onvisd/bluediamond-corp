@@ -241,7 +241,7 @@ export default class Store extends Component {
         const {products, responsive} = this.props;
         const {visibleCardCount, filter, sort, search} = this.props.query;
 
-        let cards = products;
+        let cards = products.products;
 
         if(filter || search)
             cards = cards.filter(this.filterCards);
@@ -277,7 +277,7 @@ export default class Store extends Component {
                             <p className={`t--type-incidental ${styles.refine}`}>Refine by:</p>
                             <ProductFilter
                                 title="Gifts"
-                                products={products}
+                                products={products.products}
                                 filter="collections"
                                 query="values"
                                 initState={filter.categories}
@@ -286,7 +286,7 @@ export default class Store extends Component {
                             />
                             <ProductFilter
                                 title="Products"
-                                products={products}
+                                products={products.products}
                                 filter="productType"
                                 initState={filter.brands}
                                 onClick={this.handleFilter('brands')}
@@ -294,7 +294,7 @@ export default class Store extends Component {
                             />
                             <ProductFilter
                                 title="Flavor"
-                                products={products}
+                                products={products.products}
                                 filter="tags"
                                 query="flavor"
                                 initState={filter.types}
@@ -303,7 +303,7 @@ export default class Store extends Component {
                             />
                             <ProductFilter
                                 title="Size"
-                                products={products}
+                                products={products.products}
                                 filter="options"
                                 query="values"
                                 initState={filter.sizes}
@@ -358,6 +358,10 @@ export default class Store extends Component {
                                 {cards.slice(0, visibleCardCount).map((card) => (
                                     <StoreProductCard
                                         data={card.node}
+                                        images={card.node.images.edges.length
+                                            ? products.images[card.node.images.edges[0].node.id]
+                                            : null
+                                        }
                                         key={`card${card.node.id}`}
                                         onClick={() => this.trackProduct(card)}
                                     />

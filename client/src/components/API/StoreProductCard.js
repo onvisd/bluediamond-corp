@@ -18,11 +18,12 @@ export default class StoreProductCard extends Component {
                 })
             }).isRequired
         }),
+        images: PropTypes.object.isRequired,
         onClick: PropTypes.func
     }
 
     render() {
-        const {data, onClick} = this.props;
+        const {data, images, onClick} = this.props;
 
         return (
             <ProductCardComponent
@@ -30,7 +31,7 @@ export default class StoreProductCard extends Component {
                 type={data.productType}
                 title={data.title}
                 slug={`/store/product/${data.handle}`}
-                imageFile={data.images.edges.length ? data.images.edges[0].node.src : null}
+                images={images}
                 imageAlt={data.title}
                 onClick={onClick}
             />
