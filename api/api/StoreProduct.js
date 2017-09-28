@@ -240,11 +240,9 @@ export default (api, {apolloClient}) => {
 
                     [128, 256, 512, 1024, 1536, 2048].map((size) => {
                         images[image.node.id][size] = imgixClient.buildURL(image.node.src, {
-                            'max-w': size,
-                            'max-h': size,
-                            'min-w': size / 2,
-                            'min-h': size / 2,
-                            fit: 'fill',
+                            w: size,
+                            h: size,
+                            fit: 'max',
                             bg: 'fff'
                         });
                     });
@@ -312,11 +310,9 @@ export default (api, {apolloClient}) => {
                             [128, 256, 512, 1024, 1536, 2048].map((size) => {
                                 images[image.node.id][size] = imgixClient.buildURL(
                                     image.node.src, {
-                                        'max-w': size,
-                                        'max-h': size,
-                                        'min-w': size / 2,
-                                        'min-h': size / 2,
-                                        fit: 'fill',
+                                        w: size,
+                                        h: size,
+                                        fit: 'max',
                                         bg: 'fff'
                                     }
                                 );
@@ -331,11 +327,9 @@ export default (api, {apolloClient}) => {
 
                     [128, 256, 512, 1024, 1536, 2048].map((size) => {
                         images[image.node.id][size] = imgixClient.buildURL(image.node.src, {
-                            'max-w': size,
-                            'max-h': size,
-                            'min-w': size / 2,
-                            'min-h': size / 2,
-                            fit: 'fill',
+                            w: size,
+                            h: size,
+                            fit: 'max',
                             bg: 'fff'
                         });
                     });
