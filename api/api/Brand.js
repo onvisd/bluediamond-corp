@@ -52,6 +52,10 @@ export default (api, {contentful}) => {
     api.get('/brands/:slug', async (req, res) => {
         try {
             const brand = await getBrand(req.params.slug);
+
+            if(!brand)
+                return res.status(404).send({ok: false, error: 'Brand not found'});
+
             const products = await getProducts(brand.name);
             const randomProducts = await getRandomProducts();
 
