@@ -16,7 +16,10 @@ const config = {
     // like the public user-facing part and the private "admin" part.
     entry: {
         // The "main" entry
-        main: './src/app.entry.js'
+        main: './src/app.entry.js',
+
+        // Entry point for Product Locator add-on code
+        'product-locator': './src/productLocator/entry.js'
     },
 
     output: {
