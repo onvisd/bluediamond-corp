@@ -243,7 +243,8 @@ export default (api, {apolloClient}) => {
                             w: size,
                             h: size,
                             fit: 'max',
-                            bg: 'fff'
+                            bg: 'fff',
+                            auto: 'compress'
                         });
                     });
                 });
@@ -313,7 +314,8 @@ export default (api, {apolloClient}) => {
                                         w: size,
                                         h: size,
                                         fit: 'max',
-                                        bg: 'fff'
+                                        bg: 'fff',
+                                        auto: 'compress'
                                     }
                                 );
                             });
@@ -330,7 +332,8 @@ export default (api, {apolloClient}) => {
                             w: size,
                             h: size,
                             fit: 'max',
-                            bg: 'fff'
+                            bg: 'fff',
+                            auto: 'compress'
                         });
                     });
                 });
