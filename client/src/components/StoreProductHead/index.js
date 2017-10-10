@@ -88,10 +88,9 @@ export default class StoreProductHead extends Component {
         return (
             <div className={styles.images}>
                 <img
-                    src={image[256]}
+                    src={image[512]}
                     srcSet={`
-                        ${image[256]},
-                        ${image[512]} 1.5x,
+                        ${image[512]},
                         ${image[1024]} 2x,
                         ${image[2048]} 3x
                     `}
