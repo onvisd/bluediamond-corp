@@ -9,6 +9,7 @@ global.fetch = fetch;
 
 import config from '../../config';
 import {getCached} from '../services/cache';
+import '../services/retry';
 
 export default () => {
     const api = Router();

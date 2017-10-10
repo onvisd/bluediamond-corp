@@ -195,7 +195,9 @@ export default (api, {apolloClient}) => {
             `https://api.yotpo.com/v1/widget/${config.yotpo.key}` +
             `/products/${id}/reviews.json`,
             {
-                timeout: 3000
+                timeout: 3000,
+                retry: 5,
+                retryDelay: 1000
             }
         )
         .then((response) => response.data)
