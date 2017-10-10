@@ -33,7 +33,7 @@ export default (api, {apolloClient}) => {
                                             }
                                         }
                                     }
-                                    options(first: 3) {
+                                    options(first: 250) {
                                         id
                                         name
                                         values
@@ -47,7 +47,7 @@ export default (api, {apolloClient}) => {
                                             }
                                         }
                                     }
-                                    variants(first: 3) {
+                                    variants(first: 250) {
                                         edges {
                                             node {
                                                 id
@@ -91,7 +91,7 @@ export default (api, {apolloClient}) => {
                                             }
                                         }
                                     }
-                                    options(first: 3) {
+                                    options(first: 250) {
                                         id
                                         name
                                         values
@@ -105,7 +105,7 @@ export default (api, {apolloClient}) => {
                                             }
                                         }
                                     }
-                                    variants(first: 3) {
+                                    variants(first: 250) {
                                         edges {
                                             node {
                                                 id
@@ -147,7 +147,7 @@ export default (api, {apolloClient}) => {
                                     }
                                 }
                             }
-                            options(first: 25) {
+                            options(first: 250) {
                                 id
                                 name
                                 values
@@ -161,7 +161,7 @@ export default (api, {apolloClient}) => {
                                     }
                                 }
                             }
-                            variants(first: 4) {
+                            variants(first: 250) {
                                 edges {
                                     node {
                                         id
