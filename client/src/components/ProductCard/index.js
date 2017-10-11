@@ -24,10 +24,9 @@ export default class ProductCard extends Component {
                         {images
                             ? (
                                 <img
-                                    src={images[128]}
+                                    src={images[256]}
                                     srcSet={`
-                                        ${images[128]},
-                                        ${images[256]} 1.5x,
+                                        ${images[256]},
                                         ${images[512]} 2x,
                                         ${images[1024]} 3x
                                     `}
