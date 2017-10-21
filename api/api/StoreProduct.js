@@ -26,7 +26,7 @@ export default (api, {apolloClient}) => {
                                     vendor
                                     title
                                     descriptionHtml
-                                    collections(first: 3) {
+                                    collections(first: 250) {
                                         edges {
                                             node {
                                                 title
@@ -84,7 +84,7 @@ export default (api, {apolloClient}) => {
                                     vendor
                                     title
                                     descriptionHtml
-                                    collections(first: 3) {
+                                    collections(first: 250) {
                                         edges {
                                             node {
                                                 title
@@ -140,7 +140,7 @@ export default (api, {apolloClient}) => {
                             vendor
                             title
                             descriptionHtml
-                            collections(first: 3) {
+                            collections(first: 250) {
                                 edges {
                                     node {
                                         title

@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 export default class ProductFilter extends Component {
     state = {
-        visibleOptionCount: 3,
+        visibleOptionCount: 10,
         totalOptions: 0,
         clicked: false,
         expanded: false
@@ -135,7 +135,7 @@ export default class ProductFilter extends Component {
         e.preventDefault();
 
         this.setState((state) => ({
-            visibleOptionCount: -1,
+            visibleOptionCount: this.state.totalOptions,
             clicked: !state.clicked
         }));
     }
