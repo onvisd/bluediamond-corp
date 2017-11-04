@@ -3,8 +3,13 @@ import {connect} from 'react-redux';
 import {preload, Link} from 'react-isomorphic-render';
 import ReactGA from 'react-ga';
 
+import {connector as navConnector, setNavigationStyle} from 'state/navigation';
+
 import {getStoreProduct} from 'state/storeProduct';
 import {connector as storeProductConnector} from 'state/storeProduct';
+
+import {setStoreNavigation} from 'state/storeNavigation';
+import {connector as storeNavigationConnector} from 'state/storeNavigation';
 
 import Title from 'components/Title';
 import Meta from 'components/Meta';
@@ -16,8 +21,12 @@ import styles from './styles.module.css';
 
 @preload(({dispatch, parameters}) => dispatch(getStoreProduct(parameters.slug)))
 @connect(
-    (state) => ({...storeProductConnector(state.storeProduct)}),
-    {getStoreProduct}
+    (state) => ({
+        ...navConnector(state.navigation),
+        ...storeProductConnector(state.storeProduct),
+        ...storeNavigationConnector(state.storeNavigation)
+    }),
+    {getStoreProduct, setNavigationStyle, setStoreNavigation}
 )
 export default class StoreProduct extends Component {
     componentDidMount() {
@@ -30,6 +39,23 @@ export default class StoreProduct extends Component {
         });
 
         ReactGA.plugin.execute('ec', 'setAction', 'detail');
+    }
+
+    componentWillMount() {
+        this.props.setStoreNavigation(true);
+        this.props.setNavigationStyle({className: 'brand--dark'});
+    }
+
+    componentWillUpdate(nextProps) {
+        if(!nextProps.isStorePage)
+            this.props.setStoreNavigation(true);
+        if(!nextProps.navigation.style.className)
+            this.props.setNavigationStyle({className: 'brand--dark'});
+    }
+
+    componentWillUnmount() {
+        this.props.setStoreNavigation(false);
+        this.props.setNavigationStyle({});
     }
 
     render() {

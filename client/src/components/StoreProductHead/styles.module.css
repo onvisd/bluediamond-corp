@@ -5,6 +5,10 @@
 .container {
     @mixin container;
 
+    @media (--mq-s) {
+        padding: 4rem 1rem;
+    }
+
     @media (--mq-gt-s) {
         display: flex;
         padding: 3rem 0 4rem;

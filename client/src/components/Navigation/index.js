@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 import DesktopNav from './DesktopNav';
+import StoreDesktopNav from './StoreDesktopNav';
 import MobileNav from './MobileNav';
 
 import Growers from 'images/icons/growers-site.svg';
@@ -9,7 +10,8 @@ import GlobalIngredients from 'images/icons/global-ingredients.svg';
 import International from 'images/icons/international-site.svg';
 
 @connect((state) => ({
-    responsive: state.responsive
+    responsive: state.responsive,
+    storeNavigation: state.storeNavigation
 }))
 export default class Navigation extends Component {
     static propTypes = {
@@ -53,15 +55,28 @@ export default class Navigation extends Component {
     }
 
     render() {
-        const {responsive, brands, company} = this.props;
+        const {responsive, storeNavigation, brands, company} = this.props;
+        const {isStorePage} = storeNavigation;
 
-        let nav = (
-            <header>
-                <DesktopNav
+        let desktopNav =
+            <DesktopNav
+                navData={this.navData}
+                brands={brands}
+                company={company}
+            />;
+        if(isStorePage) {
+            desktopNav =
+                <StoreDesktopNav
                     navData={this.navData}
                     brands={brands}
                     company={company}
-                />
+                />;
+        }
+
+
+        let nav = (
+            <header>
+                {desktopNav}
                 <MobileNav
                     navData={this.navData}
                     brands={brands}
@@ -80,17 +95,14 @@ export default class Navigation extends Component {
                         navData={this.navData}
                         brands={brands}
                         company={company}
+                        isStorePage={isStorePage}
                     />
                 </header>
             );
         } else if(!responsive.medium && !responsive.small) { // eslint-disable-line
             nav = (
                 <header>
-                    <DesktopNav
-                        navData={this.navData}
-                        brands={brands}
-                        company={company}
-                    />
+                    {desktopNav}
                 </header>
             );
         }

@@ -28,7 +28,6 @@
     right: 0;
     left: 0;
     height: 60px;
-    margin-top: 60px;
     padding: 0 0.5rem 0 1rem;
     z-index: 9999;
     align-items: center;
@@ -36,66 +35,16 @@
     background-color: var(--c--white);
     border-bottom: 2px solid var(--c--gray-lighter);
     pointer-events: auto;
-
-    &.brand--dark {
-        background-color: var(--c--blue-darkest);
-        border-bottom: 2px solid var(--c--blue-darkest);
-    }
-}
-
-.storeGoHomeHead {
-    display: flex;
-    position: fixed;
-    right: 0;
-    left: 0;
-    height: 60px;
-    padding: 0 0.5rem 0 1rem;
-    z-index: 9999;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--c--blue);
-    pointer-events: auto;
-
-    & a {
-        font-weight: var(--t--weight-bold);
-        color: var(--c--white);
-    }
-}
-
-.test {
-    position: absolute;
-    right: 0;
-    left: 0;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-.cart {
-    & svg {
-        &.brand--dark {
-            fill: var(--c--white);
-            vertical-align: middle;
-        }
-    }
 }
 
 .ecomm {
     z-index: var(--l--z-highest);
-
-    & .brand--dark {
-        fill: var(--c--white);
-    }
 
     & svg {
         width: 24px;
         height: 24px;
         fill: var(--c--black);
         vertical-align: middle;
-
-        &.brand--dark {
-            fill: var(--c--white);
-        }
 
         &:first-child {
             margin-right: 1rem;

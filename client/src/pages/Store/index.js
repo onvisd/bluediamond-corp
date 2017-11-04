@@ -4,6 +4,11 @@ import {preload} from 'react-isomorphic-render';
 import classnames from 'classnames';
 import ReactGA from 'react-ga';
 
+import {connector as navConnector, setNavigationStyle} from 'state/navigation';
+
+import {setStoreNavigation} from 'state/storeNavigation';
+import {connector as storeNavigationConnector} from 'state/storeNavigation';
+
 import {getStoreProducts} from 'state/storeProducts';
 import {connector as storeConnector} from 'state/storeProducts';
 
@@ -55,14 +60,33 @@ const escapeRegEx = (str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, 
 @connect(
     (state) => ({
         responsive: state.responsive,
+        ...navConnector(state.navigation),
         ...storeSearchConnector(state.storeSearch),
+        ...storeNavigationConnector(state.storeNavigation),
         ...storeConnector(state.store)
     }),
-    {setStoreSearch, getStoreProducts}
+    {setStoreSearch, getStoreProducts, setNavigationStyle, setStoreNavigation}
 )
 export default class Store extends Component {
     componentDidMount() {
         callFloodlight.load('4035228', 'fy18s0', 'store0');
+    }
+
+    componentWillMount() {
+        this.props.setStoreNavigation(true);
+        this.props.setNavigationStyle({className: 'brand--dark'});
+    }
+
+    componentWillUpdate(nextProps) {
+        if(!nextProps.isStorePage)
+            this.props.setStoreNavigation(true);
+        if(!nextProps.navigation.style.className)
+            this.props.setNavigationStyle({className: 'brand--dark'});
+    }
+
+    componentWillUnmount() {
+        this.props.setStoreNavigation(false);
+        this.props.setNavigationStyle({});
     }
 
     // Loads more products

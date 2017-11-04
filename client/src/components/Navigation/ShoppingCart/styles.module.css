@@ -4,8 +4,13 @@
 
 .cart {
     padding: 1rem 0;
+    color: var(--c--black);
     background-color: var(--c--white);
     text-align: center;
+
+    @media (--mq-lt-s) {
+        padding: 5rem 0 1rem;
+    }
 
     & h2 {
         font-size: var(--t--size-m);

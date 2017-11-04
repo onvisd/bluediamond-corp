@@ -10,6 +10,7 @@ export {default as home} from './home';
 export {default as contact} from './contact';
 export {default as craft} from './craft';
 export {default as store} from './storeProducts';
+export {default as storeNavigation} from './storeNavigation';
 export {default as storeSearch} from './storeSearch';
 export {default as storeProduct} from './storeProduct';
 export {default as manifesto} from './manifesto';

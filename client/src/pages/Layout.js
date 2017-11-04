@@ -10,6 +10,11 @@ import {
 } from '../state/navigation';
 
 import {
+    connector as storeNavigationConnector,
+    setStoreNavigation
+} from '../state/storeNavigation';
+
+import {
     connector as authConnector,
     getCustomer
 } from '../state/auth';
@@ -30,6 +35,7 @@ import sortByPriority from 'tools/sortByPriority';
 @preload(async ({dispatch}) => {
     await Promise.all([
         dispatch(getCustomer()),
+        dispatch(setStoreNavigation(false)),
         dispatch(setNavigationStyle({})),
         dispatch(getNavigationData())
     ]);
@@ -38,12 +44,14 @@ import sortByPriority from 'tools/sortByPriority';
     (state) => ({
         responsive: state.responsive,
         ...navConnector(state.navigation),
+        ...storeNavigationConnector(state.storeNavigation),
         ...authConnector(state.auth),
         ...checkoutConnector(state.checkout)
     }),
     {
         getCustomer,
         getNavigationData,
+        setStoreNavigation,
         setNavigationStyle,
         getCheckout
     }

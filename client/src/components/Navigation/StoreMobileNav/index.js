@@ -1,13 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {TrackDocument} from 'react-track';
 import TransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
 import ReactGA from 'react-ga';
 
 import {connector as authConnector} from 'state/auth';
-import {connector as navConnector} from 'state/navigation';
 
 import callFloodlight from 'tools/callFloodlight';
 
@@ -17,12 +15,9 @@ import Cart from 'images/icons/cart.svg';
 import styles from './styles.module.css';
 
 @connect(
-    (state) => ({
-        ...authConnector(state.auth),
-        ...navConnector(state.navigation)
-    })
+    (state) => ({...authConnector(state.auth)})
 )
-export default class MobileNav extends Component {
+export default class StoreMobileNav extends Component {
     static propTypes = {
         brands: PropTypes.array.isRequired,
         navData: PropTypes.object.isRequired,
@@ -74,14 +69,6 @@ export default class MobileNav extends Component {
         }
     }
 
-    trackDocument(children) {
-        return (
-            <TrackDocument formulas={[]}>
-                {children}
-            </TrackDocument>
-        );
-    }
-
     navigate = (card, transition, props) => {
         this.setState(() => ({
             transition,
@@ -99,50 +86,14 @@ export default class MobileNav extends Component {
     render() {
         const {navVisible, transition} = this.state;
         const {element, props} = this.state.activeCard;
-        const {brands, navData, company, navigation, auth, isStorePage} = this.props;
-        const navColor = navigation.style ? navigation.style.className : null;
+        const {brands, navData, company, auth} = this.props;
 
-        const cartButton =
-            <button
-                title="Cart"
-                className={styles.cart}
-                onClick={() => {
-                    if(navVisible) {
-                        this.toggleNav.hide();
-                    } else {
-                        this.toggleNav.show({
-                            element: this.cards.ShoppingCart,
-                            props: {
-                                key: 'Cart',
-                                onToggle: this.toggleNav,
-                                children: React.createElement(this.cards.FooterMobile)
-                            }
-                        });
-                    }
-                }}
-            >
-                <Cart className={styles[navColor]} />
-            </button>;
-
-        return this.trackDocument(() => (
+        return (
             <div className={classnames(styles.container, {
                 [styles.visible]: navVisible
             })}>
-                <div className={classnames(styles.storeGoHomeHead, {
-                    [styles.visible]: isStorePage
-                })}>
-                    <div className={styles.test}>
-                        <Link to="/">
-                            Go to Main Site
-                        </Link>
-                    </div>
-                </div>
-                <div className={classnames(styles.head, styles[navColor])}
-                     style={{
-                         marginTop: (scrollY < 60 && isStorePage) ? 60 - scrollY : 0
-                     }}
-                >
-                    <div className={classnames(styles.ecomm, styles[navColor])}>
+                <div className={styles.head}>
+                    <div className={styles.ecomm}>
                         {auth.authenticated
                             ? <Link to="/account/settings" title="Account"><User /></Link>
                             : (
@@ -151,44 +102,58 @@ export default class MobileNav extends Component {
                                     title="Sign in"
                                     onClick={this.trackSignIn}
                                 >
-                                    <User className={styles[navColor]} />
+                                    <User />
                                 </Link>
                             )
                         }
-                        {isStorePage
-                            ? null
-                            : cartButton
-                        }
+                        <button
+                            title="Cart"
+                            className={styles.cart}
+                            onClick={() => {
+                                this.toggleNav.show({
+                                    element: this.cards.ShoppingCart,
+                                    props: {
+                                        key: 'Cart',
+                                        onToggle: this.toggleNav,
+                                        children: React.createElement(this.cards.FooterMobile)
+                                    }
+                                });
+                            }}
+                        >
+                            <Cart />
+                        </button>
                     </div>
                     <div className={styles.logo}>
                         <Link to="/" onClick={this.toggleNav.hide}>
                             <img src={BDLogo} className={styles.logo} alt="Blue Diamond" />
                         </Link>
                     </div>
-                    {isStorePage
-                        ? (
-                            <div className={styles.toggleWrap}>
-                                {cartButton}
-                            </div>
-                        )
-                        : (
-                            <div
-                                className={styles.toggleWrap}
-                                onClick={() => {
-                                    if(navVisible)
-                                        this.toggleNav.hide();
-                                    else
-                                        this.toggleNav.show();
-                                }}
-                            >
-                                <div
-                                    className={classnames(styles.toggle, {
-                                        [styles.active]: navVisible
-                                    })}
-                                />
-                            </div>
-                        )
-                    }
+                    <div
+                        className={styles.toggleWrap}
+                        onClick={() => {
+                            if(navVisible)
+                                this.toggleNav.hide();
+                            else
+                                this.toggleNav.show();
+                        }}
+                    >
+                        <button
+                            title="Cart"
+                            className={styles.cart}
+                            onClick={() => {
+                                this.toggleNav.show({
+                                    element: this.cards.ShoppingCart,
+                                    props: {
+                                        key: 'Cart',
+                                        onToggle: this.toggleNav,
+                                        children: React.createElement(this.cards.FooterMobile)
+                                    }
+                                });
+                            }}
+                        >
+                            <Cart />
+                        </button>
+                    </div>
                 </div>
                 <div
                     className={classnames(styles.drawer, {
@@ -220,6 +185,6 @@ export default class MobileNav extends Component {
                     </TransitionGroup>
                 </div>
             </div>
-        ));
+        );
     }
 }
