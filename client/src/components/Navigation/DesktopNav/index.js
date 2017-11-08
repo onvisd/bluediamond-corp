@@ -24,6 +24,7 @@ import styles from './styles.module.css';
     })
 )
 export default class DesktopNav extends Component {
+
     static propTypes = {
         brands: PropTypes.array.isRequired,
         navData: PropTypes.object.isRequired,
@@ -108,67 +109,126 @@ export default class DesktopNav extends Component {
     render() {
         const {navVisible, cartVisible, productCards} = this.state;
         const {name, element, props} = this.state.activeCard;
-        const {brands, navData, company, navigation, auth, checkout} = this.props;
+        const {brands, navData, company, navigation, auth, checkout, isStorePage} = this.props;
         const navColor = navigation.style ? navigation.style.className : null;
 
+        let authButton =
+            <Link
+                to="/signin"
+                onClick={this.trackSignIn}
+            >
+                Sign In or Create Account
+                <User />
+            </Link>
+
+        if(auth.authenticated)
+            authButton = <Link to="/account/settings">Account <User /></Link>;
+
+
+        const secondaryNavLinks =
+            <ul
+                className={classnames(styles.secondaryNavLinks,
+                    {
+                        [styles.store]: isStorePage
+                    })
+                }
+            >
+                {navData.secondary.map((link) => (
+                    <li key={link.slug}>
+                        <a
+                            href={link.slug}
+                            target={
+                                link.slug === '/international' || link.slug === '/' ? '' : '_blank'
+                            }
+                        >
+                            {link.icon ? React.createElement(link.icon) : null}
+                            {link.name}
+                        </a>
+                    </li>
+                ))}
+            </ul>;
+
+
+        const secondaryNavStoreLinks =
+            <ul className={classnames(styles.secondaryNavLinks,
+                isStorePage ? styles.secondaryNavHomeStore : styles.secondaryNavHomeDefault)}
+            >
+                <li key={'/'}>
+                    <Link to="/">Go to Main Site</Link>
+                </li>
+            </ul>;
+
+
         return (
-            <nav className={styles.container}>
+            <nav className={classnames(styles.container, {
+                [styles.store]: isStorePage
+            })}>
                 <Link to="/">
                     <img src={BDLogo} className={styles.logo} alt="Blue Diamond" />
                 </Link>
                 <div className={classnames(styles.secondaryNav, styles[navColor])}>
                     <div className={styles.innerContainer}>
-                        <ul className={styles.secondaryNavLinks}>
-                            {navData.secondary.map((link) => (
-                                <li key={link.slug}>
-                                    <a
-                                      href={link.slug}
-                                      target={link.slug === '/international' ? '' : '_blank'}
-                                    >
-                                        {React.createElement(link.icon)}
-                                        {link.name}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
+                        {secondaryNavLinks}
+
+                        {secondaryNavStoreLinks}
+
                         <ul className={classnames(styles.secondaryNavLinks, styles.auth)}>
-                            <li>
-                                {auth.authenticated
-                                    ? <Link to="/account/settings">Account <User /></Link>
-                                    : (
-                                        <Link
-                                            to="/signin"
-                                            onClick={this.trackSignIn}
-                                        >
-                                            Sign In or Create Account
-                                            <User />
-                                        </Link>
+                            <li className={isStorePage ? styles.storePage : styles.defaultPage}>
+                                {authButton}
+                            </li>
+                            <li
+                                className={
+                                    isStorePage ? styles.cartStorePage : styles.cartDefaultPage
+                                }
+                                onMouseOver={this.toggleShoppingCart.show}
+                                onMouseLeave={this.toggleShoppingCart.hide}
+                            >
+                                <Link
+                                    className={classnames(styles.cart, {
+                                        [styles.active]: cartVisible
+                                    })}
+                                >
+                                    Cart
+                                    <ShoppingCartIcon />
+                                    {checkout.lineItems && checkout.lineItems.edges.length > 0 && (
+                                        <div className={styles.cartBadgeStore}>
+                                            {checkout.lineItems.edges.length}
+                                        </div>
                                     )}
+                                </Link>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div className={styles.primaryNav}>
-                    <div className={styles.navPanelToggles} onMouseLeave={this.toggleNav.hide}>
-                        {navData.primary.actions.map((action) => (
+
+                <div
+                    className={classnames(styles.primaryNavContainer,
+                        {
+                            [styles.store]: isStorePage
+                        })
+                    }
+                >
+                    <div className={styles.primaryNav}>
+                        <div className={styles.navPanelToggles} onMouseLeave={this.toggleNav.hide}>
+                            {navData.primary.actions.map((action) => (
+                                <div
+                                    key={action.name}
+                                    onMouseEnter={() => {
+                                        this.toggleNav.show(action.card);
+                                    }}
+                                    className={classnames(styles.navPanelToggle, {
+                                        [styles.active]: navVisible && name === action.card
+                                    })}
+                                >
+                                    {action.name}
+                                </div>
+                            ))}
                             <div
-                                key={action.name}
-                                onMouseEnter={() => {
-                                    this.toggleNav.show(action.card);
-                                }}
-                                className={classnames(styles.navPanelToggle, {
-                                    [styles.active]: navVisible && name === action.card
+                                className={classnames(styles.navPanel, {
+                                    [styles.active]: navVisible
                                 })}
                             >
-                                {action.name}
-                            </div>
-                        ))}
-                        <div
-                            className={classnames(styles.navPanel, {
-                                [styles.active]: navVisible
-                            })}
-                        >
-                            {element &&
+                                {element &&
                                 React.createElement(element, {
                                     setProductCards: this.setProductCards,
                                     toggleNav: this.toggleNav,
@@ -178,44 +238,54 @@ export default class DesktopNav extends Component {
                                     company,
                                     ...props
                                 })
-                            }
+                                }
+                            </div>
                         </div>
-                    </div>
-                    <ul className={styles.primaryNavLinks}>
-                        {navData.primary.globalLinks.map((link) => (
-                            <li key={link.slug} className={styles.primaryNavLink}>
-                                <Link to={link.slug}>
-                                    {link.name}
-                                </Link>
-                            </li>
-                        ))}
-                        <li className={classnames(styles.primaryNavLink, styles.wide)}>
-                            <div
-                                className={classnames(styles.cart, {
-                                    [styles.active]: cartVisible
-                                })}
-                                onMouseOver={this.toggleShoppingCart.show}
-                                onMouseLeave={this.toggleShoppingCart.hide}
-                            >
-                                <ShoppingCartIcon />
-                                {checkout.lineItems && checkout.lineItems.edges.length > 0 && (
-                                    <div className={styles.cartBadge}>
-                                        {checkout.lineItems.edges.length}
-                                    </div>
-                                )}
+                        <ul className={styles.primaryNavLinks}>
+                            {navData.primary.globalLinks.map((link) => (
+                                <li key={link.slug} className={styles.primaryNavLink}>
+                                    <Link to={link.slug}>
+                                        {link.name}
+                                    </Link>
+                                </li>
+                            ))}
+                            <li className={classnames(styles.primaryNavLink, styles.wide)}>
                                 <div
-                                    className={classnames(styles.dropdown, {
+                                    className={classnames(styles.cart, {
                                         [styles.active]: cartVisible
                                     })}
+                                    onMouseOver={this.toggleShoppingCart.show}
+                                    onMouseLeave={this.toggleShoppingCart.hide}
                                 >
-                                    <ShoppingCart
-                                        auth={auth}
-                                        onToggle={this.toggleShoppingCart}
-                                    />
+                                    <ShoppingCartIcon />
+                                    {checkout.lineItems && checkout.lineItems.edges.length > 0 && (
+                                        <div className={styles.cartBadge}>
+                                            {checkout.lineItems.edges.length}
+                                        </div>
+                                    )}
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div className={styles.dropdownContainer}>
+                    <div className={styles.dropdownNav}>
+                        <div
+                            className={classnames(styles.dropdown,
+                                {
+                                    [styles.active]: cartVisible,
+                                    [styles.store]: isStorePage
+                                })
+                            }
+                            onMouseOver={this.toggleShoppingCart.show}
+                            onMouseLeave={this.toggleShoppingCart.hide}
+                        >
+                            <ShoppingCart
+                                auth={auth}
+                                onToggle={this.toggleShoppingCart}
+                            />
+                        </div>
+                    </div>
                 </div>
             </nav>
         );

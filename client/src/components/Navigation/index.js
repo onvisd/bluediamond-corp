@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 import DesktopNav from './DesktopNav';
-import StoreDesktopNav from './StoreDesktopNav';
 import MobileNav from './MobileNav';
 
 import Growers from 'images/icons/growers-site.svg';
@@ -58,29 +57,19 @@ export default class Navigation extends Component {
         const {responsive, storeNavigation, brands, company} = this.props;
         const {isStorePage} = storeNavigation;
 
-        let desktopNav =
-            <DesktopNav
-                navData={this.navData}
-                brands={brands}
-                company={company}
-            />;
-        if(isStorePage) {
-            desktopNav =
-                <StoreDesktopNav
+        let nav = (
+            <header>
+                <DesktopNav
                     navData={this.navData}
                     brands={brands}
                     company={company}
-                />;
-        }
-
-
-        let nav = (
-            <header>
-                {desktopNav}
+                    isStorePage={isStorePage}
+                />
                 <MobileNav
                     navData={this.navData}
                     brands={brands}
                     company={company}
+                    isStorePage={isStorePage}
                 />
             </header>
         );
@@ -102,7 +91,12 @@ export default class Navigation extends Component {
         } else if(!responsive.medium && !responsive.small) { // eslint-disable-line
             nav = (
                 <header>
-                    {desktopNav}
+                    <DesktopNav
+                        navData={this.navData}
+                        brands={brands}
+                        company={company}
+                        isStorePage={isStorePage}
+                    />
                 </header>
             );
         }
