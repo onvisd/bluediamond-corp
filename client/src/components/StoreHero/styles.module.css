@@ -37,6 +37,14 @@
             font-size: var(--t--size-m);
         }
     }
+
+    @media (--mq-lt-m) {
+        margin: 120px 0 0;
+    }
+
+    @media (--mq-lt-s) {
+        margin: 72px 0 0;
+    }
 }
 
 .tagline {
