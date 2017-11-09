@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 export default class ProductCard extends Component {
     static PropTypes = {
         id: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         slug: PropTypes.string.isRequired,
         images: PropTypes.object.isRequired,
@@ -15,7 +14,7 @@ export default class ProductCard extends Component {
     }
 
     render() {
-        const {type, title, slug, images, imageAlt, onClick} = this.props;
+        const {title, slug, images, imageAlt, onClick} = this.props;
 
         return (
             <div className={styles.container}>
@@ -37,7 +36,6 @@ export default class ProductCard extends Component {
                         }
                     </div>
                     <p>
-                        <strong>{type}</strong><br />
                         {title}
                     </p>
                 </Link>

@@ -8,7 +8,6 @@ export default class StoreProductCard extends Component {
             id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             handle: PropTypes.string.isRequired,
-            productType: PropTypes.string.isRequired, // eslint-disable-line
             tags: PropTypes.array.isRequired,
             images: PropTypes.shape({
                 edges: PropTypes.object({
@@ -28,7 +27,6 @@ export default class StoreProductCard extends Component {
         return (
             <ProductCardComponent
                 id={data.id}
-                type={data.productType}
                 title={data.title}
                 slug={`/store/product/${data.handle}`}
                 images={images}
