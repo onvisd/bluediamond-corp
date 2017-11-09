@@ -14,7 +14,7 @@
         padding: 3rem 0 4rem;
     }
 
-    @media (--mq-lt-m) {
+    @media (--mq-m) {
         margin: 120px 0 0;
     }
 
