@@ -12,6 +12,9 @@ import {connector as storeNavigationConnector} from 'state/storeNavigation';
 import {getStoreProducts} from 'state/storeProducts';
 import {connector as storeConnector} from 'state/storeProducts';
 
+import {getStoreFilters} from 'state/storeFilters';
+import {connector as storeFilterConnector} from 'state/storeFilters';
+
 import {setStoreSearch} from 'state/storeSearch';
 import {connector as storeSearchConnector} from 'state/storeSearch';
 
@@ -42,6 +45,7 @@ const escapeRegEx = (str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, 
     const query = location.query;
 
     await Promise.all([
+        dispatch(getStoreFilters()),
         dispatch(getStoreProducts()),
         dispatch(setStoreSearch({
             visibleCardCount: Math.floor(location.query.visible) || 16,
@@ -63,9 +67,10 @@ const escapeRegEx = (str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, 
         ...navConnector(state.navigation),
         ...storeSearchConnector(state.storeSearch),
         ...storeNavigationConnector(state.storeNavigation),
-        ...storeConnector(state.store)
+        ...storeConnector(state.store),
+        ...storeFilterConnector(state.storeFilters)
     }),
-    {setStoreSearch, getStoreProducts, setNavigationStyle, setStoreNavigation}
+    {setStoreSearch, getStoreProducts, getStoreFilters, setNavigationStyle, setStoreNavigation}
 )
 export default class Store extends Component {
     componentDidMount() {
@@ -141,7 +146,34 @@ export default class Store extends Component {
         });
     };
 
-    // Handels parsing & adding filter data
+    setSlugs = (filterType, filters) => {
+        const slugs = [];
+        for (let i = 0; i < filters.length; i++)
+            slugs.push(slugify(filters[i]));
+
+        const slug = slugs.join('|') || null;
+
+        if(slug) addQuery({[filterType]: slug});
+        else removeQuery(filterType);
+    };
+
+    clearFilter = (filterType) => () => {
+        const {filter} = this.props.query;
+
+        const filters = filter[filterType].slice();
+
+        // remove everything in the array
+        filters.length = 0;
+
+        this.props.setStoreSearch({
+            ...this.props.query,
+            filter: {...filter, [filterType]: filters}
+        });
+
+        this.setSlugs(filterType, filters);
+    };
+
+    // Handles parsing & adding filter data
     handleFilter = (filterType) => (e) => {
         const {filter} = this.props.query;
 
@@ -159,18 +191,11 @@ export default class Store extends Component {
             filter: {...filter, [filterType]: filters}
         });
 
-        const slugs = [];
-        for (let i = 0; i < filters.length; i++)
-            slugs.push(slugify(filters[i]));
-
-        const slug = slugs.join('|') || null;
-
-        if(slug) addQuery({[filterType]: slug});
-        else removeQuery(filterType);
+        this.setSlugs(filterType, filters);
     };
 
     // Matches card data with filters stored in state
-    filterCards = (card) => {
+    filterCards = (skipFilter) => (card) => {
         const {filter, search} = this.props.query;
         const title = card.node.title;
         const type = card.node.productType;
@@ -181,19 +206,19 @@ export default class Store extends Component {
 
         const sizes = getOptions(card, 'Size');
 
-        let brandMatch = false;
+        let brandMatch = (skipFilter === 'brands');
         for (let i = 0; i < filter.brands.length; i++) {
             if(type.match(filter.brands[i]))
                 brandMatch = filter.brands[i];
         }
 
-        let typeMatch = false;
+        let typeMatch = (skipFilter === 'types');
         for (let i = 0; i < filter.types.length; i++) {
             if(tag && tag.match(filter.types[i]))
                 typeMatch = filter.types[i];
         }
 
-        let sizeMatch = false;
+        let sizeMatch = (skipFilter === 'sizes');
         for (let i = 0; i < filter.sizes.length; i++) {
             if(compareOptions(sizes, filter.sizes[i]))
                 sizeMatch = filter.sizes[i];
@@ -201,7 +226,7 @@ export default class Store extends Component {
 
         const collections = card.node.collections.edges.map((col) => col.node.title);
 
-        let categoryMatch = false;
+        let categoryMatch = (skipFilter === 'categories');
         for (let i = 0; i < filter.categories.length; i++) {
             if(collections.indexOf(filter.categories[i]) > -1)
                 categoryMatch = filter.categories[i];
@@ -262,13 +287,14 @@ export default class Store extends Component {
     }
 
     render() {
-        const {products, responsive} = this.props;
+        const {filters, products, responsive} = this.props;
         const {visibleCardCount, filter, sort, search} = this.props.query;
 
         let cards = products.products;
+        const allCards = cards;
 
         if(filter || search)
-            cards = cards.filter(this.filterCards);
+            cards = cards.filter(this.filterCards(null));
         if(sort)
             cards = cards.sort(this.sortCards(sort));
 
@@ -302,35 +328,47 @@ export default class Store extends Component {
                             <ProductFilter
                                 title="Gifts"
                                 products={products.products}
+                                filteredProducts={allCards.filter(this.filterCards('categories'))}
                                 filter="collections"
+                                filters={filters.collections}
                                 query="values"
                                 initState={filter.categories}
+                                onClear={this.clearFilter('categories')}
                                 onClick={this.handleFilter('categories')}
                                 dropdown={responsive.small}
                             />
                             <ProductFilter
                                 title="Products"
                                 products={products.products}
+                                filteredProducts={allCards.filter(this.filterCards('brands'))}
                                 filter="productType"
+                                filters={filters.productType}
                                 initState={filter.brands}
+                                onClear={this.clearFilter('brands')}
                                 onClick={this.handleFilter('brands')}
                                 dropdown={responsive.small}
                             />
                             <ProductFilter
                                 title="Flavor"
                                 products={products.products}
+                                filteredProducts={allCards.filter(this.filterCards('types'))}
                                 filter="tags"
+                                filters={filters.tags}
                                 query="flavor"
                                 initState={filter.types}
+                                onClear={this.clearFilter('types')}
                                 onClick={this.handleFilter('types')}
                                 dropdown={responsive.small}
                             />
                             <ProductFilter
                                 title="Size"
                                 products={products.products}
+                                filteredProducts={allCards.filter(this.filterCards('sizes'))}
                                 filter="options"
+                                filters={filters.options}
                                 query="values"
                                 initState={filter.sizes}
+                                onClear={this.clearFilter('sizes')}
                                 onClick={this.handleFilter('sizes')}
                                 dropdown={responsive.small}
                             />

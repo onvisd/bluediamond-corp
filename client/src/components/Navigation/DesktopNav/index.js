@@ -119,7 +119,7 @@ export default class DesktopNav extends Component {
             >
                 Sign In or Create Account
                 <User />
-            </Link>
+            </Link>;
 
         if(auth.authenticated)
             authButton = <Link to="/account/settings">Account <User /></Link>;
@@ -149,7 +149,7 @@ export default class DesktopNav extends Component {
             </ul>;
 
 
-        const secondaryNavStoreLinks =
+        const secondaryStoreLinks =
             <ul className={classnames(styles.secondaryNavLinks,
                 isStorePage ? styles.secondaryNavHomeStore : styles.secondaryNavHomeDefault)}
             >
@@ -170,7 +170,7 @@ export default class DesktopNav extends Component {
                     <div className={styles.innerContainer}>
                         {secondaryNavLinks}
 
-                        {secondaryNavStoreLinks}
+                        {secondaryStoreLinks}
 
                         <ul className={classnames(styles.secondaryNavLinks, styles.auth)}>
                             <li className={isStorePage ? styles.storePage : styles.defaultPage}>

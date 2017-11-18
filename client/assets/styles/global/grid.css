@@ -5,6 +5,7 @@
 /* Groupings */
 .l--container { @mixin container; }
 .l--row { @mixin row; }
+.l--row-full { @mixin row-full; }
 
 /* Columns */
 .l--col-auto { @mixin column-flex; }
@@ -20,6 +21,8 @@
 .l--col-10 { @mixin column-fixed (10/12); }
 .l--col-11 { @mixin column-fixed (11/12); }
 .l--col-12 { @mixin column-fixed (12/12); }
+
+.l--col-6-full { @mixin column-full (6/12); }
 
 @media (--mq-gt-m) {
     .l--col-auto-at-l { @mixin column-flex; }

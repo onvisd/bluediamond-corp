@@ -230,6 +230,90 @@ export default (api, {apolloClient}) => {
             };
         });
 
+    const filterByTag = (arr) => {
+        const items = [];
+
+        for (let i = 0; i < arr.length; i++) {
+            const item = JSON.stringify(arr[i]).match(new RegExp('flavor:([^,"]*)', 'g'));
+
+            if(item)
+                items.push(item[0].split(':')[1].replace('"', ''));
+        }
+
+        return items;
+    };
+
+    const filterByOption = (arr) => {
+        const options = arr.reduce((a, b) => a.concat(b), []);
+        const items = [];
+
+        for (let i = 0; i < options.length; i++) {
+            const option = options[i];
+
+            if(option)
+                items.push(option.values);
+        }
+
+        const flatItems = items.reduce((a, b) => a.concat(b), []);
+
+        return flatItems;
+    };
+
+    const filterByCollection = (arr) => {
+        const collections = arr.reduce((a, b) => a.concat(b), []);
+        const items = [];
+
+        for (let i = 0; i < collections.length; i++) {
+            const collection = collections[i].node;
+            items.push(collection.title);
+        }
+
+        return items;
+    };
+
+    const arrToSet = (arr) => {
+        arr = arr.filter((item) => item !== '');
+        return new Set(arr);
+    };
+
+    api.get('/store/filters', async(req, res) => {
+        try {
+            const products = await getProducts();
+
+            const filters = {
+                productType: [],
+                tags: [],
+                options: [],
+                collections: []
+            };
+
+            if(products) {
+                products.forEach((product) => {
+                    filters.productType.push(product.node.productType);
+                    filters.tags.push(...filterByTag(product.node.tags));
+                    filters.options.push(...filterByOption(product.node.options));
+                    filters.collections.push(
+                        ...filterByCollection(product.node.collections.edges)
+                    );
+                });
+
+                filters.productType = arrToSet(filters.productType);
+                filters.tags = arrToSet(filters.tags);
+                filters.options = arrToSet(filters.options);
+                filters.collections = arrToSet(filters.collections);
+            }
+
+            if(filters)
+                res.cache(true).send(filters);
+            else
+                res.status(401).send({message: 'No filters found!'});
+        } catch (err) {
+            console.trace(err);
+            logger.error('Problem getting shopify product filters', err, err.body);
+            res.status(500).send(err.message);
+        }
+    });
+
     api.get('/store/products', async (req, res) => {
         try {
             const products = await getProducts();

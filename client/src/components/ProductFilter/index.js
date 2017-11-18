@@ -14,8 +14,9 @@ export default class ProductFilter extends Component {
     static propTypes = {
         title: PropTypes.string.isRequired,
         filter: PropTypes.string.isRequired,
+        filters: PropTypes.array.isRequired,
         query: PropTypes.string,
-        products: PropTypes.array.isRequired,
+        filteredProducts: PropTypes.array.isRequired,
         onClick: PropTypes.func.isRequired,
         dropdown: PropTypes.bool,
         initState: PropTypes.array
@@ -90,39 +91,76 @@ export default class ProductFilter extends Component {
     }
 
     options = () => {
-        const {products, filter, initState} = this.props;
+        const {initState, filters, filteredProducts} = this.props;
+
+        const productOptions = this.productOptions(filteredProducts);
+
+        // Check if items are selected via inital state (query params)
+        let options = filters.map((f) => {
+            const option = {value: f};
+
+            if(initState && initState.includes(f))
+                option.checked = true;
+            else
+                option.checked = false;
+
+            if(productOptions)
+                option.count = productOptions[f] ? productOptions[f].count : 0;
+
+            return option;
+        });
+
+        options = options.filter(function(option) {
+            return (option.count > 0 || option.checked);
+        });
+
+        return options;
+    }
+
+    productOptions = (filteredProducts) => {
+        const {filter, initState} = this.props;
 
         let items;
 
         if(filter === 'productType')
-            items = this.compressArray(products.map((product) => product.node[filter]));
+            items = this.compressArray(filteredProducts.map((product) => product.node[filter]));
 
         if(filter === 'tags')
-            items = this.filterByTag(products.map((product) => product.node[filter]));
+            items = this.filterByTag(filteredProducts.map((product) => product.node[filter]));
 
         if(filter === 'options')
-            items = this.filterByOption(products.map((product) => product.node[filter]));
+            items = this.filterByOption(filteredProducts.map((product) => product.node[filter]));
 
-        if(filter === 'collections')
-            items = this.filterByCollection(products.map((product) => product.node[filter].edges));
+        if(filter === 'collections') {
+            items = this.filterByCollection(filteredProducts.map((product) => (
+                        product.node[filter].edges)
+                    ));
+        }
 
-        // Check if items are selected via inital state (query params)
-        items.map((item) => {
+        // Check if items are selected via initial state (query params)
+        items = items.reduce(function(map, item) {
             if(initState && initState.includes(item.value))
                 item.checked = true;
             else
                 item.checked = false;
-        });
+
+            map[item.value] = {
+                checked: item.checked,
+                count: item.count
+            };
+
+            return map;
+        }, {});
 
         return items;
     }
 
-    renderLoadMore = () => {
-        const {visibleOptionCount, totalOptions, clicked} = this.state;
+    renderLoadMore = (options) => {
+        const {visibleOptionCount, clicked} = this.state;
 
         return (
             <div>
-                {(totalOptions > visibleOptionCount) && (clicked === false) &&
+                {(options) && (options.length > visibleOptionCount) && (clicked === false) &&
                     <a onClick={this.handleClick} className={styles.seeMore}>
                         See More +
                     </a>
@@ -155,38 +193,64 @@ export default class ProductFilter extends Component {
 
     render() {
         const {visibleOptionCount, expanded} = this.state;
-        const {title, onClick, dropdown} = this.props;
+        const {title, onClear, onClick, dropdown} = this.props;
         const options = this.options();
+        const numCheckedOptions = options.filter((option) => option.checked).length;
 
-        return (
-            <div
-                className={classnames(
-                    styles.container, {
-                        [styles.expanded]: expanded,
-                        [styles.dropdown]: dropdown
-                    }
-                )}
-                onClick={dropdown ? this.toggleExpand : null}
-            >
-                <p className={styles.title}><strong>{title}</strong></p>
-                {options.slice(0, dropdown ? options.length : visibleOptionCount).map((option) => {
-                    if(option.value) {
-                        return (
-                          <label key={`filter${option.value}`} htmlFor={option.value}>
-                              <input
-                                  onChange={onClick}
-                                  type="checkbox"
-                                  value={option.value}
-                                  id={option.value}
-                                  checked={option.checked}
-                              />
-                              {option.value} ({option.count})
-                          </label>
-                        );
-                    }
-                })}
-                {!dropdown && this.renderLoadMore()}
-            </div>
-        );
+        if(options && options.length > 0) {
+            return (
+                <div
+                    className={classnames(
+                        styles.container, {
+                            [styles.expanded]: expanded,
+                            [styles.dropdown]: dropdown
+                        }
+                    )}
+                    onClick={dropdown ? this.toggleExpand : null}
+                >
+                    <div className={classnames(styles.title, 'l--row-full')}>
+                        <div className={classnames(styles.titleContainer, 'l--col-6-full')}>{title}</div>
+                        <div
+                            className={classnames(
+                                styles.clearContainer,
+                                'l--col-6-full',
+                            )} onClick={onClear}>
+                            <span className={classnames(
+                                styles.clearLabel, {
+                                    [styles.hidden]: numCheckedOptions === 0
+                                })}
+                            >CLEAR</span>
+                        </div>
+                    </div>
+                    {options.slice(0, dropdown ? options.length : visibleOptionCount).map((option) => {
+                        if(option.value) {
+                            return (
+                                <label
+                                    key={`filter${option.value}`}
+                                    htmlFor={option.value}
+                                    className={classnames({[styles.disabled]: option.count === 0})}
+                                >
+                                    <input
+                                        onChange={onClick}
+                                        type="checkbox"
+                                        value={option.value}
+                                        id={option.value}
+                                        checked={option.checked}
+                                    />
+                                    <div className={classnames(styles.checkbox)}>
+                                        <div className={classnames({[styles.checkboxContent]: option.checked})}></div>
+                                    </div>
+                                    {option.value}
+                                </label>
+                            );
+                        }
+                    })}
+                    {!dropdown}
+                    {!dropdown && this.renderLoadMore(options)}
+                </div>
+            );
+        }
+
+        return (<div/>);
     }
 }
