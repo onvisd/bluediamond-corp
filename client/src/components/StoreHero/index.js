@@ -1,19 +1,39 @@
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+
 import styles from './styles.module.css';
 
-const StoreHero = ({image, title, tagline}) => (
-    <div className={styles.container} style={{backgroundImage: `url(${image})`}}>
-        <div className={styles.innerContainer}>
-            <h2>{title}</h2>
-            <p>{tagline}</p>
-        </div>
-    </div>
-);
+@connect(
+    (state) => ({
+        responsive: state.responsive
+    })
+)
+export default class StoreHero extends Component {
+    static propTypes = {
+        desktopImage: PropTypes.string.isRequired,
+        smallDesktopImage: PropTypes.string.isRequired,
+        tabletImage: PropTypes.string.isRequired,
+        mobileImage: PropTypes.string.isRequired
+    };
 
-StoreHero.propTypes = {
-    image: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    tagline: PropTypes.string
-};
+    render() {
+        const {desktopImage, smallDesktopImage, tabletImage, mobileImage, responsive} = this.props;
 
-export default StoreHero;
+        let image = desktopImage;
+        if(responsive.xsmall)
+            image = mobileImage;
+        else if(responsive.small)
+            image = tabletImage;
+        else if(responsive.medium)
+            image = smallDesktopImage;
+
+        return (
+            <div
+                className={styles.container}
+                style={{
+                    backgroundImage: `url(${image})`
+                }}
+            />
+        );
+    }
+}

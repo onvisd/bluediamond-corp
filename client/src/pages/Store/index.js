@@ -37,7 +37,10 @@ import StoreProductCard from 'components/API/StoreProductCard';
 import Button from 'components/Button';
 import styles from './styles.module.css';
 
-import Hero from 'images/store/hero.jpg';
+import HeroDesktop from 'images/store/hero-2880x1024.jpg';
+import HeroSmallDesktop from 'images/store/hero-2048x1024.jpg';
+import HeroTablet from 'images/store/hero-1536x1024.jpg';
+import HeroMobile from 'images/store/hero-750x750.jpg';
 
 const escapeRegEx = (str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
 
@@ -242,13 +245,15 @@ export default class Store extends Component {
             (categoryMatch || !filter.categories.length) &&
             (searchMatch || !search.length)
         ) {
-            ReactGA.plugin.execute('ec', 'addImpression', {
-                id: card.node.handle,
-                name: card.node.title,
-                brand: card.node.productType,
-                category: categoryMatch || '',
-                variant: sizeMatch || ''
-            });
+            setTimeout(() => {
+                ReactGA.plugin.execute('ec', 'addImpression', {
+                    id: card.node.handle,
+                    name: card.node.title,
+                    brand: card.node.productType,
+                    category: categoryMatch || '',
+                    variant: sizeMatch || ''
+                });
+            }, 10);
 
             return true;
         }
@@ -312,14 +317,14 @@ export default class Store extends Component {
                     },
                     {
                         property: 'og:image',
-                        content: Hero
+                        content: HeroSmallDesktop
                     }
                 ]}</Meta>
                 <StoreHero
-                    image={Hero}
-                    title="Almond Snacks and Gifts for Any Occasion"
-                    buttonText="Go To Sale"
-                    buttonUrl="/store/product/other-test-product"
+                    desktopImage={HeroDesktop}
+                    smallDesktopImage={HeroSmallDesktop}
+                    tabletImage={HeroTablet}
+                    mobileImage={HeroMobile}
                 />
                 <div className={styles.container}>
                     <div className="l--row">
