@@ -83,6 +83,8 @@ export default class Store extends Component {
     componentWillMount() {
         this.props.setStoreNavigation(true);
         this.props.setNavigationStyle({className: 'brand--dark'});
+
+        this._impressionCounted = [];
     }
 
     componentWillUpdate(nextProps) {
@@ -244,19 +246,8 @@ export default class Store extends Component {
             (sizeMatch || !filter.sizes.length) &&
             (categoryMatch || !filter.categories.length) &&
             (searchMatch || !search.length)
-        ) {
-            setTimeout(() => {
-                ReactGA.plugin.execute('ec', 'addImpression', {
-                    id: card.node.handle,
-                    name: card.node.title,
-                    brand: card.node.productType,
-                    category: categoryMatch || '',
-                    variant: sizeMatch || ''
-                });
-            }, 10);
-
+        )
             return true;
-        }
 
         return false;
     };
@@ -302,6 +293,17 @@ export default class Store extends Component {
             cards = cards.filter(this.filterCards(null));
         if(sort)
             cards = cards.sort(this.sortCards(sort));
+
+        cards.slice(0, visibleCardCount).forEach((card) => {
+            if(this._impressionCounted.indexOf(card.node.title) === -1) {
+                ReactGA.plugin.execute('ec', 'addImpression', {
+                    id: card.node.handle,
+                    name: card.node.title,
+                    brand: card.node.productType
+                });
+                this._impressionCounted.push(card.node.title);
+            }
+        });
 
         return (
             <section className="content">

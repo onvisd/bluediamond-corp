@@ -1,5 +1,6 @@
 @import 'constants/grid';
 @import 'constants/color';
+@import 'constants/type';
 
 .related,
 .reviews,
@@ -44,16 +45,19 @@
 }
 
 .back {
-    margin: 3rem auto 0;
+    position: relative;
+    margin: 1rem auto 2rem;
+    z-index: 10001;
 
-    @media (--mq-gt-s) {
-        margin: 4rem auto -2rem;
+    @media (--mq-m) {
+        margin: 120px auto 0;
+        padding: 0;
     }
 }
 
 .backLink {
-    margin: 2rem 0 -4rem;
     cursor: pointer;
+    font-size: var(--t--size-xs);
 
     &::before {
         content: '';
@@ -73,5 +77,13 @@
         &::before {
             border-right-color: var(--c--blue);
         }
+    }
+
+    @media (--mq-m) {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0.5rem 1rem;
+        background: var(--c--gray-lighter);
     }
 }
