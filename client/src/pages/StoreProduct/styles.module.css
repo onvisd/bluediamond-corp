@@ -52,6 +52,7 @@
     @media (--mq-m) {
         margin: 120px auto 0;
         padding: 0;
+        z-index: 0;
     }
 }
 

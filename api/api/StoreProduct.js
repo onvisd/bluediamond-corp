@@ -599,7 +599,7 @@ export default (api, {apolloClient}) => {
                 const variants = [];
                 productData.variants.edges.forEach((variant) => {
                     let image = {};
-                    console.log(image);
+
                     if(variant && variant.node.image) {
                         [128, 256, 512, 1024, 1536, 2048].map((size) => {
                             image[size] = imgixClient.buildURL(variant.node.image.src, {
