@@ -177,6 +177,9 @@ export default class StoreProductHead extends Component {
         const {variants} = this.props;
         const {variant} = this.state;
 
+        if(variants.length === 1)
+            return;
+
         return (
             <div>
                 {
@@ -196,6 +199,19 @@ export default class StoreProductHead extends Component {
                 }
             </div>
         );
+    }
+
+    componentWillMount() {
+        const {variants} = this.props;
+
+        if(variants.length === 1) {
+            this.setState(() => ({
+                variant: variants[0].node,
+                price: variants[0].node.price,
+                compareAtPrice: variants[0].node.compareAtPrice,
+                image: variants[0].node.image
+            }));
+        }
     }
 
     handleSelect = (e) => {
@@ -242,7 +258,7 @@ export default class StoreProductHead extends Component {
         callFloodlight.click('4035228', 'fy18s0', 'addto0');
     }
 
-    showDisableMessage() {
+    toggleDisableMessage() {
         if(!this.state.variant) {
             this.setState({
                 disableMessage: !this.state.disableMessage
@@ -297,8 +313,8 @@ export default class StoreProductHead extends Component {
                         </span>
                         <div
                             style={{width: '100%'}}
-                            onMouseEnter={() => this.showDisableMessage()}
-                            onMouseLeave={() => this.showDisableMessage()}
+                            onMouseEnter={() => this.toggleDisableMessage()}
+                            onMouseLeave={() => this.toggleDisableMessage()}
                         >
                             <Button
                                 className={classnames(
