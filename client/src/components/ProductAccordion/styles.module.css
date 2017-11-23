@@ -1,5 +1,12 @@
 @import 'constants/color';
 @import 'constants/type';
+@import 'constants/grid';
+
+.accordion {
+    position: relative;
+    margin-top: 2rem;
+    z-index: var(--l--z-high);
+}
 
 .accordionItem {
     border-top: 1px solid var(--c--gray-dark);

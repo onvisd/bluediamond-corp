@@ -28,8 +28,9 @@ import callFloodlight from 'tools/callFloodlight';
 export default class StoreProductHead extends Component {
     state = {
         quantity: 1,
-        variant: {},
-        price: null
+        variant: null,
+        price: null,
+        disableMessage: false
     };
 
     static propTypes = {
@@ -84,15 +85,20 @@ export default class StoreProductHead extends Component {
     // Render product images
     renderImages() {
         const {title, image} = this.props;
+        const variantImage = this.state.image;
+        let images = image;
+
+        if(variantImage && variantImage[256])
+            images = variantImage;
 
         return (
             <div className={styles.images}>
                 <img
-                    src={image[512]}
+                    src={images[512]}
                     srcSet={`
-                        ${image[512]},
-                        ${image[1024]} 2x,
-                        ${image[2048]} 3x
+                        ${images[512]},
+                        ${images[1024]} 2x,
+                        ${images[2048]} 3x
                     `}
                     alt={title}
                 />
@@ -167,34 +173,26 @@ export default class StoreProductHead extends Component {
         );
     }
 
-    // Render purchase form.
-    renderOptions() {
+    renderButtonOptions() {
         const {variants} = this.props;
+        const {variant} = this.state;
 
         return (
-            <div className={classnames(styles.options, variants.length === 1 && styles.single)}>
-                {variants.length > 1
-                    ? (
-                        <div className="form--select">
-                            <select onChange={this.handleSelect} name="productSizeOption">
-                                {variants.map((variant) =>
-                                    <option
-                                        key={`variant${variant.node.id}`}
-                                        value={variant.node.id}
-                                    >
-                                        {variant.node.title}
-                                    </option>
-                                )}
-                            </select>
-                        </div>
-                    )
-                    : (
-                        <div>{
-                            variants[0].node.title === 'Default Title'
-                                ? ''
-                                : variants[0].node.title
-                        }</div>
-                    )
+            <div>
+                {
+                    variants.map((variantOption) => (
+                        <button
+                            key={`buttonVariant-${variantOption.node.id}`}
+                            value={variantOption.node.id}
+                            className={classnames(styles.variantButton,
+                                {
+                                    [styles.selected]:
+                                        variant && variant.id === variantOption.node.id
+                                }
+                            )}
+                            onClick={this.handleSelect}
+                        >{variantOption.node.title}</button>
+                    ))
                 }
             </div>
         );
@@ -206,19 +204,14 @@ export default class StoreProductHead extends Component {
 
         this.setState(() => ({
             variant: variant.node,
-            price: variant.node.price
+            price: variant.node.price,
+            compareAtPrice: variant.node.compareAtPrice,
+            image: variant.node.image
         }));
     }
 
     updateQuantity = (quantity) => {
         this.setState(() => ({quantity}));
-    }
-
-    componentWillMount() {
-        this.setState(() => ({
-            variant: this.props.variants[0].node,
-            price: this.props.variants[0].node.price
-        }));
     }
 
     addToCart = () => {
@@ -249,13 +242,22 @@ export default class StoreProductHead extends Component {
         callFloodlight.click('4035228', 'fy18s0', 'addto0');
     }
 
+    showDisableMessage() {
+        if(!this.state.variant) {
+            this.setState({
+                disableMessage: !this.state.disableMessage
+            });
+        }
+    }
+
     render() {
         const {title, ingredients, nutrition, productType} = this.props;
 
-        const {quantity, price} = this.state;
+        const {quantity, price, compareAtPrice, variant, disableMessage} = this.state;
 
         let reviews = [];
-        if(this.props.reviews) reviews = this.props.reviews;
+        if(this.props.reviews)
+            reviews = this.props.reviews;
 
         return (
             <section className={styles.container}>
@@ -271,15 +273,54 @@ export default class StoreProductHead extends Component {
                     }
                     {this.renderMeta()}
                     {this.renderDescription()}
-                    <div className={styles.formOptions}>
-                        {this.renderOptions()}
-                        <Quantity onChange={this.updateQuantity} />
-                    </div>
+                    {this.renderButtonOptions()}
                     <div className={styles.formPurchase}>
-                        <h2 className={styles.price}>${(quantity * price).toFixed(2)}</h2>
-                        <Button className={styles.button} onClick={this.addToCart}>
-                            + Add to cart
-                        </Button>
+                        <h2 className={classnames(
+                            styles.price, {
+                                [styles.disabled]: !variant
+                            }
+                        )}>
+                            <span>
+                                {compareAtPrice
+                                    ? `$${(quantity * compareAtPrice).toFixed(2)}`
+                                    : ''
+                                }
+                            </span>
+                            ${(quantity * price).toFixed(2)}
+                        </h2>
+                        <span className={classnames(
+                            styles.quantity, {
+                                [styles.disabled]: !variant
+                            }
+                        )}>
+                            <Quantity onChange={this.updateQuantity} />
+                        </span>
+                        <div
+                            style={{width: '100%'}}
+                            onMouseEnter={() => this.showDisableMessage()}
+                            onMouseLeave={() => this.showDisableMessage()}
+                        >
+                            <Button
+                                className={classnames(
+                                    styles.button, {
+                                        [styles.disabled]: !variant
+                                    }
+                                )}
+                                onClick={this.addToCart}
+                                disabled={!variant}
+                            >
+                                + Add to cart
+                                {!variant &&
+                                    <span className={classnames(
+                                        styles.hoverContent, {
+                                            [styles.isActive]: disableMessage
+                                        }
+                                    )}>
+                                        Please select a variant before adding to cart.
+                                    </span>
+                                }
+                            </Button>
+                        </div>
                     </div>
                     {(nutrition && ingredients) &&
                         <ProductAccordion

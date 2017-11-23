@@ -169,6 +169,12 @@ export default (api, {apolloClient}) => {
                                         weight
                                         availableForSale
                                         price
+                                        compareAtPrice
+                                        image {
+                                            id
+                                            src
+                                            altText
+                                        }
                                     }
                                 }
                             }
@@ -424,6 +430,30 @@ export default (api, {apolloClient}) => {
                     });
                 });
                 product.images = images;
+
+                const variants = [];
+                productData.variants.edges.forEach((variant) => {
+                    let image = {};
+                    console.log(image);
+                    if(variant && variant.node.image) {
+                        [128, 256, 512, 1024, 1536, 2048].map((size) => {
+                            image[size] = imgixClient.buildURL(variant.node.image.src, {
+                                w: size,
+                                h: size,
+                                fit: 'max',
+                                bg: 'fff',
+                                auto: 'compress'
+                            });
+                        });
+                    } else {
+                        image = {};
+                    }
+
+                    variant = {...variant, node: {...variant.node}};
+                    variant.node.image = image;
+                    variants.push(variant);
+                });
+                product.variants = variants;
 
                 res.cache(true).send(product);
             } else {

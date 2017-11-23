@@ -12,16 +12,6 @@ export default class StoreProductHead extends Component {
                 descriptionHtml: PropTypes.string.isRequired, // eslint-disable-line
                 handle: PropTypes.string.isRequired,
                 tags: PropTypes.array.isRequired,
-                variants: PropTypes.shape({
-                    edges: PropTypes.object({
-                        node: PropTypes.shape({
-                            id: PropTypes.number,
-                            title: PropTypes.string,
-                            weight: PropTypes.number,
-                            price: PropTypes.string
-                        })
-                    })
-                }).isRequired,
                 options: PropTypes.arrayOf(PropTypes.shape({
                     id: PropTypes.string,
                     name: PropTypes.string,
@@ -35,6 +25,22 @@ export default class StoreProductHead extends Component {
                     })
                 }).isRequired
             }),
+            variants: PropTypes.arrayOf(PropTypes.shape({
+                node: PropTypes.shape({
+                    id: PropTypes.string,
+                    title: PropTypes.string,
+                    weight: PropTypes.number,
+                    price: PropTypes.string,
+                    compareAtPrice: PropTypes.string,
+                    images: PropTypes.shape({
+                        edges: PropTypes.object({
+                            node: PropTypes.shape({
+                                src: PropTypes.string
+                            })
+                        })
+                    }).isRequired
+                })
+            })).isRequired,
             smartLabel: PropTypes.shape({
                 warnings: PropTypes.string,
                 rawIngredients: PropTypes.string,
@@ -90,7 +96,7 @@ export default class StoreProductHead extends Component {
                 title={data.product.title}
                 productType={data.product.productType}
                 tags={data.product.tags}
-                variants={data.product.variants.edges}
+                variants={data.variants}
                 options={data.product.options}
                 images={data.product.images.edges}
                 image={data.images[data.product.images.edges[0].node.id]}

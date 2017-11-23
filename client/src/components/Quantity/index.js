@@ -60,7 +60,7 @@ export default class Quantity extends Component {
 
         return (
             <div className={styles.container}>
-                Quantity
+                Qty
                 <div className={styles.input}>
                     <div className={styles.quantity}>
                         <input
