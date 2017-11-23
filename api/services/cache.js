@@ -50,6 +50,25 @@ export const getCached = (req, res, next) => {
     });
 };
 
+export const getCachedShopify = async (keyString, shopifyQuery, callback) => {
+    if(process.env.NODE_ENV !== 'production') {
+        const shopifyResult = await shopifyQuery();
+        callback(shopifyResult);
+    }
+
+    redisClient.get(keyString, async (err, data) => {
+        if(data)
+            return callback(JSON.parse(data));
+        else if(err)
+            logger.error('Problem getting cache', err, err.message);
+
+        const shopifyResult = await shopifyQuery();
+
+        redisClient.setex(keyString, 10, JSON.stringify(shopifyResult));
+        callback(shopifyResult);
+    });
+};
+
 export const delCached = (req) => {
     redisClient.del(key(req));
 };

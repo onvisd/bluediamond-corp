@@ -4,11 +4,57 @@ import ImgixClient from 'imgix-core-js';
 
 import config from '../../config';
 import logger from '../services/logger';
+import {getCachedShopify} from '../services/cache';
+import compareOptions from '../tools/compareProductOptions';
+
+const maxPageoptions = 16;
 
 const imgixClient = new ImgixClient({
     host: config.imgix.host,
     secureURLToken: config.imgix.secureURLToken
 });
+
+const paramToFilter = (param) => {
+    try {
+        return param.split('|');
+    } catch (e) {
+        return [];
+    }
+};
+
+const formatFilters = (productType, tags, options, collections) => {
+    return {
+        collections: paramToFilter(collections),
+        productType: paramToFilter(productType),
+        tags: paramToFilter(tags),
+        options: paramToFilter(options)
+    };
+};
+
+const getOptions = (product, type) => {
+    let options = [];
+
+    for (let i = 0; i < product.node.options.length; i++) {
+        const option = product.node.options[i];
+        const name = option.name;
+
+        if(name === type) // get specfic options based on it's name
+            options = options.concat(option.values);
+    }
+
+    return options;
+};
+
+const escapeRegEx = (str) => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+
+const unslugify = (str) => {
+    const toUpperCase = str.charAt(0).toUpperCase();
+    const toCapsCase = str.slice(1).toLowerCase();
+    const newStr = (match, group1) => ` ${group1.toUpperCase()}`;
+    const replace = toCapsCase.replace(/[-|_](.)/g, newStr);
+    return `${toUpperCase}${replace}`;
+};
+
 
 export default (api, {apolloClient}) => {
     const getProducts = () =>
@@ -68,6 +114,9 @@ export default (api, {apolloClient}) => {
         })
         .then((result) => result.data.shop.products.edges)
         .catch((err) => logger.error('Problem getting shopify products', err, err.body));
+
+    const getCachedProducts = async (callback) =>
+        getCachedShopify('shopify-all-products', getProducts, callback);
 
     const getProductsByType = (type) =>
         apolloClient.query({
@@ -260,9 +309,7 @@ export default (api, {apolloClient}) => {
                 items.push(option.values);
         }
 
-        const flatItems = items.reduce((a, b) => a.concat(b), []);
-
-        return flatItems;
+        return items.reduce((a, b) => a.concat(b), []);
     };
 
     const filterByCollection = (arr) => {
@@ -277,42 +324,141 @@ export default (api, {apolloClient}) => {
         return items;
     };
 
-    const arrToSet = (arr) => {
+
+    const buildFilterResult = (arr) => {
         arr = arr.filter((item) => item !== '');
         return new Set(arr);
     };
 
+
+    const filterProduct = (skipFilter, filter, search) => (product) => {
+        const title = product.node.title;
+        const type = product.node.productType;
+        const tags = JSON.stringify(product.node.tags);
+
+        let tag = '';
+        if(/flavor:([^,"]*)/.test(tags)) tag = tags.match(/flavor:([^,"]*)/)[1];
+
+        const options = getOptions(product, 'Size');
+
+        let brandMatch = (skipFilter === 'productType');
+        for (let i = 0; i < filter.productType.length; i++) {
+            if(type.match(filter.productType[i]))
+                brandMatch = filter.productType[i];
+        }
+
+        let typeMatch = (skipFilter === 'tags');
+        for (let i = 0; i < filter.tags.length; i++) {
+            if(tag && tag.match(filter.tags[i]))
+                typeMatch = filter.tags[i];
+        }
+
+        let optionsMatch = (skipFilter === 'options');
+        for (let i = 0; i < filter.options.length; i++) {
+            if(compareOptions(options, filter.options[i]))
+                optionsMatch = filter.options[i];
+        }
+
+        const collections = product.node.collections.edges.map((col) => col.node.title);
+
+        let categoryMatch = (skipFilter === 'collections');
+        for (let i = 0; i < filter.collections.length; i++) {
+            if(collections.indexOf(filter.collections[i]) > -1)
+                categoryMatch = filter.collections[i];
+        }
+
+        let searchMatch = false;
+        if(title.toLowerCase().match(escapeRegEx(unslugify(search).toLowerCase())))
+            searchMatch = true;
+
+        if((brandMatch || !filter.productType.length) &&
+            (typeMatch || !filter.tags.length) &&
+            (optionsMatch || !filter.options.length) &&
+            (categoryMatch || !filter.collections.length) &&
+            (searchMatch || !search.length)
+        )
+            return true;
+
+        return false;
+    };
+
+    // Sorts the available cards
+    const sortProduct = (sort) => {
+        let getProductField = (product) => product[sort];
+
+        if(sort === 'name')
+            getProductField = (product) => product.node.title.toUpperCase();
+
+        if(sort === 'brand')
+            getProductField = (product) => product.node.productType.toUpperCase();
+
+        return (productA, productB) => {
+            if(getProductField(productA) > getProductField(productB)) return 1;
+            if(getProductField(productA) < getProductField(productB)) return -1;
+            return 0;
+        };
+    };
+
+    const filteredProductOpts = (filterType, filteredProducts) => {
+        let items;
+
+        if(filterType === 'productType') {
+            items =
+                filteredProducts.map((product) => product.node[filterType]);
+        }
+
+        if(filterType === 'tags') {
+            items =
+                filterByTag(filteredProducts.map((product) => product.node[filterType]));
+        }
+
+        if(filterType === 'options') {
+            items =
+                filterByOption(filteredProducts.map((product) => product.node[filterType]));
+        }
+
+        if(filterType === 'collections') {
+            items = filterByCollection(filteredProducts.map((product) => (
+                product.node[filterType].edges)
+            ));
+        }
+
+        return buildFilterResult(items);
+    };
+
     api.get('/store/filters', async(req, res) => {
         try {
-            const products = await getProducts();
+            const {productType, tags, options, collections} = req.query;
+            let {search} = req.query;
+            const queryFilters = formatFilters(productType, tags, options, collections);
+            search = search ? search.trim() : '';
 
-            const filters = {
-                productType: [],
-                tags: [],
-                options: [],
-                collections: []
-            };
+            getCachedProducts((products) => {
+                const filters = {
+                    productType: new Set(queryFilters.productType),
+                    tags: new Set(queryFilters.tags),
+                    options: new Set(queryFilters.options),
+                    collections: new Set(queryFilters.collections)
+                };
 
-            if(products) {
-                products.forEach((product) => {
-                    filters.productType.push(product.node.productType);
-                    filters.tags.push(...filterByTag(product.node.tags));
-                    filters.options.push(...filterByOption(product.node.options));
-                    filters.collections.push(
-                        ...filterByCollection(product.node.collections.edges)
-                    );
-                });
+                if(products) {
+                    Object.keys(filters).forEach((filterType) => {
+                        const filteredProducts =
+                            products.filter(filterProduct(filterType, queryFilters, search));
 
-                filters.productType = arrToSet(filters.productType);
-                filters.tags = arrToSet(filters.tags);
-                filters.options = arrToSet(filters.options);
-                filters.collections = arrToSet(filters.collections);
-            }
+                        const filteredOptions =
+                            filteredProductOpts(filterType, filteredProducts);
 
-            if(filters)
-                res.cache(true).send(filters);
-            else
-                res.status(401).send({message: 'No filters found!'});
+                        filters[filterType] =
+                            new Set([...filteredOptions, ...filters[filterType]]);
+                    });
+                }
+
+                if(filters)
+                    res.cache(true).send(filters);
+                else
+                    res.status(401).send({message: 'No filters found!'});
+            });
         } catch (err) {
             console.trace(err);
             logger.error('Problem getting shopify product filters', err, err.body);
@@ -322,30 +468,49 @@ export default (api, {apolloClient}) => {
 
     api.get('/store/products', async (req, res) => {
         try {
-            const products = await getProducts();
+            const {productType, tags, options, collections, sort} = req.query;
+            let {search, page} = req.query;
+            const filters = formatFilters(productType, tags, options, collections);
             const images = {};
+            search = search ? search.trim() : '';
+            page = parseInt(page) || 0;
 
-            products.forEach((product) => {
-                product.node.images.edges.forEach((image) => {
-                    if(!images[image.node.id])
-                        images[image.node.id] = {};
+            getCachedProducts((products) => {
+                products = products.filter(filterProduct(null, filters, search));
 
-                    [128, 256, 512, 1024, 1536, 2048].map((size) => {
-                        images[image.node.id][size] = imgixClient.buildURL(image.node.src, {
-                            w: size,
-                            h: size,
-                            fit: 'max',
-                            bg: 'fff',
-                            auto: 'compress'
+                const total = products.length;
+                if(sort)
+                    products = products.sort(sortProduct(sort));
+
+                products = products.slice(
+                        page * maxPageoptions,
+                        (page * maxPageoptions) + maxPageoptions
+                    );
+
+                products.forEach((product) => {
+                    product.node.images.edges.forEach((image) => {
+                        if(!images[image.node.id])
+                            images[image.node.id] = {};
+
+                        [128, 256, 512, 1024, 1536, 2048].map((imgOpts) => {
+                            images[image.node.id][imgOpts] = imgixClient.buildURL(image.node.src, {
+                                w: imgOpts,
+                                h: imgOpts,
+                                fit: 'max',
+                                bg: 'fff',
+                                auto: 'compress'
+                            });
                         });
                     });
                 });
-            });
 
-            if(products)
-                res.status(200).send({products, images});
-            else
-                res.status(401).send({message: 'No products found!'});
+                const nextPage = page + 1;
+
+                if(products)
+                    res.cache(true).send({products, images, total, nextPage});
+                else
+                    res.status(401).send({message: 'No products found!'});
+            });
         } catch (err) {
             console.trace(err);
             logger.error('Problem getting shopify products', err, err.body);
@@ -400,11 +565,11 @@ export default (api, {apolloClient}) => {
                             if(!images[image.node.id])
                                 images[image.node.id] = {};
 
-                            [128, 256, 512, 1024, 1536, 2048].map((size) => {
-                                images[image.node.id][size] = imgixClient.buildURL(
+                            [128, 256, 512, 1024, 1536, 2048].map((options) => {
+                                images[image.node.id][options] = imgixClient.buildURL(
                                     image.node.src, {
-                                        w: size,
-                                        h: size,
+                                        w: options,
+                                        h: options,
                                         fit: 'max',
                                         bg: 'fff',
                                         auto: 'compress'
@@ -419,10 +584,10 @@ export default (api, {apolloClient}) => {
                     if(!images[image.node.id])
                         images[image.node.id] = {};
 
-                    [128, 256, 512, 1024, 1536, 2048].map((size) => {
-                        images[image.node.id][size] = imgixClient.buildURL(image.node.src, {
-                            w: size,
-                            h: size,
+                    [128, 256, 512, 1024, 1536, 2048].map((options) => {
+                        images[image.node.id][options] = imgixClient.buildURL(image.node.src, {
+                            w: options,
+                            h: options,
                             fit: 'max',
                             bg: 'fff',
                             auto: 'compress'

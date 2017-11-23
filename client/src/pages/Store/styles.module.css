@@ -68,3 +68,10 @@
     justify-content: stretch;
     align-items: flex-start;
 }
+
+.loadMore {
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}

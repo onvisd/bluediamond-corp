@@ -16,7 +16,6 @@ export default class ProductFilter extends Component {
         filter: PropTypes.string.isRequired,
         filters: PropTypes.array.isRequired,
         query: PropTypes.string,
-        filteredProducts: PropTypes.array.isRequired,
         onClick: PropTypes.func.isRequired,
         dropdown: PropTypes.bool,
         initState: PropTypes.array
@@ -91,12 +90,10 @@ export default class ProductFilter extends Component {
     }
 
     options = () => {
-        const {initState, filters, filteredProducts} = this.props;
-
-        const productOptions = this.productOptions(filteredProducts);
+        const {initState, filters} = this.props;
 
         // Check if items are selected via inital state (query params)
-        let options = filters.map((f) => {
+        return filters.map((f) => {
             const option = {value: f};
 
             if(initState && initState.includes(f))
@@ -104,56 +101,9 @@ export default class ProductFilter extends Component {
             else
                 option.checked = false;
 
-            if(productOptions)
-                option.count = productOptions[f] ? productOptions[f].count : 0;
-
             return option;
         });
-
-        options = options.filter(function(option) {
-            return (option.count > 0 || option.checked);
-        });
-
-        return options;
-    }
-
-    productOptions = (filteredProducts) => {
-        const {filter, initState} = this.props;
-
-        let items;
-
-        if(filter === 'productType')
-            items = this.compressArray(filteredProducts.map((product) => product.node[filter]));
-
-        if(filter === 'tags')
-            items = this.filterByTag(filteredProducts.map((product) => product.node[filter]));
-
-        if(filter === 'options')
-            items = this.filterByOption(filteredProducts.map((product) => product.node[filter]));
-
-        if(filter === 'collections') {
-            items = this.filterByCollection(filteredProducts.map((product) => (
-                        product.node[filter].edges)
-                    ));
-        }
-
-        // Check if items are selected via initial state (query params)
-        items = items.reduce(function(map, item) {
-            if(initState && initState.includes(item.value))
-                item.checked = true;
-            else
-                item.checked = false;
-
-            map[item.value] = {
-                checked: item.checked,
-                count: item.count
-            };
-
-            return map;
-        }, {});
-
-        return items;
-    }
+    };
 
     renderLoadMore = (options) => {
         const {visibleOptionCount, clicked} = this.state;
@@ -167,7 +117,7 @@ export default class ProductFilter extends Component {
                 }
             </div>
         );
-    }
+    };
 
     handleClick = (e) => {
         e.preventDefault();
@@ -176,14 +126,14 @@ export default class ProductFilter extends Component {
             visibleOptionCount: this.state.totalOptions,
             clicked: !state.clicked
         }));
-    }
+    };
 
     toggleExpand = (e) => {
         if(!e.target.closest('label')) {
             e.preventDefault();
             this.setState({expanded: !this.state.expanded});
         }
-    }
+    };
 
     componentWillMount() {
         this.setState(() => ({

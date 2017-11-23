@@ -7,10 +7,28 @@ const handler = createHandler(settings);
 export const getStoreFilters = action({
     namespace: 'STORE',
     event: 'GET_FILTERS',
-    action: (http) =>
-        http.get(`/api/store/filters${env.development ? `?${Date.now()}` : ''}`)
+
+    action: (filter, search, http) => {
+        const params = Object.keys(filter).map(function(key) {
+            if(filter[key] && filter[key].length > 0)
+                return `${key}=${filter[key].join('|')}`;
+
+            return '';
+        }).filter((param) => param.length > 0);
+
+        if(search)
+            params.push(`search=${search}`);
+        if(env.development)
+            params.push(`${Date.now()}`);
+
+        let query = '';
+        if(params.length > 0)
+            query = `?${params.join('&')}`;
+
+        return http.get(`/api/store/filters${query}`)
             .then((result) => result)
-            .catch((err) => console.log(err)),
+            .catch((err) => console.log(err));
+    },
     result: (state, result) => ({
         ...state,
         filters: result
