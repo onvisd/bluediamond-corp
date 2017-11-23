@@ -26,6 +26,7 @@ export default (api, {apolloClient}) => {
                                             id
                                             title
                                             image {
+                                                id
                                                 src
                                             }
                                             price
@@ -96,6 +97,7 @@ export default (api, {apolloClient}) => {
                                             id
                                             title
                                             image {
+                                                id
                                                 src
                                             }
                                             price
@@ -170,6 +172,7 @@ export default (api, {apolloClient}) => {
                                             id
                                             title
                                             image {
+                                                id
                                                 src
                                             }
                                             price
@@ -224,6 +227,7 @@ export default (api, {apolloClient}) => {
                                             id
                                             title
                                             image {
+                                                id
                                                 src
                                             }
                                             price
@@ -283,6 +287,7 @@ export default (api, {apolloClient}) => {
                                             id
                                             title
                                             image {
+                                                id
                                                 src
                                             }
                                             price
@@ -343,6 +348,7 @@ export default (api, {apolloClient}) => {
                                             id
                                             title
                                             image {
+                                                id
                                                 src
                                             }
                                             price

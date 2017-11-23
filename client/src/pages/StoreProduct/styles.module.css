@@ -46,8 +46,7 @@
 
 .back {
     position: relative;
-    margin: 1rem auto 2rem;
-    z-index: 10001;
+    margin: 4rem auto -1rem;
 
     @media (--mq-m) {
         margin: 120px auto 0;
