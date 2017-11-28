@@ -267,7 +267,7 @@ export default class StoreProductHead extends Component {
     }
 
     render() {
-        const {title, ingredients, nutrition, productType} = this.props;
+        const {title, ingredients, nutrition} = this.props;
 
         const {quantity, price, compareAtPrice, variant, disableMessage} = this.state;
 
@@ -279,7 +279,6 @@ export default class StoreProductHead extends Component {
             <section className={styles.container}>
                 {this.renderImages()}
                 <div className={styles.productInfo}>
-                    {productType && (<h3>{productType}</h3>)}
                     <h2 className={styles.title}>{title}</h2>
                     {reviews.length > 0 &&
                         <ProductStarRating

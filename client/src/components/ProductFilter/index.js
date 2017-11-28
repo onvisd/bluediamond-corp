@@ -159,7 +159,9 @@ export default class ProductFilter extends Component {
                     onClick={dropdown ? this.toggleExpand : null}
                 >
                     <div className={classnames(styles.title, 'l--row-full')}>
-                        <div className={classnames(styles.titleContainer, 'l--col-6-full')}>{title}</div>
+                        <div className={classnames(styles.titleContainer, 'l--col-6-full')}>
+                            {title}
+                        </div>
                         <div
                             className={classnames(
                                 styles.clearContainer,
@@ -172,29 +174,36 @@ export default class ProductFilter extends Component {
                             >CLEAR</span>
                         </div>
                     </div>
-                    {options.slice(0, dropdown ? options.length : visibleOptionCount).map((option) => {
-                        if(option.value) {
-                            return (
-                                <label
-                                    key={`filter${option.value}`}
-                                    htmlFor={option.value}
-                                    className={classnames({[styles.disabled]: option.count === 0})}
-                                >
-                                    <input
-                                        onChange={onClick}
-                                        type="checkbox"
-                                        value={option.value}
-                                        id={option.value}
-                                        checked={option.checked}
-                                    />
-                                    <div className={classnames(styles.checkbox)}>
-                                        <div className={classnames({[styles.checkboxContent]: option.checked})}></div>
-                                    </div>
-                                    {option.value}
-                                </label>
-                            );
-                        }
-                    })}
+                    {options
+                        .slice(0, dropdown ? options.length : visibleOptionCount)
+                        .map((option) => {
+                            if(option.value) {
+                                return (
+                                    <label
+                                        key={`filter${option.value}`}
+                                        htmlFor={option.value}
+                                        className={classnames({
+                                            [styles.disabled]: option.count === 0
+                                        })}
+                                    >
+                                        <input
+                                            onChange={onClick}
+                                            type="checkbox"
+                                            value={option.value}
+                                            id={option.value}
+                                            checked={option.checked}
+                                        />
+                                        <div className={classnames(styles.checkbox)}>
+                                            <div className={classnames({
+                                                [styles.checkboxContent]: option.checked
+                                            })}></div>
+                                        </div>
+                                        {option.value}
+                                    </label>
+                                );
+                            }
+                        })
+                    }
                     {!dropdown}
                     {!dropdown && this.renderLoadMore(options)}
                 </div>

@@ -22,14 +22,12 @@ const paramToFilter = (param) => {
     }
 };
 
-const formatFilters = (productType, tags, options, collections) => {
-    return {
-        collections: paramToFilter(collections),
-        productType: paramToFilter(productType),
-        tags: paramToFilter(tags),
-        options: paramToFilter(options)
-    };
-};
+const formatFilters = (productType, tags, options, collections) => ({
+    collections: paramToFilter(collections),
+    productType: paramToFilter(productType),
+    tags: paramToFilter(tags),
+    options: paramToFilter(options)
+});
 
 const getOptions = (product, type) => {
     let options = [];

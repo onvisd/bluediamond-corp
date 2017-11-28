@@ -338,25 +338,6 @@ export default class Store extends Component {
                         <div className={`l--col-auto ${styles.products}`}>
                             <div className={`l--row ${styles.search}`}>
                                 <div className="l--col-5">
-                                    <div className="form--select noMargin">
-                                        <select
-                                            onChange={this.handleSort}
-                                            ref={(select) => {
-                                                this.sort = select;
-                                            }}
-                                            defaultValue=""
-                                            title="Select a field to sort by"
-                                        >
-                                            <option value="" disabled>Sort by</option>
-                                            <option value="name">Name</option>
-                                            <option value="brand">Brand</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className={`l--col-2 ${styles.searchSpacer}`}>
-                                    &nbsp;
-                                </div>
-                                <div className="l--col-5">
                                     <input
                                         onChange={this.handleSearch}
                                         ref={(input) => {
@@ -366,6 +347,9 @@ export default class Store extends Component {
                                         placeholder="Search"
                                         title="Type search term here"
                                     />
+                                </div>
+                                <div className={`l--col-7 ${styles.searchSpacer}`}>
+                                    &nbsp;
                                 </div>
                             </div>
                             <div className="l--row">
