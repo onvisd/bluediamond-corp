@@ -127,7 +127,7 @@ export default class DesktopNav extends Component {
 
         const secondaryNavLinks =
             <ul
-                className={classnames(styles.secondaryNavLinks,
+                className={classnames(styles.secondaryNavLinks, styles.secondaryHomeNav,
                     {
                         [styles.store]: isStorePage
                     })
@@ -169,9 +169,8 @@ export default class DesktopNav extends Component {
                 <div className={classnames(styles.secondaryNav, styles[navColor])}>
                     <div className={styles.innerContainer}>
                         {secondaryNavLinks}
-
                         {secondaryStoreLinks}
-
+                        <ul className={styles.secondaryNavLinks} /> {/* IE hack to make header buttons position correctly */}
                         <ul className={classnames(styles.secondaryNavLinks, styles.auth)}>
                             <li className={isStorePage ? styles.storePage : styles.defaultPage}>
                                 {authButton}

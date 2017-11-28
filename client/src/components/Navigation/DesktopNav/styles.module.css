@@ -146,6 +146,10 @@
     }
 }
 
+.secondaryHomeNav {
+    position: absolute;
+}
+
 .secondaryNavHomeDefault {
     position: absolute;
     transform: translateY(-40px);

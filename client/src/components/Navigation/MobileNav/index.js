@@ -96,6 +96,13 @@ export default class MobileNav extends Component {
         callFloodlight.click('4035228', 'fy18s0', 'signi0');
     }
 
+    // calculate the Y page offset for every possible browser
+    scrollTop() {
+        return (
+            window.scrollY || window.pageYOffset || document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0) //eslint-disable-line
+        );
+    }
+
     render() {
         const {navVisible, transition} = this.state;
         const {element, props} = this.state.activeCard;
@@ -139,7 +146,7 @@ export default class MobileNav extends Component {
                 </div>
                 <div className={classnames(styles.head, styles[navColor])}
                      style={{
-                         marginTop: (scrollY < 60 && isStorePage) ? 60 - scrollY : 0
+                         marginTop: (this.scrollTop() < 60 && isStorePage) ? (60 - this.scrollTop()) : 0
                      }}
                 >
                     <div className={classnames(styles.ecomm, styles[navColor])}>
