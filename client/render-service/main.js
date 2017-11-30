@@ -1,3 +1,4 @@
+import React from 'react';
 import webpageServer from 'react-isomorphic-render/server';
 import {devtools} from 'universal-webpack';
 
@@ -45,32 +46,41 @@ export default function(parameters) {
             // Will be inserted into server rendered webpage <head/>
             // (this `head()` function is optional and is not required)
             // (its gonna work with or without this `head()` parameter)
-            head() {
-                const output = [];
+            head(path, {store}) {
+                let output = [];
 
                 if(process.env.NODE_ENV === 'development') {
                     // `devtools` just tampers with CSS styles a bit.
                     // It's not required for operation and can be omitted.
                     // It just removes the "flash of unstyled content" in development mode.
-                    output.push(`<script>${devtools({...parameters, entry: 'main'})}</script>`);
+                    output.push(
+                        <script dangerouslySetInnerHTML={{__html:
+                            devtools({...parameters, entry: 'main'})
+                        }} />
+                    );
                 }
 
                 // For Pingdom RUM
                 output.push(
-                    `<script>
-                    var _prum = [['id', '59c5525f8d4ea3c8367b23c6'],
-                                 ['mark', 'firstbyte', (new Date()).getTime()]];
-                    (function() {
-                        var s = document.getElementsByTagName('script')[0]
-                          , p = document.createElement('script');
-                        p.async = 'async';
-                        p.src = '//rum-static.pingdom.net/prum.min.js';
-                        s.parentNode.insertBefore(p, s);
-                    })();
-                    </script>`
+                    <script dangerouslySetInnerHTML={{__html: `
+                        var _prum = [['id', '59c5525f8d4ea3c8367b23c6'],
+                                     ['mark', 'firstbyte', (new Date()).getTime()]];
+                        (function() {
+                            var s = document.getElementsByTagName('script')[0]
+                              , p = document.createElement('script');
+                            p.async = 'async';
+                            p.src = '//rum-static.pingdom.net/prum.min.js';
+                            s.parentNode.insertBefore(p, s);
+                        })();
+                    `}} />
                 );
 
-                return output.join('\n');
+                // Head tags provided by the state
+                const {head} = store.getState();
+                if(head.tags.length)
+                    output = output.concat(head.tags);
+
+                return output;
             },
 
             // Isomorphic CSS flag

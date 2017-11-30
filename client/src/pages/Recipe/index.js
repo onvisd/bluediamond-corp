@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import marked from 'marked';
+import moment from 'moment';
 
 import {connector, getRecipe} from 'state/recipe';
+import {setHead} from 'state/head';
 import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 
 import Title from 'components/Title';
@@ -17,7 +19,69 @@ import styles from './styles.module.css';
 
 @preload(async ({dispatch, parameters}) => {
     await Promise.all([
-        dispatch(getRecipe(parameters.slug)),
+        dispatch(getRecipe(parameters.slug)).then((recipe) => {
+            const item = recipe.items[0];
+
+            const stepEntries = {};
+
+            recipe.includes.Entry.forEach((entry) => {
+                if(entry.sys.contentType.sys.id === 'recipeStep')
+                    stepEntries[entry.sys.id] = entry;
+            });
+
+            const steps = item.fields.steps.map((step) => stepEntries[step.sys.id]);
+
+            const assetsById = {};
+            recipe.includes.Asset.forEach((asset) => {
+                assetsById[asset.sys.id] = asset.fields;
+            });
+
+            // Add a structured data script tag to the page header for search engines
+            return dispatch(setHead([
+                <script type="application/ld+json" dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        '@context': 'http://schema.org/',
+                        '@type': 'Recipe',
+                        name: item.fields.name,
+                        image: [
+                            assetsById[item.fields.heroImage.sys.id].file.url.replace(
+                                /^\/\//, 'https://'
+                            )
+                        ],
+                        author: {
+                            '@type': 'Person',
+                            name: 'Blue Diamond'
+                        },
+                        datePublished: moment(item.sys.createdAt).format('YYYY-MM-DD'),
+                        description:
+                            `A ${item.fields.cookTime} minute recipe for ${
+                                item.fields.name
+                            } with Almond Breeze.`,
+                        totalTime: `PT${item.fields.cookTime}M`,
+                        recipeYield:
+                            `${
+                                item.fields.servingSize
+                            } serving${
+                                item.fields.servingSize === 1 ? '' : 's'
+                            }`,
+                        nutrition: {
+                            '@type': 'NutritionInformation',
+                            servingSize:
+                                `${
+                                    item.fields.servingSize
+                                } serving${
+                                    item.fields.servingSize === 1 ? '' : 's'
+                                }`,
+                            fatContent: item.fields.totalFat
+                        },
+                        recipeIngredient: item.fields.ingredients,
+                        recipeInstructions: steps.map((step, idx) =>
+                            `${idx + 1}. ${step.fields.content}`
+                        ).join('\n\n')
+                    })
+                }} />
+            ]));
+        }),
         dispatch(setNavigationStyle({className: 'brand--blue'}))
     ]);
 })
