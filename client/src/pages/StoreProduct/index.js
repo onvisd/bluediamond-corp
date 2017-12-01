@@ -19,7 +19,13 @@ import StoreProductReview from 'components/StoreProductReview';
 
 import styles from './styles.module.css';
 
-@preload(({dispatch, parameters}) => dispatch(getStoreProduct(parameters.slug)))
+@preload(({dispatch, parameters}) =>
+    dispatch(getStoreProduct(parameters.slug)).then(() => {
+        // These are synchronous actions, so we don't need to wait for them
+        dispatch(setStoreNavigation(true));
+        dispatch(setNavigationStyle({className: 'brand--dark'}));
+    })
+)
 @connect(
     (state) => ({
         ...navConnector(state.navigation),
@@ -39,11 +45,6 @@ export default class StoreProduct extends Component {
         });
 
         ReactGA.plugin.execute('ec', 'setAction', 'detail');
-    }
-
-    componentWillMount() {
-        this.props.setStoreNavigation(true);
-        this.props.setNavigationStyle({className: 'brand--dark'});
     }
 
     componentWillUpdate(nextProps) {

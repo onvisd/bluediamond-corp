@@ -35,8 +35,6 @@ import sortByPriority from 'tools/sortByPriority';
 @preload(async ({dispatch}) => {
     await Promise.all([
         dispatch(getCustomer()),
-        dispatch(setStoreNavigation(false)),
-        dispatch(setNavigationStyle({})),
         dispatch(getNavigationData())
     ]);
 })
@@ -89,12 +87,12 @@ export default class Layout extends Component {
             <div>
                 <FooterMobile
                     params={this.props.params}
-                    path={this.props.location.pathname}
+                    isStorePage={this.props.isStorePage}
                 />
                 <Footer
                     data={footerData}
                     params={this.props.params}
-                    path={this.props.location.pathname}
+                    isStorePage={this.props.isStorePage}
                 />
             </div>
         );
@@ -103,7 +101,7 @@ export default class Layout extends Component {
             footer = (
                 <FooterMobile
                     params={this.props.params}
-                    path={this.props.location.pathname}
+                    isStorePage={this.props.isStorePage}
                 />
             );
         } else if(responsive.small !== undefined && !responsive.small) { // eslint-disable-line
@@ -111,7 +109,7 @@ export default class Layout extends Component {
                 <Footer
                     data={footerData}
                     params={this.props.params}
-                    path={this.props.location.pathname}
+                    isStorePage={this.props.isStorePage}
                 />
             );
         }

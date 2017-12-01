@@ -76,7 +76,11 @@ import HeroMobile from 'images/store/hero-750x750.jpg';
             sort: searchViaParam('sort', query),
             search: sortViaParam('search', query)
         }))
-    ]);
+    ]).then(() => {
+        // These are synchronous actions, so we don't need to wait for them
+        dispatch(setStoreNavigation(true));
+        dispatch(setNavigationStyle({className: 'brand--dark'}));
+    });
 })
 @connect(
     (state) => ({
@@ -95,9 +99,6 @@ export default class Store extends Component {
     }
 
     componentWillMount() {
-        this.props.setStoreNavigation(true);
-        this.props.setNavigationStyle({className: 'brand--dark'});
-
         this._impressionCounted = [];
     }
 

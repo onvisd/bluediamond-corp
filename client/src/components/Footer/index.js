@@ -20,11 +20,12 @@ export default class Footer extends Component {
             categories: PropTypes.arrayOf(PropTypes.string).isRequired
         })),
         params: PropTypes.object,
-        path: PropTypes.string
+        path: PropTypes.string,
+        isStorePage: PropTypes.bool
     }
 
     render() {
-        const {data, params, path} = this.props;
+        const {data, params, isStorePage} = this.props;
 
         const social = {
             facebook: 'https://www.facebook.com/BlueDiamondAlmonds/',
@@ -46,7 +47,7 @@ export default class Footer extends Component {
             email: 'support@bdgrowers.com'
         };
 
-        if(path.match(/^\/store/)) {
+        if(isStorePage) {
             contact.phone = '(916) 446-8643';
             contact.email = 'orders@bdgrowers.com';
         }
@@ -54,6 +55,12 @@ export default class Footer extends Component {
         return (
             <footer className={styles.container}>
                 <div className={styles.innerContainer}>
+                    {isStorePage && (
+                        <div className={styles.returnPolicy}>
+                            <strong>Our Return Policy: </strong>
+                            Returns items for up to 30 days after purchase.
+                        </div>
+                    )}
                     <div className={styles.header}>
                         <div className={styles.social}>
                             <span>

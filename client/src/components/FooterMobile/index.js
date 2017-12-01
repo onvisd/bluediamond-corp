@@ -11,11 +11,12 @@ import FooterBG from 'images/backgrounds/wood-footer.jpg';
 
 export default class Footer extends Component {
     static propTypes = {
-        params: PropTypes.object
+        params: PropTypes.object,
+        isStorePage: PropTypes.bool
     }
 
     render() {
-        const {params} = this.props;
+        const {params, isStorePage} = this.props;
 
         const social = {
             facebook: 'https://www.facebook.com/BlueDiamondAlmonds/',
@@ -34,6 +35,12 @@ export default class Footer extends Component {
 
         return (
             <footer className={styles.container}>
+                {isStorePage && (
+                    <div className={styles.returnPolicy}>
+                        <strong>Our Return Policy: </strong>
+                        Returns items for up to 30 days after purchase.
+                    </div>
+                )}
                 <div className={styles.section}>
                     <div>
                         <Link to="/press">
