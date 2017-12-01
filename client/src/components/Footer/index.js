@@ -58,7 +58,7 @@ export default class Footer extends Component {
                     {isStorePage && (
                         <div className={styles.returnPolicy}>
                             <strong>Our Return Policy: </strong>
-                            Returns items for up to 30 days after purchase.
+                            Return items for up to 30 days after purchase.
                         </div>
                     )}
                     <div className={styles.header}>
