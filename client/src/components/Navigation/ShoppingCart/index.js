@@ -87,6 +87,9 @@ export default class ShoppingCart extends Component {
     }
 
     getImageUrl = (variant) => {
+        if(!variant.image && !variant.product)
+            return '';
+
         if(!variant.image)
             return variant.product.images.edges[0].node.src;
 
