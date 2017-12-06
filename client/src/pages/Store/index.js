@@ -19,6 +19,7 @@ import {setStoreSearch} from 'state/storeSearch';
 import {connector as storeSearchConnector} from 'state/storeSearch';
 
 import slugify from 'tools/slugify';
+import unslugify from 'tools/unslugify';
 import filterViaParam from 'tools/filterViaParam';
 import searchViaParam from 'tools/searchViaParam';
 import sortViaParam from 'tools/searchViaParam';
@@ -253,21 +254,24 @@ export default class Store extends Component {
 
     render() {
         const {filters, products, responsive, getProductsPending} = this.props;
-        const {visibleCardCount, filter} = this.props.query;
+        const {visibleCardCount, filter, sort, search} = this.props.query;
 
         const cards = products.products;
         const total = products.total;
+        const unslugifiedSearch = unslugify(search);
 
-        cards.slice(0, visibleCardCount).forEach((card) => {
-            if(this._impressionCounted.indexOf(card.node.title) === -1) {
-                ReactGA.plugin.execute('ec', 'addImpression', {
-                    id: card.node.handle,
-                    name: card.node.title,
-                    brand: card.node.productType
-                });
-                this._impressionCounted.push(card.node.title);
-            }
-        });
+        if(typeof window !== 'undefined') {
+            cards.slice(0, visibleCardCount).forEach((card) => {
+                if (this._impressionCounted.indexOf(card.node.title) === -1) {
+                    ReactGA.plugin.execute('ec', 'addImpression', {
+                        id: card.node.handle,
+                        name: card.node.title,
+                        brand: card.node.productType
+                    });
+                    this._impressionCounted.push(card.node.title);
+                }
+            });
+        }
 
         return (
             <section className="content">
@@ -344,6 +348,7 @@ export default class Store extends Component {
                                         ref={(input) => {
                                             this.search = input;
                                         }}
+                                        value={unslugifiedSearch}
                                         type="text"
                                         placeholder="Search"
                                         title="Type search term here"

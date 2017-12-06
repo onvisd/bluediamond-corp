@@ -64,7 +64,8 @@ export const getCachedShopify = async (keyString, shopifyQuery, callback) => {
 
         const shopifyResult = await shopifyQuery();
 
-        redisClient.setex(keyString, 10, JSON.stringify(shopifyResult));
+        const expiration = 3600 * 72; // 3 days
+        redisClient.setex(keyString, expiration, JSON.stringify(shopifyResult));
         callback(shopifyResult);
     });
 };
