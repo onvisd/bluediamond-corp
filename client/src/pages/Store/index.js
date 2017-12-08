@@ -406,7 +406,7 @@ export default class Store extends Component {
 
                 {/* Tracking pixel */}
                 <img
-                    src="http://r.turn.com/r/beacon?b2=dOm1o2qL7unskeoSfY7ialWAOyhtfOHhe3zQFUms8RRTNbIEOf2fo1LxMUNzxLfqsjLMl8773--xtutTwGUmYQ&cid="
+                    src="https://r.turn.com/r/beacon?b2=dOm1o2qL7unskeoSfY7ialWAOyhtfOHhe3zQFUms8RRTNbIEOf2fo1LxMUNzxLfqsjLMl8773--xtutTwGUmYQ&cid="
                 />
             </section>
         );
