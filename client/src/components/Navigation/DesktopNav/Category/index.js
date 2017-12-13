@@ -44,6 +44,16 @@ const Category = ({bgImage, brand, category, toggleNav}) => (
             >
                 Shop Online
             </Button>
+            {brand.fields.slug === 'almond-breeze' &&
+                <Button
+                    theme="gray"
+                    href={'/recipes'}
+                    onClick={toggleNav.hide}
+                    className={styles.seeAll}
+                >
+                    Browse Recipes
+                </Button>
+            }
         </div>
     </Card>
 );
