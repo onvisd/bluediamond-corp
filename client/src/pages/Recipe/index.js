@@ -116,6 +116,8 @@ export default class Recipe extends Component {
         const assets = recipe.includes.Asset;
         const ingredients = item.fields.ingredients;
         const notes = item.fields.notes;
+        const sourceName = item.fields.sourceName;
+        const sourceUrl = item.fields.sourceUrl;
 
         const stepEntries = {};
         const productEntries = {};
@@ -199,6 +201,12 @@ export default class Recipe extends Component {
                         }
                     </div>
                     <div className={styles.right}>
+                        {sourceName &&
+                            <div className={styles.source}>
+                                <h3>Source</h3>
+                                <a href={sourceUrl} target="_blank">{sourceName}</a>
+                            </div>
+                        }
                         <div className={styles.ingredients}>
                             <h3>Ingredients</h3>
                             <ul>

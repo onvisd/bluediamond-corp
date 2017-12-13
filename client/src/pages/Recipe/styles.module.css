@@ -73,6 +73,23 @@
     }
 }
 
+.source {
+    margin-bottom: 2rem;
+
+    @media (--mq-gt-s) {
+        padding: 1rem 0;
+    }
+
+    & h3 {
+        margin-bottom: 0.5rem;
+    }
+
+    & a {
+        color: var(--c--blue);
+        text-decoration: underline;
+    }
+}
+
 .ingredients {
     margin-bottom: 2rem;
 
