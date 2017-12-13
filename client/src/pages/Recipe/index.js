@@ -157,6 +157,17 @@ export default class Recipe extends Component {
                 <Title>{`Recipe: ${item.fields.name}`}</Title>
                 <Meta>{[
                     {
+                        name: 'keywords',
+                        content:
+                            'Blue Diamond,Blue Diamond Almonds,Almond,Almond Nuts,Almond Snack,' +
+                            'Almond Milk,Snack Nuts,Almond Breeze,Nut Thins,Almond Flavors,' +
+                            'Almond Milk,Nut Milk,Almond Recipes,Nut Recipes,' +
+                            'Almond Cooking,Nut Cooking,Almond Baking,Nut Baking,Almond Dessert,' +
+                            'Nuts Dessert,Recipe,Blue Diamond Recipe' +
+                            'Blue Diamond Almonds Recipe,Almond Milk Recipe,Snack Nut Recipe,' +
+                            'Almond Breeze Recipe,Nut Milk Recipe,'
+                    },
+                    {
                         property: 'og:title',
                         content: item.fields.name
                     },

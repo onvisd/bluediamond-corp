@@ -158,6 +158,18 @@ export default class RecipeIndex extends Component {
                 <Title>Recipes</Title>
                 <Meta>{[
                     {
+                        name: 'keywords',
+                        content:
+                            'Blue Diamond,Blue Diamond Almonds,Almond,Almond Nuts,Almond Snack,' +
+                            'Almond Milk,Snack Nuts,Almond Breeze,Nut Thins,Almond Flavors,' +
+                            'Almond Milk,Nut Milk,Almond Recipes,Nut Recipes,' +
+                            'Almond Cooking,Nut Cooking,Almond Baking,Nut Baking,Almond Dessert,' +
+                            'Nuts Dessert,Recipes,Recipes,Blue Diamond Recipes' +
+                            'Blue Diamond Recipes,Blue Diamond Almonds Recipes,' +
+                            'Blue Diamond Almonds Recipes,Almond Milk Recipe,Snack Nut Recipes,' +
+                            'Almond Breeze Recipes,Nut Milk Recipes,'
+                    },
+                    {
                         property: 'og:title',
                         content: 'Almond Breeze Recipes - Blue Diamond Growers'
                     },
