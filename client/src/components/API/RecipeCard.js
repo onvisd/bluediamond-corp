@@ -50,6 +50,7 @@ export default class RecipeCard extends Component {
                 imageUrl={image}
                 linkTo={{url: `/recipes/${fields.slug}`}}
                 type="recipes"
+                label={fields.name}
             >
                 <h3>{fields.name}</h3>
                 <p>{fields.cookTime} minutes <span>|</span> {fields.difficulty}</p>
