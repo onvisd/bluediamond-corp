@@ -57,11 +57,16 @@ const initFilterState = (location) => {
     return result;
 };
 
+const parseIntQueryParam = (param, location, defaultVal) => {
+    const value = searchViaParam(param, location.query);
+    return parseInt(value) || defaultVal;
+};
+
 @preload(async ({dispatch, location}) => {
     await Promise.all([
         dispatch(getRecipes({
-            skip: searchViaParam('skip', location.query) || 0,
-            perPage: searchViaParam('perPage', location.query) || 0,
+            skip: parseIntQueryParam('skip', location, 0),
+            perPage: parseIntQueryParam('perPage', location, 9),
             sort: 'sys.createdAt',
             filters: initFilterState(location)
         })),
@@ -83,8 +88,8 @@ export default class RecipeIndex extends Component {
         recipes: [],
         assets: [],
         totalCardCount: 0,
-        skip: searchViaParam('skip', this.props.location.query) || 0,
-        perPage: searchViaParam('perPage', this.props.location.query) || 9,
+        skip: parseIntQueryParam('skip', this.props.location, 0),
+        perPage: parseIntQueryParam('perPage', this.props.location, 9),
         filter: null,
         filtersSelectedCount: 0,
         search: '',
