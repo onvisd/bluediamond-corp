@@ -65,6 +65,7 @@ const parseIntQueryParam = (param, location, defaultVal) => {
 @preload(async ({dispatch, location}) => {
     await Promise.all([
         dispatch(getRecipes({
+            search: searchViaParam('search', location.query),
             skip: parseIntQueryParam('skip', location, 0),
             perPage: parseIntQueryParam('perPage', location, 9),
             sort: 'sys.createdAt',
@@ -92,7 +93,7 @@ export default class RecipeIndex extends Component {
         perPage: parseIntQueryParam('perPage', this.props.location, 9),
         filter: null,
         filtersSelectedCount: 0,
-        search: '',
+        search: searchViaParam('search', this.props.location.query),
         searchVisible: false,
         sort: 'sys.createdAt',
         loading: false,
@@ -115,6 +116,7 @@ export default class RecipeIndex extends Component {
             recipes: [...result.items],
             assets,
             totalCardCount: result.total,
+            search: this.search.value,
             loading: false
         }));
     };
@@ -306,6 +308,10 @@ export default class RecipeIndex extends Component {
     };
 
     handleSearchDebounce = () => {
+        this.setState({
+            search: this.search.value
+        });
+
         this.handleSearch();
     };
 
@@ -355,12 +361,33 @@ export default class RecipeIndex extends Component {
 
         if(filter) cards = cards.filter(filterCards);
 
-        return cards.map((card, i) => (
-            <RecipeCard
-                data={{entry: card, assets: this.state.assets}}
-                key={`card${card.sys.id}${i}`}
-            />
-        ));
+        if(cards.length === 0) {
+            return (
+                <div className={`l--row l--align-center ${styles.list}`}>
+                    <div className={classnames('l--col-12', styles.noResultsLabel)}>
+                        No Results
+                    </div>
+                    <div className="l--col-12'">
+                        <a href="/recipes">
+                            <Button theme="blue" type="button">
+                                Clear Filters
+                            </Button>
+                        </a>
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <div className={`l--row l--align-left ${styles.list}`}>
+                {cards.map((card, i) => (
+                    <RecipeCard
+                        data={{entry: card, assets: this.state.assets}}
+                        key={`card${card.sys.id}${i}`}
+                    />
+                ))}
+            </div>
+        );
     };
 
     renderFilterSelect = (title) => {
@@ -390,10 +417,14 @@ export default class RecipeIndex extends Component {
     };
 
     componentWillMount() {
+        let assets = {};
+        if(this.props.recipes.includes)
+            assets = this.props.recipes.includes.Asset;
+
         this.setState(() => ({
             totalCardCount: this.props.recipes.total,
             recipes: this.props.recipes.items,
-            assets: this.props.recipes.includes.Asset
+            assets
         }));
 
         this.props.setNavigationStyle({className: 'brand--blue'});
@@ -513,7 +544,7 @@ export default class RecipeIndex extends Component {
     };
 
     render() {
-        const {totalCardCount, hideFilters, searchVisible, perPage} = this.state;
+        const {totalCardCount, hideFilters, search, searchVisible, perPage} = this.state;
         const {responsive} = this.props;
 
         return (
@@ -652,6 +683,7 @@ export default class RecipeIndex extends Component {
                                             type="text"
                                             placeholder="Search..."
                                             title="Type search term here"
+                                            value={search}
                                         />
                                     </div>
                                 </div>
@@ -681,9 +713,7 @@ export default class RecipeIndex extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className={`l--row l--align-left ${styles.list}`}>
-                                {this.renderRecipeCards()}
-                            </div>
+                            {this.renderRecipeCards()}
                             <div>
                                 <div className="l--row l--mar-top-m l--mar-btm-m">
                                     <div className="l--col-12-at-m l--col-4-at-l t--align-center">
