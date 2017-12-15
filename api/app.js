@@ -25,6 +25,7 @@ app.use(api());
 
 app.server.listen(config.services.api.port);
 
+logger.info(`Running in ${process.env.NODE_ENV} mode`);
 logger.info(
     `Started on port ${app.server.address().port}`
 );

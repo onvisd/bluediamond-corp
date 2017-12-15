@@ -107,6 +107,7 @@ export default function(parameters) {
             throw error;
         }
 
+        console.log(`Running in ${process.env.NODE_ENV} mode`);
         console.log(
             `Render service is listening at port ${config.services.rendering.port}`
         );

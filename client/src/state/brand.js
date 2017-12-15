@@ -1,5 +1,4 @@
 import {action, createHandler, stateConnector} from 'react-isomorphic-render';
-import env from 'tools/env';
 import settings from '../react-isomorphic-render-async';
 
 const handler = createHandler(settings);
@@ -8,7 +7,7 @@ export const getBrand = action({
     namespace: 'BRAND',
     event: 'GET_BRAND',
     action: (slug, http) =>
-        http.get(`/api/brands/${slug}${env.development ? `?${Date.now()}` : ''}`),
+        http.get(`/api/brands/${slug}`),
     result: (state, result) => ({
         ...state,
         brand: result

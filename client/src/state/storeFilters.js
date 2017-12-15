@@ -1,5 +1,4 @@
 import {action, createHandler, stateConnector} from 'react-isomorphic-render';
-import env from 'tools/env';
 import settings from '../react-isomorphic-render-async';
 
 const handler = createHandler(settings);
@@ -18,8 +17,6 @@ export const getStoreFilters = action({
 
         if(search)
             params.push(`search=${search}`);
-        if(env.development)
-            params.push(`${Date.now()}`);
 
         let query = '';
         if(params.length > 0)

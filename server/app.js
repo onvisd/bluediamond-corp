@@ -21,6 +21,7 @@ app.use('/api', proxy(`http://localhost:${config.services.api.port}`));
 app.use(proxy(`http://localhost:${config.services.rendering.port}`));
 
 app.server.listen(config.web.port);
+console.log(`Running in ${process.env.NODE_ENV} mode`);
 console.log(`Started on port ${app.server.address().port}`);
 
 export default app;

@@ -1,5 +1,4 @@
 import {action, createHandler, stateConnector} from 'react-isomorphic-render';
-import env from 'tools/env';
 import settings from '../react-isomorphic-render-async';
 
 const handler = createHandler(settings);
@@ -12,8 +11,6 @@ export const getRecipes = action({
             typeof options.skip === 'undefined' ? '' : `skip=${options.skip}`
         }${
             typeof options.sort === 'undefined' ? '' : `&sort=${options.sort}`
-        }${
-            env.development ? `&${Date.now()}` : ''
         }`
     ),
     result: (state, result) => ({

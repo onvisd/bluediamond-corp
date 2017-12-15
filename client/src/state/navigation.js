@@ -1,5 +1,4 @@
 import {action, createHandler, stateConnector} from 'react-isomorphic-render';
-import env from 'tools/env';
 import settings from '../react-isomorphic-render-async';
 
 const handler = createHandler(settings);
@@ -7,7 +6,7 @@ const handler = createHandler(settings);
 export const getNavigationData = action({
     namespace: 'NAVIGATION',
     event: 'GET_NAVIGATION',
-    action: (http) => http.get(`/api/navigation${env.development ? `?${Date.now()}` : ''}`),
+    action: (http) => http.get('/api/navigation'),
     result: (state, result) => ({
         ...state,
         navigation: {
