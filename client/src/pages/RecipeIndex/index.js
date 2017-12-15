@@ -647,7 +647,7 @@ export default class RecipeIndex extends Component {
                                 dropdown={responsive.small}
                             />
                         </div>
-                        <div className="l--col-12-at-s l--col-9">
+                        <div className="l--col-auto">
                             <div className={`l--row l--align-center ${styles.filter}`}>
                                 <div className="l--col-12-at-s l--col-4">
                                     <h3 className={styles.title}>
