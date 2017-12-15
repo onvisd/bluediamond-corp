@@ -114,6 +114,16 @@
         margin: auto;
         background-color: var(--c--blue-light);
     }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.label {
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .seeMore {

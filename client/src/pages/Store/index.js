@@ -254,7 +254,7 @@ export default class Store extends Component {
 
     render() {
         const {filters, products, responsive, getProductsPending} = this.props;
-        const {visibleCardCount, filter, sort, search} = this.props.query;
+        const {visibleCardCount, filter, search} = this.props.query;
 
         const cards = products.products;
         const total = products.total;
@@ -262,7 +262,7 @@ export default class Store extends Component {
 
         if(typeof window !== 'undefined') {
             cards.slice(0, visibleCardCount).forEach((card) => {
-                if (this._impressionCounted.indexOf(card.node.title) === -1) {
+                if(this._impressionCounted.indexOf(card.node.title) === -1) {
                     ReactGA.plugin.execute('ec', 'addImpression', {
                         id: card.node.handle,
                         name: card.node.title,

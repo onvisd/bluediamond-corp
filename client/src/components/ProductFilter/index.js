@@ -182,7 +182,7 @@ export default class ProductFilter extends Component {
                                     <label
                                         key={`filter${option.value}`}
                                         htmlFor={option.value}
-                                        className={classnames({
+                                        className={classnames(styles.label, {
                                             [styles.disabled]: option.count === 0
                                         })}
                                     >
