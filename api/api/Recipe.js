@@ -10,7 +10,7 @@ export default (api, {contentful}) => {
                 typeof req.query.skip === 'undefined' ? '' : `&skip=${req.query.skip}`
             }${
                 typeof req.query.sort === 'undefined' || !req.query.sort
-                    ? '&order=fields.featured'
+                    ? '&order=fields.featured,sys.createdAt'
                     : `&order=${req.query.sort}`
             }${
                 typeof req.query.search === 'undefined'

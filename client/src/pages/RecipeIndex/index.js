@@ -68,7 +68,7 @@ const parseIntQueryParam = (param, location, defaultVal) => {
             search: searchViaParam('search', location.query),
             skip: parseIntQueryParam('skip', location, 0),
             perPage: parseIntQueryParam('perPage', location, 9),
-            sort: 'sys.createdAt',
+            sort: 'fields.featured,sys.createdAt',
             filters: initFilterState(location)
         })),
         dispatch(setNavigationStyle({className: 'brand--blue'}))
@@ -95,7 +95,7 @@ export default class RecipeIndex extends Component {
         filtersSelectedCount: 0,
         search: searchViaParam('search', this.props.location.query),
         searchVisible: false,
-        sort: 'sys.createdAt',
+        sort: 'fields.featured,sys.createdAt',
         loading: false,
         hideFilters: true,
         filters: initFilterState(this.props.location)
