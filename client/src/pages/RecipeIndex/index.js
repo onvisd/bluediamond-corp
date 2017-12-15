@@ -16,6 +16,7 @@ import ProductFilter from 'components/ProductFilter';
 
 import addQuery from 'tools/addQuery';
 import removeQuery from 'tools/removeQuery';
+import searchViaParam from 'tools/searchViaParam';
 import filterViaParam from 'tools/filterViaParam';
 import callFloodlight from 'tools/callFloodlight';
 
@@ -59,8 +60,8 @@ const initFilterState = (location) => {
 @preload(async ({dispatch, location}) => {
     await Promise.all([
         dispatch(getRecipes({
-            skip: 0,
-            perPage: 9,
+            skip: searchViaParam('skip', location.query) || 0,
+            perPage: searchViaParam('perPage', location.query) || 0,
             sort: 'sys.createdAt',
             filters: initFilterState(location)
         })),
@@ -82,8 +83,8 @@ export default class RecipeIndex extends Component {
         recipes: [],
         assets: [],
         totalCardCount: 0,
-        skip: 0,
-        perPage: 9,
+        skip: searchViaParam('skip', this.props.location.query) || 0,
+        perPage: searchViaParam('perPage', this.props.location.query) || 9,
         filter: null,
         filtersSelectedCount: 0,
         search: '',
@@ -587,16 +588,6 @@ export default class RecipeIndex extends Component {
                                 initState={this.selectedFilters('almondBreezeFlavor')}
                                 onClear={this.clearFilter('almondBreezeFlavor')}
                                 onClick={this.handleFilterChange('almondBreezeFlavor')}
-                                dropdown={responsive.small}
-                            />
-                            <ProductFilter
-                                title="Featured"
-                                filter="collections"
-                                filters={Object.keys(this.state.filters.featured)}
-                                query="values"
-                                initState={this.selectedFilters('featured')}
-                                onClear={this.clearFilter('featured')}
-                                onClick={this.handleFilterChange('featured')}
                                 dropdown={responsive.small}
                             />
                             <ProductFilter

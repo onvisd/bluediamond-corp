@@ -21,10 +21,6 @@ export default (api, {contentful}) => {
                     ? ''
                     : `&fields.consumerSymbols[in]=${req.query.dietaryFilters}`
             }${
-                typeof req.query.almondBreezeFlavor === 'undefined'
-                    ? ''
-                    : `&fields.includedProducts[in]=${req.query.almondBreezeFlavor}`
-            }${
                 typeof req.query.category === 'undefined'
                     ? ''
                     : `&fields.category[in]=${encodeURIComponent(req.query.category)}`
