@@ -16,7 +16,7 @@ export const getRecipes = action({
     namespace: 'RECIPES',
     event: 'GET_RECIPES',
     action: (options, http) => {
-        const {search, skip, sort} = options;
+        const {limit, search, skip, sort} = options;
         const filters = Object.assign({}, options.filters);
 
         Object.keys(filters).map(function(filterTitle) {
@@ -41,6 +41,8 @@ export const getRecipes = action({
                 typeof sort === 'undefined' || sort === null
                     ? '&sort=fields.featured'
                     : `&sort=${sort}`
+            }${
+                typeof limit === 'undefined' ? '' : `&limit=${limit}`
             }${
                 typeof search === 'undefined' ? '' : `&search=${search}`
             }${

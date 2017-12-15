@@ -58,7 +58,12 @@ const initFilterState = (location) => {
 
 @preload(async ({dispatch, location}) => {
     await Promise.all([
-        dispatch(getRecipes({skip: 0, sort: 'sys.createdAt', filters: initFilterState(location)})),
+        dispatch(getRecipes({
+            skip: 0,
+            perPage: 9,
+            sort: 'sys.createdAt',
+            filters: initFilterState(location)
+        })),
         dispatch(setNavigationStyle({className: 'brand--blue'}))
     ]);
 })
@@ -77,7 +82,7 @@ export default class RecipeIndex extends Component {
         recipes: [],
         assets: [],
         totalCardCount: 0,
-        skip: 9,
+        skip: 0,
         perPage: 9,
         filter: null,
         filtersSelectedCount: 0,
@@ -89,7 +94,7 @@ export default class RecipeIndex extends Component {
         filters: initFilterState(this.props.location)
     };
 
-    setGetRecipesResultsState = (result, filters, filtersSelectedCount, sort) => {
+    setGetRecipesResultsState = (result, filters, filtersSelectedCount, sort, skip, perPage) => {
         let assets = [];
 
         if(result.includes)
@@ -99,11 +104,42 @@ export default class RecipeIndex extends Component {
             filters,
             filtersSelectedCount,
             sort,
+            skip,
+            perPage,
             recipes: [...result.items],
             assets,
             totalCardCount: result.total,
             loading: false
         }));
+    };
+
+    setPage = (page) => {
+        const {perPage, totalCardCount} = this.state;
+
+        let newSkip = (page - 1) * perPage;
+        if(newSkip > totalCardCount)
+            newSkip = totalCardCount;
+
+        this.getNextRecipes(newSkip, perPage);
+    };
+
+    prevPage = () => {
+        const {perPage} = this.state;
+        let newSkip = this.props.recipes.skip - perPage;
+        if(newSkip < 0)
+            newSkip = 0;
+        this.getNextRecipes(newSkip, perPage);
+    };
+
+    nextPage = () => {
+        const {perPage, totalCardCount} = this.state;
+        const {skip} = this.props.recipes;
+
+        let newSkip = skip + perPage;
+        if(newSkip > totalCardCount)
+            newSkip = totalCardCount - 1;
+
+        this.getNextRecipes(newSkip, perPage);
     };
 
     handleLoadMore = () => {
@@ -136,8 +172,20 @@ export default class RecipeIndex extends Component {
         return count;
     };
 
+    handlePerPage = () => {
+        const {skip} = this.props.recipes;
+        const newPerPage = parseInt(this.perPage.value);
+        const newSkip = skip - (skip % newPerPage);
+
+        this.setState(() => ({
+            perPage: newPerPage
+        }));
+
+        this.getNextRecipes(newSkip, newPerPage);
+    };
+
     handleSort = () => {
-        const {filters, filtersSelectedCount, search} = this.state;
+        const {filters, filtersSelectedCount, search, perPage} = this.state;
         const sort = this.sort.value === '' ? null : this.sort.value;
 
         addQuery({sort});
@@ -146,9 +194,11 @@ export default class RecipeIndex extends Component {
             loading: true
         }));
 
-        this.props.getRecipes({skip: 0, sort, search, filters})
+        this.props.getRecipes({skip: 0, sort, search, filters, limit: perPage})
             .then((result) =>
-                this.setGetRecipesResultsState(result, filters, filtersSelectedCount, sort)
+                this.setGetRecipesResultsState(
+                    result, filters, filtersSelectedCount, sort, 0, perPage
+                )
             )
             .catch((err) => console.trace(err));
 
@@ -160,7 +210,7 @@ export default class RecipeIndex extends Component {
     };
 
     handleFilterChange = (filterTitle) => (e) => {
-        const {filters, filtersSelectedCount, sort, search} = this.state;
+        const {filters, filtersSelectedCount, sort, perPage, search} = this.state;
         const checked = e.currentTarget.checked;
         filters[filterTitle][e.target.value] = checked;
 
@@ -175,9 +225,11 @@ export default class RecipeIndex extends Component {
         else
             removeQuery(filterTitle);
 
-        this.props.getRecipes({skip: 0, sort, search, filters})
+        this.props.getRecipes({skip: 0, sort, search, filters, limit: perPage})
             .then((result) =>
-                this.setGetRecipesResultsState(result, filters, filtersSelectedCount, sort)
+                this.setGetRecipesResultsState(
+                    result, filters, filtersSelectedCount, sort, 0, perPage
+                )
             )
             .catch((err) => console.trace(err));
 
@@ -189,7 +241,7 @@ export default class RecipeIndex extends Component {
     };
 
     clearFilter = (filterTitle) => () => {
-        const {filters, filtersSelectedCount, sort, search} = this.state;
+        const {filters, filtersSelectedCount, sort, search, perPage} = this.state;
 
         Object.keys(filters[filterTitle]).map(function(filter) {
             filters[filterTitle][filter] = false;
@@ -197,9 +249,11 @@ export default class RecipeIndex extends Component {
 
         removeQuery(filterTitle);
 
-        this.props.getRecipes({skip: 0, sort, search, filters})
+        this.props.getRecipes({skip: 0, sort, search, filters, limit: perPage})
             .then((result) =>
-                this.setGetRecipesResultsState(result, filters, filtersSelectedCount, sort)
+                this.setGetRecipesResultsState(
+                    result, filters, filtersSelectedCount, sort, 0, perPage
+                )
             )
             .catch((err) => console.trace(err));
     };
@@ -216,17 +270,19 @@ export default class RecipeIndex extends Component {
     };
 
     handleFilterApply = () => {
-        const {filters, search, sort} = this.state;
+        const {filters, search, sort, perPage} = this.state;
 
-        this.props.getRecipes({skip: 0, sort, search, filters})
+        this.props.getRecipes({skip: 0, sort, search, filters, limit: perPage})
             .then((result) =>
-                this.setGetRecipesResultsState(result, filters, this.filtersSelectedCount(), sort)
+                this.setGetRecipesResultsState(
+                    result, filters, this.filtersSelectedCount(), sort, 0, perPage
+                )
             )
             .catch((err) => console.trace(err));
     };
 
     handleFilterClear = () => {
-        const {filters, filtersSelectedCount, search, sort} = this.state;
+        const {filters, filtersSelectedCount, search, sort, perPage} = this.state;
 
         Object.keys(filters).map(function(filterTitle) {
             Object.keys(filters[filterTitle]).map(function(filterOption) {
@@ -234,9 +290,11 @@ export default class RecipeIndex extends Component {
             });
         });
 
-        this.props.getRecipes({skip: 0, sort, search, filters})
+        this.props.getRecipes({skip: 0, sort, search, filters, limit: perPage})
             .then((result) =>
-                this.setGetRecipesResultsState(result, filters, filtersSelectedCount, sort)
+                this.setGetRecipesResultsState(
+                    result, filters, filtersSelectedCount, sort, 0, perPage
+                )
             )
             .catch((err) => console.trace(err));
     };
@@ -246,7 +304,7 @@ export default class RecipeIndex extends Component {
     };
 
     handleSearch = () => {
-        const {filters, filtersSelectedCount, sort} = this.state;
+        const {filters, filtersSelectedCount, sort, perPage} = this.state;
         const search = this.search.value;
 
         if(search === '')
@@ -254,9 +312,11 @@ export default class RecipeIndex extends Component {
         else
             addQuery({search});
 
-        this.props.getRecipes({skip: 0, sort, search, filters})
+        this.props.getRecipes({skip: 0, sort, search, filters, limit: perPage})
             .then((result) =>
-                this.setGetRecipesResultsState(result, filters, filtersSelectedCount, sort)
+                this.setGetRecipesResultsState(
+                    result, filters, filtersSelectedCount, sort, 0, perPage
+                )
             )
             .catch((err) => console.trace(err));
     };
@@ -347,22 +407,107 @@ export default class RecipeIndex extends Component {
         this.handleSearch = debounce(this.handleSearch, 300);
     }
 
-    getNextRecipes() {
-        const {filters, skip, sort} = this.state;
+    getNextRecipes(newSkip, newPerPage) {
+        const {filters, filtersSelectedCount, search, sort} = this.state;
 
-        return this.props.getRecipes({skip, sort, filters})
+        this.setState({
+            loading: true
+        });
+
+        addQuery({skip: newSkip, perPage: newPerPage});
+
+        this.props.getRecipes({skip: newSkip, limit: newPerPage, sort, search, filters})
             .then((result) => {
+                this.setGetRecipesResultsState(
+                    result, filters, filtersSelectedCount, sort, newSkip, newPerPage
+                );
                 this.setState((state) => ({
-                    recipes: [...state.recipes, ...result.items],
+                    skip: result.skip,
+                    recipes: [...result.items],
                     assets: [...state.assets, ...result.includes.Asset],
                     loading: false
                 }));
             })
             .catch((err) => console.trace(err));
+
+        this.search.scrollIntoView({behavior: 'smooth'});
     }
 
+    renderNavButtons = () => {
+        const {perPage, totalCardCount} = this.state;
+        const {skip} = this.props.recipes;
+
+        if(skip === 'undefined' || totalCardCount === 'undefined')
+            return <div/>;
+
+        const currentPage = Math.floor(skip / perPage) + 1;
+        const lastPage = Math.ceil(totalCardCount / perPage);
+
+        let start;
+        let end;
+        if(currentPage - 2 < 1) {
+            start = 1;
+            end = start + 4;
+        } else if(currentPage + 2 > lastPage) {
+            end = lastPage;
+            start = lastPage - 4;
+        } else {
+            start = currentPage - 2;
+            end = currentPage + 2;
+        }
+
+        if(start < 1)
+            start = 1;
+        if(end > lastPage)
+            end = lastPage;
+
+        const pages = [];
+        for (let i = start; i <= end; i++) {
+            const pageIndex = i;
+            pages.push(
+                <a
+                    key={`page-${pageIndex}`}
+                    onClick={() => this.setPage(pageIndex)}
+                    className={classnames(
+                        styles.pageButton,
+                        {
+                            [styles.currentPage]: pageIndex === currentPage
+                        }
+                    )}
+                >
+                    <span
+                        className={classnames(
+                            styles.pageButtonContainer,
+                            {
+                                [styles.currentPage]: pageIndex === currentPage
+                            }
+                        )}
+                    >
+                        {pageIndex}
+                    </span>
+                </a>
+            );
+        }
+
+        return (
+            <div className="l--col-12-at-m l--col-7-at-l t--align-center">
+                {
+                    skip >= perPage
+                        ? <a className={styles.navButton} onClick={this.prevPage}>&lt; Prev</a>
+                        : null
+                }
+                {pages}
+                {
+                    skip < totalCardCount - perPage
+                        ? <a className={styles.navButton} onClick={this.nextPage}>Next &gt;</a>
+                        : null
+                }
+            </div>
+        );
+    };
+
     render() {
-        const {skip, totalCardCount, loading, hideFilters, searchVisible} = this.state;
+        const {totalCardCount, hideFilters, searchVisible, perPage} = this.state;
         const {responsive} = this.props;
 
         return (
@@ -543,18 +688,26 @@ export default class RecipeIndex extends Component {
                             <div className={`l--row l--align-left ${styles.list}`}>
                                 {this.renderRecipeCards()}
                             </div>
-                            <div className={classnames({isHidden: skip >= totalCardCount})}>
+                            <div>
                                 <div className="l--row l--mar-top-m l--mar-btm-m">
-                                    <div className="l--col-12 t--align-center">
-                                        <Button
-                                            onClick={this.handleLoadMore}
-                                            theme="blueLight"
-                                            type="button"
-                                            disabled={loading === true}
-                                        >
-                                            {loading ? 'Loading...' : 'Load more recipes'}
-                                        </Button>
+                                    <div className="l--col-12-at-m l--col-4-at-l t--align-center">
+                                        <div className="form--select">
+                                            <select
+                                                ref={(page) => {
+                                                    this.perPage = page;
+                                                }}
+                                                onChange={this.handlePerPage}
+                                                className={styles.resultCountSelect}
+                                                value={perPage}
+                                            >
+                                                <option value={9}>9 results per page</option>
+                                                <option value={15}>15 results per page</option>
+                                                <option value={24}>24 results per page</option>
+                                            </select>
+                                        </div>
                                     </div>
+                                    <div className="l--col-1 t--align-center"/>
+                                    {this.renderNavButtons()}
                                 </div>
                             </div>
                         </div>

@@ -76,6 +76,18 @@
     }
 }
 
+.grayDark {
+    composes: base;
+    color: var(--c--black);
+    background-color: var(--c--gray-light);
+
+    &:hover,
+    &:focus {
+        color: var(--c--black);
+        background-color: var(--c--gray);
+    }
+}
+
 .blue {
     composes: base;
     color: var(--c--white);

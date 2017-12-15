@@ -101,6 +101,36 @@
     margin: 0 8px 0 0;
 }
 
+.navButton {
+    padding: 0 5px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.pageButtonContainer {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    padding: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &.currentPage {
+        background-color: var(--c--blue);
+    }
+}
+
+.pageButton {
+    color: var(--c--gray-dark);
+    &.currentPage {
+        color: var(--c--white);
+    }
+
+    @media (--mq-s) {
+        display: none;
+    }
+}
+
 .title {
     margin: 0;
 
@@ -127,6 +157,10 @@
 .refine {
     padding: 50px 0 0.5rem;
     border-bottom: 1px solid var(--c--gray-light);
+}
+
+.resultCountSelect {
+    margin: 0 0 20px;
 }
 
 .hideSort {
