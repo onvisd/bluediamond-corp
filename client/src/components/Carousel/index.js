@@ -11,6 +11,7 @@ export default class Carousel extends Component {
     static propTypes = {
         cards: PropTypes.array.isRequired,
         settings: PropTypes.object,
+        id: PropTypes.string,
         classNames: PropTypes.object,
         containerClass: PropTypes.string,
         cardClasses: PropTypes.object,
@@ -161,38 +162,40 @@ export default class Carousel extends Component {
     }
 
     render() {
-        const {cards, settings, classNames, showOverlay, showArrows, showTabs} = this.props;
+        const {cards, settings, classNames, showOverlay, showArrows, showTabs, id} = this.props;
 
         const pages = cards.map((card, idx) => idx)
             .filter((card, idx) => idx % settings.viewsToShow === 0);
 
         return (
-            <ViewPager className={classNames.container}>
-                <Frame>
-                    <Track
-                        onViewChange={this.handleSwipe}
-                        style={{display: 'flex'}}
-                        ref={(track) => {
-                            this.carouselTrack = track;
-                        }}
-                        {...settings}
-                    >
-                        {cards.map((card, idx) => (
-                            <View style={{flex: '1'}} key={`card-${idx}`}>
-                                {card}
-                            </View>
-                        ))}
-                    </Track>
-                </Frame>
-                {showOverlay && pages.length > 1 ? (
-                    <div
-                        className={styles.overlay}
-                        style={this.getOverlayStyle()}
-                    />
-                ) : null}
-                {showArrows && this.renderArrow()}
-                {showTabs && this.renderTabs()}
-            </ViewPager>
+            <div id={id}>
+                <ViewPager className={classNames.container}>
+                    <Frame>
+                        <Track
+                            onViewChange={this.handleSwipe}
+                            style={{display: 'flex'}}
+                            ref={(track) => {
+                                this.carouselTrack = track;
+                            }}
+                            {...settings}
+                        >
+                            {cards.map((card, idx) => (
+                                <View style={{flex: '1'}} key={`card-${idx}`}>
+                                    {card}
+                                </View>
+                            ))}
+                        </Track>
+                    </Frame>
+                    {showOverlay && pages.length > 1 ? (
+                        <div
+                            className={styles.overlay}
+                            style={this.getOverlayStyle()}
+                        />
+                    ) : null}
+                    {showArrows && this.renderArrow()}
+                    {showTabs && this.renderTabs()}
+                </ViewPager>
+            </div>
         );
     }
 }

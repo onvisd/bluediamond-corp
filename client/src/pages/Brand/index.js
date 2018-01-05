@@ -144,6 +144,7 @@ export default class Brand extends Component {
                 />
                 {brand.fields.stories && (
                     <Carousel
+                        id="stories"
                         classNames={{container: styles.carousel}}
                         showArrows
                         showTabs
