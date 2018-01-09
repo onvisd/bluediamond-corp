@@ -4,6 +4,7 @@ export {default as navigation} from './navigation';
 export {default as preload} from './preload';
 export {default as recipe} from './recipe';
 export {default as recipes} from './recipes';
+export {default as recipeFilters} from './recipeFilters';
 export {default as pageData} from './pageData';
 export {default as brand} from './brand';
 export {default as home} from './home';

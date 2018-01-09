@@ -6,6 +6,7 @@ import ReactGA from 'react-ga';
 import debounce from 'lodash/debounce';
 
 import {connector, getRecipes} from 'state/recipes';
+import {connector as recipeFilterConnector, getRecipeFilters} from 'state/recipeFilters';
 import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 
 import Title from 'components/Title';
@@ -24,42 +25,30 @@ import styles from './styles.module.css';
 
 import HeroImage from 'images/backgrounds/recipe-hero.jpg';
 
-
-const filterSelections = {
-    category: ['Smoothies & Shakes', 'Soups & Chillis', 'Cakes, Pies & Cookies', 'Ice Cream & Popscicles',
-        'Pancake, Waffles & Muffins', 'Breads & Biscuits', 'Pasta', 'Slow Cooker', 'No Bake & Overnight', 'Drinks',
-        'Appetizers & Sides', 'Main Dishes', 'Breakfast', 'Lunch', 'Dinner', 'Desserts'
-    ],
-    seasonal: ['Spring', 'Summer', 'Fall', 'Winter', 'Tailgate & Superbowl', 'Parties', 'Holiday', 'Easter',
-        'Fourth of July', 'Halloween', 'St. Pattty', 'V-Day'
-    ],
-    dietary: ['Dairy-Free', 'Gluten-Free', 'Vegan'],
-    almondBreezeFlavor: ['Unsweetened', 'Original', 'Vanilla', 'Chocolate', 'Hint of Honey'],
-    featured: ['Food Festival', 'TV / Website', 'Magazine', 'Food Blogger'],
-    difficulty: ['Easy', 'Medium', 'Hard'],
-    ingredients: ['Chicken', 'Beef', 'Shrimp', 'Fish']
+const parseIntQueryParam = (param, location, defaultVal) => {
+    const value = searchViaParam(param, location.query);
+    return parseInt(value) || defaultVal;
 };
 
-const initFilterState = (location) => {
+const initGetFilter = (location) => {
     const query = location.query;
     const result = {};
 
-    Object.keys(filterSelections).map(function(filterTitle) {
+    Object.keys(query).map(function(filterTitle) {
         const param = new Set(filterViaParam(filterTitle, query));
         const filters = {};
-        filterSelections[filterTitle].map(function(f) {
+
+        const options = query[filterTitle].split('|');
+
+        options.map(function(f) {
             // handle special case where 'Dairy-Free' is unslugified to 'Dairy Free'
             filters[f] = param.has(f.replace('-', ' '));
         });
+
         result[filterTitle] = filters;
     });
 
     return result;
-};
-
-const parseIntQueryParam = (param, location, defaultVal) => {
-    const value = searchViaParam(param, location.query);
-    return parseInt(value) || defaultVal;
 };
 
 @preload(async ({dispatch, location}) => {
@@ -69,8 +58,9 @@ const parseIntQueryParam = (param, location, defaultVal) => {
             skip: parseIntQueryParam('skip', location, 0),
             perPage: parseIntQueryParam('perPage', location, 9),
             sort: 'fields.featured,sys.createdAt',
-            filters: initFilterState(location)
+            filters: initGetFilter(location)
         })),
+        dispatch(getRecipeFilters()),
         dispatch(setNavigationStyle({className: 'brand--blue'}))
     ]);
 })
@@ -78,12 +68,45 @@ const parseIntQueryParam = (param, location, defaultVal) => {
     (state) => ({
         responsive: state.responsive,
         ...connector(state.recipes),
+        ...recipeFilterConnector(state.recipeFilters),
         ...navConnector(state.navigation)
     }),
-    {getRecipes, setNavigationStyle}
+    {getRecipes, getRecipeFilters, setNavigationStyle}
 )
-
 export default class RecipeIndex extends Component {
+    filterSelections = () => this.props.getRecipeFilters()
+        .then((result) => result)
+        .catch((err) => console.trace(err));
+
+    initFilterState = (location, filterList) => {
+        const query = location.query;
+        const result = {};
+
+        Object.keys(filterList).map(function(filterTitle) {
+            const param = new Set(filterViaParam(filterTitle, query));
+            let filters = {};
+
+            if(filterTitle === 'almondBreezeFlavor') {
+                filters = [];
+
+                filterList[filterTitle].map(function(f) {
+                    filters.push({
+                        ...f,
+                        checked: param.has(f.id.toLowerCase())
+                    });
+                });
+            } else {
+                filterList[filterTitle].map(function(f) {
+                    // handle special case where 'Dairy-Free' is unslugified to 'Dairy Free'
+                    filters[f] = param.has(f.replace('-', ' '));
+                });
+            }
+
+            result[filterTitle] = filters;
+        });
+
+        return result;
+    };
 
     state = {
         recipes: [],
@@ -98,10 +121,11 @@ export default class RecipeIndex extends Component {
         sort: 'fields.featured,sys.createdAt',
         loading: false,
         hideFilters: true,
-        filters: initFilterState(this.props.location)
+        filters: [],
+        allFilters: []
     };
 
-    setGetRecipesResultsState = (result, filters, filtersSelectedCount, sort, skip, perPage) => {
+    setGetRecipesResultsState = (result, filters, filtersSelectedCount, sort, skip, perPage) => { // eslint-disable-line
         let assets = [];
 
         if(result.includes)
@@ -220,20 +244,45 @@ export default class RecipeIndex extends Component {
     handleFilterChange = (filterTitle) => (e) => {
         const {filters, filtersSelectedCount, sort, perPage, search} = this.state;
         const checked = e.currentTarget.checked;
-        filters[filterTitle][e.target.value] = checked;
-
+        const filterList = filters[filterTitle];
         const filterQuery = [];
-        Object.keys(filters[filterTitle]).map(function(filter) {
-            if(filters[filterTitle][filter])
-                filterQuery.push(filter);
-        });
+
+        if(Array.isArray(filterList)) {
+            const targetFilter = filterList.find((f) => f.id === e.target.value);
+
+            if(targetFilter)
+                targetFilter.checked = checked;
+
+            filterList.filter((filter) => filter.checked).forEach((filter) => {
+                filterQuery.push(filter.id);
+            });
+        } else {
+            filterList[e.target.value] = checked;
+
+            Object.keys(filterList).forEach((filter) => {
+                if(filters[filterTitle][filter])
+                    filterQuery.push(filter);
+            });
+        }
 
         if(filterQuery.length > 0)
             addQuery({[filterTitle]: filterQuery.join('|')});
         else
             removeQuery(filterTitle);
 
-        this.props.getRecipes({skip: 0, sort, search, filters, limit: perPage})
+        const flavorFilter = {};
+        filters.almondBreezeFlavor.forEach((f) => {
+            flavorFilter[f.id] = f.checked;
+        });
+
+        this.props.getRecipes({
+            skip: 0,
+            sort,
+            search,
+            filters: Object.assign({}, filters, {
+                almondBreezeFlavor: flavorFilter
+            }),
+            limit: perPage})
             .then((result) =>
                 this.setGetRecipesResultsState(
                     result, filters, filtersSelectedCount, sort, 0, perPage
@@ -251,13 +300,28 @@ export default class RecipeIndex extends Component {
     clearFilter = (filterTitle) => () => {
         const {filters, filtersSelectedCount, sort, search, perPage} = this.state;
 
-        Object.keys(filters[filterTitle]).map(function(filter) {
-            filters[filterTitle][filter] = false;
+        Object.keys(filters[filterTitle]).map((filter) => {
+            if(filterTitle === 'almondBreezeFlavor')
+                filters[filterTitle][filter].checked = false;
+            else
+                filters[filterTitle][filter] = false;
         });
 
         removeQuery(filterTitle);
 
-        this.props.getRecipes({skip: 0, sort, search, filters, limit: perPage})
+        const flavorFilter = {};
+        filters.almondBreezeFlavor.forEach((f) => {
+            flavorFilter[f.id] = f.checked;
+        });
+
+        this.props.getRecipes({
+            skip: 0,
+            sort,
+            search,
+            filters: Object.assign({}, filters, {
+                almondBreezeFlavor: flavorFilter
+            }),
+            limit: perPage})
             .then((result) =>
                 this.setGetRecipesResultsState(
                     result, filters, filtersSelectedCount, sort, 0, perPage
@@ -269,9 +333,16 @@ export default class RecipeIndex extends Component {
     selectedFilters = (filterTitle) => {
         const {filters} = this.state;
         const selectedFilters = [];
-        Object.keys(filters[filterTitle]).map(function(filter) {
-            if(filters[filterTitle][filter])
+
+        Object.keys(filters[filterTitle]).map((filter) => {
+            const targetFilter = filters[filterTitle][filter];
+
+            if(typeof targetFilter === 'object') {
+                if(targetFilter.checked)
+                    selectedFilters.push(targetFilter.id);
+            } else if(filters[filterTitle][filter]) {
                 selectedFilters.push(filter);
+            }
         });
 
         return selectedFilters;
@@ -280,7 +351,19 @@ export default class RecipeIndex extends Component {
     handleFilterApply = () => {
         const {filters, search, sort, perPage} = this.state;
 
-        this.props.getRecipes({skip: 0, sort, search, filters, limit: perPage})
+        const flavorFilter = {};
+        filters.almondBreezeFlavor.forEach((f) => {
+            flavorFilter[f.id] = f.checked;
+        });
+
+        this.props.getRecipes({
+            skip: 0,
+            sort,
+            search,
+            filters: Object.assign({}, filters, {
+                almondBreezeFlavor: flavorFilter
+            }),
+            limit: perPage})
             .then((result) =>
                 this.setGetRecipesResultsState(
                     result, filters, this.filtersSelectedCount(), sort, 0, perPage
@@ -298,7 +381,19 @@ export default class RecipeIndex extends Component {
             });
         });
 
-        this.props.getRecipes({skip: 0, sort, search, filters, limit: perPage})
+        const flavorFilter = {};
+        filters.almondBreezeFlavor.forEach((f) => {
+            flavorFilter[f.id] = f.checked;
+        });
+
+        this.props.getRecipes({
+            skip: 0,
+            sort,
+            search,
+            filters: Object.assign({}, filters, {
+                almondBreezeFlavor: flavorFilter
+            }),
+            limit: perPage})
             .then((result) =>
                 this.setGetRecipesResultsState(
                     result, filters, filtersSelectedCount, sort, 0, perPage
@@ -324,13 +419,33 @@ export default class RecipeIndex extends Component {
         else
             addQuery({search});
 
-        this.props.getRecipes({skip: 0, sort, search, filters, limit: perPage})
+        const flavorFilter = {};
+        if(filters.almondBreezeFlavor) {
+            filters.almondBreezeFlavor.forEach((f) => {
+                flavorFilter[f.id] = f.checked;
+            });
+        }
+
+        this.props.getRecipes({
+            skip: 0,
+            sort,
+            search,
+            filters: Object.assign({}, filters, {
+                almondBreezeFlavor: flavorFilter
+            }),
+            limit: perPage})
             .then((result) =>
                 this.setGetRecipesResultsState(
                     result, filters, filtersSelectedCount, sort, 0, perPage
                 )
             )
             .catch((err) => console.trace(err));
+
+        ReactGA.event({
+            category: 'interaction',
+            action: 'search',
+            label: search
+        });
     };
 
     handleSearchVisibility = () => {
@@ -424,6 +539,8 @@ export default class RecipeIndex extends Component {
         this.setState(() => ({
             totalCardCount: this.props.recipes.total,
             recipes: this.props.recipes.items,
+            allFilters: this.props.recipeFilters,
+            filters: this.initFilterState(this.props.location, this.props.recipeFilters),
             assets
         }));
 
@@ -453,7 +570,19 @@ export default class RecipeIndex extends Component {
 
         addQuery({skip: newSkip, perPage: newPerPage});
 
-        this.props.getRecipes({skip: newSkip, limit: newPerPage, sort, search, filters})
+        const flavorFilter = {};
+        filters.almondBreezeFlavor.forEach((f) => {
+            flavorFilter[f.id] = f.checked;
+        });
+
+        this.props.getRecipes({
+            skip: newSkip,
+            limit: newPerPage,
+            sort,
+            search,
+            filters: Object.assign({}, filters, {
+                almondBreezeFlavor: flavorFilter
+            })})
             .then((result) => {
                 this.setGetRecipesResultsState(
                     result, filters, filtersSelectedCount, sort, newSkip, newPerPage
@@ -544,7 +673,14 @@ export default class RecipeIndex extends Component {
     };
 
     render() {
-        const {totalCardCount, hideFilters, search, searchVisible, perPage} = this.state;
+        const {
+            totalCardCount,
+            hideFilters,
+            search,
+            searchVisible,
+            perPage,
+            allFilters
+        } = this.state;
         const {responsive} = this.props;
 
         return (
@@ -586,66 +722,34 @@ export default class RecipeIndex extends Component {
                     <div className="l--row">
                         <div className={`l--col-3 ${styles.leftFilters}`}>
                             <p className={`t--type-incidental ${styles.refine}`}>Refine by:</p>
-                            <ProductFilter
-                                title="Category"
-                                filter="collections"
-                                filters={Object.keys(this.state.filters.category)}
-                                query="values"
-                                initState={this.selectedFilters('category')}
-                                onClear={this.clearFilter('category')}
-                                onClick={this.handleFilterChange('category')}
-                                dropdown={responsive.small}
-                            />
-                            <ProductFilter
-                                title="Seasonal"
-                                filter="collections"
-                                filters={Object.keys(this.state.filters.seasonal)}
-                                query="values"
-                                initState={this.selectedFilters('seasonal')}
-                                onClear={this.clearFilter('seasonal')}
-                                onClick={this.handleFilterChange('seasonal')}
-                                dropdown={responsive.small}
-                            />
-                            <ProductFilter
-                                title="Dietary"
-                                filter="collections"
-                                filters={Object.keys(this.state.filters.dietary)}
-                                query="values"
-                                initState={this.selectedFilters('dietary')}
-                                onClear={this.clearFilter('dietary')}
-                                onClick={this.handleFilterChange('dietary')}
-                                dropdown={responsive.small}
-                            />
-                            <ProductFilter
-                                title="Almond Breeze"
-                                filter="collections"
-                                filters={Object.keys(this.state.filters.almondBreezeFlavor)}
-                                query="values"
-                                initState={this.selectedFilters('almondBreezeFlavor')}
-                                onClear={this.clearFilter('almondBreezeFlavor')}
-                                onClick={this.handleFilterChange('almondBreezeFlavor')}
-                                dropdown={responsive.small}
-                            />
-                            <ProductFilter
-                                title="Difficulty"
-                                filter="collections"
-                                filters={Object.keys(this.state.filters.difficulty)}
-                                query="values"
-                                initState={this.selectedFilters('difficulty')}
-                                onClear={this.clearFilter('difficulty')}
-                                onClick={this.handleFilterChange('difficulty')}
-                                dropdown={responsive.small}
-                            />
-                            <ProductFilter
-                                title="Ingredients"
-                                filter="collections"
-                                filters={Object.keys(this.state.filters.ingredients)}
-                                query="values"
-                                initState={this.selectedFilters('ingredients')}
-                                onClear={this.clearFilter('ingredients')}
-                                onClick={this.handleFilterChange('ingredients')}
-                                dropdown={responsive.small}
-                            />
+                            {Object.keys(allFilters)
+                                .filter((key) => allFilters[key].length !== 0)
+                                .map((key, idx) => {
+                                    const filterList = this.state.filters[key];
+
+                                    let filters;
+                                    if(Array.isArray(filterList))
+                                        filters = filterList;
+                                    else
+                                        filters = Object.keys(filterList);
+
+                                    return (
+                                        <ProductFilter
+                                            key={`recipeFilter${idx}`}
+                                            title={key === 'almondBreezeFlavor'
+                                                ? 'Almond Breeze'
+                                                : key.charAt(0).toUpperCase() + key.slice(1)}
+                                            filter="collections"
+                                            filters={filters}
+                                            query="values"
+                                            initState={this.selectedFilters(key)}
+                                            onClear={this.clearFilter(key)}
+                                            onClick={this.handleFilterChange(key)}
+                                            dropdown={responsive.small}
+                                        />
+                                    );
+                                })
+                            }
                         </div>
                         <div className="l--col-auto">
                             <div className={`l--row l--align-center ${styles.filter}`}>

@@ -92,6 +92,19 @@ export default class ProductFilter extends Component {
     options = () => {
         const {initState, filters} = this.props;
 
+        if(typeof filters[0] === 'object') {
+            return filters.map((f) => {
+                const option = {value: f.id, name: f.name};
+
+                if(initState && initState.includes(f.id))
+                    option.checked = true;
+                else
+                    option.checked = false;
+
+                return option;
+            });
+        }
+
         // Check if items are selected via inital state (query params)
         return filters.map((f) => {
             const option = {value: f};
@@ -198,7 +211,7 @@ export default class ProductFilter extends Component {
                                                 [styles.checkboxContent]: option.checked
                                             })}></div>
                                         </div>
-                                        {option.value}
+                                        {option.name || option.value}
                                     </label>
                                 );
                             }
