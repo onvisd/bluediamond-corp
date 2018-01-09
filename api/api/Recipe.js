@@ -1,6 +1,5 @@
 import axios from 'axios';
 import logger from '../services/logger';
-import {getCached} from '../services/cache';
 
 import arrayPush from '../tools/arrayPush';
 import concatItems from '../tools/concatItems';
@@ -65,9 +64,6 @@ export default (api, {contentful}) => {
             return 'Problem getting recipe filters';
         });
 
-    const getCachedFilters = (callback) =>
-        getCached('recipe-all-filters', getRecipeFilters, callback);
-
     api.get('/recipes', (req, res) => {
         // Build the search query
         const query = {
@@ -128,20 +124,11 @@ export default (api, {contentful}) => {
 
     api.get('/recipe/filters', async (req, res) => {
         try {
-            if(process.env.NODE_ENV === 'production') {
-                getCachedFilters((filters) => {
-                    if(filters)
-                        res.cache(true).send(filters);
-                    else
-                        res.status(401).send({message: 'No filters found!'});
-                });
-            } else {
-                const filters = await getRecipeFilters();
-                if(filters)
-                    res.cache(true).send(filters);
-                else
-                    res.status(401).send({message: 'No filters found!'});
-            }
+            const filters = await getRecipeFilters();
+            if(filters)
+                res.cache(true).send(filters);
+            else
+                res.status(401).send({message: 'No filters found!'});
         } catch (err) {
             console.trace(err);
             logger.error('Problem getting recipe filters', err, err.body);
