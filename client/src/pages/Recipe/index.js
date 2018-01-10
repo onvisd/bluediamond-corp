@@ -118,6 +118,9 @@ export default class Recipe extends Component {
         const notes = item.fields.notes;
         const sourceName = item.fields.sourceName;
         const sourceUrl = item.fields.sourceUrl;
+        const courtesyName = item.fields.courtesyOfText;
+        const courtesyUrl = item.fields.courtesyOfUrl;
+        const featuredIn = item.fields.featuredIn;
 
         const stepEntries = {};
         const productEntries = {};
@@ -199,14 +202,42 @@ export default class Recipe extends Component {
                                 <div dangerouslySetInnerHTML={this.renderMarkup(notes)} />
                             </div>
                         }
+                        <div className={styles.notes}>
+                            <p>
+                                {featuredIn &&
+                                    <span>
+                                        <strong>Featured In:</strong>&nbsp;
+                                        {featuredIn.join(', ')}
+                                        <br />
+                                    </span>
+                                }
+                                {sourceName &&
+                                    <span>
+                                        <strong>Source:</strong>&nbsp;
+                                        {sourceUrl
+                                            ? <a href={sourceUrl} target="_blank">
+                                                {sourceName}
+                                            </a>
+                                            : sourceName
+                                        }
+                                        <br />
+                                    </span>
+                                }
+                                {courtesyName &&
+                                    <span>
+                                        <strong>Courtesy of:</strong>&nbsp;
+                                        {courtesyUrl
+                                            ? <a href={courtesyUrl} target="_blank">
+                                                {courtesyName}
+                                            </a>
+                                            : courtesyName
+                                        }
+                                    </span>
+                                }
+                            </p>
+                        </div>
                     </div>
                     <div className={styles.right}>
-                        {sourceName &&
-                            <div className={styles.source}>
-                                <h3>Source</h3>
-                                <a href={sourceUrl} target="_blank">{sourceName}</a>
-                            </div>
-                        }
                         <div className={styles.ingredients}>
                             <h3>Ingredients</h3>
                             <ul>
