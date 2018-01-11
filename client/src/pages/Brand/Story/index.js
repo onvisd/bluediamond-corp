@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 )
 export default class Story extends Component {
     static propTypes = {
+        link: PropTypes.string.isRequired,
         desktopImage: PropTypes.string.isRequired,
         smallDesktopImage: PropTypes.string.isRequired,
         tabletImage: PropTypes.string.isRequired,
@@ -21,6 +22,7 @@ export default class Story extends Component {
             smallDesktopImage,
             tabletImage,
             mobileImage,
+            link,
             responsive
         } = this.props;
 
@@ -31,6 +33,19 @@ export default class Story extends Component {
             image = tabletImage;
         else if(responsive.medium)
             image = smallDesktopImage;
+
+        if(link) {
+            return (
+                <a
+                    href={link}
+                    target="_blank"
+                    className={styles.container}
+                    style={{
+                        backgroundImage: `url(${image})`
+                    }}
+                />
+            );
+        }
 
         return (
             <div
