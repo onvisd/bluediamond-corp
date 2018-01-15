@@ -14,9 +14,10 @@ const pageModules = {
     Gallery: require('../components/API/ImageGallery').default,
     GenericHero: require('../components/API/GenericHero').default,
     Hero: require('../components/API/PageHero').default,
+    IFrame: require('../components/API/IFrame').default,
+    ImageCluster: require('../components/API/ImageCluster').default,
     ParagraphWithHeader: require('../components/API/ParagraphWithHeader').default,
     ParagraphWithImage: require('../components/API/ParagraphWithImage').default,
-    ImageCluster: require('../components/API/ImageCluster').default,
     RelatedPages: require('../components/API/RelatedPages').default,
     RelatedPageLink: require('../components/API/RelatedPageLink').default
 };

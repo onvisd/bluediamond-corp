@@ -1,0 +1,9 @@
+@import 'constants/grid';
+
+.fullHeight {
+    height: calc(100vh - 112px);
+
+    @media (--mq-m) {
+        height: calc(100vh - 53px);
+    }
+}
