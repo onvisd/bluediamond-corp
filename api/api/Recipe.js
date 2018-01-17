@@ -1,8 +1,15 @@
 import axios from 'axios';
 import logger from '../services/logger';
+import ImgixClient from 'imgix-core-js';
 
+import config from '../../config';
 import arrayPush from '../tools/arrayPush';
 import concatItems from '../tools/concatItems';
+
+const imgixClient = new ImgixClient({
+    host: config.imgix.host,
+    secureURLToken: config.imgix.secureURLToken
+});
 
 export default (api, {contentful}) => {
     const getRecipeFilters = () =>
@@ -143,10 +150,41 @@ export default (api, {contentful}) => {
             `access_token=${req.apiParams.token}&content_type=recipe`
         )
         .then((response) => {
-            if(response.data.items.length)
+            if(response.data.items.length) {
+                const {includes} = response.data;
+                const {fields} = response.data.items[0];
+
+                const entryById = {};
+                includes.Entry.forEach((asset) => {
+                    entryById[asset.sys.id] = asset.fields;
+                });
+
+                const assetsById = {};
+                includes.Asset.forEach((asset) => {
+                    assetsById[asset.sys.id] = asset.fields;
+                });
+
+                const image = entryById[fields.includedProducts[0].sys.id].productPhotos[0].sys.id;
+
+                const images = {};
+                [128, 256, 512, 1024, 1536, 2048].map((imgOpts) => {
+                    images[imgOpts] = imgixClient.buildURL(
+                        `http:${assetsById[image].file.url}`,
+                        {
+                            w: imgOpts,
+                            h: imgOpts,
+                            fit: 'max',
+                            bg: 'fff',
+                            auto: 'compress'
+                        }
+                    );
+                });
+
+                response.data.images = images;
                 res.cache(true).send(response.data);
-            else
+            } else {
                 res.status(404).send({ok: false, error: 'not found'});
+            }
         })
         .catch((err) => {
             console.trace(err);

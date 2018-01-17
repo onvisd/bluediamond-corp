@@ -17,37 +17,20 @@ export default class ProductCard extends Component {
                     description: PropTypes.string.isRequired
                 })
             })),
-            includes: PropTypes.shape({
-                Asset: PropTypes.arrayOf(PropTypes.shape({
-                    sys: PropTypes.shape({
-                        id: PropTypes.string.isRequired
-                    }),
-                    fields: PropTypes.shape({
-                        title: PropTypes.string.isRequired,
-                        file: PropTypes.shape({
-                            url: PropTypes.string
-                        }).isRequired
-                    })
-                }))
-            })
+            images: PropTypes.object.isRequired
         })
     }
 
     render() {
-        const {items, includes} = this.props.data;
+        const {items, images} = this.props.data;
         const {fields} = items[0];
-
-        const assetsById = {};
-        includes.Asset.forEach((asset) => {
-            assetsById[asset.sys.id] = asset.fields;
-        });
 
         return (
             <ProductCardComponent
                 title={fields.name}
                 slug={`/product/${fields.slug}`}
-                imageFile={assetsById[fields.productPhotos[0].sys.id].file.url}
-                imageAlt={assetsById[fields.productPhotos[0].sys.id].file.name}
+                images={images}
+                imageAlt={fields.name}
             />
         );
     }

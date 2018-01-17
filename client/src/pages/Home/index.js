@@ -14,7 +14,6 @@ import image from 'tools/image';
 
 import Title from 'components/Title';
 import Button from 'components/Button';
-import IFrame from 'components/IFrame';
 import ButtonDropdown from 'components/ButtonDropdown';
 import preventOrphan from 'tools/preventOrphan';
 import styles from './styles.module.css';

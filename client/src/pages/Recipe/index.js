@@ -12,8 +12,9 @@ import Title from 'components/Title';
 import Meta from 'components/Meta';
 import RecipeHead from 'components/API/RecipeHead';
 import RecipeStep from 'components/API/RecipeStep';
-import ProductCard from 'components/API/ProductCard';
+import ProductCard from 'components/ProductCard';
 import CardPanel from 'components/CardPanel';
+import slugify from 'tools/slugify';
 
 import styles from './styles.module.css';
 
@@ -248,10 +249,24 @@ export default class Recipe extends Component {
                         </div>
                         <div className={styles.includedProducts}>
                             <p><strong>Included in this recipe</strong></p>
-                            {includedProducts.map((product, idx) => <ProductCard data={{
-                                items: [product],
-                                includes: recipe.includes
-                            }} key={`product${idx}`} />)}
+                            {includedProducts.map((product) => {
+                                const {fields} = product;
+
+                                return (
+                                    <ProductCard
+                                        title={fields.name}
+                                        slug={[
+                                            '/brand',
+                                            slugify(fields.brand),
+                                            slugify(fields.brandCategory),
+                                            fields.slug
+                                        ].join('/')}
+                                        images={recipe.images}
+                                        imageAlt={fields.name}
+                                        key={`product-${fields.slug}`}
+                                    />
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
