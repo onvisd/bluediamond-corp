@@ -4,8 +4,6 @@ import {ShareButtons} from 'react-share';
 
 import NutritionFacts from '../NutritionFacts';
 
-import callFloodlight from 'tools/callFloodlight';
-
 import Facebook from 'images/icons/facebook.svg';
 import Pinterest from 'images/icons/pinterest.svg';
 import Twitter from 'images/icons/twitter.svg';
@@ -68,9 +66,14 @@ export default class RecipeHead extends Component {
         );
     }
 
-    trackFloodlight(value) {
+    trackShare(value) {
         return () => {
-            callFloodlight.click('4035228', 'fy18s0', value);
+            if(typeof window !== 'undefined' && window.dataLayer) {
+                window.dataLayer.push({
+                    event: 'floodlight',
+                    activity: value
+                });
+            }
         };
     }
 
@@ -122,7 +125,7 @@ export default class RecipeHead extends Component {
                                 <div className={styles.share}>
                                     <span>Share this recipe:</span>
                                     <span
-                                        onClick={this.trackFloodlight('faceb0')}
+                                        onClick={this.trackShare('faceb0')}
                                     >
                                         <FacebookShareButton
                                             className={styles.shareButton}
@@ -134,7 +137,7 @@ export default class RecipeHead extends Component {
                                         </FacebookShareButton>
                                     </span>
                                     <span
-                                        onClick={this.trackFloodlight('pinte0')}
+                                        onClick={this.trackShare('pinte0')}
                                     >
                                         <PinterestShareButton
                                             className={styles.shareButton}
@@ -154,7 +157,7 @@ export default class RecipeHead extends Component {
                                         </PinterestShareButton>
                                     </span>
                                     <span
-                                        onClick={this.trackFloodlight('tweet0')}
+                                        onClick={this.trackShare('tweet0')}
                                     >
                                         <TwitterShareButton
                                             className={styles.shareButton}

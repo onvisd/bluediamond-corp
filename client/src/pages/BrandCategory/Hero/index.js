@@ -5,7 +5,6 @@ import {Parallax} from 'react-parallax';
 
 import ButtonDropdown from 'components/ButtonDropdown';
 
-import callFloodlight from 'tools/callFloodlight';
 import image from 'tools/image';
 
 import styles from './styles.module.css';
@@ -100,12 +99,17 @@ export default class Hero extends Component {
                                     theme={brand.fields.themeColor}
                                     layout="wide"
                                     onClick={(evt, name) => {
-                                        callFloodlight.click('4035228', 'fy18s0', `${
-                                            name
-                                                .replace(/[^a-z0-9]/i, '')
-                                                .slice(0, 5)
-                                                .toLowerCase()
-                                        }0`);
+                                        if(typeof window !== 'undefined' && window.dataLayer) {
+                                            window.dataLayer.push({
+                                                event: 'floodlight',
+                                                activity: `${
+                                                    name
+                                                        .replace(/[^a-z0-9]/i, '')
+                                                        .slice(0, 5)
+                                                        .toLowerCase()
+                                                }0`
+                                            });
+                                        }
                                     }}
                                     dropUp
                                 >

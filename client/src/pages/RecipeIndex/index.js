@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import classnames from 'classnames';
-import ReactGA from 'react-ga';
 import debounce from 'lodash/debounce';
 
 import {connector, getRecipes} from 'state/recipes';
@@ -19,7 +18,6 @@ import addQuery from 'tools/addQuery';
 import removeQuery from 'tools/removeQuery';
 import searchViaParam from 'tools/searchViaParam';
 import filterViaParam from 'tools/filterViaParam';
-import callFloodlight from 'tools/callFloodlight';
 
 import styles from './styles.module.css';
 
@@ -182,11 +180,13 @@ export default class RecipeIndex extends Component {
 
         this.getNextRecipes();
 
-        ReactGA.event({
-            category: 'interaction',
-            action: 'click',
-            label: 'Recipes Load More'
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
+                action: 'click',
+                label: 'Recipes Load More'
+            });
+        }
     };
 
     filtersSelectedCount = () => {
@@ -234,11 +234,13 @@ export default class RecipeIndex extends Component {
             )
             .catch((err) => console.trace(err));
 
-        ReactGA.event({
-            category: 'interaction',
-            action: 'click',
-            label: `Recipes Sort - ${this.sort.value || 'None'}`
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
+                action: 'click',
+                label: `Recipes Sort - ${this.sort.value || 'None'}`
+            });
+        }
     };
 
     handleFilterChange = (filterTitle) => (e) => {
@@ -290,11 +292,13 @@ export default class RecipeIndex extends Component {
             )
             .catch((err) => console.trace(err));
 
-        ReactGA.event({
-            category: 'interaction',
-            action: 'click',
-            label: e.target.value
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
+                action: 'click',
+                label: e.target.value
+            });
+        }
     };
 
     clearFilter = (filterTitle) => () => {
@@ -441,11 +445,13 @@ export default class RecipeIndex extends Component {
             )
             .catch((err) => console.trace(err));
 
-        ReactGA.event({
-            category: 'interaction',
-            action: 'search',
-            label: search
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
+                action: 'search',
+                label: search
+            });
+        }
     };
 
     handleSearchVisibility = () => {
@@ -557,7 +563,12 @@ export default class RecipeIndex extends Component {
     }
 
     componentDidMount() {
-        callFloodlight.load('4035228', 'fy18s0', 'indiv0');
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'floodlight',
+                activity: 'indiv0'
+            });
+        }
         this.handleSearch = debounce(this.handleSearch, 300);
     }
 

@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {ViewPager, Frame, Track, View} from 'react-view-pager';
 import classnames from 'classnames';
-import ReactGA from 'react-ga';
 
 import ArrowLeft from 'images/icons/arrow-left.svg';
 import ArrowRight from 'images/icons/arrow-right.svg';
@@ -51,9 +50,9 @@ export default class Carousel extends Component {
                 this.props.onViewChange(currentIndices[0]);
         });
 
-        if(this.props.name) {
-            ReactGA.event({
-                category: 'interaction',
+        if(this.props.name && window && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
                 action: 'swipe',
                 label: this.props.name
             });
@@ -63,9 +62,9 @@ export default class Carousel extends Component {
     prev = () => {
         this.carouselTrack.prev();
 
-        if(this.props.name) {
-            ReactGA.event({
-                category: 'interaction',
+        if(this.props.name && window && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
                 action: 'click',
                 label: this.props.name
             });
@@ -75,9 +74,9 @@ export default class Carousel extends Component {
     next = () => {
         this.carouselTrack.next();
 
-        if(this.props.name) {
-            ReactGA.event({
-                category: 'interaction',
+        if(this.props.name && window && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
                 action: 'click',
                 label: this.props.name
             });

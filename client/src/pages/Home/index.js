@@ -6,7 +6,6 @@ import {Track, TrackDocument} from 'react-track';
 import {tween} from 'react-imation';
 import {topTop, calculateScrollY} from 'react-track/tracking-formulas';
 import {translate3d, percent} from 'react-imation/tween-value-factories';
-import ReactGA from 'react-ga';
 
 import {connector, getHome} from 'state/home';
 import {parseModel} from 'tools/parseApi';
@@ -87,11 +86,13 @@ export default class Home extends Component {
     }
 
     dropdownButtonClick(evt, name) {
-        ReactGA.event({
-            category: 'navigation',
-            action: 'click',
-            label: name
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'navigation',
+                action: 'click',
+                label: name
+            });
+        }
     }
 
     trackDocument(children) {

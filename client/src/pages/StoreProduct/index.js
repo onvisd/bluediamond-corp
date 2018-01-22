@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {preload, Link} from 'react-isomorphic-render';
-import ReactGA from 'react-ga';
 
 import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 
@@ -38,13 +37,19 @@ export default class StoreProduct extends Component {
     componentDidMount() {
         const {product} = this.props;
 
-        ReactGA.plugin.execute('ec', 'addProduct', {
-            id: product.product.handle,
-            name: product.product.title,
-            brand: product.product.productType
-        });
-
-        ReactGA.plugin.execute('ec', 'setAction', 'detail');
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                ecommerce: {
+                    detail: {
+                        products: [{
+                            id: product.product.handle,
+                            name: product.product.title,
+                            brand: product.product.productType
+                        }]
+                    }
+                }
+            });
+        }
     }
 
     componentWillUpdate(nextProps) {

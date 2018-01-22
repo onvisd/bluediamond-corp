@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Form} from 'formsy-react';
 import {Link} from 'react-isomorphic-render';
-import ReactGA from 'react-ga';
 
 import {connector, addAttribute, removeFromCart} from 'state/checkout';
 
@@ -10,8 +9,6 @@ import Button from 'components/Button';
 import Textarea from 'components/FormTextarea';
 import Checkbox from 'components/Checkbox';
 import ShoppingCartItem from 'components/ShoppingCartItem';
-
-import callFloodlight from 'tools/callFloodlight';
 
 import styles from './styles.module.css';
 
@@ -37,11 +34,13 @@ export default class ShoppingCart extends Component {
     handleRemoveItem = (item) => {
         this.props.removeFromCart({checkoutId: this.props.checkout.id, lineItemIds: [item.id]});
 
-        ReactGA.event({
-            category: 'interaction',
-            action: 'click',
-            label: item.title
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
+                action: 'expand',
+                label: item.title
+            });
+        }
     }
 
     handleToggleNote = () => {
@@ -49,11 +48,13 @@ export default class ShoppingCart extends Component {
             note: !this.state.note
         });
 
-        ReactGA.event({
-            category: 'interaction',
-            action: 'click',
-            label: 'This is a gift'
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
+                action: 'click',
+                label: 'This is a gift'
+            });
+        }
     }
 
     handleGoToCheckout = (data) => {
@@ -61,13 +62,17 @@ export default class ShoppingCart extends Component {
         const {checkout, auth} = this.props;
         const checkoutLink = auth ? `${checkout.webUrl}&auth=true` : checkout.webUrl;
 
-        ReactGA.event({
-            category: 'interaction',
-            action: 'click',
-            label: 'Checkout'
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
+                action: 'click',
+                label: 'Checkout'
+            });
 
-        callFloodlight.click('4035228', 'fy18s0', 'check0');
+            window.dataLayer.push({
+                event: 'checkout'
+            });
+        }
 
         if(!note || !data)
             return window.location.assign(checkoutLink);

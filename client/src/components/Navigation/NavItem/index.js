@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
-import ReactGA from 'react-ga';
 
 import styles from './styles.module.css';
 
@@ -14,11 +13,13 @@ const NavItem = ({active, theme, href, extHref, onClick, onMouseOver, children})
         if(!label)
             label = children;
 
-        ReactGA.event({
-            category: 'navigation',
-            action: 'click',
-            label: children
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'navigation',
+                action: 'click',
+                label: children
+            });
+        }
     };
 
     let button = (

@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import axios from 'axios';
 import {Form} from 'formsy-react';
-import ReactGA from 'react-ga';
 
 import Button from '../Button';
 import Input from '../FormInput';
@@ -85,11 +84,13 @@ export default class ContactForm extends Component {
                 this.sent.scrollIntoView({behavior: 'smooth'});
             });
 
-            ReactGA.event({
-                category: 'form',
-                action: 'complete',
-                label: 'contact us'
-            });
+            if(typeof window !== 'undefined' && window.dataLayer) {
+                window.dataLayer.push({
+                    event: 'form',
+                    action: 'complete',
+                    label: 'contact us'
+                });
+            }
         })
         .catch(() => {
             this.setState({

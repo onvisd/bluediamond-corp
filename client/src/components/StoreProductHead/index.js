@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import ReactGA from 'react-ga';
 import classnames from 'classnames';
 
 import {connector, addToCart} from 'state/checkout';
@@ -18,8 +17,6 @@ import Button from '../Button';
 import Quantity from '../Quantity';
 import ProductAccordion from '../ProductAccordion';
 import ProductStarRating from '../ProductStarRating';
-
-import callFloodlight from 'tools/callFloodlight';
 
 @connect(
     (state) => ({...connector(state.checkout)}),
@@ -238,24 +235,29 @@ export default class StoreProductHead extends Component {
             lineItems: [{variantId: variant.id, quantity: parseInt(quantity)}]
         });
 
-        ReactGA.plugin.execute('ec', 'addProduct', {
-            id: this.props.handle,
-            name: this.props.title,
-            brand: this.props.productType,
-            variant: variant.id,
-            price,
-            quantity
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'addToCart',
+                ecommerce: {
+                    add: {
+                        products: [{
+                            id: this.props.handle,
+                            name: this.props.title,
+                            brand: this.props.productType,
+                            variant: variant.id,
+                            price,
+                            quantity
+                        }]
+                    }
+                }
+            });
 
-        ReactGA.plugin.execute('ec', 'setAction', 'add');
-
-        ReactGA.event({
-            category: 'interaction',
-            action: 'click',
-            label: this.props.title
-        });
-
-        callFloodlight.click('4035228', 'fy18s0', 'addto0');
+            window.dataLayer.push({
+                event: 'interaction',
+                action: 'click',
+                label: this.props.title
+            });
+        }
     }
 
     toggleDisableMessage() {

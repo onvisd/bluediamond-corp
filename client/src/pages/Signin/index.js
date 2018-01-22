@@ -12,8 +12,6 @@ import Meta from 'components/Meta';
 import FormInput from 'components/FormInput';
 import Button from 'components/Button';
 
-import callFloodlight from 'tools/callFloodlight';
-
 import styles from './styles.module.css';
 
 @connect(
@@ -66,7 +64,12 @@ export default class Signin extends Component {
     handleSignIn = (creds) => {
         this.setState({submitting: true});
 
-        callFloodlight.click('4035228', 'fy18s0', 'signi00');
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'floodlight',
+                activity: 'signi00'
+            });
+        }
 
         this.props.signinCustomer(creds)
             .then((result) => {
@@ -87,7 +90,12 @@ export default class Signin extends Component {
     handleRegister = (creds) => {
         this.setState({submitting: true});
 
-        callFloodlight.click('4035228', 'fy18s0', 'creat0');
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'floodlight',
+                activity: 'creat0'
+            });
+        }
 
         if(creds.password === creds.password_confirmation) {
             this.props.registerCustomer(creds)

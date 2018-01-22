@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
-import ReactGA from 'react-ga';
 import classnames from 'classnames';
 
 import Instagram from 'images/icons/instagram.svg';
@@ -20,11 +19,13 @@ export default class Card extends Component {
     }
 
     handleTracking() {
-        ReactGA.event({
-            category: 'interaction',
-            action: 'click',
-            label: `View ${this.props.label || this.props.type}`
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
+                action: 'click',
+                label: `View ${this.props.label || this.props.type}`
+            });
+        }
     }
 
     render() {

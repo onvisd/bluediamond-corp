@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {ViewPager, Frame, Track, View} from 'react-view-pager';
 import classnames from 'classnames';
-import ReactGA from 'react-ga';
 
 import Button from 'components/Button';
 import ProductLink from 'components/ProductLink';
@@ -42,9 +41,9 @@ export default class MoreFlavorsDesktop extends Component {
     prev = () => {
         this.carouselTrack.prev();
 
-        if(this.props.name) {
-            ReactGA.event({
-                category: 'interaction',
+        if(this.props.name && window && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
                 action: 'click',
                 label: this.props.name
             });
@@ -54,9 +53,9 @@ export default class MoreFlavorsDesktop extends Component {
     next = () => {
         this.carouselTrack.next();
 
-        if(this.props.name) {
-            ReactGA.event({
-                category: 'interaction',
+        if(this.props.name && window && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
                 action: 'click',
                 label: this.props.name
             });

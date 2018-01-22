@@ -2,13 +2,10 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
-import ReactGA from 'react-ga';
 
 import {connector as authConnector} from 'state/auth';
 import {connector as navConnector} from 'state/navigation';
 import {connector as checkoutConnector} from 'state/checkout';
-
-import callFloodlight from 'tools/callFloodlight';
 
 import ShoppingCartIcon from 'images/icons/cart.svg';
 import User from 'images/icons/user.svg';
@@ -49,11 +46,13 @@ export default class DesktopNav extends Component {
         show: () => {
             this.setState(() => ({cartVisible: true}));
 
-            ReactGA.event({
-                category: 'interaction',
-                action: 'click',
-                label: 'shopping cart fly out'
-            });
+            if(typeof window !== 'undefined' && window.dataLayer) {
+                window.dataLayer.push({
+                    event: 'interaction',
+                    action: 'click',
+                    label: 'shopping cart fly out'
+                });
+            }
         },
 
         hide: () => {
@@ -86,11 +85,13 @@ export default class DesktopNav extends Component {
                 ]
             }));
 
-            ReactGA.event({
-                category: 'navigation',
-                action: 'expand',
-                label: 'main navigation'
-            });
+            if(typeof window !== 'undefined' && window.dataLayer) {
+                window.dataLayer.push({
+                    event: 'navigation',
+                    action: 'expand',
+                    label: 'main navigation'
+                });
+            }
         },
 
         hide: () => {
@@ -103,7 +104,12 @@ export default class DesktopNav extends Component {
     }
 
     trackSignIn() {
-        callFloodlight.click('4035228', 'fy18s0', 'signi0');
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'floodlight',
+                activity: 'signi0'
+            });
+        }
     }
 
     render() {

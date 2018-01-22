@@ -4,12 +4,9 @@ import {TrackDocument} from 'react-track';
 import TransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import {Link} from 'react-isomorphic-render';
 import classnames from 'classnames';
-import ReactGA from 'react-ga';
 
 import {connector as authConnector} from 'state/auth';
 import {connector as navConnector} from 'state/navigation';
-
-import callFloodlight from 'tools/callFloodlight';
 
 import BDLogo from 'images/bd-logo.png';
 import User from 'images/icons/user.svg';
@@ -57,11 +54,13 @@ export default class MobileNav extends Component {
                 activeCard
             }));
 
-            ReactGA.event({
-                category: 'navigation',
-                action: 'expand',
-                label: 'main navigation'
-            });
+            if(typeof window !== 'undefined' && window.dataLayer) {
+                window.dataLayer.push({
+                    event: 'navigation',
+                    action: 'expand',
+                    label: 'main navigation'
+                });
+            }
         },
         hide: () => {
             document.documentElement.classList.remove('no-scroll');
@@ -93,7 +92,12 @@ export default class MobileNav extends Component {
     }
 
     trackSignIn() {
-        callFloodlight.click('4035228', 'fy18s0', 'signi0');
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'floodlight',
+                activity: 'signi0'
+            });
+        }
     }
 
     // calculate the Y page offset for every possible browser

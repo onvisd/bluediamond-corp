@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import classnames from 'classnames';
-import ReactGA from 'react-ga';
 
 import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 
@@ -25,7 +24,6 @@ import searchViaParam from 'tools/searchViaParam';
 import sortViaParam from 'tools/searchViaParam';
 import addQuery from 'tools/addQuery';
 import removeQuery from 'tools/removeQuery';
-import callFloodlight from 'tools/callFloodlight';
 
 import Title from 'components/Title';
 import Meta from 'components/Meta';
@@ -96,11 +94,16 @@ import HeroMobile from 'images/store/hero-750x750.jpg';
 )
 export default class Store extends Component {
     componentDidMount() {
-        callFloodlight.load('4035228', 'fy18s0', 'store0');
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'floodlight',
+                activity: 'store0'
+            });
+        }
     }
 
     componentWillMount() {
-        this._impressionCounted = [];
+        this.trackImpressions();
     }
 
     componentWillUpdate(nextProps) {
@@ -121,6 +124,8 @@ export default class Store extends Component {
 
             this.props.getStoreFilters(filter, search);
         }
+
+        this.trackImpressions(true);
     }
 
     componentWillUnmount() {
@@ -158,11 +163,13 @@ export default class Store extends Component {
 
         removeQuery('page');
 
-        ReactGA.event({
-            category: 'interaction',
-            action: 'filter',
-            label: sort
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
+                action: 'filter',
+                label: sort
+            });
+        }
     };
 
     // Handles updating the search state
@@ -183,11 +190,13 @@ export default class Store extends Component {
 
         removeQuery('page');
 
-        ReactGA.event({
-            category: 'interaction',
-            action: 'search',
-            label: search
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'interaction',
+                action: 'search',
+                label: search
+            });
+        }
     };
 
     clearFilter = (filterType) => () => {
@@ -241,15 +250,45 @@ export default class Store extends Component {
     };
 
     trackProduct = (card) => {
-        ReactGA.plugin.execute('ec', 'addProduct', {
-            id: card.node.handle,
-            name: card.node.title,
-            brand: card.node.productType
-        });
+        if(typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'productClick',
+                ecommerce: {
+                    click: {
+                        actionField: {list: 'Search Results'}
+                    },
+                    products: [{
+                        id: card.node.handle,
+                        name: card.node.title,
+                        brand: card.node.productType
+                    }]
+                }
+            });
+        }
+    }
 
-        ReactGA.plugin.execute('ec', 'setAction', 'click', {
-            list: 'Search Results'
-        });
+    trackImpressions = (asEvent) => {
+        const {products} = this.props;
+        const {visibleCardCount} = this.props.query;
+        const cards = products.products;
+
+        if(typeof window !== 'undefined' && window.dataLayer && cards !== this._prevCards) {
+            const impressions = [];
+            cards.slice(0, visibleCardCount).forEach((card, index) => {
+                impressions.push({
+                    id: card.node.handle,
+                    name: card.node.title,
+                    brand: card.node.productType,
+                    position: index
+                });
+            });
+
+            const data = {ecommerce: {impressions}};
+            if(asEvent)
+                data.event = 'storeFilter';
+            window.dataLayer.push(data);
+        }
+        this._prevCards = cards;
     }
 
     render() {
@@ -259,19 +298,6 @@ export default class Store extends Component {
         const cards = products.products;
         const total = products.total;
         const unslugifiedSearch = unslugify(search);
-
-        if(typeof window !== 'undefined') {
-            cards.slice(0, visibleCardCount).forEach((card) => {
-                if(this._impressionCounted.indexOf(card.node.title) === -1) {
-                    ReactGA.plugin.execute('ec', 'addImpression', {
-                        id: card.node.handle,
-                        name: card.node.title,
-                        brand: card.node.productType
-                    });
-                    this._impressionCounted.push(card.node.title);
-                }
-            });
-        }
 
         return (
             <section className="content">
