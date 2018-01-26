@@ -65,7 +65,7 @@ export default () => (
             <li>Speed up your searches; and</li>
             <li>Recognize you when you return to our Sites.</li>
         </ul>
-        <p>The technologies we use for this automatic data collection may include cookies (or browser cookies). A cookie is a small file placed on the hard drive of your computer. You may refuse to accept browser cookies by activating the appropriate setting on your browser. However, if you select this setting you may be unable to access certain parts of our Sites. Unless you have adjusted your browser setting so that it will refuse cookies, our system will issue cookies when you direct your browser to our Sites.</p>
+        <p>The technologies we use for this automatic data collection may include <strong>cookies</strong> (or browser cookies). A cookie is a small file placed on the hard drive of your computer. You may refuse to accept browser cookies by activating the appropriate setting on your browser. However, if you select this setting you may be unable to access certain parts of our Sites. Unless you have adjusted your browser setting so that it will refuse cookies, our system will issue cookies when you direct your browser to our Sites.</p>
         <p></p>
         <h3>IP Address</h3>
         <p>We track IP addresses (the Internet address of your computer) for system administration purposes. IP addresses are logged per the user's session and help us determine how often areas on our site are visited. In most cases, we view and delete the information immediately. We never link an IP address to a specific customer.</p>
