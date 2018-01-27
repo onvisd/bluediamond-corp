@@ -40,7 +40,7 @@ const initGetFilter = (location) => {
 
         options.map(function(f) {
             // handle special case where 'Dairy-Free' is unslugified to 'Dairy Free'
-            filters[f] = param.has(f.replace('-', ' '));
+            filters[f] = param.has(f.toLowerCase().replace('-', ' '));
         });
 
         result[filterTitle] = filters;
