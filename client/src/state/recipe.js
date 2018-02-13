@@ -6,8 +6,8 @@ const handler = createHandler(settings);
 export const getRecipe = action({
     namespace: 'RECIPE',
     event: 'GET_RECIPE',
-    action: (slug, http) =>
-        http.get(`/api/recipes/${slug}`),
+    action: (slug, preview, http) =>
+        http.get(`/api/recipes/${slug}${preview ? '?preview=1' : ''}`),
     result: (state, result) => ({
         ...state,
         recipe: result

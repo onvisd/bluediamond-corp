@@ -18,9 +18,9 @@ import slugify from 'tools/slugify';
 
 import styles from './styles.module.css';
 
-@preload(async ({dispatch, parameters}) => {
+@preload(async ({dispatch, parameters, location}) => {
     await Promise.all([
-        dispatch(getRecipe(parameters.slug)).then((recipe) => {
+        dispatch(getRecipe(parameters.slug, location.query.preview)).then((recipe) => {
             const item = recipe.items[0];
 
             const stepEntries = {};

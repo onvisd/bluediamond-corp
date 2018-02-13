@@ -78,7 +78,7 @@ export default (api, {contentful}) => {
             resolveLinks: true,
             skip: req.query.skip || 0,
             limit: req.query.limit || 9,
-            order: req.query.sort || 'fields.featured,sys.createdAt',
+            order: req.query.sort || '-fields.featured,sys.createdAt',
             select: [
                 'fields.name',
                 'fields.slug',

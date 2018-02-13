@@ -55,7 +55,7 @@ const initGetFilter = (location) => {
             search: searchViaParam('search', location.query),
             skip: parseIntQueryParam('skip', location, 0),
             perPage: parseIntQueryParam('perPage', location, 9),
-            sort: 'fields.featured,sys.createdAt',
+            sort: '-fields.featured,sys.createdAt',
             filters: initGetFilter(location)
         })),
         dispatch(getRecipeFilters()),
