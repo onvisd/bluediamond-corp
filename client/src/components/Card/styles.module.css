@@ -82,6 +82,10 @@
         background-color: var(--c--blue-light);
     }
 
+    & .image {
+        padding-bottom: inherit;
+    }
+
     @media (--mq-s) {
         & .meta p {
             color: var(--c--white);
