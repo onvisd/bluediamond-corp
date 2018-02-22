@@ -70,6 +70,10 @@
         background-color: var(--c--blue-light);
     }
 
+    &.brand--gold {
+        background-color: var(--c--gold);
+    }
+
     &.brand--dark {
         background-color: var(--c--blue-darkest);
         border-bottom: 2px solid var(--c--blue-darkest);

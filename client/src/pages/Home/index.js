@@ -147,7 +147,14 @@ export default class Home extends Component {
                                 <h3>{preventOrphan(homeFields.heroText)}</h3>
                                 <ButtonDropdown
                                     items={[
-                                        {slug: '/brand/snack-almonds', name: 'Snack Almonds'},
+                                        {
+                                            slug: '/brand/classic-snack-almonds',
+                                            name: 'Classic Snack Almonds'
+                                        },
+                                        {
+                                            slug: '/brand/crafted-snack-almonds',
+                                            name: 'Crafted Snack Almonds'
+                                        },
                                         {slug: '/brand/almond-breeze', name: 'Almond Breeze'},
                                         {slug: '/brand/nut-thins', name: 'Nut-Thins'}
                                     ]}

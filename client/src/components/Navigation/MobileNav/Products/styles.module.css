@@ -27,8 +27,12 @@
     border-bottom: 1px solid var(--c--gray-lighter);
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: 135% 50%;
+    background-position: 120% 50%;
     cursor: pointer;
+
+    @media (--mq-xs) {
+        background-position: 132% 50%;
+    }
 
     & h2 {
         margin-bottom: 0;

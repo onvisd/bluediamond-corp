@@ -179,3 +179,30 @@
         }
     }
 }
+
+.brand--gold {
+    composes: primary;
+    background-color: var(--c--gold);
+    border-bottom: 1px solid var(--c--gold);
+
+    & .button {
+        color: var(--c--gold-light);
+    }
+
+    & .button:focus,
+    & .button.active {
+        color: var(--c--black);
+        background-color: var(--c--gold-light);
+    }
+
+    & .button.active::after {
+        opacity: 0.8;
+    }
+
+    @media (--mq-gt-s) {
+        & .button:hover {
+            color: var(--c--black);
+            background-color: var(--c--gold-light);
+        }
+    }
+}

@@ -13,9 +13,9 @@
 
     @media (--mq-gt-m) {
         position: relative;
-        width: 12rem;
+        width: 13rem;
         height: auto;
-        min-width: 12rem;
+        min-width: 13rem;
     }
 }
 
@@ -32,6 +32,11 @@
 .white {
     composes: base;
     background-color: var(--c--gray-light);
+
+    @media (--mq-gt-m) {
+        position: relative;
+        min-width: 15rem;
+    }
 }
 
 .yellow {
@@ -47,4 +52,9 @@
 .green {
     composes: base;
     background-color: var(--c--green-darker);
+}
+
+.gold {
+    composes: base;
+    background-color: var(--c--gold);
 }

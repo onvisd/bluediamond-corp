@@ -60,6 +60,11 @@
     background-color: var(--c--green);
 }
 
+.brand--gold {
+    composes: default;
+    background-color: var(--c--gold);
+}
+
 .brand--green_light {
     composes: default;
     background-color: var(--c--green-light);

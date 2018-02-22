@@ -160,6 +160,18 @@
     }
 }
 
+.gold {
+    composes: base;
+    color: var(--c--black);
+    background-color: var(--c--gold);
+
+    &:hover,
+    &:focus {
+        color: var(--c--black);
+        background-color: var(--c--gold-light);
+    }
+}
+
 .ghost {
     composes: base;
     color: var(--c--black);
