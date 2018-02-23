@@ -2,22 +2,25 @@ import React, {Component, PropTypes} from 'react';
 
 import ProductPanel from 'components/ProductPanel';
 import slugify from 'tools/slugify';
+import classnames from 'classnames';
+
 import styles from './styles.module.css';
 
 export default class Category extends Component {
     static PropTypes = {
         name: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
-        products: PropTypes.array
+        products: PropTypes.array,
+        theme: PropTypes.string
     }
 
     render() {
-        const {name, description, products, appetizerImages} = this.props;
+        const {name, description, products, appetizerImages, theme} = this.props;
 
         return (
             <div
                 id={`category-${slugify(name)}`}
-                className={styles.container}
+                className={classnames(styles.container, [styles[theme]])}
                 style={{
                     backgroundImage:
                         `url(${appetizerImages[0].fields.file.url}), ` +
@@ -30,6 +33,7 @@ export default class Category extends Component {
                     <ProductPanel
                         products={products}
                         showActiveClasses={false}
+                        theme={theme}
                     />
                 </div>
             </div>

@@ -5,11 +5,13 @@ import styles from './styles.module.css';
 
 import CaretDown from 'images/icons/caret-down.svg';
 import SmartLabel from 'images/icons/smart-label.png';
+import SmartLabelLight from 'images/icons/smart-label-white.png';
 
 export default class ProductAccordion extends Component {
     static propTypes = {
         nutrition: PropTypes.object,
-        ingredients: PropTypes.string
+        ingredients: PropTypes.string,
+        theme: PropTypes.string
     }
 
     state = {
@@ -141,7 +143,7 @@ export default class ProductAccordion extends Component {
     }
 
     render() {
-        const {nutrition, ingredients} = this.props;
+        const {nutrition, ingredients, theme} = this.props;
 
         const nutritionClass = `${
             styles.accordionItem
@@ -152,7 +154,7 @@ export default class ProductAccordion extends Component {
         } ${classnames({[styles.isOpen]: this.state.ingredientOpen})}`;
 
         return (
-            <div className={styles.accordion}>
+            <div className={classnames(styles.accordion, styles[theme])}>
                 {nutrition && <div className={nutritionClass}>
                     <div
                         onClick={() => this.handleClick('nutrition')}
@@ -186,7 +188,10 @@ export default class ProductAccordion extends Component {
                         target="_blank"
                         alt="SmartLabel"
                     >
-                        <img src={SmartLabel} />
+                        {theme === 'dark'
+                            ? <img src={SmartLabelLight} />
+                            : <img src={SmartLabel} />
+                        }
                     </a>
                 )}
             </div>

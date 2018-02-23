@@ -9,9 +9,9 @@ const Hero = ({logo, image, title, textColor, tagline}) => (
             style={{backgroundImage: `url(${image})`}}
         >
             <div className={styles.innerContainer}>
-                <img src={logo} className={styles.logo} alt={title} />
+                {logo && <img src={logo} className={styles.logo} alt={title} />}
                 {title && <h2>{title}</h2>}
-                <p>{tagline}</p>
+                {tagline && <p>{tagline}</p>}
             </div>
         </div>
         <div className={styles.info}>
@@ -22,10 +22,10 @@ const Hero = ({logo, image, title, textColor, tagline}) => (
 );
 
 Hero.propTypes = {
-    logo: PropTypes.string.isRequired,
+    logo: PropTypes.string,
     image: PropTypes.string.isRequired,
     textColor: PropTypes.string.isRequired,
-    tagline: PropTypes.string.isRequired,
+    tagline: PropTypes.string,
     title: PropTypes.string
 };
 

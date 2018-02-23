@@ -59,3 +59,15 @@
         }
     }
 }
+
+/* themes */
+
+.dark {
+    background-size: 35%, 40%;
+    background-position: -25% 0%, 135% 100%;
+
+    & h2,
+    & p {
+        color: var(--c--white);
+    }
+}

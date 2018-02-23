@@ -158,3 +158,17 @@
     flex-wrap: no-wrap;
     list-style: none;
 }
+
+/* themes */
+
+.dark {
+    & .header,
+    & .heading,
+    & .text {
+        color: var(--c--white);
+    }
+
+    & .panel {
+        background-color: var(--c--dark-blue);
+    }
+}

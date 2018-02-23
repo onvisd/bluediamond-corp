@@ -17,7 +17,8 @@ export default class ProductPanel extends Component {
         linkAction: PropTypes.string,
         setActiveProduct: PropTypes.func,
         overflowType: PropTypes.string,
-        showActiveClasses: PropTypes.bool
+        showActiveClasses: PropTypes.bool,
+        theme: PropTypes.string
     }
 
     static defaultProps = {
@@ -34,7 +35,8 @@ export default class ProductPanel extends Component {
             linkAction,
             overflowType,
             responsive,
-            showActiveClasses
+            showActiveClasses,
+            theme
         } = this.props;
 
         const overflow = products.length > 5;
@@ -100,7 +102,8 @@ export default class ProductPanel extends Component {
             <div
                 className={classnames(styles.container, {
                     [styles.wrap]: overflow,
-                    [styles.carousel]: overflow && overflowType === 'carousel'
+                    [styles.carousel]: overflow && overflowType === 'carousel',
+                    [styles[theme]]: theme
                 })}
             >
                 {children}
@@ -116,7 +119,7 @@ export default class ProductPanel extends Component {
         }
 
         const mobilePanel = (
-            <div className={styles.productList}>
+            <div className={classnames(styles.productList, [styles[theme]]: theme)}>
                 {products.sort(sortByPriority).map((product) => (
                     <ProductLink
                         key={product.fields.slug}

@@ -43,9 +43,10 @@ export default class Brand extends Component {
                 name: PropTypes.string.isRequired,
                 slug: PropTypes.string.isRequired,
                 themeColor: PropTypes.string,
+                themeType: PropTypes.string,
                 logo: PropTypes.shape({
                     sys: PropTypes.shape({
-                        id: PropTypes.string.isRequired
+                        id: PropTypes.string
                     })
                 }),
                 heroImage: PropTypes.shape({
@@ -58,7 +59,7 @@ export default class Brand extends Component {
                         id: PropTypes.string.isRequired
                     })
                 }),
-                heroTagline: PropTypes.string.isRequired,
+                heroTagline: PropTypes.string,
                 stories: PropTypes.arrayOf(PropTypes.shape({
                     sys: PropTypes.shape({
                         id: PropTypes.string.isRequired
@@ -139,7 +140,7 @@ export default class Brand extends Component {
                     image={heroImage.fields.file.url}
                     title={brand.fields.heroTitle}
                     textColor={brand.fields.heroTextColor}
-                    logo={brand.fields.logo.fields.file.url}
+                    logo={brand.fields.logo ? brand.fields.logo.fields.file.url : null}
                     tagline={brand.fields.heroTagline}
                 />
                 {brand.fields.stories && (
@@ -148,7 +149,16 @@ export default class Brand extends Component {
                         classNames={{container: styles.carousel}}
                         showArrows
                         showTabs
-                        tabColor="light"
+                        arrowColor={
+                            brand.fields.themeType === 'dark'
+                                ? brand.fields.themeColor
+                                : 'light'
+                            }
+                        tabColor={
+                            brand.fields.themeType === 'dark'
+                                ? brand.fields.themeColor
+                                : 'light'
+                            }
                         settings={{
                             viewsToShow: 1,
                             infinite: true
@@ -173,6 +183,7 @@ export default class Brand extends Component {
                         .map((category) => (
                             <Category
                                 key={category.sys.id}
+                                theme={brand.fields.themeType}
                                 products={
                                     brand.fields.products.filter((product) =>
                                         product.fields.brandCategory === category.fields.name
@@ -183,10 +194,19 @@ export default class Brand extends Component {
                         ))
                     }
                 </div>
+                {brand.fields.flavors && (
+                    <CardPanel
+                        type="brandFlavor"
+                        title={brand.fields.waysToUseTitle || `Ways to use ${brand.fields.name}`}
+                        cards={brand.fields.flavors}
+                        theme={brand.fields.themeType}
+                        color={brand.fields.themeColor}
+                    />
+                )}
                 {brand.fields.waysToUse && (
                     <CardPanel
                         type="instagram"
-                        title={`Ways to use ${brand.fields.name}`}
+                        title={brand.fields.waysToUseTitle || `Ways to use ${brand.fields.name}`}
                         cards={brand.fields.waysToUse}
                     />
                 )}

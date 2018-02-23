@@ -6,6 +6,8 @@ import styles from './styles.module.css';
 
 import Card from '../Card';
 
+import slugify from 'tools/slugify';
+
 export default class CardPanel extends Component {
     static PropTypes = {
         type: PropTypes.string.isRequired,
@@ -30,6 +32,7 @@ export default class CardPanel extends Component {
         let imageUrl = `${data}media/?size=m`; // Instagram Media URL, medium size
         let linkToUrl = data;
         let children = null;
+
         if(type === 'recipes') {
             imageUrl = data.fields.cardBackgroundImage.fields.file.url;
             linkToUrl = `/recipes/${data.fields.slug}`;
@@ -37,6 +40,13 @@ export default class CardPanel extends Component {
                 <h3 key={0}>{data.fields.name}</h3>,
                 <p key={1}>{data.fields.cookTime} minutes <span>|</span> {data.fields.difficulty}</p>
             ];
+        }
+
+        if(type === 'brandFlavor') {
+            const brand = slugify(data.fields.brand);
+            const brandCat = slugify(data.fields.brandCategory);
+            imageUrl = data.fields.brandFlavorImage.fields.file.url;
+            linkToUrl = `/brand/${brand}/${brandCat}/${data.fields.slug}`;
         }
 
         return (
@@ -77,7 +87,9 @@ export default class CardPanel extends Component {
         const {type, title, theme, cards} = this.props;
 
         return (
-            <div className={styles.container}>
+            <div className={classnames(styles.container, {
+                [styles[theme]]: type === 'brandFlavor'
+            })}>
                 <div className={styles.innerContainer}>
                     {title && <h2>{title}</h2>}
                     <div className={`${styles.cards}`}>

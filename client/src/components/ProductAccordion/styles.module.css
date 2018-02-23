@@ -136,3 +136,47 @@
 .dvp {
     text-align: right;
 }
+
+/* themes */
+
+.dark {
+    color: var(--c--white);
+
+    & .accordionItem {
+        border-top: 1px solid var(--c--alt-gray);
+
+        &:nth-child(2) {
+            border-bottom: 1px solid var(--c--alt-gray);
+        }
+    }
+
+    & svg {
+        fill: var(--c--alt-gray);
+    }
+
+    &:hover,
+    &.isOpen {
+        border-top-color: var(--c--alt-gray);
+        border-bottom-color: var(--c--alt-gray);
+
+        &:nth-child(2) {
+            border-bottom-color: var(--c--alt-gray);
+        }
+
+        &:not(:nth-child(2)) + .accordionItem {
+            border-top-color: var(--c--alt-gray);
+        }
+
+        & svg {
+            fill: var(--c--alt-gray);
+        }
+    }
+
+    & .divider {
+        background: var(--c--alt-gray);
+    }
+
+    & td {
+        border-bottom: 1px solid var(--c--alt-gray);
+    }
+}

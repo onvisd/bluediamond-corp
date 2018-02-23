@@ -64,3 +64,24 @@
     background-color: brown;
     background-size: contain;
 }
+
+/* themes */
+
+.brand--gold {
+    background-color: var(--c--alt-gray-dark);
+    border-color: transparent;
+    color: var(--c--white);
+
+    & svg {
+        fill: var(--c--alt-gray);
+    }
+
+    & a {
+        color: var(--c--alt-gray);
+
+        &:hover {
+            color: var(--c--alt-gray);
+            opacity: 0.75;
+        }
+    }
+}

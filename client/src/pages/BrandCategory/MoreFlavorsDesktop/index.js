@@ -12,7 +12,8 @@ import styles from './styles.module.css';
 export default class MoreFlavorsDesktop extends Component {
     static propTypes = {
         brand: PropTypes.object,
-        otherCategories: PropTypes.array
+        otherCategories: PropTypes.array,
+        theme: PropTypes.string
     }
 
     state = {
@@ -65,7 +66,7 @@ export default class MoreFlavorsDesktop extends Component {
     // Render the product cards that are seen in the carousel.
     // Trunticate to 6 items.
     renderProductCards = (category) => {
-        const {brand, otherCategories} = this.props;
+        const {brand, otherCategories, theme} = this.props;
         const visibleCategories = otherCategories.filter((cat) => !cat.fields.hidden);
 
         let products = {};
@@ -77,7 +78,7 @@ export default class MoreFlavorsDesktop extends Component {
 
         return products.slice(0, 6).map((product) => (
             <div key={product.sys.id} className={styles.productCard}>
-                <ProductLink product={product} type="card" />
+                <ProductLink product={product} type="card" theme={theme}/>
             </div>
         ));
     }
@@ -85,14 +86,14 @@ export default class MoreFlavorsDesktop extends Component {
     // Render the inital panels for each flavor.
     // Buttons open the carousel.
     renderFlavorPanels = () => {
-        const {brand, otherCategories} = this.props;
+        const {brand, otherCategories, theme} = this.props;
         const visibleCategories = otherCategories.filter((category) => !category.fields.hidden);
         const className = classnames(styles.panel, {
             [styles.single]: otherCategories.length === 1
         });
 
         return (
-            <div className={styles.container}>
+            <div className={classnames(styles.container, styles[theme])}>
                 <h3 className={styles.heading}>More {brand.fields.name} flavors</h3>
                 <div className={styles.panels}>
                     {visibleCategories.map((category, i) => (
@@ -138,11 +139,11 @@ export default class MoreFlavorsDesktop extends Component {
     // Render and handle the flavor Carousel
     renderFlavorProducts = () => {
         const {currentPanel} = this.state;
-        const {otherCategories} = this.props;
+        const {otherCategories, theme} = this.props;
         const categories = otherCategories.filter((cat) => !cat.fields.hidden);
 
         return (
-            <ViewPager className={styles.productSlider}>
+            <ViewPager className={classnames(styles.container, styles[theme])}>
                 <nav className={styles.header}>
                     {categories.length > 1 && <a onClick={this.prev}>← Previous</a>}
                     <h3 className={styles.heading}>

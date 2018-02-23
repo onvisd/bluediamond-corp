@@ -47,6 +47,7 @@ export default class BrandCategory extends Component {
                 name: PropTypes.string.isRequired,
                 slug: PropTypes.string.isRequired,
                 themeColor: PropTypes.string,
+                themeType: PropTypes.string,
                 logo: PropTypes.shape({
                     file: PropTypes.shape({
                         url: PropTypes.string.isRequired
@@ -57,7 +58,7 @@ export default class BrandCategory extends Component {
                         url: PropTypes.string.isRequired
                     })
                 }),
-                heroTagline: PropTypes.string.isRequired,
+                heroTagline: PropTypes.string,
                 stories: PropTypes.array,
                 categories: PropTypes.array,
                 recipePanel: PropTypes.object,
@@ -252,22 +253,37 @@ export default class BrandCategory extends Component {
                         products={categoryProducts}
                         activeProduct={activeProduct}
                         setActiveProduct={this.setActiveProduct}
+                        theme={brand.fields.themeType}
                         shopLinks={shopLinks}
                     />
-                    {!responsive.small && <MoreFlavorsDesktop
+                    {!responsive.small && otherBrandCategories.length > 0 && <MoreFlavorsDesktop
                         brand={brand}
                         otherCategories={otherBrandCategories}
+                        theme={brand.fields.themeType}
                     />}
-                    {responsive.small && <MoreFlavorsMobile
+                    {responsive.small && otherBrandCategories.length > 0 && <MoreFlavorsMobile
                         brand={brand}
                         otherCategories={otherBrandCategories}
+                        theme={brand.fields.themeType}
                     />}
-                    <MoreProducts products={moreProducts} />
+                    <MoreProducts
+                        products={moreProducts}
+                        theme={brand.fields.themeType}
+                    />
                 </div>
+                {brand.fields.flavors && (
+                    <CardPanel
+                        type="brandFlavor"
+                        title={brand.fields.waysToUseTitle || `Ways to use ${brand.fields.name}`}
+                        cards={brand.fields.flavors}
+                        theme={`${brand.fields.themeType}Category`}
+                        color={brand.fields.themeColor}
+                    />
+                )}
                 {brand.fields.waysToUse && (
                     <CardPanel
                         type="instagram"
-                        title={`Ways to use ${brand.fields.name}`}
+                        title={brand.fields.waysToUseTitle || `Ways to use ${brand.fields.name}`}
                         cards={brand.fields.waysToUse}
                     />
                 )}

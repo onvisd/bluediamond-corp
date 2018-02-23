@@ -147,3 +147,16 @@
     z-index: var(--l--z-higher);
     flex: 0 0 50%;
 }
+
+/* themes */
+
+.dark {
+    & .heading,
+    & .text {
+        color: var(--c--white);
+    }
+
+    & .panel {
+        background-color: var(--c--dark-blue);
+    }
+}

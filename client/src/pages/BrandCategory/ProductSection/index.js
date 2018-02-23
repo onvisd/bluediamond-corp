@@ -17,7 +17,8 @@ export default class ProductSection extends Component {
         products: PropTypes.array.isRequired,
         activeProduct: PropTypes.object.isRequired,
         setActiveProduct: PropTypes.func.isRequired,
-        shopLinks: PropTypes.array.isRequired
+        shopLinks: PropTypes.array.isRequired,
+        theme: PropTypes.string
     }
 
     state = {
@@ -32,13 +33,14 @@ export default class ProductSection extends Component {
 
     render() {
         const {isOpen} = this.state;
-        const {brand, products, activeProduct, setActiveProduct, shopLinks} = this.props;
+        const {brand, products, activeProduct, setActiveProduct, shopLinks, theme} = this.props;
 
         return (
             <div className={styles.container}>
                 <div
                     className={classnames(styles.showMore, {
-                        [styles.active]: isOpen
+                        [styles.active]: isOpen,
+                        [styles[theme]]: theme
                     })}
                     onClick={this.toggleProductPanel}
                 >
@@ -46,19 +48,22 @@ export default class ProductSection extends Component {
                 </div>
                 <div
                     className={classnames(styles.productPanel, {
-                        [styles.active]: isOpen
+                        [styles.active]: isOpen,
+                        [styles[theme]]: theme
                     })}
                 >
                     <ProductPanel
                         products={products}
                         activeProduct={activeProduct}
                         setActiveProduct={setActiveProduct}
+                        className={classnames(styles.container, styles[theme])}
                         overflowType="carousel"
                         linkAction="push"
+                        theme={theme}
                     />
                 </div>
                 <div className={styles.innerContainer}>
-                    <p className={styles.description}>
+                    <p className={classnames(styles.description, styles[theme])}>
                         {preventOrphan(activeProduct.fields.description)}
                     </p>
                     <div className={styles.actions}>
@@ -100,6 +105,7 @@ export default class ProductSection extends Component {
                         <ProductAccordion
                             nutrition={activeProduct.fields.smartLabel}
                             ingredients={activeProduct.fields.smartLabel.rawIngredients}
+                            theme={theme}
                         />
                     }
                 </div>

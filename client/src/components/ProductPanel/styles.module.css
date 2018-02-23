@@ -9,6 +9,10 @@
     border-radius: 12px;
     overflow: hidden;
 
+    &.dark {
+        background-color: var(--c--alt-gray);
+    }
+
     &.wrap {
         @mixin container;
 
@@ -75,6 +79,7 @@
 
     @media (--mq-s) {
         align-items: flex-start;
+        border-radius: 0;
     }
 }
 
@@ -84,4 +89,10 @@
 
 .inactive {
     opacity: 0.5;
+}
+
+/* theme */
+
+.dark {
+    background-color: var(--c--alt-gray);
 }

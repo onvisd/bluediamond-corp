@@ -4,15 +4,16 @@ import styles from './styles.module.css';
 export default class NutritionFacts extends Component {
     static propTypes = {
         nutrition: PropTypes.array.isRequired,
-        pageType: PropTypes.string.isRequired
+        pageType: PropTypes.string.isRequired,
+        theme: PropTypes.string
     }
 
     render() {
-        const {nutrition, pageType} = this.props;
+        const {nutrition, pageType, theme} = this.props;
         const item = nutrition[0];
 
         return (
-            <section>
+            <section classname={theme}>
                 <p><strong>Nutrition Facts</strong></p>
                 {pageType === 'product' &&
                     <p>

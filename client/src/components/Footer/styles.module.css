@@ -3,8 +3,8 @@
 @import 'constants/type';
 
 .container {
-    height: 20rem;
     border-top: 2px solid var(--c--gray-lighter);
+    font-size: var(--t--size-xs);
 
     @media (--mq-s) {
         display: none;
@@ -30,10 +30,12 @@
 
 .social {
     & span:not(:last-child) {
-        margin-right: 1rem;
+        margin-right: 0.85rem;
     }
 
     & svg {
+        width: 18px;
+        height: 18px;
         fill: var(--c--black);
         vertical-align: middle;
     }
@@ -46,9 +48,12 @@
 
     & span a {
         color: var(--c--black);
+        font-size: var(--t--size-xs);
     }
 
     & svg {
+        width: 12px;
+        height: 12px;
         margin-right: 0.5rem;
         fill: var(--c--black);
         vertical-align: middle;
@@ -69,10 +74,12 @@
         margin-left: 4rem;
     }
 
-    & > a {
+    & > a,
+    & .sectionHeader {
         display: inline-block;
         margin-bottom: 0.75rem;
         padding-bottom: 0.5rem;
+        font-size: var(--t--size-xs);
         color: var(--c--black);
         line-height: 1;
         border-bottom: 2px solid var(--c--gray-lighter);
@@ -85,6 +92,7 @@
 
     & li a {
         color: var(--c--gray-dark);
+        font-size: var(--t--size-xs);
 
         &:hover {
             color: var(--c--gray-darker);
@@ -100,4 +108,48 @@
     line-height: 2.5rem;
     background-color: brown;
     background-size: contain;
+}
+
+/* themes */
+
+.brand--gold {
+    background-color: var(--c--alt-gray-dark);
+    border-color: transparent;
+    color: var(--c--white);
+
+    & svg {
+        fill: var(--c--alt-gray);
+    }
+
+    & a,
+    & span a {
+        color: var(--c--white);
+    }
+
+    & a:hover,
+    & span a:hover {
+        color: var(--c--white);
+        opacity: 0.75;
+    }
+
+    & li a {
+        color: var(--c--alt-gray);
+
+        &:hover {
+            color: var(--c--alt-gray);
+            opacity: 0.75;
+        }
+    }
+
+    & .header {
+        border-color: var(--c--alt-gray-light);
+    }
+
+    & .navListWrap {
+        & > a,
+        & .sectionHeader {
+            color: var(--c--white);
+            border-color: var(--c--alt-gray-light);
+        }
+    }
 }

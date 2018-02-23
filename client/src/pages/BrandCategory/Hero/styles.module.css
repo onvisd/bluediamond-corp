@@ -206,6 +206,11 @@
         background-color: var(--c--blue);
     }
 
+    &.gold {
+        color: var(--c--dark-blue);
+        background-color: var(--c--gold);
+    }
+
     @media (--mq-gt-s) {
         margin: 0 0 0.5rem;
     }

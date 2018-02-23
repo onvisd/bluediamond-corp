@@ -32,6 +32,10 @@
     line-height: 56px;
     text-align: center;
 
+    &.dark {
+        background-color: var(--c--alt-gray);
+    }
+
     &::after {
         content: '';
         display: inline-block;
@@ -105,6 +109,11 @@
 
 .description {
     margin-bottom: 2rem;
+
+    &.dark {
+        color: var(--c--white);
+        text-align: center;
+    }
 
     @media (--mq-gt-s) {
         font-size: var(--t--size-m);

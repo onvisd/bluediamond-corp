@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
+import {connect} from 'react-redux';
+import classnames from 'classnames';
 
 import slugify from 'tools/slugify';
 import styles from './styles.module.css';
@@ -13,6 +15,13 @@ import Phone from 'images/icons/phone.svg';
 import Mail from 'images/icons/mail.svg';
 import FooterBG from 'images/backgrounds/wood-footer.jpg';
 
+import {connector as navConnector} from 'state/navigation';
+
+@connect(
+    (state) => ({
+        ...navConnector(state.navigation)
+    })
+)
 export default class Footer extends Component {
     static propTypes = {
         data: PropTypes.arrayOf(PropTypes.shape({
@@ -25,7 +34,7 @@ export default class Footer extends Component {
     }
 
     render() {
-        const {data, params, isStorePage} = this.props;
+        const {data, params, isStorePage, navigation} = this.props;
 
         const social = {
             facebook: 'https://www.facebook.com/BlueDiamondAlmonds/',
@@ -53,7 +62,8 @@ export default class Footer extends Component {
         }
 
         return (
-            <footer className={styles.container}>
+            <footer className={`${styles.container}
+                    ${navigation && navigation.style && styles[navigation.style.className]}`}>
                 <div className={styles.innerContainer}>
                     {isStorePage && (
                         <div className={styles.returnPolicy}>
@@ -144,7 +154,7 @@ export default class Footer extends Component {
                         </div>
                         <div className={styles.navSection}>
                             <div className={styles.navListWrap}>
-                                <p>Information</p>
+                                <p className={styles.sectionHeader}>Information</p>
                                 <ul className={styles.navList}>
                                     <li>
                                         <Link to="/terms">
@@ -179,7 +189,7 @@ export default class Footer extends Component {
                                 </ul>
                             </div>
                             <div className={styles.navListWrap}>
-                                <p>Company</p>
+                                <p className={styles.sectionHeader}>Company</p>
                                 <ul className={styles.navList}>
                                     <li>
                                         <Link to="/craft">

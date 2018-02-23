@@ -136,3 +136,13 @@
         font-size: var(--t--size-xs);
     }
 }
+
+/* themes */
+
+.dark {
+    & .brand,
+    & .title,
+    & a {
+        color: var(--c--white);
+    }
+}

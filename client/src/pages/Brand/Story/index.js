@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 )
 export default class Story extends Component {
     static propTypes = {
-        link: PropTypes.string.isRequired,
+        link: PropTypes.string,
         desktopImage: PropTypes.string.isRequired,
         smallDesktopImage: PropTypes.string.isRequired,
         tabletImage: PropTypes.string.isRequired,

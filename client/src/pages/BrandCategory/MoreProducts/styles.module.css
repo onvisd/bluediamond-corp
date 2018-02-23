@@ -52,3 +52,11 @@
         }
     }
 }
+
+/* themes */
+
+.dark {
+    & .heading {
+        color: var(--c--white);
+    }
+}

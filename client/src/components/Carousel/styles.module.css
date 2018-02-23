@@ -60,6 +60,14 @@
     &.light .tabActive {
         background-color: var(--c--white);
     }
+
+    &.gold .tab {
+        background-color: var(--c--gold);
+    }
+
+    &.gold .tabActive {
+        background-color: var(--c--gold-dark);
+    }
 }
 
 .tab {
@@ -67,4 +75,16 @@
     height: 8px;
     margin: 6px;
     border-radius: 50%;
+}
+
+/* themes */
+
+.gold {
+    & circle {
+        fill: var(--c--gold);
+    }
+
+    & path {
+        fill: var(--c--dark-blue);
+    }
 }

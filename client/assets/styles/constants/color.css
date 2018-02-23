@@ -10,12 +10,20 @@
     --c--gray-dark: #60798e;
     --c--gray-darker: #2f506b;
 
+    /* alt gray */
+    --c--alt-gray-light: #787878;
+    --c--alt-gray: #dedede;
+    --c--alt-gray-dark: #444;
+
     /* blues */
     --c--blue-light: #45c2f4;
     --c--blue: #1daeec;
     --c--blue-dark: #117cbc;
     --c--blue-darker: #074b8e;
     --c--blue-darkest: #234152;
+
+    /* dark blues */
+    --c--dark-blue: #223b4b;
 
     /* yellows */
     --c--yellow-light: #fed158;
@@ -36,6 +44,6 @@
 
     /* golds */
     --c--gold-light: #f2cc8e;
-    --c--gold: #e2bb7d;
+    --c--gold: #d3b785;
     --c--gold-dark: #dbac65;
 }

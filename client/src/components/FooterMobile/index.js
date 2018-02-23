@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
+import {connect} from 'react-redux';
+import classnames from 'classnames';
 import styles from './styles.module.css';
 
 import Facebook from 'images/icons/facebook.svg';
@@ -9,6 +11,13 @@ import Pinterest from 'images/icons/pinterest.svg';
 import Twitter from 'images/icons/twitter.svg';
 import FooterBG from 'images/backgrounds/wood-footer.jpg';
 
+import {connector as navConnector} from 'state/navigation';
+
+@connect(
+    (state) => ({
+        ...navConnector(state.navigation)
+    })
+)
 export default class Footer extends Component {
     static propTypes = {
         params: PropTypes.object,
@@ -16,7 +25,7 @@ export default class Footer extends Component {
     }
 
     render() {
-        const {params, isStorePage} = this.props;
+        const {params, isStorePage, navigation} = this.props;
 
         const social = {
             facebook: 'https://www.facebook.com/BlueDiamondAlmonds/',
@@ -34,7 +43,8 @@ export default class Footer extends Component {
         }
 
         return (
-            <footer className={styles.container}>
+            <footer className={`${styles.container}
+                    ${navigation && navigation.style && styles[navigation.style.className]}`}>
                 {isStorePage && (
                     <div className={styles.returnPolicy}>
                         <strong>Our Return Policy: </strong>
