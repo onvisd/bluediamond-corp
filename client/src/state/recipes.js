@@ -35,30 +35,38 @@ export const getRecipes = action({
                     ? ''
                     : `&search=${search}`
             }${
-                typeof filters.category === 'undefined' || filters.category === ''
+                typeof filters.breakfast === 'undefined' || filters.breakfast === ''
                     ? ''
-                    : `&category=${filters.category}`
+                    : `&breakfast=${filters.breakfast}`
             }${
-                typeof filters.seasonal === 'undefined' || filters.seasonal === ''
+                typeof filters.lunchDinner === 'undefined' || filters.lunchDinner === ''
                     ? ''
-                    : `&seasonal=${filters.seasonal}`
+                    : `&lunchDinner=${filters.lunchDinner}`
             }${
-                typeof filters.dietary === 'undefined' || filters.dietary === ''
+                typeof filters.desserts === 'undefined' || filters.desserts === ''
                     ? ''
-                    : `&dietaryFilters=${filters.dietary}`
+                    : `&desserts=${filters.desserts}`
+            }${
+                typeof filters.holiday === 'undefined' || filters.holiday === ''
+                    ? ''
+                    : `&holiday=${filters.holiday}`
+            }${
+                typeof filters.easyMeals === 'undefined' || filters.easyMeals === ''
+                    ? ''
+                    : `&easyMeals=${filters.easyMeals}`
             }${
                 typeof filters.almondBreezeFlavor === 'undefined' ||
                         filters.almondBreezeFlavor === ''
                     ? ''
                     : `&almondBreezeFlavor=${filters.almondBreezeFlavor}`
             }${
+                typeof filters.dietary === 'undefined' || filters.dietary === ''
+                    ? ''
+                    : `&dietaryFilters=${filters.dietary}`
+            }${
                 typeof filters.featured === 'undefined' || filters.featured === ''
                     ? ''
                     : `&featured=${filters.featured}`
-            }${
-                typeof filters.difficulty === 'undefined' || filters.difficulty === ''
-                    ? ''
-                    : `&difficulty=${filters.difficulty}`
             }${
                 typeof filters.ingredients === 'undefined' || filters.ingredients === ''
                     ? ''

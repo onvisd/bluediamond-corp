@@ -23,13 +23,14 @@ export default (api, {contentful}) => {
 
             // Define the filterable item object
             const filterSelections = {
-                category: [],
-                seasonal: [],
-                dietary: [],
-                almondBreezeFlavor: [],
                 featured: [],
-                difficulty: [],
-                ingredients: []
+                breakfast: [],
+                lunchDinner: [],
+                desserts: [],
+                holiday: [],
+                easyMeals: [],
+                almondBreezeFlavor: [],
+                dietary: []
             };
 
             // Get all the available filterable items from API
@@ -41,12 +42,14 @@ export default (api, {contentful}) => {
                         flavorNames.push({id: entry.sys.id, name: entry.fields.name});
                 });
 
-                arrayPush(item.fields.category, filterSelections.category);
-                arrayPush(item.fields.seasonal, filterSelections.seasonal);
-                arrayPush(item.fields.consumerSymbols, filterSelections.dietary);
-                arrayPush(flavorNames, filterSelections.almondBreezeFlavor);
                 arrayPush(item.fields.featuredIn, filterSelections.featured);
-                arrayPush(item.fields.difficulty, filterSelections.difficulty);
+                arrayPush(item.fields.breakfastCategories, filterSelections.breakfast);
+                arrayPush(item.fields.lunchDinnerCategories, filterSelections.lunchDinner);
+                arrayPush(item.fields.dessertsCategories, filterSelections.desserts);
+                arrayPush(item.fields.holidayCategories, filterSelections.holiday);
+                arrayPush(item.fields.easyMealsCategories, filterSelections.easyMeals);
+                arrayPush(flavorNames, filterSelections.almondBreezeFlavor);
+                arrayPush(item.fields.consumerSymbols, filterSelections.dietary);
             });
 
             // Concat & remove duplicates
@@ -84,8 +87,11 @@ export default (api, {contentful}) => {
                 'fields.slug',
                 'fields.featured',
                 'fields.featuredIn',
-                'fields.category',
-                'fields.seasonal',
+                'fields.breakfastCategories',
+                'fields.lunchDinnerCategories',
+                'fields.dessertsCategories',
+                'fields.holidayCategories',
+                'fields.easyMealsCategories',
                 'fields.consumerSymbols',
                 'fields.cardBackgroundImage',
                 'fields.servingSize',
@@ -99,23 +105,29 @@ export default (api, {contentful}) => {
         if(req.query.search)
             query['fields.tags[match]'] = req.query.search;
 
-        if(req.query.dietaryFilters)
-            query['fields.consumerSymbols[in]'] = req.query.dietaryFilters;
-
-        if(req.query.category)
-            query['fields.category[in]'] = req.query.category;
-
-        if(req.query.seasonal)
-            query['fields.seasonal[in]'] = req.query.seasonal;
-
         if(req.query.featured)
             query['fields.featuredIn[in]'] = req.query.featured;
 
-        if(req.query.difficulty)
-            query['fields.difficulty[in]'] = req.query.difficulty;
+        if(req.query.breakfast)
+            query['fields.breakfastCategories[in]'] = req.query.breakfast;
+
+        if(req.query.lunchDinner)
+            query['fields.lunchDinnerCategories[in]'] = req.query.lunchDinner;
+
+        if(req.query.desserts)
+            query['fields.dessertsCategories[in]'] = req.query.desserts;
+
+        if(req.query.holiday)
+            query['fields.holidayCategories[in]'] = req.query.holiday;
+
+        if(req.query.easyMeals)
+            query['fields.easyMealsCategories[in]'] = req.query.easyMeals;
 
         if(req.query.almondBreezeFlavor)
             query['fields.includedProducts.sys.id[in]'] = req.query.almondBreezeFlavor;
+
+        if(req.query.dietaryFilters)
+            query['fields.consumerSymbols[in]'] = req.query.dietaryFilters;
 
         // Get the recipes based on the query
         contentful.client.getEntries(query)

@@ -16,7 +16,7 @@ export default (filterType, query) => {
         const filters = via.split('|');
         if(arr[i].filter === filterType) {
             for (let f = 0; f < filters.length; f++)
-                filter.push(unslugify(filters[f]));
+                filter.push(unslugify(filters[f]).toLowerCase());
         }
     }
 

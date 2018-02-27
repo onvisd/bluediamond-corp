@@ -96,7 +96,7 @@ export default class RecipeIndex extends Component {
             } else {
                 filterList[filterTitle].map(function(f) {
                     // handle special case where 'Dairy-Free' is unslugified to 'Dairy Free'
-                    filters[f] = param.has(f.replace('-', ' '));
+                    filters[f] = param.has(f.toLowerCase().replace('-', ' '));
                 });
             }
 
@@ -744,12 +744,27 @@ export default class RecipeIndex extends Component {
                                     else
                                         filters = Object.keys(filterList);
 
+
+                                    let title = '';
+                                    switch (key) {
+                                        case 'almondBreezeFlavor':
+                                            title = 'Almond Breeze';
+                                            break;
+                                        case 'lunchDinner':
+                                            title = 'Lunch & Dinner';
+                                            break;
+                                        case 'easyMeals':
+                                            title = 'Easy Meals';
+                                            break;
+                                        default:
+                                            title = key.charAt(0).toUpperCase() + key.slice(1);
+                                            break;
+                                    }
+
                                     return (
                                         <ProductFilter
                                             key={`recipeFilter${idx}`}
-                                            title={key === 'almondBreezeFlavor'
-                                                ? 'Almond Breeze'
-                                                : key.charAt(0).toUpperCase() + key.slice(1)}
+                                            title={title}
                                             filter="collections"
                                             filters={filters}
                                             query="values"
