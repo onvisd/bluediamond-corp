@@ -64,7 +64,7 @@
 
 .dark {
     background-size: 35%, 40%;
-    background-position: -25% 0%, 135% 100%;
+    background-position: -25% 0%, 135% 10%;
 
     & h2,
     & p {

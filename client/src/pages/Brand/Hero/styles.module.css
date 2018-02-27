@@ -7,7 +7,7 @@
     position: relative;
     height: 125vw; /* 1.25x browser width */
     margin-top: 60px;
-    align-items: center;
+    flex-direction: column;
     background-color: var(--c--gray-dark);
     background-size: cover;
     background-position: center;
@@ -19,6 +19,25 @@
 
     &.light * {
         color: var(--c--white);
+    }
+
+    &.top-left,
+    &.top-center,
+    &.top-right {
+        justify-content: flex-start;
+    }
+
+    &.center-left,
+    &.center,
+    &.center-right {
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.bottom-left,
+    &.bottom-center,
+    &.bottom-right {
+        justify-content: flex-end;
     }
 
     & p,
@@ -34,12 +53,6 @@
         padding: 0 1rem;
     }
 
-    & img {
-        display: block;
-        margin: 0 auto;
-        max-width: 80%;
-    }
-
     @media (--mq-gt-s) {
         height: 45rem;
         margin-top: 0;
@@ -53,16 +66,34 @@
             max-width: 40rem;
             font-size: var(--t--size-m);
         }
+    }
 
-        & img {
-            margin-bottom: 2rem;
-            max-width: 30vw;
-        }
+    @media (--mq-m) {
+        margin-top: 60px;
     }
 }
 
 .innerContainer {
     @mixin container;
+
+    &.top-left,
+    &.center-left,
+    &.bottom-left {
+        padding-top: 2rem;
+        text-align: left;
+    }
+
+    &.top-center,
+    &.center,
+    &.bottom-center {
+        text-align: center;
+    }
+
+    &.top-right,
+    &.center-right,
+    &.bottom-right {
+        text-align: right;
+    }
 }
 
 .info {
@@ -77,5 +108,43 @@
 
     @media (--mq-gt-s) {
         display: none;
+    }
+}
+
+.logo {
+    display: inline-block;
+    width: 100%;
+    max-width: 80%;
+
+    @media (--mq-gt-s) {
+        margin-bottom: 2rem;
+        max-width: 30vw;
+    }
+}
+
+.flavor {
+    position: absolute;
+    right: 15vw;
+    bottom: 0.5rem;
+    color: var(--c--white);
+    font-style: italic;
+    font-size: var(--t--size-m);
+
+    @media (--mq-s) {
+        right: 1.5rem;
+        bottom: 1rem;
+        font-size: var(--t--size-s);
+    }
+}
+
+/* brand specifics */
+
+.crafted-snack-almonds {
+    & .logo {
+        max-width: 40vw;
+
+        @media (--mq-gt-s) {
+            max-width: 50vw;
+        }
     }
 }

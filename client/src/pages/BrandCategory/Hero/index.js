@@ -59,7 +59,7 @@ export default class Hero extends Component {
                                 category.fields.productShelfImage.fields.file.url,
                                 {
                                     width: ({
-                                        xl: 4096,
+                                        xl: 4000,
                                         l: 2048,
                                         s: 1024,
                                         xs: 600

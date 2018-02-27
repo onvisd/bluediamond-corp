@@ -140,9 +140,13 @@
 /* themes */
 
 .dark {
+    & .imageWrap {
+        background-color: var(--c--alt-gray);
+    }
+
     & .brand,
     & .title,
     & a {
-        color: var(--c--white);
+        color: var(--c--alt-gray);
     }
 }

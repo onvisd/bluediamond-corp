@@ -141,7 +141,15 @@ export default class Brand extends Component {
                     title={brand.fields.heroTitle}
                     textColor={brand.fields.heroTextColor}
                     logo={brand.fields.logo ? brand.fields.logo.fields.file.url : null}
+                    mobileLogo={
+                        brand.fields.mobileLogo
+                        ? brand.fields.mobileLogo.fields.file.url
+                        : null
+                    }
+                    logoPosition={brand.fields.logoPosition}
                     tagline={brand.fields.heroTagline}
+                    flavorLine={brand.fields.heroFlavorLine}
+                    brand={brand.fields.slug}
                 />
                 {brand.fields.stories && (
                     <Carousel
@@ -199,7 +207,7 @@ export default class Brand extends Component {
                         type="brandFlavor"
                         title={brand.fields.waysToUseTitle || `Ways to use ${brand.fields.name}`}
                         cards={brand.fields.flavors}
-                        theme={brand.fields.themeType}
+                        theme={`${brand.fields.themeType}Category`}
                         color={brand.fields.themeColor}
                     />
                 )}

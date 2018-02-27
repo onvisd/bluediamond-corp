@@ -60,14 +60,6 @@
     &.light .tabActive {
         background-color: var(--c--white);
     }
-
-    &.gold .tab {
-        background-color: var(--c--gold);
-    }
-
-    &.gold .tabActive {
-        background-color: var(--c--gold-dark);
-    }
 }
 
 .tab {

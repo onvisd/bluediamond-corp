@@ -19,8 +19,7 @@ export default class Carousel extends Component {
         showTabs: PropTypes.bool,
         tabColor: PropTypes.string,
         onViewChange: PropTypes.func,
-        name: PropTypes.string,
-        arrowColor: PropTypes.string
+        name: PropTypes.string
     }
 
     static defaultProps = {
@@ -110,7 +109,7 @@ export default class Carousel extends Component {
 
     renderArrow = () => {
         const {activeIndex} = this.state;
-        const {cards, settings, arrowColor} = this.props;
+        const {cards, settings} = this.props;
         const arrows = [];
         const tabs = cards.map((card, idx) => idx)
             .filter((card, idx) => idx % settings.viewsToShow === 0);
@@ -119,9 +118,7 @@ export default class Carousel extends Component {
             arrows.push(
                 <ArrowLeft
                     key="arrowLeft"
-                    className={classnames(styles.prev, {
-                        [styles[arrowColor]]: arrowColor
-                    })}
+                    className={styles.prev}
                     onClick={this.prev}
                 />
             );
@@ -131,9 +128,7 @@ export default class Carousel extends Component {
             arrows.push(
                 <ArrowRight
                     key="arrowRight"
-                    className={classnames(styles.next, {
-                        [styles[arrowColor]]: arrowColor
-                    })}
+                    className={styles.next}
                     onClick={this.next}
                 />
             );
