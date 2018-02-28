@@ -185,7 +185,12 @@ export default class Brand extends Component {
                         name={`${brand.fields.name} - Stories Carousel`}
                     />
                 )}
-                <div style={{backgroundImage: `url(${brand.fields.backgroundTexture.fields.file.url})`}}>
+                <div style={{
+                    backgroundImage: `url(${brand.fields.backgroundTexture.fields.file.url})`,
+                    backgroundSize: `${
+                        brand.fields.backgroundTexture.fields.file.details.image.width / 2
+                    }px`
+                }}>
                     {brand.fields.categories
                         .filter((category) => !category.fields.hidden)
                         .map((category) => (

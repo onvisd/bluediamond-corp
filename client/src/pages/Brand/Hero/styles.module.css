@@ -79,7 +79,9 @@
     &.top-left,
     &.center-left,
     &.bottom-left {
+        width: 100%;
         padding-top: 2rem;
+        max-width: calc(100% - 3rem);
         text-align: left;
     }
 
@@ -144,7 +146,7 @@
         max-width: 40vw;
 
         @media (--mq-gt-s) {
-            max-width: 50vw;
+            max-width: 300px;
         }
     }
 }
