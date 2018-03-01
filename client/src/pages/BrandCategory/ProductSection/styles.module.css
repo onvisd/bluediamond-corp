@@ -112,7 +112,6 @@
 
     &.dark {
         color: var(--c--white);
-        text-align: center;
     }
 
     @media (--mq-gt-s) {
