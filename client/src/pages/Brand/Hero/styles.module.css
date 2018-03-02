@@ -143,10 +143,11 @@
 
 .crafted-snack-almonds {
     & .logo {
-        max-width: 40vw;
+        max-width: 70vw;
 
         @media (--mq-gt-s) {
-            max-width: 300px;
+            width: 70vw;
+            max-width: 500px;
         }
     }
 }
