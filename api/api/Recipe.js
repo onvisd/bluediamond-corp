@@ -52,17 +52,37 @@ export default (api, {contentful}) => {
                 arrayPush(item.fields.consumerSymbols, filterSelections.dietary);
             });
 
-            // Concat & remove duplicates
             Object.keys(filterSelections).map((key) => {
+                // Concat & remove duplicates
                 if(key === 'almondBreezeFlavor')
                     filterSelections[key] = concatItems(filterSelections[key], 'id');
-
                 filterSelections[key] = concatItems(filterSelections[key]);
 
                 // Remove 'N/A'
                 const i = filterSelections[key].indexOf('N/A');
                 if(i !== -1)
                     filterSelections[key].splice(i, 1);
+
+                // Replace '-' with a comma
+                if(key !== 'almondBreezeFlavor') {
+                    filterSelections[key].map((keyValue, idx) => {
+                        filterSelections[key][idx] =
+                            filterSelections[key][idx].replace(' - ', ', ');
+                    });
+                }
+
+                // Alphabetize
+                filterSelections[key] = filterSelections[key].sort();
+                if(key === 'almondBreezeFlavor') {
+                    filterSelections[key] = filterSelections[key].sort((a, b) => {
+                        if(a.name < b.name)
+                            return -1;
+                        else if(a.name > b.name)
+                            return 1;
+
+                        return 0;
+                    });
+                }
             });
 
             // Send to client

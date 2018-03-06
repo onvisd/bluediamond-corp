@@ -16,7 +16,7 @@ export const getRecipes = action({
 
             Object.keys(filterValues).map((filter) => {
                 if(filterValues[filter])
-                    enabledFilters.push(encodeURIComponent(filter.replace(',', '')));
+                    enabledFilters.push(encodeURIComponent(filter.replace(', ', ' - ')));
             });
 
             filters[filterTitle] = enabledFilters.join(',');
