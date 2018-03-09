@@ -19,11 +19,12 @@ export default class Hero extends Component {
         brand: PropTypes.object.isRequired,
         category: PropTypes.object.isRequired,
         product: PropTypes.object.isRequired,
-        shopLinks: PropTypes.array.isRequired
+        shopLinks: PropTypes.array.isRequired,
+        style: PropTypes.string
     }
 
     render() {
-        const {brand, category, product, shopLinks, responsive} = this.props;
+        const {brand, category, product, shopLinks, responsive, style} = this.props;
 
         let size;
         if(responsive.xlarge)
@@ -41,7 +42,7 @@ export default class Hero extends Component {
             <div>
                 <div className={styles.hero}>
                     <Parallax
-                        className={styles.background}
+                        className={classnames(styles.background, styles[style])}
                         bgImage={image(
                             category.fields.heroBackground.fields.file.url,
                             {

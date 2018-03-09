@@ -230,6 +230,7 @@ export default class BrandCategory extends Component {
                     category={category}
                     product={activeProduct}
                     shopLinks={shopLinks}
+                    style={category.fields.heroBackgroundStyle}
                 />
                 <div
                     style={textureBg}

@@ -53,8 +53,11 @@
     width: 100vw;
     height: 80%;
     overflow: hidden;
-    filter: blur(4px);
-    transform: scale(1.02);
+
+    &.blurred {
+        filter: blur(4px);
+        transform: scale(1.02);
+    }
 
     & img {
         width: 100%; /* this will be overridden by react-parallax */
