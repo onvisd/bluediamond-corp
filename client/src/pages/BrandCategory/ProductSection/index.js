@@ -68,7 +68,7 @@ export default class ProductSection extends Component {
                     </p>
                     <div className={styles.actions}>
                         <Button
-                            theme="white"
+                            theme={theme === 'crave' ? 'blueDark' : 'white'}
                             href="/product-locator"
                             onClick={() => {
                                 if(typeof window !== 'undefined' && window.dataLayer) {

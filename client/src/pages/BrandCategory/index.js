@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {preload, redirect, pushLocation} from 'react-isomorphic-render';
 import {withRouter} from 'react-router';
+import classnames from 'classnames';
 
 import {connector as brandConnector, getBrand} from 'state/brand';
 import {
@@ -148,6 +149,12 @@ export default class BrandCategory extends Component {
         this.props.setNavigationStyle({});
     }
 
+    hasAppetizerImage(index) {
+        const {category} = this.state;
+
+        return category.fields.appetizerImages && category.fields.appetizerImages[index];
+    }
+
     render() {
         const {activeProduct, category, categoryProducts} = this.state;
         const {brand, responsive, redirect} = this.props; // eslint-disable-line no-shadow
@@ -190,6 +197,13 @@ export default class BrandCategory extends Component {
             });
         }
 
+        const textureBg = brand.fields.backgroundTexture ? {
+            backgroundImage: `url(${brand.fields.backgroundTexture.fields.file.url})`,
+            backgroundSize: `${
+                brand.fields.backgroundTexture.fields.file.details.image.width / 2
+            }px`
+        } : null;
+
         return (
             <section className={styles.content}>
                 <Title>{
@@ -218,34 +232,36 @@ export default class BrandCategory extends Component {
                     shopLinks={shopLinks}
                 />
                 <div
-                    className={styles.background}
-                    style={{
-                        backgroundImage: `url(${brand.fields.backgroundTexture.fields.file.url})`
-                    }}
+                    style={textureBg}
+                    className={classnames(styles.background, styles[brand.fields.themeType])}
                 >
                     <div className={styles.accents}>
-                        <div className={`${styles.accent} ${styles.accentLeft}`}>
-                            <img
-                                src={image(
-                                    category.fields.appetizerImages[0].fields.file.url,
-                                    {
-                                        width: 400
-                                    }
-                                )}
-                                alt="Accent Image"
-                            />
-                        </div>
-                        <div className={`${styles.accent} ${styles.accentRight}`}>
-                            <img
-                                src={image(
-                                    category.fields.appetizerImages[1].fields.file.url,
-                                    {
-                                        width: 400
-                                    }
-                                )}
-                                alt="Accent Image"
-                            />
-                        </div>
+                        {this.hasAppetizerImage(0) && (
+                            <div className={`${styles.accent} ${styles.accentLeft}`}>
+                                <img
+                                    src={image(
+                                        category.fields.appetizerImages[0].fields.file.url,
+                                        {
+                                            width: 400
+                                        }
+                                    )}
+                                    alt="Accent Image"
+                                />
+                            </div>
+                        )}
+                        {this.hasAppetizerImage(0) && (
+                            <div className={`${styles.accent} ${styles.accentRight}`}>
+                                <img
+                                    src={image(
+                                        category.fields.appetizerImages[1].fields.file.url,
+                                        {
+                                            width: 400
+                                        }
+                                    )}
+                                    alt="Accent Image"
+                                />
+                            </div>
+                        )}
                     </div>
                     <ProductSection
                         brand={brand}
@@ -285,6 +301,8 @@ export default class BrandCategory extends Component {
                         type="instagram"
                         title={brand.fields.waysToUseTitle || `Ways to use ${brand.fields.name}`}
                         cards={brand.fields.waysToUse}
+                        theme={`${brand.fields.themeType}Category`}
+                        color={brand.fields.themeColor}
                     />
                 )}
                 {brand.fields.recipes && (

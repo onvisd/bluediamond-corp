@@ -71,3 +71,13 @@
         color: var(--c--white);
     }
 }
+
+.crave {
+    & h2 {
+        color: var(--c--yellow);
+    }
+
+    & p {
+        color: var(--c--white);
+    }
+}

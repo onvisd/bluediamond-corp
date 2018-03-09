@@ -87,9 +87,7 @@ export default class CardPanel extends Component {
         const {type, title, theme, cards} = this.props;
 
         return (
-            <div className={classnames(styles.container, {
-                [styles[theme]]: type === 'brandFlavor'
-            })}>
+            <div className={classnames(styles.container, styles[theme])}>
                 <div className={styles.innerContainer}>
                     {title && <h2>{title}</h2>}
                     <div className={`${styles.cards}`}>

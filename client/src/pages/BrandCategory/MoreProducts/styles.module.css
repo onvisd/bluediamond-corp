@@ -60,3 +60,11 @@
         color: var(--c--white);
     }
 }
+
+.crave {
+    & .products {
+        padding: 1rem 1.5rem;
+        background-color: var(--c--gray-lighter);
+        border-radius: var(--l--border-radius);
+    }
+}

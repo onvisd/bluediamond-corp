@@ -27,3 +27,10 @@
 .carousel {
     position: relative;
 }
+
+/* themes */
+
+.crave {
+    background-image: none;
+    background-color: var(--c--crave-blue);
+}

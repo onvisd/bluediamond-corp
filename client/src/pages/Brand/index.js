@@ -119,6 +119,13 @@ export default class Brand extends Component {
                             ? brand.fields.mobileHeroImage
                             : brand.fields.heroImage;
 
+        const textureBg = brand.fields.backgroundTexture ? {
+            backgroundImage: `url(${brand.fields.backgroundTexture.fields.file.url})`,
+            backgroundSize: `${
+                brand.fields.backgroundTexture.fields.file.details.image.width / 2
+            }px`
+        } : null;
+
         return (
             <section className="content">
                 <Title>{brand.fields.name}</Title>
@@ -185,12 +192,7 @@ export default class Brand extends Component {
                         name={`${brand.fields.name} - Stories Carousel`}
                     />
                 )}
-                <div style={{
-                    backgroundImage: `url(${brand.fields.backgroundTexture.fields.file.url})`,
-                    backgroundSize: `${
-                        brand.fields.backgroundTexture.fields.file.details.image.width / 2
-                    }px`
-                }}>
+                <div style={textureBg} className={styles[brand.fields.themeType]}>
                     {brand.fields.categories
                         .filter((category) => !category.fields.hidden)
                         .map((category) => (

@@ -17,14 +17,21 @@ export default class Category extends Component {
     render() {
         const {name, description, products, appetizerImages, theme} = this.props;
 
+        const backgroundImage = [];
+
+        if(appetizerImages && appetizerImages.length) {
+            backgroundImage.push(`url(${appetizerImages[0].fields.file.url})`);
+
+            if(appetizerImages[1])
+                backgroundImage.push(`url(${appetizerImages[1].fields.file.url})`);
+        }
+
         return (
             <div
                 id={`category-${slugify(name)}`}
                 className={classnames(styles.container, [styles[theme]])}
                 style={{
-                    backgroundImage:
-                        `url(${appetizerImages[0].fields.file.url}), ` +
-                        `url(${appetizerImages[1].fields.file.url})`
+                    backgroundImage: backgroundImage.join(', ')
                 }}
             >
                 <div className={styles.innerContainer}>

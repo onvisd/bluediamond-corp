@@ -172,3 +172,9 @@
         background-color: var(--c--dark-blue);
     }
 }
+
+.crave {
+    & .panel {
+        border: 1px solid var(--c--gray-lighter);
+    }
+}

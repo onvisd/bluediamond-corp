@@ -83,6 +83,10 @@ export default class MoreFlavorsDesktop extends Component {
         ));
     }
 
+    hasAppetizerImage(category, index) {
+        return category.fields.appetizerImages && category.fields.appetizerImages[index];
+    }
+
     // Render the inital panels for each flavor.
     // Buttons open the carousel.
     renderFlavorPanels = () => {
@@ -98,28 +102,38 @@ export default class MoreFlavorsDesktop extends Component {
                 <div className={styles.panels}>
                     {visibleCategories.map((category, i) => (
                         <div className={className} key={category.sys.id}>
-                            <div className={`${styles.accent} ${styles.accentLeft}`}>
-                                <img
-                                    src={image(
-                                        category.fields.appetizerImages[0].fields.file.url,
-                                        {
-                                            width: 400
-                                        }
-                                    )}
-                                    alt="Flavor Accent"
-                                />
-                            </div>
-                            <div className={`${styles.accent} ${styles.accentRight}`}>
-                                <img
-                                    src={image(
-                                        category.fields.appetizerImages[1].fields.file.url,
-                                        {
-                                            width: 400
-                                        }
-                                    )}
-                                    alt="Flavor Accent"
-                                />
-                            </div>
+                            {this.hasAppetizerImage(category, 0)
+                                ? (
+                                    <div className={`${styles.accent} ${styles.accentLeft}`}>
+                                        <img
+                                            src={image(
+                                                category.fields.appetizerImages[0].fields.file.url,
+                                                {
+                                                    width: 400
+                                                }
+                                            )}
+                                            alt="Flavor Accent"
+                                        />
+                                    </div>
+                                )
+                                : null
+                            }
+                            {this.hasAppetizerImage(category, 1)
+                                ? (
+                                    <div className={`${styles.accent} ${styles.accentRight}`}>
+                                        <img
+                                            src={image(
+                                                category.fields.appetizerImages[1].fields.file.url,
+                                                {
+                                                    width: 400
+                                                }
+                                            )}
+                                            alt="Flavor Accent"
+                                        />
+                                    </div>
+                                )
+                                : null
+                            }
                             <div className={styles.text}>
                                 <h2>{category.fields.name}</h2>
                                 <Button onClick={() => this.openPanel({
@@ -133,6 +147,49 @@ export default class MoreFlavorsDesktop extends Component {
                     ))}
                 </div>
             </div>
+        );
+    }
+
+    renderCategoryCard(category, numCategories) {
+        return (
+            <View
+              key={category.sys.id}
+              className={styles.productSlide}
+              name={category.fields.name}
+              style={numCategories <= 1 && {margin: '0 auto'}}
+            >
+                <div className={`${styles.panel} ${styles.hasProducts}`}>
+                    {this.hasAppetizerImage(category, 0) && (
+                        <div className={`${styles.accent} ${styles.accentLeft}`}>
+                            <img
+                                src={image(
+                                  category.fields.appetizerImages[0].fields.file.url,
+                                  {
+                                      width: 400
+                                  }
+                              )}
+                              alt="Flavor Accent"
+                            />
+                        </div>
+                    )}
+                    {this.hasAppetizerImage(category, 1) && (
+                        <div className={`${styles.accent} ${styles.accentRight}`}>
+                            <img
+                              src={image(
+                                  category.fields.appetizerImages[1].fields.file.url,
+                                  {
+                                      width: 400
+                                  }
+                              )}
+                              alt="Flavor Accent"
+                            />
+                        </div>
+                    )}
+                    <div className={styles.products}>
+                        {this.renderProductCards(category.fields.name)}
+                    </div>
+                </div>
+            </View>
         );
     }
 
@@ -163,42 +220,9 @@ export default class MoreFlavorsDesktop extends Component {
                         style={{display: 'flex'}}
                         infinite
                     >
-                        {categories.map((category) => (
-                            <View
-                              key={category.sys.id}
-                              className={styles.productSlide}
-                              name={category.fields.name}
-                              style={categories.length <= 1 && {margin: '0 auto'}}
-                            >
-                                <div className={`${styles.panel} ${styles.hasProducts}`}>
-                                    <div className={`${styles.accent} ${styles.accentLeft}`}>
-                                        <img
-                                          src={image(
-                                              category.fields.appetizerImages[0].fields.file.url,
-                                              {
-                                                  width: 400
-                                              }
-                                          )}
-                                          alt="Flavor Accent"
-                                        />
-                                    </div>
-                                    <div className={`${styles.accent} ${styles.accentRight}`}>
-                                        <img
-                                          src={image(
-                                              category.fields.appetizerImages[1].fields.file.url,
-                                              {
-                                                  width: 400
-                                              }
-                                          )}
-                                          alt="Flavor Accent"
-                                        />
-                                    </div>
-                                    <div className={styles.products}>
-                                        {this.renderProductCards(category.fields.name)}
-                                    </div>
-                                </div>
-                            </View>
-                        ))}
+                        {categories.map((category) =>
+                            this.renderCategoryCard(category, categories.length)
+                        )}
                     </Track>
                 </Frame>
             </ViewPager>
