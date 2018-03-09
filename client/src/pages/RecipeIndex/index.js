@@ -116,7 +116,7 @@ export default class RecipeIndex extends Component {
         filtersSelectedCount: 0,
         search: searchViaParam('search', this.props.location.query),
         searchVisible: false,
-        sort: 'fields.featured,sys.createdAt',
+        sort: '-fields.featured,sys.createdAt',
         loading: false,
         hideFilters: true,
         filters: [],
