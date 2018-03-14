@@ -196,23 +196,31 @@ export default (api, {contentful}) => {
                     assetsById[asset.sys.id] = asset.fields;
                 });
 
-                const image = entryById[fields.includedProducts[0].sys.id].productPhotos[0].sys.id;
+                const productImages = {};
 
-                const images = {};
-                [128, 256, 512, 1024, 1536, 2048].map((imgOpts) => {
-                    images[imgOpts] = imgixClient.buildURL(
-                        `http:${assetsById[image].file.url}`,
-                        {
-                            w: imgOpts,
-                            h: imgOpts,
-                            fit: 'max',
-                            bg: 'fff',
-                            auto: 'compress'
-                        }
-                    );
-                });
+                if(fields.includedProducts) {
+                    fields.includedProducts.forEach((product) => {
+                        const image = entryById[product.sys.id].productPhotos[0].sys.id;
 
-                response.data.images = images;
+                        const images = {};
+                        [128, 256, 512, 1024, 1536, 2048].map((imgOpts) => {
+                            images[imgOpts] = imgixClient.buildURL(
+                                `http:${assetsById[image].file.url}`,
+                                {
+                                    w: imgOpts,
+                                    h: imgOpts,
+                                    fit: 'max',
+                                    bg: 'fff',
+                                    auto: 'compress'
+                                }
+                            );
+                        });
+
+                        productImages[product.sys.id] = images;
+                    });
+                }
+
+                response.data.productImages = productImages;
                 res.cache(true).send(response.data);
             } else {
                 res.status(404).send({ok: false, error: 'not found'});

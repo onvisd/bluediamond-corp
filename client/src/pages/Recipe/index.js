@@ -261,7 +261,7 @@ export default class Recipe extends Component {
                                             slugify(fields.brandCategory),
                                             fields.slug
                                         ].join('/')}
-                                        images={recipe.images}
+                                        images={recipe.productImages[product.sys.id]}
                                         imageAlt={fields.name}
                                         key={`product-${fields.slug}`}
                                     />
