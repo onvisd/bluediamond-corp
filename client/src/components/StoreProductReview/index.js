@@ -16,7 +16,10 @@ export default class StoreProductReview extends Component {
 
         return (
             <div className={styles.container}>
-                <h4 className={styles.title}>{review.title}</h4>
+                <h4
+                    className={styles.title}
+                    dangerouslySetInnerHTML={{__html: review.title}}
+                />
                 <div className={styles.meta}>
                     <div className={styles.date}>
                         {moment(review.created_at).format('DD MMMM YYYY')}
