@@ -52,7 +52,7 @@ export default class ProductReviews extends Component {
     submit = (model) => {
         const {product} = this.props;
         return axios.post(`/api/store/product/${product.product.handle}/review`, {
-            sku: product.storefrontId,
+            sku: product.storefrontId || product.product.id,
             product_title: product.product.title, // eslint-disable-line
             product_url: `https://bluediamond.com/store/product/${product.product.handle}`, // eslint-disable-line
             display_name: model.name, // eslint-disable-line

@@ -5,6 +5,29 @@ import logger from '../services/logger';
 
 import config from '../../config';
 
+const emptyResponse = {
+    status: {
+        code: 200,
+        message: 'OK'
+    },
+    response: {
+        pagination: {
+            page: 1,
+            per_page: 5,
+            total: 0
+        },
+        bottomline: {
+            total_review: 0,
+            average_score: 0,
+            star_distribution: null,
+            custom_fields_bottomline: null
+        },
+        products: [],
+        product_tags: null,
+        reviews: []
+    }
+};
+
 export default (api) => {
     const getYotpo = (id, params) =>
         axios.get(
@@ -24,28 +47,7 @@ export default (api) => {
             logger.error('No YotPo data found', err, err.body);
 
             // Return an empty response so we don't fail because of a review load error
-            return {
-                status: {
-                    code: 200,
-                    message: 'OK'
-                },
-                response: {
-                    pagination: {
-                        page: 1,
-                        per_page: 5,
-                        total: 0
-                    },
-                    bottomline: {
-                        total_review: 0,
-                        average_score: 0,
-                        star_distribution: null,
-                        custom_fields_bottomline: null
-                    },
-                    products: [],
-                    product_tags: null,
-                    reviews: []
-                }
-            };
+            return emptyResponse;
         });
 
     api.get('/store/product/:slug/reviews', async (req, res) => {
@@ -57,16 +59,18 @@ export default (api) => {
                 direction: 'descending'
             };
 
-            const reviews = await getYotpo(req.query.id, params);
-
-            if(reviews)
+            if(typeof req.query.id !== 'undefined') { // eslint-disable-line
+                const reviews = await getYotpo(req.query.id, params);
                 res.cache(true).send(reviews.response);
-            else
-                res.status(404).send({ok: false, error: 'Reviews not found.'});
+            } else {
+                res.status(404).send({ok: false, error: 'No reviews product id found.'});
+            }
         } catch (err) {
             console.trace(err);
             logger.error('Problem getting yotpo reviews', err, err.body);
-            res.status(500).send(err.message);
+
+            // Return an empty response so we don't fail because of a review load error
+            res.send(emptyResponse);
         }
     });
 
