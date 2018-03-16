@@ -41,6 +41,7 @@ export default {
     },
     yotpo: {
         key: process.env.YOTPO_KEY,
+        appKey: process.env.YOTPO_APP_KEY,
         secret: process.env.YOTPO_SECRET
     },
     auth: {

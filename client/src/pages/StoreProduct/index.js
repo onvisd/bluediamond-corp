@@ -7,6 +7,9 @@ import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 import {getStoreProduct} from 'state/storeProduct';
 import {connector as storeProductConnector} from 'state/storeProduct';
 
+import {getStoreReviews} from 'state/storeReviews';
+import {connector as storeReviewsConnector} from 'state/storeReviews';
+
 import {setStoreNavigation} from 'state/storeNavigation';
 import {connector as storeNavigationConnector} from 'state/storeNavigation';
 
@@ -14,26 +17,37 @@ import Title from 'components/Title';
 import Meta from 'components/Meta';
 import StoreProductHead from 'components/API/StoreProductHead';
 import StoreProductCard from 'components/API/StoreProductCard';
-import StoreProductReview from 'components/StoreProductReview';
+import ProductReviews from 'components/ProductReviews';
 
 import styles from './styles.module.css';
 
-@preload(({dispatch, parameters}) =>
-    dispatch(getStoreProduct(parameters.slug)).then(() => {
-        // These are synchronous actions, so we don't need to wait for them
-        dispatch(setStoreNavigation(true));
-        dispatch(setNavigationStyle({className: 'brand--dark'}));
-    })
-)
+@preload(async ({dispatch, parameters}) => {
+    await Promise.all([
+        dispatch(getStoreProduct(parameters.slug)).then((product) =>
+            dispatch(getStoreReviews({
+                slug: parameters.slug,
+                id: product.storefrontId
+            }))
+        ),
+        dispatch(setStoreNavigation(true)),
+        dispatch(setNavigationStyle({className: 'brand--dark'}))
+    ]);
+})
 @connect(
     (state) => ({
         ...navConnector(state.navigation),
         ...storeProductConnector(state.storeProduct),
+        ...storeReviewsConnector(state.storeReviews),
         ...storeNavigationConnector(state.storeNavigation)
     }),
-    {getStoreProduct, setNavigationStyle, setStoreNavigation}
+    {getStoreProduct, getStoreReviews, setNavigationStyle, setStoreNavigation}
 )
 export default class StoreProduct extends Component {
+    state = {
+        reviews: this.props.productReviews,
+        reviewsPage: 1
+    };
+
     componentDidMount() {
         const {product} = this.props;
 
@@ -55,7 +69,7 @@ export default class StoreProduct extends Component {
     componentWillUpdate(nextProps) {
         if(!nextProps.isStorePage)
             this.props.setStoreNavigation(true);
-        if(!nextProps.navigation.style.className)
+        if(!nextProps.navigation && !nextProps.navigation.style.className)
             this.props.setNavigationStyle({className: 'brand--dark'});
     }
 
@@ -64,13 +78,29 @@ export default class StoreProduct extends Component {
         this.props.setNavigationStyle({});
     }
 
+    setReviewsPage = (evt, page) => {
+        evt.preventDefault();
+
+        this.props.getStoreReviews({
+            slug: this.props.product.product.handle,
+            id: this.props.product.storefrontId,
+            page
+        })
+        .then((res) => this.setState({
+            reviews: res,
+            reviewsPage: page
+        }))
+        .catch((err) => console.trace(err));
+    };
+
+    scrollToReviews = () => {
+        this.reviewContainer.scrollIntoView({behavior: 'smooth'});
+    }
+
     render() {
-        const {product} = this.props;
+        const {product, productReviews} = this.props;
 
-        let reviews = [];
         let related = [];
-
-        if(product.reviews) reviews = product.reviews.reviews;
         if(product.related) related = product.related;
 
         return (
@@ -93,7 +123,22 @@ export default class StoreProduct extends Component {
                 <div className={styles.back}>
                     <Link className={styles.backLink} to="/store">Continue Shopping</Link>
                 </div>
-                <StoreProductHead data={product} />
+                <StoreProductHead
+                    data={product}
+                    reviews={productReviews}
+                    scrollToReviews={this.scrollToReviews}
+                />
+                <div ref={(reviewContainer) => {
+                    this.reviewContainer = reviewContainer;
+                }}
+                >
+                    <ProductReviews
+                        product={product}
+                        reviews={productReviews}
+                        setPage={(evt, page) => this.setReviewsPage(evt, page)}
+                        activePage={this.state.reviewsPage}
+                    />
+                </div>
                 {related.length > 0 &&
                     <div className={styles.related}>
                         <h3>Related Products</h3>
@@ -108,21 +153,6 @@ export default class StoreProduct extends Component {
                         </div>
                     </div>
                 }
-                {reviews.length > 0 &&
-                    <div className={styles.reviews}>
-                        <h3>Customer Reviews</h3>
-                        <div className={styles.reviewCards}>
-                            {reviews.slice(0, 2).map((review, idx) =>
-                                <StoreProductReview
-                                    key={`productReview${idx}`}
-                                    review={review}
-                                    totalReviews={product.reviews.bottomline.total_review || 0}
-                                />
-                            )}
-                        </div>
-                    </div>
-                }
-
                 {/* Tracking pixel */}
                 <img
                     src="https://r.turn.com/r/beacon?b2=dOm1o2qL7unskeoSfY7ialWAOyhtfOHhe3zQFUms8RRTNbIEOf2fo1LxMUNzxLfqsjLMl8773--xtutTwGUmYQ&cid="

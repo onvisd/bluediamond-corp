@@ -13,7 +13,7 @@ export default class NutritionFacts extends Component {
         const item = nutrition[0];
 
         return (
-            <section classname={theme}>
+            <section className={theme}>
                 <p><strong>Nutrition Facts</strong></p>
                 {pageType === 'product' &&
                     <p>

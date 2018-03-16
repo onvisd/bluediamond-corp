@@ -41,7 +41,8 @@ export default class StoreProductHead extends Component {
         description: PropTypes.string.isRequired,
         nutrition: PropTypes.object,
         ingredients: PropTypes.string,
-        reviews: PropTypes.object
+        reviews: PropTypes.object,
+        scrollToReviews: PropTypes.func
     }
 
     certMap = {
@@ -268,26 +269,38 @@ export default class StoreProductHead extends Component {
         }
     }
 
+    handleScrollReviews = (evt) => {
+        evt.preventDefault();
+        this.props.scrollToReviews(evt);
+    }
+
     render() {
-        const {title, ingredients, nutrition} = this.props;
-
-        const {quantity, price, compareAtPrice, variant, disableMessage} = this.state;
-
-        let reviews = [];
-        if(this.props.reviews)
-            reviews = this.props.reviews;
+        const {title, ingredients, nutrition, reviews} = this.props;
+        const {
+            quantity,
+            price,
+            compareAtPrice,
+            variant,
+            disableMessage
+        } = this.state;
 
         return (
             <section className={styles.container}>
                 {this.renderImages()}
                 <div className={styles.productInfo}>
                     <h2 className={styles.title}>{title}</h2>
-                    {reviews.length > 0 &&
+                    <div className={styles.reviews}>
                         <ProductStarRating
                             rating={reviews.bottomline.average_score}
                             reviewCount={reviews.bottomline.total_review}
                         />
-                    }
+                        <a
+                            href="#"
+                            onClick={this.handleScrollReviews}
+                        >
+                            Write a Review
+                        </a>
+                    </div>
                     {this.renderMeta()}
                     {this.renderDescription()}
                     {this.renderButtonOptions()}

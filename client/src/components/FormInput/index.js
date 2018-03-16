@@ -40,7 +40,8 @@ export default class FormInput extends Component {
             getValue,
             getErrorMessage,
             classNames,
-            required
+            required,
+            autocomplete
         } = this.props;
 
         return (
@@ -56,7 +57,9 @@ export default class FormInput extends Component {
                     )
                 }
             >
-                <div className={classnames(styles.label, classNames.label)}>{label}</div>
+                {label &&
+                    <div className={classnames(styles.label, classNames.label)}>{label}</div>
+                }
                 <input
                     type={type}
                     name={name}
@@ -64,6 +67,7 @@ export default class FormInput extends Component {
                     onChange={this.changeValue}
                     value={getValue() || ''}
                     required={required}
+                    autoComplete={autocomplete}
                 />
                 <span>{getErrorMessage()}</span>
             </label>

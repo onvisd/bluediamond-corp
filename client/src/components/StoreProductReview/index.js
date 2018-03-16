@@ -24,9 +24,10 @@ export default class StoreProductReview extends Component {
                     <ProductStarRating
                         rating={review.score}
                         reviewCount={totalReviews}
+                        starOnly={true}
                     />
                 </div>
-                <p className="t--size-s">{review.content.replace('&#x27;', "'")}</p>
+                <p className="t--size-s" dangerouslySetInnerHTML={{__html: review.content}}></p>
                 <p className={styles.user}>By {review.user.display_name}</p>
             </div>
         );

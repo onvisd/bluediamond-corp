@@ -30,7 +30,8 @@ export default class FormTextarea extends Component {
             getValue,
             getErrorMessage,
             classNames,
-            required
+            required,
+            placeholder
         } = this.props;
 
         return (
@@ -46,12 +47,15 @@ export default class FormTextarea extends Component {
                     )
                 }
             >
-                <div className={classnames(styles.label, classNames.label)}>{label}</div>
+                {label &&
+                    <div className={classnames(styles.label, classNames.label)}>{label}</div>
+                }
                 <textarea
                     name={name}
                     onChange={this.changeValue}
                     value={getValue() || ''}
                     required={required}
+                    placeholder={placeholder}
                 ></textarea>
                 <span>{getErrorMessage()}</span>
             </label>

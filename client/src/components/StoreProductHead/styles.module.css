@@ -207,3 +207,12 @@
         vertical-align: middle;
     }
 }
+
+.reviews {
+    display: flex;
+    align-items: center;
+
+    & a {
+        text-decoration: underline;
+    }
+}

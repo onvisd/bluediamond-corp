@@ -38,7 +38,7 @@ export default class StoreProductHead extends Component {
                                 src: PropTypes.string
                             })
                         })
-                    }).isRequired
+                    })
                 })
             })).isRequired,
             smartLabel: PropTypes.shape({
@@ -64,29 +64,30 @@ export default class StoreProductHead extends Component {
                     }))
                 })
             }),
-            reviews: PropTypes.shape({
-                bottomline: PropTypes.shape({
-                    total_review: PropTypes.number, // eslint-disable-line
-                    average_score: PropTypes.number, // eslint-disable-line
-                    star_distribution: PropTypes.string // eslint-disable-line
-                }),
-                reviews: PropTypes.arrayOf(PropTypes.shape({
-                    id: PropTypes.number.isRequired,
-                    score: PropTypes.number.isRequired,
-                    content: PropTypes.string,
-                    created_at: PropTypes.instanceOf(Date), // eslint-disable-line
-                    title: PropTypes.string,
-                    user: PropTypes.shape({
-                        display_name: PropTypes.string // eslint-disable-line
-                    })
-                }))
-            }),
             images: PropTypes.object
-        })
+        }),
+        reviews: PropTypes.shape({
+            bottomline: PropTypes.shape({
+                total_review: PropTypes.number, // eslint-disable-line
+                average_score: PropTypes.number, // eslint-disable-line
+                star_distribution: PropTypes.string // eslint-disable-line
+            }),
+            reviews: PropTypes.arrayOf(PropTypes.shape({
+                id: PropTypes.number.isRequired,
+                score: PropTypes.number.isRequired,
+                content: PropTypes.string,
+                created_at: PropTypes.instanceOf(Date), // eslint-disable-line
+                title: PropTypes.string,
+                user: PropTypes.shape({
+                    display_name: PropTypes.string // eslint-disable-line
+                })
+            }))
+        }),
+        scrollToReviews: PropTypes.func
     }
 
     render() {
-        const {data} = this.props;
+        const {data, reviews, scrollToReviews} = this.props;
         const smartLabel = data.smartLabel;
         const ingredients = smartLabel ? smartLabel.rawIngredients : null;
 
@@ -103,7 +104,8 @@ export default class StoreProductHead extends Component {
                 description={data.product.descriptionHtml}
                 nutrition={smartLabel && smartLabel}
                 ingredients={ingredients}
-                reviews={data.reviews}
+                reviews={reviews}
+                scrollToReviews={scrollToReviews}
             />
         );
     }

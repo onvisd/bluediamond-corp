@@ -15,6 +15,7 @@ export {default as storeFilters} from './storeFilters';
 export {default as storeNavigation} from './storeNavigation';
 export {default as storeSearch} from './storeSearch';
 export {default as storeProduct} from './storeProduct';
+export {default as storeReviews} from './storeReviews';
 export {default as manifesto} from './manifesto';
 export {default as foodService} from './foodService';
 export {default as product} from './product';

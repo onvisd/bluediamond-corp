@@ -243,46 +243,6 @@ export default (api, {apolloClient}) => {
             return 'No Smart Label data found';
         });
 
-    const getYotpo = (id) =>
-        axios.get(
-            `https://api.yotpo.com/v1/widget/${config.yotpo.key}` +
-            `/products/${id}/reviews.json`,
-            {
-                timeout: 3000,
-                retry: 5,
-                retryDelay: 1000
-            }
-        )
-        .then((response) => response.data)
-        .catch((err) => {
-            console.trace(err);
-            logger.error('No YotPo data found', err, err.body);
-
-            // Return an empty response so we don't fail because of a review load error
-            return {
-                status: {
-                    code: 200,
-                    message: 'OK'
-                },
-                response: {
-                    pagination: {
-                        page: 1,
-                        per_page: 5, // eslint-disable-line
-                        total: 0
-                    },
-                    bottomline: {
-                        total_review: 0, // eslint-disable-line
-                        average_score: 0, // eslint-disable-line
-                        star_distribution: null, // eslint-disable-line
-                        custom_fields_bottomline: null // eslint-disable-line
-                    },
-                    products: [],
-                    product_tags: null, // eslint-disable-line
-                    reviews: []
-                }
-            };
-        });
-
     const filterByTag = (arr) => {
         const items = [];
 
@@ -545,8 +505,7 @@ export default (api, {apolloClient}) => {
 
                 if(tags.length > 0 && /id:(\d*)/.test(productTags)) {
                     const productId = getProductId(productTags);
-                    const yotpo = await getYotpo(productId);
-                    product.reviews = yotpo.response;
+                    product.storefrontId = productId;
                 }
 
                 if(productType) {
