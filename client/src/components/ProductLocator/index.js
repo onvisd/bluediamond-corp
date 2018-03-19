@@ -12,11 +12,11 @@ export default class ProductLocator extends Component {
 
     render() {
         const {width, height, query} = this.props;
-        const destiniBase = 'https://destinilocators.com/bluediamondnuts';
+        const destiniBase = 'https://destinilocators.com/bluediamondnuts/site/';
 
         return (
             <iframe
-                src={`${destiniBase}/site${query && query}`}
+                src={`${destiniBase}${query || '?MM=panel2'}`}
                 width={width || null}
                 height={height || null}
                 frameBorder="0"
