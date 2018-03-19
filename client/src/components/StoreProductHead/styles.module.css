@@ -210,9 +210,12 @@
 
 .reviews {
     display: flex;
+    width: 100%;
     align-items: center;
+    max-width: 350px;
 
     & a {
+        margin-top: 0.25rem;
         text-decoration: underline;
     }
 }
