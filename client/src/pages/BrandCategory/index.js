@@ -178,12 +178,19 @@ export default class BrandCategory extends Component {
             ).slice(0, 6);
         }
 
-        const shopLinks = [
-            {
-                slug: activeProduct.fields.shopifyLink || '/store',
+        const shopLinks = [];
+        if(activeProduct.fields.shopifyLink) {
+            shopLinks.push({
+                slug: activeProduct.fields.shopifyLink,
                 name: 'Blue Diamond Store'
-            }
-        ];
+            });
+        }
+        if(activeProduct.fields.destiniLink) {
+            shopLinks.push({
+                slug: activeProduct.fields.destiniLink,
+                name: 'Find Product Near You'
+            });
+        }
 
         if(activeProduct.fields.otherStoreLinks) {
             activeProduct.fields.otherStoreLinks.forEach((link) => {

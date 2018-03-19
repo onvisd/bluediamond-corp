@@ -114,7 +114,7 @@ export default class Hero extends Component {
                                     }}
                                     dropUp
                                 >
-                                    Buy Online
+                                    Buy
                                 </ButtonDropdown>
                             </div>
                         </div>
