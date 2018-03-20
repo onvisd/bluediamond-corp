@@ -164,6 +164,7 @@ export default class Brand extends Component {
                         classNames={{container: styles.carousel}}
                         showArrows
                         showTabs
+                        autoplay={true}
                         arrowColor={
                             brand.fields.themeType === 'dark'
                                 ? brand.fields.themeColor

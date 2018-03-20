@@ -19,7 +19,9 @@ export default class Carousel extends Component {
         showTabs: PropTypes.bool,
         tabColor: PropTypes.string,
         onViewChange: PropTypes.func,
-        name: PropTypes.string
+        name: PropTypes.string,
+        autoplay: PropTypes.bool,
+        autoplayInterval: PropTypes.number
     }
 
     static defaultProps = {
@@ -31,7 +33,9 @@ export default class Carousel extends Component {
         showOverlay: false,
         showArrows: false,
         showTabs: false,
-        tabColor: 'dark'
+        tabColor: 'dark',
+        autoplay: false,
+        autoplayInterval: 6000
     }
 
     constructor(props) {
@@ -158,6 +162,23 @@ export default class Carousel extends Component {
                 ))}
             </div>
         );
+    }
+
+    componentDidMount() {
+        const {autoplay, autoplayInterval} = this.props;
+
+        if(autoplay && this.carouselTrack) {
+            this.interval = setInterval(
+                () => this.carouselTrack.next(), autoplayInterval
+            );
+        }
+    }
+
+    componentWillUnmount() {
+        const {autoplay} = this.state;
+
+        if(autoplay && this.interval)
+            clearInterval(this.interval);
     }
 
     render() {
