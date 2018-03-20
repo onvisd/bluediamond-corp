@@ -8,48 +8,33 @@ export default class ProductStarRating extends Component {
     static propTypes = {
         rating: PropTypes.number.isRequired,
         reviewCount: PropTypes.number,
-        starOnly: PropTypes.bool
+        starOnly: PropTypes.bool,
+        onClick: PropTypes.func
     }
 
     render() {
-        const {rating, reviewCount, starOnly} = this.props;
+        const {rating, reviewCount, starOnly, onClick} = this.props;
 
-        if(rating === 0 && reviewCount === 0) {
-            return (
-                <div className={styles.container}>
-                    <div className={styles.stars} data-rating={rating}>
-                        <span><Empty /></span>
-                        <span><Empty /></span>
-                        <span><Empty /></span>
-                        <span><Empty /></span>
-                        <span><Empty /></span>
-                    </div>
+        return (
+            <div className={styles.container} onClick={onClick}>
+                <div className={styles.stars} data-rating={rating}>
+                    {rating >= 1 ? <span><Full /></span> : <span><Empty /></span>}
+                    {rating >= 2 ? <span><Full /></span> : <span><Empty /></span>}
+                    {rating >= 3 ? <span><Full /></span> : <span><Empty /></span>}
+                    {rating >= 4 ? <span><Full /></span> : <span><Empty /></span>}
+                    {rating >= 5 ? <span><Full /></span> : <span><Empty /></span>}
+                </div>
+                {starOnly ? null : (
                     <div className={styles.reviewCount}>
                         <p className="t--type-incidental">
-                            {reviewCount} reviews
+                            {reviewCount > 0
+                                ? `${reviewCount} ${reviewCount === 1 ? 'review' : 'reviews'}`
+                                : 'No reviews'
+                            }
                         </p>
                     </div>
-                </div>
-            );
-        }
-
-        if(rating !== 0 && reviewCount !== 0) {
-            return (
-                <div className={styles.container}>
-                    <div className={styles.stars} data-rating={rating}>
-                        {rating >= 1 ? <span><Full /></span> : <span><Empty /></span>}
-                        {rating >= 2 ? <span><Full /></span> : <span><Empty /></span>}
-                        {rating >= 3 ? <span><Full /></span> : <span><Empty /></span>}
-                        {rating >= 4 ? <span><Full /></span> : <span><Empty /></span>}
-                        {rating >= 5 ? <span><Full /></span> : <span><Empty /></span>}
-                    </div>
-                    {reviewCount && !starOnly && <div className={styles.reviewCount}>
-                        <p className="t--type-incidental">
-                            {reviewCount} {reviewCount === 1 ? 'review' : 'reviews'}
-                        </p>
-                    </div>}
-                </div>
-            );
-        }
+                )}
+            </div>
+        );
     }
 }

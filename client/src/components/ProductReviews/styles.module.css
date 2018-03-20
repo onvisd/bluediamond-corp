@@ -198,7 +198,7 @@
 }
 
 .starRatingLabel {
-    color: var(--c--gray);
+    color: var(--c--gray-dark);
 
     @media (--mq-s) {
         flex: auto;

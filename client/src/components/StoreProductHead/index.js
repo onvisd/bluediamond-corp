@@ -293,9 +293,10 @@ export default class StoreProductHead extends Component {
                         <ProductStarRating
                             rating={reviews.bottomline.average_score}
                             reviewCount={reviews.bottomline.total_review}
+                            onClick={this.handleScrollReviews}
                         />
                         <a
-                            href="#"
+                            href="#reviews"
                             onClick={this.handleScrollReviews}
                         >
                             Write a Review

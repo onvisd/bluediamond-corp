@@ -128,7 +128,7 @@ export default class StoreProduct extends Component {
                     reviews={productReviews}
                     scrollToReviews={this.scrollToReviews}
                 />
-                <div ref={(reviewContainer) => {
+                <div id="reviews" ref={(reviewContainer) => {
                     this.reviewContainer = reviewContainer;
                 }}
                 >

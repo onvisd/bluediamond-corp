@@ -243,7 +243,7 @@ export default class ProductReviews extends Component {
                                 />
                                 <div className={styles.starRating}>
                                     <div className={styles.starRatingLabel}>
-                                        Select a star Rating
+                                        Select a star rating
                                     </div>
                                     <div className={styles.starRatingInput}>
                                         <Rating

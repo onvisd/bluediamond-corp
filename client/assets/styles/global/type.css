@@ -141,7 +141,7 @@ a {
 .t--type-prose {
     font-size: var(--t--size-m);
 }
-.t--type-incidental { color: var(--c--gray); }
+.t--type-incidental { color: var(--c--gray-dark); }
 
 .t--size-ms-xl { font-size: var(--ms2); }
 .t--size-ms-l { font-size: var(--ms1); }
