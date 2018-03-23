@@ -231,6 +231,11 @@ export default class Footer extends Component {
                                             Careers
                                         </a>
                                     </li>
+                                    <li>
+                                        <Link to="/community-giving">
+                                            Community Giving
+                                        </Link>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
