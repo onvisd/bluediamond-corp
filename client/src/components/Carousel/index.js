@@ -175,7 +175,7 @@ export default class Carousel extends Component {
     }
 
     componentWillUnmount() {
-        const {autoplay} = this.state;
+        const {autoplay} = this.props;
 
         if(autoplay && this.interval)
             clearInterval(this.interval);
