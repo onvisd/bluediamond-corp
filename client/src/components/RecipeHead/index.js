@@ -1,6 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import marked from 'marked';
-import {ShareButtons} from 'react-share';
+import {
+    FacebookShareButton,
+    PinterestShareButton,
+    TwitterShareButton
+} from 'react-share';
 
 import NutritionFacts from '../NutritionFacts';
 
@@ -16,12 +20,6 @@ import Unsweetened from 'images/icons/unsweetened.svg';
 import Vegan from 'images/icons/vegan.svg';
 
 import styles from './styles.module.css';
-
-const {
-    FacebookShareButton,
-    PinterestShareButton,
-    TwitterShareButton
-} = ShareButtons;
 
 export default class RecipeHead extends Component {
     static propTypes = {

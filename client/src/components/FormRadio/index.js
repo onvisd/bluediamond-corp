@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import Formsy from 'formsy-react';
+import {withFormsy} from 'formsy-react';
 
 import styles from './styles.module.css';
 
-@Formsy.Decorator()
-export default class FormRadio extends Component {
+class FormRadio extends Component {
     componentDidMount() {
         this.props.setValue(this.props.defaultChecked || false);
     }
@@ -38,3 +37,5 @@ export default class FormRadio extends Component {
         );
     }
 }
+
+export default withFormsy(FormRadio);

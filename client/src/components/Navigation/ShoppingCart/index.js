@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Form} from 'formsy-react';
+import Formsy from 'formsy-react';
 import {Link} from 'react-isomorphic-render';
 
 import {connector, addAttribute, removeFromCart} from 'state/checkout';
@@ -132,7 +132,7 @@ export default class ShoppingCart extends Component {
                                     ${checkout.subtotalPrice}
                                 </div>
                             </div>
-                            <Form
+                            <Formsy
                                 onValidSubmit={this.handleGoToCheckout}
                                 className={styles.form}
                                 ref={(form) => {
@@ -175,7 +175,7 @@ export default class ShoppingCart extends Component {
                                       Continue Shopping
                                   </Link>
                               </div>
-                            </Form>
+                            </Formsy>
                             {children}
                         </div>
                     ) : 'Your shopping cart is empty'}

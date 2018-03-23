@@ -55,6 +55,12 @@ const config = {
                 use: [
                     {
                         loader: 'babel-loader'
+                    },
+                    {
+                        loader: 'eslint-loader',
+                        options: {
+                            failOnError: true
+                        }
                     }
                 ]
             },
@@ -124,22 +130,6 @@ config.plugins.push(
         test: /\.(css)$/,
         debug: true,
         options: {
-            // A temporary workaround for `scss`
-            // https://github.com/jtangelder/sass/issues/298
-            // output: {
-            //     path: configuration.output.path
-            // },
-
-            postcss: [
-                require('postcss-import')({
-                    path: [
-                        path.resolve(rootFolder, 'assets', 'styles')
-                    ]
-                }),
-                require('postcss-mixins'),
-                require('postcss-cssnext')
-            ],
-
             // A temporary workaround for `css`.
             // Can also supply `query.context` parameter.
             context: config.context

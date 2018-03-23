@@ -86,10 +86,10 @@
 
     & svg {
         margin-right: 0.5rem;
+    }
 
-        & path {
-            fill: var(--c--white);
-        }
+    & path {
+        fill: var(--c--white);
     }
 
     &.brand--yellow a,

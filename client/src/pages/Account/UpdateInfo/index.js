@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Form} from 'formsy-react';
+import Formsy from 'formsy-react';
 import classnames from 'classnames';
 
 import {updateCustomer} from 'state/auth';
@@ -122,7 +122,7 @@ export default class UpdateInfo extends Component {
 
         return (
             <div className={styles.container}>
-              <Form
+              <Formsy
                   onValidSubmit={this.handleUpdate}
                   onValid={this.enableSubmit}
                   onInvalid={this.disableSubmit}
@@ -171,7 +171,7 @@ export default class UpdateInfo extends Component {
                           {this.btnContent()}
                       </Button>
                   </div>
-              </Form>
+              </Formsy>
             </div>
         );
     }

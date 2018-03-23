@@ -164,9 +164,7 @@ export default class MoreFlavorsDesktop extends Component {
                             <img
                                 src={image(
                                   category.fields.appetizerImages[0].fields.file.url,
-                                  {
-                                      width: 400
-                                  }
+                                  {width: 400}
                               )}
                               alt="Flavor Accent"
                             />

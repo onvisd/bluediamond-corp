@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import classnames from 'classnames';
 import axios from 'axios';
-import {Form} from 'formsy-react';
+import Formsy from 'formsy-react';
 
 import Button from '../Button';
 import Input from '../FormInput';
@@ -160,7 +160,7 @@ export default class ProductReviews extends Component {
                         }
                     </div>
                     <div className={styles.right}>
-                        <Form
+                        <Formsy
                             onValidSubmit={this.submit}
                             onValid={this.enableSubmit}
                             onInvalid={this.disableSubmit}
@@ -264,7 +264,7 @@ export default class ProductReviews extends Component {
                                     {this.state.sending ? 'Submitting...' : 'Submit'}
                                 </Button>
                             </div>
-                        </Form>
+                        </Formsy>
                     </div>
                 </div>
                 {reviews.pagination.total > reviews.pagination.per_page &&

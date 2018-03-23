@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import axios from 'axios';
-import {Form} from 'formsy-react';
+import Formsy from 'formsy-react';
 
 import Button from '../Button';
 import Input from '../FormInput';
@@ -75,7 +75,7 @@ export default class FoodserviceContact extends Component {
         } = this.props;
 
         return (
-            <Form
+            <Formsy
                 onValidSubmit={this.submit}
                 onValid={this.enableSubmit}
                 onInvalid={this.disableSubmit}
@@ -164,7 +164,7 @@ export default class FoodserviceContact extends Component {
                 >
                     {this.state.sending ? 'Sending...' : 'Send Message'}
                 </Button>
-            </Form>
+            </Formsy>
         );
     }
 }

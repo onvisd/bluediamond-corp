@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import Formsy from 'formsy-react';
+import {withFormsy} from 'formsy-react';
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
 
-@Formsy.Decorator()
-export default class FormInput extends Component {
+class FormInput extends Component {
     static defaultProps = {
         classNames: {
             container: null,
@@ -74,3 +73,5 @@ export default class FormInput extends Component {
         );
     }
 }
+
+export default withFormsy(FormInput);

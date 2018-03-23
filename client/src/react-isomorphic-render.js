@@ -19,7 +19,7 @@ export default {
 
     reduxStoreEnhancers: () => enhancers,
 
-    catch(error, {url, redirect}) {
+    error(error, {url, redirect}) {
         switch (error.status) {
             case 404:
                 return redirect('/404');

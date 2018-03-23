@@ -61,7 +61,7 @@
         }
     }
 
-    & ol
+    & ol,
     & ul {
         @media (--mq-s) {
             padding-left: 0.75rem;

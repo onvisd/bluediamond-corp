@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import axios from 'axios';
-import {Form} from 'formsy-react';
+import Formsy from 'formsy-react';
 
 import Button from '../Button';
 import Input from '../FormInput';
@@ -65,7 +65,7 @@ export default class RequestSampleForm extends Component {
 
     render() {
         return (
-            <Form
+            <Formsy
                 onValidSubmit={this.submit}
                 onValid={this.enableSubmit}
                 onInvalid={this.disableSubmit}
@@ -144,7 +144,7 @@ export default class RequestSampleForm extends Component {
                 >
                     {this.state.sending ? 'Submitting...' : 'Submit Request'}
                 </Button>
-            </Form>
+            </Formsy>
         );
     }
 }

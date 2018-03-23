@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import Formsy from 'formsy-react';
+import {withFormsy} from 'formsy-react';
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
 
-@Formsy.Decorator()
-export default class FormSelect extends Component {
+class FormSelect extends Component {
     static defaultProps = {
         classNames: {
             container: null,
@@ -83,3 +82,5 @@ export default class FormSelect extends Component {
         );
     }
 }
+
+export default withFormsy(FormSelect);

@@ -25,6 +25,7 @@
             border-bottom-color: var(--c--black);
         }
 
+        /* stylelint-disable-next-line */
         &:not(:nth-child(2)) + .accordionItem {
             border-top-color: var(--c--black);
         }

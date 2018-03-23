@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link, goto} from 'react-isomorphic-render';
 import {connect} from 'react-redux';
-import {Form} from 'formsy-react';
+import Formsy from 'formsy-react';
 import classnames from 'classnames';
 
 import {connector as authConnector} from 'state/auth';
@@ -207,7 +207,7 @@ export default class Signin extends Component {
                         </button>
                     </div>
                     {view === 'signin' && (
-                        <Form
+                        <Formsy
                             className={styles.form}
                             onValidSubmit={this.handleSignIn}
                             onValid={this.enableSubmit}
@@ -247,10 +247,10 @@ export default class Signin extends Component {
                                     Forgot Password?
                                 </a>
                             </div>
-                        </Form>
+                        </Formsy>
                     )}
                     {view === 'create' && (
-                        <Form
+                        <Formsy
                             className={styles.form}
                             onValidSubmit={this.handleRegister}
                             onValid={this.enableSubmit}
@@ -292,10 +292,10 @@ export default class Signin extends Component {
                             >
                                 {this.registerState()}
                             </Button>
-                        </Form>
+                        </Formsy>
                     )}
                     {view === 'recover' && (
-                        <Form
+                        <Formsy
                             className={styles.form}
                             onValidSubmit={this.handleRecover}
                             onValid={this.enableSubmit}
@@ -323,7 +323,7 @@ export default class Signin extends Component {
                             >
                                 {this.recoverState()}
                             </Button>
-                        </Form>
+                        </Formsy>
                     )}
                 </div>
                 <Link to="/store" className={styles.continue}>

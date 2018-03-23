@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link, goto} from 'react-isomorphic-render';
 import {connect} from 'react-redux';
-import {Form} from 'formsy-react';
+import Formsy from 'formsy-react';
 
 import {connector as authConnector} from 'state/auth';
 import {resetCustomer, signoutCustomer} from 'state/auth';
@@ -111,7 +111,7 @@ export default class Signin extends Component {
                 ]}</Meta>
                 <h1>Reset Your Password</h1>
                 <div className={styles.formWrap}>
-                    <Form
+                    <Formsy
                         className={styles.form}
                         onValidSubmit={this.handleReset}
                         onValid={this.enableSubmit}
@@ -139,7 +139,7 @@ export default class Signin extends Component {
                         >
                             {this.buttonState()}
                         </Button>
-                    </Form>
+                    </Formsy>
                 </div>
                 <Link to="/store" className={styles.continue}>
                     Continue as Guest

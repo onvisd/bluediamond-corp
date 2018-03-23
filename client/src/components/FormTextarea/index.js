@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import Formsy from 'formsy-react';
+import {withFormsy} from 'formsy-react';
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
 
-@Formsy.Decorator()
-export default class FormTextarea extends Component {
+class FormTextarea extends Component {
     static defaultProps = {
         classNames: {}
     }
@@ -62,3 +61,5 @@ export default class FormTextarea extends Component {
         );
     }
 }
+
+export default withFormsy(FormTextarea);

@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-isomorphic-render';
 import {connect} from 'react-redux';
-import classnames from 'classnames';
 import styles from './styles.module.css';
 
 import Facebook from 'images/icons/facebook.svg';

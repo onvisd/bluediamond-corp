@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Form} from 'formsy-react';
+import Formsy from 'formsy-react';
 import classnames from 'classnames';
 
 import {updateAddress, deleteAddress} from 'state/auth';
@@ -104,7 +104,7 @@ export default class EditAddress extends Component {
 
         return (
             <div className={styles.container}>
-                <Form
+                <Formsy
                     onValidSubmit={this.handleUpdateAddress}
                     onValid={this.enableSubmit}
                     onInvalid={this.disableSubmit}
@@ -177,7 +177,7 @@ export default class EditAddress extends Component {
                             </Button>
                         </div>
                     </div>
-                </Form>
+                </Formsy>
             </div>
         );
     }
