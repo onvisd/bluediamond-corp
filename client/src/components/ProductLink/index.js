@@ -16,7 +16,8 @@ export default class ProductLink extends Component {
         inactiveClassName: PropTypes.string,
         showBrand: PropTypes.bool,
         type: PropTypes.string,
-        modifierClass: PropTypes.string,
+        modifierClass: PropTypes.any,
+        textClass: PropTypes.any,
         theme: PropTypes.string
     }
 
@@ -76,14 +77,15 @@ export default class ProductLink extends Component {
     renderCopy() {
         const {
             product,
-            showBrand
+            showBrand,
+            textClass
         } = this.props;
 
         return (
             <div className={styles.info}>
                 {showBrand &&
                     <span className={styles.brand}>{product.fields.brand}</span>}
-                <span className={styles.title}>{product.fields.name}</span>
+                <span className={classnames(styles.title, textClass)}>{product.fields.name}</span>
             </div>
         );
     }
@@ -131,7 +133,8 @@ export default class ProductLink extends Component {
                         styles.container,
                         styles[theme],
                         styles[type],
-                        styles[modifierClass], {
+                        modifierClass,
+                        {
                             [activeClassName]: activeClassName && active,
                             [inactiveClassName]: inactiveClassName && !active
                         },

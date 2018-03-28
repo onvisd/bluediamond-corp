@@ -57,6 +57,7 @@ export default class ProductPanel extends Component {
                     key={product.fields.slug}
                     product={product}
                     theme={theme}
+                    textClass={styles.text}
                     active={activeProduct && activeProduct.fields.slug === product.fields.slug}
                     action={linkAction}
                     type={overflowType === 'carousel' && overflow ? 'carousel' : 'panel'}

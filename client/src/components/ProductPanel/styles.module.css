@@ -95,4 +95,8 @@
 
 .dark {
     background-color: var(--c--alt-gray);
+
+    & .text {
+        color: var(--c--alt-gray-dark);
+    }
 }
