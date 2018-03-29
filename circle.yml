@@ -11,11 +11,11 @@ deployment:
     development:
         branch: development
         commands:
-        - ssh bluediamond@planetary.io '~/development/redeploy'
+        - ssh bluediamond@planetary.io '. ~/.profile && ~/development/redeploy'
     staging:
         branch: staging
         commands:
-        - ssh bluediamond@planetary.io '~/staging/redeploy'
+        - ssh bluediamond@planetary.io '. ~/.profile && ~/staging/redeploy'
     production:
         branch: master
         commands:
