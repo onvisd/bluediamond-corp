@@ -107,9 +107,7 @@ export default class RecipeIndex extends Component {
     };
 
     state = {
-        recipes: [],
         assets: [],
-        totalCardCount: 0,
         skip: parseIntQueryParam('skip', this.props.location, 0),
         perPage: parseIntQueryParam('perPage', this.props.location, 9),
         filter: null,
@@ -135,20 +133,19 @@ export default class RecipeIndex extends Component {
             sort,
             skip,
             perPage,
-            recipes: [...result.items],
             assets,
-            totalCardCount: result.total,
             search: this.search.value,
             loading: false
         }));
     };
 
     setPage = (page) => {
-        const {perPage, totalCardCount} = this.state;
+        const {perPage} = this.state;
+        const {total} = this.props.recipes;
 
         let newSkip = (page - 1) * perPage;
-        if(newSkip > totalCardCount)
-            newSkip = totalCardCount;
+        if(newSkip > total)
+            newSkip = total;
 
         this.getNextRecipes(newSkip, perPage);
     };
@@ -162,12 +159,12 @@ export default class RecipeIndex extends Component {
     };
 
     nextPage = () => {
-        const {perPage, totalCardCount} = this.state;
-        const {skip} = this.props.recipes;
+        const {perPage} = this.state;
+        const {skip, total} = this.props.recipes;
 
         let newSkip = skip + perPage;
-        if(newSkip > totalCardCount)
-            newSkip = totalCardCount - 1;
+        if(newSkip > total)
+            newSkip = total - 1;
 
         this.getNextRecipes(newSkip, perPage);
     };
@@ -284,7 +281,8 @@ export default class RecipeIndex extends Component {
             filters: Object.assign({}, filters, {
                 almondBreezeFlavor: flavorFilter
             }),
-            limit: perPage})
+            limit: perPage
+        })
             .then((result) =>
                 this.setGetRecipesResultsState(
                     result, filters, filtersSelectedCount, sort, 0, perPage
@@ -325,7 +323,8 @@ export default class RecipeIndex extends Component {
             filters: Object.assign({}, filters, {
                 almondBreezeFlavor: flavorFilter
             }),
-            limit: perPage})
+            limit: perPage
+        })
             .then((result) =>
                 this.setGetRecipesResultsState(
                     result, filters, filtersSelectedCount, sort, 0, perPage
@@ -367,7 +366,8 @@ export default class RecipeIndex extends Component {
             filters: Object.assign({}, filters, {
                 almondBreezeFlavor: flavorFilter
             }),
-            limit: perPage})
+            limit: perPage
+        })
             .then((result) =>
                 this.setGetRecipesResultsState(
                     result, filters, this.filtersSelectedCount(), sort, 0, perPage
@@ -397,7 +397,8 @@ export default class RecipeIndex extends Component {
             filters: Object.assign({}, filters, {
                 almondBreezeFlavor: flavorFilter
             }),
-            limit: perPage})
+            limit: perPage
+        })
             .then((result) =>
                 this.setGetRecipesResultsState(
                     result, filters, filtersSelectedCount, sort, 0, perPage
@@ -437,7 +438,8 @@ export default class RecipeIndex extends Component {
             filters: Object.assign({}, filters, {
                 almondBreezeFlavor: flavorFilter
             }),
-            limit: perPage})
+            limit: perPage
+        })
             .then((result) =>
                 this.setGetRecipesResultsState(
                     result, filters, filtersSelectedCount, sort, 0, perPage
@@ -472,9 +474,9 @@ export default class RecipeIndex extends Component {
     };
 
     renderRecipeCards = () => {
-        const {recipes, filter} = this.state;
+        const {filter} = this.state;
 
-        let cards = recipes;
+        let cards = this.props.recipes.items;
 
         const filterCards = (card) =>
             card.fields.consumerSymbols &&
@@ -543,8 +545,6 @@ export default class RecipeIndex extends Component {
             assets = this.props.recipes.includes.Asset;
 
         this.setState(() => ({
-            totalCardCount: this.props.recipes.total,
-            recipes: this.props.recipes.items,
             allFilters: this.props.recipeFilters,
             filters: this.initFilterState(this.props.location, this.props.recipeFilters),
             assets
@@ -556,6 +556,13 @@ export default class RecipeIndex extends Component {
     componentWillUpdate(nextProps) {
         if(!nextProps.navigation.style.className)
             this.props.setNavigationStyle({className: 'brand--blue'});
+    }
+
+    componentWillReceiveProps(nextProps) { // eslint-disable-line id-length
+        this.setState(() => ({
+            filters: this.initFilterState(nextProps.location, nextProps.recipeFilters),
+            assets: nextProps.recipes.includes ? nextProps.recipes.includes.Asset : {}
+        }));
     }
 
     componentWillUnmount() {
@@ -600,7 +607,6 @@ export default class RecipeIndex extends Component {
                 );
                 this.setState((state) => ({
                     skip: result.skip,
-                    recipes: [...result.items],
                     assets: [...state.assets, ...result.includes.Asset],
                     loading: false
                 }));
@@ -611,14 +617,14 @@ export default class RecipeIndex extends Component {
     }
 
     renderNavButtons = () => {
-        const {perPage, totalCardCount} = this.state;
-        const {skip} = this.props.recipes;
+        const {perPage} = this.state;
+        const {skip, total} = this.props.recipes;
 
-        if(skip === 'undefined' || totalCardCount === 'undefined')
+        if(skip === 'undefined' || total === 'undefined')
             return <div/>;
 
         const currentPage = Math.floor(skip / perPage) + 1;
-        const lastPage = Math.ceil(totalCardCount / perPage);
+        const lastPage = Math.ceil(total / perPage);
 
         let start;
         let end;
@@ -675,7 +681,7 @@ export default class RecipeIndex extends Component {
                 }
                 {pages}
                 {
-                    skip < totalCardCount - perPage
+                    skip < total - perPage
                         ? <a className={styles.navButton} onClick={this.nextPage}>Next &gt;</a>
                         : null
                 }
@@ -685,14 +691,13 @@ export default class RecipeIndex extends Component {
 
     render() {
         const {
-            totalCardCount,
             hideFilters,
             search,
             searchVisible,
             perPage,
             allFilters
         } = this.state;
-        const {responsive} = this.props;
+        const {responsive, recipes} = this.props;
 
         return (
             <section className="content">
@@ -782,7 +787,7 @@ export default class RecipeIndex extends Component {
                                 <div className="l--col-12-at-s l--col-4">
                                     <h3 className={styles.title}>
                                         All recipes
-                                        <small> ({totalCardCount})</small>
+                                        <small> ({recipes.total})</small>
                                     </h3>
                                 </div>
                                 <div className="l--col-12-at-s l--col-8 form--group">
