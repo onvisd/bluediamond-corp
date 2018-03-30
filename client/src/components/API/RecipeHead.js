@@ -13,6 +13,10 @@ export default class RecipeHead extends Component {
                             id: PropTypes.string
                         })
                     }).isRequired,
+                    heroVideo: PropTypes.string,
+                    heroVideoAutoplay: PropTypes.bool,
+                    heroVideoShowControls: PropTypes.bool,
+                    heroVideoMute: PropTypes.bool,
                     consumerSymbols: PropTypes.array,
                     servingSize: PropTypes.number.isRequired,
                     servingSizeOz: PropTypes.number,
@@ -72,6 +76,10 @@ export default class RecipeHead extends Component {
             <RecipeHeadComponent
                 title={fields.name}
                 heroImage={assetsById[fields.heroImage.sys.id].file.url}
+                heroVideo={fields.heroVideo}
+                heroVideoAutoplay={fields.heroVideoAutoplay || false}
+                heroVideoShowControls={fields.heroVideoShowControls || false}
+                heroVideoMute={fields.heroVideoMute || false}
                 consumerSymbols={fields.consumerSymbols || null}
                 nutrition={nutrition}
                 difficulty={fields.difficulty}

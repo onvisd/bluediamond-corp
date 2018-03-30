@@ -60,6 +60,11 @@ export default class Brand extends Component {
                     })
                 }),
                 heroTagline: PropTypes.string,
+                video: PropTypes.string,
+                videoAutoplay: PropTypes.bool,
+                videoShowControls: PropTypes.bool,
+                videoMute: PropTypes.bool,
+                videoLoop: PropTypes.bool,
                 stories: PropTypes.arrayOf(PropTypes.shape({
                     sys: PropTypes.shape({
                         id: PropTypes.string.isRequired
@@ -157,6 +162,11 @@ export default class Brand extends Component {
                     tagline={brand.fields.heroTagline}
                     flavorLine={brand.fields.heroFlavorLine}
                     brand={brand.fields.slug}
+                    video={brand.fields.video}
+                    videoAutoplay={brand.fields.videoAutoplay || false}
+                    videoShowControls={brand.fields.videoShowControls || false}
+                    videoMute={brand.fields.videoMute || false}
+                    videoLoop={brand.fields.videoLoop || false}
                 />
                 {brand.fields.stories && (
                     <Carousel
@@ -188,6 +198,10 @@ export default class Brand extends Component {
                                 }
                                 tabletImage={story.fields.tabletBackgroundImage.fields.file.url}
                                 mobileImage={story.fields.mobileBackgroundImage.fields.file.url}
+                                video={story.fields.video}
+                                videoAutoplay={story.fields.videoAutoplay}
+                                videoShowControls={story.fields.videoShowControls}
+                                videoMute={story.fields.videoMute}
                             />
                         ))}
                         name={`${brand.fields.name} - Stories Carousel`}

@@ -5,6 +5,8 @@ import {
     PinterestShareButton,
     TwitterShareButton
 } from 'react-share';
+import YouTubePlayer from 'react-player/lib/players/YouTube';
+import classnames from 'classnames';
 
 import NutritionFacts from '../NutritionFacts';
 
@@ -25,6 +27,10 @@ export default class RecipeHead extends Component {
     static propTypes = {
         title: PropTypes.string.isRequired,
         heroImage: PropTypes.string.isRequired,
+        heroVideo: PropTypes.string,
+        heroVideoAutoplay: PropTypes.bool,
+        heroVideoShowControls: PropTypes.bool,
+        heroVideoMute: PropTypes.bool,
         consumerSymbols: PropTypes.array,
         nutrition: PropTypes.array.isRequired,
         difficulty: PropTypes.string.isRequired,
@@ -79,17 +85,47 @@ export default class RecipeHead extends Component {
         const {
             title,
             heroImage,
+            heroVideo,
+            heroVideoAutoplay,
+            heroVideoShowControls,
+            heroVideoMute,
             nutrition,
             difficulty,
             cookTime,
             consumerSymbols
         } = this.props;
 
+        const playerConfig = {
+            youtube: {
+                playerVars: {
+                    showinfo: 0,
+                    modestbranding: 1
+                }
+            }
+        };
+
         return (
             <section className={styles.container}>
-                <div className={styles.left} style={{
-                    backgroundImage: `url(${heroImage})`
-                }} />
+                {!heroVideo &&
+                    <div className={styles.left} style={{
+                        backgroundImage: `url(${heroImage})`
+                    }} />
+                }
+                {heroVideo &&
+                    <div className={classnames(styles.left, styles.isVideo)}>
+                        <YouTubePlayer
+                            config={playerConfig}
+                            className={styles.reactPlayer}
+                            url={heroVideo}
+                            playing={heroVideoAutoplay || false}
+                            controls={heroVideoShowControls || false}
+                            muted={heroVideoMute || false}
+                            volume={heroVideoMute ? 0 : 1}
+                            width="100%"
+                            height="100%"
+                        />
+                    </div>
+                }
                 <div className={styles.right}>
                     <div className={styles.content}>
                         <div className={styles.head}>

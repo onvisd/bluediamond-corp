@@ -40,9 +40,9 @@ export default class Carousel extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
-            activeIndex: props.activeIndex || 0
+            activeIndex: props.activeIndex || 0,
+            playing: props.autoplay && false
         };
     }
 
@@ -164,21 +164,44 @@ export default class Carousel extends Component {
         );
     }
 
-    componentDidMount() {
+    startAutoplay = () => {
         const {autoplay, autoplayInterval} = this.props;
 
-        if(autoplay && this.carouselTrack) {
-            this.interval = setInterval(
-                () => this.carouselTrack.next(), autoplayInterval
-            );
+        if(autoplay) {
+            this.interval = setInterval(() => {
+                if(this.carouselTrack)
+                    this.carouselTrack.next();
+            }, autoplayInterval);
+
+            this.setState({
+                playing: true
+            });
         }
     }
 
-    componentWillUnmount() {
-        const {autoplay} = this.props;
+    stopAutoplay = () => {
+        clearInterval(this.interval);
 
-        if(autoplay && this.interval)
-            clearInterval(this.interval);
+        this.setState({
+            playing: false
+        });
+    }
+
+    toggleAutoplay = () => {
+        const {playing} = this.state;
+
+        if(playing)
+            this.stopAutoplay();
+        else
+            this.startAutoplay();
+    }
+
+    componentDidMount() {
+        this.startAutoplay();
+    }
+
+    componentWillUnmount() {
+        this.stopAutoplay();
     }
 
     render() {
@@ -189,7 +212,9 @@ export default class Carousel extends Component {
 
         return (
             <div id={id}>
-                <ViewPager className={classNames.container}>
+                <ViewPager
+                    className={classNames.container}
+                >
                     <Frame>
                         <Track
                             onViewChange={this.handleSwipe}
@@ -200,7 +225,13 @@ export default class Carousel extends Component {
                             {...settings}
                         >
                             {cards.map((card, idx) => (
-                                <View style={{flex: '1'}} key={`card-${idx}`}>
+                                <View
+                                    style={{flex: '1'}}
+                                    key={`card-${idx}`}
+                                    onClick={this.stopAutoplay}
+                                    onMouseEnter={this.toggleAutoplay}
+                                    onMouseOut={this.toggleAutoplay}
+                                >
                                     {card}
                                 </View>
                             ))}

@@ -13,6 +13,11 @@
     background-position: center;
     overflow: hidden;
 
+    &.isVideo {
+        height: 0;
+        padding-top: 56.24%;
+    }
+
     &.dark * {
         color: var(--c--black);
     }
@@ -76,6 +81,9 @@
 .innerContainer {
     @mixin container;
 
+    position: relative;
+    z-index: 20;
+
     &.top-left,
     &.center-left,
     &.bottom-left {
@@ -136,6 +144,19 @@
         right: 1.5rem;
         bottom: 1rem;
         font-size: var(--t--size-s);
+    }
+}
+
+.reactPlayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.isVideo {
+    & .innerContainer {
+        margin-top: -56.24%;
     }
 }
 

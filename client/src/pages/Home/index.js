@@ -6,6 +6,8 @@ import {Track, TrackDocument} from 'react-track';
 import {tween} from 'react-imation';
 import {topTop, calculateScrollY} from 'react-track/tracking-formulas';
 import {translate3d, percent} from 'react-imation/tween-value-factories';
+import YouTubePlayer from 'react-player/lib/players/YouTube';
+import classnames from 'classnames';
 
 import {connector, getHome} from 'state/home';
 import {parseModel} from 'tools/parseApi';
@@ -54,6 +56,10 @@ export default class Home extends Component {
                             id: PropTypes.string.isRequired
                         })
                     }),
+                    craftVideo: PropTypes.string.isRequired,
+                    craftVideoAutoplay: PropTypes.bool,
+                    craftVideoShowControls: PropTypes.bool,
+                    craftVideoMute: PropTypes.bool,
                     historyHeadline: PropTypes.string.isRequired,
                     historyText: PropTypes.string.isRequired,
                     historyImage: PropTypes.shape({
@@ -61,6 +67,10 @@ export default class Home extends Component {
                             id: PropTypes.string.isRequired
                         })
                     }),
+                    historyVideo: PropTypes.string.isRequired,
+                    historyVideoAutoplay: PropTypes.bool,
+                    historyVideoShowControls: PropTypes.bool,
+                    historyVideoMute: PropTypes.bool,
                     coopHeadline: PropTypes.string.isRequired,
                     coopText: PropTypes.string.isRequired,
                     coopImage: PropTypes.shape({
@@ -119,6 +129,15 @@ export default class Home extends Component {
                 width: 1000
             }
         );
+
+        const playerConfig = {
+            youtube: {
+                playerVars: {
+                    showinfo: 0,
+                    modestbranding: 1
+                }
+            }
+        };
 
         return this.trackDocument((scrollY, topTop) => ( // eslint-disable-line no-shadow
             <section className={styles.container}>
@@ -181,7 +200,9 @@ export default class Home extends Component {
                     {(Div, posTopTop) => (
                         <Div>
                             <div
-                                className={styles.frame}
+                                className={classnames(styles.frame, {
+                                    [styles.isVideo]: homeFields.craftVideo
+                                })}
                                 style={
                                     responsive.large
                                     ? tween(scrollY, [
@@ -195,19 +216,34 @@ export default class Home extends Component {
                                     : null
                                 }
                             >
-                                <div
-                                    className={styles.image}
-                                    style={{
-                                        backgroundImage: `url(${image(
-                                            homeFields.craftImage.file.url,
-                                            {
-                                                format: 'jpg',
-                                                quality: 70,
-                                                progressive: true
-                                            }
-                                        )})`
-                                    }}
-                                />
+                                {!homeFields.craftVideo &&
+                                    <div
+                                        className={styles.image}
+                                        style={{
+                                            backgroundImage: `url(${image(
+                                                homeFields.craftImage.file.url,
+                                                {
+                                                    format: 'jpg',
+                                                    quality: 70,
+                                                    progressive: true
+                                                }
+                                            )})`
+                                        }}
+                                    />
+                                }
+                                {homeFields.craftVideo &&
+                                    <YouTubePlayer
+                                        config={playerConfig}
+                                        className={styles.reactPlayer}
+                                        url={homeFields.craftVideo}
+                                        playing={homeFields.craftVideoAutoplay || false}
+                                        controls={homeFields.craftVideoShowControls || false}
+                                        muted={homeFields.craftVideoMute || false}
+                                        volume={homeFields.craftVideoMute ? 0 : 1}
+                                        width="100%"
+                                        height="100%"
+                                    />
+                                }
                             </div>
                             <div className={styles.corpContent}>
                                 <div>
@@ -228,7 +264,9 @@ export default class Home extends Component {
                     {(Div, posTopTop) => (
                         <Div>
                             <div
-                                className={styles.frame}
+                                className={classnames(styles.frame, {
+                                    [styles.isVideo]: homeFields.historyVideo
+                                })}
                                 style={
                                     responsive.large
                                     ? tween(scrollY, [
@@ -242,20 +280,35 @@ export default class Home extends Component {
                                     : null
                                 }
                             >
-                                <div
-                                    className={styles.image}
-                                    style={{
-                                        backgroundImage:
-                                            `url(${image(
-                                                homeFields.historyImage.file.url,
-                                                {
-                                                    format: 'jpg',
-                                                    quality: 70,
-                                                    progressive: true
-                                                }
-                                            )})`
-                                    }}
-                                />
+                                {!homeFields.historyVideo &&
+                                    <div
+                                        className={styles.image}
+                                        style={{
+                                            backgroundImage:
+                                                `url(${image(
+                                                    homeFields.historyImage.file.url,
+                                                    {
+                                                        format: 'jpg',
+                                                        quality: 70,
+                                                        progressive: true
+                                                    }
+                                                )})`
+                                        }}
+                                    />
+                                }
+                                {homeFields.historyVideo &&
+                                    <YouTubePlayer
+                                        config={playerConfig}
+                                        className={styles.reactPlayer}
+                                        url={homeFields.historyVideo}
+                                        playing={homeFields.historyVideoAutoplay || false}
+                                        controls={homeFields.historyVideoShowControls || false}
+                                        muted={homeFields.historyVideoMute || false}
+                                        volume={homeFields.historyVideoMute ? 0 : 1}
+                                        width="100%"
+                                        height="100%"
+                                    />
+                                }
                             </div>
                             <div className={styles.corpContent}>
                                 <div>

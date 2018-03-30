@@ -1,5 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import YouTubePlayer from 'react-player/lib/players/YouTube';
+import classnames from 'classnames';
+
 import styles from './styles.module.css';
 
 @connect(
@@ -13,7 +16,11 @@ export default class Story extends Component {
         desktopImage: PropTypes.string.isRequired,
         smallDesktopImage: PropTypes.string.isRequired,
         tabletImage: PropTypes.string.isRequired,
-        mobileImage: PropTypes.string.isRequired
+        mobileImage: PropTypes.string.isRequired,
+        video: PropTypes.string,
+        videoAutoplay: PropTypes.bool,
+        videoShowControls: PropTypes.bool,
+        videoMute: PropTypes.bool
     };
 
     render() {
@@ -23,6 +30,10 @@ export default class Story extends Component {
             tabletImage,
             mobileImage,
             link,
+            video,
+            videoAutoplay,
+            videoShowControls,
+            videoMute,
             responsive
         } = this.props;
 
@@ -33,6 +44,15 @@ export default class Story extends Component {
             image = tabletImage;
         else if(responsive.medium)
             image = smallDesktopImage;
+
+        const playerConfig = {
+            youtube: {
+                playerVars: {
+                    showinfo: 0,
+                    modestbranding: 1
+                }
+            }
+        };
 
         if(link) {
             return (
@@ -45,6 +65,24 @@ export default class Story extends Component {
                     }}
                 />
             );
+        }
+
+        if(video) {
+            return (
+                <div className={classnames(styles.container, styles.isVideo)}>
+                    <YouTubePlayer
+                        config={playerConfig}
+                        className={styles.reactPlayer}
+                        url={video}
+                        playing={videoAutoplay || false}
+                        controls={videoShowControls || false}
+                        muted={videoMute || false}
+                        volume={videoMute ? 0 : 1}
+                        width="100%"
+                        height="100%"
+                    />
+                </div>
+            )
         }
 
         return (
