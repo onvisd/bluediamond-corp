@@ -20,8 +20,11 @@ export default class Story extends Component {
         video: PropTypes.string,
         videoAutoplay: PropTypes.bool,
         videoShowControls: PropTypes.bool,
-        videoMute: PropTypes.bool
+        videoMute: PropTypes.bool,
+        videoStarted: PropTypes.func,
+        videoStopped: PropTypes.func
     };
+
 
     render() {
         const {
@@ -49,7 +52,12 @@ export default class Story extends Component {
             youtube: {
                 playerVars: {
                     showinfo: 0,
-                    modestbranding: 1
+                    modestbranding: 1,
+                    rel: 0,
+                    color: 'white',
+                    autohide: 1,
+                    iv_load_policy: 3, // eslint-disable-line
+                    controls: null
                 }
             }
         };
@@ -80,9 +88,12 @@ export default class Story extends Component {
                         volume={videoMute ? 0 : 1}
                         width="100%"
                         height="100%"
+                        onPlay={this.props.videoStarted}
+                        onPause={this.props.videoStopped}
+                        onEnded={this.props.videoStopped}
                     />
                 </div>
-            )
+            );
         }
 
         return (

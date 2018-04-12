@@ -84,6 +84,13 @@ export default class Brand extends Component {
         })
     }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            videoPlaying: false
+        };
+    }
+
     componentWillMount() {
         const {brand} = this.props;
 
@@ -115,6 +122,18 @@ export default class Brand extends Component {
 
     componentWillUnmount() {
         this.props.setNavigationStyle({});
+    }
+
+    videoStarted = () => {
+        this.setState({
+            videoPlaying: true
+        });
+    }
+
+    videoStopped = () => {
+        this.setState({
+            videoPlaying: false
+        });
     }
 
     render() {
@@ -175,6 +194,7 @@ export default class Brand extends Component {
                         showArrows
                         showTabs
                         autoplay={true}
+                        videoPlaying={this.state.videoPlaying}
                         arrowColor={
                             brand.fields.themeType === 'dark'
                                 ? brand.fields.themeColor
@@ -202,6 +222,8 @@ export default class Brand extends Component {
                                 videoAutoplay={story.fields.videoAutoplay}
                                 videoShowControls={story.fields.videoShowControls}
                                 videoMute={story.fields.videoMute}
+                                videoStarted={this.videoStarted}
+                                videoStopped={this.videoStopped}
                             />
                         ))}
                         name={`${brand.fields.name} - Stories Carousel`}

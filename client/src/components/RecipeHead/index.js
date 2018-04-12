@@ -99,7 +99,12 @@ export default class RecipeHead extends Component {
             youtube: {
                 playerVars: {
                     showinfo: 0,
-                    modestbranding: 1
+                    modestbranding: 1,
+                    rel: 0,
+                    color: 'white',
+                    autohide: 1,
+                    iv_load_policy: 3, // eslint-disable-line
+                    controls: null
                 }
             }
         };

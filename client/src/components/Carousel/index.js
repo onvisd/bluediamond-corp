@@ -21,7 +21,8 @@ export default class Carousel extends Component {
         onViewChange: PropTypes.func,
         name: PropTypes.string,
         autoplay: PropTypes.bool,
-        autoplayInterval: PropTypes.number
+        autoplayInterval: PropTypes.number,
+        videoPlaying: PropTypes.bool
     }
 
     static defaultProps = {
@@ -167,7 +168,7 @@ export default class Carousel extends Component {
     startAutoplay = () => {
         const {autoplay, autoplayInterval} = this.props;
 
-        if(autoplay) {
+        if(autoplay && !this.props.videoPlaying) {
             this.interval = setInterval(() => {
                 if(this.carouselTrack)
                     this.carouselTrack.next();
@@ -180,20 +181,23 @@ export default class Carousel extends Component {
     }
 
     stopAutoplay = () => {
-        clearInterval(this.interval);
+        const {playing} = this.state;
 
-        this.setState({
-            playing: false
-        });
+        if(playing || this.props.videoPlaying) {
+            clearInterval(this.interval);
+            this.setState({
+                playing: false
+            });
+        }
     }
 
     toggleAutoplay = () => {
         const {playing} = this.state;
 
-        if(playing)
-            this.stopAutoplay();
-        else
-            this.startAutoplay();
+        if(playing || this.props.videoPlaying)
+            return this.stopAutoplay();
+
+        return this.startAutoplay();
     }
 
     componentDidMount() {
