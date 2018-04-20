@@ -63,7 +63,7 @@ export default class MoreFlavorsMobile extends Component {
                     {visibleCategories.map((category, i) => (
                         <div className={`${className}
                           ${currentPanel === i ? styles.isOpen : null}`} key={category.sys.id}>
-                            {category.fields.appetizerImages.length > 0 &&
+                            {category.fields.appetizerImages &&
                               <div className={`${styles.accent} ${styles.accentLeft}`}>
                                   <img
                                       src={category.fields.appetizerImages[0].fields.file.url}
@@ -71,7 +71,7 @@ export default class MoreFlavorsMobile extends Component {
                                   />
                               </div>
                             }
-                            {category.fields.appetizerImages.length > 0 &&
+                            {category.fields.appetizerImages &&
                                 <div className={`${styles.accent} ${styles.accentRight}`}>
                                     <img
                                         src={category.fields.appetizerImages[1].fields.file.url}
