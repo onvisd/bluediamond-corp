@@ -72,6 +72,10 @@ export default class Contact extends Component {
                     {
                         property: 'og:description',
                         content: description
+                    },
+                    {
+                        property: 'description',
+                        content: description
                     }
                 ]}</Meta>
 

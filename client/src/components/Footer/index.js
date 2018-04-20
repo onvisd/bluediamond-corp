@@ -72,51 +72,51 @@ export default class Footer extends Component {
                     )}
                     <div className={styles.header}>
                         <div className={styles.social}>
-                            <span>
-                                <a
-                                    href={social.facebook}
-                                    target="_blank"
-                                    title="Facebook"
-                                >
-                                    <Facebook />
-                                </a>
-                            </span>
-                            <span>
-                                <a
-                                    href={social.youtube}
-                                    target="_blank"
-                                    title="YouTube"
-                                >
-                                    <Youtube />
-                                </a>
-                            </span>
-                            <span>
-                                <a
-                                    href={social.instagram}
-                                    target="_blank"
-                                    title="Instagram"
-                                >
-                                    <Instagram />
-                                </a>
-                            </span>
-                            <span>
-                                <a
-                                    href={social.pinterest}
-                                    target="_blank"
-                                    title="Pinterest"
-                                >
-                                    <Pinterest />
-                                </a>
-                            </span>
-                            <span>
-                                <a
-                                    href={social.twitter}
-                                    target="_blank"
-                                    title="Twitter"
-                                >
-                                    <Twitter />
-                                </a>
-                            </span>
+                            <a
+                                className={styles.socialLink}
+                                href={social.facebook}
+                                target="_blank"
+                                title="Facebook"
+                            >
+                                <Facebook />
+                                <span>Facebook</span>
+                            </a>
+                            <a
+                                className={styles.socialLink}
+                                href={social.youtube}
+                                target="_blank"
+                                title="YouTube"
+                            >
+                                <Youtube />
+                                <span>YouTube</span>
+                            </a>
+                            <a
+                                className={styles.socialLink}
+                                href={social.instagram}
+                                target="_blank"
+                                title="Instagram"
+                            >
+                                <Instagram />
+                                <span>Instagram</span>
+                            </a>
+                            <a
+                                className={styles.socialLink}
+                                href={social.pinterest}
+                                target="_blank"
+                                title="Pinterest"
+                            >
+                                <Pinterest />
+                                <span>Pinterest</span>
+                            </a>
+                            <a
+                                className={styles.socialLink}
+                                href={social.twitter}
+                                target="_blank"
+                                title="Twitter"
+                            >
+                                <Twitter />
+                                <span>Twitter</span>
+                            </a>
                         </div>
                         <div className={styles.contact}>
                             <span><Phone />{contact.phone}</span>

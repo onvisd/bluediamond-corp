@@ -122,6 +122,11 @@ export default class HistoryPage extends Component {
                     {
                         property: 'og:image',
                         content: Hero
+                    },
+                    {
+                        property: 'description',
+                        content:
+                            'Read about the history of Blue Diamond Growers and how we\'ve grown.'
                     }
                 ]}</Meta>
                 <GenericHero

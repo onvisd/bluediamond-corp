@@ -136,6 +136,10 @@ export default class FoodService extends Component {
                     {
                         property: 'og:image',
                         content: fields.heroBackgroundImage.file.url
+                    },
+                    {
+                        property: 'description',
+                        content: marked(fields.pageContent).replace(/<[^>]*>/g, '')
                     }
                 ]}</Meta>
                 <div className={styles.hero} style={{

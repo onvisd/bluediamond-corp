@@ -107,6 +107,10 @@ export default class Signin extends Component {
                     {
                         property: 'og:description',
                         content: 'Reset your password for the Blue Diamond Online Store.'
+                    },
+                    {
+                        property: 'description',
+                        content: 'Reset your password for the Blue Diamond Online Store.'
                     }
                 ]}</Meta>
                 <h1>Reset Your Password</h1>

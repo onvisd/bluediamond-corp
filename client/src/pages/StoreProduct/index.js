@@ -118,6 +118,10 @@ export default class StoreProduct extends Component {
                     {
                         property: 'og:image',
                         content: product.product.images.edges[0].node.src
+                    },
+                    {
+                        property: 'description',
+                        content: product.product.descriptionHtml.replace(/<[^>]*>/g, '')
                     }
                 ]}</Meta>
                 <div className={styles.back}>
@@ -156,6 +160,7 @@ export default class StoreProduct extends Component {
                 {/* Tracking pixel */}
                 <img
                     src="https://r.turn.com/r/beacon?b2=dOm1o2qL7unskeoSfY7ialWAOyhtfOHhe3zQFUms8RRTNbIEOf2fo1LxMUNzxLfqsjLMl8773--xtutTwGUmYQ&cid="
+                    alt=""
                 />
             </section>
         );

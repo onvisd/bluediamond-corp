@@ -18,9 +18,13 @@ export default class ProductLocatorPage extends Component {
                     },
                     {
                         property: 'og:description',
-                        content: (
+                        content:
                             'Find out where Blue Diamond products are sold in stores near you.'
-                        )
+                    },
+                    {
+                        property: 'description',
+                        content:
+                            'Find out where Blue Diamond products are sold in stores near you.'
                     }
                 ]}</Meta>
                 <ProductLocator

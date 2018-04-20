@@ -727,6 +727,15 @@ export default class RecipeIndex extends Component {
                             'touch of honey, you&#39;ll find dozens of ideas including low ' +
                             'calorie, low cholesterol, and dairy free recipes.'
                         )
+                    },
+                    {
+                        property: 'description',
+                        content: (
+                            'Find the perfect recipe or smoothie idea using the filters below. ' +
+                            'Whether it&#39;s chocolate, coconut, vanilla, or something with a ' +
+                            'touch of honey, you&#39;ll find dozens of ideas including low ' +
+                            'calorie, low cholesterol, and dairy free recipes.'
+                        )
                     }
                 ]}</Meta>
                 <div className={styles.hero} style={{backgroundImage: `url(${HeroImage})`}}>

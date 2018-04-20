@@ -314,6 +314,10 @@ export default class Store extends Component {
                     {
                         property: 'og:image',
                         content: HeroSmallDesktop
+                    },
+                    {
+                        property: 'description',
+                        content: 'Almond Snacks and Gifts for Any Occasion'
                     }
                 ]}</Meta>
                 <StoreHero
@@ -433,6 +437,7 @@ export default class Store extends Component {
                 {/* Tracking pixel */}
                 <img
                     src="https://r.turn.com/r/beacon?b2=dOm1o2qL7unskeoSfY7ialWAOyhtfOHhe3zQFUms8RRTNbIEOf2fo1LxMUNzxLfqsjLMl8773--xtutTwGUmYQ&cid="
+                    alt=""
                 />
             </section>
         );

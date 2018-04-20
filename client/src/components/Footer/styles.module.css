@@ -29,15 +29,25 @@
 }
 
 .social {
-    & span:not(:last-child) {
+    flex: 1;
+}
+
+.socialLink {
+    display: inline-block;
+
+    &:not(:last-child) {
         margin-right: 0.85rem;
     }
 
     & svg {
-        width: 18px;
         height: 18px;
         fill: var(--c--black);
         vertical-align: middle;
+    }
+
+    & span {
+        display: inline-block;
+        text-indent: -10000px;
     }
 }
 

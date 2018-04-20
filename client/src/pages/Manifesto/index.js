@@ -101,6 +101,10 @@ export default class Manifesto extends Component {
                     {
                         property: 'og:image',
                         content: manifestoFields.heroImage.file.url
+                    },
+                    {
+                        property: 'description',
+                        content: marked(manifestoFields.introHeadline).replace(/<[^>]*>/g, '')
                     }
                 ]}</Meta>
                 <GenericHero
@@ -123,10 +127,12 @@ export default class Manifesto extends Component {
                     <ImageCluster
                         images={[
                             {
-                                url: manifestoFields.firstImageCluster[0].file.url
+                                url: manifestoFields.firstImageCluster[0].file.url,
+                                alt: manifestoFields.firstImageCluster[0].title
                             },
                             {
-                                url: manifestoFields.firstImageCluster[1].file.url
+                                url: manifestoFields.firstImageCluster[1].file.url,
+                                alt: manifestoFields.firstImageCluster[1].title
                             }
                         ]}
                         className={styles.imageCluster}
@@ -145,13 +151,16 @@ export default class Manifesto extends Component {
                     <ImageCluster
                         images={[
                             {
-                                url: manifestoFields.secondImageCluster[0].file.url
+                                url: manifestoFields.secondImageCluster[0].file.url,
+                                alt: manifestoFields.secondImageCluster[0].title
                             },
                             {
-                                url: manifestoFields.secondImageCluster[1].file.url
+                                url: manifestoFields.secondImageCluster[1].file.url,
+                                alt: manifestoFields.secondImageCluster[1].title
                             },
                             {
-                                url: manifestoFields.secondImageCluster[2].file.url
+                                url: manifestoFields.secondImageCluster[2].file.url,
+                                alt: manifestoFields.secondImageCluster[2].title
                             }
                         ]}
                         className={classnames(styles.imageCluster, styles.secondImageCluster)}

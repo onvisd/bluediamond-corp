@@ -30,9 +30,13 @@ export default (props) => {
         },
 
         // <meta property="..." content="..."/>
+        // OpenGraph Tags
         {property: 'og:title', content: 'Blue Diamond Growers'},
         {property: 'og:description', content: 'From our hearts to your hands'},
-        {property: 'og:locale', content: 'en-US'}
+        {property: 'og:locale', content: 'en-US'},
+
+        // Other Meta Property Tags
+        {property: 'description', content: 'From our hearts to your hands'}
     ];
 
     // Overwrite defaults

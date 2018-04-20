@@ -165,6 +165,10 @@ export default class Craft extends Component {
                     {
                         property: 'og:image',
                         content: craftFields.heroImage.file.url
+                    },
+                    {
+                        property: 'description',
+                        content: craftFields.heroTitle
                     }
                 ]}</Meta>
                 <GenericHero

@@ -74,6 +74,10 @@ export default class Press extends Component {
                     {
                         property: 'og:description',
                         content: 'Read the latest press releases and news from Blue Diamond.'
+                    },
+                    {
+                        property: 'description',
+                        content: 'Read the latest press releases and news from Blue Diamond.'
                     }
                 ]}</Meta>
 

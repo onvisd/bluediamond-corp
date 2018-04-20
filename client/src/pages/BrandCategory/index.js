@@ -230,6 +230,10 @@ export default class BrandCategory extends Component {
                     {
                         property: 'og:image',
                         content: activeProduct.fields.productPhotos[0].fields.file.url
+                    },
+                    {
+                        property: 'description',
+                        content: activeProduct.fields.description
                     }
                 ]}</Meta>
                 <Hero

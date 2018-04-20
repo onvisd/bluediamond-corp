@@ -165,6 +165,10 @@ export default class Brand extends Component {
                     {
                         property: 'og:image',
                         content: heroImage.fields.file.url
+                    },
+                    {
+                        property: 'description',
+                        content: brand.fields.heroTitle
                     }
                 ]}</Meta>
                 <Hero
