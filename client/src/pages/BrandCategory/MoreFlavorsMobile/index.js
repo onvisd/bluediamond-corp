@@ -63,18 +63,22 @@ export default class MoreFlavorsMobile extends Component {
                     {visibleCategories.map((category, i) => (
                         <div className={`${className}
                           ${currentPanel === i ? styles.isOpen : null}`} key={category.sys.id}>
-                            <div className={`${styles.accent} ${styles.accentLeft}`}>
-                                <img
-                                    src={category.fields.appetizerImages[0].fields.file.url}
-                                    alt="Flavor Accent"
-                                />
-                            </div>
-                            <div className={`${styles.accent} ${styles.accentRight}`}>
-                                <img
-                                    src={category.fields.appetizerImages[1].fields.file.url}
-                                    alt="Flavor Accent"
-                                />
-                            </div>
+                            {category.fields.appetizerImages.length > 0 &&
+                              <div className={`${styles.accent} ${styles.accentLeft}`}>
+                                  <img
+                                      src={category.fields.appetizerImages[0].fields.file.url}
+                                      alt="Flavor Accent"
+                                  />
+                              </div>
+                            }
+                            {category.fields.appetizerImages.length > 0 &&
+                                <div className={`${styles.accent} ${styles.accentRight}`}>
+                                    <img
+                                        src={category.fields.appetizerImages[1].fields.file.url}
+                                        alt="Flavor Accent"
+                                    />
+                                </div>
+                            }
                             <div className={`${styles.text}
                                 ${currentPanel === i ? styles.isHidden : null}`}>
                                 <h2>{category.fields.name}</h2>
