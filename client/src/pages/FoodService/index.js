@@ -138,7 +138,7 @@ export default class FoodService extends Component {
                         content: fields.heroBackgroundImage.file.url
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content: marked(fields.pageContent).replace(/<[^>]*>/g, '')
                     }
                 ]}</Meta>

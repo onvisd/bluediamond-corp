@@ -167,7 +167,7 @@ export default class Craft extends Component {
                         content: craftFields.heroImage.file.url
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content: craftFields.heroTitle
                     }
                 ]}</Meta>

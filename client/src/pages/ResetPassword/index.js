@@ -109,7 +109,7 @@ export default class Signin extends Component {
                         content: 'Reset your password for the Blue Diamond Online Store.'
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content: 'Reset your password for the Blue Diamond Online Store.'
                     }
                 ]}</Meta>

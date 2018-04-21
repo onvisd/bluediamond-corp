@@ -124,7 +124,7 @@ export default class HistoryPage extends Component {
                         content: Hero
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content:
                             'Read about the history of Blue Diamond Growers and how we\'ve grown.'
                     }

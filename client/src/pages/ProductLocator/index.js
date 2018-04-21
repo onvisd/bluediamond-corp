@@ -22,7 +22,7 @@ export default class ProductLocatorPage extends Component {
                             'Find out where Blue Diamond products are sold in stores near you.'
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content:
                             'Find out where Blue Diamond products are sold in stores near you.'
                     }

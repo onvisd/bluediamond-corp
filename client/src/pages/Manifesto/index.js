@@ -103,7 +103,7 @@ export default class Manifesto extends Component {
                         content: manifestoFields.heroImage.file.url
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content: marked(manifestoFields.introHeadline).replace(/<[^>]*>/g, '')
                     }
                 ]}</Meta>

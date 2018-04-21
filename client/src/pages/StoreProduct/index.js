@@ -120,7 +120,7 @@ export default class StoreProduct extends Component {
                         content: product.product.images.edges[0].node.src
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content: product.product.descriptionHtml.replace(/<[^>]*>/g, '')
                     }
                 ]}</Meta>

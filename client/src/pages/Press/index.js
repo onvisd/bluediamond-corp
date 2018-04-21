@@ -76,7 +76,7 @@ export default class Press extends Component {
                         content: 'Read the latest press releases and news from Blue Diamond.'
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content: 'Read the latest press releases and news from Blue Diamond.'
                     }
                 ]}</Meta>

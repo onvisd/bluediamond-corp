@@ -50,7 +50,7 @@ export default class FAQs extends Component {
                         content: 'Frequently asked question about Blue Diamond products.'
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content: 'Frequently asked question about Blue Diamond products.'
                     }
                 ]}</Meta>

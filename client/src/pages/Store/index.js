@@ -316,7 +316,7 @@ export default class Store extends Component {
                         content: HeroSmallDesktop
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content: 'Almond Snacks and Gifts for Any Occasion'
                     }
                 ]}</Meta>

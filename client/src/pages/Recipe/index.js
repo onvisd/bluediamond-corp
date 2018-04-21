@@ -188,7 +188,7 @@ export default class Recipe extends Component {
                         content: assetsById[item.fields.heroImage.sys.id].file.url
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content: `A ${item.fields.cookTime} minute recipe for ${
                             item.fields.name
                         } with Almond Breeze.`

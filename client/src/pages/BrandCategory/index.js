@@ -232,7 +232,7 @@ export default class BrandCategory extends Component {
                         content: activeProduct.fields.productPhotos[0].fields.file.url
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content: activeProduct.fields.description
                     }
                 ]}</Meta>

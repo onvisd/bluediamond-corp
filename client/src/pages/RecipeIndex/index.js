@@ -729,7 +729,7 @@ export default class RecipeIndex extends Component {
                         )
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content: (
                             'Find the perfect recipe or smoothie idea using the filters below. ' +
                             'Whether it&#39;s chocolate, coconut, vanilla, or something with a ' +

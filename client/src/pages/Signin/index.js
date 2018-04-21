@@ -177,7 +177,7 @@ export default class Signin extends Component {
                         )
                     },
                     {
-                        property: 'description',
+                        name: 'description',
                         content: (
                             'If you have registered with us before, sign in' +
                             'now to save time during checkout. Signing in is optional.' +
