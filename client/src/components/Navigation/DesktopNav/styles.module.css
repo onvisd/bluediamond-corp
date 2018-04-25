@@ -230,8 +230,8 @@
 
 .primaryNavLinks {
     height: 100%;
-    line-height: 72px;
-    font-size: var(--t--size-ms);
+    line-height: 4.5rem;
+    font-size: 1.15rem;
 }
 
 .primaryNavLink {
@@ -268,9 +268,9 @@
 
 .navPanelToggle {
     display: inline-block;
-    font-size: var(--t--size-ms);
+    font-size: 1.15rem;
     font-weight: var(--t--weight-medium);
-    line-height: 72px;
+    line-height: 4.5rem;
     cursor: pointer;
     transition: color 300ms ease;
 

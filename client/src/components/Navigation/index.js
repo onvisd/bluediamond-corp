@@ -24,6 +24,7 @@ export default class Navigation extends Component {
                 {name: 'Company', card: 'Company'}
             ],
             globalLinks: [
+                {name: 'Recipes', slug: '/recipes'},
                 {name: 'Product Locator', slug: '/product-locator'},
                 {name: 'Store', slug: '/store'}
             ],
