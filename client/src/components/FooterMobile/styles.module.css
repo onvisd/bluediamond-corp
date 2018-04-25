@@ -52,8 +52,13 @@
     text-align: center;
 }
 
-.social a {
+.socialLink {
     padding: 0;
+
+    & span {
+        display: inline-block;
+        text-indent: -10000px;
+    }
 }
 
 .copyright {

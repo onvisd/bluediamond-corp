@@ -66,20 +66,50 @@ export default class Footer extends Component {
                         </Link>
                     </div>
                     <div className={styles.social}>
-                        <a href={social.facebook} target="_blank" title="Facebook">
+                        <a
+                          className={styles.socialLink}
+                          href={social.facebook}
+                          target="_blank"
+                          title="Facebook"
+                        >
                             <Facebook />
+                            <span>Facebook</span>
                         </a>
-                        <a href={social.youtube} target="_blank" title="YouTube">
+                        <a
+                          className={styles.socialLink}
+                          href={social.youtube}
+                          target="_blank"
+                          title="YouTube"
+                        >
                             <Youtube />
+                            <span>Youtube</span>
                         </a>
-                        <a href={social.instagram} target="_blank" title="Instagram">
+                        <a
+                          className={styles.socialLink}
+                          href={social.instagram}
+                          target="_blank"
+                          title="Instagram"
+                        >
                             <Instagram />
+                            <span>Instagram</span>
                         </a>
-                        <a href={social.pinterest} target="_blank" title="Pinterest">
+                        <a
+                          className={styles.socialLink}
+                          href={social.pinterest}
+                          target="_blank"
+                          title="Pinterest"
+                        >
                             <Pinterest />
+                            <span>Pinterest</span>
                         </a>
-                        <a href={social.twitter} target="_blank" title="Twitter">
+                        <a
+                          className={styles.socialLink}
+                          href={social.twitter}
+                          target="_blank"
+                          title="Twitter"
+                        >
                             <Twitter />
+                            <span>Twitter</span>
                         </a>
                     </div>
                     <div>
