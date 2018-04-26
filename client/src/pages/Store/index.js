@@ -239,7 +239,7 @@ export default class Store extends Component {
 
         const slugs = [];
         for (let i = 0; i < filters.length; i++)
-            slugs.push(slugify(filters[i]));
+            slugs.push(encodeURIComponent(filters[i]));
 
         const slug = slugs.join('|') || null;
 

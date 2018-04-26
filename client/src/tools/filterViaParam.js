@@ -2,8 +2,6 @@
  * Splits page query & filters out given paramater(s)
  */
 
-import unslugify from './unslugify';
-
 export default (filterType, query) => {
     const arr = Object.keys(query).map((q) => Object.assign(
       {filter: q},
@@ -16,7 +14,7 @@ export default (filterType, query) => {
         const filters = via.split('|');
         if(arr[i].filter === filterType) {
             for (let f = 0; f < filters.length; f++)
-                filter.push(unslugify(filters[f]).toLowerCase());
+                filter.push(decodeURIComponent(filters[f]));
         }
     }
 
