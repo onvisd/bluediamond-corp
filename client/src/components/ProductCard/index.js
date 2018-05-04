@@ -9,12 +9,11 @@ export default class ProductCard extends Component {
         title: PropTypes.string.isRequired,
         slug: PropTypes.string.isRequired,
         images: PropTypes.object.isRequired,
-        imageAlt: PropTypes.string.isRequired,
         onClick: PropTypes.func
     }
 
     render() {
-        const {title, slug, images, imageAlt, onClick} = this.props;
+        const {title, slug, images, onClick} = this.props;
 
         return (
             <div className={styles.container}>
@@ -29,7 +28,7 @@ export default class ProductCard extends Component {
                                         ${images[512]} 2x,
                                         ${images[1024]} 3x
                                     `}
-                                    alt={imageAlt}
+                                    alt={`${title} Photo`}
                                 />
                             )
                             : 'Not Available'

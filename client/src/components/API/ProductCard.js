@@ -30,7 +30,6 @@ export default class ProductCard extends Component {
                 title={fields.name}
                 slug={`/product/${fields.slug}`}
                 images={images}
-                imageAlt={fields.name}
             />
         );
     }

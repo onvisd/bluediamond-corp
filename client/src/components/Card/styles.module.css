@@ -45,6 +45,12 @@
         left: 1rem;
         fill: rgba(255, 255, 255, 0.7);
     }
+
+    & span {
+        display: inline-block;
+        position: absolute;
+        text-indent: -10000px;
+    }
 }
 
 .meta {

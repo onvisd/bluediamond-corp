@@ -815,11 +815,13 @@ export default class RecipeIndex extends Component {
                                             <option value="fields.difficulty">Difficulty</option>
                                         </select>
                                     </div>
-                                    <div>
+                                    <label className={styles.formLabel} htmlFor="search">
+                                        <span>Search</span>
                                         <input
                                             className={classnames(styles.searchInput, {
                                                 [styles.visible]: searchVisible
                                             })}
+                                            name="search"
                                             onChange={this.handleSearchDebounce}
                                             ref={(input) => {
                                                 this.search = input;
@@ -829,7 +831,7 @@ export default class RecipeIndex extends Component {
                                             title="Type search term here"
                                             value={search}
                                         />
-                                    </div>
+                                    </label>
                                 </div>
                             </div>
                             <div className={classnames(styles.filtersContainer, {
@@ -861,11 +863,16 @@ export default class RecipeIndex extends Component {
                             <div>
                                 <div className="l--row l--mar-top-m l--mar-btm-m">
                                     <div className="l--col-12-at-m l--col-4-at-l t--align-center">
-                                        <div className="form--select">
+                                        <label
+                                          className={classnames('form--select', styles.formLabel)}
+                                          htmlFor="perPage"
+                                        >
+                                            <span>Results per page</span>
                                             <select
                                                 ref={(page) => {
                                                     this.perPage = page;
                                                 }}
+                                                name="perPage"
                                                 onChange={this.handlePerPage}
                                                 className={styles.resultCountSelect}
                                                 value={perPage}
@@ -874,7 +881,7 @@ export default class RecipeIndex extends Component {
                                                 <option value={15}>15 results per page</option>
                                                 <option value={24}>24 results per page</option>
                                             </select>
-                                        </div>
+                                        </label>
                                     </div>
                                     <div className="l--col-1 t--align-center"/>
                                     {this.renderNavButtons()}

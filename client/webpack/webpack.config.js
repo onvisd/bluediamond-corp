@@ -117,7 +117,17 @@ const config = {
             },
             {
                 test: /\.(svg)$/,
-                loaders: ['react-svgdom-loader', 'svgo-loader']
+                use: [
+                    'react-svgdom-loader',
+                    {
+                        loader: 'svgo-loader',
+                        options: {
+                            plugins: [
+                                {removeViewBox: false}
+                            ]
+                        }
+                    }
+                ]
             }
         ]
     },

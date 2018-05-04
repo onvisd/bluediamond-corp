@@ -76,7 +76,6 @@ export default class Footer extends Component {
                                 className={styles.socialLink}
                                 href={social.facebook}
                                 target="_blank"
-                                title="Facebook"
                             >
                                 <Facebook />
                                 <span>Facebook</span>
@@ -85,7 +84,6 @@ export default class Footer extends Component {
                                 className={styles.socialLink}
                                 href={social.youtube}
                                 target="_blank"
-                                title="YouTube"
                             >
                                 <Youtube />
                                 <span>YouTube</span>
@@ -94,7 +92,6 @@ export default class Footer extends Component {
                                 className={styles.socialLink}
                                 href={social.instagram}
                                 target="_blank"
-                                title="Instagram"
                             >
                                 <Instagram />
                                 <span>Instagram</span>
@@ -103,7 +100,6 @@ export default class Footer extends Component {
                                 className={styles.socialLink}
                                 href={social.pinterest}
                                 target="_blank"
-                                title="Pinterest"
                             >
                                 <Pinterest />
                                 <span>Pinterest</span>
@@ -112,7 +108,6 @@ export default class Footer extends Component {
                                 className={styles.socialLink}
                                 href={social.twitter}
                                 target="_blank"
-                                title="Twitter"
                             >
                                 <Twitter />
                                 <span>Twitter</span>
@@ -147,6 +142,13 @@ export default class Footer extends Component {
                                                 </Link>
                                             </li>
                                         ))}
+                                        {brand.name === 'Almond Breeze' && (
+                                          <li>
+                                            <Link to="/recipes">
+                                              Recipes
+                                            </Link>
+                                          </li>
+                                        )}
                                     </ul>
                                 </div>
                             ))}

@@ -34,10 +34,14 @@ export default class Card extends Component {
         let imageLink = (
             <Link
                 to={linkTo.url}
-                className={styles.image}
-                style={{backgroundImage: `url(${imageUrl})`}}
+                className={classnames(styles.container, {
+                    [styles.recipe]: type === 'recipes'
+                }, className)}
                 onClick={() => this.handleTracking()}
-            />
+            >
+                <div className={styles.image} style={imageUrl ? {backgroundImage: `url(${imageUrl})`} : null} />
+                {children && <div className={styles.meta}>{children}</div>}
+            </Link>
         );
 
         if(linkTo.external) {
@@ -45,30 +49,19 @@ export default class Card extends Component {
                 <a
                     href={linkTo.url}
                     target="_blank"
-                    className={styles.image}
-                    style={imageUrl ? {backgroundImage: `url(${imageUrl})`} : null}
+                    className={classnames(styles.container, {
+                        [styles.recipe]: type === 'recipes'
+                    }, className)}
                     title={linkTo.url}
                 >
-                    <Instagram />
+                    <div className={styles.image} style={imageUrl ? {backgroundImage: `url(${imageUrl})`} : null}>
+                        <Instagram />
+                    </div>
+                    {children && <div className={styles.meta}>{children}</div>}
                 </a>
             );
         }
 
-        return (
-            <div className={classnames(styles.container, {
-                [styles.recipe]: type === 'recipes'
-            }, className)}>
-                {imageLink}
-                {children && (
-                    <Link
-                        to={linkTo.url}
-                        className={styles.meta}
-                        onClick={() => this.handleTracking()}
-                    >
-                        {children}
-                    </Link>
-                )}
-            </div>
-        );
+        return imageLink;
     }
 }
