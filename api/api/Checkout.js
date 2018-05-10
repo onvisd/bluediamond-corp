@@ -381,6 +381,10 @@ export default (api, {apolloClient}) => {
             mutation: gql`
                 mutation ($checkoutId: ID!, $input: CheckoutAttributesUpdateInput!) {
                     checkoutAttributesUpdate(checkoutId: $checkoutId, input: $input) {
+                        checkout {
+                          id
+                          completedAt
+                        }
                         userErrors {
                             message
                         }
@@ -389,7 +393,7 @@ export default (api, {apolloClient}) => {
             `,
             variables: {checkoutId, input}
         })
-        .then((result) => result.data.checkout)
+        .then((result) => result.data.checkoutAttributesUpdate)
         .catch((err) => {
             if(err.message.match('Checkout is already completed'))
                 return {completed: true};
@@ -528,7 +532,9 @@ export default (api, {apolloClient}) => {
             const updatedCheckout =
                 await addAttribute(req.params.checkoutId, req.body.attributes);
 
-            if(updatedCheckout.checkout && !updatedCheckout.completed)
+            if(updatedCheckout &&
+                updatedCheckout.checkout &&
+                !updatedCheckout.checkout.completedAt)
                 res.status(200).send(updatedCheckout.checkout);
             else
                 createNewCheckout(req, res);
