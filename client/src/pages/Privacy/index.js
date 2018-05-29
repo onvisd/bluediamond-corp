@@ -21,6 +21,7 @@ export default () => (
         <p></p>
         <h3>The Information We Collect</h3>
         <p></p>
+        <p>The personal data that Blue Diamond Growers knowingly collects from persons in the EU is described at our EU website (<a href="https://www.bluediamondalmonds.co.uk" target="_blank" noopener noreferrer>www.bluediamondalmonds.co.uk</a>).</p>
         <p>The Sites are intended for a general audience, and we do not knowingly collect personal information from children under the age of 13. If you are under the age of 13, you should not and may not provide any personal information to us through or on the Sites.</p>
         <p>We collect different types of information from and about Users of our Sites when you provide it and automatically as you navigate through the Sites.</p>
         <ul>
