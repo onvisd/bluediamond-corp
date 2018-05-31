@@ -11,11 +11,11 @@ import {
 import Title from 'components/Title';
 import Meta from 'components/Meta';
 import Button from 'components/Button';
+import BrandCategory from 'components/BrandCategory';
 import CardPanel from 'components/CardPanel';
 import Carousel from 'components/Carousel';
 import Hero from './Hero';
 import Story from './Story';
-import Category from './Category';
 import sortByPriority from 'tools/sortByPriority';
 import styles from './styles.module.css';
 
@@ -237,7 +237,7 @@ export default class Brand extends Component {
                     {brand.fields.categories
                         .filter((category) => !category.fields.hidden)
                         .map((category) => (
-                            <Category
+                            <BrandCategory
                                 key={category.sys.id}
                                 theme={brand.fields.themeType}
                                 products={

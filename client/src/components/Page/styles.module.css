@@ -1,7 +1,12 @@
+@import 'constants/color';
 @import 'constants/grid';
 
 .container {
     @media (--mq-m) {
         margin-top: 60px;
+    }
+
+    &.dark {
+        background-color: var(--c--black);
     }
 }

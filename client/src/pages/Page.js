@@ -8,6 +8,7 @@ import NotFound from './Error/404';
 // require pageModules ahead of time here using the format
 // PageModuleName: require('../components/API/PageModuleName').default
 const pageModules = {
+    BrandCategory: require('../components/API/BrandCategory').default,
     ButtonBar: require('../components/API/ButtonBar').default,
     DocumentLink: require('../components/API/DocumentLink').default,
     FullBleedImage: require('../components/API/FullBleedImage').default,
@@ -16,6 +17,7 @@ const pageModules = {
     Hero: require('../components/API/PageHero').default,
     IFrame: require('../components/API/IFrame').default,
     ImageCluster: require('../components/API/ImageCluster').default,
+    LinkedPageWithMedia: require('../components/API/LinkedPageMedia').default,
     ParagraphWithHeader: require('../components/API/ParagraphWithHeader').default,
     ParagraphWithImage: require('../components/API/ParagraphWithImage').default,
     RelatedPages: require('../components/API/RelatedPages').default,

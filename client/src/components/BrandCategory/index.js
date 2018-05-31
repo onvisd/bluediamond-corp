@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import styles from './styles.module.css';
 
-export default class Category extends Component {
+export default class BrandCategory extends Component {
     static PropTypes = {
         name: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,

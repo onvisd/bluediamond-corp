@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import classnames from 'classnames';
 
 import Title from 'components/Title';
 import Meta from 'components/Meta';
@@ -13,7 +14,8 @@ export default class Page extends Component {
 
     renderChildren = (data) => {
         const {pageModules} = this.props;
-        const modules = data.items[0].fields.modules;
+        const fields = data.items[0].fields;
+        const modules = fields.modules;
         const includes = data.includes;
         const entries = includes.Entry;
 
@@ -22,12 +24,13 @@ export default class Page extends Component {
                 entry.sys.id === mdle.sys.id
             ).map((entry) => ({
                 component: entry.sys.contentType.sys.id.replace('pageModule', ''),
-                data: entry
+                data: mdle.sys.contentType.sys.id === 'pageModuleBrandCategory' ? mdle : entry
             }))[0]);
 
         return parsedModules.filter((mdle) => pageModules[mdle.component])
             .map((mdle, idx) => React.createElement(pageModules[mdle.component], {
                 data: mdle.data,
+                theme: fields.theme,
                 assets: includes.Asset,
                 entries,
                 key: `pageModule${idx}`
@@ -36,14 +39,15 @@ export default class Page extends Component {
 
     render() {
         const {pageData} = this.props;
+        const {fields} = pageData.items[0];
 
         return (
-            <div className={styles.container}>
-                <Title>{pageData.items[0].fields.title}</Title>
+            <div className={classnames(styles.container, styles[fields.theme])}>
+                <Title>{fields.title}</Title>
                 <Meta>{[
                     {
                         property: 'og:title',
-                        content: pageData.items[0].fields.title
+                        content: fields.title
                     },
                     {
                         property: 'og:description',
