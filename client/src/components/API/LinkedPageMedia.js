@@ -16,7 +16,7 @@ export default class LinkedPageMedia extends Component {
                         id: PropTypes.string.isRequired
                     })
                 }),
-                imagePosition: PropTypes.string.isRequired,
+                mediaPosition: PropTypes.string.isRequired,
                 description: PropTypes.string
             })
         }),

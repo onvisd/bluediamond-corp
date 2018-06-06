@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import classnames from 'classnames';
 
 import Button from '../Button';
 
@@ -25,7 +26,12 @@ export default class ButtonBar extends Component {
                 style: PropTypes.string,
                 visibility: PropTypes.bool
             }
-        )).isRequired
+        )).isRequired,
+        align: PropTypes.oneOf(['left', 'center', 'right'])
+    }
+
+    static defaultProps = {
+        align: 'center'
     }
 
     renderButton(button, i) {
@@ -42,10 +48,10 @@ export default class ButtonBar extends Component {
     }
 
     render() {
-        const {buttons} = this.props;
+        const {buttons, align} = this.props;
 
         return (
-            <div className={styles.container}>
+            <div className={classnames(styles.container, styles[align])}>
                 {buttons.map((button, idx) =>
                     button.visibility && this.renderButton(button, idx)
                 )}

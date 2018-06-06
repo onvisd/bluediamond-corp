@@ -2,6 +2,8 @@
 @import 'constants/grid';
 
 .container {
+    overflow-x: hidden;
+
     @media (--mq-m) {
         margin-top: 60px;
     }

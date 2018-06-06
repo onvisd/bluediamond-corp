@@ -1,13 +1,32 @@
 /* Button Bar styles */
+@import 'constants/grid';
 
 .container {
     display: flex;
     margin: 2rem 0;
-    justify-content: center;
+
+    &.center {
+        justify-content: center;
+    }
+
+    &.right {
+        justify-content: flex-end;
+    }
+
+    @media (--mq-xs) {
+        flex-direction: column;
+    }
 }
 
 .button {
     &:not(:last-child) {
-        margin-right: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    @media (--mq-gt-xs) {
+        &:not(:last-child) {
+            margin-right: 1rem;
+            margin-bottom: 0;
+        }
     }
 }

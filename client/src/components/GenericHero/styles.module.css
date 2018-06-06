@@ -7,15 +7,18 @@
 .container {
     display: flex;
     position: relative;
-    height: 80vh;
     background-color: var(--c--gray-dark);
     background-size: cover;
     background-position: center;
-    overflow: hidden;
 
     @media (--mq-s) {
         padding: 2rem;
-        max-height: 450px;
+        min-height: 450px;
+    }
+
+    @media (--mq-gt-s) {
+        height: 80vh;
+        overflow: hidden;
     }
 }
 
@@ -34,7 +37,7 @@
     }
 }
 
-.alignTop {
+.vAlignTop {
     align-items: flex-start;
 
     & .innerContainer {
@@ -43,17 +46,16 @@
     }
 }
 
-.alignCenter {
+.vAlignCenter {
     align-items: center;
 
     & .innerContainer {
         padding-top: 12vh;
         padding-bottom: 12vh;
-        text-align: center;
     }
 }
 
-.alignBottom {
+.vAlignBottom {
     align-items: flex-end;
 
     & .innerContainer {
@@ -61,12 +63,107 @@
     }
 }
 
-.alignTop,
-.alignCenter,
-.alignBottom {
+.vAlignTop,
+.vAlignCenter,
+.vAlignBottom {
     & .innerContainer {
         @media (--mq-s) {
             padding: 0;
+        }
+    }
+}
+
+.hAlignLeft {
+    justify-content: flex-start;
+}
+
+.hAlignCenter {
+    justify-content: center;
+    text-align: center;
+
+    & .innerContainer {
+        text-align: center;
+
+        & h1,
+        & h3 {
+            margin: 0 auto;
+        }
+    }
+}
+
+.hAlignRight {
+    justify-content: flex-end;
+    text-align: right;
+
+    & .innerContainer {
+        text-align: right;
+
+        & h1,
+        & h3 {
+            margin-right: 0;
+            margin-left: auto;
+        }
+    }
+}
+
+.mvAlignTop {
+    @media (--mq-xs) {
+        align-items: flex-start;
+
+        & .innerContainer {
+            padding-bottom: 38vh;
+        }
+    }
+}
+
+.mvAlignCenter {
+    @media (--mq-xs) {
+        align-items: center;
+    }
+}
+
+.mvAlignBottom {
+    @media (--mq-xs) {
+        align-items: flex-end;
+    }
+}
+
+.mhAlignLeft {
+    @media (--mq-xs) {
+        justify-content: flex-start;
+    }
+}
+
+.mhAlignCenter {
+    @media (--mq-xs) {
+        justify-content: center;
+        text-align: center;
+
+        & .innerContainer {
+            text-align: center;
+        }
+
+        & .innerContainer h1,
+        & .innerContainer h3 {
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+}
+
+.mhAlignRight {
+    @media (--mq-xs) {
+        justify-content: flex-end;
+        text-align: right;
+
+        & .innerContainer {
+            text-align: right;
+        }
+
+        & .innerContainer h1,
+        & .innerContainer h3 {
+            margin-right: 0;
+            margin-left: auto;
         }
     }
 }
@@ -88,7 +185,7 @@
 
         @media (--mq-s) {
             padding: 0;
-            max-width: 75%;
+            max-width: 85%;
         }
     }
 
@@ -100,6 +197,7 @@
 
     & h3 {
         @media (--mq-s) {
+            margin-bottom: 1rem;
             font-size: var(--t--size-s);
         }
     }
