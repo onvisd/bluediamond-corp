@@ -30,25 +30,21 @@
     order: 2;
 
     &.left {
-        right: 0;
-
         @media (--mq-gt-s) {
-            right: 6vh;
+            right: 5vw;
         }
 
-        @media (--mq-gt-m) {
+        @media (--mq-gt-l) {
             right: 0;
         }
     }
 
     &.right {
-        left: 0;
-
         @media (--mq-gt-s) {
-            left: 6vh;
+            left: 5vw;
         }
 
-        @media (--mq-gt-m) {
+        @media (--mq-gt-l) {
             left: 0;
         }
     }
@@ -59,7 +55,7 @@
         max-width: 300px;
 
         @media (--mq-gt-s) {
-            max-width: 500px;
+            max-width: 440px;
         }
 
         @media (--mq-m) {
@@ -71,7 +67,7 @@
         max-width: 400px;
 
         @media (--mq-gt-s) {
-            max-width: 500px;
+            max-width: 440px;
         }
     }
 
@@ -120,6 +116,10 @@
         &.right {
             right: -10vw;
         }
+    }
+
+    @media (--mq-gt-m) {
+        min-width: 60%;
     }
 
     @media (--mq-gt-l) {
