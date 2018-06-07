@@ -107,35 +107,42 @@
 }
 
 .mvAlignTop {
-    @media (--mq-xs) {
+    @media (--mq-m) {
+        & .innerContainer {
+            padding-top: 6vh;
+        }
+    }
+
+    @media (--mq-s) {
         align-items: flex-start;
 
         & .innerContainer {
+            padding-top: 0;
             padding-bottom: 38vh;
         }
     }
 }
 
 .mvAlignCenter {
-    @media (--mq-xs) {
+    @media (--mq-s) {
         align-items: center;
     }
 }
 
 .mvAlignBottom {
-    @media (--mq-xs) {
+    @media (--mq-s) {
         align-items: flex-end;
     }
 }
 
 .mhAlignLeft {
-    @media (--mq-xs) {
+    @media (--mq-s) {
         justify-content: flex-start;
     }
 }
 
 .mhAlignCenter {
-    @media (--mq-xs) {
+    @media (--mq-s) {
         justify-content: center;
         text-align: center;
 
@@ -152,7 +159,7 @@
 }
 
 .mhAlignRight {
-    @media (--mq-xs) {
+    @media (--mq-s) {
         justify-content: flex-end;
         text-align: right;
 
@@ -179,7 +186,6 @@
         max-width: 30vw;
 
         @media (--mq-m) {
-            padding: 0 2rem;
             max-width: 50%;
         }
 

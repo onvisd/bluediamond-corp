@@ -110,10 +110,12 @@ export default class GenericHero extends Component {
                 )}
                 <div className={styles.innerContainer}>
                     {headline && <h3>{headline}</h3>}
-                    {title && <h1 className={`t--size-${titleSize}`}>{title}</h1>}
+                    {title && <h1 className={`t--size-${titleSize}`} dangerouslySetInnerHTML={{__html: title}} />}
                     {(buttonOneText || buttonTwoText) && (
                         <ButtonBar
-                            align={horizontalAlign && horizontalAlign.toLowerCase()}
+                            align={responsive.small
+                                ? 'center'
+                                : horizontalAlign && horizontalAlign.toLowerCase()}
                             buttons={[
                                 {
                                     text: buttonOneText,

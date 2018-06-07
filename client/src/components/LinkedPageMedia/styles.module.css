@@ -31,16 +31,36 @@
 
     &.left {
         right: 0;
+
+        @media (--mq-gt-s) {
+            right: 6vh;
+        }
+
+        @media (--mq-gt-m) {
+            right: 0;
+        }
     }
 
     &.right {
         left: 0;
+
+        @media (--mq-gt-s) {
+            left: 6vh;
+        }
+
+        @media (--mq-gt-m) {
+            left: 0;
+        }
     }
 
     & h2 {
         margin: 0 auto 1rem;
         font-size: var(--t--size-l);
         max-width: 300px;
+
+        @media (--mq-gt-s) {
+            max-width: 500px;
+        }
 
         @media (--mq-m) {
             margin: 1rem auto;
@@ -49,6 +69,10 @@
 
     & p {
         max-width: 400px;
+
+        @media (--mq-gt-s) {
+            max-width: 500px;
+        }
     }
 
     & a,
@@ -56,8 +80,11 @@
         margin-top: 1rem;
     }
 
-    @media (--mq-gt-m) {
+    @media (--mq-gt-s) {
         position: absolute;
+    }
+
+    @media (--mq-gt-m) {
         width: 40%;
         padding: 0;
 
