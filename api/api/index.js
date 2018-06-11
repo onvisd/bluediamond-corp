@@ -24,7 +24,13 @@ export default () => {
         accessToken
     });
 
-    const contentful = {spaceId, client};
+    const previewClient = contentfulSdk.createClient({
+        space: spaceId,
+        accessToken: previewToken,
+        host: 'preview.contentful.com'
+    });
+
+    const contentful = {spaceId, client, previewClient};
 
     const apolloClient = new ApolloClient({
         networkInterface: createNetworkInterface({
@@ -63,6 +69,7 @@ export default () => {
             base: req.query.preview ? apiBase.prev : apiBase.prod,
             token: req.query.preview ? previewToken : accessToken
         };
+        req.client = req.query.preview ? contentful.previewClient : contentful.client;
 
         next();
     });

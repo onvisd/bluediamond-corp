@@ -19,8 +19,8 @@ import Story from './Story';
 import sortByPriority from 'tools/sortByPriority';
 import styles from './styles.module.css';
 
-@preload(async ({dispatch, parameters}) => {
-    const brand = await dispatch(getBrand(parameters.slug));
+@preload(async ({dispatch, parameters, location}) => {
+    const brand = await dispatch(getBrand(parameters.slug, location.search));
     await dispatch(setNavigationStyle({
         className: `brand--${brand.fields.themeColor}`
     }));

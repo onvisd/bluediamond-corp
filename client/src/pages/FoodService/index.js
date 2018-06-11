@@ -15,7 +15,7 @@ import ProductLink from 'components/ProductLink';
 
 import styles from './styles.module.css';
 
-@preload(({dispatch}) => dispatch(getFoodService()))
+@preload(({dispatch, location}) => dispatch(getFoodService(location.search)))
 @connect(
     (state) => ({...connector(state.foodService)}),
     {getFoodService}

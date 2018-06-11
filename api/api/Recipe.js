@@ -12,8 +12,8 @@ const imgixClient = new ImgixClient({
 });
 
 export default (api, {contentful}) => {
-    const getRecipeFilters = () =>
-        contentful.client.getEntries({
+    const getRecipeFilters = (client) =>
+        client.getEntries({
             content_type: 'recipe', // eslint-disable-line camelcase
             limit: 500
         })
@@ -150,7 +150,7 @@ export default (api, {contentful}) => {
             query['fields.consumerSymbols[in]'] = req.query.dietaryFilters;
 
         // Get the recipes based on the query
-        contentful.client.getEntries(query)
+        req.client.getEntries(query)
         .then((response) => {
             res.cache(true).send(response);
         })
@@ -163,7 +163,7 @@ export default (api, {contentful}) => {
 
     api.get('/recipe/filters', async (req, res) => {
         try {
-            const filters = await getRecipeFilters();
+            const filters = await getRecipeFilters(req.client);
             if(filters)
                 res.cache(true).send(filters);
             else

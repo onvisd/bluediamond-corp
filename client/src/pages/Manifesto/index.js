@@ -21,7 +21,7 @@ import BgAlmond from 'images/relatedLinks/almonds-on-right.png';
 
 import styles from './styles.module.css';
 
-@preload(({dispatch}) => dispatch(getManifesto()))
+@preload(({dispatch, location}) => dispatch(getManifesto(location.search)))
 @connect(
     (state) => ({...connector(state.manifesto)}),
     {getManifesto}

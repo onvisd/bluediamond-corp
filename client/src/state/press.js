@@ -6,8 +6,8 @@ const handler = createHandler(settings);
 export const getPress = action({
     namespace: 'PRESS',
     event: 'GET_PRESS',
-    action: (http) =>
-        http.get('/api/template/press'),
+    action: (search, http) =>
+        http.get(`/api/template/press?${search.replace(/^\?/, '')}`),
     result: (state, result) => ({
         ...state,
         press: result

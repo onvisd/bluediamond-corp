@@ -20,7 +20,7 @@ import styles from './styles.module.css';
 
 @preload(async ({dispatch, parameters, location}) => {
     await Promise.all([
-        dispatch(getRecipe(parameters.slug, location.query.preview)).then((recipe) => {
+        dispatch(getRecipe(parameters.slug, location.search)).then((recipe) => {
             const item = recipe.items[0];
 
             const stepEntries = {};

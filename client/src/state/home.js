@@ -6,7 +6,7 @@ const handler = createHandler(settings);
 export const getHome = action({
     namespace: 'HOME',
     event: 'GET_HOME',
-    action: (http) => http.get('/api/template/home'),
+    action: (search, http) => http.get(`/api/template/home?${search.replace(/^\?/, '')}`),
     result: (state, result) => ({
         ...state,
         home: result

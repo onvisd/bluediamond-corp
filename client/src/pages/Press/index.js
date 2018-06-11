@@ -14,7 +14,7 @@ import ExternalLink from 'images/icons/external-link.svg';
 import Button from 'components/Button';
 import styles from './styles.module.css';
 
-@preload(({dispatch}) => dispatch(getPress()))
+@preload(({dispatch, location}) => dispatch(getPress(location.search)))
 @connect(
     (state) => ({...connector(state.press)}),
     {getPress}

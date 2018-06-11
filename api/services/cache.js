@@ -24,6 +24,11 @@ export const setCached = (req, data, exp) => {
 };
 
 export const getCached = (req, res, next) => {
+    if(req.query.preview) {
+        res.cache = () => res;
+        return next();
+    }
+
     redisClient.get(key(req), (err, data) => {
         if(err) {
             logger.error('Problem getting cache', err, err.message);

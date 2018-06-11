@@ -17,9 +17,9 @@ const getRandomEntries = (count, entries) => {
     return entries.items;
 };
 
-export default (api, {contentful}) => {
-    const getBrand = (slug) =>
-        contentful.client.getEntries({
+export default (api) => {
+    const getBrand = (slug, client) =>
+        client.getEntries({
             limit: 1,
             content_type: 'brand', // eslint-disable-line camelcase
             'fields.slug': slug,
@@ -28,16 +28,16 @@ export default (api, {contentful}) => {
         .then((entries) => entries.items[0])
         .catch((err) => logger.error('Problem getting brand from contentful', err, err.body));
 
-    const getProducts = (brand) =>
-        contentful.client.getEntries({
+    const getProducts = (brand, client) =>
+        client.getEntries({
             content_type: 'product', // eslint-disable-line camelcase
             'fields.brand': brand
         })
         .then((entries) => entries.items.map((entry) => entry))
         .catch((err) => logger.error('Problem getting products from contentful', err, err.body));
 
-    const getRandomProducts = () =>
-        contentful.client.getEntries({
+    const getRandomProducts = (client) =>
+        client.getEntries({
             content_type: 'product' // eslint-disable-line camelcase
         })
         .then((entries) => getRandomEntries(6, entries))
@@ -51,13 +51,13 @@ export default (api, {contentful}) => {
 
     api.get('/brands/:slug', async (req, res) => {
         try {
-            const brand = await getBrand(req.params.slug);
+            const brand = await getBrand(req.params.slug, req.client);
 
             if(!brand)
                 return res.status(404).send({ok: false, error: 'Brand not found'});
 
-            const products = await getProducts(brand.name);
-            const randomProducts = await getRandomProducts();
+            const products = await getProducts(brand.name, req.client);
+            const randomProducts = await getRandomProducts(req.client);
 
             for (let i = 0; i < products.length; i++) {
                 products[i].fields = {...products[i].fields};

@@ -6,8 +6,8 @@ const handler = createHandler(settings);
 export const getManifesto = action({
     namespace: 'MANIFESTO',
     event: 'GET_MANIFESTO',
-    action: (http) =>
-        http.get('/api/template/manifesto'),
+    action: (search, http) =>
+        http.get(`/api/template/manifesto?${search.replace(/^\?/, '')}`),
     result: (state, result) => ({
         ...state,
         manifesto: result

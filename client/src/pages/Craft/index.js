@@ -27,7 +27,7 @@ import RelatedPageLink from 'components/RelatedPageLink';
 import styles from './styles.module.css';
 
 
-@preload(({dispatch}) => dispatch(getCraft()))
+@preload(({dispatch, location}) => dispatch(getCraft(location.search)))
 @connect(
     (state) => ({
         responsive: state.responsive,

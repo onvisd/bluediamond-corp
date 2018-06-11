@@ -6,7 +6,7 @@ const handler = createHandler(settings);
 export const getContact = action({
     namespace: 'CONTACT',
     event: 'GET_CONTACT',
-    action: (http) => http.get('/api/template/contact'),
+    action: (search, http) => http.get(`/api/template/contact?${search.replace(/^\?/, '')}`),
     result: (state, result) => ({
         ...state,
         contact: result

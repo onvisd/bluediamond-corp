@@ -2,9 +2,9 @@ import logger from '../services/logger';
 
 const contentTypes = ['page', 'pageWithSidebar', 'fullScreenPage'];
 
-export default (api, {contentful}) => {
-    const getProducts = (category) =>
-        contentful.client
+export default (api) => {
+    const getProducts = (client, category) =>
+        client
             .getEntries({
                 content_type: 'product', // eslint-disable-line camelcase
                 'fields.brandCategory': category
@@ -14,8 +14,8 @@ export default (api, {contentful}) => {
                 logger.error('Problem getting products from contentful', err, err.body)
             );
 
-    const requestSlugFromType = (req, res, spaceId, typeIndex) =>
-        contentful.client
+    const requestSlugFromType = (req, res, typeIndex) =>
+        req.client
             .getEntries({
                 content_type: contentTypes[typeIndex], // eslint-disable-line camelcase
                 include: 2,
@@ -34,7 +34,7 @@ export default (api, {contentful}) => {
 
                         for (const brandCategoryMdle of brandCategoryMdles) {
                             products[brandCategoryMdle.fields.title] = await getProducts(
-                                brandCategoryMdle.fields.brandCategory.fields.name
+                                req.client, brandCategoryMdle.fields.brandCategory.fields.name
                             );
                         }
 
@@ -69,7 +69,7 @@ export default (api, {contentful}) => {
                         res.cache(true).send(data);
                     }
                 } else if(typeIndex + 1 < contentTypes.length) {
-                    requestSlugFromType(req, res, spaceId, typeIndex + 1);
+                    requestSlugFromType(req, res, typeIndex + 1);
                 } else {
                     res.status(404).send({ok: false, error: 'not found'});
                 }
@@ -80,5 +80,5 @@ export default (api, {contentful}) => {
                 res.status(500).send(err.message);
             });
 
-    api.get('/page/:slug', (req, res) => requestSlugFromType(req, res, contentful.spaceId, 0));
+    api.get('/page/:slug', (req, res) => requestSlugFromType(req, res, 0));
 };

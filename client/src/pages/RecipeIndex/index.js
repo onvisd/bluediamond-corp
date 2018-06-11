@@ -58,7 +58,7 @@ const initGetFilter = (location) => {
             sort: '-fields.featured,sys.createdAt',
             filters: initGetFilter(location)
         })),
-        dispatch(getRecipeFilters()),
+        dispatch(getRecipeFilters(location.search)),
         dispatch(setNavigationStyle({className: 'brand--blue'}))
     ]);
 })

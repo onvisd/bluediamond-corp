@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 import {parseModel} from 'tools/parseApi';
 
-@preload(({dispatch}) => dispatch(getContact()))
+@preload(({dispatch, location}) => dispatch(getContact(location.search)))
 @connect(
     (state) => ({...connector(state.contact)}),
     {getContact}

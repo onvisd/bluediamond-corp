@@ -6,8 +6,8 @@ const handler = createHandler(settings);
 export const getFoodService = action({
     namespace: 'FOOD_SERVICE',
     event: 'GET_FOOD_SERVICE',
-    action: (http) =>
-        http.get('/api/template/foodService'),
+    action: (search, http) =>
+        http.get(`/api/template/foodService?${search.replace(/^\?/, '')}`),
     result: (state, result) => ({
         ...state,
         foodService: result

@@ -6,7 +6,7 @@ const handler = createHandler(settings);
 export const getCraft = action({
     namespace: 'CRAFT',
     event: 'GET_CRAFT',
-    action: (http) => http.get('/api/template/craft'),
+    action: (search, http) => http.get(`/api/template/craft?${search.replace(/^\?/, '')}`),
     result: (state, result) => ({
         ...state,
         craft: result

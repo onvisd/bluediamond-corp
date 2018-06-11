@@ -6,8 +6,8 @@ const handler = createHandler(settings);
 export const getBrand = action({
     namespace: 'BRAND',
     event: 'GET_BRAND',
-    action: (slug, http) =>
-        http.get(`/api/brands/${slug}`),
+    action: (slug, search, http) =>
+        http.get(`/api/brands/${slug}?${search.replace(/^\?/, '')}`),
     result: (state, result) => ({
         ...state,
         brand: result

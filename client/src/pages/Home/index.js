@@ -19,7 +19,7 @@ import ButtonDropdown from 'components/ButtonDropdown';
 import preventOrphan from 'tools/preventOrphan';
 import styles from './styles.module.css';
 
-@preload(({dispatch}) => dispatch(getHome()))
+@preload(({dispatch, location}) => dispatch(getHome(location.search)))
 @connect(
     (state) => ({
         responsive: state.responsive,
