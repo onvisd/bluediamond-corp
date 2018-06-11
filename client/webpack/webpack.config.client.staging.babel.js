@@ -53,4 +53,10 @@ config.plugins.push(
     })
 );
 
+config.entry.main = [
+    // https://github.com/facebook/react/issues/8379#issuecomment-309916013
+    'core-js/modules/es6.symbol',
+    config.entry.main
+];
+
 export default config;
