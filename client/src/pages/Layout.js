@@ -24,6 +24,7 @@ import {
     getCheckout
 } from '../state/checkout';
 
+import AstuteBot from 'components/AstuteBot';
 import Title from 'components/Title';
 import Preloading from 'components/Preloading';
 import Navigation from 'components/Navigation';
@@ -126,6 +127,8 @@ export default class Layout extends Component {
                 {children}
 
                 {footer}
+
+                <AstuteBot />
             </div>
         );
     }
