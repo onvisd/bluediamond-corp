@@ -13,6 +13,8 @@ import {connector as storeReviewsConnector} from 'state/storeReviews';
 import {setStoreNavigation} from 'state/storeNavigation';
 import {connector as storeNavigationConnector} from 'state/storeNavigation';
 
+import {buildQueryString, connector as storeSearchConnector} from 'state/storeSearch';
+
 import Title from 'components/Title';
 import Meta from 'components/Meta';
 import StoreProductHead from 'components/API/StoreProductHead';
@@ -36,6 +38,7 @@ import styles from './styles.module.css';
 @connect(
     (state) => ({
         ...navConnector(state.navigation),
+        ...storeSearchConnector(state.storeSearch),
         ...storeProductConnector(state.storeProduct),
         ...storeReviewsConnector(state.storeReviews),
         ...storeNavigationConnector(state.storeNavigation)
@@ -125,7 +128,12 @@ export default class StoreProduct extends Component {
                     }
                 ]}</Meta>
                 <div className={styles.back}>
-                    <Link className={styles.backLink} to="/store">Continue Shopping</Link>
+                    <Link
+                        className={styles.backLink}
+                        to={`/store${buildQueryString(this.props.query)}`}
+                    >
+                        Continue Shopping
+                    </Link>
                 </div>
                 <StoreProductHead
                     data={product}
