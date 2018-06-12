@@ -85,7 +85,7 @@
 .recipe {
     & .meta {
         color: var(--c--white);
-        background-color: var(--c--blue-light);
+        background-color: color(var(--c--blue) lightness(-8%));
     }
 
     & .image {

@@ -206,7 +206,7 @@
 
     &.blue {
         color: var(--c--white);
-        background-color: var(--c--blue);
+        background-color: color(var(--c--blue) lightness(-15%));
     }
 
     &.gold {

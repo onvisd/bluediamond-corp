@@ -89,7 +89,7 @@
     }
 
     & .button {
-        color: var(--c--yellow-darker);
+        color: color(var(--c--yellow-darker) lightness(-10%));
     }
 
     & .button:focus,
@@ -120,7 +120,7 @@
 
     & .button {
         background-color: var(--c--green-dark);
-        color: var(--c--green-darker);
+        color: color(var(--c--green-darker) lightness(-10%));
     }
 
     & .button:focus,
@@ -151,33 +151,27 @@
 
     & .button {
         background-color: var(--c--blue);
-        color: var(--c--blue-darker);
+        color: color(var(--c--blue-dark) lightness(-10%));
     }
 
     & .button:focus,
     & .button.active {
         color: var(--c--black);
-        background-color: var(--c--blue-light);
+        background-color: color(var(--c--blue-light));
     }
 
-     /* stylelint-disable */
-    & .button.active,
+    /* stylelint-disable */
+    & .button:hover,
     & .button.active:hover {
-        color: var(--c--white);
+        color: var(--c--black);
+        background-color: color(var(--c--blue-light));
 
         &::after {
             opacity: 0.8;
-            border-left-color: var(--c--white);
+            border-left-color: var(--c--black);
         }
     }
     /* stylelint-enable */
-
-    @media (--mq-gt-s) {
-        & .button:hover {
-            color: var(--c--black);
-            background-color: var(--c--blue-light);
-        }
-    }
 }
 
 .brand--gold {

@@ -67,7 +67,7 @@
     }
 
     &.brand--blue {
-        background-color: var(--c--blue-light);
+        background-color: color(var(--c--blue-light) lightness(-23%));
     }
 
     &.brand--gold {

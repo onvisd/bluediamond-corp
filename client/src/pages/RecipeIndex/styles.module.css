@@ -126,9 +126,11 @@
     padding: 16px;
     border-radius: 50%;
     cursor: pointer;
+    line-height: 30px;
 
     &.currentPage {
-        background-color: var(--c--blue);
+        font-weight: 700;
+        background-color: color(var(--c--blue) lightness(-10%));
     }
 }
 

@@ -91,24 +91,24 @@
 .blue {
     composes: base;
     color: var(--c--white);
-    background-color: var(--c--blue);
+    background-color: color(var(--c--blue) lightness(-6%));
 
     &:hover,
     &:focus {
         color: var(--c--white);
-        background-color: var(--c--blue-dark);
+        background-color: color(var(--c--blue-dark) lightness(-3%));
     }
 }
 
 .blueDark {
     composes: base;
     color: var(--c--white);
-    background-color: var(--c--blue-dark);
+    background-color: color(var(--c--blue-dark) lightness(-3%));
 
     &:hover,
     &:focus {
         color: var(--c--white);
-        background-color: var(--c--blue);
+        background-color: color(var(--c--blue) lightness(-6%));
     }
 }
 
