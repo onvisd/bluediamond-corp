@@ -25,9 +25,12 @@ export default (api) => {
                 if(data.items.length) {
                     const fields = data.items[0].fields;
 
-                    const brandCategoryMdles = fields.modules.filter(
-                        (mdle) => mdle.sys.contentType.sys.id === 'pageModuleBrandCategory'
-                    );
+                    let brandCategoryMdles = [];
+                    if(fields.modules) {
+                        brandCategoryMdles = fields.modules.filter(
+                            (mdle) => mdle.sys.contentType.sys.id === 'pageModuleBrandCategory'
+                        );
+                    }
 
                     if(brandCategoryMdles.length) {
                         const products = {};

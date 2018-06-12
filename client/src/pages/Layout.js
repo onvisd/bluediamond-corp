@@ -74,7 +74,7 @@ export default class Layout extends Component {
     }
 
     render() {
-        const {children, navigation, responsive} = this.props;
+        const {children, navigation, responsive, location} = this.props;
         const {brands, companyNavItems} = navigation.data;
         const footerData = brands.sort(sortByPriority).map((brand) => ({
             name: brand.fields.name,
@@ -128,7 +128,7 @@ export default class Layout extends Component {
 
                 {footer}
 
-                <AstuteBot />
+                {location.search.match('astute') && <AstuteBot />}
             </div>
         );
     }
