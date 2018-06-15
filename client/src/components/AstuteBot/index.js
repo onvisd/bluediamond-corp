@@ -22,7 +22,7 @@ export default class AstuteBox extends Component {
                     {
                         userInfo: {
 
-                            language: 'en-us'
+                            language: 'en'
                         },
                     }
                 ]),
