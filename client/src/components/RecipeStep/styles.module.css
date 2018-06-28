@@ -28,7 +28,7 @@
         height: 35px;
         font-size: var(--t--size-s);
         font-weight: var(--t--weight-bold);
-        background-color: var(--c--blue);
+        background-color: color(var(--c--blue) lightness(-15%));
         color: var(--c--white);
         text-align: center;
         line-height: 35px;

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import marked from 'marked';
 import moment from 'moment';
+import classnames from 'classnames';
 
 import {connector, getRecipe} from 'state/recipe';
 import {setHead} from 'state/head';
@@ -158,6 +159,12 @@ export default class Recipe extends Component {
             assetsById[asset.sys.id] = asset.fields;
         });
 
+        const metaDescription = item.fields.description
+            ? marked(item.fields.description).replace(/<[^>]*>/g, '').replace(/\n+$/, '')
+            : `A ${item.fields.cookTime} minute recipe for ${
+                item.fields.name
+            } with Almond Breeze.`;
+
         return (
             <section className="content">
                 <Title>{`Recipe: ${item.fields.name}`}</Title>
@@ -178,23 +185,26 @@ export default class Recipe extends Component {
                         content: item.fields.name
                     },
                     {
-                        property: 'og:description',
-                        content: `A ${item.fields.cookTime} minute recipe for ${
-                            item.fields.name
-                        } with Almond Breeze.`
-                    },
-                    {
                         property: 'og:image',
                         content: assetsById[item.fields.heroImage.sys.id].file.url
                     },
                     {
+                        property: 'og:description',
+                        content: metaDescription
+                    },
+                    {
                         name: 'description',
-                        content: `A ${item.fields.cookTime} minute recipe for ${
-                            item.fields.name
-                        } with Almond Breeze.`
+                        content: metaDescription
                     }
                 ]}</Meta>
                 <RecipeHead data={recipe} />
+                {item.fields.description && (
+                    <div className={classnames(styles.container, styles.description)}>
+                        <div
+                            dangerouslySetInnerHTML={this.renderMarkup(item.fields.description)}
+                        />
+                    </div>
+                )}
                 <div className={styles.container}>
                     <div className={styles.left}>
                         <h3>Directions</h3>

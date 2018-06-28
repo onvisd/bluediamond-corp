@@ -27,6 +27,10 @@
     margin: 0 -0.5rem 0;
 }
 
+.description {
+    font-size: 1.5rem;
+}
+
 .left {
     padding-right: 3%;
     flex: 0 0 70%;
@@ -85,7 +89,7 @@
     }
 
     & a {
-        color: var(--c--blue);
+        color: color(var(--c--blue) lightness(-15%));
         text-decoration: underline;
     }
 }

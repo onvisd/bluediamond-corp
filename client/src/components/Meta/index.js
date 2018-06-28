@@ -44,12 +44,14 @@ export default (props) => {
     // Overwrite defaults
     const meta = defaults.map((tag) => {
         const matchingTag = tags.filter(
-            (childTag) =>
-                (childTag.property === tag.property || childTag.name === tag.name)
-        )[0];
+            (childTag) => (
+                (childTag.property && childTag.property === tag.property) ||
+                (childTag.name && childTag.name === tag.name)
+            )
+        );
 
-        if(matchingTag)
-            return matchingTag;
+        if(matchingTag.length)
+            return matchingTag[0];
 
         return tag;
     });
@@ -57,8 +59,10 @@ export default (props) => {
     // Add any new tags
     tags.forEach((tag) => {
         const matchingTag = meta.filter(
-            (existingTag) =>
-                (existingTag.property === tag.property || existingTag.name === tag.name)
+            (existingTag) => (
+                (existingTag.property && existingTag.property === tag.property) ||
+                (existingTag.name && existingTag.name === tag.name)
+            )
         )[0];
 
         if(!matchingTag)

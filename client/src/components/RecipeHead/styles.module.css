@@ -4,9 +4,11 @@
 
 .container {
     display: flex;
-    height: 1px; /* Fixes a flexbox issue on IE where a fixed height must at least be set */
+
+    /* Fixes a flexbox issue on IE where a fixed height must at least be set */
+    height: 1px;
     min-height: 32rem;
-    background-color: var(--c--blue);
+    background-color: color(var(--c--blue) lightness(-15%));
     overflow: hidden;
 
     @media (--mq-s) {
@@ -57,8 +59,13 @@
         max-width: 100%;
     }
 
-    & h2 {
+    & h2,
+    & p {
         color: var(--c--white);
+    }
+
+    & p {
+        margin: 1rem 0;
     }
 }
 
@@ -106,6 +113,7 @@
 
 .meta {
     display: flex;
+    color: var(--c--white);
 
     @media (--mq-s) {
         margin-top: 1rem;
@@ -123,12 +131,10 @@
 
     & p {
         margin: 0;
-        color: var(--c--black);
-        white-space: nowrap;
     }
 
+    & p,
     & h3 {
-        color: var(--c--white);
         white-space: nowrap;
     }
 }
@@ -137,6 +143,7 @@
     display: flex;
     align-items: center;
     font-weight: var(--t--weight-bold);
+    color: var(--c--white);
 }
 
 .shareButton {
@@ -145,12 +152,12 @@
     cursor: pointer;
 
     & svg {
-        fill: var(--c--black);
+        fill: var(--c--white);
     }
 
     &:hover {
         & svg {
-            fill: color(var(--c--black) lightness(-10%));
+            fill: color(var(--c--white) lightness(-10%));
         }
     }
 }
@@ -158,8 +165,8 @@
 .nutritionFacts {
     margin: 0 0 1rem;
     padding: 1rem 0;
-    border-top: 1px solid var(--c--black);
-    border-bottom: 1px solid var(--c--black);
+    border-top: 1px solid color(var(--c--white) a(0.5));
+    border-bottom: 1px solid color(var(--c--white) a(0.5));
 
     & p,
     & table {
