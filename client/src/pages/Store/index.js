@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import classnames from 'classnames';
+import Helmet from 'react-helmet';
 
 import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 
@@ -320,6 +321,9 @@ export default class Store extends Component {
                         content: 'Almond Snacks and Gifts for Any Occasion'
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href="https://www.bluediamond.com/store" />
+                </Helmet>
                 <StoreHero
                     desktopImage={HeroDesktop}
                     smallDesktopImage={HeroSmallDesktop}

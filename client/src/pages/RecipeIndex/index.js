@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import classnames from 'classnames';
 import debounce from 'lodash/debounce';
+import Helmet from 'react-helmet';
 
 import {connector, getRecipes} from 'state/recipes';
 import {connector as recipeFilterConnector, getRecipeFilters} from 'state/recipeFilters';
@@ -738,6 +739,9 @@ export default class RecipeIndex extends Component {
                         )
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href="https://www.bluediamond.com/recipes" />
+                </Helmet>
                 <div className={styles.hero} style={{backgroundImage: `url(${HeroImage})`}}>
                     <div className={styles.heroInner}>
                         <h2>Creativity Never Came So Smoothly</h2>
