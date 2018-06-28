@@ -9,7 +9,7 @@ export const getStoreProducts = action({
     action: (filter, search, sort, page, http) => {
         const params = Object.keys(filter).map(function(key) {
             if(filter[key] && filter[key].length > 0)
-                return `${key}=${filter[key].join('|')}`;
+                return `${key}=${encodeURIComponent(filter[key].join('|'))}`;
 
             return '';
         }).filter((param) => param.length > 0);
