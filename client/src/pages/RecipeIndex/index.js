@@ -14,6 +14,7 @@ import Meta from 'components/Meta';
 import RecipeCard from 'components/API/RecipeCard';
 import Button from 'components/Button';
 import ProductFilter from 'components/ProductFilter';
+import StoreHero from 'components/StoreHero';
 
 import addQuery from 'tools/addQuery';
 import removeQuery from 'tools/removeQuery';
@@ -22,7 +23,10 @@ import filterViaParam from 'tools/filterViaParam';
 
 import styles from './styles.module.css';
 
-import HeroImage from 'images/backgrounds/recipe-hero.jpg';
+import HeroDesktop from 'images/recipes/hero-2880x1024.jpg';
+import HeroSmallDesktop from 'images/recipes/hero-2048x1024.jpg';
+import HeroTablet from 'images/recipes/hero-1536x1024.jpg';
+import HeroMobile from 'images/recipes/hero-750x750.jpg';
 
 const parseIntQueryParam = (param, location, defaultVal) => {
     const value = searchViaParam(param, location.query);
@@ -742,11 +746,13 @@ export default class RecipeIndex extends Component {
                 <Helmet>
                     <link rel="canonical" href="https://www.bluediamond.com/recipes" />
                 </Helmet>
-                <div className={styles.hero} style={{backgroundImage: `url(${HeroImage})`}}>
-                    <div className={styles.heroInner}>
-                        <h2>Creativity Never Came So Smoothly</h2>
-                    </div>
-                </div>
+                <StoreHero
+                    desktopImage={HeroDesktop}
+                    smallDesktopImage={HeroSmallDesktop}
+                    tabletImage={HeroTablet}
+                    mobileImage={HeroMobile}
+                    isRecipes
+                />
                 <div className={`l--container ${styles.container}`}>
                     <div className="l--row">
                         <div className={`l--col-3 ${styles.leftFilters}`}>

@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import classnames from 'classnames';
 
 import styles from './styles.module.css';
 
@@ -13,11 +14,23 @@ export default class StoreHero extends Component {
         desktopImage: PropTypes.string.isRequired,
         smallDesktopImage: PropTypes.string.isRequired,
         tabletImage: PropTypes.string.isRequired,
-        mobileImage: PropTypes.string.isRequired
+        mobileImage: PropTypes.string.isRequired,
+        isRecipes: PropTypes.bool
+    };
+
+    static defaultProps = {
+        isRecipes: false
     };
 
     render() {
-        const {desktopImage, smallDesktopImage, tabletImage, mobileImage, responsive} = this.props;
+        const {
+            desktopImage,
+            smallDesktopImage,
+            tabletImage,
+            mobileImage,
+            isRecipes,
+            responsive
+        } = this.props;
 
         let image = desktopImage;
         if(responsive.xsmall)
@@ -29,7 +42,7 @@ export default class StoreHero extends Component {
 
         return (
             <div
-                className={styles.container}
+                className={classnames(styles.container, {[styles.recipes]: isRecipes})}
                 style={{
                     backgroundImage: `url(${image})`
                 }}
