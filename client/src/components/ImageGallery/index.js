@@ -12,7 +12,7 @@ export default class ImageGallery extends Component {
         const alt = image.title;
 
         return (
-            <div key={id} className="l--col-12-at-s l--col-6-at-m l--col-4-at-l">
+            <div key={id} className={`l--col-12-at-s l--col-6-at-m l--col-4-at-l ${styles.image}`}>
                 <img src={`${url}?fit=fill&f=face&w=800&h=800`} alt={alt} />
             </div>
         );

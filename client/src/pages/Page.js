@@ -18,6 +18,7 @@ const pageModules = {
     IFrame: require('../components/API/IFrame').default,
     ImageCluster: require('../components/API/ImageCluster').default,
     LinkedPageWithMedia: require('../components/API/LinkedPageMedia').default,
+    LinkedPageWithSummary: require('../components/API/LinkedPageSummary').default,
     ParagraphWithHeader: require('../components/API/ParagraphWithHeader').default,
     ParagraphWithImage: require('../components/API/ParagraphWithImage').default,
     RelatedPages: require('../components/API/RelatedPages').default,

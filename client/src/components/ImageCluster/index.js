@@ -5,12 +5,12 @@ import styles from './styles.module.css';
 export default class ImageCluster extends Component {
     static propTypes = {
         images: PropTypes.array.isRequired,
-        change: PropTypes.bool.isRequired,
+        change: PropTypes.bool,
         className: PropTypes.any
     }
 
     renderImage(image, id, width, height) {
-        const url = image.url;
+        const url = image.url ? image.url : image.file.url;
         const alt = image.alt;
 
         return (

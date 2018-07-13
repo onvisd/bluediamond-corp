@@ -183,7 +183,7 @@
     & h1,
     & h3,
     & p {
-        max-width: 30vw;
+        max-width: 60vw;
 
         @media (--mq-m) {
             max-width: 50%;

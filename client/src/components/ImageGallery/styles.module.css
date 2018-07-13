@@ -1,1 +1,9 @@
 /* Image Gallery Styles */
+
+.container {
+    margin: 2rem 0 0;
+}
+
+.image {
+    padding-bottom: 2%;
+}
