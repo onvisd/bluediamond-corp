@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import {Component} from 'react';
 
-export default class AstuteBox extends Component {
+export default class AstuteBot extends Component {
     componentDidMount() {
         const script = document.createElement('script');
         script.src = 'https://www.astutebot.com/chat/script/AstuteBotLauncher-1.0.0.min.js';
@@ -29,8 +29,8 @@ export default class AstuteBox extends Component {
                 customCss:
                     '@import url("https://use.typekit.net/pru3xpz.css");' +
                     '.AstuteBotLauncher { position: fixed; bottom: 0px; right: 20px;} ' +
-                    '.AstuteBotLauncher .ToggleChat { float: right; margin-right: 100px; background-color: #2c7fb9; color: #fff; padding: 0 20px; font-family: "brandon-grotesque", sans-serif; font-weight: 400; font-size: 16px; height: 40px; line-height: 40px; } '  +
-                    'div.AstuteBotLauncher .ChatTitleBar { background-color: #2c7fb9; height: 40px; line-height: 40px;} ' +
+                    '.AstuteBotLauncher .ToggleChat { float: right; margin-right: 100px; background-color: #fdbb30; color: #2b3b48; padding: 0 20px; font-family: "brandon-grotesque", sans-serif; font-weight: 400; font-size: 16px; height: 40px; line-height: 40px; } '  +
+                    'div.AstuteBotLauncher .ChatTitleBar { background-color: #fdbb30; color: #2b3b48; height: 40px; line-height: 40px;} ' +
                     'div.AstuteBotLauncher .ChatTitleBar .TitleText { font-family: "brandon-grotesque", sans-serif; font-weight: 400; font-size: 16px; margin-left: 10px} ' +
                     'div.AstuteBotLauncher .ChatTitleBar .MinMaxChat { margin-right: 20px} ',
 
