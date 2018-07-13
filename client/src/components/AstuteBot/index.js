@@ -17,7 +17,7 @@ export default class AstuteBox extends Component {
                 persistConversationAcrossSession: false,
                 replyHeightPixels: 50,
                 toggleChatMarkup: 'Need Help?',
-                titleMarkup: 'Blue Diamond Bot ',
+                titleMarkup: 'Blue Diamond Help',
                 initialContext: JSON.stringify([
                     {
                         userInfo: {
