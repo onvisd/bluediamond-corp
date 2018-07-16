@@ -134,7 +134,7 @@ export default class RecipeHead extends Component {
                 <div className={styles.right}>
                     <div className={styles.content}>
                         <div className={styles.head}>
-                            <h2>{title}</h2>
+                            <h1>{title}</h1>
                             {consumerSymbols && this.renderSymbols()}
                         </div>
                         <div className={styles.foot}>
