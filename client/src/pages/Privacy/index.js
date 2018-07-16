@@ -12,6 +12,14 @@ export default () => (
             {
                 property: 'og:title',
                 content: 'Privacy Policy'
+            },
+            {
+                property: 'og:description',
+                content: 'The Blue Diamond website privacy policy.'
+            },
+            {
+                name: 'description',
+                content: 'The Blue Diamond website privacy policy.'
             }
         ]}</Meta>
         <h2>Privacy Policy</h2>

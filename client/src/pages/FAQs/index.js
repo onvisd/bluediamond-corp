@@ -47,11 +47,11 @@ export default class FAQs extends Component {
                     },
                     {
                         property: 'og:description',
-                        content: 'Frequently asked question about Blue Diamond products.'
+                        content: 'Frequently asked questions about Blue Diamond products.'
                     },
                     {
                         name: 'description',
-                        content: 'Frequently asked question about Blue Diamond products.'
+                        content: 'Frequently asked questions about Blue Diamond products.'
                     }
                 ]}</Meta>
 
