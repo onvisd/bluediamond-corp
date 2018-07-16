@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
+import Helmet from 'react-helmet';
 
 import {connector as brandConnector, getBrand} from 'state/brand';
 import {
@@ -171,6 +172,9 @@ export default class Brand extends Component {
                         content: brand.fields.heroTitle
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <Hero
                     image={heroImage.fields.file.url}
                     title={brand.fields.heroTitle}

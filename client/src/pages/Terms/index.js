@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import Title from 'components/Title';
 import Meta from 'components/Meta';
@@ -22,6 +23,9 @@ export default () => (
                 content: 'The Blue Diamond website terms of use.'
             }
         ]}</Meta>
+        <Helmet>
+            <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+        </Helmet>
         <h2>Terms of Use</h2>
         <p></p>
         <p>This website (&#8220;Site&#8221;) is owned and operated by Blue Diamond Growers, a California Corporation (&#8220;we&#8221;, &#8220;our,&#8221; or &#8220;us&#8221;). These Terms of Use apply to any access or use of the Site by you (&#8220;you,&#8221; &#8220;your,&#8221; or &#8220;User&#8221;). By accessing, browsing, or otherwise using the Site, you agree to be legally bound by these Terms of Use&#8212;and further acknowledge consent to our collection and use of information as set forth in the&#160;<a href="/privacy">Privacy Policy</a>.</p>

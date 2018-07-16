@@ -3,6 +3,7 @@ import {Link, goto} from 'react-isomorphic-render';
 import {connect} from 'react-redux';
 import Formsy from 'formsy-react';
 import classnames from 'classnames';
+import Helmet from 'react-helmet';
 
 import {connector as authConnector} from 'state/auth';
 import {registerCustomer, signinCustomer, recoverCustomerPass} from 'state/auth';
@@ -185,6 +186,9 @@ export default class Signin extends Component {
                         )
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <h1>Shopped with us before?</h1>
                 <p>
                     If you have registered with us before, sign in

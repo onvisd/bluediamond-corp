@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import Title from 'components/Title';
 import Button from 'components/Button';
@@ -8,6 +9,9 @@ import styles from './styles.module.css';
 export default () => (
     <div>
         <Title>Error</Title>
+        <Helmet>
+            <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+        </Helmet>
         <div className={styles.container}>
           <div className={styles.content}>
             <h1>Houston, we got a 500.</h1>

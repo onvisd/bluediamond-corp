@@ -4,6 +4,7 @@ import {preload} from 'react-isomorphic-render';
 import marked from 'marked';
 import moment from 'moment';
 import classnames from 'classnames';
+import Helmet from 'react-helmet';
 
 import {connector, getRecipe} from 'state/recipe';
 import {setHead} from 'state/head';
@@ -197,6 +198,9 @@ export default class Recipe extends Component {
                         content: metaDescription
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <RecipeHead data={recipe} />
                 {item.fields.description && (
                     <div className={classnames(styles.container, styles.description)}>

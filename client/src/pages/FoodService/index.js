@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import marked from 'marked';
+import Helmet from 'react-helmet';
 
 import {connector, getFoodService} from 'state/foodService';
 import {parseModel} from 'tools/parseApi';
@@ -142,6 +143,9 @@ export default class FoodService extends Component {
                         content: marked(fields.pageContent).replace(/<[^>]*>/g, '')
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <div className={styles.hero} style={{
                     backgroundImage: `url(${fields.heroBackgroundImage.file.url})`
                 }} />

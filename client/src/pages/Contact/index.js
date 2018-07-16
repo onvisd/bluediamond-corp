@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
+import Helmet from 'react-helmet';
 
 import {connector, getContact} from 'state/contact';
 
@@ -78,7 +79,9 @@ export default class Contact extends Component {
                         content: description
                     }
                 ]}</Meta>
-
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <div className={styles.container}>
                     <div className={styles.row}>
                         <div className={styles.colLeft}>

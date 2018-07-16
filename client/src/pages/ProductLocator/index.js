@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Helmet from 'react-helmet';
 
 import Title from 'components/Title';
 import Meta from 'components/Meta';
@@ -27,6 +28,9 @@ export default class ProductLocatorPage extends Component {
                             'Find out where Blue Diamond products are sold in stores near you.'
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <ProductLocator
                     query={this.props.location.search}
                     width="100%"

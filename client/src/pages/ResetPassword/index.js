@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link, goto} from 'react-isomorphic-render';
 import {connect} from 'react-redux';
 import Formsy from 'formsy-react';
+import Helmet from 'react-helmet';
 
 import {connector as authConnector} from 'state/auth';
 import {resetCustomer, signoutCustomer} from 'state/auth';
@@ -113,6 +114,9 @@ export default class Signin extends Component {
                         content: 'Reset your password for the Blue Diamond Online Store.'
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <h1>Reset Your Password</h1>
                 <div className={styles.formWrap}>
                     <Formsy

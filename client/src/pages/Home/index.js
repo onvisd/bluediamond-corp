@@ -8,6 +8,7 @@ import {topTop, calculateScrollY} from 'react-track/tracking-formulas';
 import {translate3d, percent} from 'react-imation/tween-value-factories';
 import YouTubePlayer from 'react-player/lib/players/YouTube';
 import classnames from 'classnames';
+import Helmet from 'react-helmet';
 
 import {connector, getHome} from 'state/home';
 import {parseModel} from 'tools/parseApi';
@@ -147,6 +148,9 @@ export default class Home extends Component {
         return this.trackDocument((scrollY, topTop) => ( // eslint-disable-line no-shadow
             <section className={styles.container}>
                 <Title>From Our Hearts to Your Hands</Title>
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <div
                     className={styles.heroWrapper}
                 >

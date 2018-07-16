@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import marked from 'marked';
 import classnames from 'classnames';
+import Helmet from 'react-helmet';
 
 import {connector, getManifesto} from 'state/manifesto';
 import {parseModel} from 'tools/parseApi';
@@ -107,6 +108,9 @@ export default class Manifesto extends Component {
                         content: marked(manifestoFields.introHeadline).replace(/<[^>]*>/g, '')
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <GenericHero
                     className={styles.hero}
                     headline="Our Story"

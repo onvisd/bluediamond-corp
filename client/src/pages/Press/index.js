@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import moment from 'moment';
+import Helmet from 'react-helmet';
 
 import {connector, getPress} from 'state/press';
 import {parseModel} from 'tools/parseApi';
@@ -80,7 +81,9 @@ export default class Press extends Component {
                         content: 'Read the latest press releases and news from Blue Diamond.'
                     }
                 ]}</Meta>
-
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <div className={styles.container}>
                     <div className={`${styles.main} ${styles.colLeft}`}>
                         <h1>News Releases</h1>

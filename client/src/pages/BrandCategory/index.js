@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {preload, redirect, pushLocation} from 'react-isomorphic-render';
 import {withRouter} from 'react-router';
 import classnames from 'classnames';
+import Helmet from 'react-helmet';
 
 import {connector as brandConnector, getBrand} from 'state/brand';
 import {
@@ -236,6 +237,9 @@ export default class BrandCategory extends Component {
                         content: activeProduct.fields.description
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <Hero
                     brand={brand}
                     category={category}

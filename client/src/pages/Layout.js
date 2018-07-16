@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {preload} from 'react-isomorphic-render';
 import env from 'tools/env';
+import Helmet from 'react-helmet';
 
 import {
     connector as navConnector,
@@ -119,6 +120,9 @@ export default class Layout extends Component {
             <div className="content">
                 <Title>From Our Hearts to Your Hands</Title>
                 <Meta />
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
 
                 <Navigation brands={brands} company={companyNavItems} />
 

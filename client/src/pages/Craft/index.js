@@ -8,6 +8,7 @@ import {tween} from 'react-imation';
 import {topTop, calculateScrollY} from 'react-track/tracking-formulas';
 import {translate3d} from 'react-imation/tween-value-factories';
 import {Parallax} from 'react-parallax';
+import Helmet from 'react-helmet';
 
 import {connector, getCraft} from 'state/craft';
 import {parseModel} from 'tools/parseApi';
@@ -171,6 +172,9 @@ export default class Craft extends Component {
                         content: craftFields.heroTitle
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <GenericHero
                     headline={craftFields.heroHeadline}
                     title={craftFields.heroTitle}

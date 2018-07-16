@@ -6,6 +6,7 @@ import {topTop, topBottom, bottomTop, calculateScrollY} from 'react-track/tracki
 import {scale} from 'react-imation/tween-value-factories';
 import {Parallax} from 'react-parallax';
 import classnames from 'classnames';
+import Helmet from 'react-helmet';
 
 import Title from 'components/Title';
 import Meta from 'components/Meta';
@@ -129,6 +130,9 @@ export default class HistoryPage extends Component {
                             'Read about the history of Blue Diamond Growers and how we\'ve grown.'
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <GenericHero
                     headline="Our History"
                     title="How We've Grown"

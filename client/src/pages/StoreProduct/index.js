@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {preload, Link} from 'react-isomorphic-render';
+import Helmet from 'react-helmet';
 
 import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 
@@ -127,6 +128,9 @@ export default class StoreProduct extends Component {
                         content: product.product.descriptionHtml.replace(/<[^>]*>/g, '')
                     }
                 ]}</Meta>
+                <Helmet>
+                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                </Helmet>
                 <div className={styles.back}>
                     <Link
                         className={styles.backLink}
