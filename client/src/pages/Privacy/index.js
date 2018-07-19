@@ -24,7 +24,7 @@ export default () => (
             }
         ]}</Meta>
         <Helmet>
-            <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+            <link rel="canonical" href={`https://www.bluediamond.com/privacy`} />
         </Helmet>
         <h2>Privacy Policy</h2>
         <p>Blue Diamond Growers (“we”, “our,” “us” or "the Company") is concerned about privacy issues and want you (“you,” “your,” or “User”) to be familiar with how we collect, use and disclose information.  This Privacy Policy describes our practices in connection with information that we collect through activities that link to this Privacy Policy including websites (our “Sites”) and any mobile sites, applications, widgets, and other mobile interactive features (collectively, our “Apps”), through other services that we may offer in connections with our Sites and Apps, such as contests or sweepstakes, through our official social media pages that we control (our “Social Media Pages”), as well as through email messages that we send to you (collectively, including the Social Media Pages, Apps and Sites, the “Sites”).</p>

@@ -24,7 +24,7 @@ export default () => (
             }
         ]}</Meta>
         <Helmet>
-            <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+            <link rel="canonical" href={`https://www.bluediamond.com/terms`} />
         </Helmet>
         <h2>Terms of Use</h2>
         <p></p>

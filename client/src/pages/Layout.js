@@ -121,7 +121,7 @@ export default class Layout extends Component {
                 <Title>From Our Hearts to Your Hands</Title>
                 <Meta />
                 <Helmet>
-                    <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
+                    <link rel="canonical" href={`https://www.bluediamond.com${location.pathname}`} />
                 </Helmet>
 
                 <Navigation brands={brands} company={companyNavItems} />
