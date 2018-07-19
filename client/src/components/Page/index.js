@@ -51,10 +51,17 @@ export default class Page extends Component {
                     },
                     {
                         property: 'og:description',
-                        content: ''
+                        content: fields.metaDescription
+                    },
+                    {
+                        property: 'description',
+                        content: fields.metaDescription
+                    },
+                    {
+                        name: 'keywords',
+                        content: fields.metaKeywords && fields.metaKeywords.join(',')
                     }
                 ]}</Meta>
-
                 {this.renderChildren(pageData)}
             </div>
         );

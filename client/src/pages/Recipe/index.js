@@ -172,7 +172,7 @@ export default class Recipe extends Component {
                 <Meta>{[
                     {
                         name: 'keywords',
-                        content:
+                        content: (item.fields.metaKeywords && item.fields.metaKeywords) ||
                             'Blue Diamond,Blue Diamond Almonds,Almond,Almond Nuts,Almond Snack,' +
                             'Almond Milk,Snack Nuts,Almond Breeze,Nut Thins,Almond Flavors,' +
                             'Almond Milk,Nut Milk,Almond Recipes,Nut Recipes,' +
@@ -191,11 +191,11 @@ export default class Recipe extends Component {
                     },
                     {
                         property: 'og:description',
-                        content: metaDescription
+                        content: item.fields.metaDescription || metaDescription
                     },
                     {
                         name: 'description',
-                        content: metaDescription
+                        content: item.fields.metaDescription || metaDescription
                     }
                 ]}</Meta>
                 <Helmet>

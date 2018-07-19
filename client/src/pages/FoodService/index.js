@@ -27,6 +27,8 @@ export default class FoodService extends Component {
             items: PropTypes.arrayOf(PropTypes.shape({
                 fields: PropTypes.shape({
                     title: PropTypes.string.isRequired,
+                    metaKeywords: PropTypes.array,
+                    metaDescription: PropTypes.string,
                     heroHeadline: PropTypes.string.isRequired,
                     heroBackgroundImage: PropTypes.shape({
                         sys: PropTypes.shape({
@@ -132,7 +134,7 @@ export default class FoodService extends Component {
                     },
                     {
                         property: 'og:description',
-                        content: marked(fields.pageContent).replace(/<[^>]*>/g, '')
+                        content: fields.metaDescription
                     },
                     {
                         property: 'og:image',
@@ -140,7 +142,11 @@ export default class FoodService extends Component {
                     },
                     {
                         name: 'description',
-                        content: marked(fields.pageContent).replace(/<[^>]*>/g, '')
+                        content: fields.metaDescription
+                    },
+                    {
+                        name: 'keywords',
+                        content: fields.metaKeywords && fields.metaKeywords.join(',')
                     }
                 ]}</Meta>
                 <Helmet>

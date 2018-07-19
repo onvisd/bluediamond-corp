@@ -26,6 +26,8 @@ export default class Contact extends Component {
             items: PropTypes.arrayOf(PropTypes.shape({
                 fields: PropTypes.shape({
                     title: PropTypes.string.isRequired,
+                    metaKeywords: PropTypes.array,
+                    metaDescription: PropTypes.string,
                     description: PropTypes.string.isRequired,
                     details: PropTypes.arrayOf(PropTypes.shape({
                         sys: PropTypes.shape({
@@ -60,7 +62,15 @@ export default class Contact extends Component {
 
     render() {
         const {contact} = this.props;
-        const {title, description, faq, form, details} = parseModel(contact)[0].fields;
+        const {
+            title,
+            description,
+            faq,
+            form,
+            details,
+            metaDescription,
+            metaKeywords
+        } = parseModel(contact)[0].fields;
 
         return (
             <section className="content">
@@ -72,11 +82,15 @@ export default class Contact extends Component {
                     },
                     {
                         property: 'og:description',
-                        content: description
+                        content: metaDescription
                     },
                     {
                         name: 'description',
-                        content: description
+                        content: metaDescription
+                    },
+                    {
+                        name: 'keywords',
+                        content: metaKeywords && metaKeywords.join(',')
                     }
                 ]}</Meta>
                 <Helmet>

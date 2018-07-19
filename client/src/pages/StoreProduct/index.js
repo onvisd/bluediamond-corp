@@ -117,7 +117,8 @@ export default class StoreProduct extends Component {
                     },
                     {
                         property: 'og:description',
-                        content: product.product.descriptionHtml.replace(/<[^>]*>/g, '')
+                        content: product.product.metaDescription ||
+                          product.product.descriptionHtml.replace(/<[^>]*>/g, '')
                     },
                     {
                         property: 'og:image',
@@ -125,7 +126,13 @@ export default class StoreProduct extends Component {
                     },
                     {
                         name: 'description',
-                        content: product.product.descriptionHtml.replace(/<[^>]*>/g, '')
+                        content: product.product.metaDescription ||
+                          product.product.descriptionHtml.replace(/<[^>]*>/g, '')
+                    },
+                    {
+                        name: 'keywords',
+                        content: product.product.metaKeywords &&
+                          product.product.metaKeywords.join(',')
                     }
                 ]}</Meta>
                 <Helmet>

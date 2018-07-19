@@ -41,6 +41,8 @@ export default class Craft extends Component {
         craft: PropTypes.shape({
             items: PropTypes.arrayOf(PropTypes.shape({
                 fields: PropTypes.shape({
+                    metaKeywords: PropTypes.array,
+                    metaDescription: PropTypes.string,
                     heroHeadline: PropTypes.string.isRequired,
                     heroTitle: PropTypes.string.isRequired,
                     heroImage: PropTypes.shape({
@@ -161,7 +163,7 @@ export default class Craft extends Component {
                     },
                     {
                         property: 'og:description',
-                        content: craftFields.heroTitle
+                        content: craftFields.metaDescription
                     },
                     {
                         property: 'og:image',
@@ -169,7 +171,11 @@ export default class Craft extends Component {
                     },
                     {
                         name: 'description',
-                        content: craftFields.heroTitle
+                        content: craftFields.metaDescription
+                    },
+                    {
+                        name: 'keywords',
+                        content: craftFields.metaKeywords && craftFields.metaKeywords.join(',')
                     }
                 ]}</Meta>
                 <Helmet>

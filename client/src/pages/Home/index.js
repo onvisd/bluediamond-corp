@@ -15,6 +15,7 @@ import {parseModel} from 'tools/parseApi';
 import image from 'tools/image';
 
 import Title from 'components/Title';
+import Meta from 'components/Meta';
 import Button from 'components/Button';
 import ButtonDropdown from 'components/ButtonDropdown';
 import preventOrphan from 'tools/preventOrphan';
@@ -33,6 +34,8 @@ export default class Home extends Component {
         home: PropTypes.shape({
             items: PropTypes.arrayOf(PropTypes.shape({
                 fields: PropTypes.shape({
+                    metaKeywords: PropTypes.array,
+                    metaDescription: PropTypes.string,
                     heroHeadline: PropTypes.string.isRequired,
                     heroText: PropTypes.string.isRequired,
                     heroBackground: PropTypes.shape({
@@ -148,6 +151,20 @@ export default class Home extends Component {
         return this.trackDocument((scrollY, topTop) => ( // eslint-disable-line no-shadow
             <section className={styles.container}>
                 <Title>From Our Hearts to Your Hands</Title>
+                <Meta>{[
+                    {
+                        property: 'og:description',
+                        content: homeFields.metaDescription
+                    },
+                    {
+                        name: 'description',
+                        content: homeFields.metaDescription
+                    },
+                    {
+                        name: 'keywords',
+                        content: homeFields.metaKeywords && homeFields.metaKeywords.join(',')
+                    }
+                ]}</Meta>
                 <Helmet>
                     <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
                 </Helmet>

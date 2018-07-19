@@ -32,6 +32,8 @@ export default class Manifesto extends Component {
         manifesto: PropTypes.shape({
             items: PropTypes.arrayOf(PropTypes.shape({
                 fields: PropTypes.shape({
+                    metaKeywords: PropTypes.array,
+                    metaDescription: PropTypes.string,
                     heroHeadline: PropTypes.string.isRequired,
                     heroVideoText: PropTypes.string.isRequired,
                     heroImage: PropTypes.shape({
@@ -97,7 +99,7 @@ export default class Manifesto extends Component {
                     },
                     {
                         property: 'og:description',
-                        content: marked(manifestoFields.introHeadline).replace(/<[^>]*>/g, '')
+                        content: manifestoFields.metaDescription
                     },
                     {
                         property: 'og:image',
@@ -105,7 +107,12 @@ export default class Manifesto extends Component {
                     },
                     {
                         name: 'description',
-                        content: marked(manifestoFields.introHeadline).replace(/<[^>]*>/g, '')
+                        content: manifestoFields.metaDescription
+                    },
+                    {
+                        name: 'keywords',
+                        content: manifestoFields.metaKeywords &&
+                            manifestoFields.metaKeywords.join(',')
                     }
                 ]}</Meta>
                 <Helmet>

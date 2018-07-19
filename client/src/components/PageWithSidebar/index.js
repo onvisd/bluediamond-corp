@@ -35,18 +35,27 @@ export default class PageWithSidebar extends Component {
 
     render() {
         const {pageData} = this.props;
+        const {fields} = pageData.items[0];
 
         return (
           <div className={styles.container}>
-              <Title>{pageData.items[0].fields.title}</Title>
+              <Title>{fields.title}</Title>
               <Meta>{[
                   {
                       property: 'og:title',
-                      content: pageData.items[0].fields.title
+                      content: fields.title
                   },
                   {
                       property: 'og:description',
-                      content: ''
+                      content: fields.metaDescription
+                  },
+                  {
+                      property: 'description',
+                      content: fields.metaDescription
+                  },
+                  {
+                      name: 'keywords',
+                      content: fields.metaKeywords && fields.metaKeywords.join(',')
                   }
               ]}</Meta>
               <div className={styles.row}>

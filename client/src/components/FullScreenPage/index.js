@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Title} from 'react-isomorphic-render';
+import Meta from 'components/Meta';
 
 import styles from './styles.module.css';
 
@@ -12,6 +13,7 @@ export default class FullScreenPage extends Component {
     render() {
         const {pageData} = this.props;
         const {pageModules} = this.props;
+        const {fields} = pageData.items[0];
         const mdle = pageData.items[0].fields.module;
         const includes = pageData.includes;
         const entries = includes.Entry;
@@ -25,7 +27,25 @@ export default class FullScreenPage extends Component {
 
         return (
             <div className={styles.container}>
-                <Title>{pageData.items[0].fields.title}</Title>
+                <Title>{fields.title}</Title>
+                <Meta>{[
+                    {
+                        property: 'og:title',
+                        content: fields.title
+                    },
+                    {
+                        property: 'og:description',
+                        content: fields.metaDescription
+                    },
+                    {
+                        property: 'description',
+                        content: fields.metaDescription
+                    },
+                    {
+                        name: 'keywords',
+                        content: fields.metaKeywords && fields.metaKeywords.join(',')
+                    }
+                ]}</Meta>
                 {pageModules[parsedModule.component]
                     ? React.createElement(pageModules[parsedModule.component], {
                         data: parsedModule.data,

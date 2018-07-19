@@ -35,6 +35,8 @@ export default class Press extends Component {
                             id: PropTypes.string.isRequired
                         })
                     })),
+                    metaKeywords: PropTypes.array,
+                    metaDescription: PropTypes.string,
                     contactDetail: PropTypes.string.isRequired
                 })
             })),
@@ -62,7 +64,13 @@ export default class Press extends Component {
     render() {
         const {pressReleasesPage, documentsPage} = this.state;
         const {press} = this.props;
-        const {pressReleases, documents, contactDetail} = parseModel(press)[0].fields;
+        const {
+          pressReleases,
+          documents,
+          contactDetail,
+          metaDescription,
+          metaKeywords
+        } = parseModel(press)[0].fields;
 
         return (
             <section className="content">
@@ -74,11 +82,15 @@ export default class Press extends Component {
                     },
                     {
                         property: 'og:description',
-                        content: 'Read the latest press releases and news from Blue Diamond.'
+                        content: metaDescription
                     },
                     {
                         name: 'description',
-                        content: 'Read the latest press releases and news from Blue Diamond.'
+                        content: metaDescription
+                    },
+                    {
+                        name: 'keywords',
+                        content: metaKeywords && metaKeywords.join(',')
                     }
                 ]}</Meta>
                 <Helmet>

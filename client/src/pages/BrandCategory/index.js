@@ -48,6 +48,8 @@ export default class BrandCategory extends Component {
             fields: PropTypes.shape({
                 name: PropTypes.string.isRequired,
                 slug: PropTypes.string.isRequired,
+                metaKeywords: PropTypes.array,
+                metaDescription: PropTypes.string,
                 themeColor: PropTypes.string,
                 themeType: PropTypes.string,
                 logo: PropTypes.shape({
@@ -226,7 +228,7 @@ export default class BrandCategory extends Component {
                     },
                     {
                         property: 'og:description',
-                        content: activeProduct.fields.description
+                        content: activeProduct.fields.metaDescription
                     },
                     {
                         property: 'og:image',
@@ -234,7 +236,12 @@ export default class BrandCategory extends Component {
                     },
                     {
                         name: 'description',
-                        content: activeProduct.fields.description
+                        content: activeProduct.fields.metaDescription
+                    },
+                    {
+                        name: 'keywords',
+                        content: activeProduct.fields.metaKeywords &&
+                            activeProduct.fields.metaKeywords.join(',')
                     }
                 ]}</Meta>
                 <Helmet>
