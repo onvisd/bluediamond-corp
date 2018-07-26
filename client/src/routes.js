@@ -23,8 +23,6 @@ import Signin from './pages/Signin';
 import Account from './pages/Account';
 import FAQs from './pages/FAQs';
 import ProductLocator from './pages/ProductLocator';
-import Terms from './pages/Terms';
-import Privacy from './pages/Privacy';
 
 export default (
     <Route path="/" component={Layout}>
@@ -49,8 +47,6 @@ export default (
         <Route path="/account/:view" component={Account} />
         <Route path="/404" component={NotFound} status={404} />
         <Route path="/error" component={GenericError} />
-        <Route path="/terms" component={Terms} />
-        <Route path="/privacy" component={Privacy} />
         <Route path="*" component={Page} />
     </Route>
 );

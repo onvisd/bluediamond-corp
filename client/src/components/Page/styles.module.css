@@ -11,4 +11,14 @@
     &.dark {
         background-color: var(--c--black);
     }
+
+    &.fixedWidth {
+        @mixin container;
+
+        margin: 2rem auto;
+
+        @media (--mq-m) {
+            margin-top: calc(60px + 2rem);
+        }
+    }
 }
