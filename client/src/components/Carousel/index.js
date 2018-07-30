@@ -23,7 +23,7 @@ class Carousel extends Component {
         name: PropTypes.string,
         autoplay: PropTypes.bool,
         autoplayInterval: PropTypes.number,
-        videoPlaying: PropTypes.bool
+        videoPlaying: PropTypes.bool,
     }
 
     static defaultProps = {
@@ -112,26 +112,29 @@ class Carousel extends Component {
 
     getOverlayStyle = () => {
         const {activeIndex} = this.state;
+        const {classNames} = this.props;
 
-        if(activeIndex === 0) {
+        if(!classNames.overlay) {
+            if(activeIndex === 0) {
+                return {
+                    backgroundImage:
+                        `linear-gradient(
+                            to left,
+                            rgba(255, 255, 255, 1) 0%,
+                            rgba(255, 255, 255, 0) 10%
+                        )`
+                };
+            }
+
             return {
                 backgroundImage:
                     `linear-gradient(
-                        to left,
-                        rgba(255, 255, 255, 1) 4%,
-                        rgba(255, 255, 255, 0) 8%
+                        to right,
+                        rgba(255, 255, 255, 1) 0%,
+                        rgba(255, 255, 255, 0) 10%
                     )`
             };
         }
-
-        return {
-            backgroundImage:
-                `linear-gradient(
-                    to right,
-                    rgba(255, 255, 255, 1) 4%,
-                    rgba(255, 255, 255, 0) 8%
-                )`
-        };
     }
 
     renderArrow = () => {
@@ -239,6 +242,7 @@ class Carousel extends Component {
                 >
                     <Frame>
                         <Track
+                            className={classNames.track}
                             onViewChange={this.handleSwipe}
                             style={{display: 'flex'}}
                             ref={(track) => {
@@ -248,6 +252,7 @@ class Carousel extends Component {
                         >
                             {cards.map((card, idx) => (
                                 <View
+                                    className={classNames.view}
                                     style={{flex: '1'}}
                                     key={`card-${idx}`}
                                     onClick={this.stopAutoplay}
@@ -261,7 +266,7 @@ class Carousel extends Component {
                     </Frame>
                     {showOverlay && pages.length > 1 ? (
                         <div
-                            className={styles.overlay}
+                            className={classnames(styles.overlay, classNames.overlay)}
                             style={this.getOverlayStyle()}
                         />
                     ) : null}

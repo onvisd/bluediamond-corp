@@ -1,0 +1,81 @@
+/* Nessessary to use !important to override built-in styles from react-view-pager
+in order to show shifted slides left to right & give slides flex properties */
+/* stylelint-disable declaration-no-important */
+
+@import 'constants/grid';
+@import 'constants/type';
+
+.container {
+    position: relative;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.carouselContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.shortCarouselContainer {
+    display: flex;
+    flex-direction: column;
+
+    @media (--mq-gt-sm) {
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.carouselItem {
+    width: 100%;
+    margin: 0 0.5rem;
+}
+
+.carouselTrack {
+    @media (--mq-gt-sm) {
+        width: 100% !important;
+        transform: none !important;
+    }
+}
+
+.carouselView {
+    display: flex !important;
+    justify-content: !important;
+    flex: 0 0 21% !important;
+
+    @media (--mq-m) {
+        flex: 0 0 28% !important;
+    }
+
+    @media (--mq-s) {
+        flex: 1 !important;
+    }
+}
+
+.midCarouselView {
+    display: flex !important;
+    justify-content: !important;
+
+    @media (--mq-gt-sm) {
+        flex: 0 0 21% !important;
+    }
+}
+
+.shortCarouselView {
+    display: flex !important;
+    justify-content: !important;
+}
+
+.carouselOverlay {
+    background-image:
+        linear-gradient(
+            to left,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 0) 10%
+        ),
+        linear-gradient(
+            to right,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 0) 10%
+        );
+}

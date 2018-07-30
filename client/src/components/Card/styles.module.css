@@ -84,6 +84,7 @@
 
 .recipe {
     & .meta {
+        min-height: 86px;
         color: var(--c--white);
         background-color: color(var(--c--blue) lightness(-8%));
     }
