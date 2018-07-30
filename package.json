@@ -132,6 +132,7 @@
     "postcss-nesting": "^4.2.1",
     "raven": "^2.1.1",
     "react": "^15.4.1",
+    "react-animation-frame": "^1.0.1",
     "react-dom": "^15.4.1",
     "react-ga": "^2.2.0",
     "react-hot-loader": "^4.0.0",

@@ -1,12 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {ViewPager, Frame, Track, View} from 'react-view-pager';
+import ReactAnimationFrame from 'react-animation-frame';
 import classnames from 'classnames';
 
 import ArrowLeft from 'images/icons/arrow-left.svg';
 import ArrowRight from 'images/icons/arrow-right.svg';
 import styles from './styles.module.css';
 
-export default class Carousel extends Component {
+class Carousel extends Component {
     static propTypes = {
         cards: PropTypes.array.isRequired,
         settings: PropTypes.object,
@@ -47,6 +48,11 @@ export default class Carousel extends Component {
         };
     }
 
+    onAnimationFrame() {
+        if(this.carouselTrack)
+            this.carouselTrack.next();
+    }
+
     handleSwipe = (currentIndices) => {
         this.setState(() => ({
             activeIndex: currentIndices[0]
@@ -65,6 +71,11 @@ export default class Carousel extends Component {
     }
 
     prev = () => {
+        const {autoplay} = this.state;
+
+        if(autoplay)
+            this.props.endAnimation();
+
         this.carouselTrack.prev();
 
         if(this.props.name && window && window.dataLayer) {
@@ -74,9 +85,17 @@ export default class Carousel extends Component {
                 label: this.props.name
             });
         }
+
+        if(autoplay)
+            this.props.startAnimation();
     }
 
     next = () => {
+        const {autoplay} = this.state;
+
+        if(autoplay)
+            this.props.endAnimation();
+
         this.carouselTrack.next();
 
         if(this.props.name && window && window.dataLayer) {
@@ -86,6 +105,9 @@ export default class Carousel extends Component {
                 label: this.props.name
             });
         }
+
+        if(autoplay)
+            this.props.startAnimation();
     }
 
     getOverlayStyle = () => {
@@ -166,14 +188,10 @@ export default class Carousel extends Component {
     }
 
     startAutoplay = () => {
-        const {autoplay, autoplayInterval} = this.props;
+        const {autoplay} = this.props;
 
         if(autoplay && !this.props.videoPlaying) {
-            this.interval = setInterval(() => {
-                if(this.carouselTrack)
-                    this.carouselTrack.next();
-            }, autoplayInterval);
-
+            this.props.startAnimation();
             this.setState({
                 playing: true
             });
@@ -184,7 +202,7 @@ export default class Carousel extends Component {
         const {playing} = this.state;
 
         if(playing || this.props.videoPlaying) {
-            clearInterval(this.interval);
+            this.props.endAnimation();
             this.setState({
                 playing: false
             });
@@ -254,3 +272,5 @@ export default class Carousel extends Component {
         );
     }
 }
+
+export default ReactAnimationFrame(Carousel, 6000);
