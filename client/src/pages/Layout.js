@@ -25,19 +25,26 @@ import {
     getCheckout
 } from '../state/checkout';
 
+import {
+    connector as recallConnector,
+    getRecallData
+} from '../state/recalls';
+
 import AstuteBot from 'components/AstuteBot';
 import Title from 'components/Title';
 import Preloading from 'components/Preloading';
 import Navigation from 'components/Navigation';
 import Footer from 'components/Footer';
 import FooterMobile from 'components/FooterMobile';
+import RecallAlertBar from 'components/RecallAlertBar';
 import Meta from 'components/Meta';
 import sortByPriority from 'tools/sortByPriority';
 
 @preload(async ({dispatch}) => {
     await Promise.all([
         dispatch(getCustomer()),
-        dispatch(getNavigationData())
+        dispatch(getNavigationData()),
+        dispatch(getRecallData())
     ]);
 })
 @connect(
@@ -46,14 +53,16 @@ import sortByPriority from 'tools/sortByPriority';
         ...navConnector(state.navigation),
         ...storeNavigationConnector(state.storeNavigation),
         ...authConnector(state.auth),
-        ...checkoutConnector(state.checkout)
+        ...checkoutConnector(state.checkout),
+        ...recallConnector(state.recalls)
     }),
     {
         getCustomer,
         getNavigationData,
         setStoreNavigation,
         setNavigationStyle,
-        getCheckout
+        getCheckout,
+        getRecallData
     }
 )
 export default class Layout extends Component {
@@ -75,7 +84,7 @@ export default class Layout extends Component {
     }
 
     render() {
-        const {children, navigation, responsive, location} = this.props;
+        const {children, navigation, responsive, location, recalls} = this.props;
         const {brands, companyNavItems} = navigation.data;
         const footerData = brands.sort(sortByPriority).map((brand) => ({
             name: brand.fields.name,
@@ -123,6 +132,15 @@ export default class Layout extends Component {
                 <Helmet>
                     <link rel="canonical" href={`https://www.bluediamond.com${location.pathname}`} />
                 </Helmet>
+
+                {recalls.length > 0 && recalls.map((recall, i) =>
+                    <RecallAlertBar
+                        key={`recall-${i}`}
+                        visible={recall.fields.showAlert}
+                        content={recall.fields.content}
+                        location={location}
+                    />
+                )}
 
                 <Navigation brands={brands} company={companyNavItems} />
 

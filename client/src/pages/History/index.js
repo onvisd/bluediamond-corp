@@ -39,7 +39,8 @@ import TimelineToday from 'images/history/timeline-today.jpg';
 
 @connect(
     (state) => ({
-        responsive: state.responsive
+        responsive: state.responsive,
+        recalls: state.recalls
     })
 )
 export default class HistoryPage extends Component {
@@ -65,7 +66,10 @@ export default class HistoryPage extends Component {
 
         return (
             <div
-                className={classnames(styles.container, container.className)}
+                className={classnames(
+                  styles.container,
+                  container.className
+                )}
                 style={container.style}
             >
                 <div className={styles.row}>
@@ -104,11 +108,14 @@ export default class HistoryPage extends Component {
     }
 
     render() {
-        const {responsive} = this.props;
+        const {responsive, recalls} = this.props;
 
         // eslint-disable-next-line no-shadow
         return this.trackDocument((scrollY, topTop, topBottom, bottomTop) => (
-            <section className={styles.pageContainer}>
+            <section className={classnames(
+                styles.pageContainer,
+                recalls.recalls.length > 0 && styles.noMargin
+            )}>
                 <Title>Our History</Title>
                 <Meta>{[
                     {

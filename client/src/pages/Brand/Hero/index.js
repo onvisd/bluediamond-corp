@@ -7,7 +7,8 @@ import styles from './styles.module.css';
 
 @connect(
     (state) => ({
-        responsive: state.responsive
+        responsive: state.responsive,
+        recalls: state.recalls
     })
 )
 export default class Hero extends Component {
@@ -44,7 +45,8 @@ export default class Hero extends Component {
             videoAutoplay,
             videoShowControls,
             videoMute,
-            videoLoop
+            videoLoop,
+            recalls
         } = this.props;
 
         const playerConfig = {
@@ -68,7 +70,8 @@ export default class Hero extends Component {
                     styles.isVideo,
                     styles[textColor],
                     styles[logoPosition],
-                    styles[brand]
+                    styles[brand],
+                    recalls.recalls.length > 0 && styles.noMargin
                 )}>
                     {(title || tagline) &&
                         <div className={classnames(
@@ -114,7 +117,8 @@ export default class Hero extends Component {
                         styles.container,
                         styles[textColor],
                         styles[logoPosition],
-                        styles[brand]
+                        styles[brand],
+                        recalls.recalls.length > 0 && styles.noMargin
                     )}
                     style={{backgroundImage: `url(${image})`}}
                 >

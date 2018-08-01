@@ -76,6 +76,12 @@
     @media (--mq-m) {
         margin-top: 60px;
     }
+
+    &.noMargin {
+        @media (--mq-m) {
+            margin-top: 0;
+        }
+    }
 }
 
 .innerContainer {

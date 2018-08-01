@@ -22,3 +22,4 @@ export {default as product} from './product';
 export {default as press} from './press';
 export {default as checkout} from './checkout';
 export {default as head} from './head';
+export {default as recalls} from './recalls';

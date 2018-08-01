@@ -6,7 +6,8 @@ import styles from './styles.module.css';
 
 @connect(
     (state) => ({
-        responsive: state.responsive
+        responsive: state.responsive,
+        recalls: state.recalls
     })
 )
 export default class StoreHero extends Component {
@@ -29,7 +30,8 @@ export default class StoreHero extends Component {
             tabletImage,
             mobileImage,
             isRecipes,
-            responsive
+            responsive,
+            recalls
         } = this.props;
 
         let image = desktopImage;
@@ -42,7 +44,11 @@ export default class StoreHero extends Component {
 
         return (
             <div
-                className={classnames(styles.container, {[styles.recipes]: isRecipes})}
+                className={classnames(
+                    styles.container,
+                    {[styles.recipes]: isRecipes},
+                    recalls.recalls.length > 0 && styles.noMargin
+                )}
                 style={{
                     backgroundImage: `url(${image})`
                 }}

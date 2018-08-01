@@ -1,0 +1,47 @@
+@import 'constants/color';
+@import 'constants/type';
+@import 'constants/grid';
+
+.container {
+    padding: 0.75rem;
+    background-color: #c74130;
+
+    @media (--mq-m) {
+        margin-top: 59px;
+    }
+
+    @media (--mq-m) {
+        & + .container {
+            margin-top: 0;
+        }
+    }
+
+    &.store {
+        @media (--mq-m) {
+            margin-top: 120px;
+        }
+    }
+
+    & p,
+    & a,
+    & strong,
+    & em {
+        margin: 0;
+        color: var(--c--white);
+        font-size: 0.85rem;
+        text-align: center;
+
+        @media (--mq-s) {
+            font-size: 0.75rem;
+        }
+    }
+
+    & a {
+        text-decoration: underline;
+
+        &:hover,
+        &:focus {
+            color: var(--c--white);
+        }
+    }
+}

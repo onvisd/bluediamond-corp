@@ -11,7 +11,8 @@ import styles from './styles.module.css';
 
 @connect(
     (state) => ({
-        responsive: state.responsive
+        responsive: state.responsive,
+        recalls: state.recalls
     })
 )
 export default class Hero extends Component {
@@ -24,7 +25,7 @@ export default class Hero extends Component {
     }
 
     render() {
-        const {brand, category, product, shopLinks, responsive, style} = this.props;
+        const {brand, category, product, shopLinks, responsive, style, recalls} = this.props;
 
         let size;
         if(responsive.xlarge)
@@ -40,7 +41,10 @@ export default class Hero extends Component {
 
         return (
             <div>
-                <div className={styles.hero}>
+                <div className={classnames(
+                    styles.hero,
+                    recalls.recalls.length > 0 && styles.noMargin
+                )}>
                     <Parallax
                         className={classnames(styles.background, styles[style])}
                         bgImage={image(

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {preload, Link} from 'react-isomorphic-render';
 import Helmet from 'react-helmet';
+import classnames from 'classnames';
 
 import {connector as navConnector, setNavigationStyle} from 'state/navigation';
 
@@ -38,6 +39,7 @@ import styles from './styles.module.css';
 })
 @connect(
     (state) => ({
+        recalls: state.recalls,
         ...navConnector(state.navigation),
         ...storeSearchConnector(state.storeSearch),
         ...storeProductConnector(state.storeProduct),
@@ -102,7 +104,7 @@ export default class StoreProduct extends Component {
     }
 
     render() {
-        const {product, productReviews} = this.props;
+        const {product, productReviews, recalls} = this.props;
 
         let related = [];
         if(product.related) related = product.related;
@@ -138,7 +140,7 @@ export default class StoreProduct extends Component {
                 <Helmet>
                     <link rel="canonical" href={`https://www.bluediamond.com${this.props.location.pathname}`} />
                 </Helmet>
-                <div className={styles.back}>
+                <div className={classnames(styles.back, recalls.recalls.length > 0 && styles.noMargin)}>
                     <Link
                         className={styles.backLink}
                         to={`/store${buildQueryString(this.props.query)}`}
