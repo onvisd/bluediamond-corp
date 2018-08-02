@@ -1,0 +1,86 @@
+@import 'constants/color';
+@import 'constants/type';
+@import 'constants/grid';
+
+.container {
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+
+    @media (--mq-m) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.innerContainer {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contentWrap {
+    padding: 2rem 0;
+    max-width: 80%;
+
+    @media (--mq-s) {
+        padding: 2rem 1rem;
+        max-width: 100%;
+    }
+}
+
+.content {
+    & h1,
+    & h2,
+    & h3,
+    & h4,
+    & p,
+    & strong,
+    & em,
+    & li {
+        color: var(--c--white);
+        text-align: center;
+    }
+
+    & h1 {
+        @media (--mq-s) {
+            font-size: var(--t--size-lm);
+        }
+    }
+
+    & h2 {
+        @media (--mq-s) {
+            font-size: var(--t--size-m);
+        }
+    }
+
+    & h3 {
+        @media (--mq-s) {
+            font-size: var(--t--size-ms);
+        }
+    }
+
+    & p {
+        @media (--mq-s) {
+            font-size: var(--t--size-xs);
+        }
+    }
+}
+
+.background {
+    position: relative;
+    z-index: 1;
+}
+
+.hidden {
+    visibility: hidden;
+}

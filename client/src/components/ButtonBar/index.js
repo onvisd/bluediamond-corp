@@ -27,7 +27,8 @@ export default class ButtonBar extends Component {
                 visibility: PropTypes.bool
             }
         )).isRequired,
-        align: PropTypes.oneOf(['left', 'center', 'right'])
+        align: PropTypes.oneOf(['left', 'center', 'right']),
+        customStyle: PropTypes.object
     }
 
     static defaultProps = {
@@ -48,10 +49,10 @@ export default class ButtonBar extends Component {
     }
 
     render() {
-        const {buttons, align} = this.props;
+        const {buttons, align, customStyle} = this.props;
 
         return (
-            <div className={classnames(styles.container, styles[align])}>
+            <div className={classnames(styles.container, styles[align])} style={customStyle}>
                 {buttons.map((button, idx) =>
                     button.visibility && this.renderButton(button, idx)
                 )}

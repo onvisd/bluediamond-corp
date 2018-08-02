@@ -23,7 +23,8 @@ const pageModules = {
     ParagraphWithImage: require('../components/API/ParagraphWithImage').default,
     RelatedPages: require('../components/API/RelatedPages').default,
     RelatedPageLink: require('../components/API/RelatedPageLink').default,
-    RecipeCarousel: require('../components/API/RecipeCarousel').default
+    RecipeCarousel: require('../components/API/RecipeCarousel').default,
+    ResponsiveHero: require('../components/API/ResponsiveHero').default
 };
 
 const pageLayouts = {

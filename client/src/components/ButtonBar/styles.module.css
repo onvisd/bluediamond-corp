@@ -13,6 +13,10 @@
         justify-content: flex-end;
     }
 
+    &.buttons {
+        margin-bottom: 0;
+    }
+
     @media (--mq-xs) {
         flex-direction: column;
     }
