@@ -4,10 +4,6 @@
 .container {
     overflow-x: hidden;
 
-    @media (--mq-m) {
-        margin-top: 60px;
-    }
-
     &.dark {
         background-color: var(--c--black);
     }
