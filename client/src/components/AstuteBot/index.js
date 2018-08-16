@@ -35,7 +35,8 @@ export default class AstuteBot extends Component {
                     'div.AstuteBotLauncher .ChatTitleBar { background-color: #fdbb30; color: #2b3b48; height: 40px; line-height: 40px;} ' +
                     'div.AstuteBotLauncher .ChatTitleBar .TitleText { font-family: "brandon-grotesque", sans-serif; font-weight: 400; font-size: 16px; margin-left: 10px; display: inline-flex; align-items: center; } ' +
                     '.AstuteBotLauncher .BotFrame { border: 0; } ' +
-                    'div.AstuteBotLauncher .ChatTitleBar .MinMaxChat { margin-right: 20px; }',
+                    'div.AstuteBotLauncher .ChatTitleBar .MinMaxChat { margin-right: 20px; }' +
+                    '@media (max-width: 767px) { div.AstuteBotLauncher .ChatContainer { width: 100vw; max-width: 400px; } .AstuteBotLauncher { right: 0; } }',
 
                 botUrl: 'https://www.astutebot.com/chat/index.aspx?aid=QiGxMOTLTz2a4sfhRdS%2BDA%3D%3D'
             });
