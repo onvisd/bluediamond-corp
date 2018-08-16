@@ -24,6 +24,7 @@ const pageModules = {
     RelatedPages: require('../components/API/RelatedPages').default,
     RelatedPageLink: require('../components/API/RelatedPageLink').default,
     RecipeCarousel: require('../components/API/RecipeCarousel').default,
+    RecipeCuratedTiles: require('../components/API/RecipeCuratedTiles').default,
     ResponsiveHero: require('../components/API/ResponsiveHero').default
 };
 

@@ -29,7 +29,7 @@ export default class Card extends Component {
     }
 
     render() {
-        const {type, imageUrl, linkTo, children, className} = this.props;
+        const {type, imageUrl, linkTo, children, className, style} = this.props;
 
         let imageLink = (
             <Link
@@ -38,6 +38,7 @@ export default class Card extends Component {
                     [styles.recipe]: type === 'recipes'
                 }, className)}
                 onClick={() => this.handleTracking()}
+                style={style}
             >
                 <div className={styles.image} style={imageUrl ? {backgroundImage: `url(${imageUrl})`} : null} />
                 {children && <div className={styles.meta}>{children}</div>}
@@ -53,6 +54,7 @@ export default class Card extends Component {
                         [styles.recipe]: type === 'recipes'
                     }, className)}
                     title={linkTo.url}
+                    style={style}
                 >
                     <div className={styles.image} style={imageUrl ? {backgroundImage: `url(${imageUrl})`} : null}>
                         <Instagram />

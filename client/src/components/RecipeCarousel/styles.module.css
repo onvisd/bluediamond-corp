@@ -6,8 +6,11 @@ in order to show shifted slides left to right & give slides flex properties */
 @import 'constants/type';
 
 .container {
+    @mixin container;
+
     position: relative;
-    margin: 1rem 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     overflow: hidden;
 }
 
@@ -40,30 +43,14 @@ in order to show shifted slides left to right & give slides flex properties */
 
 .carouselView {
     display: flex !important;
-    justify-content: !important;
-    flex: 0 0 21% !important;
 
-    @media (--mq-m) {
+    /* @media (--mq-m) {
         flex: 0 0 28% !important;
-    }
+    } */
 
     @media (--mq-s) {
         flex: 1 !important;
     }
-}
-
-.midCarouselView {
-    display: flex !important;
-    justify-content: !important;
-
-    @media (--mq-gt-sm) {
-        flex: 0 0 21% !important;
-    }
-}
-
-.shortCarouselView {
-    display: flex !important;
-    justify-content: !important;
 }
 
 .carouselOverlay {

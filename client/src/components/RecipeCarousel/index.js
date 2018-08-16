@@ -20,23 +20,21 @@ export default class RecipeCarousel extends Component {
         const {carouselItems, responsive} = this.props;
 
         const carouselCards = carouselItems.map((item, i) => (
-                <Card
-                    className={styles.carouselItem}
-                    key={i}
-                    type="recipes"
-                    imageUrl={item.fields.image.fields.file.url}
-                    linkTo={{url: item.fields.link, external: false}}
-                >
-                    <h3>{item.fields.title}</h3>
-                    <p>{item.fields.subtitle}</p>
-                </Card>
+            <Card
+                className={styles.carouselItem}
+                key={i}
+                type="recipes"
+                imageUrl={item.fields.image.fields.file.url}
+                linkTo={{url: item.fields.link, external: false}}
+            >
+                <h3>{item.fields.title}</h3>
+                <p>{item.fields.subtitle}</p>
+            </Card>
         ));
 
-        let slidesShown = carouselCards.length === 4 ? 3 : 5;
+        let slidesShown = 3;
         if(responsive.xsmall)
             slidesShown = 1;
-        else if(responsive.medium)
-            slidesShown = 3;
 
         let align = 0.5;
         if(carouselCards.length <= 3)

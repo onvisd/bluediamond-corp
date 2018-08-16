@@ -1,0 +1,19 @@
+@import 'constants/grid';
+
+.container {
+    @mixin container;
+}
+
+.tilesContainer {
+    display: flex;
+    position: relative;
+    margin: 1rem -0.5rem;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.item {
+    display: flex;
+    margin: 0 0.5rem;
+}

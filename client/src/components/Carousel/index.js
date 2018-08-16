@@ -23,7 +23,7 @@ class Carousel extends Component {
         name: PropTypes.string,
         autoplay: PropTypes.bool,
         autoplayInterval: PropTypes.number,
-        videoPlaying: PropTypes.bool,
+        videoPlaying: PropTypes.bool
     }
 
     static defaultProps = {
