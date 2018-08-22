@@ -150,7 +150,7 @@ export default class Layout extends Component {
 
                 {footer}
 
-                {location.search.match('astute') && <AstuteBot />}
+                <AstuteBot />
             </div>
         );
     }
