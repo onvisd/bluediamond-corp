@@ -49,7 +49,7 @@ class Carousel extends Component {
     }
 
     onAnimationFrame() {
-        if(this.carouselTrack)
+        if(this.carouselTrack && this.props.autoplay)
             this.carouselTrack.next();
     }
 
@@ -71,7 +71,7 @@ class Carousel extends Component {
     }
 
     prev = () => {
-        const {autoplay} = this.state;
+        const {autoplay} = this.props;
 
         if(autoplay)
             this.props.endAnimation();
@@ -91,7 +91,7 @@ class Carousel extends Component {
     }
 
     next = () => {
-        const {autoplay} = this.state;
+        const {autoplay} = this.props;
 
         if(autoplay)
             this.props.endAnimation();

@@ -10,7 +10,7 @@ export default () => (
     <div>
         <Title>Page not found</Title>
         <Helmet>
-            <link rel="canonical" href={`https://www.bluediamond.com/404`} />
+            <link rel="canonical" href={'https://www.bluediamond.com/404'} />
         </Helmet>
         <div className={styles.container}>
           <div className={styles.content}>

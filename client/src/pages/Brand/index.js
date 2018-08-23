@@ -207,7 +207,7 @@ export default class Brand extends Component {
                         classNames={{container: styles.carousel}}
                         showArrows
                         showTabs
-                        autoplay={true}
+                        autoplay={responsive.large || responsive.xlarge}
                         videoPlaying={this.state.videoPlaying}
                         arrowColor={
                             brand.fields.themeType === 'dark'
