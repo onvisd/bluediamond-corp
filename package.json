@@ -33,7 +33,8 @@
     "production:api": "better-npm-run production:api",
     "production:client": "better-npm-run production:client",
     "production:server": "better-npm-run production:server",
-    "production:services": "run-p production:api production:client production:server"
+    "production:services": "run-p production:api production:client production:server",
+    "migrate": "migrate"
   },
   "betterScripts": {
     "staging:client": {
@@ -99,6 +100,8 @@
     "classnames": "^2.2.5",
     "clean-webpack-plugin": "^0.1.19",
     "contentful": "^5.1.3",
+    "contentful-export": "^6.0.4",
+    "contentful-import": "^6.1.2",
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.11",
     "css-modularscale": "^1.1.1",

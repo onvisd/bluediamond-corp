@@ -11,6 +11,11 @@ grower_ids.cache
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 /node_modules
 
+# migration files
+/migrate/archives
+/migrate/logs
+/migrate/latest.json
+
 # npm errors
 npm-debug.log
 
