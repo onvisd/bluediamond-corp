@@ -48,17 +48,10 @@ jobs:
           - v1-dependencies
 
       - run:
-          name: "Deploy to development"
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "development" ]; then
-              ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null bluediamond@planetary.io '. ~/.profile && ~/development/redeploy'
-            fi;
-
-      - run:
           name: "Deploy to staging"
           command: |
             if [ "${CIRCLE_BRANCH}" == "staging" ]; then
-              ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null bluediamond@planetary.io '. ~/.profile && ~/staging/redeploy'
+              ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null site@45.55.190.115 '~/redeploy_staging'
             fi;
 
       - run:
