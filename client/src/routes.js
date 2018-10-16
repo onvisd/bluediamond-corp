@@ -23,8 +23,13 @@ import Signin from './pages/Signin';
 import Account from './pages/Account';
 import FAQs from './pages/FAQs';
 import ProductLocator from './pages/ProductLocator';
+import Holiday from './pages/Holiday/Home';
+import HolidayRecipes from './pages/Holiday/Recipes';
 
 export default (
+    <div>
+    <Route path="/holiday" component={Holiday} />
+    <Route path="/holiday/recipes" component={HolidayRecipes} />
     <Route path="/" component={Layout}>
         <IndexRoute component={Home} />
         <Route path="/store/product/:slug" component={StoreProduct} />
@@ -49,4 +54,5 @@ export default (
         <Route path="/error" component={GenericError} />
         <Route path="*" component={Page} />
     </Route>
+    </div>
 );
