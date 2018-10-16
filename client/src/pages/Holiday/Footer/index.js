@@ -1,5 +1,11 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router';
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+
+// import facebook from '../Layout/images/icons/facebook.svg';
+// import instagram from '../Layout/images/icons/instagram.svg';
+// import twitter from '../Layout/images/icons/twitter.svg';
+// import pinterest from '../Layout/images/icons/pinterest.svg';
+// import youtube from '../Layout/images/icons/youtube.svg';
 
 export default class Footer extends Component {
     render() {
@@ -13,14 +19,10 @@ export default class Footer extends Component {
                                     <div className="footer-social">
                                         <ul className="float-left">
                                             <li className="pl-0 ml-0">
-                                                <Link to="">
-                                                    <i
-                                                        className="fa fa-facebook-official"
-                                                        aria-hidden="true"
-                                                    />
-                                                </Link>
+                                            <Link to=""><i className="fa fa-facebook-official" aria-hidden="true"></i></Link>
                                             </li>
                                             <li>
+                                                {/* <Link to="">{youtube}</Link> */}
                                                 <Link to="">
                                                     <i
                                                         className="fa fa-youtube-play"
@@ -29,6 +31,7 @@ export default class Footer extends Component {
                                                 </Link>
                                             </li>
                                             <li>
+                                                {/* <Link to="">{instagram}</Link> */}
                                                 <Link to="">
                                                     <i
                                                         className="fa fa-instagram"
@@ -37,6 +40,7 @@ export default class Footer extends Component {
                                                 </Link>
                                             </li>
                                             <li>
+                                                {/* <Link to="">{pinterest}</Link> */}
                                                 <Link to="">
                                                     <i
                                                         className="fa fa-pinterest"
@@ -45,6 +49,7 @@ export default class Footer extends Component {
                                                 </Link>
                                             </li>
                                             <li>
+                                                {/* <Link to="">{twitter}</Link> */}
                                                 <Link to="">
                                                     <i
                                                         className="fa fa-twitter"

@@ -1,5 +1,19 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Layout from '../Layout';
+import invite_Icon from '../Layout/images/invite-icon.png';
+import music_Icon from '../Layout/images/music-icon.png';
+import product_Icon_01 from '../Layout/images/product-01-img.png';
+import product_Icon_01_1 from '../Layout/images/product-01.1-img.png';
+import platter_Icon from '../Layout/images/platter-icon.png';
+import fire_Icon from '../Layout/images/fire-icon.png';
+import blueDiamondCover_t2_V2 from '../Layout/images/blue-diamond-cover_t2_V2.png';
+import product_02 from '../Layout/images/product-02-img.png';
+import product_02_1 from '../Layout/images/product-02.1-img.png';
+import product_03 from '../Layout/images/product-03-img.png';
+import product_03_1 from '../Layout/images/product-03.1-img.png';
+import product_04 from '../Layout/images/product-04-img.png';
+import product_04_1 from '../Layout/images/product-04.1-img.png';
+import instagram from '../Layout/images/insta-01.png';
 
 export default class Home extends Component {
     // constructor(props) {
@@ -25,7 +39,7 @@ export default class Home extends Component {
                                 <div className="banner">
                                     <img
                                         className="img-fluid"
-                                        src="images/blue-diamond-cover_t2_V2.png"
+                                        src={blueDiamondCover_t2_V2}
                                         alt=""
                                     />
                                 </div>
@@ -40,10 +54,7 @@ export default class Home extends Component {
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12 p-0">
                                     <div className="box-main shadow-lg">
                                         <div className="product-image text-left">
-                                            <img
-                                                src="images/product-01-img.png"
-                                                alt=""
-                                            />
+                                            <img src={product_Icon_01} alt="" />
                                         </div>
                                         <div className="product-content">
                                             <div className="product-heading">
@@ -60,7 +71,7 @@ export default class Home extends Component {
                                                 </p>
                                                 <div className="prop-imgs">
                                                     <img
-                                                        src="images/product-01.1-img.png"
+                                                        src={product_Icon_01_1}
                                                         alt=""
                                                     />
                                                 </div>
@@ -71,10 +82,7 @@ export default class Home extends Component {
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12 p-0">
                                     <div className="box-main shadow-lg">
                                         <div className="product-image text-left">
-                                            <img
-                                                src="images/product-02-img.png"
-                                                alt=""
-                                            />
+                                            <img src={product_02} alt="" />
                                         </div>
                                         <div className="product-content">
                                             <div className="product-heading">
@@ -91,7 +99,7 @@ export default class Home extends Component {
                                                 </p>
                                                 <div className="prop-imgs">
                                                     <img
-                                                        src="images/product-02.1-img.png"
+                                                        src={product_02_1}
                                                         alt=""
                                                     />
                                                 </div>
@@ -102,10 +110,7 @@ export default class Home extends Component {
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12 p-0">
                                     <div className="box-main shadow-lg">
                                         <div className="product-image text-left">
-                                            <img
-                                                src="images/product-03-img.png"
-                                                alt=""
-                                            />
+                                            <img src={product_03} alt="" />
                                         </div>
                                         <div className="product-content">
                                             <div className="product-heading">
@@ -122,7 +127,7 @@ export default class Home extends Component {
                                                 </p>
                                                 <div className="prop-imgs">
                                                     <img
-                                                        src="images/product-03.1-img.png"
+                                                        src={product_03_1}
                                                         alt=""
                                                     />
                                                 </div>
@@ -133,10 +138,7 @@ export default class Home extends Component {
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12 p-0">
                                     <div className="box-main shadow-lg">
                                         <div className="product-image text-left">
-                                            <img
-                                                src="images/product-04-img.png"
-                                                alt=""
-                                            />
+                                            <img src={product_04} alt="" />
                                         </div>
                                         <div className="product-content">
                                             <div className="product-heading">
@@ -153,7 +155,7 @@ export default class Home extends Component {
                                                 </p>
                                                 <div className="prop-imgs">
                                                     <img
-                                                        src="images/product-04.1-img.png"
+                                                        src={product_04_1}
                                                         alt=""
                                                     />
                                                 </div>
@@ -180,7 +182,7 @@ export default class Home extends Component {
                                     <div className="text-center mb-4">
                                         <img
                                             className="party-icon"
-                                            src="images/invite-icon.png"
+                                            src={invite_Icon}
                                             alt=""
                                         />
                                         <p className="party-icon-text">
@@ -192,7 +194,7 @@ export default class Home extends Component {
                                     <div className="text-center mb-4">
                                         <img
                                             className="party-icon"
-                                            src="images/music-icon.png"
+                                            src={music_Icon}
                                             alt=""
                                         />
                                         <p className="party-icon-text">Music</p>
@@ -202,7 +204,7 @@ export default class Home extends Component {
                                     <div className="text-center mb-4">
                                         <img
                                             className="party-icon"
-                                            src="images/fire-icon.png"
+                                            src={fire_Icon}
                                             alt=""
                                         />
                                         <p className="party-icon-text">
@@ -214,7 +216,7 @@ export default class Home extends Component {
                                     <div className="text-center mb-4">
                                         <img
                                             className="party-icon"
-                                            src="images/platter-icon.png"
+                                            src={platter_Icon}
                                             alt=""
                                         />
                                         <p className="party-icon-text">
@@ -240,7 +242,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src="images/insta-01.png"
+                                                src={instagram}
                                                 alt=""
                                             />
                                         </div>
@@ -249,7 +251,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src="images/insta-01.png"
+                                                src={instagram}
                                                 alt=""
                                             />
                                         </div>
@@ -258,7 +260,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src="images/insta-01.png"
+                                                src={instagram}
                                                 alt=""
                                             />
                                         </div>
@@ -267,7 +269,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src="images/insta-01.png"
+                                                src={instagram}
                                                 alt=""
                                             />
                                         </div>
@@ -276,7 +278,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src="images/insta-01.png"
+                                                src={instagram}
                                                 alt=""
                                             />
                                         </div>
@@ -285,7 +287,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src="images/insta-01.png"
+                                                src={instagram}
                                                 alt=""
                                             />
                                         </div>
@@ -294,7 +296,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src="images/insta-01.png"
+                                                src={instagram}
                                                 alt=""
                                             />
                                         </div>
@@ -303,7 +305,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src="images/insta-01.png"
+                                                src={instagram}
                                                 alt=""
                                             />
                                         </div>

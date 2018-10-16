@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import styles from './styles.module.css';
 
 import Close from '../../../assets/images/icons/close.svg';
@@ -16,15 +16,12 @@ const ShoppingCartItem = ({
             <img src={imageUrl} alt={title} />
         </div>
         <div className={styles.info}>
-            <h3 className={styles.title}>
-                {title}
-            </h3>
-            {description}<br />
+            <h3 className={styles.title}>{title}</h3>
+            {description}
+            <br />
             Qty: {quantity}
             <div className={styles.row}>
-                <p className={styles.price}>
-                    ${price}
-                </p>
+                <p className={styles.price}>${price}</p>
             </div>
             <a className={styles.remove} onClick={onRemoveItem}>
                 Remove

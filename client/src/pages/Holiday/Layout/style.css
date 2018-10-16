@@ -79,7 +79,7 @@ a, a:hover {
 .top-header ul .sign-in-icon img{
   max-width: 16px;
 }
-.top-header ul li a .Sign In-Icon{
+.top-header ul li a .sign-in-icon{
   margin-left: 15px;
 }
 .top-header ul.top-header-right{
@@ -95,6 +95,7 @@ a, a:hover {
 /* logo navigation */
 .logo-navigation .navbar .navbar-brand img {
   width: 185px;
+  max-width: 185px;
 }
 .logo-navigation .navbar{
   padding: 0;
@@ -318,7 +319,9 @@ a, a:hover {
   bottom: 5%;
 }
 .recipes-banners .carousel-caption .carousel-img-download img{
-  width: 150px;
+  width: auto;
+  height: 90px;
+  margin-right: 15px;
 }
 .recipes-banners .carousel-caption .carousel-img-download a{
   margin-top: auto;

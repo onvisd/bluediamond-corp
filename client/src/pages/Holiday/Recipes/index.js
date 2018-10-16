@@ -1,6 +1,22 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import Layout from '../Layout';
+import productImageOne from '../Layout/images/sliderOne/product-img.png';
+import productImageTwo from '../Layout/images/sliderTwo/product-img.png';
+import productImageThree from '../Layout/images/sliderThree/product-img.png';
+import productImageFour from '../Layout/images/sliderFour/product-img.png';
+import bannerRecepiesF1 from '../Layout/images/sliderOne/banner1RecipesF1.jpg';
+import bannerRecepiesF2 from '../Layout/images/sliderOne/banner1RecipesF2.jpg';
+import bannerRecepiesF3 from '../Layout/images/sliderOne/banner1RecipesF3.jpg';
+import bannerRecepiesF2_1 from '../Layout/images/sliderTwo/banner2RecipesF1.jpg';
+import bannerRecepiesF2_2 from '../Layout/images/sliderTwo/banner2RecipesF2.jpg';
+import bannerRecepiesF2_3 from '../Layout/images/sliderTwo/banner2RecipesF3.jpg';
+import bannerRecepiesF3_1 from '../Layout/images/sliderThree/banner3RecipesF1.jpg';
+import bannerRecepiesF3_2 from '../Layout/images/sliderThree/banner3RecipesF2.jpg';
+import bannerRecepiesF3_3 from '../Layout/images/sliderThree/banner3RecipesF3.jpg';
+import bannerRecepiesF4_1 from '../Layout/images/sliderFour/banner4RecipesF1.jpg';
+import bannerRecepiesF4_2 from '../Layout/images/sliderFour/banner4RecipesF2.jpg';
+import bannerRecepiesF4_3 from '../Layout/images/sliderFour/banner4RecipesF3.jpg';
 
 export default class Recipes extends Component {
     render() {
@@ -18,7 +34,7 @@ export default class Recipes extends Component {
                                 <div className="carousel-item active">
                                     <img
                                         className="d-block w-100"
-                                        src="images/sliderOne/banner1RecipesF1.jpg"
+                                        src={bannerRecepiesF1}
                                         alt="First slide"
                                     />
                                     <div className="carousel-caption d-md-block">
@@ -36,7 +52,7 @@ export default class Recipes extends Component {
                                         </p>
                                         <div className="carousel-img-download">
                                             <img
-                                                src="images/sliderOne/product-img.png"
+                                                src={productImageOne}
                                                 alt=""
                                             />
                                             <Link to="">
@@ -48,7 +64,7 @@ export default class Recipes extends Component {
                                 <div className="carousel-item">
                                     <img
                                         className="d-block w-100"
-                                        src="images/sliderOne/banner1RecipesF2.jpg"
+                                        src={bannerRecepiesF2}
                                         alt="Second slide"
                                     />
                                     <div className="carousel-caption d-md-block">
@@ -66,7 +82,7 @@ export default class Recipes extends Component {
                                         </p>
                                         <div className="carousel-img-download">
                                             <img
-                                                src="images/sliderOne/product-img.png"
+                                                src={productImageOne}
                                                 alt=""
                                             />
                                             <Link to="">
@@ -78,7 +94,7 @@ export default class Recipes extends Component {
                                 <div className="carousel-item">
                                     <img
                                         className="d-block w-100"
-                                        src="images/sliderOne/banner1RecipesF3.jpg"
+                                        src={bannerRecepiesF3}
                                         alt="Third slide"
                                     />
                                     <div className="carousel-caption d-md-block">
@@ -96,7 +112,7 @@ export default class Recipes extends Component {
                                         </p>
                                         <div className="carousel-img-download">
                                             <img
-                                                src="images/sliderOne/product-img.png"
+                                                src={productImageOne}
                                                 alt=""
                                             />
                                             <Link to="">
@@ -141,7 +157,7 @@ export default class Recipes extends Component {
                                 <div className="carousel-item active">
                                     <img
                                         className="d-block w-100"
-                                        src="images/sliderTwo/banner2RecipesF1.jpg"
+                                        src={bannerRecepiesF2_1}
                                         alt="First slide"
                                     />
                                     <div className="carousel-caption d-md-block">
@@ -159,7 +175,7 @@ export default class Recipes extends Component {
                                         </p>
                                         <div className="carousel-img-download">
                                             <img
-                                                src="images/sliderTwo/product-img.png"
+                                                src={productImageTwo}
                                                 alt=""
                                             />
                                             <Link to="">
@@ -171,7 +187,7 @@ export default class Recipes extends Component {
                                 <div className="carousel-item">
                                     <img
                                         className="d-block w-100"
-                                        src="images/sliderTwo/banner2RecipesF2.jpg"
+                                        src={bannerRecepiesF2_2}
                                         alt="Second slide"
                                     />
                                     <div className="carousel-caption d-md-block">
@@ -189,7 +205,7 @@ export default class Recipes extends Component {
                                         </p>
                                         <div className="carousel-img-download">
                                             <img
-                                                src="images/sliderTwo/product-img.png"
+                                                src={productImageTwo}
                                                 alt=""
                                             />
                                             <Link to="">
@@ -201,7 +217,7 @@ export default class Recipes extends Component {
                                 <div className="carousel-item">
                                     <img
                                         className="d-block w-100"
-                                        src="images/sliderTwo/banner2RecipesF3.jpg"
+                                        src={bannerRecepiesF2_3}
                                         alt="Third slide"
                                     />
                                     <div className="carousel-caption d-md-block">
@@ -219,7 +235,7 @@ export default class Recipes extends Component {
                                         </p>
                                         <div className="carousel-img-download">
                                             <img
-                                                src="images/sliderTwo/product-img.png"
+                                                src={productImageTwo}
                                                 alt=""
                                             />
                                             <Link to="">
@@ -264,7 +280,7 @@ export default class Recipes extends Component {
                                 <div className="carousel-item active">
                                     <img
                                         className="d-block w-100"
-                                        src="images/sliderThree/banner3RecipesF1.jpg"
+                                        src={bannerRecepiesF3_1}
                                         alt="First slide"
                                     />
                                     <div className="carousel-caption d-md-block">
@@ -282,7 +298,7 @@ export default class Recipes extends Component {
                                         </p>
                                         <div className="carousel-img-download">
                                             <img
-                                                src="images/sliderThree/product-img.png"
+                                                src={productImageThree}
                                                 alt=""
                                             />
                                             <Link to="">
@@ -294,7 +310,7 @@ export default class Recipes extends Component {
                                 <div className="carousel-item">
                                     <img
                                         className="d-block w-100"
-                                        src="images/sliderThree/banner3RecipesF2.jpg"
+                                        src={bannerRecepiesF3_2}
                                         alt="Second slide"
                                     />
                                     <div className="carousel-caption d-md-block">
@@ -312,7 +328,7 @@ export default class Recipes extends Component {
                                         </p>
                                         <div className="carousel-img-download">
                                             <img
-                                                src="images/sliderThree/product-img.png"
+                                                src={productImageThree}
                                                 alt=""
                                             />
                                             <Link to="">
@@ -324,7 +340,7 @@ export default class Recipes extends Component {
                                 <div className="carousel-item">
                                     <img
                                         className="d-block w-100"
-                                        src="images/sliderThree/banner3RecipesF3.jpg"
+                                        src={bannerRecepiesF3_3}
                                         alt="Third slide"
                                     />
                                     <div className="carousel-caption d-md-block">
@@ -342,7 +358,7 @@ export default class Recipes extends Component {
                                         </p>
                                         <div className="carousel-img-download">
                                             <img
-                                                src="images/sliderThree/product-img.png"
+                                                src={productImageThree}
                                                 alt=""
                                             />
                                             <Link to="">
@@ -387,7 +403,7 @@ export default class Recipes extends Component {
                                 <div className="carousel-item active">
                                     <img
                                         className="d-block w-100"
-                                        src="images/sliderFour/banner4RecipesF1.jpg"
+                                        src={bannerRecepiesF4_1}
                                         alt="First slide"
                                     />
                                     <div className="carousel-caption d-md-block">
@@ -405,7 +421,7 @@ export default class Recipes extends Component {
                                         </p>
                                         <div className="carousel-img-download">
                                             <img
-                                                src="images/sliderFour/product-img.png"
+                                                src={productImageFour}
                                                 alt=""
                                             />
                                             <Link to="">
@@ -417,7 +433,7 @@ export default class Recipes extends Component {
                                 <div className="carousel-item">
                                     <img
                                         className="d-block w-100"
-                                        src="images/sliderFour/banner4RecipesF2.jpg"
+                                        src={bannerRecepiesF4_2}
                                         alt="Second slide"
                                     />
                                     <div className="carousel-caption d-md-block">
@@ -435,7 +451,7 @@ export default class Recipes extends Component {
                                         </p>
                                         <div className="carousel-img-download">
                                             <img
-                                                src="images/sliderFour/product-img.png"
+                                                src={productImageFour}
                                                 alt=""
                                             />
                                             <Link to="">
@@ -447,7 +463,7 @@ export default class Recipes extends Component {
                                 <div className="carousel-item">
                                     <img
                                         className="d-block w-100"
-                                        src="images/sliderFour/banner4RecipesF3.jpg"
+                                        src={bannerRecepiesF4_3}
                                         alt="Third slide"
                                     />
                                     <div className="carousel-caption d-md-block">
@@ -465,7 +481,7 @@ export default class Recipes extends Component {
                                         </p>
                                         <div className="carousel-img-download">
                                             <img
-                                                src="images/sliderFour/product-img.png"
+                                                src={productImageFour}
                                                 alt=""
                                             />
                                             <Link to="">

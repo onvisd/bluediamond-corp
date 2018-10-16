@@ -1,5 +1,11 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router';
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+import signInIcon from '../Layout/images/sign-in-icon.png';
+import bdlogo from '../Layout/images/bd-logo.png';
+import shoppingCartIcon from '../Layout/images/shopping-cart-icon.png';
+import growers_icon from '../Layout/images/growers-icon.png';
+import gi_Icon from '../Layout/images/gi-icon.png';
+import international_Icon from '../Layout/images/international-icon.png';
 
 export default class Header extends Component {
     render() {
@@ -15,7 +21,7 @@ export default class Header extends Component {
                                         <Link to="">
                                             <span className="top-nav-icons">
                                                 <img
-                                                    src="images/growers-icon.png"
+                                                    src={growers_icon}
                                                     alt=""
                                                 />
                                             </span>
@@ -25,10 +31,7 @@ export default class Header extends Component {
                                     <li className="top-menu-back">
                                         <Link to="">
                                             <span className="top-nav-icons">
-                                                <img
-                                                    src="images/GI-Icon.png"
-                                                    alt=""
-                                                />
+                                                <img src={gi_Icon} alt="" />
                                             </span>
                                             Global Ingredients
                                         </Link>
@@ -37,7 +40,7 @@ export default class Header extends Component {
                                         <Link to="">
                                             <span className="top-nav-icons">
                                                 <img
-                                                    src="images/International-Icon.png"
+                                                    src={international_Icon}
                                                     alt=""
                                                 />
                                             </span>
@@ -62,7 +65,7 @@ export default class Header extends Component {
                                         <li className="sign-in-icon">
                                             <Link to="">
                                                 <img
-                                                    src="images/sign-in-icon.png"
+                                                    src={signInIcon}
                                                     alt=""
                                                 />
                                             </Link>
@@ -146,7 +149,7 @@ export default class Header extends Component {
                                     className="navbar-brand mx-auto"
                                     href="index.html"
                                 >
-                                    <img src="images/bd-logo.png" alt="" />{' '}
+                                    <img src={bdlogo} alt="bdlogo" />
                                 </a>
                                 <button
                                     className="navbar-toggler"
@@ -162,7 +165,7 @@ export default class Header extends Component {
                                     <li className="nav-item">
                                         <Link
                                             className="nav-link"
-                                            to="/recipes"
+                                            to="/holiday/recipes"
                                         >
                                             Recipes
                                         </Link>
@@ -180,7 +183,7 @@ export default class Header extends Component {
                                     <li className="nav-item">
                                         <Link className="nav-link" to="/">
                                             <img
-                                                src="images/Shopping-Cart-Icon.png"
+                                                src={shoppingCartIcon}
                                                 alt=""
                                                 width="25"
                                             />
