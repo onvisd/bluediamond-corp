@@ -1,6 +1,10 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router';
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+import Slider from 'react-slick';
 import Layout from '../Layout';
+import './slick.css';
+import './slick-theme.css';
+
 import productImageOne from '../Layout/images/sliderOne/product-img.png';
 import productImageTwo from '../Layout/images/sliderTwo/product-img.png';
 import productImageThree from '../Layout/images/sliderThree/product-img.png';
@@ -51,10 +55,7 @@ export default class Recipes extends Component {
                                             molestie ut ipsum et,
                                         </p>
                                         <div className="carousel-img-download">
-                                            <img
-                                                src={productImageOne}
-                                                alt=""
-                                            />
+                                            <img src={productImageOne} alt="" />
                                             <Link to="">
                                                 Download Shopping List
                                             </Link>
@@ -81,10 +82,7 @@ export default class Recipes extends Component {
                                             molestie ut ipsum et,
                                         </p>
                                         <div className="carousel-img-download">
-                                            <img
-                                                src={productImageOne}
-                                                alt=""
-                                            />
+                                            <img src={productImageOne} alt="" />
                                             <Link to="">
                                                 Download Shopping List
                                             </Link>
@@ -111,10 +109,7 @@ export default class Recipes extends Component {
                                             molestie ut ipsum et,
                                         </p>
                                         <div className="carousel-img-download">
-                                            <img
-                                                src={productImageOne}
-                                                alt=""
-                                            />
+                                            <img src={productImageOne} alt="" />
                                             <Link to="">
                                                 Download Shopping List
                                             </Link>
@@ -174,10 +169,7 @@ export default class Recipes extends Component {
                                             molestie ut ipsum et,
                                         </p>
                                         <div className="carousel-img-download">
-                                            <img
-                                                src={productImageTwo}
-                                                alt=""
-                                            />
+                                            <img src={productImageTwo} alt="" />
                                             <Link to="">
                                                 Download Shopping List
                                             </Link>
@@ -204,10 +196,7 @@ export default class Recipes extends Component {
                                             molestie ut ipsum et,
                                         </p>
                                         <div className="carousel-img-download">
-                                            <img
-                                                src={productImageTwo}
-                                                alt=""
-                                            />
+                                            <img src={productImageTwo} alt="" />
                                             <Link to="">
                                                 Download Shopping List
                                             </Link>
@@ -234,10 +223,7 @@ export default class Recipes extends Component {
                                             molestie ut ipsum et,
                                         </p>
                                         <div className="carousel-img-download">
-                                            <img
-                                                src={productImageTwo}
-                                                alt=""
-                                            />
+                                            <img src={productImageTwo} alt="" />
                                             <Link to="">
                                                 Download Shopping List
                                             </Link>
