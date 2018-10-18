@@ -103,7 +103,7 @@ const config = {
                 ]
             },
             {
-                test: /\.(jpg|png|woff|woff2|eot)$/,
+                test: /\.(jpg|png|gif|woff|woff2|eot|ttf)$/,
                 use: [
                     {
                         loader: 'url-loader',
@@ -122,9 +122,7 @@ const config = {
                     {
                         loader: 'svgo-loader',
                         options: {
-                            plugins: [
-                                {removeViewBox: false}
-                            ]
+                            plugins: [{ removeViewBox: false }]
                         }
                     }
                 ]
