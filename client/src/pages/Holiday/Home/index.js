@@ -14,6 +14,13 @@ import product_03_1 from '../Layout/images/product-03.1-img.png';
 import product_04 from '../Layout/images/product-04-img.png';
 import product_04_1 from '../Layout/images/product-04.1-img.png';
 import instagram from '../Layout/images/insta-01.png';
+import instagramTwo from '../Layout/images/insta-02.png';
+import instagramThree from '../Layout/images/insta-03.png';
+import instagramFour from '../Layout/images/insta-04.png';
+import instagramFive from '../Layout/images/insta-05.png';
+import instagramSix from '../Layout/images/insta-06.png';
+import instagramSeven from '../Layout/images/insta-07.png';
+import instagramEight from '../Layout/images/insta-08.png';
 
 export default class Home extends Component {
     // constructor(props) {
@@ -42,6 +49,22 @@ export default class Home extends Component {
                                         src={blueDiamondCover_t2_V2}
                                         alt=""
                                     />
+                                </div>
+                                <div className="banner-text">
+                                    <div className="b-heading">
+                                        <h2>Your Holiday</h2>
+                                        <h2>Entertaining Starts Here.</h2>
+                                    </div>
+                                    <div className="b-text">
+                                        <p>
+                                            Show your guests that you thought
+                                            about
+                                        </p>
+                                        <p>
+                                            every detail with our amazing
+                                            pairings.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -251,7 +274,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src={instagram}
+                                                src={instagramTwo}
                                                 alt=""
                                             />
                                         </div>
@@ -260,7 +283,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src={instagram}
+                                                src={instagramThree}
                                                 alt=""
                                             />
                                         </div>
@@ -269,7 +292,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src={instagram}
+                                                src={instagramFour}
                                                 alt=""
                                             />
                                         </div>
@@ -278,7 +301,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src={instagram}
+                                                src={instagramFive}
                                                 alt=""
                                             />
                                         </div>
@@ -287,7 +310,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src={instagram}
+                                                src={instagramSix}
                                                 alt=""
                                             />
                                         </div>
@@ -296,7 +319,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src={instagram}
+                                                src={instagramSeven}
                                                 alt=""
                                             />
                                         </div>
@@ -305,7 +328,7 @@ export default class Home extends Component {
                                         <div className="text-center">
                                             <img
                                                 className="img-fluid"
-                                                src={instagram}
+                                                src={instagramEight}
                                                 alt=""
                                             />
                                         </div>

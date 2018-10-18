@@ -1,4 +1,10 @@
 /* stylelint-disable */
+@media only screen and (min-width: 2000px) {
+  .products-boxes-container{
+    max-width: 1920px;
+  }
+}
+
 @media only screen and (min-width: 1300px) {
   .header-container{
     max-width: 1245px;
@@ -36,11 +42,10 @@
 
 
 @media only screen and (max-width: 1700px) {
-  .products-boxes .box-main .product-content .product-heading h1{
-    font-size: 30px;
-  }
   .recipes-banners .carousel-caption {
     width: 30%;
+    max-width: 500px;
+    line-height: normal;
   }
   .recipes-banners .carousel-caption h5{
     font-size: 30px;
@@ -48,14 +53,37 @@
   .recipes-banners .carousel-caption p{
     font-size: 16px;
   }
+  #baner-section .banner-text {
+    bottom: 150px;
+  }
+  #baner-section .banner-text .b-heading h2 {
+    font-size: 85px;
+  }
+  #baner-section .banner-text .b-text {
+    padding: 5px 0;
+    margin-top: 10px;
+  }
+  #baner-section .banner-text .b-text p {
+    font-size: 24px;
+  }
+  .products-boxes .box-main .product-content .product-heading h1{
+    font-size: 34px;
+    min-height: 150px;
+  }
+  .products-boxes .box-main .product-content .product-bottom p{
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+}
+@media only screen and (max-width: 1366px) {
+  #baner-section .banner-text .b-heading h2 {
+    font-size: 80px;
+  }
+  #baner-section .banner-text .b-text p {
+    font-size: 20px;
+  }
 }
 @media only screen and (max-width: 1360px) {
-  .products-boxes .box-main .product-content .product-heading h1{
-    font-size: 22px;
-  }
-  .products-boxes .box-main .product-content .product-bottom{
-    top: -10px;
-  }
   .top-header ul li a {
     padding: 5px 4px;
     font-size: 12px;
@@ -63,9 +91,27 @@
   .top-header ul li a .top-nav-icons {
     margin-right: 5px;
   }
-  .products-boxes .box-main .product-content .product-bottom p {
-    margin-left: 0;
-    margin-bottom: 8px;
+  #baner-section .banner-text {
+    bottom: 22%;
+  }
+  #baner-section .banner-text .b-heading h2 {
+    font-size: 70px;
+  }
+  #baner-section .banner-text .b-text {
+    padding: 5px 0;
+    margin-top: 20px;
+  }
+  .products-boxes .box-main .product-content .product-heading h1{
+    font-size: 28px;
+    min-height: 120px;
+  }
+  .products-boxes .box-main .product-content .product-heading h1 br{
+    display: none;
+  }
+  .products-boxes .box-main .product-content .product-bottom p{
+    margin: 0 10px 5px 0;
+    padding: 0;
+    width: 50%;
   }
 }
 @media only screen and (max-width: 1260px) {
@@ -74,6 +120,9 @@
   }
 }
 @media only screen and (max-width: 1200px) {
+.logo-navigation .navbar .nav-item a{
+font-size: 14px !important;
+}
   .top-header ul li{
     margin-right: 5px;
   }
@@ -88,20 +137,6 @@
   .top-header ul .sign-in-icon img {
     width: 14px;
   }
-  .products-boxes .box-main .product-content .product-bottom {
-    display: inline-block;
-    position: static;
-  }
-  .products-boxes .box-main .product-content .product-bottom p,
-  .products-boxes .box-main .product-content .product-bottom .prop-imgs{
-    width: 100%;
-    text-align: left !important;
-  }
-  .products-boxes .box-main .product-content .product-bottom .prop-imgs img {
-    max-width: 100%;
-    width: 150px;
-    margin-bottom: 10px;
-  }
   .recipes-banners .carousel-caption {
     width: 38%;
   }
@@ -110,6 +145,9 @@
   }
   .recipes-banners .carousel-caption p {
     font-size: 12px;
+  }
+  .products-boxes .box-main .product-content .product-bottom p{
+    font-size: 10px;
   }
 }
 
@@ -146,27 +184,6 @@
     display: inline-block;
     float: left;
   }
-  .products-boxes .box-main .product-content .product-heading h1{
-    font-size: 18px;
-  }
-  .products-boxes .box-main .product-content .product-heading h1 br{
-    display: none;
-  }
-  .product-image.text-left {
-    width: 50%;
-    float: left;
-  }
-  .products-boxes .box-main .product-content {
-    padding: 0 25px;
-    text-align: right !important;
-    width: 50%;
-    float: right;
-  }
-  .products-boxes .box-main .product-content .product-bottom p,
-  .products-boxes .box-main .product-content .product-bottom .prop-imgs {
-    width: 100%;
-    text-align: right !important;
-  }
   .recipes-banners .carousel-caption{
     width: 60%;
   }
@@ -183,6 +200,29 @@
   .recipes-banners .carousel-caption .carousel-img-download {
     position: relative;
     margin-top: 12px;
+  }
+  #baner-section .banner-text {
+    bottom: 80px;
+  }
+  #baner-section .banner-text .b-heading h2 {
+    font-size: 50px;
+  }
+  #baner-section .banner-text .b-text {
+    padding: 5px 0;
+    margin-top: 0;
+  }
+  #baner-section .banner-text .b-text p {
+    font-size: 18px;
+  }
+  .products-boxes .box-main .product-content{
+    padding: 0 15px;
+  }
+  .products-boxes .box-main .product-content .product-heading h1{
+    font-size: 36px;
+    min-height: 120px;
+  }
+  .products-boxes .box-main .product-content .product-bottom p{
+    font-size: 12px;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -216,12 +256,24 @@
   .recipes-banners .carousel-caption .carousel-img-download {
     margin-top: 10%;
   }
+  #baner-section .banner-text {
+    bottom: 65px;
+  }
+  #baner-section .banner-text .b-heading h2 {
+    font-size: 42px;
+  }
+  #baner-section .banner-text .b-text {
+    padding: 5px 0;
+    margin-top: 0;
+  }
+  #baner-section .banner-text .b-text p {
+    font-size: 16px;
+  }
+  .products-boxes .box-main .product-content .product-heading h1 br{
+    display: none;
+  }
 }
 @media only screen and (max-width: 665px) {
-  .products-boxes .box-main .product-content .product-bottom{
-    display: inline-block;
-    top:0px;
-  }
   .recipes-banners .carousel-control-next-icon, .recipes-banners .carousel-control-prev-icon{
     width:30px;
     height:30px;
@@ -242,6 +294,26 @@
   }
   .recipes-banners .carousel-caption .carousel-img-download {
     margin-top: 5%;
+  }
+  #baner-section .banner-text {
+    bottom: 50px;
+  }
+  #baner-section .banner-text .b-heading h2 {
+    font-size: 38px;
+  }
+  #baner-section .banner-text .b-text {
+    padding: 5px 0;
+  }
+  #baner-section .banner-text .b-text p {
+    font-size: 14px;
+  }
+  .products-boxes .box-main .product-content .product-heading h1 {
+    font-size: 32px;
+    text-align: center;
+  }
+  .products-boxes .box-main .product-content .product-bottom p{
+    margin: 15px 0 15px 50px;
+    width: 50%;
   }
 }
 
@@ -266,6 +338,18 @@
   .recipes-banners .carousel-caption .carousel-img-download {
     display: none;
   }
+  #baner-section .banner-text {
+    bottom: 35px;
+  }
+  #baner-section .banner-text .b-heading h2 {
+    font-size: 20px;
+  }
+  #baner-section .banner-text .b-text {
+    padding: 5px 0;
+  }
+  #baner-section .banner-text .b-text p {
+    font-size: 12px ;
+  }
 }
 
 
@@ -273,11 +357,18 @@
   .site-footer .Secound-links-footer ul li p{
     min-height: 50px;
   }
+  .products-boxes .box-main .product-content .product-heading h1 {
+    font-size: 30px;
+  }
+  .products-boxes .box-main .product-content .product-bottom p{
+    margin: 5px 25px;
+    width: 50%;
+  }
 }
+
 @media only screen and (min-width: 991px) and (max-width: 1100px) {
   .site-footer .Secound-links-footer ul li p{
     min-height: 50px;
   }
 }
-
 /* stylelint-enable */

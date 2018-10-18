@@ -103,7 +103,7 @@ const config = {
                 ]
             },
             {
-                test: /\.(jpg|png|gif|woff|woff2|eot|ttf)$/,
+                test: /\.(jpg|png|gif|woff|woff2|otf|eot|ttf)$/,
                 use: [
                     {
                         loader: 'url-loader',

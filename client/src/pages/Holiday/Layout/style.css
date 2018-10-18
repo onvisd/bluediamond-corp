@@ -5,19 +5,24 @@ html {
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px; color:#666666;
+  font-family: 'gotham-book';
+  font-weight: normal;
+  font-size: 14px; 
+  color:#666666;
 }
 
 h1, h2, h3, h4, h5, h6, p, ul {
   padding: 0px;
   margin: 0px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'gotham-book';
+  font-weight: normal;
 }
 
 img {
   border: none;
 }
+.slick-list
+{line-height:0;}
 
 a, a:hover {
   text-decoration: none;
@@ -26,9 +31,31 @@ a, a:hover {
   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
 }
 .shadow-lg {
-  box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+  box-shadow: 0 1rem 3rem rgba(0,0,0,.5) !important;
 }
 
+@font-face {
+  font-family: 'bigcaslonregular';
+  src: url('./fonts/bigcaslon_regular-webfont.woff2') format('woff2'),
+  url('./fonts/bigcaslon_regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'gotham-book';
+  src: url('./fonts/Gotham-Book.woff') format('woff2'),
+  url('./fonts/Gotham-Book.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* @font-face {
+  font-family: 'MinionPro-Semibold';
+  src: url('./fonts/MinionPro-Semibold.eot?#iefix') format('embedded-opentype'),  url('MinionPro-Semibold.otf')  format('opentype'),
+	     url('./fonts/MinionPro-Semibold.woff') format('woff'), url('./fonts/MinionPro-Semibold.ttf')  format('truetype'), url('./fonts/MinionPro-Semibold.svg#MinionPro-Semibold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+} */
 
 /* headings */
 .duble-headings{
@@ -38,10 +65,10 @@ a, a:hover {
   color: #fff;
 }
 .duble-headings h1{
-  font-size: 38px;
+  font-size: 42px;
 }
 .duble-headings p{
-  font-size: 22px;
+  font-size: 24px;
   padding: 10px;
 }
 
@@ -128,6 +155,9 @@ a, a:hover {
 /* content-section main start */
 
 /* baner-section */
+#baner-section{
+  position: relative;
+}
 #baner-section .banner {
   display: inline-block;
   width: 100%;
@@ -135,10 +165,32 @@ a, a:hover {
 #baner-section .banner img{
   width: 100%;
 }
+#baner-section .banner-text {
+  position: absolute;
+  z-index: 99;
+  bottom: 28%;
+  left: 4%;
+  color: #fff;
+}
+#baner-section .banner-text .b-heading h2 {
+  font-size: 100px;
+  font-family: 'bigcaslonregular';
+  font-weight: normal;
+}
+#baner-section .banner-text .b-text {
+  padding: 15px 0;
+  margin-top: 10px;
+}
+#baner-section .banner-text .b-text p {
+  font-size: 24px;
+  /* font-family: 'MinionPro-Semibold'; */
+}
 
 /* Products boxes */
-.products-boxes .box-main {
+.products-boxes{
   background-color: #243b4b;
+}
+.products-boxes .box-main {
   padding-bottom: 5px;
   height: 100%;
 }
@@ -151,7 +203,9 @@ a, a:hover {
 .products-boxes .box-main .product-content .product-heading h1 {
   color: #fff;
   padding: 10px 0;
-  font-size: 38px;
+  font-size: 42px;
+  font-family: bigcaslonregular;
+  font-weight: normal;
 }
 .products-boxes .box-main .product-content .product-bottom{
   display:flex;
@@ -189,7 +243,7 @@ a, a:hover {
 }
 
 .build-party .party-icon-text {
-  font-size: 20px;
+  font-size: 22px;
   color: #fff;
   padding: 10px 0 15px;
 }
@@ -251,13 +305,14 @@ a, a:hover {
 
 
 /* Secound-links-footer */
-.site-footer .links-footer  .Secound-links-footer ul {
+.site-footer .links-footer .Secound-links-footer ul {
   display: inline-block;
   list-style: none;
   margin-bottom: 20px;
 }
-.site-footer .links-footer  .Secound-links-footer ul li a{
+.site-footer .links-footer .Secound-links-footer ul li a{
   color: #c9c9c9;
+  font-size: 13px;
 }
 .site-footer .Secound-links-footer ul li p {
   border-bottom: 1px solid #7d7d7d;
@@ -265,6 +320,7 @@ a, a:hover {
   margin-bottom: 15px;
   display: inline-block;
   color: #c9c9c9;
+  font-size: 13px;
 }
 .bottom-block-left,
 .bottom-block-right {
@@ -336,10 +392,10 @@ a, a:hover {
 .recipes-banners .carousel-caption h5{margin-bottom: 10px;font-size: 35px;}
 .recipes-banners .carousel-caption p {font-size: 19px;}
 .recipes-banners .carousel-caption a {}
-.recipes-banners .carousel-control-next-icon{background-image: url("./images/nextSlide.png ");}
-.recipes-banners .carousel-control-prev-icon{background-image: url("./images/prevSlide.png ");}
-.recipes-banners .carousel-control-prev, .recipes-banners .carousel-control-next {opacity: 1;}
-.recipes-banners .carousel-control-next-icon, .recipes-banners .carousel-control-prev-icon{width:40px;height:40px;}
-/* recipes */
+  .recipes-banners .carousel-control-next-icon{background-image: url("./images/nextSlide.png ");}
+  .recipes-banners .carousel-control-prev-icon{background-image: url("./images/prevSlide.png ");}
+  .recipes-banners .carousel-control-prev, .recipes-banners .carousel-control-next {opacity: 1;}
+  .recipes-banners .carousel-control-next-icon, .recipes-banners .carousel-control-prev-icon{width:40px;height:40px;}
+  /* recipes */
 
-/* stylelint-enable */
+  /* stylelint-enable */
