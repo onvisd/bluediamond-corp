@@ -22,6 +22,33 @@ import bannerRecepiesF4_1 from '../Layout/images/sliderFour/banner4RecipesF1.jpg
 import bannerRecepiesF4_2 from '../Layout/images/sliderFour/banner4RecipesF2.jpg';
 import bannerRecepiesF4_3 from '../Layout/images/sliderFour/banner4RecipesF3.jpg';
 
+function PrevButton(props) {
+    return (
+        <span
+            className="carousel-control-prev"
+            onClick={props.onClick}
+            role="button"
+            data-slide="prev"
+        >
+            <span className="carousel-control-prev-icon" aria-hidden="true" />
+            <span className="sr-only">Previous</span>
+        </span>
+    );
+}
+function NextButton(props) {
+    return (
+        <span
+            className="carousel-control-next"
+            role="button"
+            data-slide="next"
+            onClick={props.onClick}
+        >
+            <span className="carousel-control-next-icon" aria-hidden="true" />
+            <span className="sr-only">Next</span>
+        </span>
+    );
+}
+
 export default class Recipes extends Component {
     render() {
         const sliderSettings = {
@@ -29,7 +56,9 @@ export default class Recipes extends Component {
             infinite: true,
             speed: 500,
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            nextArrow: <NextButton />,
+            prevArrow: <PrevButton />
         };
 
         return (
@@ -37,14 +66,14 @@ export default class Recipes extends Component {
                 <div id="content-section-main">
                     {/* <!-- baner-section --> */}
                     <section id="baner-section" className="recipes-banners">
-                        <Slider {...sliderSettings}>
-                            <div
-                                id="carouselExampleControls"
-                                className="carousel slide"
-                                data-ride="carousel"
-                            >
-                                <div className="carousel-inner">
-                                    <div className="carousel-item active">
+                        <div
+                            id="carouselExampleControls"
+                            className="carousel slide"
+                            data-ride="carousel"
+                        >
+                            <div className="carousel-inner">
+                                <Slider {...sliderSettings}>
+                                    <div>
                                         <img
                                             className="d-block w-100"
                                             src={bannerRecepiesF1}
@@ -75,7 +104,7 @@ export default class Recipes extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="carousel-item">
+                                    <div className="">
                                         <img
                                             className="d-block w-100"
                                             src={bannerRecepiesF2}
@@ -106,7 +135,7 @@ export default class Recipes extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="carousel-item">
+                                    <div className="">
                                         <img
                                             className="d-block w-100"
                                             src={bannerRecepiesF3}
@@ -137,411 +166,369 @@ export default class Recipes extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <a
-                                    className="carousel-control-prev"
-                                    href="#carouselExampleControls"
-                                    role="button"
-                                    data-slide="prev"
-                                >
-                                    <span
-                                        className="carousel-control-prev-icon"
-                                        aria-hidden="true"
-                                    />
-                                    <span className="sr-only">Previous</span>
-                                </a>
-                                <a
-                                    className="carousel-control-next"
-                                    href="#carouselExampleControls"
-                                    role="button"
-                                    data-slide="next"
-                                >
-                                    <span
-                                        className="carousel-control-next-icon"
-                                        aria-hidden="true"
-                                    />
-                                    <span className="sr-only">Next</span>
-                                </a>
+                                </Slider>
                             </div>
+                        </div>
 
-                            <div
-                                id="carouselExampleControlsTwo"
-                                className="carousel slide"
-                                data-ride="carousel"
-                            >
-                                <div className="carousel-inner">
-                                    <div className="carousel-item active">
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF2_1}
-                                            alt="First slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>A Gift of Truffle and Seeds</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageTwo}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="carousel-item">
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF2_2}
-                                            alt="Second slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>A Gift of Truffle and Seeds</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageTwo}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="carousel-item">
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF2_3}
-                                            alt="Third slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>A Gift of Truffle and Seeds</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageTwo}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
-                                            </div>
+                        <div
+                            id="carouselExampleControlsTwo"
+                            className="carousel slide"
+                            data-ride="carousel"
+                        >
+                            <div className="carousel-inner">
+                                <div className="carousel-item active">
+                                    <img
+                                        className="d-block w-100"
+                                        src={bannerRecepiesF2_1}
+                                        alt="First slide"
+                                    />
+                                    <div className="carousel-caption d-md-block">
+                                        <h5>A Gift of Truffle and Seeds</h5>
+                                        <p>Difficulty 1</p>
+                                        <p>Time: 10 mins.</p>
+                                        <p className="text-detail">
+                                            Nam porttitor blandit accumsan. vel
+                                            dictum sem, a pretium dui. In
+                                            malesuada enim in dolor euismod,
+                                            commodo mi consec tetur. Curabitur
+                                            at vestibulum nisi. Nullam vehicula
+                                            nisi velit. Mauris turpis nisl,
+                                            molestie ut ipsum et,
+                                        </p>
+                                        <div className="carousel-img-download">
+                                            <img src={productImageTwo} alt="" />
+                                            <Link to="">
+                                                Download Shopping List
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
-                                <a
-                                    className="carousel-control-prev"
-                                    href="#carouselExampleControlsTwo"
-                                    role="button"
-                                    data-slide="prev"
-                                >
-                                    <span
-                                        className="carousel-control-prev-icon"
-                                        aria-hidden="true"
+                                <div className="carousel-item">
+                                    <img
+                                        className="d-block w-100"
+                                        src={bannerRecepiesF2_2}
+                                        alt="Second slide"
                                     />
-                                    <span className="sr-only">Previous</span>
-                                </a>
-                                <a
-                                    className="carousel-control-next"
-                                    href="#carouselExampleControlsTwo"
-                                    role="button"
-                                    data-slide="next"
-                                >
-                                    <span
-                                        className="carousel-control-next-icon"
-                                        aria-hidden="true"
+                                    <div className="carousel-caption d-md-block">
+                                        <h5>A Gift of Truffle and Seeds</h5>
+                                        <p>Difficulty 1</p>
+                                        <p>Time: 10 mins.</p>
+                                        <p className="text-detail">
+                                            Nam porttitor blandit accumsan. vel
+                                            dictum sem, a pretium dui. In
+                                            malesuada enim in dolor euismod,
+                                            commodo mi consec tetur. Curabitur
+                                            at vestibulum nisi. Nullam vehicula
+                                            nisi velit. Mauris turpis nisl,
+                                            molestie ut ipsum et,
+                                        </p>
+                                        <div className="carousel-img-download">
+                                            <img src={productImageTwo} alt="" />
+                                            <Link to="">
+                                                Download Shopping List
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="carousel-item">
+                                    <img
+                                        className="d-block w-100"
+                                        src={bannerRecepiesF2_3}
+                                        alt="Third slide"
                                     />
-                                    <span className="sr-only">Next</span>
-                                </a>
+                                    <div className="carousel-caption d-md-block">
+                                        <h5>A Gift of Truffle and Seeds</h5>
+                                        <p>Difficulty 1</p>
+                                        <p>Time: 10 mins.</p>
+                                        <p className="text-detail">
+                                            Nam porttitor blandit accumsan. vel
+                                            dictum sem, a pretium dui. In
+                                            malesuada enim in dolor euismod,
+                                            commodo mi consec tetur. Curabitur
+                                            at vestibulum nisi. Nullam vehicula
+                                            nisi velit. Mauris turpis nisl,
+                                            molestie ut ipsum et,
+                                        </p>
+                                        <div className="carousel-img-download">
+                                            <img src={productImageTwo} alt="" />
+                                            <Link to="">
+                                                Download Shopping List
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <a
+                                className="carousel-control-prev"
+                                href="#carouselExampleControlsTwo"
+                                role="button"
+                                data-slide="prev"
+                            >
+                                <span
+                                    className="carousel-control-prev-icon"
+                                    aria-hidden="true"
+                                />
+                                <span className="sr-only">Previous</span>
+                            </a>
+                            <a
+                                className="carousel-control-next"
+                                href="#carouselExampleControlsTwo"
+                                role="button"
+                                data-slide="next"
+                            >
+                                <span
+                                    className="carousel-control-next-icon"
+                                    aria-hidden="true"
+                                />
+                                <span className="sr-only">Next</span>
+                            </a>
+                        </div>
 
-                            <div
-                                id="carouselExampleControlsThree"
-                                className="carousel slide"
-                                data-ride="carousel"
-                            >
-                                <div className="carousel-inner">
-                                    <div className="carousel-item active">
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF3_1}
-                                            alt="First slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>Jolly Pink Chia Combo</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageThree}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="carousel-item">
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF3_2}
-                                            alt="Second slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>Jolly Pink Chia Combo</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageThree}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="carousel-item">
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF3_3}
-                                            alt="Third slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>Jolly Pink Chia Combo</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageThree}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
-                                            </div>
+                        <div
+                            id="carouselExampleControlsThree"
+                            className="carousel slide"
+                            data-ride="carousel"
+                        >
+                            <div className="carousel-inner">
+                                <div className="carousel-item active">
+                                    <img
+                                        className="d-block w-100"
+                                        src={bannerRecepiesF3_1}
+                                        alt="First slide"
+                                    />
+                                    <div className="carousel-caption d-md-block">
+                                        <h5>Jolly Pink Chia Combo</h5>
+                                        <p>Difficulty 1</p>
+                                        <p>Time: 10 mins.</p>
+                                        <p className="text-detail">
+                                            Nam porttitor blandit accumsan. vel
+                                            dictum sem, a pretium dui. In
+                                            malesuada enim in dolor euismod,
+                                            commodo mi consec tetur. Curabitur
+                                            at vestibulum nisi. Nullam vehicula
+                                            nisi velit. Mauris turpis nisl,
+                                            molestie ut ipsum et,
+                                        </p>
+                                        <div className="carousel-img-download">
+                                            <img
+                                                src={productImageThree}
+                                                alt=""
+                                            />
+                                            <Link to="">
+                                                Download Shopping List
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
-                                <a
-                                    className="carousel-control-prev"
-                                    href="#carouselExampleControlsThree"
-                                    role="button"
-                                    data-slide="prev"
-                                >
-                                    <span
-                                        className="carousel-control-prev-icon"
-                                        aria-hidden="true"
+                                <div className="carousel-item">
+                                    <img
+                                        className="d-block w-100"
+                                        src={bannerRecepiesF3_2}
+                                        alt="Second slide"
                                     />
-                                    <span className="sr-only">Previous</span>
-                                </a>
-                                <a
-                                    className="carousel-control-next"
-                                    href="#carouselExampleControlsThree"
-                                    role="button"
-                                    data-slide="next"
-                                >
-                                    <span
-                                        className="carousel-control-next-icon"
-                                        aria-hidden="true"
+                                    <div className="carousel-caption d-md-block">
+                                        <h5>Jolly Pink Chia Combo</h5>
+                                        <p>Difficulty 1</p>
+                                        <p>Time: 10 mins.</p>
+                                        <p className="text-detail">
+                                            Nam porttitor blandit accumsan. vel
+                                            dictum sem, a pretium dui. In
+                                            malesuada enim in dolor euismod,
+                                            commodo mi consec tetur. Curabitur
+                                            at vestibulum nisi. Nullam vehicula
+                                            nisi velit. Mauris turpis nisl,
+                                            molestie ut ipsum et,
+                                        </p>
+                                        <div className="carousel-img-download">
+                                            <img
+                                                src={productImageThree}
+                                                alt=""
+                                            />
+                                            <Link to="">
+                                                Download Shopping List
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="carousel-item">
+                                    <img
+                                        className="d-block w-100"
+                                        src={bannerRecepiesF3_3}
+                                        alt="Third slide"
                                     />
-                                    <span className="sr-only">Next</span>
-                                </a>
+                                    <div className="carousel-caption d-md-block">
+                                        <h5>Jolly Pink Chia Combo</h5>
+                                        <p>Difficulty 1</p>
+                                        <p>Time: 10 mins.</p>
+                                        <p className="text-detail">
+                                            Nam porttitor blandit accumsan. vel
+                                            dictum sem, a pretium dui. In
+                                            malesuada enim in dolor euismod,
+                                            commodo mi consec tetur. Curabitur
+                                            at vestibulum nisi. Nullam vehicula
+                                            nisi velit. Mauris turpis nisl,
+                                            molestie ut ipsum et,
+                                        </p>
+                                        <div className="carousel-img-download">
+                                            <img
+                                                src={productImageThree}
+                                                alt=""
+                                            />
+                                            <Link to="">
+                                                Download Shopping List
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <a
+                                className="carousel-control-prev"
+                                href="#carouselExampleControlsThree"
+                                role="button"
+                                data-slide="prev"
+                            >
+                                <span
+                                    className="carousel-control-prev-icon"
+                                    aria-hidden="true"
+                                />
+                                <span className="sr-only">Previous</span>
+                            </a>
+                            <a
+                                className="carousel-control-next"
+                                href="#carouselExampleControlsThree"
+                                role="button"
+                                data-slide="next"
+                            >
+                                <span
+                                    className="carousel-control-next-icon"
+                                    aria-hidden="true"
+                                />
+                                <span className="sr-only">Next</span>
+                            </a>
+                        </div>
 
-                            <div
-                                id="carouselExampleControlsFour"
-                                className="carousel slide"
-                                data-ride="carousel"
-                            >
-                                <div className="carousel-inner">
-                                    <div className="carousel-item active">
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF4_1}
-                                            alt="First slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>The Rosemary-Flax Spirit</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageFour}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="carousel-item">
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF4_2}
-                                            alt="Second slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>The Rosemary-Flax Spirit</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageFour}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="carousel-item">
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF4_3}
-                                            alt="Third slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>The Rosemary-Flax Spirit</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageFour}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
-                                            </div>
+                        <div
+                            id="carouselExampleControlsFour"
+                            className="carousel slide"
+                            data-ride="carousel"
+                        >
+                            <div className="carousel-inner">
+                                <div className="carousel-item active">
+                                    <img
+                                        className="d-block w-100"
+                                        src={bannerRecepiesF4_1}
+                                        alt="First slide"
+                                    />
+                                    <div className="carousel-caption d-md-block">
+                                        <h5>The Rosemary-Flax Spirit</h5>
+                                        <p>Difficulty 1</p>
+                                        <p>Time: 10 mins.</p>
+                                        <p className="text-detail">
+                                            Nam porttitor blandit accumsan. vel
+                                            dictum sem, a pretium dui. In
+                                            malesuada enim in dolor euismod,
+                                            commodo mi consec tetur. Curabitur
+                                            at vestibulum nisi. Nullam vehicula
+                                            nisi velit. Mauris turpis nisl,
+                                            molestie ut ipsum et,
+                                        </p>
+                                        <div className="carousel-img-download">
+                                            <img
+                                                src={productImageFour}
+                                                alt=""
+                                            />
+                                            <Link to="">
+                                                Download Shopping List
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
-                                <a
-                                    className="carousel-control-prev"
-                                    href="#carouselExampleControlsFour"
-                                    role="button"
-                                    data-slide="prev"
-                                >
-                                    <span
-                                        className="carousel-control-prev-icon"
-                                        aria-hidden="true"
+                                <div className="carousel-item">
+                                    <img
+                                        className="d-block w-100"
+                                        src={bannerRecepiesF4_2}
+                                        alt="Second slide"
                                     />
-                                    <span className="sr-only">Previous</span>
-                                </a>
-                                <a
-                                    className="carousel-control-next"
-                                    href="#carouselExampleControlsFour"
-                                    role="button"
-                                    data-slide="next"
-                                >
-                                    <span
-                                        className="carousel-control-next-icon"
-                                        aria-hidden="true"
+                                    <div className="carousel-caption d-md-block">
+                                        <h5>The Rosemary-Flax Spirit</h5>
+                                        <p>Difficulty 1</p>
+                                        <p>Time: 10 mins.</p>
+                                        <p className="text-detail">
+                                            Nam porttitor blandit accumsan. vel
+                                            dictum sem, a pretium dui. In
+                                            malesuada enim in dolor euismod,
+                                            commodo mi consec tetur. Curabitur
+                                            at vestibulum nisi. Nullam vehicula
+                                            nisi velit. Mauris turpis nisl,
+                                            molestie ut ipsum et,
+                                        </p>
+                                        <div className="carousel-img-download">
+                                            <img
+                                                src={productImageFour}
+                                                alt=""
+                                            />
+                                            <Link to="">
+                                                Download Shopping List
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="carousel-item">
+                                    <img
+                                        className="d-block w-100"
+                                        src={bannerRecepiesF4_3}
+                                        alt="Third slide"
                                     />
-                                    <span className="sr-only">Next</span>
-                                </a>
+                                    <div className="carousel-caption d-md-block">
+                                        <h5>The Rosemary-Flax Spirit</h5>
+                                        <p>Difficulty 1</p>
+                                        <p>Time: 10 mins.</p>
+                                        <p className="text-detail">
+                                            Nam porttitor blandit accumsan. vel
+                                            dictum sem, a pretium dui. In
+                                            malesuada enim in dolor euismod,
+                                            commodo mi consec tetur. Curabitur
+                                            at vestibulum nisi. Nullam vehicula
+                                            nisi velit. Mauris turpis nisl,
+                                            molestie ut ipsum et,
+                                        </p>
+                                        <div className="carousel-img-download">
+                                            <img
+                                                src={productImageFour}
+                                                alt=""
+                                            />
+                                            <Link to="">
+                                                Download Shopping List
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </Slider>
+                            <a
+                                className="carousel-control-prev"
+                                href="#carouselExampleControlsFour"
+                                role="button"
+                                data-slide="prev"
+                            >
+                                <span
+                                    className="carousel-control-prev-icon"
+                                    aria-hidden="true"
+                                />
+                                <span className="sr-only">Previous</span>
+                            </a>
+                            <a
+                                className="carousel-control-next"
+                                href="#carouselExampleControlsFour"
+                                role="button"
+                                data-slide="next"
+                            >
+                                <span
+                                    className="carousel-control-next-icon"
+                                    aria-hidden="true"
+                                />
+                                <span className="sr-only">Next</span>
+                            </a>
+                        </div>
                     </section>
                 </div>
             </Layout>
