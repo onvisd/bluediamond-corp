@@ -8,6 +8,16 @@ import gi_Icon from '../Layout/images/gi-icon.png';
 import international_Icon from '../Layout/images/international-icon.png';
 
 export default class Header extends Component {
+    state = {
+        isActive: false
+    };
+
+    toggleNav = () => {
+        this.setState((prevState) => ({
+            isActive: !prevState.isActive
+        }));
+    };
+
     render() {
         return (
             <header id="header-main">
@@ -64,10 +74,7 @@ export default class Header extends Component {
                                         </li>
                                         <li className="sign-in-icon">
                                             <Link to="">
-                                                <img
-                                                    src={signInIcon}
-                                                    alt=""
-                                                />
+                                                <img src={signInIcon} alt="" />
                                             </Link>
                                         </li>
                                     </ul>
@@ -80,7 +87,13 @@ export default class Header extends Component {
                 <div className="logo-navigation">
                     <div className="container header-container">
                         <nav className="navbar navbar-expand-lg navbar-light">
-                            <div className="navbar-collapse collapse w-100 order-1 order-md-1 order-lg-0 dual-collapse2">
+                            <div
+                                className={
+                                    this.state.isActive
+                                        ? 'navbar-collapse show w-100 order-1 order-md-1 order-lg-0 dual-collapse2'
+                                        : 'navbar-collapse collapse w-100 order-1 order-md-1 order-lg-0 dual-collapse2'
+                                }
+                            >
                                 <ul className="navbar-nav mr-auto">
                                     <li className="nav-item dropdown">
                                         <a
@@ -156,11 +169,12 @@ export default class Header extends Component {
                                     type="button"
                                     data-toggle="collapse"
                                     data-target=".dual-collapse2"
+                                    onClick={this.toggleNav}
                                 >
                                     <span className="navbar-toggler-icon" />
                                 </button>
                             </div>
-                            <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                            <div className={this.state.isActive ? 'navbar-collapse show w-100 order-1 order-md-1 order-lg-0 dual-collapse2': 'navbar-collapse collapse w-100 order-1 order-md-1 order-lg-0 dual-collapse2'}>
                                 <ul className="navbar-nav ml-auto">
                                     <li className="nav-item">
                                         <Link
