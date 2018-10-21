@@ -23,18 +23,34 @@ import instagramSeven from '../Layout/images/insta-07.png';
 import instagramEight from '../Layout/images/insta-08.png';
 
 export default class Home extends Component {
-    // constructor(props) {
-    //   super(props);
-    //   this.setState = {
-    //     toggle: false
-    //   };
-    //   this.handleToggle = this.handleToggle.bind(this);
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            assets: {
+                heroImage: blueDiamondCover_t2_V2
+            }
+        };
+    }
+
     // handleToggle() {
     //   this.setState({
     //     toggle: true
     //   });
     // }
+
+    componentDidMount = () => {
+        fetch('/api/holidays/assets')
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({
+                    assets: {
+                        heroImage: res.heroImage
+                    }
+                });
+            })
+            .catch((err) => console.error(err));
+    };
+
     render() {
         return (
             <Layout>
@@ -46,7 +62,7 @@ export default class Home extends Component {
                                 <div className="banner">
                                     <img
                                         className="img-fluid"
-                                        src={blueDiamondCover_t2_V2}
+                                        src={this.state.assets.heroImage}
                                         alt=""
                                     />
                                 </div>
@@ -56,14 +72,8 @@ export default class Home extends Component {
                                         <h2>Entertaining Starts Here.</h2>
                                     </div>
                                     <div className="b-text">
-                                        <p>
-                                            Show your guests that you thought
-                                            about
-                                        </p>
-                                        <p>
-                                            every detail with our amazing
-                                            pairings.
-                                        </p>
+                                        <p>Show your guests that you thought about</p>
+                                        <p>every detail with our amazing pairings.</p>
                                     </div>
                                 </div>
                             </div>
@@ -82,21 +92,16 @@ export default class Home extends Component {
                                         <div className="product-content">
                                             <div className="product-heading">
                                                 <h1>
-                                                    A Take of Herbs & <br />{' '}
-                                                    Sesame
+                                                    A Take of Herbs & <br /> Sesame
                                                 </h1>
                                             </div>
                                             <div className="product-bottom">
                                                 <p className="text-right">
-                                                    Garlic Herb & olive oil
-                                                    Almonds and artisan Sesame
-                                                    Seed Nut-thins
+                                                    Garlic Herb & olive oil Almonds and artisan
+                                                    Sesame Seed Nut-thins
                                                 </p>
                                                 <div className="prop-imgs">
-                                                    <img
-                                                        src={product_Icon_01_1}
-                                                        alt=""
-                                                    />
+                                                    <img src={product_Icon_01_1} alt="" />
                                                 </div>
                                             </div>
                                         </div>
@@ -116,15 +121,11 @@ export default class Home extends Component {
                                             </div>
                                             <div className="product-bottom">
                                                 <p className="text-right">
-                                                    Black Truffle Almonds and
-                                                    Artisan Multi-Seeds
+                                                    Black Truffle Almonds and Artisan Multi-Seeds
                                                     Nut-thins
                                                 </p>
                                                 <div className="prop-imgs">
-                                                    <img
-                                                        src={product_02_1}
-                                                        alt=""
-                                                    />
+                                                    <img src={product_02_1} alt="" />
                                                 </div>
                                             </div>
                                         </div>
@@ -144,15 +145,11 @@ export default class Home extends Component {
                                             </div>
                                             <div className="product-bottom">
                                                 <p className="text-right">
-                                                    Pink Himalayan Salt Almonds
-                                                    and Artisaqn Chia Seeds
-                                                    Nut-Thins
+                                                    Pink Himalayan Salt Almonds and Artisaqn Chia
+                                                    Seeds Nut-Thins
                                                 </p>
                                                 <div className="prop-imgs">
-                                                    <img
-                                                        src={product_03_1}
-                                                        alt=""
-                                                    />
+                                                    <img src={product_03_1} alt="" />
                                                 </div>
                                             </div>
                                         </div>
@@ -172,15 +169,11 @@ export default class Home extends Component {
                                             </div>
                                             <div className="product-bottom">
                                                 <p className="text-right">
-                                                    Rosemary and Sea Salt
-                                                    Almonds and Aetisan Flax
+                                                    Rosemary and Sea Salt Almonds and Aetisan Flax
                                                     Seeds Nuts-Thins
                                                 </p>
                                                 <div className="prop-imgs">
-                                                    <img
-                                                        src={product_04_1}
-                                                        alt=""
-                                                    />
+                                                    <img src={product_04_1} alt="" />
                                                 </div>
                                             </div>
                                         </div>
@@ -196,55 +189,33 @@ export default class Home extends Component {
                             <div className="duble-headings text-center">
                                 <h1>Build A Party</h1>
                                 <p>
-                                    Find in each of our social channels
-                                    something special for your parties
+                                    Find in each of our social channels something special for your
+                                    parties
                                 </p>
                             </div>
                             <div className="row">
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-6">
                                     <div className="text-center mb-4">
-                                        <img
-                                            className="party-icon"
-                                            src={invite_Icon}
-                                            alt=""
-                                        />
-                                        <p className="party-icon-text">
-                                            Invite
-                                        </p>
+                                        <img className="party-icon" src={invite_Icon} alt="" />
+                                        <p className="party-icon-text">Invite</p>
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-6">
                                     <div className="text-center mb-4">
-                                        <img
-                                            className="party-icon"
-                                            src={music_Icon}
-                                            alt=""
-                                        />
+                                        <img className="party-icon" src={music_Icon} alt="" />
                                         <p className="party-icon-text">Music</p>
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-6">
                                     <div className="text-center mb-4">
-                                        <img
-                                            className="party-icon"
-                                            src={fire_Icon}
-                                            alt=""
-                                        />
-                                        <p className="party-icon-text">
-                                            Set the Mood
-                                        </p>
+                                        <img className="party-icon" src={fire_Icon} alt="" />
+                                        <p className="party-icon-text">Set the Mood</p>
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-6">
                                     <div className="text-center mb-4">
-                                        <img
-                                            className="party-icon"
-                                            src={platter_Icon}
-                                            alt=""
-                                        />
-                                        <p className="party-icon-text">
-                                            Platters
-                                        </p>
+                                        <img className="party-icon" src={platter_Icon} alt="" />
+                                        <p className="party-icon-text">Platters</p>
                                     </div>
                                 </div>
                             </div>
@@ -254,29 +225,18 @@ export default class Home extends Component {
                         <div className="container sm-container">
                             <div className="duble-headings text-center">
                                 <h1>Get Inspired</h1>
-                                <p>
-                                    Keep Up With our latest and delicious
-                                    instagram activity
-                                </p>
+                                <p>Keep Up With our latest and delicious instagram activity</p>
                             </div>
                             <div className="instagram-images-sec">
                                 <div className="row">
                                     <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
                                         <div className="text-center">
-                                            <img
-                                                className="img-fluid"
-                                                src={instagram}
-                                                alt=""
-                                            />
+                                            <img className="img-fluid" src={instagram} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
                                         <div className="text-center">
-                                            <img
-                                                className="img-fluid"
-                                                src={instagramTwo}
-                                                alt=""
-                                            />
+                                            <img className="img-fluid" src={instagramTwo} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
@@ -290,29 +250,17 @@ export default class Home extends Component {
                                     </div>
                                     <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
                                         <div className="text-center">
-                                            <img
-                                                className="img-fluid"
-                                                src={instagramFour}
-                                                alt=""
-                                            />
+                                            <img className="img-fluid" src={instagramFour} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
                                         <div className="text-center">
-                                            <img
-                                                className="img-fluid"
-                                                src={instagramFive}
-                                                alt=""
-                                            />
+                                            <img className="img-fluid" src={instagramFive} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
                                         <div className="text-center">
-                                            <img
-                                                className="img-fluid"
-                                                src={instagramSix}
-                                                alt=""
-                                            />
+                                            <img className="img-fluid" src={instagramSix} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">

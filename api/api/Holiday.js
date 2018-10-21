@@ -24,7 +24,7 @@ const getHeroImage = async (holidayPage) => {
 };
 
 export default (api) => {
-    api.get('/holiday/banners', async (req, res) => {
+    api.get('/holidays/assets', async (req, res) => {
         const client = req.client;
         const holidayPage = await getHolidayPage(client);
         const heroImage = await getHeroImage(holidayPage);
