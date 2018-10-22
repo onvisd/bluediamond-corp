@@ -4,6 +4,7 @@ import Footer from '../Footer';
 
 import './style.css';
 import './bootstrap.min.css';
+import './font-awesome.min.css';
 import './responsive.css';
 
 

@@ -14,6 +14,7 @@ import styles from './styles.module.css';
     null,
     {createAddress}
 )
+
 export default class AddAddress extends Component {
     static propTypes = {
         user: PropTypes.object.isRequired,
