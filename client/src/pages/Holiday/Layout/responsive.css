@@ -74,6 +74,7 @@
     margin-left: 20px;
     margin-right: 10px;
   }
+    .title-comment p { bottom: -32%;}
 }
 @media only screen and (max-width: 1366px) {
   #baner-section .banner-text .b-heading h2 {
@@ -151,6 +152,9 @@ font-size: 14px !important;
   }
 }
 
+@media only screen and (max-width:1024px) {
+    .title-comment p {font-size: 32px;}
+}
 @media only screen and (max-width: 991px) {
   .logo-navigation .navbar .navbar-brand img {
     width: 160px;
@@ -224,6 +228,16 @@ font-size: 14px !important;
   .products-boxes .box-main .product-content .product-bottom p{
     font-size: 12px;
   }
+    .title-comment p {
+
+     bottom: -20%;
+     font-size: 28px;
+}
+    .title-comment p sup {
+    font-size: 11px;
+    top: 14px;
+}
+    #baner-section .banner-text .b-heading h2 {line-height: 58px;}
 }
 @media only screen and (max-width: 767px) {
   .top-header{
@@ -272,6 +286,7 @@ font-size: 14px !important;
   .products-boxes .box-main .product-content .product-heading h1 br{
     display: none;
   }
+  .title-comment p {font-size: 24px;}
 }
 @media only screen and (max-width: 665px) {
   .recipes-banners .carousel-control-next-icon, .recipes-banners .carousel-control-prev-icon{
@@ -343,6 +358,7 @@ font-size: 14px !important;
   }
   #baner-section .banner-text .b-heading h2 {
     font-size: 20px;
+    line-height: 24px;
   }
   #baner-section .banner-text .b-text {
     padding: 5px 0;
@@ -350,8 +366,14 @@ font-size: 14px !important;
   #baner-section .banner-text .b-text p {
     font-size: 12px ;
   }
+    
+.title-comment p {
+    font-size: 16px;
+    letter-spacing: 0;
+    position: static;
 }
-
+    .title-comment p sup { top: 87%;}
+}
 
 @media only screen and (min-width: 575px) and (max-width: 767px) {
   .site-footer .Secound-links-footer ul li p{

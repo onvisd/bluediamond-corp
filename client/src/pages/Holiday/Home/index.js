@@ -6,7 +6,7 @@ import product_Icon_01 from '../Layout/images/product-01-img.png';
 import product_Icon_01_1 from '../Layout/images/product-01.1-img.png';
 import platter_Icon from '../Layout/images/platter-icon.png';
 import fire_Icon from '../Layout/images/fire-icon.png';
-import blueDiamondCover_t2_V2 from '../Layout/images/blue-diamond-cover_t2_V2.png';
+import blueDiamondCover_t2_V2 from '../Layout/images/blue-diamond-cover_t2_V2.jpg';
 import product_02 from '../Layout/images/product-02-img.png';
 import product_02_1 from '../Layout/images/product-02.1-img.png';
 import product_03 from '../Layout/images/product-03-img.png';
@@ -31,12 +31,6 @@ export default class Home extends Component {
             }
         };
     }
-
-    // handleToggle() {
-    //   this.setState({
-    //     toggle: true
-    //   });
-    // }
 
     componentDidMount = () => {
         fetch('/api/holidays/assets')
@@ -68,12 +62,14 @@ export default class Home extends Component {
                                 </div>
                                 <div className="banner-text">
                                     <div className="b-heading">
-                                        <h2>Your Holiday</h2>
-                                        <h2>Entertaining Starts Here.</h2>
+                                        <h2>Your Holiday<br/>Entertaining Starts Here.</h2>
                                     </div>
                                     <div className="b-text">
-                                        <p>Show your guests that you thought about</p>
-                                        <p>every detail with our amazing pairings.</p>
+                                        <p>Show your guests that you thought about<br/>every detail with our amazing pairings.</p>
+                                       
+                                    </div>
+                                    <div className="title-comment">
+                                        <p>The Uncommon Almond.<sup>TM</sup></p>  
                                     </div>
                                 </div>
                             </div>

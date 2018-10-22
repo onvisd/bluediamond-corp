@@ -80,7 +80,7 @@ export default class Recipes extends Component {
                                             alt="First slide"
                                         />
                                         <div className="carousel-caption d-md-block">
-                                            <h5>A Tale of Herbs & Sesame</h5>
+                                            <h5>A Tale of Herbs <br/>& Sesame</h5>
                                             <p>Difficulty 1</p>
                                             <p>Time: 10 mins.</p>
                                             <p className="text-detail">
@@ -111,7 +111,7 @@ export default class Recipes extends Component {
                                             alt="Second slide"
                                         />
                                         <div className="carousel-caption d-md-block">
-                                            <h5>A Tale of Herbs & Sesame</h5>
+                                            <h5>A Tale of Herbs <br/>& Sesame</h5>
                                             <p>Difficulty 1</p>
                                             <p>Time: 10 mins.</p>
                                             <p className="text-detail">
@@ -142,7 +142,7 @@ export default class Recipes extends Component {
                                             alt="Third slide"
                                         />
                                         <div className="carousel-caption d-md-block">
-                                            <h5>A Tale of Herbs & Sesame</h5>
+                                            <h5>A Tale of Herbs <br/>& Sesame</h5>
                                             <p>Difficulty 1</p>
                                             <p>Time: 10 mins.</p>
                                             <p className="text-detail">
@@ -288,7 +288,7 @@ export default class Recipes extends Component {
                                             alt="First slide"
                                         />
                                         <div className="carousel-caption d-md-block">
-                                            <h5>Jolly Pink Chia Combo</h5>
+                                            <h5>Jolly Pink Salt-Chia Combo</h5>
                                             <p>Difficulty 1</p>
                                             <p>Time: 10 mins.</p>
                                             <p className="text-detail">
@@ -319,7 +319,7 @@ export default class Recipes extends Component {
                                             alt="Second slide"
                                         />
                                         <div className="carousel-caption d-md-block">
-                                            <h5>Jolly Pink Chia Combo</h5>
+                                            <h5>Jolly Pink Salt-Chia Combo</h5>
                                             <p>Difficulty 1</p>
                                             <p>Time: 10 mins.</p>
                                             <p className="text-detail">
@@ -350,7 +350,7 @@ export default class Recipes extends Component {
                                             alt="Third slide"
                                         />
                                         <div className="carousel-caption d-md-block">
-                                            <h5>Jolly Pink Chia Combo</h5>
+                                            <h5>Jolly Pink Salt-Chia Combo</h5>
                                             <p>Difficulty 1</p>
                                             <p>Time: 10 mins.</p>
                                             <p className="text-detail">

@@ -48,6 +48,14 @@ a, a:hover {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'cinzelbold';
+  src: url('./fonts/cinzel-bold-webfont.woff2') format('woff2'),
+       url('./fonts/cinzel-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
 
 /* @font-face {
   font-family: 'MinionPro-Semibold';
@@ -97,6 +105,7 @@ a, a:hover {
 .top-header ul li a {
   color: #fff;
   padding: 5px 15px;
+  font-size: 14px;
   display: inline-block;
 }
 .top-header ul li a .top-nav-icons {
@@ -173,8 +182,9 @@ a, a:hover {
   color: #fff;
 }
 #baner-section .banner-text .b-heading h2 {
-  font-size: 100px;
+  font-size: 85px;
   font-family: 'bigcaslonregular';
+  line-height: 93px;
   font-weight: normal;
 }
 #baner-section .banner-text .b-text {
@@ -279,6 +289,7 @@ a, a:hover {
 }
 .site-footer .links-footer .first-links-footer ul{
   list-style: none;
+  margin-bottom:0;
 }
 .site-footer .links-footer .first-links-footer ul li{
   display: inline-block;
@@ -358,6 +369,7 @@ a, a:hover {
 .site-footer .copright-footer p {
   color: #fff;
   font-weight: 600;
+  margin-bottom: 0;
   font-size: 14px;
 }
 /* site-footer end*/
@@ -389,13 +401,33 @@ a, a:hover {
   text-align: center;
   min-width: 175px;
 }
-.recipes-banners .carousel-caption h5{margin-bottom: 10px;font-size: 35px;}
-.recipes-banners .carousel-caption p {font-size: 19px;}
-.recipes-banners .carousel-caption a {}
-  .recipes-banners .carousel-control-next-icon{background-image: url("./images/nextSlide.png ");}
-  .recipes-banners .carousel-control-prev-icon{background-image: url("./images/prevSlide.png ");}
-  .recipes-banners .carousel-control-prev, .recipes-banners .carousel-control-next {opacity: 1;}
-  .recipes-banners .carousel-control-next-icon, .recipes-banners .carousel-control-prev-icon{width:40px;height:40px;}
-  /* recipes */
-
+.recipes-banners .carousel-caption h5{font-family: 'gotham-book';
+  font-weight: normal;margin-bottom: 10px;font-size: 35px;text-transform: capitalize;}
+.recipes-banners .carousel-caption p {font-size: 19px;font-family: 'gotham-book';
+  font-weight: normal;line-height: 1.5}
+.recipes-banners .carousel-control-next-icon{background-image: url("./images/nextSlide.png ");}
+.recipes-banners .carousel-control-prev-icon{background-image: url("./images/prevSlide.png ");}
+.recipes-banners .carousel-control-prev, .recipes-banners .carousel-control-next {opacity: 1;}
+.recipes-banners .carousel-control-next-icon, .recipes-banners .carousel-control-prev-icon{width:40px;height:40px;}
+.slick-slide {
+  position: relative;
+}
+/* recipes */
+/*react*/
+.recipes-banners .carousel-control-prev, .recipes-banners .carousel-control-next{z-index:1;}
+.title-comment p {
+  font-family: 'cinzelbold';
+  text-transform: capitalize;
+  color: #C39D5F;
+  font-size: 40px;
+  position: absolute;
+  bottom: -74%;
+  left: 8px;
+  letter-spacing: 2px;
+}
+.title-comment p sup {
+  font-size: 16px;
+  position: absolute;
+  top: 22px;
+}
   /* stylelint-enable */
