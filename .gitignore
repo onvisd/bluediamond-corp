@@ -24,3 +24,6 @@ npm-debug.log
 
 # test coverage folder
 coverage
+
+# vscode settings
+.vscode
