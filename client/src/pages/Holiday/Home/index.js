@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import Layout from '../Layout';
-import invite_Icon from '../Layout/images/invite-icon.png';
-import music_Icon from '../Layout/images/music-icon.png';
 import product_Icon_01 from '../Layout/images/product-01-img.png';
 import product_Icon_01_1 from '../Layout/images/product-01.1-img.png';
-import platter_Icon from '../Layout/images/platter-icon.png';
-import fire_Icon from '../Layout/images/fire-icon.png';
 import blueDiamondCover_t2_V2 from '../Layout/images/blue-diamond-cover_t2_V2.jpg';
 import product_02 from '../Layout/images/product-02-img.png';
 import product_02_1 from '../Layout/images/product-02.1-img.png';
@@ -13,14 +9,7 @@ import product_03 from '../Layout/images/product-03-img.png';
 import product_03_1 from '../Layout/images/product-03.1-img.png';
 import product_04 from '../Layout/images/product-04-img.png';
 import product_04_1 from '../Layout/images/product-04.1-img.png';
-import instagram from '../Layout/images/insta-01.png';
-import instagramTwo from '../Layout/images/insta-02.png';
-import instagramThree from '../Layout/images/insta-03.png';
-import instagramFour from '../Layout/images/insta-04.png';
-import instagramFive from '../Layout/images/insta-05.png';
-import instagramSix from '../Layout/images/insta-06.png';
-import instagramSeven from '../Layout/images/insta-07.png';
-import instagramEight from '../Layout/images/insta-08.png';
+
 
 export default class Home extends Component {
     constructor(props) {
@@ -75,7 +64,6 @@ export default class Home extends Component {
                             </div>
                         </div>
                     </section>
-
                     {/* <!-- Products boxes section --> */}
                     <section className="products-boxes">
                         <div className="container-fluid">
@@ -178,109 +166,7 @@ export default class Home extends Component {
                             </div>
                         </div>
                     </section>
-
-                    {/* <!-- build party section --> */}
-                    <section className="build-party">
-                        <div className="container sm-container">
-                            <div className="duble-headings text-center">
-                                <h1>Build A Party</h1>
-                                <p>
-                                    Find in each of our social channels something special for your
-                                    parties
-                                </p>
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-3 col-md-6 col-sm-6 col-6">
-                                    <div className="text-center mb-4">
-                                        <img className="party-icon" src={invite_Icon} alt="" />
-                                        <p className="party-icon-text">Invite</p>
-                                    </div>
-                                </div>
-                                <div className="col-lg-3 col-md-6 col-sm-6 col-6">
-                                    <div className="text-center mb-4">
-                                        <img className="party-icon" src={music_Icon} alt="" />
-                                        <p className="party-icon-text">Music</p>
-                                    </div>
-                                </div>
-                                <div className="col-lg-3 col-md-6 col-sm-6 col-6">
-                                    <div className="text-center mb-4">
-                                        <img className="party-icon" src={fire_Icon} alt="" />
-                                        <p className="party-icon-text">Set the Mood</p>
-                                    </div>
-                                </div>
-                                <div className="col-lg-3 col-md-6 col-sm-6 col-6">
-                                    <div className="text-center mb-4">
-                                        <img className="party-icon" src={platter_Icon} alt="" />
-                                        <p className="party-icon-text">Platters</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section className="get-inspired">
-                        <div className="container sm-container">
-                            <div className="duble-headings text-center">
-                                <h1>Get Inspired</h1>
-                                <p>Keep Up With our latest and delicious instagram activity</p>
-                            </div>
-                            <div className="instagram-images-sec">
-                                <div className="row">
-                                    <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
-                                        <div className="text-center">
-                                            <img className="img-fluid" src={instagram} alt="" />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
-                                        <div className="text-center">
-                                            <img className="img-fluid" src={instagramTwo} alt="" />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
-                                        <div className="text-center">
-                                            <img
-                                                className="img-fluid"
-                                                src={instagramThree}
-                                                alt=""
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
-                                        <div className="text-center">
-                                            <img className="img-fluid" src={instagramFour} alt="" />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
-                                        <div className="text-center">
-                                            <img className="img-fluid" src={instagramFive} alt="" />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
-                                        <div className="text-center">
-                                            <img className="img-fluid" src={instagramSix} alt="" />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
-                                        <div className="text-center">
-                                            <img
-                                                className="img-fluid"
-                                                src={instagramSeven}
-                                                alt=""
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-3 col-md-4 col-sm-4 col-xs-12 pl-2 pr-2 ">
-                                        <div className="text-center">
-                                            <img
-                                                className="img-fluid"
-                                                src={instagramEight}
-                                                alt=""
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                    {/* <!-- build party section removed--> */}
                 </div>
             </Layout>
         );
