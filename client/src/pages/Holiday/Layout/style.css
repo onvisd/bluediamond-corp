@@ -1,5 +1,4 @@
 /* stylelint-disable */
-
 html {
   scroll-behavior: smooth;
 }
@@ -27,9 +26,11 @@ img {
 a, a:hover {
   text-decoration: none;
 }
+
 .shadow {
   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
 }
+
 .shadow-lg {
   box-shadow: 0 1rem 3rem rgba(0,0,0,.5) !important;
 }
@@ -41,6 +42,7 @@ a, a:hover {
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'gotham-book';
   src: url('./fonts/Gotham-Book.woff') format('woff2'),
@@ -48,13 +50,13 @@ a, a:hover {
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'cinzelbold';
   src: url('./fonts/cinzel-bold-webfont.woff2') format('woff2'),
        url('./fonts/cinzel-bold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-
 }
 
 /* @font-face {
@@ -79,8 +81,6 @@ a, a:hover {
   font-size: 24px;
   padding: 10px;
 }
-
-
 
 /* header start  */
 
@@ -378,13 +378,13 @@ a, a:hover {
 /* recipes */
 .recipes-banners .carousel-caption {
   width: 25%;
-  top: 8%;
+  top: 17%;
   text-align: left;
 }
 .recipes-banners .carousel-caption .carousel-img-download {
   display: flex;
   position: absolute;
-  bottom: 5%;
+  bottom: 27%;
 }
 .recipes-banners .carousel-caption .carousel-img-download img{
   width: auto;
@@ -401,7 +401,7 @@ a, a:hover {
   text-align: center;
   min-width: 175px;
 }
-.recipes-banners .carousel-caption h5{font-family: 'gotham-book';
+.recipes-banners .carousel-caption h5{font-family: 'bigcaslonregular';
   font-weight: normal;margin-bottom: 10px;font-size: 35px;text-transform: capitalize;}
 .recipes-banners .carousel-caption p {font-size: 19px;font-family: 'gotham-book';
   font-weight: normal;line-height: 1.5}

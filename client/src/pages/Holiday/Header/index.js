@@ -140,7 +140,7 @@ export default class Header extends Component {
                                     </ul>
                                 </div>
                                 <div className="mx-auto order-0 device-menu-block">
-                                    <a className="navbar-brand mx-auto" href="index.html">
+                                    <a className="navbar-brand mx-auto" href="/holiday">
                                         <img src={bdlogo} alt="bdlogo" />
                                     </a>
                                     <button

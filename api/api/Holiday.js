@@ -3,7 +3,7 @@ const getHolidayPage = async (client) => {
         content_type: 'page',
         limit: 1,
         query: 'Whole+Natural+Almonds'
-    });
+    })
 
     if (!entries.items || entries.items.length !== 1) {
         throw new Error('ContentfulPageNotFound: Whole Natural Almonds');
@@ -25,6 +25,7 @@ const getHeroImage = async (holidayPage) => {
 
 export default (api) => {
     api.get('/holidays/assets', async (req, res) => {
+        debugger;
         const client = req.client;
         const holidayPage = await getHolidayPage(client);
         const heroImage = await getHeroImage(holidayPage);
@@ -34,3 +35,5 @@ export default (api) => {
         });
     });
 };
+
+

@@ -54,11 +54,10 @@ export default class Home extends Component {
                                         <h2>Your Holiday<br/>Entertaining Starts Here.</h2>
                                     </div>
                                     <div className="b-text">
-                                        <p>Show your guests that you thought about<br/>every detail with our amazing pairings.</p>
-                                       
+                                        <p>Show your guests that you thought about<br/>every detail with our amazing pairings.</p>                                      
                                     </div>
                                     <div className="title-comment">
-                                        <p>The Uncommon Almond.<sup>TM</sup></p>  
+                                        <p>The Uncommon Almond.<sup>TM</sup></p>
                                     </div>
                                 </div>
                             </div>

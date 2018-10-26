@@ -80,27 +80,19 @@ export default class Recipes extends Component {
                                             alt="First slide"
                                         />
                                         <div className="carousel-caption d-md-block">
-                                            <h5>A Tale of Herbs <br/>& Sesame</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
+                                            <h5>
+                                                A Tale of Herbs <br />& Sesame
+                                            </h5>
                                             <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
+                                                Nam porttitor blandit accumsan. vel dictum sem, a
+                                                pretium dui. In malesuada enim in dolor euismod,
+                                                commodo mi consec tetur. Curabitur at vestibulum
+                                                nisi. Nullam vehicula nisi velit. Mauris turpis
+                                                nisl, molestie ut ipsum et,
                                             </p>
                                             <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageOne}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
+                                                <img src={productImageOne} alt="" />
+                                                <Link to="http://a.co/fdIGaVX">Start Your Cart</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -111,27 +103,20 @@ export default class Recipes extends Component {
                                             alt="Second slide"
                                         />
                                         <div className="carousel-caption d-md-block">
-                                            <h5>A Tale of Herbs <br/>& Sesame</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
+                                            <h5>
+                                                A Tale of Herbs <br />& Sesame
+                                            </h5>
+
                                             <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
+                                                Nam porttitor blandit accumsan. vel dictum sem, a
+                                                pretium dui. In malesuada enim in dolor euismod,
+                                                commodo mi consec tetur. Curabitur at vestibulum
+                                                nisi. Nullam vehicula nisi velit. Mauris turpis
+                                                nisl, molestie ut ipsum et,
                                             </p>
                                             <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageOne}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
+                                                <img src={productImageOne} alt="" />
+                                                <Link to="http://a.co/fdIGaVX">Start Your Cart</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -142,27 +127,20 @@ export default class Recipes extends Component {
                                             alt="Third slide"
                                         />
                                         <div className="carousel-caption d-md-block">
-                                            <h5>A Tale of Herbs <br/>& Sesame</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
+                                            <h5>
+                                                A Tale of Herbs <br />& Sesame
+                                            </h5>
+
                                             <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
+                                                Nam porttitor blandit accumsan. vel dictum sem, a
+                                                pretium dui. In malesuada enim in dolor euismod,
+                                                commodo mi consec tetur. Curabitur at vestibulum
+                                                nisi. Nullam vehicula nisi velit. Mauris turpis
+                                                nisl, molestie ut ipsum et,
                                             </p>
                                             <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageOne}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
+                                                <img src={productImageOne} alt="" />
+                                                <Link to="http://a.co/fdIGaVX">Start Your Cart</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -185,26 +163,17 @@ export default class Recipes extends Component {
                                         />
                                         <div className="carousel-caption d-md-block">
                                             <h5>A Gift of Truffle and Seeds</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
+
                                             <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
+                                                Nam porttitor blandit accumsan. vel dictum sem, a
+                                                pretium dui. In malesuada enim in dolor euismod,
+                                                commodo mi consec tetur. Curabitur at vestibulum
+                                                nisi. Nullam vehicula nisi velit. Mauris turpis
+                                                nisl, molestie ut ipsum et,
                                             </p>
                                             <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageTwo}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
+                                                <img src={productImageTwo} alt="" />
+                                                <Link to="http://a.co/fwxluZA">Start Your Cart</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -216,26 +185,17 @@ export default class Recipes extends Component {
                                         />
                                         <div className="carousel-caption d-md-block">
                                             <h5>A Gift of Truffle and Seeds</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
+
                                             <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
+                                                Nam porttitor blandit accumsan. vel dictum sem, a
+                                                pretium dui. In malesuada enim in dolor euismod,
+                                                commodo mi consec tetur. Curabitur at vestibulum
+                                                nisi. Nullam vehicula nisi velit. Mauris turpis
+                                                nisl, molestie ut ipsum et,
                                             </p>
                                             <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageTwo}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
+                                                <img src={productImageTwo} alt="" />
+                                                <Link to="http://a.co/fwxluZA">Start Your Cart</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -247,26 +207,17 @@ export default class Recipes extends Component {
                                         />
                                         <div className="carousel-caption d-md-block">
                                             <h5>A Gift of Truffle and Seeds</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
+
                                             <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
+                                                Nam porttitor blandit accumsan. vel dictum sem, a
+                                                pretium dui. In malesuada enim in dolor euismod,
+                                                commodo mi consec tetur. Curabitur at vestibulum
+                                                nisi. Nullam vehicula nisi velit. Mauris turpis
+                                                nisl, molestie ut ipsum et,
                                             </p>
                                             <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageTwo}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
+                                                <img src={productImageTwo} alt="" />
+                                                <Link to="http://a.co/fwxluZA">Start Your Cart</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -289,26 +240,17 @@ export default class Recipes extends Component {
                                         />
                                         <div className="carousel-caption d-md-block">
                                             <h5>Jolly Pink Salt-Chia Combo</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
+
                                             <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
+                                                Nam porttitor blandit accumsan. vel dictum sem, a
+                                                pretium dui. In malesuada enim in dolor euismod,
+                                                commodo mi consec tetur. Curabitur at vestibulum
+                                                nisi. Nullam vehicula nisi velit. Mauris turpis
+                                                nisl, molestie ut ipsum et,
                                             </p>
                                             <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageThree}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
+                                                <img src={productImageThree} alt="" />
+                                                <Link to="http://a.co/bvG3oBg">Start Your Cart</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -320,26 +262,17 @@ export default class Recipes extends Component {
                                         />
                                         <div className="carousel-caption d-md-block">
                                             <h5>Jolly Pink Salt-Chia Combo</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
+
                                             <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
+                                                Nam porttitor blandit accumsan. vel dictum sem, a
+                                                pretium dui. In malesuada enim in dolor euismod,
+                                                commodo mi consec tetur. Curabitur at vestibulum
+                                                nisi. Nullam vehicula nisi velit. Mauris turpis
+                                                nisl, molestie ut ipsum et,
                                             </p>
                                             <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageThree}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
+                                                <img src={productImageThree} alt="" />
+                                                <Link to="http://a.co/bvG3oBg">Start Your Cart</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -351,32 +284,22 @@ export default class Recipes extends Component {
                                         />
                                         <div className="carousel-caption d-md-block">
                                             <h5>Jolly Pink Salt-Chia Combo</h5>
-                                            <p>Difficulty 1</p>
-                                            <p>Time: 10 mins.</p>
+
                                             <p className="text-detail">
-                                                Nam porttitor blandit accumsan.
-                                                vel dictum sem, a pretium dui.
-                                                In malesuada enim in dolor
-                                                euismod, commodo mi consec
-                                                tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi
-                                                velit. Mauris turpis nisl,
-                                                molestie ut ipsum et,
+                                                Nam porttitor blandit accumsan. vel dictum sem, a
+                                                pretium dui. In malesuada enim in dolor euismod,
+                                                commodo mi consec tetur. Curabitur at vestibulum
+                                                nisi. Nullam vehicula nisi velit. Mauris turpis
+                                                nisl, molestie ut ipsum et,
                                             </p>
                                             <div className="carousel-img-download">
-                                                <img
-                                                    src={productImageThree}
-                                                    alt=""
-                                                />
-                                                <Link to="">
-                                                    Download Shopping List
-                                                </Link>
+                                                <img src={productImageThree} alt="" />
+                                                <Link to="http://a.co/bvG3oBg">Start Your Cart</Link>
                                             </div>
                                         </div>
                                     </div>
                                 </Slider>
                             </div>
-                            
                         </div>
 
                         <div
@@ -385,97 +308,73 @@ export default class Recipes extends Component {
                             data-ride="carousel"
                         >
                             <div className="carousel-inner">
-                            <Slider {...sliderSettings}>
-                                <div>
-                                    <img
-                                        className="d-block w-100"
-                                        src={bannerRecepiesF4_1}
-                                        alt="First slide"
-                                    />
-                                    <div className="carousel-caption d-md-block">
-                                        <h5>The Rosemary-Flax Spirit</h5>
-                                        <p>Difficulty 1</p>
-                                        <p>Time: 10 mins.</p>
-                                        <p className="text-detail">
-                                            Nam porttitor blandit accumsan. vel
-                                            dictum sem, a pretium dui. In
-                                            malesuada enim in dolor euismod,
-                                            commodo mi consec tetur. Curabitur
-                                            at vestibulum nisi. Nullam vehicula
-                                            nisi velit. Mauris turpis nisl,
-                                            molestie ut ipsum et,
-                                        </p>
-                                        <div className="carousel-img-download">
-                                            <img
-                                                src={productImageFour}
-                                                alt=""
-                                            />
-                                            <Link to="">
-                                                Download Shopping List
-                                            </Link>
+                                <Slider {...sliderSettings}>
+                                    <div>
+                                        <img
+                                            className="d-block w-100"
+                                            src={bannerRecepiesF4_1}
+                                            alt="First slide"
+                                        />
+                                        <div className="carousel-caption d-md-block">
+                                            <h5>The Rosemary-Flax Spirit</h5>
+
+                                            <p className="text-detail">
+                                                Nam porttitor blandit accumsan. vel dictum sem, a
+                                                pretium dui. In malesuada enim in dolor euismod,
+                                                commodo mi consec tetur. Curabitur at vestibulum
+                                                nisi. Nullam vehicula nisi velit. Mauris turpis
+                                                nisl, molestie ut ipsum et,
+                                            </p>
+                                            <div className="carousel-img-download">
+                                                <img src={productImageFour} alt="" />
+                                                <Link to="http://a.co/3nWh9hq">Start Your Cart</Link>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div>
-                                    <img
-                                        className="d-block w-100"
-                                        src={bannerRecepiesF4_2}
-                                        alt="Second slide"
-                                    />
-                                    <div className="carousel-caption d-md-block">
-                                        <h5>The Rosemary-Flax Spirit</h5>
-                                        <p>Difficulty 1</p>
-                                        <p>Time: 10 mins.</p>
-                                        <p className="text-detail">
-                                            Nam porttitor blandit accumsan. vel
-                                            dictum sem, a pretium dui. In
-                                            malesuada enim in dolor euismod,
-                                            commodo mi consec tetur. Curabitur
-                                            at vestibulum nisi. Nullam vehicula
-                                            nisi velit. Mauris turpis nisl,
-                                            molestie ut ipsum et,
-                                        </p>
-                                        <div className="carousel-img-download">
-                                            <img
-                                                src={productImageFour}
-                                                alt=""
-                                            />
-                                            <Link to="">
-                                                Download Shopping List
-                                            </Link>
+                                    <div>
+                                        <img
+                                            className="d-block w-100"
+                                            src={bannerRecepiesF4_2}
+                                            alt="Second slide"
+                                        />
+                                        <div className="carousel-caption d-md-block">
+                                            <h5>The Rosemary-Flax Spirit</h5>
+
+                                            <p className="text-detail">
+                                                Nam porttitor blandit accumsan. vel dictum sem, a
+                                                pretium dui. In malesuada enim in dolor euismod,
+                                                commodo mi consec tetur. Curabitur at vestibulum
+                                                nisi. Nullam vehicula nisi velit. Mauris turpis
+                                                nisl, molestie ut ipsum et,
+                                            </p>
+                                            <div className="carousel-img-download">
+                                                <img src={productImageFour} alt="" />
+                                                <Link to="http://a.co/3nWh9hq">Start Your Cart</Link>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div>
-                                    <img
-                                        className="d-block w-100"
-                                        src={bannerRecepiesF4_3}
-                                        alt="Third slide"
-                                    />
-                                    <div className="carousel-caption d-md-block">
-                                        <h5>The Rosemary-Flax Spirit</h5>
-                                        <p>Difficulty 1</p>
-                                        <p>Time: 10 mins.</p>
-                                        <p className="text-detail">
-                                            Nam porttitor blandit accumsan. vel
-                                            dictum sem, a pretium dui. In
-                                            malesuada enim in dolor euismod,
-                                            commodo mi consec tetur. Curabitur
-                                            at vestibulum nisi. Nullam vehicula
-                                            nisi velit. Mauris turpis nisl,
-                                            molestie ut ipsum et,
-                                        </p>
-                                        <div className="carousel-img-download">
-                                            <img
-                                                src={productImageFour}
-                                                alt=""
-                                            />
-                                            <Link to="">
-                                                Download Shopping List
-                                            </Link>
+                                    <div>
+                                        <img
+                                            className="d-block w-100"
+                                            src={bannerRecepiesF4_3}
+                                            alt="Third slide"
+                                        />
+                                        <div className="carousel-caption d-md-block">
+                                            <h5>The Rosemary-Flax Spirit</h5>
+
+                                            <p className="text-detail">
+                                                Nam porttitor blandit accumsan. vel dictum sem, a
+                                                pretium dui. In malesuada enim in dolor euismod,
+                                                commodo mi consec tetur. Curabitur at vestibulum
+                                                nisi. Nullam vehicula nisi velit. Mauris turpis
+                                                nisl, molestie ut ipsum et,
+                                            </p>
+                                            <div className="carousel-img-download">
+                                                <img src={productImageFour} alt="" />
+                                                <Link to="http://a.co/3nWh9hq">Start Your Cart</Link>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 </Slider>
                             </div>
                         </div>
