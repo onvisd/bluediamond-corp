@@ -28,10 +28,10 @@ Show your guests that you thought about every detail with our amazing pairings.
             },
             gallery: {
                 images: [
-                    { url: product_02 },
-                    { url: product_03 },
-                    { url: product_04 },
-                    { url: product_02 }
+                  { url: product_02, title: '' },
+                  { url: product_03, title: '' },
+                  { url: product_04, title: '' },
+                  { url: product_02, title: '' }
                 ]
             }
         };
@@ -41,8 +41,10 @@ Show your guests that you thought about every detail with our amazing pairings.
         fetch('/api/holidays/content')
             .then((res) => res.json())
             .then((res) => {
+              console.log('RS', res);
                 this.setState({
-                    hero: res.hero
+                  hero: res.hero,
+                  gallery: res.gallery
                 });
             })
             .catch((err) => console.error(err));
