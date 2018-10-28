@@ -58,19 +58,19 @@ export default class Recipes extends Component {
                     title: 'First Carousel',
                     items: [
                         {
-                            title: 'A Tale of Herbs\n& Sesame',
+                            title: 'A Tale of Herbs<br>& Sesame',
                             subtitle:
                                 'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et',
                             image: { url: bannerRecepiesF1 }
                         },
                         {
-                            title: 'A Tale of Herbs\n& Sesame',
+                            title: 'A Tale of Herbs<br>& Sesame',
                             subtitle:
                                 'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et',
                             image: { url: bannerRecepiesF2 }
                         },
                         {
-                            title: 'A Tale of Herbs\n& Sesame',
+                            title: 'A Tale of Herbs<br>& Sesame',
                             subtitle:
                                 'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et',
                             image: { url: bannerRecepiesF3 }
@@ -193,7 +193,7 @@ export default class Recipes extends Component {
                                                     alt="First slide"
                                                 />
                                                 <div className="carousel-caption d-md-block">
-                                                    {item.title.split('\n').map((x) => (
+                                                    {item.title.split('<br>').map((x) => (
                                                         <h5>{x}</h5>
                                                     ))}
                                                     <p className="text-detail">{item.subtitle}</p>
