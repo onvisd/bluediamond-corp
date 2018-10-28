@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import marked from 'marked';
 import Layout from '../Layout';
 import product_Icon_01 from '../Layout/images/product-01-img.png';
 import product_Icon_01_1 from '../Layout/images/product-01.1-img.png';
@@ -10,29 +11,46 @@ import product_03_1 from '../Layout/images/product-03.1-img.png';
 import product_04 from '../Layout/images/product-04-img.png';
 import product_04_1 from '../Layout/images/product-04.1-img.png';
 
-
 export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            assets: {
-                heroImage: blueDiamondCover_t2_V2
+            hero: {
+                backgroundImageUrl: blueDiamondCover_t2_V2,
+                content: `
+## Your Holiday
+## Entertaining Starts Here.
+
+Show your guests that you thought about every detail with our amazing pairings.
+
+<div class='title-comment'><p>The Uncommon Almond.<sup>TM</sup></p></div>
+`
+            },
+            gallery: {
+                images: [
+                    { url: product_02 },
+                    { url: product_03 },
+                    { url: product_04 },
+                    { url: product_02 }
+                ]
             }
         };
     }
 
     componentDidMount = () => {
-        fetch('/api/holidays/assets')
+        fetch('/api/holidays/content')
             .then((res) => res.json())
             .then((res) => {
                 this.setState({
-                    assets: {
-                        heroImage: res.heroImage
-                    }
+                    hero: res.hero
                 });
             })
             .catch((err) => console.error(err));
     };
+
+    renderMarkup(field) {
+        return { __html: marked(field) };
+    }
 
     render() {
         return (
@@ -45,21 +63,17 @@ export default class Home extends Component {
                                 <div className="banner">
                                     <img
                                         className="img-fluid"
-                                        src={this.state.assets.heroImage}
+                                        src={this.state.hero.backgroundImageUrl}
                                         alt=""
                                     />
                                 </div>
-                                <div className="banner-text">
-                                    <div className="b-heading">
-                                        <h2>Your Holiday<br/>Entertaining Starts Here.</h2>
-                                    </div>
-                                    <div className="b-text">
-                                        <p>Show your guests that you thought about<br/>every detail with our amazing pairings.</p>                                      
-                                    </div>
-                                    <div className="title-comment">
-                                        <p>The Uncommon Almond.<sup>TM</sup></p>
-                                    </div>
-                                </div>
+
+                                <div
+                                    className="banner-text"
+                                    dangerouslySetInnerHTML={this.renderMarkup(
+                                        this.state.hero.content
+                                    )}
+                                />
                             </div>
                         </div>
                     </section>
@@ -70,7 +84,7 @@ export default class Home extends Component {
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12 p-0">
                                     <div className="box-main shadow-lg">
                                         <div className="product-image text-left">
-                                            <img src={product_Icon_01} alt="" />
+                                            <img src={this.state.gallery.images[0].url} alt="" />
                                         </div>
                                         <div className="product-content">
                                             <div className="product-heading">
@@ -93,7 +107,7 @@ export default class Home extends Component {
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12 p-0">
                                     <div className="box-main shadow-lg">
                                         <div className="product-image text-left">
-                                            <img src={product_02} alt="" />
+                                            <img src={this.state.gallery.images[1].url} alt="" />
                                         </div>
                                         <div className="product-content">
                                             <div className="product-heading">
@@ -117,7 +131,7 @@ export default class Home extends Component {
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12 p-0">
                                     <div className="box-main shadow-lg">
                                         <div className="product-image text-left">
-                                            <img src={product_03} alt="" />
+                                            <img src={this.state.gallery.images[2].url} alt="" />
                                         </div>
                                         <div className="product-content">
                                             <div className="product-heading">
@@ -141,7 +155,7 @@ export default class Home extends Component {
                                 <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12 p-0">
                                     <div className="box-main shadow-lg">
                                         <div className="product-image text-left">
-                                            <img src={product_04} alt="" />
+                                            <img src={this.state.gallery.images[3].url} alt="" />
                                         </div>
                                         <div className="product-content">
                                             <div className="product-heading">
