@@ -50,6 +50,117 @@ function NextButton(props) {
 }
 
 export default class Recipes extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            carousels: [
+                {
+                    title: 'First Carousel',
+                    items: [
+                        {
+                            title: 'A Tale of Herbs\n& Sesame',
+                            subtitle:
+                                'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et',
+                            image: { url: bannerRecepiesF1 }
+                        },
+                        {
+                            title: 'A Tale of Herbs\n& Sesame',
+                            subtitle:
+                                'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et',
+                            image: { url: bannerRecepiesF2 }
+                        },
+                        {
+                            title: 'A Tale of Herbs\n& Sesame',
+                            subtitle:
+                                'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et',
+                            image: { url: bannerRecepiesF3 }
+                        }
+                    ]
+                },
+                {
+                    title: 'Second Carousel',
+                    items: [
+                        {
+                            title: 'A Gift of Truffle and Seeds',
+                            subtitle:
+                                'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et',
+                            image: { url: bannerRecepiesF2_1 }
+                        },
+                        {
+                            title: 'A Gift of Truffle and Seeds',
+                            subtitle:
+                                'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et',
+                            image: { url: bannerRecepiesF2_2 }
+                        },
+                        {
+                            title: 'A Gift of Truffle and Seeds',
+                            subtitle:
+                                'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et',
+                            image: { url: bannerRecepiesF2_3 }
+                        }
+                    ]
+                },
+                {
+                    title: 'Third Carousel',
+                    items: [
+                        {
+                            title: 'Jolly Pink Salt-Chia Combo',
+                            subtitle:
+                                'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et',
+                            image: { url: bannerRecepiesF3_1 }
+                        },
+                        {
+                            title: 'Jolly Pink Salt-Chia Combo',
+                            subtitle:
+                                'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et',
+                            image: { url: bannerRecepiesF3_2 }
+                        },
+                        {
+                            title: 'Jolly Pink Salt-Chia Combo',
+                            subtitle:
+                                'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et',
+                            image: { url: bannerRecepiesF3_3 }
+                        }
+                    ]
+                },
+                {
+                    title: 'Fourth Carousel',
+                    items: [
+                        {
+                            title: 'The Rosemary-Flax Spirit',
+                            subtitle:
+                                'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et,',
+                            image: { url: bannerRecepiesF4_1 }
+                        },
+                        {
+                            title: 'The Rosemary-Flax Spirit',
+                            subtitle:
+                                'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et,',
+                            image: { url: bannerRecepiesF4_1 }
+                        },
+                        {
+                            title: 'The Rosemary-Flax Spirit',
+                            subtitle:
+                                'Nam porttitor blandit accumsan. vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, commodo mi consec tetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velit. Mauris turpis nisl, molestie ut ipsum et,',
+                            image: { url: bannerRecepiesF4_1 }
+                        }
+                    ]
+                }
+            ]
+        };
+    }
+
+    componentDidMount = () => {
+        fetch('/api/holidays/recipes/content')
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({
+                    carousels: res.carousels
+                });
+            })
+            .catch((err) => console.error(err));
+    };
+
     render() {
         const sliderSettings = {
             dots: true,
@@ -66,318 +177,39 @@ export default class Recipes extends Component {
                 <div id="content-section-main">
                     {/* <!-- baner-section --> */}
                     <section id="baner-section" className="recipes-banners">
-                        <div
-                            id="carouselExampleControls"
-                            className="carousel slide"
-                            data-ride="carousel"
-                        >
-                            <div className="carousel-inner">
-                                <Slider {...sliderSettings}>
-                                    <div>
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF1}
-                                            alt="First slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>
-                                                A Tale of Herbs <br />& Sesame
-                                            </h5>
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan. vel dictum sem, a
-                                                pretium dui. In malesuada enim in dolor euismod,
-                                                commodo mi consec tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi velit. Mauris turpis
-                                                nisl, molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img src={productImageOne} alt="" />
-                                                <Link to="http://a.co/fdIGaVX">Start Your Cart</Link>
+                        {this.state.carousels.map((carousel) => (
+                            <div
+                                id="carouselExampleControls"
+                                className="carousel slide"
+                                data-ride="carousel"
+                            >
+                                <div className="carousel-inner">
+                                    <Slider {...sliderSettings}>
+                                        {carousel.items.map((item) => (
+                                            <div>
+                                                <img
+                                                    className="d-block w-100"
+                                                    src={item.image.url}
+                                                    alt="First slide"
+                                                />
+                                                <div className="carousel-caption d-md-block">
+                                                    {item.title.split('\n').map((x) => (
+                                                        <h5>{x}</h5>
+                                                    ))}
+                                                    <p className="text-detail">{item.subtitle}</p>
+                                                    <div className="carousel-img-download">
+                                                        <img src={productImageOne} alt="" />
+                                                        <Link to="http://a.co/fdIGaVX">
+                                                            Start Your Cart
+                                                        </Link>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF2}
-                                            alt="Second slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>
-                                                A Tale of Herbs <br />& Sesame
-                                            </h5>
-
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan. vel dictum sem, a
-                                                pretium dui. In malesuada enim in dolor euismod,
-                                                commodo mi consec tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi velit. Mauris turpis
-                                                nisl, molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img src={productImageOne} alt="" />
-                                                <Link to="http://a.co/fdIGaVX">Start Your Cart</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF3}
-                                            alt="Third slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>
-                                                A Tale of Herbs <br />& Sesame
-                                            </h5>
-
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan. vel dictum sem, a
-                                                pretium dui. In malesuada enim in dolor euismod,
-                                                commodo mi consec tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi velit. Mauris turpis
-                                                nisl, molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img src={productImageOne} alt="" />
-                                                <Link to="http://a.co/fdIGaVX">Start Your Cart</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Slider>
+                                        ))}
+                                    </Slider>
+                                </div>
                             </div>
-                        </div>
-
-                        <div
-                            id="carouselExampleControlsTwo"
-                            className="carousel slide"
-                            data-ride="carousel"
-                        >
-                            <div className="carousel-inner">
-                                <Slider {...sliderSettings}>
-                                    <div>
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF2_1}
-                                            alt="First slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>A Gift of Truffle and Seeds</h5>
-
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan. vel dictum sem, a
-                                                pretium dui. In malesuada enim in dolor euismod,
-                                                commodo mi consec tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi velit. Mauris turpis
-                                                nisl, molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img src={productImageTwo} alt="" />
-                                                <Link to="http://a.co/fwxluZA">Start Your Cart</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF2_2}
-                                            alt="Second slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>A Gift of Truffle and Seeds</h5>
-
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan. vel dictum sem, a
-                                                pretium dui. In malesuada enim in dolor euismod,
-                                                commodo mi consec tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi velit. Mauris turpis
-                                                nisl, molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img src={productImageTwo} alt="" />
-                                                <Link to="http://a.co/fwxluZA">Start Your Cart</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF2_3}
-                                            alt="Third slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>A Gift of Truffle and Seeds</h5>
-
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan. vel dictum sem, a
-                                                pretium dui. In malesuada enim in dolor euismod,
-                                                commodo mi consec tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi velit. Mauris turpis
-                                                nisl, molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img src={productImageTwo} alt="" />
-                                                <Link to="http://a.co/fwxluZA">Start Your Cart</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Slider>
-                            </div>
-                        </div>
-
-                        <div
-                            id="carouselExampleControlsThree"
-                            className="carousel slide"
-                            data-ride="carousel"
-                        >
-                            <div className="carousel-inner">
-                                <Slider {...sliderSettings}>
-                                    <div>
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF3_1}
-                                            alt="First slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>Jolly Pink Salt-Chia Combo</h5>
-
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan. vel dictum sem, a
-                                                pretium dui. In malesuada enim in dolor euismod,
-                                                commodo mi consec tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi velit. Mauris turpis
-                                                nisl, molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img src={productImageThree} alt="" />
-                                                <Link to="http://a.co/bvG3oBg">Start Your Cart</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF3_2}
-                                            alt="Second slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>Jolly Pink Salt-Chia Combo</h5>
-
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan. vel dictum sem, a
-                                                pretium dui. In malesuada enim in dolor euismod,
-                                                commodo mi consec tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi velit. Mauris turpis
-                                                nisl, molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img src={productImageThree} alt="" />
-                                                <Link to="http://a.co/bvG3oBg">Start Your Cart</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF3_3}
-                                            alt="Third slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>Jolly Pink Salt-Chia Combo</h5>
-
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan. vel dictum sem, a
-                                                pretium dui. In malesuada enim in dolor euismod,
-                                                commodo mi consec tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi velit. Mauris turpis
-                                                nisl, molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img src={productImageThree} alt="" />
-                                                <Link to="http://a.co/bvG3oBg">Start Your Cart</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Slider>
-                            </div>
-                        </div>
-
-                        <div
-                            id="carouselExampleControlsFour"
-                            className="carousel slide"
-                            data-ride="carousel"
-                        >
-                            <div className="carousel-inner">
-                                <Slider {...sliderSettings}>
-                                    <div>
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF4_1}
-                                            alt="First slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>The Rosemary-Flax Spirit</h5>
-
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan. vel dictum sem, a
-                                                pretium dui. In malesuada enim in dolor euismod,
-                                                commodo mi consec tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi velit. Mauris turpis
-                                                nisl, molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img src={productImageFour} alt="" />
-                                                <Link to="http://a.co/3nWh9hq">Start Your Cart</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF4_2}
-                                            alt="Second slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>The Rosemary-Flax Spirit</h5>
-
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan. vel dictum sem, a
-                                                pretium dui. In malesuada enim in dolor euismod,
-                                                commodo mi consec tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi velit. Mauris turpis
-                                                nisl, molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img src={productImageFour} alt="" />
-                                                <Link to="http://a.co/3nWh9hq">Start Your Cart</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <img
-                                            className="d-block w-100"
-                                            src={bannerRecepiesF4_3}
-                                            alt="Third slide"
-                                        />
-                                        <div className="carousel-caption d-md-block">
-                                            <h5>The Rosemary-Flax Spirit</h5>
-
-                                            <p className="text-detail">
-                                                Nam porttitor blandit accumsan. vel dictum sem, a
-                                                pretium dui. In malesuada enim in dolor euismod,
-                                                commodo mi consec tetur. Curabitur at vestibulum
-                                                nisi. Nullam vehicula nisi velit. Mauris turpis
-                                                nisl, molestie ut ipsum et,
-                                            </p>
-                                            <div className="carousel-img-download">
-                                                <img src={productImageFour} alt="" />
-                                                <Link to="http://a.co/3nWh9hq">Start Your Cart</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Slider>
-                            </div>
-                        </div>
+                        ))}
                     </section>
                 </div>
             </Layout>

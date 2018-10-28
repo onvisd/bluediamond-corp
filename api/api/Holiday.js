@@ -64,7 +64,7 @@ const getRecipeCarousels = async (recipesPage, client) => {
     return carouselModules.map((carousel) => {
         return {
             title: carousel.fields.title,
-            carouselItems: carousel.fields.carouselItems.map((ci) => {
+            items: carousel.fields.carouselItems.map((ci) => {
                 const item = carouselItems[ci.sys.id];
                 return {
                     title: item.fields.title,
