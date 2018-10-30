@@ -43,53 +43,16 @@ const getHolidaysGallery = async (holidayPage) => {
     };
 };
 
-const getRecipeCarousels = async (recipesPage, client) => {
-    const carouselModules = findModule(recipesPage, 'pageModuleRecipeCarousel');
+const getCarouselsHTML = async (recepies, client) => {
+    const carousels = findModule(recepies, 'pageModuleHtml');
 
-    const itemIds = carouselModules
-        .map((carousel) => {
-            return carousel.fields.carouselItems.map((i) => i.sys.id);
-        })
-        .reduce((accum, items) => accum.concat(items), []);
-
-    const items = (await client.getEntries({
-        'sys.id[in]': String(itemIds)
-    })).items;
-    const carouselItems = items.reduce((accum, item) => {
-        accum[item.sys.id] = item;
-
-        return accum;
-    }, {});
-
-    return carouselModules.map((carousel) => {
+    return carousels.map(function(carousel) {
         return {
             title: carousel.fields.title,
-            items: carousel.fields.carouselItems.map((ci) => {
-                const item = carouselItems[ci.sys.id];
-                return {
-                    title: item.fields.title,
-                    subtitle: item.fields.subtitle,
-                    image: {
-                        title: item.fields.image.fields.title,
-                        description: item.fields.image.fields.description,
-                        url: item.fields.image.fields.file.url
-                    }
-                };
-            })
+            html: carousel.fields.html
         };
     });
 };
-
-const getCarouselsHTML = async(recepies,client) => {
-    const carousels = findModule(recepies, 'pageModuleHtml');
-
-    return carousels.map(function(carousel){
-        return {
-            title : carousel.fields.title,
-            html : carousel.fields.html
-        }
-    });
-}
 
 export default (api) => {
     api.get('/holidays/content', async (req, res) => {
@@ -108,15 +71,8 @@ export default (api) => {
     api.get('/holidays/recipes/content', async (req, res) => {
         const client = req.client;
         const recipesPage = await getPageWithName(client, 'Holiday Recipes');
-        const carousels = await getRecipeCarousels(recipesPage, client);
+        const carousels = await getCarouselsHTML(recipesPage, client);
 
         res.send({ carousels });
-    });
-
-    api.get('/holidays/html',async (req,res) =>{
-        const client = req.client;
-        const recepies = await getPageWithName(client, 'Recipies');
-        const carouselhtml = await getCarouselsHTML(recepies, client);
-        res.send({carouselhtml});
     });
 };
