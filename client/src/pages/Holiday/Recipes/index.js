@@ -53,6 +53,12 @@ export default class Recipes extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            carousel:[
+                {
+                    title:'',
+                    html:''
+            }
+        ],
             carousels: [
                 {
                     title: 'First Carousel',
@@ -150,6 +156,7 @@ export default class Recipes extends Component {
         };
     }
 
+    
     componentDidMount = () => {
         fetch('/api/holidays/recipes/content')
             .then((res) => res.json())
@@ -159,7 +166,21 @@ export default class Recipes extends Component {
                 });
             })
             .catch((err) => console.error(err));
+
+            fetch('/api/holidays/html')
+            .then((res) => res.json())
+            .then((res) => {
+                console.log('state is', res);
+                this.setState({
+                   carousel:res.carouselhtml
+                });
+            })
+            .catch((err) => console.error(err));   
     };
+
+    createMarkup =() => {
+        return {__html: this.state.carousel.html};
+    }
 
     render() {
         const sliderSettings = {
@@ -177,7 +198,6 @@ export default class Recipes extends Component {
                 <div id="content-section-main">
                     {/* <!-- baner-section --> */}
                     <section id="baner-section" className="recipes-banners">
-                        {this.state.carousels.map((carousel) => (
                             <div
                                 id="carouselExampleControls"
                                 className="carousel slide"
@@ -185,31 +205,12 @@ export default class Recipes extends Component {
                             >
                                 <div className="carousel-inner">
                                     <Slider {...sliderSettings}>
-                                        {carousel.items.map((item) => (
-                                            <div>
-                                                <img
-                                                    className="d-block w-100"
-                                                    src={item.image.url}
-                                                    alt="First slide"
-                                                />
-                                                <div className="carousel-caption d-md-block">
-                                                    {item.title.split('<br>').map((x) => (
-                                                        <h5>{x}</h5>
-                                                    ))}
-                                                    <p className="text-detail">{item.subtitle}</p>
-                                                    <div className="carousel-img-download">
-                                                        <img src={productImageOne} alt="" />
-                                                        <Link to="http://a.co/fdIGaVX">
-                                                            Start Your Cart
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
+                                    {this.state.carousel.map((carousel) => (
+                                        <div dangerouslySetInnerHTML={createMarkup()}/>
+                                    ))}
                                     </Slider>
                                 </div>
                             </div>
-                        ))}
                     </section>
                 </div>
             </Layout>

@@ -80,6 +80,17 @@ const getRecipeCarousels = async (recipesPage, client) => {
     });
 };
 
+const getCarouselsHTML = async(recepies,client) => {
+    const carousels = findModule(recepies, 'pageModuleHtml');
+
+    return carousels.map(function(carousel){
+        return {
+            title : carousel.fields.title,
+            html : carousel.fields.html
+        }
+    });
+}
+
 export default (api) => {
     api.get('/holidays/content', async (req, res) => {
         const client = req.client;
@@ -100,5 +111,12 @@ export default (api) => {
         const carousels = await getRecipeCarousels(recipesPage, client);
 
         res.send({ carousels });
+    });
+
+    api.get('/holidays/html',async (req,res) =>{
+        const client = req.client;
+        const recepies = await getPageWithName(client, 'Recipies');
+        const carouselhtml = await getCarouselsHTML(recepies, client);
+        res.send({carouselhtml});
     });
 };
