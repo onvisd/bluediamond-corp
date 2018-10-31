@@ -18,13 +18,7 @@ export default class Home extends Component {
             hero: {
                 backgroundImageUrl: blueDiamondCover_t2_V2,
                 content: `
-## Your Holiday
-## Entertaining Starts Here.
-
-Show your guests that you thought about every detail with our amazing pairings.
-
-<div class='title-comment'><p>The Uncommon Almond.<sup>TM</sup></p></div>
-`
+                `
             },
             gallery: {
                 images: [

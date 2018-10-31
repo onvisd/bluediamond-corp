@@ -59,13 +59,12 @@ a, a:hover {
   font-style: normal;
 }
 
-/* @font-face {
+@font-face {
   font-family: 'MinionPro-Semibold';
-  src: url('./fonts/MinionPro-Semibold.eot?#iefix') format('embedded-opentype'),  url('MinionPro-Semibold.otf')  format('opentype'),
-	     url('./fonts/MinionPro-Semibold.woff') format('woff'), url('./fonts/MinionPro-Semibold.ttf')  format('truetype'), url('./fonts/MinionPro-Semibold.svg#MinionPro-Semibold') format('svg');
+  src: url('./fonts/MinionPro-Semibold.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-} */
+}
 
 /* headings */
 .duble-headings{
@@ -193,7 +192,8 @@ a, a:hover {
 }
 #baner-section .banner-text .b-text p {
   font-size: 24px;
-  /* font-family: 'MinionPro-Semibold'; */
+  width: 50%;
+  font-family: 'MinionPro-Semibold';
 }
 
 /* Products boxes */
@@ -384,7 +384,7 @@ a, a:hover {
 .recipes-banners .carousel-caption .carousel-img-download {
   display: flex;
   position: absolute;
-  bottom: 27%;
+  bottom: 10%;
 }
 .recipes-banners .carousel-caption .carousel-img-download img{
   width: auto;
@@ -430,4 +430,6 @@ a, a:hover {
   position: absolute;
   top: 22px;
 }
+#carouselExampleControls{margin-top:-1px}
+#carouselExampleControls:first-child{margin-top: 0}
   /* stylelint-enable */
