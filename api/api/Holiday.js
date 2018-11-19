@@ -18,6 +18,10 @@ const findModule = (page, moduleId) => {
     return page.fields.modules.filter((m) => m.sys.contentType.sys.id === moduleId);
 };
 
+const findModuleEnvironment = (page, environmentId) => {
+    return page.fields.modules.filter((m) => m.sys.id === environmentId);
+};
+
 const getHolidaysHero = async (holidayPage) => {
     const heroModule = findModule(holidayPage, 'pageModuleHero')[0];
     const backgroundImageUrl = heroModule.fields.backgroundImage.fields.file.url;
@@ -43,6 +47,16 @@ const getHolidaysGallery = async (holidayPage) => {
     };
 };
 
+const getBuildPartyModule = async(holidayPage) => {
+    const partyModule = findModuleEnvironment(holidayPage, '4l5KdbCcusCgM2amKYYQss')[0];
+    const backgroundImageUrl = partyModule.fields.backgroundImage.fields.file.url;
+    const content = partyModule.fields.content;
+    return {
+         backgroundImageUrl,
+         content
+     };
+}
+
 const getCarouselsHTML = async (recepies, client) => {
     const carousels = findModule(recepies, 'pageModuleHtml');
 
@@ -61,10 +75,12 @@ export default (api) => {
 
         const hero = await getHolidaysHero(holidayPage);
         const gallery = await getHolidaysGallery(holidayPage);
+        const buildPartyHero = await getBuildPartyModule(holidayPage);
 
         res.send({
             hero,
-            gallery
+            gallery,
+            buildPartyHero
         });
     });
 
@@ -75,4 +91,5 @@ export default (api) => {
 
         res.send({ carousels });
     });
+
 };

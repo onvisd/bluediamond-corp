@@ -241,16 +241,17 @@ a, a:hover {
 }
 
 /* build party section */
-.build-party{
-  background-image: url('./images/build-party-back.png');
-  background-size: cover;
-  background-position: center;
-  padding: 90px 0;
-}
 
-.build-party .party-icon{
-  width: 110px;
+.build-party{
+  display: flex;
+  width:100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
+.full-img, .build-img{width: 100%;}
+.content-block{position: absolute;width: 100%;}
 
 .build-party .party-icon-text {
   font-size: 22px;

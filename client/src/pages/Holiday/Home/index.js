@@ -4,12 +4,18 @@ import Layout from '../Layout';
 import product_Icon_01 from '../Layout/images/product-01-img.png';
 import product_Icon_01_1 from '../Layout/images/product-01.1-img.png';
 import blueDiamondCover_t2_V2 from '../Layout/images/blue-diamond-cover_t2_V2.jpg';
+import blueDiamondPartyModule from '../Layout/images/build-party-back.png';
 import product_02 from '../Layout/images/product-02-img.png';
 import product_02_1 from '../Layout/images/product-02.1-img.png';
 import product_03 from '../Layout/images/product-03-img.png';
 import product_03_1 from '../Layout/images/product-03.1-img.png';
 import product_04 from '../Layout/images/product-04-img.png';
 import product_04_1 from '../Layout/images/product-04.1-img.png';
+import inviteIcon from '../Layout/images/invite-icon.png';
+import musicIcon from '../Layout/images/music-icon.png';
+import fireIcon from '../Layout/images/fire-icon.png';
+import platterIcon from '../Layout/images/platter-icon.png';
+
 
 export default class Home extends Component {
     constructor(props) {
@@ -17,16 +23,19 @@ export default class Home extends Component {
         this.state = {
             hero: {
                 backgroundImageUrl: blueDiamondCover_t2_V2,
-                content: `
-                `
+                content: ` `
             },
             gallery: {
                 images: [
-                  { url: product_02, title: '' },
-                  { url: product_03, title: '' },
-                  { url: product_04, title: '' },
-                  { url: product_02, title: '' }
+                    { url: product_02, title: '' },
+                    { url: product_03, title: '' },
+                    { url: product_04, title: '' },
+                    { url: product_02, title: '' }
                 ]
+            },
+            buildPartyHero: {
+                backgroundImageUrl: blueDiamondPartyModule,
+                content: ''
             }
         };
     }
@@ -35,10 +44,11 @@ export default class Home extends Component {
         fetch('/api/holidays/content')
             .then((res) => res.json())
             .then((res) => {
-              console.log('RS', res);
+                console.log('RS', res);
                 this.setState({
-                  hero: res.hero,
-                  gallery: res.gallery
+                    hero: res.hero,
+                    gallery: res.gallery,
+                    buildPartyHero: res.buildPartyHero
                 });
             })
             .catch((err) => console.error(err));
@@ -63,7 +73,6 @@ export default class Home extends Component {
                                         alt=""
                                     />
                                 </div>
-
                                 <div
                                     className="banner-text"
                                     dangerouslySetInnerHTML={this.renderMarkup(
@@ -175,7 +184,68 @@ export default class Home extends Component {
                             </div>
                         </div>
                     </section>
-                    {/* <!-- build party section removed--> */}
+                    {/* <!-- build party section */}
+                    <section className="build-party">
+                        <div className="build-img">
+                            <img
+                                className="full-img"
+                                src={this.state.buildPartyHero.backgroundImageUrl}
+                                alt=""
+                            />
+                        </div>
+                        <div className="content-block">
+                            <div
+                                className="duble-headings text-center"
+                                dangerouslySetInnerHTML={this.renderMarkup(
+                                    this.state.buildPartyHero.content
+                                )}
+                            />
+                            <div className="container sm-container">
+                                <div className="row">
+                                    <div className="col-lg-3 col-md-6 col-sm-6 col-6">
+                                        <div className="text-center mb-4">
+                                            <img
+                                                className="party-icon"
+                                                src={inviteIcon}
+                                                alt=""
+                                            />
+                                            <p className="party-icon-text">Invite</p>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 col-sm-6 col-6">
+                                        <div className="text-center mb-4">
+                                            <img
+                                                className="party-icon"
+                                                src={musicIcon}
+                                                alt=""
+                                            />
+                                            <p className="party-icon-text">Music</p>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 col-sm-6 col-6">
+                                        <div className="text-center mb-4">
+                                            <img
+                                                className="party-icon"
+                                                src={fireIcon}
+                                                alt=""
+                                            />
+                                            <p className="party-icon-text">Set the Mood</p>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 col-sm-6 col-6">
+                                        <div className="text-center mb-4">
+                                            <img
+                                                className="party-icon"
+                                                src={platterIcon}
+                                                alt=""
+                                            />
+                                            <p className="party-icon-text">Platters</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </Layout>
         );
