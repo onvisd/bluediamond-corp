@@ -75,6 +75,8 @@ a, a:hover {
 }
 .duble-headings h1{
   font-size: 42px;
+  font-family: 'bigcaslonregular';
+  font-weight: 500;
 }
 .duble-headings p{
   font-size: 24px;
@@ -252,13 +254,16 @@ a, a:hover {
 }
 .full-img, .build-img{width: 100%;}
 .content-block{position: absolute;width: 100%;}
-
+.build-party .party-icon{width: 110px;}
 .build-party .party-icon-text {
   font-size: 22px;
   color: #fff;
+  margin-bottom:0;
   padding: 10px 0 15px;
 }
-
+.build-party .text-center.mb-4 {
+  margin-bottom: 0 !important;
+}
 /* get inspired */
 .get-inspired{
   background-color: #233b4a;

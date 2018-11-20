@@ -44,7 +44,6 @@ export default class Home extends Component {
         fetch('/api/holidays/content')
             .then((res) => res.json())
             .then((res) => {
-                console.log('RS', res);
                 this.setState({
                     hero: res.hero,
                     gallery: res.gallery,
@@ -192,7 +191,7 @@ export default class Home extends Component {
                                 src={this.state.buildPartyHero.backgroundImageUrl}
                                 alt=""
                             />
-                        </div>
+                        </div>                       
                         <div className="content-block">
                             <div
                                 className="duble-headings text-center"
