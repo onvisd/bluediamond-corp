@@ -26,6 +26,9 @@ import ProductLocator from './pages/ProductLocator';
 import Holiday from './pages/Holiday/Home';
 import HolidayRecipes from './pages/Holiday/Recipes';
 
+import Holidays from './pages/Holidays/Home';
+import HolidaysRecipes from './pages/Holidays/Recipes';
+
 export default (
     <div>
         <Route path="/holiday" component={Holiday} />
@@ -58,6 +61,8 @@ export default (
             <Route path="/account/:view" component={Account} />
             <Route path="/404" component={NotFound} status={404} />
             <Route path="/error" component={GenericError} />
+            <Route path="/holidays" component={Holidays} />
+            <Route path="/holidays/recipes" component={HolidaysRecipes} />
             <Route path="*" component={Page} />
         </Route>
     </div>
