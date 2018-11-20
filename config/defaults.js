@@ -57,5 +57,8 @@ export default {
   imgix: {
     host: process.env.IMGIX_HOST,
     secureURLToken: process.env.IMGIX_SECURE_URL_TOKEN
+  },
+  facebook:{
+    ogUrl: process.env.shareFbUrl,
   }
 };

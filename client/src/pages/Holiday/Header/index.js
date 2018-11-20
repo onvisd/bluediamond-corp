@@ -12,7 +12,10 @@ import international_Icon from '../Layout/images/international-icon.png';
 
 export default class Header extends Component {
     state = {
-        isActive: false
+        isActive: false,
+        day: date.toDateString(),
+        time: date.toLocaleTimeString(),
+        address: ''
     };
 
     toggleNav = () => {
@@ -22,10 +25,33 @@ export default class Header extends Component {
     };
 
     render() {
+    const ogUrl = 'http://localhost:8080/holiday'
+
         return (
             <div>
                 <Title>Holiday</Title>
-                <Meta></Meta>
+                <Meta>{[
+                    {
+                        property: 'og:url',
+                        content: ogUrl
+                    },
+                    {
+                        property: 'og:type',
+                        content: 'invite'
+                    },
+                    {
+                        property:'og:title',
+                        content: 'Tis the Seasonings'
+                    },
+                    {
+                        property: 'og:description',
+                        content: 'Our friendship’s like a great board: it only exists if we come together. Join me on '+this.state.day+' at '+this.state.time+' for a holiday celebration full of great pairings—like you and me. See you at '+this.state.address+'. Cheers! '
+                    },
+                    {
+                        property: 'og:image',
+                        content: 'https://images.ctfassets.net/eipaypwf4tdc/2eNHNLwZLSU04WOOqMII2i/406886eb0ec265c528122ac98d7375e2/tis.png'
+                    }
+                ]}</Meta>
                 <header id="header-main">
                     {/* <!-- top header --> */}
                     <div className="top-header">

@@ -15,7 +15,7 @@ import inviteIcon from '../Layout/images/invite-icon.png';
 import musicIcon from '../Layout/images/music-icon.png';
 import fireIcon from '../Layout/images/fire-icon.png';
 import platterIcon from '../Layout/images/platter-icon.png';
-
+import { FacebookProvider, Share } from 'react-facebook';
 
 export default class Home extends Component {
     constructor(props) {
@@ -191,7 +191,7 @@ export default class Home extends Component {
                                 src={this.state.buildPartyHero.backgroundImageUrl}
                                 alt=""
                             />
-                        </div>                       
+                        </div>
                         <div className="content-block">
                             <div
                                 className="duble-headings text-center"
@@ -203,41 +203,37 @@ export default class Home extends Component {
                                 <div className="row">
                                     <div className="col-lg-3 col-md-6 col-sm-6 col-6">
                                         <div className="text-center mb-4">
-                                            <img
-                                                className="party-icon"
-                                                src={inviteIcon}
-                                                alt=""
-                                            />
+                                            <FacebookProvider appId="2185001408409392">
+                                                <Share href="http://localhost:8080/holiday">
+                                                    {({ handleClick, loading }) => (
+                                                        <img
+                                                            className="party-icon"
+                                                            src={inviteIcon}
+                                                            alt=""
+                                                            disabled="loading"
+                                                            onClick={handleClick}
+                                                        />
+                                                    )}
+                                                </Share>
+                                            </FacebookProvider>
                                             <p className="party-icon-text">Invite</p>
                                         </div>
                                     </div>
                                     <div className="col-lg-3 col-md-6 col-sm-6 col-6">
                                         <div className="text-center mb-4">
-                                            <img
-                                                className="party-icon"
-                                                src={musicIcon}
-                                                alt=""
-                                            />
+                                            <img className="party-icon" src={musicIcon} alt="" />
                                             <p className="party-icon-text">Music</p>
                                         </div>
                                     </div>
                                     <div className="col-lg-3 col-md-6 col-sm-6 col-6">
                                         <div className="text-center mb-4">
-                                            <img
-                                                className="party-icon"
-                                                src={fireIcon}
-                                                alt=""
-                                            />
+                                            <img className="party-icon" src={fireIcon} alt="" />
                                             <p className="party-icon-text">Set the Mood</p>
                                         </div>
                                     </div>
                                     <div className="col-lg-3 col-md-6 col-sm-6 col-6">
                                         <div className="text-center mb-4">
-                                            <img
-                                                className="party-icon"
-                                                src={platterIcon}
-                                                alt=""
-                                            />
+                                            <img className="party-icon" src={platterIcon} alt="" />
                                             <p className="party-icon-text">Platters</p>
                                         </div>
                                     </div>
