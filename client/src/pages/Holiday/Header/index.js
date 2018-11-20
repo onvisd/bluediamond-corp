@@ -12,9 +12,10 @@ import international_Icon from '../Layout/images/international-icon.png';
 
 export default class Header extends Component {
     state = {
+
         isActive: false,
-        day: date.toDateString(),
-        time: date.toLocaleTimeString(),
+        day: new Date().toDateString(),
+        time: new Date().toLocaleTimeString(),
         address: ''
     };
 

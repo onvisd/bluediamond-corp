@@ -205,15 +205,12 @@ export default class Home extends Component {
                                         <div className="text-center mb-4">
                                             <FacebookProvider appId="2185001408409392">
                                                 <Share href="http://localhost:8080/holiday">
-                                                    {({ handleClick, loading }) => (
-                                                        <img
-                                                            className="party-icon"
-                                                            src={inviteIcon}
-                                                            alt=""
-                                                            disabled="loading"
-                                                            onClick={handleClick}
-                                                        />
-                                                    )}
+                                                <img
+                                                    className="party-icon"
+                                                    src={inviteIcon}
+                                                    alt=""
+                                                    disabled="loading"
+                                                  />
                                                 </Share>
                                             </FacebookProvider>
                                             <p className="party-icon-text">Invite</p>
