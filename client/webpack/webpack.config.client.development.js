@@ -43,13 +43,13 @@ config.plugins.push(
 // enable webpack development server
 config.entry.main = [
     'babel-polyfill',
-    `webpack-hot-middleware/client?path=http://localhost:${appConfig.webpack.devserver.port}/__webpack_hmr`,
+    `webpack-hot-middleware/client?path=http://10.91.0.54:${appConfig.webpack.devserver.port}/__webpack_hmr`,
     'react-hot-loader/patch',
     config.entry.main
 ];
 
 // network path for static files: fetch all statics from webpack development server
 config.output.publicPath =
-    `http://localhost:${appConfig.webpack.devserver.port}${config.output.publicPath}`;
+    `http://10.91.0.54:${appConfig.webpack.devserver.port}${config.output.publicPath}`;
 
 export default config;

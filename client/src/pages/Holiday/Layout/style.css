@@ -286,7 +286,7 @@ a, a:hover {
   display: inline-block;
   width: 100%;
 }
-.site-footer .links-footer .first-links-footer hr{
+.site-footer .links-footer .first-links-fsection.build-partyooter hr{
   border-color: #797979;
   display: inline-block;
   width: 100%;
@@ -438,4 +438,30 @@ a, a:hover {
 }
 #carouselExampleControls{margin-top:-1px}
 #carouselExampleControls:first-child{margin-top: 0}
-  /* stylelint-enable */
+/*popup*/
+section.build-party{position: relative;}
+.popup-backdrop {
+  background: rgba(0, 0, 0, .80);
+  position: fixed;
+  width: 100%;
+  height: auto;
+  z-index: 99;
+  max-height: unset;
+  top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+img.fbPopUp {
+  margin-top: 3px;
+}
+.popup-backdrop .popup {
+  width: 400px;
+  margin: 30px auto;
+}
+button.popup-close {
+  float: right;
+  margin-top: 20px;
+  color: #fff;
+}
+/* stylelint-enable */

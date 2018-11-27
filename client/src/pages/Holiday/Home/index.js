@@ -15,7 +15,10 @@ import inviteIcon from '../Layout/images/invite-icon.png';
 import musicIcon from '../Layout/images/music-icon.png';
 import fireIcon from '../Layout/images/fire-icon.png';
 import platterIcon from '../Layout/images/platter-icon.png';
-import { FacebookProvider, Share } from 'react-facebook';
+// import { FacebookProvider, Feed } from 'react-facebook';
+// import { FacebookShareButton } from 'react-share';
+import Popup from '../Popup';
+import tis from '../../../../assets/tis.png';
 
 export default class Home extends Component {
     constructor(props) {
@@ -36,9 +39,22 @@ export default class Home extends Component {
             buildPartyHero: {
                 backgroundImageUrl: blueDiamondPartyModule,
                 content: ''
-            }
+            },
+            isOpen: false
         };
     }
+
+    openPopup = () => {
+        this.setState({
+            isOpen: true
+        });
+    };
+
+    closePopup = () => {
+        this.setState({
+            isOpen: false
+        });
+    };
 
     componentDidMount = () => {
         fetch('/api/holidays/content')
@@ -58,6 +74,9 @@ export default class Home extends Component {
     }
 
     render() {
+        const shareLink = 'http://holiday.urtestsite.com';
+        const title =
+            'Our friendship’s like a great board: it only exists if we come together. Join me on [day] at [time] for a holiday celebration full of great pairings—like you and me. See you at [address]. Cheers!';
         return (
             <Layout>
                 <div id="content-section-main">
@@ -81,6 +100,7 @@ export default class Home extends Component {
                             </div>
                         </div>
                     </section>
+
                     {/* <!-- Products boxes section --> */}
                     <section className="products-boxes">
                         <div className="container-fluid">
@@ -203,16 +223,19 @@ export default class Home extends Component {
                                 <div className="row">
                                     <div className="col-lg-3 col-md-6 col-sm-6 col-6">
                                         <div className="text-center mb-4">
-                                            <FacebookProvider appId="2185001408409392">
-                                                <Share href="http://localhost:8080/holiday">
-                                                <img
-                                                    className="party-icon"
-                                                    src={inviteIcon}
-                                                    alt=""
-                                                    disabled="loading"
-                                                  />
-                                                </Share>
-                                            </FacebookProvider>
+                                            <img
+                                                className="party-icon"
+                                                src={inviteIcon}
+                                                alt=""
+                                                onClick={this.openPopup}
+                                            />
+                                            {/* <FacebookShareButton
+                                                url={shareLink}
+                                                quote={title}
+                                                className="social-media-icon"
+                                            >
+                                                
+                                            </FacebookShareButton>*/}
                                             <p className="party-icon-text">Invite</p>
                                         </div>
                                     </div>
@@ -238,6 +261,12 @@ export default class Home extends Component {
                             </div>
                         </div>
                     </section>
+                    <Popup show={this.state.isOpen} onClose={this.closePopup}>
+                        <div>
+                            <input type="text" placeholder="Search" title="Type search term here" />
+                            <img src={tis} alt="" className="fbPopUp" />
+                        </div>
+                    </Popup>
                 </div>
             </Layout>
         );

@@ -15,10 +15,10 @@ app.use(morgan('dev'));
 app.use('/assets', express.static(path.join(__dirname, '../client/build/assets')));
 
 // Proxy /api requests to API server
-app.use('/api', proxy(`http://localhost:${config.services.api.port}`));
+app.use('/api', proxy(`http://10.91.0.54:${config.services.api.port}`));
 
 // Proxy all the other requests to rendering server
-app.use(proxy(`http://localhost:${config.services.rendering.port}`));
+app.use(proxy(`http://10.91.0.54:${config.services.rendering.port}`));
 
 app.server.listen(config.web.port);
 console.log(`Running in ${process.env.NODE_ENV} mode`);

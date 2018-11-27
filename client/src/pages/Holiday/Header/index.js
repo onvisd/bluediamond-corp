@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Title from '../../../components/Title';
 import Meta from '../../../components/Meta';
-
 import signInIcon from '../Layout/images/sign-in-icon.png';
 import bdlogo from '../Layout/images/bd-logo.png';
 import shoppingCartIcon from '../Layout/images/shopping-cart-icon.png';
 import growers_icon from '../Layout/images/growers-icon.png';
 import gi_Icon from '../Layout/images/gi-icon.png';
 import international_Icon from '../Layout/images/international-icon.png';
-
+import tis from '../../../../assets/tis.png';
 export default class Header extends Component {
     state = {
-
         isActive: false,
         day: new Date().toDateString(),
         time: new Date().toLocaleTimeString(),
@@ -26,7 +24,7 @@ export default class Header extends Component {
     };
 
     render() {
-    const ogUrl = 'http://localhost:8080/holiday'
+        const ogUrl = 'http://holiday.urtestsite.com/';
 
         return (
             <div>
@@ -38,7 +36,7 @@ export default class Header extends Component {
                     },
                     {
                         property: 'og:type',
-                        content: 'invite'
+                        content: 'website'
                     },
                     {
                         property:'og:title',
@@ -46,11 +44,15 @@ export default class Header extends Component {
                     },
                     {
                         property: 'og:description',
-                        content: 'Our friendship’s like a great board: it only exists if we come together. Join me on '+this.state.day+' at '+this.state.time+' for a holiday celebration full of great pairings—like you and me. See you at '+this.state.address+'. Cheers! '
+                        content: 'Our friendship’s like a great board: it only exists if we come together'
                     },
                     {
                         property: 'og:image',
-                        content: 'https://images.ctfassets.net/eipaypwf4tdc/2eNHNLwZLSU04WOOqMII2i/406886eb0ec265c528122ac98d7375e2/tis.png'
+                        content: tis
+                    },
+                    {
+                        property:'fb:app_id',
+                        content:'2185001408409392'
                     }
                 ]}</Meta>
                 <header id="header-main">
