@@ -15,8 +15,6 @@ import inviteIcon from '../Layout/images/invite-icon.png';
 import musicIcon from '../Layout/images/music-icon.png';
 import fireIcon from '../Layout/images/fire-icon.png';
 import platterIcon from '../Layout/images/platter-icon.png';
-// import { FacebookProvider, Feed } from 'react-facebook';
-// import { FacebookShareButton } from 'react-share';
 import Popup from '../Popup';
 import tis from '../../../../assets/tis.png';
 
@@ -75,8 +73,7 @@ export default class Home extends Component {
 
     render() {
         const shareLink = 'http://holiday.urtestsite.com';
-        const title =
-            'Our friendship’s like a great board: it only exists if we come together. Join me on [day] at [time] for a holiday celebration full of great pairings—like you and me. See you at [address]. Cheers!';
+        let title = 'Our friendship’s like a great board: it only exists if we come together. Join me on [day] at [time] for a holiday celebration full of great pairings—like you and me. See you at [address]. Cheers!';
         return (
             <Layout>
                 <div id="content-section-main">
@@ -223,6 +220,7 @@ export default class Home extends Component {
                                 <div className="row">
                                     <div className="col-lg-3 col-md-6 col-sm-6 col-6">
                                         <div className="text-center mb-4">
+                                        {console.log(shareLink + tis)}
                                             <img
                                                 className="party-icon"
                                                 src={inviteIcon}
@@ -262,9 +260,37 @@ export default class Home extends Component {
                         </div>
                     </section>
                     <Popup show={this.state.isOpen} onClose={this.closePopup}>
-                        <div>
-                            <input type="text" placeholder="Search" title="Type search term here" />
+                        <div className="dm-pop">
+                        <textarea className="form-control"
+                                type="text"
+                                placeholder="Search"
+                                title="Type search term here"
+                                defaultValue={title}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        const url = '';
+                                        const image = 'http://myserver.com';
+                                        const description = e.target.value;
+
+                                        FB.ui({
+                                            method: 'share_open_graph',
+                                            action_type: 'og.likes',
+                                            action_properties: JSON.stringify({
+                                                object: {
+                                                    'og:url': url,
+                                                    'og:title': title,
+                                                    'og:description': description,
+                                                    'og:image': image
+                                                }
+                                            })
+                                        });
+                                    }
+                                }}
+                            />
                             <img src={tis} alt="" className="fbPopUp" />
+                            <div className="shareButton">
+                            <button className="fbShare">Share</button>
+                            </div>
                         </div>
                     </Popup>
                 </div>

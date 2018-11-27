@@ -464,4 +464,37 @@ button.popup-close {
   margin-top: 20px;
   color: #fff;
 }
+
+.dm-pop-close {
+  color: #000 !important;
+  margin: 0 !important;
+  width: 100%;
+  text-align: right;
+  background: #f1f1f1;
+}
+
+.dm-pop {
+  background: #fff;
+}
+
+.dm-pop textarea {
+  border: none;
+  min-height: 80px;
+}
+
+.dm-pop img {
+  padding: 10px;
+}
+.shareButton {
+  width: 100%;
+  text-align: right;
+}
+button.fbShare {
+  background: #333;
+  padding: 5px 12px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  color: #fff;
+}
 /* stylelint-enable */
