@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import Layout from '../Layout';
 import './slick.css';
 import './slick-theme.css';
+import Popup from '../Popup';
 
 import productImageOne from '../Layout/images/sliderOne/product-img.png';
 import productImageTwo from '../Layout/images/sliderTwo/product-img.png';
@@ -59,9 +60,23 @@ export default class Recipes extends Component {
                     title: '',
                     html: ''
                 }
-            ]
+            ],
+            isOpen: false
+            // lightbox: ``
         };
     }
+
+    openPopup = () => {
+        this.setState({
+            isOpen: true
+        });
+    };
+
+    closePopup = () => {
+        this.setState({
+            isOpen: false
+        });
+    };
 
     componentDidMount = () => {
         fetch('/api/holidays/recipes/content')
@@ -73,6 +88,11 @@ export default class Recipes extends Component {
             })
             .catch((err) => console.error(err));
     };
+
+    // handleClick = () => {
+    //     console.log('The link was clicked.');
+    //     alert('Im an alert');
+    // };
 
     render() {
         const sliderSettings = {
@@ -112,6 +132,21 @@ export default class Recipes extends Component {
                             </div>
                         ))}
                     </section>
+                    <button className="recipes-video-btn" onClick={this.openPopup}>
+                        clickme
+                    </button>
+                    <Popup show={this.state.isOpen} onClose={this.closePopup}>
+                        <div className="recipes-video-modal">
+                            <iframe
+                                width="100%"
+                                height="315"
+                                src="https://www.youtube.com/embed/on5I4KJfulw"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                            />
+                        </div>
+                    </Popup>
                 </div>
             </Layout>
         );

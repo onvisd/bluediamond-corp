@@ -497,4 +497,47 @@ button.fbShare {
   border-radius: 3px;
   color: #fff;
 }
+
+/* modal 20-11-2018 */
+/* The Modal (background) */
+.recipes-video-bth {
+  margin: 15px 0;
+  background: #b7945a;
+  border-radius: 4px;
+  color: #fff;
+  padding: 10px 12px;
+  text-align: center;
+  min-width: 130px;
+  border: 0;
+}
+.recipes-video-bth:focus{
+  outline: 0;
+}
+button.recipes-video-btn {
+  margin: 15px 0;
+  background: #b7945a;
+  border-radius: 4px;
+  color: #fff;
+  padding: 10px 12px;
+  text-align: center;
+  min-width: 150px;
+  border: none;
+}
+.recipes-video-modal {
+  background: #fff;
+  padding: 15px;
+  display: inline-block;
+  width: 100%;
+}
+.popup.abc {
+  width: 550px;
+  max-width: 90%;
+}
+
+@media only screen and (max-width: 600px) {
+  #recipes-video-modal.modal .modal-content{
+    width: 90%;
+  }
+}
+/* modal 20-11-2018 */
 /* stylelint-enable */

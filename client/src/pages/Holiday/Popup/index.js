@@ -5,10 +5,9 @@ export default class Popup extends Component {
         if (!this.props.show) {
             return null;
         }
-
         return (
             <div className="popup-backdrop">
-                <div className="popup">
+                <div className="popup abc">
                     <button className="popup-close dm-pop-close" onClick={this.props.onClose}>
                         ✖
                     </button>

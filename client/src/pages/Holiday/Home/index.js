@@ -220,7 +220,6 @@ export default class Home extends Component {
                                 <div className="row">
                                     <div className="col-lg-3 col-md-6 col-sm-6 col-6">
                                         <div className="text-center mb-4">
-                                        {console.log(shareLink + tis)}
                                             <img
                                                 className="party-icon"
                                                 src={inviteIcon}
@@ -268,8 +267,8 @@ export default class Home extends Component {
                                 defaultValue={title}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
-                                        const url = '';
-                                        const image = 'http://myserver.com';
+                                        const url = shareLink;
+                                        const image = 'http://10.91.0.54:9084/assets/c71cf3d01b48e317ccfacf1358e6bf22.png';
                                         const description = e.target.value;
 
                                         FB.ui({
@@ -292,7 +291,7 @@ export default class Home extends Component {
                             <button className="fbShare">Share</button>
                             </div>
                         </div>
-                    </Popup>
+                    </Popup>                  
                 </div>
             </Layout>
         );
