@@ -4,7 +4,6 @@ import Slider from 'react-slick';
 import Layout from '../Layout';
 import './slick.css';
 import './slick-theme.css';
-import marked from 'marked';
 import Popup from '../Popup';
 
 import productImageOne from '../Layout/images/sliderOne/product-img.png';
@@ -63,7 +62,7 @@ export default class Recipes extends Component {
                 }
             ],
             isOpen: false,
-             lightbox: `<div className="recipes-video-modal">
+            popup: `<div className="recipes-video-modal">
              <iframe
                  width="100%"
                  height="315"
@@ -88,16 +87,13 @@ export default class Recipes extends Component {
         });
     };
 
-    renderMarkup(field) {
-        return { __html: marked(field) };
-    }
-
     componentDidMount = () => {
         fetch('/api/holidays/recipes/content')
             .then((res) => res.json())
             .then((res) => {
                 this.setState({
-                    carousels: res.carousels
+                    carousels: res.carousels,
+                    popup: res.popups[0].html
                 });
             })
             .catch((err) => console.error(err));
@@ -150,7 +146,7 @@ export default class Recipes extends Component {
                         ))}
                     </section>
                     <Popup show={this.state.isOpen} onClose={this.closePopup}>
-                        <div dangerouslySetInnerHTML={this.renderMarkup(this.state.lightbox)} />
+                        <div dangerouslySetInnerHTML={{ __html: this.state.popup }} />
                     </Popup>
                 </div>
             </Layout>

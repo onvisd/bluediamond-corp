@@ -47,20 +47,31 @@ const getHolidaysGallery = async (holidayPage) => {
     };
 };
 
-const getBuildPartyModule = async(holidayPage) => {
+const getBuildPartyModule = async (holidayPage) => {
     const partyModule = findModuleEnvironment(holidayPage, '4l5KdbCcusCgM2amKYYQss')[0];
     const backgroundImageUrl = partyModule.fields.backgroundImage.fields.file.url;
     const content = partyModule.fields.content;
     return {
-         backgroundImageUrl,
-         content
-     };
-}
+        backgroundImageUrl,
+        content
+    };
+};
 
-const getCarouselsHTML = async (recepies, client) => {
-    const carousels = findModule(recepies, 'pageModuleHtml');
+const getCarouselsHTML = async (recipes, client) => {
+    const htmlModules = findModule(recipes, 'pageModuleHtml');
 
-    return carousels.map(function(carousel) {
+    return htmlModules.filter((p) => p.fields.title !== 'Recipes Popup').map(function(carousel) {
+        return {
+            title: carousel.fields.title,
+            html: carousel.fields.html
+        };
+    });
+};
+
+const getRecipesPopupsHTML = async (recipes, client) => {
+    const htmlModules = findModule(recipes, 'pageModuleHtml');
+
+    return htmlModules.filter((p) => p.fields.title === 'Recipes Popup').map(function(carousel) {
         return {
             title: carousel.fields.title,
             html: carousel.fields.html
@@ -88,8 +99,8 @@ export default (api) => {
         const client = req.client;
         const recipesPage = await getPageWithName(client, 'Holiday Recipes');
         const carousels = await getCarouselsHTML(recipesPage, client);
+        const popups = await getRecipesPopupsHTML(recipesPage, client);
 
-        res.send({ carousels });
+        res.send({ carousels, popups });
     });
-
 };
