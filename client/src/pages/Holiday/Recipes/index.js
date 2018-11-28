@@ -87,6 +87,9 @@ export default class Recipes extends Component {
                 });
             })
             .catch((err) => console.error(err));
+
+        // handler called by recipe carousel button
+        window.showRecipesPopup = this.openPopup;
     };
 
     // handleClick = () => {
@@ -132,9 +135,6 @@ export default class Recipes extends Component {
                             </div>
                         ))}
                     </section>
-                    <button className="recipes-video-btn" onClick={this.openPopup}>
-                        clickme
-                    </button>
                     <Popup show={this.state.isOpen} onClose={this.closePopup}>
                         <div className="recipes-video-modal">
                             <iframe
