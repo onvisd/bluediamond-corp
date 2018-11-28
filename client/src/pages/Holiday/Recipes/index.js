@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import Layout from '../Layout';
 import './slick.css';
 import './slick-theme.css';
+import marked from 'marked';
 import Popup from '../Popup';
 
 import productImageOne from '../Layout/images/sliderOne/product-img.png';
@@ -61,8 +62,17 @@ export default class Recipes extends Component {
                     html: ''
                 }
             ],
-            isOpen: false
-            // lightbox: ``
+            isOpen: false,
+             lightbox: `<div className="recipes-video-modal">
+             <iframe
+                 width="100%"
+                 height="315"
+                 src="https://www.youtube.com/embed/UFWoGRQrIws"
+                 frameborder="0"
+                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                 allowfullscreen
+             />
+         </div>`
         };
     }
 
@@ -77,6 +87,10 @@ export default class Recipes extends Component {
             isOpen: false
         });
     };
+
+    renderMarkup(field) {
+        return { __html: marked(field) };
+    }
 
     componentDidMount = () => {
         fetch('/api/holidays/recipes/content')
@@ -136,16 +150,7 @@ export default class Recipes extends Component {
                         ))}
                     </section>
                     <Popup show={this.state.isOpen} onClose={this.closePopup}>
-                        <div className="recipes-video-modal">
-                            <iframe
-                                width="100%"
-                                height="315"
-                                src="https://www.youtube.com/embed/on5I4KJfulw"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
-                            />
-                        </div>
+                        <div dangerouslySetInnerHTML={this.renderMarkup(this.state.lightbox)} />
                     </Popup>
                 </div>
             </Layout>
