@@ -16,7 +16,7 @@ import musicIcon from '../Layout/images/music-icon.png';
 import fireIcon from '../Layout/images/fire-icon.png';
 import platterIcon from '../Layout/images/platter-icon.png';
 import Popup from '../Popup';
-import tis from '../../../../assets/tis.png';
+// import tis from '../../../../assets/tis.png';
 
 export default class Home extends Component {
     constructor(props) {
@@ -73,6 +73,7 @@ export default class Home extends Component {
 
     render() {
         const shareLink = 'http://holiday.urtestsite.com';
+        const tis = 'https://images.ctfassets.net/eipaypwf4tdc/2eNHNLwZLSU04WOOqMII2i/406886eb0ec265c528122ac98d7375e2/tis.png';
         let title = 'Our friendship’s like a great board: it only exists if we come together. Join me on [day] at [time] for a holiday celebration full of great pairings—like you and me. See you at [address]. Cheers!';
         return (
             <Layout>
@@ -268,7 +269,7 @@ export default class Home extends Component {
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         const url = shareLink;
-                                        const image = 'http://10.91.0.54:9084/assets/c71cf3d01b48e317ccfacf1358e6bf22.png';
+                                        const image = tis;
                                         const description = e.target.value;
 
                                         FB.ui({
@@ -279,7 +280,7 @@ export default class Home extends Component {
                                                     'og:url': url,
                                                     'og:title': title,
                                                     'og:description': description,
-                                                    'og:image': image
+                                                    'og:image': tis
                                                 }
                                             })
                                         });
