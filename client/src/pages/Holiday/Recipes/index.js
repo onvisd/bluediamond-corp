@@ -76,8 +76,12 @@ export default class Recipes extends Component {
         };
     }
 
-    openPopupbox() {
-        const content = <div>You are almost there dear</div>
+    openPopupbox = () => {
+        const content = <div>You are almost there dear</div>;
+
+        console.warn('Opening popup box');
+        window.PopupboxManager = PopupboxManager;
+
         PopupboxManager.open({
             content,
             config: {
@@ -89,7 +93,7 @@ export default class Recipes extends Component {
                 fadeInSpeed: 500
             }
         });
-    }
+    };
 
     componentDidMount = () => {
         fetch('/api/holidays/recipes/content')
