@@ -4,8 +4,9 @@ import Slider from 'react-slick';
 import Layout from '../Layout';
 import './slick.css';
 import './slick-theme.css';
-// import Popup from '../Popup';
-import { PopupboxManager, PopupboxContainer } from 'react-popupbox';
+import Popup from '../Popup';
+// import ReactPlayer from 'react-player';
+import YoutubePlayer from 'react-youtube-player';
 
 import productImageOne from '../Layout/images/sliderOne/product-img.png';
 import productImageTwo from '../Layout/images/sliderTwo/product-img.png';
@@ -63,6 +64,7 @@ export default class Recipes extends Component {
                 }
             ],
             isOpen: false,
+            playbackState:'playing',
             popup: `<div className="recipes-video-modal">
              <iframe
                  width="100%"
@@ -76,22 +78,17 @@ export default class Recipes extends Component {
         };
     }
 
-    openPopupbox = () => {
-        const content = <div>You are almost there dear</div>;
+    openPopup = () => {
+        this.setState({
+            isOpen: true,
+            playbackState:'playing'
+        });
+    };
 
-        console.warn('Opening popup box');
-        window.PopupboxManager = PopupboxManager;
-
-        PopupboxManager.open({
-            content,
-            config: {
-                titleBar: {
-                    enable: true,
-                    text: 'Test'
-                },
-                fadeIn: true,
-                fadeInSpeed: 500
-            }
+    closePopup = () => {
+        this.setState({
+            isOpen: false,
+            playbackState:'unstarted'
         });
     };
 
@@ -107,7 +104,7 @@ export default class Recipes extends Component {
             .catch((err) => console.error(err));
 
         // handler called by recipe carousel button
-        window.showRecipesPopup = this.openPopupbox;
+        window.showRecipesPopup = this.openPopup;
     };
 
     render() {
@@ -148,9 +145,25 @@ export default class Recipes extends Component {
                             </div>
                         ))}
                     </section>
-                    {/* <Popup show={this.state.isOpen} onClose={this.closePopup}>
-                        <div dangerouslySetInnerHTML={{ __html: this.state.popup }} />
-                    </Popup> */}
+                    <Popup show={this.state.isOpen} onClose={this.closePopup}>
+                        {/* <ReactPlayer
+                            url="https://www.youtube.com/embed/UFWoGRQrIws"
+                            config={{ file: { attributes: { controlsList: 'nodownload' } } }}
+                            onContextMenu={(e) => e.preventDefault()}
+                            playing
+                            width="100%"
+                            height="100%"
+                        /> */}
+                        <YoutubePlayer
+                            videoId='https://www.youtube.com/embed/UFWoGRQrIws'
+                            playbackState="playing"
+                            configuration={{
+                                showinfo: 0,
+                                frameborder:0,
+                                controls: 1                         
+                            }}
+                        />
+                    </Popup>
                 </div>
             </Layout>
         );
