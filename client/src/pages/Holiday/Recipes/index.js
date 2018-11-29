@@ -4,7 +4,8 @@ import Slider from 'react-slick';
 import Layout from '../Layout';
 import './slick.css';
 import './slick-theme.css';
-import Popup from '../Popup';
+// import Popup from '../Popup';
+import { PopupboxManager, PopupboxContainer } from 'react-popupbox';
 
 import productImageOne from '../Layout/images/sliderOne/product-img.png';
 import productImageTwo from '../Layout/images/sliderTwo/product-img.png';
@@ -75,17 +76,20 @@ export default class Recipes extends Component {
         };
     }
 
-    openPopup = () => {
-        this.setState({
-            isOpen: true
+    openPopupbox() {
+        const content = <div>You are almost there dear</div>
+        PopupboxManager.open({
+            content,
+            config: {
+                titleBar: {
+                    enable: true,
+                    text: 'Test'
+                },
+                fadeIn: true,
+                fadeInSpeed: 500
+            }
         });
-    };
-
-    closePopup = () => {
-        this.setState({
-            isOpen: false
-        });
-    };
+    }
 
     componentDidMount = () => {
         fetch('/api/holidays/recipes/content')
@@ -99,13 +103,8 @@ export default class Recipes extends Component {
             .catch((err) => console.error(err));
 
         // handler called by recipe carousel button
-        window.showRecipesPopup = this.openPopup;
+        window.showRecipesPopup = this.openPopupbox;
     };
-
-    // handleClick = () => {
-    //     console.log('The link was clicked.');
-    //     alert('Im an alert');
-    // };
 
     render() {
         const sliderSettings = {
@@ -145,9 +144,9 @@ export default class Recipes extends Component {
                             </div>
                         ))}
                     </section>
-                    <Popup show={this.state.isOpen} onClose={this.closePopup}>
+                    {/* <Popup show={this.state.isOpen} onClose={this.closePopup}>
                         <div dangerouslySetInnerHTML={{ __html: this.state.popup }} />
-                    </Popup>
+                    </Popup> */}
                 </div>
             </Layout>
         );

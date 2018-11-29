@@ -391,6 +391,11 @@ a, a:hover {
   display: flex;
   position: absolute;
   bottom: 10%;
+  align-items: center;
+}
+.carousel_btn {
+    display: flex;
+    flex-direction: column;
 }
 .recipes-banners .carousel-caption .carousel-img-download img{
   width: auto;
@@ -406,6 +411,7 @@ a, a:hover {
   padding: 10px 12px;
   text-align: center;
   min-width: 175px;
+  text-decoration: none;
 }
 .recipes-banners .carousel-caption h5{font-family: 'bigcaslonregular';
   font-weight: normal;margin-bottom: 10px;font-size: 35px;text-transform: capitalize;}
@@ -500,8 +506,8 @@ button.fbShare {
 
 /* modal 20-11-2018 */
 /* The Modal (background) */
-.recipes-video-bth {
-  margin: 15px 0;
+.recipes_video_btn {
+  margin: 10px 0;
   background: #b7945a;
   border-radius: 4px;
   color: #fff;
@@ -510,7 +516,7 @@ button.fbShare {
   min-width: 130px;
   border: 0;
 }
-.recipes-video-bth:focus{
+.recipes_video_btn:focus{
   outline: 0;
 }
 button.recipes-video-btn {
