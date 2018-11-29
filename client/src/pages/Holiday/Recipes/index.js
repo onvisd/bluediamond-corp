@@ -155,8 +155,8 @@ export default class Recipes extends Component {
                             height="100%"
                         /> */}
                         <YoutubePlayer
-                            videoId='https://www.youtube.com/embed/UFWoGRQrIws'
-                            playbackState="playing"
+                            videoId='UFWoGRQrIws'
+                            playbackState={this.state.playbackState}
                             configuration={{
                                 showinfo: 0,
                                 frameborder:0,
