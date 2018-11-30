@@ -5,25 +5,6 @@ import Layout from '../Layout';
 import './slick.css';
 import './slick-theme.css';
 import Popup from '../Popup';
-// import ReactPlayer from 'react-player';
-import YoutubePlayer from 'react-youtube-player';
-
-import productImageOne from '../Layout/images/sliderOne/product-img.png';
-import productImageTwo from '../Layout/images/sliderTwo/product-img.png';
-import productImageThree from '../Layout/images/sliderThree/product-img.png';
-import productImageFour from '../Layout/images/sliderFour/product-img.png';
-import bannerRecepiesF1 from '../Layout/images/sliderOne/banner1RecipesF1.jpg';
-import bannerRecepiesF2 from '../Layout/images/sliderOne/banner1RecipesF2.jpg';
-import bannerRecepiesF3 from '../Layout/images/sliderOne/banner1RecipesF3.jpg';
-import bannerRecepiesF2_1 from '../Layout/images/sliderTwo/banner2RecipesF1.jpg';
-import bannerRecepiesF2_2 from '../Layout/images/sliderTwo/banner2RecipesF2.jpg';
-import bannerRecepiesF2_3 from '../Layout/images/sliderTwo/banner2RecipesF3.jpg';
-import bannerRecepiesF3_1 from '../Layout/images/sliderThree/banner3RecipesF1.jpg';
-import bannerRecepiesF3_2 from '../Layout/images/sliderThree/banner3RecipesF2.jpg';
-import bannerRecepiesF3_3 from '../Layout/images/sliderThree/banner3RecipesF3.jpg';
-import bannerRecepiesF4_1 from '../Layout/images/sliderFour/banner4RecipesF1.jpg';
-import bannerRecepiesF4_2 from '../Layout/images/sliderFour/banner4RecipesF2.jpg';
-import bannerRecepiesF4_3 from '../Layout/images/sliderFour/banner4RecipesF3.jpg';
 
 function PrevButton(props) {
     return (
@@ -64,11 +45,10 @@ export default class Recipes extends Component {
                 }
             ],
             isOpen: false,
-            playbackState:'playing',
             popup: `<div className="recipes-video-modal">
              <iframe
                  width="100%"
-                 height="315"
+                 height="400"
                  src="https://www.youtube.com/embed/UFWoGRQrIws"
                  frameborder="0"
                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -81,14 +61,12 @@ export default class Recipes extends Component {
     openPopup = () => {
         this.setState({
             isOpen: true,
-            playbackState:'playing'
         });
     };
 
     closePopup = () => {
         this.setState({
             isOpen: false,
-            playbackState:'unstarted'
         });
     };
 
@@ -146,23 +124,7 @@ export default class Recipes extends Component {
                         ))}
                     </section>
                     <Popup show={this.state.isOpen} onClose={this.closePopup}>
-                        {/* <ReactPlayer
-                            url="https://www.youtube.com/embed/UFWoGRQrIws"
-                            config={{ file: { attributes: { controlsList: 'nodownload' } } }}
-                            onContextMenu={(e) => e.preventDefault()}
-                            playing
-                            width="100%"
-                            height="100%"
-                        /> */}
-                        <YoutubePlayer
-                            videoId='UFWoGRQrIws'
-                            playbackState={this.state.playbackState}
-                            configuration={{
-                                showinfo: 0,
-                                frameborder:0,
-                                controls: 1                         
-                            }}
-                        />
+                        <div dangerouslySetInnerHTML={{ __html: this.state.popup }} />
                     </Popup>
                 </div>
             </Layout>

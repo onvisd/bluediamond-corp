@@ -511,14 +511,15 @@ button.popup-close {
     float: right;
     margin-top: 20px;
     color: #fff;
+    font-size: 24px;
 }
 
 .dm-pop-close {
-    color: #000 !important;
+    color: #fff !important;
     margin: 0 !important;
     width: 100%;
     text-align: right;
-    background: #f1f1f1;
+   padding: 0;
 }
 
 .dm-pop {
@@ -572,15 +573,18 @@ button.recipes-video-btn {
     border: none;
 }
 .recipes-video-modal {
-    background: #fff;
-    padding: 15px;
+    background: #000;
+    padding: 10px;
     display: inline-block;
     width: 100%;
 }
-.popup.abc {
-    width: 550px;
+.popup.set_video {
+    width: 650px;
     max-width: 90%;
-    height:309px;
+    height:auto;
+}
+.popup.set_video iframe{
+  display: block;
 }
 
 @media only screen and (max-width: 600px) {
