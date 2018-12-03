@@ -128,8 +128,8 @@ export default function(parameters) {
             // Isomorphic CSS flag
             bodyStart() {
                 return `
-                    <script>
-                        // This line is just for CSS
+                     <script>
+                        // This line is just for CSSS
                         document.body.classList.add('javascript-is-enabled');
                     </script>
                 `;

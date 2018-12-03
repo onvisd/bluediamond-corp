@@ -7,7 +7,6 @@ import './bootstrap.min.css';
 import './font-awesome.min.css';
 import './responsive.css';
 
-
 export default class Layout extends Component {
     render() {
         return (

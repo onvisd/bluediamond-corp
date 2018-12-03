@@ -587,6 +587,47 @@ button.recipes-video-btn {
   display: block;
 }
 
+/* javascript popup modal */
+.is-hidden { display: none; }
+.button-close {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 1px;
+  right: 31px;
+  cursor: pointer;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHRJREFUeNqsU1EKQCEIG+9E4UU6cO8iXaIr+AzsJyiFvcEgaJouhapWYzc2YzEi4NS8HlPhh4VhlEuwuGahw7NpIskePNFWSSNIIgdNiQQS3AGJV67VZfq8+oOkWUdzH7D4swXKROob6UGiR5leJmqdPwEGAEu1TahsdNcMAAAAAElFTkSuQmCC');
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.video_popup_content {
+    padding: 20px 30px;
+    width: 100%;
+    position: relative;
+    min-height: 300px;
+    margin: 5% auto 0;
+    background: none;
+    max-width: 750px;
+}
+body.home{
+    overflow: hidden;
+}
+body.home .slick-slider .slick-track, body.home .slick-slider .slick-list{
+    transform: none!important;
+}
+.overlay.is-hidden{
+    display: none;
+}
+/* javascript popup modal end*/
+
 @media only screen and (max-width: 600px) {
     #recipes-video-modal.modal .modal-content {
         width: 90%;

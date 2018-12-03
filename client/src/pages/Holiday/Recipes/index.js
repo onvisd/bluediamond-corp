@@ -4,7 +4,8 @@ import Slider from 'react-slick';
 import Layout from '../Layout';
 import './slick.css';
 import './slick-theme.css';
-import Popup from '../Popup';
+// import Popup from '../Popup';
+// require('./video_popup.js');
 
 function PrevButton(props) {
     return (
@@ -60,13 +61,13 @@ export default class Recipes extends Component {
 
     openPopup = () => {
         this.setState({
-            isOpen: true,
+            isOpen: true
         });
     };
 
     closePopup = () => {
         this.setState({
-            isOpen: false,
+            isOpen: false
         });
     };
 
@@ -78,6 +79,25 @@ export default class Recipes extends Component {
                     carousels: res.carousels,
                     popup: res.popups[0].html
                 });
+                debugger;
+                var btnPopup = document.getElementById('btn_popup');
+                var overlay = document.getElementById('overlay');
+                var slider_first_video = document.getElementById('popup_Iframe');
+                var slider_first_video_src = document.getElementById('popup_Iframe').src;
+
+                btnPopup.onclick = function() {
+                    debugger;
+                    document.body.className += ' ' + 'home';
+                    overlay.classList.remove('is-hidden');
+                };
+                
+                var btnPopupClose = document.getElementById('video_popup_close');
+                btnPopupClose.onclick = function() {
+                    debugger;
+                    document.body.className = document.body.className.replace('home','')
+                    overlay.classList.add('is-hidden');
+                    slider_first_video.setAttribute("src",'');
+                };
             })
             .catch((err) => console.error(err));
 
@@ -123,9 +143,9 @@ export default class Recipes extends Component {
                             </div>
                         ))}
                     </section>
-                    <Popup show={this.state.isOpen} onClose={this.closePopup}>
+                    {/* <Popup show={this.state.isOpen} onClose={this.closePopup}>
                         <div dangerouslySetInnerHTML={{ __html: this.state.popup }} />
-                    </Popup>
+                    </Popup> */}
                 </div>
             </Layout>
         );
